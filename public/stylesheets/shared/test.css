@@ -1,0 +1,13 @@
+/* .testClass {
+  background-color: var(--highlight-color-root);
+} */
+
+body {
+  background: rgb(200, 200, 200);
+}
+
+svg {
+  margin: auto;
+  display: block;
+  background: white;
+}
