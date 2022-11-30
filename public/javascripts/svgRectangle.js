@@ -201,6 +201,30 @@ function drawRectangleNEW() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ORGINAL
 function drawRectangle() {
     var self = this, rect, rectData = [], isDown = false, m1, m2, isDrag = false;

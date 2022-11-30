@@ -67,7 +67,7 @@ rect {
 /* svgArc */
 
 /* SVG Quad Bex */
-*, *:before, *:after {
+/* *, *:before, *:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -157,6 +157,6 @@ h1 {
   padding: 0.3em;
   border: 1px solid #999;
   user-select: all;
-}
+} */
 /* SVG Quad Bex */
 
