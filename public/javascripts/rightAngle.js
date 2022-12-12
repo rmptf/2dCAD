@@ -72,6 +72,9 @@ function drawPerpendicular(base_angle_A, base_path_c){
     poly2Coord1 = coord_A
     poly2Coord2 = coord_B
     poly2Coord3 = coord_C
+
+    // d3.select("body").insert("div")
+    // .text(angle_A)
 }
 
 // Draw a perpendicular line from specified coordinate to line segment between two specified coordinates
@@ -98,6 +101,8 @@ if (path1.pointA.y == path1.pointB.y) { // AB is horizontal
     path2.pointB.y = gradientOfpath2 * path2.pointB.x + interceptOfpath2;
     // (green point)
 }
+
+
 
 
 // Draw SVGs
