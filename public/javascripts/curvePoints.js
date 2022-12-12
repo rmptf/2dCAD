@@ -41,7 +41,8 @@ function drawLine() {
             // CURVE POINT
 
             // INTERSECTING POINT
-            self.pointElementIP = svg.append('circle').attr('class', 'pointC').call(dragC1);
+            self.pointElementIPa = svg.append('circle').attr('class', 'pointC');
+            self.pointElementIPb = svg.append('circle').attr('class', 'pointC');
             // INTERSECTING POINT
 
             // SOLVE TRIANGLE 1 Sides
@@ -156,8 +157,8 @@ function drawLine() {
         let solveTriangleData2 = solvTriangleEAST(rightTriangleData2.sides, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x,self.lineData[1].y, perpPoints[0], perpPoints[1], self.curvePointData[0].x, self.curvePointData[0].y)
         let solvTriangleCoords2 = solveTriangleData2.coords
 
-        let intersectingTriangle = findIntersectingTriangle(self.curvePointData[0].x, self.curvePointData[0]. y,perpPoints[0], perpPoints[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
-
+        let intersectingPoint_a_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, perpPoints[0], perpPoints[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
+        let intersectingPoint_b_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, perpPoints[0], perpPoints[1], solvTriangleCoords2.coord_A[0], solvTriangleCoords2.coord_A[1], solvTriangleCoords2.coord_B[0], solvTriangleCoords2.coord_B[1])
         // LINE
         line = d3.select(self.lineElement[0][0]);
         line.attr({
@@ -228,11 +229,17 @@ function drawLine() {
         // CURVE POINT
 
         // INTERSECTING POINT
-        let pointIP = d3.select(self.pointElementIP[0][0]);
-        pointIP.attr('r', 5)
-                .attr('cx', intersectingTriangle[0])
-                .attr('cy', intersectingTriangle[1])
+        let pointIPa = d3.select(self.pointElementIPa[0][0]);
+        pointIPa.attr('r', 5)
+                .attr('cx', intersectingPoint_a_lineInfinite.x)
+                .attr('cy', intersectingPoint_a_lineInfinite.y)
                 .attr('fill', 'red');
+
+        let pointIPb = d3.select(self.pointElementIPb[0][0]);
+        pointIPb.attr('r', 5)
+                .attr('cx', intersectingPoint_b_lineInfinite.x)
+                .attr('cy', intersectingPoint_b_lineInfinite.y)
+                .attr('fill', 'blue');
         // INTERSECTING POINT
 
         // SOLVE TRIANGLE 1 Sides
@@ -551,46 +558,40 @@ function drawLine() {
         }
     }
 
-    // line intercept math by Paul Bourke http://paulbourke.net/geometry/pointlineplane/
-    // Determine the intersection point of two line segments
-    // Return FALSE if the lines don't intersect
-
-    // x1y1x2y2 = cp - mp
-    // x3y3x4y4 = westTriangle_A, westTriangle_B
-    function findIntersectingTriangle(x1, y1, x2, y2, x3, y3, x4, y4) {
-
-        // console.log(x1, y1, x2, y2, x3, y3, x4, y4)
-
-        // Check if none of the lines are of length 0
-        if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4)) {
-            console.log(1111)
-            return false
+    function findIntersectingPoint_lineInfinite(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
+        // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
+        var denominator, a, b, numerator1, numerator2, result = {
+            x: null,
+            y: null,
+            onLine1: false,
+            onLine2: false
+        };
+        denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
+        if (denominator == 0) {
+            return result;
         }
+        a = line1StartY - line2StartY;
+        b = line1StartX - line2StartX;
+        numerator1 = ((line2EndX - line2StartX) * a) - ((line2EndY - line2StartY) * b);
+        numerator2 = ((line1EndX - line1StartX) * a) - ((line1EndY - line1StartY) * b);
+        a = numerator1 / denominator;
+        b = numerator2 / denominator;
     
-        denominator = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1))
+        // if we cast these lines infinitely in both directions, they intersect here:
+        result.x = line1StartX + (a * (line1EndX - line1StartX));
+        result.y = line1StartY + (a * (line1EndY - line1StartY));
     
-        // Lines are parallel
-        if (denominator === 0) {
-            console.log(2222)
-            return false
+        // if line1 is a segment and line2 is infinite, they intersect if:
+        if (a > 0 && a < 1) {
+            result.onLine1 = true;
         }
-    
-        let ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator
-        let ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator
-    
-        // is the intersection along the segments
-        if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
-            console.log(3333)
-            return false
+        // if line2 is a segment and line1 is infinite, they intersect if:
+        if (b > 0 && b < 1) {
+            result.onLine2 = true;
         }
-    
-        // Return a object with the x and y coordinates of the intersection
-        let x = x1 + ua * (x2 - x1)
-        let y = y1 + ua * (y2 - y1)
-    
-        console.log(x,y)
-        return [x, y]
-    }
+        // if line1 and line2 are segments, they intersect if both of the above are trues
+        return result;
+    };
 
 }
 
