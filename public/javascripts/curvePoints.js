@@ -27,11 +27,8 @@ function drawLine() {
             //ELLIPSE
 
             // PATH
-            // self.pathData = [ { x: m1[0], y: m1[1] }, { x: m1[0], y: m1[1] } ];
-            // self.pathElement = svg.append('path').attr('class', 'path');
-            // self.pathElement2 = svg.append('path').attr('class', 'path');
-            // self.pathElement3 = svg.append('path').attr('class', 'path');
-            // self.pathElement4 = svg.append('path').attr('class', 'path');
+            self.pathElement = svg.append('path').attr('class', 'path');
+            self.pathElement2 = svg.append('path').attr('class', 'path');
             // PATH
 
             // CURVE POINT LEG
@@ -196,7 +193,7 @@ function drawLine() {
         .attr("rx", circRadius)
         .attr("ry", circRadius)
         .attr("fill", "none")
-        .attr("stroke", "black")
+        .attr("stroke", "red")
         .attr("stroke-dasharray", "4 4");
 
         ellipse2 = d3.select(self.ellipseElement2[0][0]);
@@ -206,62 +203,25 @@ function drawLine() {
         .attr("rx", circRadius2)
         .attr("ry", circRadius2)
         .attr("fill", "none")
-        .attr("stroke", "black")
+        .attr("stroke", "blue")
         .attr("stroke-dasharray", "4 4");
         // ELLIPSE
 
-
-
         // PATH
-        // let path = d3.select(self.pathElement[0][0]);
-        // path.attr({
-        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
-        //     " A " + circRadius + " " + circRadius+ " " + 
-        //     0 + " " + 0 + " " + 0 + " " + 
-        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
-        
-        // path.style('stroke', 'grey')
-        // path.style('fill', 'none')
-        // path.style('stroke-width', 5)
+        let path = d3.select(self.pathElement[0][0]);
+        // path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300)})
+        path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, perpPoints[0], perpPoints[1], self.curvePointData[0].x, self.curvePointData[0].y)})
+        path.style('fill', 'none')
+        path.style('stroke', 'red')
+        path.style('stroke-width', 3)
 
-        // let path2 = d3.select(self.pathElement2[0][0]);
-        // path2.attr({
-        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
-        //     " A " + circRadius + " " + circRadius+ " " + 
-        //     0 + " " + 1 + " " + 0 + " " + 
-        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
-        
-        // path2.style('stroke', 'grey')
-        // path2.style('fill', 'none')
-        // path2.style('stroke-width', 5)
-
-        // let path3 = d3.select(self.pathElement3[0][0]);
-        // path3.attr({
-        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
-        //     " A " + circRadius + " " + circRadius+ " " + 
-        //     0 + " " + 1 + " " + 1 + " " + 
-        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
-        
-        // path3.style('stroke', 'grey')
-        // path3.style('fill', 'none')
-        // path3.style('stroke-width', 5)
-
-        // let path4 = d3.select(self.pathElement4[0][0]);
-        // path4.attr({
-        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
-        //     " A " + circRadius + " " + circRadius+ " " + 
-        //     0 + " " + 0 + " " + 1 + " " + 
-        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
-        
-        // path4.style('stroke', 'grey')
-        // path4.style('fill', 'none')
-        // path4.style('stroke-width', 5)
+        let path2 = d3.select(self.pathElement2[0][0]);
+        // path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300)})
+        path2.attr({d: describeArc(intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y, circRadius2, 220, 300, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, perpPoints[0], perpPoints[1], self.curvePointData[0].x, self.curvePointData[0].y)})
+        path2.style('fill', 'none')
+        path2.style('stroke', 'blue')
+        path2.style('stroke-width', 3)
         // PATH
-
-
-
-
-
 
         // CURVE POINT LEG
         let lineCPLA = d3.select(self.lineElementCPLA[0][0]);
@@ -272,7 +232,7 @@ function drawLine() {
             y2:self.curvePointData[0].y,
         });
         lineCPLA.style('stroke', 'grey')
-        lineCPLA.style('stroke-width', 2.5)
+        lineCPLA.style('stroke-width', 2)
         
         let lineCPLB = d3.select(self.lineElementCPLB[0][0]);
         lineCPLB.attr({
@@ -282,7 +242,7 @@ function drawLine() {
             y2:self.lineData[1].y,
         });
         lineCPLB.style('stroke', 'grey')
-        lineCPLB.style('stroke-width', 2.5)
+        lineCPLB.style('stroke-width', 2)
         // CURVE POINT LEG
 
         // CP PERPENDICULAR LINE
@@ -294,7 +254,7 @@ function drawLine() {
             y2:perpPoints[1],
         });
         lineCPPL.style('stroke', 'grey')
-        lineCPPL.style('stroke-width', 2.5)
+        lineCPPL.style('stroke-width', 1)
         // CP PERPENDICULAR LINE
 
         // END POINTS
@@ -512,26 +472,26 @@ function drawLine() {
 
         // } else if(x1 > x2 && y1 > y2) {
         } else if (x1 > perpPointsX && perpPointsY > cpY) {
-            // console.log('1')
+            console.log('1')
             // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
             coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
             
         // } else if(x1 < x2 && y1 < y2) {
         } else if (x1 < perpPointsX && perpPointsY < cpY) {
-            // console.log('2')
+            console.log('2')
             // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
             coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
         // } else if (x1 > x2 && y1 < y2) {
         } else if (x1 > perpPointsX && perpPointsY < cpY) {
-            // console.log('3')
+            console.log('3')
             coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
             // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
             coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
         // } else if(x1 < x2 && y1 > y2) {
         } else if (x1 < perpPointsX && perpPointsY > cpY) {
-            // console.log('4')
+            console.log('4')
             coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
             // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
             coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
@@ -685,6 +645,26 @@ function drawLine() {
         return result;
     };
 
+    function describeArc(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY){
+        //   var start = polarToCartesian(x, y, radius, endAngle);
+        //   var end = polarToCartesian(x, y, radius, startAngle);
+        let upDown = perpPointY > curvePointY ? 0 : 1
+        // var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+        let arcSweep = 0
+        // let arcSweep = 1
+
+        let d = [
+            "M", x1, y1, 
+            "A", radius, radius, 0, arcSweep, upDown, x2, y2,
+            // "M", start.x, start.y, 
+            // "A", radius, radius, 0, arcSweep, 0, end.x, end.y,
+            //   "L", x,y,
+            //   "L", start.x, start.y
+        ].join(" ");
+
+        // console.log(d)
+        return d;       
+    }      
 }
 
 
@@ -692,6 +672,23 @@ function drawLine() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+    // Wasnt working, but after looking at it, it looks like it is the same exact format as 'describeArc()'
+    // let path = d3.select(self.pathElement[0][0]);
+    // path.attr({
+    //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
+    //     " A " + circRadius + " " + circRadius+ " " + 
+    //     0 + " " + 0 + " " + 0 + " " + 
+    //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
 
 
     // function solvTriangleEAST(triangleA_sides, x1, y1, x2, y2, perpPointsX) {
