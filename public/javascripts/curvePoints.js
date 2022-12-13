@@ -476,7 +476,6 @@ function drawLine() {
             // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
             coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-            
         // } else if(x1 < x2 && y1 < y2) {
         } else if (x1 < perpPointsX && perpPointsY < cpY) {
             console.log('2')
