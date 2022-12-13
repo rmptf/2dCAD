@@ -21,6 +21,19 @@ function drawLine() {
             self.lineElement = svg.append('line').attr('class', 'line').call(dragL);
             // LINE
 
+            //ELLIPSE
+            self.ellipseElement1 = svg.append('ellipse').attr('class', 'ellipse');
+            self.ellipseElement2 = svg.append('ellipse').attr('class', 'ellipse');
+            //ELLIPSE
+
+            // PATH
+            // self.pathData = [ { x: m1[0], y: m1[1] }, { x: m1[0], y: m1[1] } ];
+            // self.pathElement = svg.append('path').attr('class', 'path');
+            // self.pathElement2 = svg.append('path').attr('class', 'path');
+            // self.pathElement3 = svg.append('path').attr('class', 'path');
+            // self.pathElement4 = svg.append('path').attr('class', 'path');
+            // PATH
+
             // CURVE POINT LEG
             self.lineElementCPLA = svg.append('line').attr('class', 'line');
             self.lineElementCPLB = svg.append('line').attr('class', 'line');
@@ -159,6 +172,10 @@ function drawLine() {
 
         let intersectingPoint_a_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, perpPoints[0], perpPoints[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
         let intersectingPoint_b_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, perpPoints[0], perpPoints[1], solvTriangleCoords2.coord_A[0], solvTriangleCoords2.coord_A[1], solvTriangleCoords2.coord_B[0], solvTriangleCoords2.coord_B[1])
+
+        const circRadius = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y)
+        const circRadius2 = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y)
+
         // LINE
         line = d3.select(self.lineElement[0][0]);
         line.attr({
@@ -170,6 +187,81 @@ function drawLine() {
         line.style('stroke', 'grey')
         line.style('stroke-width', 5)
         // LINE
+
+        // ELLIPSE
+        ellipse1 = d3.select(self.ellipseElement1[0][0]);
+        ellipse1
+        .attr("cx", intersectingPoint_a_lineInfinite.x)
+        .attr("cy", intersectingPoint_a_lineInfinite.y)
+        .attr("rx", circRadius)
+        .attr("ry", circRadius)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "4 4");
+
+        ellipse2 = d3.select(self.ellipseElement2[0][0]);
+        ellipse2
+        .attr("cx", intersectingPoint_b_lineInfinite.x)
+        .attr("cy", intersectingPoint_b_lineInfinite.y)
+        .attr("rx", circRadius2)
+        .attr("ry", circRadius2)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "4 4");
+        // ELLIPSE
+
+
+
+        // PATH
+        // let path = d3.select(self.pathElement[0][0]);
+        // path.attr({
+        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
+        //     " A " + circRadius + " " + circRadius+ " " + 
+        //     0 + " " + 0 + " " + 0 + " " + 
+        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
+        
+        // path.style('stroke', 'grey')
+        // path.style('fill', 'none')
+        // path.style('stroke-width', 5)
+
+        // let path2 = d3.select(self.pathElement2[0][0]);
+        // path2.attr({
+        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
+        //     " A " + circRadius + " " + circRadius+ " " + 
+        //     0 + " " + 1 + " " + 0 + " " + 
+        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
+        
+        // path2.style('stroke', 'grey')
+        // path2.style('fill', 'none')
+        // path2.style('stroke-width', 5)
+
+        // let path3 = d3.select(self.pathElement3[0][0]);
+        // path3.attr({
+        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
+        //     " A " + circRadius + " " + circRadius+ " " + 
+        //     0 + " " + 1 + " " + 1 + " " + 
+        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
+        
+        // path3.style('stroke', 'grey')
+        // path3.style('fill', 'none')
+        // path3.style('stroke-width', 5)
+
+        // let path4 = d3.select(self.pathElement4[0][0]);
+        // path4.attr({
+        //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
+        //     " A " + circRadius + " " + circRadius+ " " + 
+        //     0 + " " + 0 + " " + 1 + " " + 
+        //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
+        
+        // path4.style('stroke', 'grey')
+        // path4.style('fill', 'none')
+        // path4.style('stroke-width', 5)
+        // PATH
+
+
+
+
+
 
         // CURVE POINT LEG
         let lineCPLA = d3.select(self.lineElementCPLA[0][0]);
