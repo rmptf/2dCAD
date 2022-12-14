@@ -159,6 +159,7 @@ function drawLine() {
 
         let rightTriangleData = findRightTriangle(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x,self.curvePointData[0].y)
         // let rightTriangleCoords = rightTriangleData.coords
+        
         let solveTriangleData = solvTriangleWEST(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x,self.curvePointData[0].y, perpPoints[0], perpPoints[1], self.curvePointData[0].x, self.curvePointData[0].y)
         let solvTriangleCoords = solveTriangleData.coords
 
@@ -449,52 +450,52 @@ function drawLine() {
         let coord_C = ''
         let coord_B = ''
         
-        if (x1 == x2 && y1 == y2) {
-            // console.log('No Line')
-            coord_C = [coord_A[0], coord_A[1]]
-            coord_B = [coord_C[0], coord_C[1]]
-        } else if (x1 > x2 && y1 == y2) {
-            // console.log('Y++ Horizontal')
-            coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (x1 == x2 && y1 > y2) {
-            // console.log('X++ Vertical')
-            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1])]
-        } else if (x1 < x2 && y1 == y2) {
-            // console.log('Y-- Horizontal')
-            coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (x1 == x2 && y1 < y2) {
-            // console.log('X-- Vertical')
-            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1])]
-
-        // } else if(x1 > x2 && y1 > y2) {
-        } else if (x1 > perpPointsX && perpPointsY > cpY) {
-            console.log('1')
-            // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        // } else if(x1 < x2 && y1 < y2) {
-        } else if (x1 < perpPointsX && perpPointsY < cpY) {
-            console.log('2')
-            // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        // } else if (x1 > x2 && y1 < y2) {
-        } else if (x1 > perpPointsX && perpPointsY < cpY) {
-            console.log('3')
-            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-            coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-        // } else if(x1 < x2 && y1 > y2) {
-        } else if (x1 < perpPointsX && perpPointsY > cpY) {
-            console.log('4')
-            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-            coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-        }
+        // if(y1 > y2 && x1 < x2 ) {
+            // console.log('LEFT DOWN, RIGHT UP', y1, y2, x1, x2)
+            if (x1 == x2 && y1 == y2) {
+                // console.log('No Line')
+                coord_C = [coord_A[0], coord_A[1]]
+                coord_B = [coord_C[0], coord_C[1]]
+            } else if (x1 > x2 && y1 == y2) {
+                // console.log('Y++ Horizontal')
+                coord_C = [(coord_A[0]), coord_A[1]]
+                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+            } else if (x1 == x2 && y1 > y2) {
+                // console.log('X++ Vertical')
+                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                coord_B = [coord_C[0], (coord_C[1])]
+            } else if (x1 < x2 && y1 == y2) {
+                // console.log('Y-- Horizontal')
+                coord_C = [(coord_A[0]), coord_A[1]]
+                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+            } else if (x1 == x2 && y1 < y2) {
+                // console.log('X-- Vertical')
+                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                coord_B = [coord_C[0], (coord_C[1])]
+    
+            } else if (x1 > perpPointsX && perpPointsY > cpY) {
+                console.log('1')
+                // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+            } else if (x1 < perpPointsX && perpPointsY < cpY) {
+                // console.log('2')
+                coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+            } else if (x1 > perpPointsX && perpPointsY < cpY) {
+                console.log('3')
+                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+            } else if (x1 < perpPointsX && perpPointsY > cpY) {
+                console.log('4')
+                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+            }
+        // } else if(y1 < y2 && x1 < x2 ) {
+        //     console.log('LEFT UP, RIGHT DOWN', y1, y2, x1, x2)
+        // }
 
         let solveTriangleData = {
             coords: {
@@ -522,19 +523,19 @@ function drawLine() {
             // coord_C = [coord_A[0], coord_A[1]]
             // coord_B = [coord_C[0], coord_C[1]]
         } else if (x1 > x2 && y1 == y2) {
-            console.log('Y++ Horizontal')
+            // console.log('Y++ Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
             coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
         } else if (x1 == x2 && y1 > y2) {
-            console.log('X++ Vertical')
+            // console.log('X++ Vertical')
             coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
             coord_B = [coord_C[0], (coord_C[1])]
         } else if (x1 < x2 && y1 == y2) {
-            console.log('Y-- Horizontal')
+            // console.log('Y-- Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
             coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
         } else if (x1 == x2 && y1 < y2) {
-            console.log('X-- Vertical')
+            // console.log('X-- Vertical')
             coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
             coord_B = [coord_C[0], (coord_C[1])]
 
@@ -647,7 +648,17 @@ function drawLine() {
     function describeArc(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY){
         //   var start = polarToCartesian(x, y, radius, endAngle);
         //   var end = polarToCartesian(x, y, radius, startAngle);
-        let upDown = perpPointY > curvePointY ? 0 : 1
+
+        let upDown
+        if (x1 > x2) {
+            console.log('ass')
+            upDown = perpPointY > curvePointY ? 0 : 1
+        } else {
+            console.log('tis')
+            upDown = perpPointY > curvePointY ? 1 : 0
+        }
+
+        // let upDown = perpPointY > curvePointY ? 0 : 1
         // var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
         let arcSweep = 0
         // let arcSweep = 1
