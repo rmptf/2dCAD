@@ -160,12 +160,12 @@ function drawLine() {
 
         // let rightTriangleData = findRightTriangle(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x,self.curvePointData[0].y)
         let rightTriangleData = findRightTriangle(self.lineData[0], self.curvePointData[0])
-        let solveTriangleData = solvTriangleWEST(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.lineData[1].x, self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y)
+        let solveTriangleData = solvTriangleWEST(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y)
         let solvTriangleCoords = solveTriangleData.coords
 
         // let rightTriangleData2 = findRightTriangle(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x,self.lineData[1].y)
         let rightTriangleData2 = findRightTriangle(self.curvePointData[0], self.lineData[1])
-        let solveTriangleData2 = solvTriangleEAST(rightTriangleData2.sides, self.lineData[0].x, self.lineData[0].y, self.lineData[1].x,self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y)
+        let solveTriangleData2 = solvTriangleEAST(rightTriangleData2.sides, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y)
         let solvTriangleCoords2 = solveTriangleData2.coords
 
         let intersectingPoint_a_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
@@ -173,6 +173,7 @@ function drawLine() {
 
         const circRadius = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y)
         const circRadius2 = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y)
+        // console.log(circRadius * 2, circRadius2 * 2)
 
         // LINE
         line = d3.select(self.lineElement[0][0]);
@@ -471,54 +472,57 @@ function drawLine() {
         return rightTriangleData
     }
 
-    function solvTriangleWEST(triangleA_sides, x1, y1, x2, y2, curvePointLineX, curvePointLineY, cpX, cpY) {
+    function solvTriangleWEST(triangleA_sides, p1x, p1y, p2x, p2y, curvePointLineX, curvePointLineY, cpX, cpY) {
         let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
         let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
         let angle_A = base_angle_A * (Math.PI/180)
         let side_C_length = triangleA_sides.side_C / 2
         let side_A_length = side_C_length * (Math.sin(angle_A))
         let side_B_length = side_C_length * (Math.cos(angle_A))
-        let coord_A = findLineMidpoint(x1, y1, cpX, cpY)
+        let coord_A = findLineMidpoint(p1x, p1y, p2x, p2y)
         let coord_C = ''
         let coord_B = ''
-        
-        if (x1 == cpX && y1 == cpY) {
+
+        if (p1x == p2x && p1y == p2y) {
             console.log('No Line')
             coord_C = [coord_A[0], coord_A[1]]
             coord_B = [coord_C[0], coord_C[1]]
-        } else if (x1 > cpX && y1 == cpY) {
+        } else if (p1x > p2x && p1y == p2y) {
             console.log('Y++ Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (x1 == cpX && y1 > cpY) {
+            coord_B = [coord_C[0], (coord_C[1] + side_B_length)] // DIFFERENT ( + / -)
+        } else if (p1x == p2x && p1y > p2y) {
             console.log('X++ Vertical')
-            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+            coord_C = [(coord_A[0] + side_A_length), coord_A[1]] // DIFFERENT ( + / - )
             coord_B = [coord_C[0], (coord_C[1])]
-        } else if (x1 < cpX && y1 == cpY) {
+        } else if (p1x < p2x && p1y == p2y) {
             console.log('Y-- Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (x1 == cpX && y1 < cpY) {
+            coord_B = [coord_C[0], (coord_C[1] - side_B_length)] // DIFFERENT ( - / + )
+        } else if (p1x == p2x && p1y < p2y) {
             console.log('X-- Vertical')
-            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+            coord_C = [(coord_A[0] - side_A_length), coord_A[1]] // DIFFERENT ( - / + )
             coord_B = [coord_C[0], (coord_C[1])]
 
-        } else if (x1 > curvePointLineX && curvePointLineY > cpY) {
-            console.log('1')
-            coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+
+
+
+        } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
+            // console.log('1')
+            coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (x1 < curvePointLineX && curvePointLineY < cpY) {
-            console.log('2')
-            coord_C = ((y1 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        } else if (p1x < curvePointLineX && curvePointLineY < p2y) {
+            // console.log('2')
+            coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (x1 > curvePointLineX && curvePointLineY < cpY) {
-            console.log('3')
+        } else if (p1x > curvePointLineX && curvePointLineY < p2y) {
+            // console.log('3')
             coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-        } else if (x1 < curvePointLineX && curvePointLineY > cpY) {
-            console.log('4')
+            coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
+        } else if (p1x < curvePointLineX && curvePointLineY > p2y) {
+            // console.log('4')
             coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_B = ((x1 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+            coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
         }
 
         let solveTriangleData = {
@@ -531,54 +535,85 @@ function drawLine() {
         return solveTriangleData
     }
 
-    function solvTriangleEAST(triangleA_sides, x1, y1, x2, y2, curvePointLineX, curvePointLineY, cpX, cpY) {
+    function solvTriangleEAST(triangleA_sides, p1x, p1y, p2x, p2y, curvePointLineX, curvePointLineY, cpX, cpY) {
         let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
         let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
         let angle_A = base_angle_A * (Math.PI/180)
         let side_C_length = triangleA_sides.side_C / 2
         let side_A_length = side_C_length * (Math.sin(angle_A))
         let side_B_length = side_C_length * (Math.cos(angle_A))
-        let coord_A = findLineMidpoint(cpX, cpY, x2, y2)
+        let coord_A = findLineMidpoint(p1x, p1y, p2x, p2y)
         let coord_C = ''
         let coord_B = ''
         
-        if (cpX == x2 && cpY == y2) {
-            // console.log('No Line')
+
+
+        if (p1x == p2x && p1y == p2y) {
+            console.log('No Line')
             coord_C = [coord_A[0], coord_A[1]]
             coord_B = [coord_C[0], coord_C[1]]
-        } else if (cpX > x2 && cpY == y2) {
-            // console.log('Y++ Horizontal')
+        } else if (p1x > p2x && p1y == p2y) {
+            console.log('Y++ Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (cpX == x2 && cpY > y2) {
-            // console.log('X++ Vertical')
-            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+            coord_B = [coord_C[0], (coord_C[1] - side_B_length)] // DIFFERENT ( - / + )
+        } else if (p1x == p2x && p1y > p2y) {
+            console.log('X++ Vertical')
+            coord_C = [(coord_A[0] - side_A_length), coord_A[1]] // DIFFERENT ( - / + )
             coord_B = [coord_C[0], (coord_C[1])]
-        } else if (cpX < x2 && cpY == y2) {
-            // console.log('Y-- Horizontal')
+        } else if (p1x < p2x && p1y == p2y) {
+            console.log('Y-- Horizontal')
             coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (cpX == x2 && cpY < y2) {
-            // console.log('X-- Vertical')
-            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+            coord_B = [coord_C[0], (coord_C[1] + side_B_length)] // DIFFERENT ( + / - )
+        } else if (p1x == p2x && p1y < p2y) {
+            console.log('X-- Vertical')
+            coord_C = [(coord_A[0] + side_A_length), coord_A[1]] // DIFFERENT ( + / - )
             coord_B = [coord_C[0], (coord_C[1])]
-        } else if (x2 > curvePointLineX && curvePointLineY > cpY) {
-            // console.log('1')
-            coord_C = ((y2 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+
+
+        // let anchorPointX = p2x
+        // let anchorPointY = p2y
+
+        // } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
+        // } else if (p2x > curvePointLineX && curvePointLineY > p1y) {
+
+        // } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
+        } else if (p2x > curvePointLineX && curvePointLineY > p1y) {
+            console.log('1')
+            coord_C = ((p2y < p1y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (x2 < curvePointLineX && curvePointLineY < cpY) {
-            // console.log('2')
-            coord_C = ((y2 < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        } else if (p2x < curvePointLineX && curvePointLineY < p1y) {
+            console.log('2')
+            coord_C = ((p2y < p1y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
             coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (x2 > curvePointLineX && curvePointLineY < cpY) {
-            // console.log('3')
+        } else if (p2x > curvePointLineX && curvePointLineY < p1y) {
+            console.log('3')
             coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_B = ((x2 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-        } else if (x2 < curvePointLineX && curvePointLineY > cpY) {
-            // console.log('4')
+            coord_B = ((p2x < p1x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+        } else if (p2x < curvePointLineX && curvePointLineY > p1y) {
+            console.log('4')
             coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_B = ((x2 < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+            coord_B = ((p2x < p1x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
         }
+        
+        //WEST 
+        // } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
+        //     console.log('1')
+        //     coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        // } else if (p1x < curvePointLineX && curvePointLineY < p2y) {
+        //     console.log('2')
+        //     coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        // } else if (p1x > curvePointLineX && curvePointLineY < p2y) {
+        //     console.log('3')
+        //     coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
+        // } else if (p1x < curvePointLineX && curvePointLineY > p2y) {
+        //     console.log('4')
+        //     coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+        // }
+        //WEST 
 
         let solveTriangleData = {
             coords: {
