@@ -569,12 +569,17 @@ function drawLine() {
             coord_C = [(coord_A[0] + side_A_length), coord_A[1]] // DIFFERENT ( + / - )
             coord_B = [coord_C[0], (coord_C[1])]
 
+        // if (anchorPoint is p1) {
+            // let anchorPointX = p1x
+            // let anchorPointY = p1y
+        // } else if (anchorPoint is p2){
+            // let anchorPointX = p2x
+            // let anchorPointY = p2y
+        // }
 
-        // let anchorPointX = p2x
-        // let anchorPointY = p2y
 
-        // } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
-        // } else if (p2x > curvePointLineX && curvePointLineY > p1y) {
+        // } else if (anchorPointX > curvePointLineX && curvePointLineY > cpY) {
+        // } else if (anchorPointX > curvePointLineX && curvePointLineY > cpY) {
 
         // } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
         } else if (p2x > curvePointLineX && curvePointLineY > p1y) {
