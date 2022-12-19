@@ -1,3 +1,5 @@
+// const { selection } = require("d3");
+
 const width = '100%'
 const height = '700px'
 
@@ -160,12 +162,12 @@ function drawLine() {
 
         // let rightTriangleData = findRightTriangle(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x,self.curvePointData[0].y)
         let rightTriangleData = findRightTriangle(self.lineData[0], self.curvePointData[0])
-        let solveTriangleData = solvTriangleALL(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].x)
+        let solveTriangleData = solvTriangleALL(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y)
         let solvTriangleCoords = solveTriangleData.coords
 
         // let rightTriangleData2 = findRightTriangle(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x,self.lineData[1].y)
         let rightTriangleData2 = findRightTriangle(self.curvePointData[0], self.lineData[1])
-        let solveTriangleData2 = solvTriangleALL(rightTriangleData2.sides, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].x)
+        let solveTriangleData2 = solvTriangleALL(rightTriangleData2.sides, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y)
         let solvTriangleCoords2 = solveTriangleData2.coords
 
         let intersectingPoint_a_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
@@ -211,13 +213,13 @@ function drawLine() {
 
         // PATH
         let path = d3.select(self.pathElement[0][0]);
-        path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData.arcFlagWest)})
+        path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData.arcFlagWest, solveTriangleData.sweepFlagWest)})
         path.style('fill', 'none')
         path.style('stroke', 'red')
         path.style('stroke-width', 3)
 
         let path2 = d3.select(self.pathElement2[0][0]);
-        path2.attr({d: describeArc(intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y, circRadius2, 220, 300, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData2.arcFlagEast)})
+        path2.attr({d: describeArc(intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y, circRadius2, 220, 300, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData2.arcFlagEast, solveTriangleData.sweepFlagEast)})
         path2.style('fill', 'none')
         path2.style('stroke', 'blue')
         path2.style('stroke-width', 3)
@@ -487,6 +489,8 @@ function drawLine() {
         let anchorPointY
         let arcFlagWestVar = 0
         let arcFlagEastVar = 0
+        let sweepFlagWestVar = 0
+        let sweepFlagEastVar = 0
 
         if (p1x != cpX || p1y != cpY) {
             math = 'west'
@@ -496,6 +500,112 @@ function drawLine() {
             math = 'east'
             anchorPointX = p2x
             anchorPointY = p2y
+        }
+
+        if (math === 'west') {
+            let anchorPoint1x = p1x
+            let anchorPoint1y = p1y
+            let anchorPoint2x = otherAnchorPx
+            let anchorPoint2y = otherAnchorPy
+            let curvePointX = p2x
+            let curvePointY = p2y
+            let curvePointAnchorX = curvePointLineX
+            let curvePointAnchorY = curvePointLineY
+
+            // console.log(anchorPoint1x, anchorPoint1y, anchorPoint2x, anchorPoint2y, curvePointX, curvePointY, curvePointAnchorX, curvePointAnchorY)
+            if (anchorPoint1y < anchorPoint2y) {
+                // console.log(1, 2, 3, 4)
+                // Shape 1
+                // Shape 2
+                // Shape 3
+                // Shape 4
+                if (anchorPoint1x < anchorPoint2x) {
+                    // console.log(1, 2)
+                    // Shape 1
+                    // Shape 2
+                    if (curvePointY < curvePointAnchorY) {
+                        console.log(1)
+                        // Shape 1
+                    } else {
+                        console.log(2)
+                        // Shape 2
+                    }
+                // }
+                } else {
+                    // console.log(3, 4)
+                    // Shape 3
+                    // Shape 4
+                    if (curvePointY < curvePointAnchorY) {
+                        console.log(3)
+                        // Shape 3
+                    } else {
+                        console.log(4)
+                        // Shape 4
+                    }
+                }
+            // }
+            } else {
+                // console.log(5, 6, 7, 8)
+                // Shape 5
+                // Shape 6
+                // Shape 7
+                // Shape 8
+                if (anchorPoint1x < anchorPoint2x) {
+                    // console.log(5, 6)
+                    // Shape 5
+                    // Shape 6
+                    if (curvePointY < curvePointAnchorY) {
+                        console.log(5)
+                        // Shape 5
+                    } else {
+                        console.log(6)
+                        // Shape 6
+                    }
+                } else {
+                    // console.log(7, 8)
+                    // Shape 7
+                    // Shape 8
+                    if (curvePointY < curvePointAnchorY) {
+                        console.log(7)
+                        // Shape 7
+                    } else {
+                        console.log(8)
+                        // Shape 8
+                    }
+                }
+            }
+
+            if (anchorPoint1x < curvePointAnchorX) {
+                console.log('AP Axis Section 1')
+                // AP Axis Section 1
+            } else {
+                console.log('AP Axis Section 2')
+                // AP Axis Section 2
+            }
+
+            if(anchorPoint1x < curvePointX) {
+                // console.log('XY Axis Section 1, 2')
+                // XY Axis Section 1
+                // XY Axis Section 2
+                if (anchorPoint1y < curvePointY){
+                    console.log('XY Axis Section 1')
+                    // XY Axis Section 1
+                } else {
+                    console.log('XY Axis Section 2')
+                    // XY Axis Section 2
+                }
+            } else {
+                // console.log('XY Axis Section 3, 4')
+                // XY Axis Section 3
+                // XY Axis Section 4
+                if (anchorPoint1y > curvePointY){
+                    console.log('XY Axis Section 3')
+                    // XY Axis Section 3
+                } else {
+                    console.log('XY Axis Section 4')
+                    // XY Axis Section 4
+                }
+            }
         }
 
         if (p1x == p2x && p1y == p2y) {
@@ -522,11 +632,6 @@ function drawLine() {
             // if(math === 'east'){console.log('X- Vertical EAST')}
             coord_C = (math === 'west') ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
             coord_B = [coord_C[0], (coord_C[1])]
-
-
-
-
-
 
 
 
@@ -611,7 +716,9 @@ function drawLine() {
                 coord_C: coord_C,
             },
             arcFlagWest: arcFlagWestVar,
-            arcFlagEast: arcFlagEastVar
+            arcFlagEast: arcFlagEastVar,
+            sweepFlagWest: sweepFlagWestVar,
+            sweepFlagEast: sweepFlagEastVar
         }
         return solveTriangleData
     }
@@ -651,8 +758,9 @@ function drawLine() {
         return result;
     };
 
-    function describeArc(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY, arcFlagPass){
+    function describeArc(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY, arcFlagPass, sweepFlagPass){
         let arcFlag = arcFlagPass
+        // let sweepFlag = sweepFlagPass
         let sweepFlag = perpPointY > curvePointY ? 0 : 1
         let d = [
             "M", x1, y1, 
@@ -662,6 +770,79 @@ function drawLine() {
     }
 }
 
+
+function figureItOUT() {
+    // Relationships:
+    // AP1 - AP2
+    // AP1 - CP
+    // AP2 - CP
+    // CP - CA
+    // CP - XYaxis
+    // CP - APaxis
+
+    // if(AP1x = AP2x) {
+    //     apx = 0
+    // } else if(AP1x < AP2x) {
+    //     apx = 1
+    // } else {
+    //     apx = 2
+    // }
+
+    // let straightLine = true || false
+    // let straightLineDirection = vertical || horizontal
+    // let coord_C_symbol = + || -
+    // let coord_B_symbol = + || -
+    // let arcFlag = 0 || 1
+    // let sweepFlag = 0 || 1
+
+
+    // coord_C = [(coord_A[0] ~ side_A_length), coord_A[1]]
+    // coord_B = [coord_C[0], (coord_C[1] ~ side_B_length)]
+
+    // coord_C = [(coord_A[0]), coord_A[1]]
+    // coord_B = [coord_C[0], (coord_C[1] ~ side_B_length)]
+
+    // coord_C = [(coord_A[0] ~ side_A_length), coord_A[1]]
+    // coord_B = [coord_C[0], (coord_C[1])]
+
+    // arcFlag = ~
+    // sweepFlag = ~
+
+
+    // determin shape
+    // shape 1
+    // shape 2
+    // shape 3
+    // shape 4
+    // shape 5
+    // shape 6
+    // shape 7
+    // shape 8
+
+    // for each shape
+    // determin which side
+    // west side
+    // east side
+
+    // for each side 
+    // determin anchor point axis section
+    // section 1
+    // section 2
+    // section 3
+    // section 4
+
+    // for each anchor point axis section 
+    // determin x y axis section 
+    // section 1
+    // section 2
+
+
+    // if (anchorPointPathX ~ anchorPointCurveX && anchorPointCurveY ~ curvePointY) {}
+    // if (anchorPointX ~ cpX) {}
+    // if (anchorPointY ~ cpY) {}
+    
+
+}
 
 
 // function describeArcWest(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY, arcFlag){
