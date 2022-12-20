@@ -512,101 +512,186 @@ function drawLine() {
             let curvePointAnchorX = curvePointLineX
             let curvePointAnchorY = curvePointLineY
 
-            // console.log(anchorPoint1x, anchorPoint1y, anchorPoint2x, anchorPoint2y, curvePointX, curvePointY, curvePointAnchorX, curvePointAnchorY)
             if (anchorPoint1y < anchorPoint2y) {
-                // console.log(1, 2, 3, 4)
-                // Shape 1
-                // Shape 2
-                // Shape 3
-                // Shape 4
                 if (anchorPoint1x < anchorPoint2x) {
-                    // console.log(1, 2)
-                    // Shape 1
-                    // Shape 2
                     if (curvePointY < curvePointAnchorY) {
-                        console.log(1)
-                        // Shape 1
+                        // not clockwise
+                        console.log('Shape 1')
+                        if (anchorPoint1x < curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y < curvePointY) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x < curvePointX) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        }
                     } else {
-                        console.log(2)
-                        // Shape 2
+                        console.log('Shape 2')
+                        if (anchorPoint1x > curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y > curvePointY) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x > curvePointX) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        }
                     }
-                // }
                 } else {
-                    // console.log(3, 4)
-                    // Shape 3
-                    // Shape 4
                     if (curvePointY < curvePointAnchorY) {
-                        console.log(3)
-                        // Shape 3
+                        console.log('Shape 3')
+                        if (anchorPoint1x > curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y < curvePointY) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x > curvePointX) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        }
                     } else {
-                        console.log(4)
-                        // Shape 4
+                        console.log('Shape 4')
+                        if (anchorPoint1x < curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y > curvePointY) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x < curvePointX) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        }
                     }
                 }
-            // }
             } else {
-                // console.log(5, 6, 7, 8)
-                // Shape 5
-                // Shape 6
-                // Shape 7
-                // Shape 8
                 if (anchorPoint1x < anchorPoint2x) {
-                    // console.log(5, 6)
-                    // Shape 5
-                    // Shape 6
                     if (curvePointY < curvePointAnchorY) {
-                        console.log(5)
-                        // Shape 5
+                        console.log('Shape 5')
+                        if (anchorPoint1x < curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y > curvePointY) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x < curvePointX) {
+                                console.log('XY Axis Section 1')
+                            } else {
+                                console.log('XY Axis Section 2')
+                            }
+                        }
                     } else {
-                        console.log(6)
+                        console.log('Shape 6')
                         // Shape 6
                     }
                 } else {
-                    // console.log(7, 8)
-                    // Shape 7
-                    // Shape 8
                     if (curvePointY < curvePointAnchorY) {
-                        console.log(7)
+                        console.log('Shape 7')
                         // Shape 7
                     } else {
-                        console.log(8)
+                        console.log('Shape 8')
                         // Shape 8
                     }
                 }
             }
 
-            if (anchorPoint1x < curvePointAnchorX) {
-                console.log('AP Axis Section 1')
-                // AP Axis Section 1
-            } else {
-                console.log('AP Axis Section 2')
-                // AP Axis Section 2
-            }
+            // if (anchorPoint1x < curvePointAnchorX) {
+            //     console.log('AP Axis Section 1')
+            //     // AP Axis Section 1
+            // } else {
+            //     console.log('AP Axis Section 2')
+            //     // AP Axis Section 2
+            // }
 
-            if(anchorPoint1x < curvePointX) {
-                // console.log('XY Axis Section 1, 2')
-                // XY Axis Section 1
-                // XY Axis Section 2
-                if (anchorPoint1y < curvePointY){
-                    console.log('XY Axis Section 1')
-                    // XY Axis Section 1
-                } else {
-                    console.log('XY Axis Section 2')
-                    // XY Axis Section 2
-                }
-            } else {
-                // console.log('XY Axis Section 3, 4')
-                // XY Axis Section 3
-                // XY Axis Section 4
-                if (anchorPoint1y > curvePointY){
-                    console.log('XY Axis Section 3')
-                    // XY Axis Section 3
-                } else {
-                    console.log('XY Axis Section 4')
-                    // XY Axis Section 4
-                }
-            }
+            // if(anchorPoint1x < curvePointX) {
+            //     if (anchorPoint1y < curvePointY){
+            //         console.log('XY Axis Section 1')
+            //         // XY Axis Section 1
+            //     } else {
+            //         console.log('XY Axis Section 2')
+            //         // XY Axis Section 2
+            //     }
+            // } else {
+            //     if (anchorPoint1y > curvePointY){
+            //         console.log('XY Axis Section 3')
+            //         // XY Axis Section 3
+            //     } else {
+            //         console.log('XY Axis Section 4')
+            //         // XY Axis Section 4
+            //     }
+            // }
+        } else {
         }
+
+        // function findShape() {
+        //     if (anchorPoint1y < anchorPoint2y) {
+        //         if (anchorPoint1x < anchorPoint2x) {
+        //             if (curvePointY < curvePointAnchorY) {
+        //                 findSection1()
+        //             } else {
+        //                 findSection1()
+        //             }
+        //         }
+        //     }
+        // }
+
+        // function findSection1() {
+        //     if (anchorPoint1x < curvePointAnchorX) {
+        //         findSection2()
+        //     } else {
+        //         findSection2()
+        //     }
+        // }
+
+        // function findSection2() {
+        //     if(anchorPoint1x < curvePointX) {
+        //         if (anchorPoint1y < curvePointY){
+        //             plotPoint()
+        //         } else {
+        //             plotPoint()
+        //         }
+        //     } else {
+        //         if (anchorPoint1y > curvePointY){
+        //             plotPoint()
+        //         } else {
+        //             plotPoint()
+        //         }
+        //     }
+        // }
+
+        // function plotPoint() {
+        //     coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        // }
+        
+
+
 
         if (p1x == p2x && p1y == p2y) {
             if(math === 'west'){console.log('No Line')}
