@@ -515,38 +515,53 @@ function drawLine() {
             if (anchorPoint1y < anchorPoint2y) {
                 if (anchorPoint1x < anchorPoint2x) {
                     if (curvePointY < curvePointAnchorY) {
-                        // not clockwise
                         console.log('Shape 1')
-                        if (anchorPoint1x < curvePointAnchorX) {
+                        if (anchorPoint1x > curvePointAnchorX) {
                             console.log('AP Axis Section 1')
-                            if(anchorPoint1y < curvePointY) {
-                                console.log('XY Axis Section 1')
+                            if(anchorPoint1x > curvePointX) {
+                                console.log('XY Axis Section 1 - 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             } else {
-                                console.log('XY Axis Section 2')
+                                console.log('XY Axis Section 2 - 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         } else {
                             console.log('AP Axis Section 2')
-                            if(anchorPoint1x < curvePointX) {
-                                console.log('XY Axis Section 1')
+                            if(anchorPoint1y > curvePointY) {
+                                console.log('XY Axis Section 1 - 3')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
-                                console.log('XY Axis Section 2')
+                                console.log('XY Axis Section 2 - 4')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     } else {
                         console.log('Shape 2')
-                        if (anchorPoint1x > curvePointAnchorX) {
+                        if (anchorPoint1x < curvePointAnchorX) {
                             console.log('AP Axis Section 1')
-                            if(anchorPoint1y > curvePointY) {
-                                console.log('XY Axis Section 1')
+                            if(anchorPoint1x < curvePointX) {
+                                console.log('XY Axis Section 1 - 5')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             } else {
-                                console.log('XY Axis Section 2')
+                                console.log('XY Axis Section 2 - 6')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         } else {
                             console.log('AP Axis Section 2')
-                            if(anchorPoint1x > curvePointX) {
-                                console.log('XY Axis Section 1')
+                            if(anchorPoint1y < curvePointY) {
+                                console.log('XY Axis Section 1 - 7')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
-                                console.log('XY Axis Section 2')
+                                console.log('XY Axis Section 2 - 8')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     }
@@ -557,15 +572,23 @@ function drawLine() {
                             console.log('AP Axis Section 1')
                             if(anchorPoint1y < curvePointY) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         } else {
                             console.log('AP Axis Section 2')
                             if(anchorPoint1x > curvePointX) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     } else {
@@ -574,15 +597,23 @@ function drawLine() {
                             console.log('AP Axis Section 1')
                             if(anchorPoint1y > curvePointY) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         } else {
                             console.log('AP Axis Section 2')
                             if(anchorPoint1x < curvePointX) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     }
@@ -591,32 +622,106 @@ function drawLine() {
                 if (anchorPoint1x < anchorPoint2x) {
                     if (curvePointY < curvePointAnchorY) {
                         console.log('Shape 5')
+                        if (anchorPoint1x > curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1y < curvePointY) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1x > curvePointX) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            }
+                        }
+                    } else {
+                        console.log('Shape 6')
                         if (anchorPoint1x < curvePointAnchorX) {
                             console.log('AP Axis Section 1')
                             if(anchorPoint1y > curvePointY) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         } else {
                             console.log('AP Axis Section 2')
                             if(anchorPoint1x < curvePointX) {
                                 console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             } else {
                                 console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
-                    } else {
-                        console.log('Shape 6')
-                        // Shape 6
                     }
                 } else {
                     if (curvePointY < curvePointAnchorY) {
                         console.log('Shape 7')
-                        // Shape 7
+                        if (anchorPoint1x > curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1x > curvePointX) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1y > curvePointY) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        }
                     } else {
                         console.log('Shape 8')
-                        // Shape 8
+                        if (anchorPoint1x < curvePointAnchorX) {
+                            console.log('AP Axis Section 1')
+                            if(anchorPoint1x < curvePointX) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            console.log('AP Axis Section 2')
+                            if(anchorPoint1y < curvePointY) {
+                                console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        }
                     }
                 }
             }
@@ -693,106 +798,106 @@ function drawLine() {
 
 
 
-        if (p1x == p2x && p1y == p2y) {
-            if(math === 'west'){console.log('No Line')}
-            coord_C = [coord_A[0], coord_A[1]]
-            coord_B = [coord_C[0], coord_C[1]]
-        } else if (p1x > p2x && p1y == p2y) {
-            // if(math === 'west'){console.log('Y+ Horizontal WEST')}
-            // if(math === 'east'){console.log('Y+ Horizontal EAST')}
-            coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-        } else if (p1x == p2x && p1y > p2y) {
-            // if(math === 'west'){console.log('X+ Vertical WEST')}
-            // if(math === 'east'){console.log('X+ Vertical EAST')}
-            coord_C = (math === 'west') ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1])]
-        } else if (p1x < p2x && p1y == p2y) {
-            // if(math === 'west'){console.log('Y- Horizontal WEST')}
-            // if(math === 'east'){console.log('Y- Horizontal EAST')}
-            coord_C = [(coord_A[0]), coord_A[1]]
-            coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-        } else if (p1x == p2x && p1y < p2y) {
-            // if(math === 'west'){console.log('X- Vertical WEST')}
-            // if(math === 'east'){console.log('X- Vertical EAST')}
-            coord_C = (math === 'west') ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_B = [coord_C[0], (coord_C[1])]
+        // if (p1x == p2x && p1y == p2y) {
+        //     if(math === 'west'){console.log('No Line')}
+        //     coord_C = [coord_A[0], coord_A[1]]
+        //     coord_B = [coord_C[0], coord_C[1]]
+        // } else if (p1x > p2x && p1y == p2y) {
+        //     // if(math === 'west'){console.log('Y+ Horizontal WEST')}
+        //     // if(math === 'east'){console.log('Y+ Horizontal EAST')}
+        //     coord_C = [(coord_A[0]), coord_A[1]]
+        //     coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
+        // } else if (p1x == p2x && p1y > p2y) {
+        //     // if(math === 'west'){console.log('X+ Vertical WEST')}
+        //     // if(math === 'east'){console.log('X+ Vertical EAST')}
+        //     coord_C = (math === 'west') ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
+        //     coord_B = [coord_C[0], (coord_C[1])]
+        // } else if (p1x < p2x && p1y == p2y) {
+        //     // if(math === 'west'){console.log('Y- Horizontal WEST')}
+        //     // if(math === 'east'){console.log('Y- Horizontal EAST')}
+        //     coord_C = [(coord_A[0]), coord_A[1]]
+        //     coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
+        // } else if (p1x == p2x && p1y < p2y) {
+        //     // if(math === 'west'){console.log('X- Vertical WEST')}
+        //     // if(math === 'east'){console.log('X- Vertical EAST')}
+        //     coord_C = (math === 'west') ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
+        //     coord_B = [coord_C[0], (coord_C[1])]
 
 
 
-        } else if (anchorPointX > curvePointLineX && curvePointLineY > cpY) {
-            // if(math === 'west'){console.log('1W')}
-            // if(math === 'east'){console.log('1E')}
-            if(math === 'west'){arcFlagWestVar = 1}
-            if(math === 'east'){arcFlagEastVar = 0}
+        // } else if (anchorPointX > curvePointLineX && curvePointLineY > cpY) {
+        //     // if(math === 'west'){console.log('1W')}
+        //     // if(math === 'east'){console.log('1E')}
+        //     if(math === 'west'){arcFlagWestVar = 1}
+        //     if(math === 'east'){arcFlagEastVar = 0}
 
-            coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-            // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-            if (math === 'west' && anchorPointY > otherAnchorPy) {
-                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-            } else {
-                coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-            }
-            if (math === 'east' && anchorPointY < otherAnchorPy) {
-                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-            } else {
-                coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-            }
-        } else if (anchorPointX < curvePointLineX && curvePointLineY < cpY) {
-            // if(math === 'west'){console.log('2W')}
-            // if(math === 'east'){console.log('2E')}
-            if(math === 'west'){arcFlagWestVar = 0}
-            if(math === 'east'){arcFlagEastVar = 1}
+        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
+        //     }
+        // } else if (anchorPointX < curvePointLineX && curvePointLineY < cpY) {
+        //     // if(math === 'west'){console.log('2W')}
+        //     // if(math === 'east'){console.log('2E')}
+        //     if(math === 'west'){arcFlagWestVar = 0}
+        //     if(math === 'east'){arcFlagEastVar = 1}
 
-            coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-            // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-            if (math === 'west' && anchorPointY > otherAnchorPy) {
-                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-            } else {
-                coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-            }
-            if (math === 'east' && anchorPointY < otherAnchorPy) {
-                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-            } else {
-                coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-            }
-        } else if (anchorPointX > curvePointLineX && curvePointLineY < cpY) {
-            // if(math === 'west'){console.log('3W')}
-            // if(math === 'east'){console.log('3E')}
-            if(math === 'west'){arcFlagWestVar = 1}
-            if(math === 'east'){arcFlagEastVar = 0}
+        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
+        //     }
+        // } else if (anchorPointX > curvePointLineX && curvePointLineY < cpY) {
+        //     // if(math === 'west'){console.log('3W')}
+        //     // if(math === 'east'){console.log('3E')}
+        //     if(math === 'west'){arcFlagWestVar = 1}
+        //     if(math === 'east'){arcFlagEastVar = 0}
 
-            if (math === 'west' && anchorPointY > otherAnchorPy) {
-                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            } else {
-                coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
-            }
-            if (math === 'east' && anchorPointY < otherAnchorPy) {
-                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            } else {
-                coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
-            }
-            // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-            coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
-        } else if (anchorPointX < curvePointLineX && curvePointLineY > cpY) {
-            // if(math === 'west'){console.log('4W')}
-            // if(math === 'east'){console.log('4E')}
-            if(math === 'west'){arcFlagWestVar = 0}
-            if(math === 'east'){arcFlagEastVar = 1}
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
+        //     }
+        //     // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
+        // } else if (anchorPointX < curvePointLineX && curvePointLineY > cpY) {
+        //     // if(math === 'west'){console.log('4W')}
+        //     // if(math === 'east'){console.log('4E')}
+        //     if(math === 'west'){arcFlagWestVar = 0}
+        //     if(math === 'east'){arcFlagEastVar = 1}
             
-            if (math === 'west' && anchorPointY > otherAnchorPy) {
-                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            } else {
-                coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
-            }
-            if (math === 'east' && anchorPointY < otherAnchorPy) {
-                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            } else {
-                coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
-            }
-            // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-            coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-        }
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
+        //     }
+        //     // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+        // }
 
         let solveTriangleData = {
             coords: {
