@@ -8,77 +8,82 @@ let svg = d3.select('body').append('svg')
 
 d3.select("body").insert("div")
     .append("button")
-    .text("Draw Path")
-    .on("click", drawPath);
+    .text("Draw Free Until")
+    .on("click", drawFreeUntilDbl);
 
-let groupCounter = -1
+// let groupCounter = -1
+let groupCounter = 0
 let pathDatas = []
 let paths = []
 let endPointsGroups = []
 
-function drawPath(){
+function drawFreeUntilDbl(){
+    // var line;
     let self = this, m1, isDown = false, isDrag = false, thisCount;
-    let ass = false
-    console.log(!ass)
-    var line;
+    svg.on('click', mousedown);
+    svg.on('dblclick', mouseup);
 
-    svg.on('mousedown', function(event) {
+    function mousedown(event) {
         m1 = d3.pointer(event);
-        if (!isDown && !isDrag) {
-            groupCounter = groupCounter + 1
-            thisCount = groupCounter
+        // var m = d3.mouse(this);
+        // line = svg.append("line")
+        //     .attr("x1", m[0])
+        //     .attr("y1", m[1])
+        //     .attr("x2", m[0])
+        //     .attr("y2", m[1])
+        //     .attr("stroke", "blue");
 
-            self.group = svg.append('g').attr('class', 'figureGroup');
-            self.pathGroup = self.group.append('g').attr('class', 'pathGroup');
-            self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup');
+        console.log('Click')
+        // groupCounter = groupCounter + 1
+        // groupCounter = 0
+        thisCount = groupCounter
 
-            // PATH
-            pathDatas.push([
-                {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
-                {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
-            ])
-            paths.push(self.pathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})))
-            // PATH
+        self.group = svg.append('g').attr('class', 'figureGroup');
+        self.pathGroup = self.group.append('g').attr('class', 'pathGroup');
+        self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup');
 
-            // DYNAMIC END POINTS
-            let endPoints = []
-            for (let i = 0; i < pathDatas[thisCount].length; i++) {
-                let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint'))
-                endPoints.push(newPoint)
-            }
-            endPointsGroups.push(endPoints)
-            // DYNAMIC END POINTS
+        // PATH
+        pathDatas.push([
+            {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
+            {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
+        ])
+        paths.push(self.pathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})))
+        // PATH
 
-            updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-        } else {
-            console.log('ass')
-            isDrag = true;
-
-            // Prob needs some work
-            pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
-            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            // Prob needs some work
-
-            for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
-                // should do 1 at a time. Prob cant impliment until we build double click method or something.
-                let currentEndPoint = endPointsGroups[thisCount][i]
-                currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
-            }
-
-            updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+        // DYNAMIC END POINTS
+        let endPoints = []
+        for (let i = 0; i < pathDatas[thisCount].length; i++) {
+            let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint'))
+            endPoints.push(newPoint)
         }
-        isDown = !isDown
-    })
+        endPointsGroups.push(endPoints)
+        // DYNAMIC END POINTS
 
-    .on('mousemove', function(event) {
+        updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+
+        
+        svg.on("mousemove", mousemove);
+    }
+    
+    function mousemove(event) {
+        // var m = d3.mouse(this);
+        // line
+        //     .attr("x2", m[0])
+        //     .attr("y2", m[1])
+        console.log('Mouse Move')
+
         m2 = d3.pointer(event);
-        if(isDown && !isDrag) {
-            console.log('thicc ass')
+        // if(isDown && !isDrag) {
             pathDatas[thisCount][1].coords.x = m2[0]
             pathDatas[thisCount][1].coords.y = m2[1]
             updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-        } 
-    })
+        // } 
+    }
+    
+    function mouseup() {
+        console.log("double click")
+        svg.on("mousemove", null);
+    }
 }
 
 // PATH
