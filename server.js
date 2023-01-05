@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express")
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -13,17 +13,15 @@ app.use(expressLayouts);
 app.use(express.static("public"));
 app.use(express.json())
 
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to Mongoose"));
+// mongoose.connect(process.env.DATABASE_URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+// const db = mongoose.connection;
+// db.on("error", (error) => console.error(error));
+// db.once("open", () => console.log("Connected to Mongoose"));
 
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
-// const filesRouter = require('./routes/files')
-// app.use('/files', filesRouter)
 
 app.listen(3000, () => console.log('Server started on Port 3000.'))

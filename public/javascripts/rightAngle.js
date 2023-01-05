@@ -106,6 +106,7 @@ if (path1.pointA.y == path1.pointB.y) { // AB is horizontal
 
 
 // Draw SVGs
+// var svg = document.querySelector("#arc-shape")
 var svg = d3.select('body').append('svg')
     .attr('width', width)
     .attr('height', height)

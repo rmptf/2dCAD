@@ -1,5 +1,3 @@
-// const { selection } = require("d3");
-
 const width = '100%'
 const height = '700px'
 
@@ -157,25 +155,17 @@ function drawLine() {
 
 
     function updateFigureA() {
-        // let curvePointLine = findPerpendicularFromPoint(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, self.lineData[1].x, self.lineData[1].y)
-        let curvePointLine = findPerpendicularFromPoint(self.lineData, self.curvePointData[0])
+        let curvePointAnchor = findPerpendicularFromPoint(self.lineData, self.curvePointData[0])
 
-        // let rightTriangleData = findRightTriangle(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x,self.curvePointData[0].y)
-        let rightTriangleData = findRightTriangle(self.lineData[0], self.curvePointData[0])
-        let solveTriangleData = solvTriangleALL(rightTriangleData.sides, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y)
-        let solvTriangleCoords = solveTriangleData.coords
+        let rightTriangleDataA = findRightTriangle(self.lineData[0], self.curvePointData[0])
+        let solveTriangleDataA = solvTriangleALL(rightTriangleDataA.sides, self.lineData[0].x, self.lineData[0].y, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1])
+        let intersectingPointA = findIntersectingPoint(self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1], solveTriangleDataA.coords.coord_A[0], solveTriangleDataA.coords.coord_A[1], solveTriangleDataA.coords.coord_B[0], solveTriangleDataA.coords.coord_B[1])
+        let circRadiusA = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPointA.x, intersectingPointA.y)
 
-        // let rightTriangleData2 = findRightTriangle(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x,self.lineData[1].y)
-        let rightTriangleData2 = findRightTriangle(self.curvePointData[0], self.lineData[1])
-        let solveTriangleData2 = solvTriangleALL(rightTriangleData2.sides, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y)
-        let solvTriangleCoords2 = solveTriangleData2.coords
-
-        let intersectingPoint_a_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], solvTriangleCoords.coord_A[0], solvTriangleCoords.coord_A[1], solvTriangleCoords.coord_B[0], solvTriangleCoords.coord_B[1])
-        let intersectingPoint_b_lineInfinite = findIntersectingPoint_lineInfinite(self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], solvTriangleCoords2.coord_A[0], solvTriangleCoords2.coord_A[1], solvTriangleCoords2.coord_B[0], solvTriangleCoords2.coord_B[1])
-
-        const circRadius = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y)
-        const circRadius2 = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y)
-        // console.log(circRadius * 2, circRadius2 * 2)
+        let rightTriangleDataB = findRightTriangle(self.curvePointData[0], self.lineData[1])
+        let solveTriangleDataB = solvTriangleALL(rightTriangleDataB.sides, self.lineData[1].x, self.lineData[1].y, self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1])
+        let intersectingPointB = findIntersectingPoint(self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1], solveTriangleDataB.coords.coord_A[0], solveTriangleDataB.coords.coord_A[1], solveTriangleDataB.coords.coord_B[0], solveTriangleDataB.coords.coord_B[1])
+        let circRadiusB = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPointB.x, intersectingPointB.y)
 
         // LINE
         line = d3.select(self.lineElement[0][0]);
@@ -192,20 +182,20 @@ function drawLine() {
         // ELLIPSE
         ellipse1 = d3.select(self.ellipseElement1[0][0]);
         ellipse1
-        .attr("cx", intersectingPoint_a_lineInfinite.x)
-        .attr("cy", intersectingPoint_a_lineInfinite.y)
-        .attr("rx", circRadius)
-        .attr("ry", circRadius)
+        .attr("cx", intersectingPointA.x)
+        .attr("cy", intersectingPointA.y)
+        .attr("rx", circRadiusA)
+        .attr("ry", circRadiusA)
         .attr("fill", "none")
         .attr("stroke", "red")
         .attr("stroke-dasharray", "4 4");
 
         ellipse2 = d3.select(self.ellipseElement2[0][0]);
         ellipse2
-        .attr("cx", intersectingPoint_b_lineInfinite.x)
-        .attr("cy", intersectingPoint_b_lineInfinite.y)
-        .attr("rx", circRadius2)
-        .attr("ry", circRadius2)
+        .attr("cx", intersectingPointB.x)
+        .attr("cy", intersectingPointB.y)
+        .attr("rx", circRadiusB)
+        .attr("ry", circRadiusB)
         .attr("fill", "none")
         .attr("stroke", "blue")
         .attr("stroke-dasharray", "4 4");
@@ -213,16 +203,28 @@ function drawLine() {
 
         // PATH
         let path = d3.select(self.pathElement[0][0]);
-        path.attr({d: describeArc(intersectingPoint_a_lineInfinite.x, intersectingPoint_a_lineInfinite.y, circRadius, 220, 300, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData.arcFlagWest, solveTriangleData.sweepFlagWest)})
         path.style('fill', 'none')
         path.style('stroke', 'red')
         path.style('stroke-width', 3)
 
         let path2 = d3.select(self.pathElement2[0][0]);
-        path2.attr({d: describeArc(intersectingPoint_b_lineInfinite.x, intersectingPoint_b_lineInfinite.y, circRadius2, 220, 300, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointLine[0], curvePointLine[1], self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleData2.arcFlagEast, solveTriangleData.sweepFlagEast)})
         path2.style('fill', 'none')
         path2.style('stroke', 'blue')
         path2.style('stroke-width', 3)
+
+        if(inRange(self.curvePointData[0].x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(self.curvePointData[0].y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
+            console.log('straight')
+            path.attr({d: describeStraightPath(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y)})
+            path2.attr({d: describeStraightPath(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y)})
+            path.style('stroke', 'red')
+            path2.style('stroke', 'blue')
+            path.style('stroke-width', 10)
+            path2.style('stroke-width', 10)
+        } else {
+            console.log('arc')
+            path.attr({d: describeArcPath(circRadiusA, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, solveTriangleDataA.arcFlag, solveTriangleDataA.sweepFlagWest)})
+            path2.attr({d: describeArcPath(circRadiusB, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleDataB.arcFlag, solveTriangleDataB.sweepFlagEast)})
+        }
         // PATH
 
         // CURVE POINT LEG
@@ -252,8 +254,8 @@ function drawLine() {
         lineCPPL.attr({
             x1:self.curvePointData[0].x,
             y1:self.curvePointData[0].y,
-            x2:curvePointLine[0],
-            y2:curvePointLine[1],
+            x2:curvePointAnchor[0],
+            y2:curvePointAnchor[1],
         });
         lineCPPL.style('stroke', 'grey')
         lineCPPL.style('stroke-width', 1)
@@ -285,44 +287,44 @@ function drawLine() {
         // INTERSECTING POINT
         let pointIPa = d3.select(self.pointElementIPa[0][0]);
         pointIPa.attr('r', 5)
-                .attr('cx', intersectingPoint_a_lineInfinite.x)
-                .attr('cy', intersectingPoint_a_lineInfinite.y)
+                .attr('cx', intersectingPointA.x)
+                .attr('cy', intersectingPointA.y)
                 .attr('fill', 'red');
 
         let pointIPb = d3.select(self.pointElementIPb[0][0]);
         pointIPb.attr('r', 5)
-                .attr('cx', intersectingPoint_b_lineInfinite.x)
-                .attr('cy', intersectingPoint_b_lineInfinite.y)
+                .attr('cx', intersectingPointB.x)
+                .attr('cy', intersectingPointB.y)
                 .attr('fill', 'blue');
         // INTERSECTING POINT
 
         // SOLVE TRIANGLE 1 Sides
         let line_solveTriangle_1_sideA = d3.select(self.lineElement_solveTriangle_1_sideA[0][0]);
         line_solveTriangle_1_sideA.attr({
-            x1:solvTriangleCoords.coord_B[0],
-            y1:solvTriangleCoords.coord_B[1],
-            x2:solvTriangleCoords.coord_C[0],
-            y2:solvTriangleCoords.coord_C[1],
+            x1:solveTriangleDataA.coords.coord_B[0],
+            y1:solveTriangleDataA.coords.coord_B[1],
+            x2:solveTriangleDataA.coords.coord_C[0],
+            y2:solveTriangleDataA.coords.coord_C[1],
         });
         line_solveTriangle_1_sideA.style('stroke', 'red')
         line_solveTriangle_1_sideA.style('stroke-width', 0.5)
 
         let line_solveTriangle_1_sideB = d3.select(self.lineElement_solveTriangle_1_sideB[0][0]);
         line_solveTriangle_1_sideB.attr({
-            x1:solvTriangleCoords.coord_C[0],
-            y1:solvTriangleCoords.coord_C[1],
-            x2:solvTriangleCoords.coord_A[0],
-            y2:solvTriangleCoords.coord_A[1],
+            x1:solveTriangleDataA.coords.coord_C[0],
+            y1:solveTriangleDataA.coords.coord_C[1],
+            x2:solveTriangleDataA.coords.coord_A[0],
+            y2:solveTriangleDataA.coords.coord_A[1],
         });
         line_solveTriangle_1_sideB.style('stroke', 'green')
         line_solveTriangle_1_sideB.style('stroke-width', 0.5)
 
         let line_solveTriangle_1_sideC = d3.select(self.lineElement_solveTriangle_1_sideC[0][0]);
         line_solveTriangle_1_sideC.attr({
-            x1:solvTriangleCoords.coord_A[0],
-            y1:solvTriangleCoords.coord_A[1],
-            x2:solvTriangleCoords.coord_B[0],
-            y2:solvTriangleCoords.coord_B[1],
+            x1:solveTriangleDataA.coords.coord_A[0],
+            y1:solveTriangleDataA.coords.coord_A[1],
+            x2:solveTriangleDataA.coords.coord_B[0],
+            y2:solveTriangleDataA.coords.coord_B[1],
         });
         line_solveTriangle_1_sideC.style('stroke', 'blue')
         line_solveTriangle_1_sideC.style('stroke-width', 0.5)
@@ -331,50 +333,50 @@ function drawLine() {
         // SOLVE TRIANGLE 1 Points
         let point_solveTriangle_1_pointA = d3.select(self.pointElement_solveTriangle_1_pointA[0][0]).data(self.lineData);
         point_solveTriangle_1_pointA.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords.coord_A[0])
-                .attr('cy', solvTriangleCoords.coord_A[1])
+                .attr('cx', solveTriangleDataA.coords.coord_A[0])
+                .attr('cy', solveTriangleDataA.coords.coord_A[1])
                 .attr('fill', 'red');
         
         let point_solveTriangle_1_pointB = d3.select(self.pointElement_solveTriangle_1_pointB[0][0]).data(self.lineData);
         point_solveTriangle_1_pointB.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords.coord_B[0])
-                .attr('cy', solvTriangleCoords.coord_B[1])
+                .attr('cx', solveTriangleDataA.coords.coord_B[0])
+                .attr('cy', solveTriangleDataA.coords.coord_B[1])
                 .attr('fill', 'green');
 
         let point_solveTriangle_1_pointC = d3.select(self.pointElement_solveTriangle_1_pointC[0][0]).data(self.lineData);
         point_solveTriangle_1_pointC.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords.coord_C[0])
-                .attr('cy', solvTriangleCoords.coord_C[1])
+                .attr('cx', solveTriangleDataA.coords.coord_C[0])
+                .attr('cy', solveTriangleDataA.coords.coord_C[1])
                 .attr('fill', 'blue');
         // SOLVE TRIANGLE 1 Points
-//
+
         // SOLVE TRIANGLE 2 Sides
         let line_solveTriangle_2_sideA = d3.select(self.lineElement_solveTriangle_2_sideA[0][0]);
         line_solveTriangle_2_sideA.attr({
-            x1:solvTriangleCoords2.coord_B[0],
-            y1:solvTriangleCoords2.coord_B[1],
-            x2:solvTriangleCoords2.coord_C[0],
-            y2:solvTriangleCoords2.coord_C[1],
+            x1:solveTriangleDataB.coords.coord_B[0],
+            y1:solveTriangleDataB.coords.coord_B[1],
+            x2:solveTriangleDataB.coords.coord_C[0],
+            y2:solveTriangleDataB.coords.coord_C[1],
         });
         line_solveTriangle_2_sideA.style('stroke', 'red')
         line_solveTriangle_2_sideA.style('stroke-width', 0.5)
 
         let line_solveTriangle_2_sideB = d3.select(self.lineElement_solveTriangle_2_sideB[0][0]);
         line_solveTriangle_2_sideB.attr({
-            x1:solvTriangleCoords2.coord_C[0],
-            y1:solvTriangleCoords2.coord_C[1],
-            x2:solvTriangleCoords2.coord_A[0],
-            y2:solvTriangleCoords2.coord_A[1],
+            x1:solveTriangleDataB.coords.coord_C[0],
+            y1:solveTriangleDataB.coords.coord_C[1],
+            x2:solveTriangleDataB.coords.coord_A[0],
+            y2:solveTriangleDataB.coords.coord_A[1],
         });
         line_solveTriangle_2_sideB.style('stroke', 'green')
         line_solveTriangle_2_sideB.style('stroke-width', 0.5)
 
         let line_solveTriangle_2_sideC = d3.select(self.lineElement_solveTriangle_2_sideC[0][0]);
         line_solveTriangle_2_sideC.attr({
-            x1:solvTriangleCoords2.coord_A[0],
-            y1:solvTriangleCoords2.coord_A[1],
-            x2:solvTriangleCoords2.coord_B[0],
-            y2:solvTriangleCoords2.coord_B[1],
+            x1:solveTriangleDataB.coords.coord_A[0],
+            y1:solveTriangleDataB.coords.coord_A[1],
+            x2:solveTriangleDataB.coords.coord_B[0],
+            y2:solveTriangleDataB.coords.coord_B[1],
         });
         line_solveTriangle_2_sideC.style('stroke', 'blue')
         line_solveTriangle_2_sideC.style('stroke-width', 0.5)
@@ -383,20 +385,20 @@ function drawLine() {
         // SOLVE TRIANGLE 2 Points
         let point_solveTriangle_2_pointA = d3.select(self.pointElement_solveTriangle_2_pointA[0][0]).data(self.lineData);
         point_solveTriangle_2_pointA.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords2.coord_A[0])
-                .attr('cy', solvTriangleCoords2.coord_A[1])
+                .attr('cx', solveTriangleDataB.coords.coord_A[0])
+                .attr('cy', solveTriangleDataB.coords.coord_A[1])
                 .attr('fill', 'red');
         
         let point_solveTriangle_2_pointB = d3.select(self.pointElement_solveTriangle_2_pointB[0][0]).data(self.lineData);
         point_solveTriangle_2_pointB.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords2.coord_B[0])
-                .attr('cy', solvTriangleCoords2.coord_B[1])
+                .attr('cx', solveTriangleDataB.coords.coord_B[0])
+                .attr('cy', solveTriangleDataB.coords.coord_B[1])
                 .attr('fill', 'green');
 
         let point_solveTriangle_2_pointC = d3.select(self.pointElement_solveTriangle_2_pointC[0][0]).data(self.lineData);
         point_solveTriangle_2_pointC.attr('r', 2.5)
-                .attr('cx', solvTriangleCoords2.coord_C[0])
-                .attr('cy', solvTriangleCoords2.coord_C[1])
+                .attr('cx', solveTriangleDataB.coords.coord_C[0])
+                .attr('cy', solveTriangleDataB.coords.coord_C[1])
                 .attr('fill', 'blue');
         // SOLVE TRIANGLE 2 Points
     }
@@ -445,10 +447,10 @@ function drawLine() {
             
             return xy2
         } else { // need some geometry
-            var gradientOfpath1 = (path1.pointA.y - path1.pointB.y) / (path1.pointA.x - path1.pointB.x);
-            var interceptOfpath1 = path1.pointA.y - gradientOfpath1 * path1.pointA.x;
-            var gradientOfpath2 = -1 / gradientOfpath1;
-            var interceptOfpath2 = path2.pointA.y - gradientOfpath2 * path2.pointA.x;
+            let gradientOfpath1 = (path1.pointA.y - path1.pointB.y) / (path1.pointA.x - path1.pointB.x);
+            let interceptOfpath1 = path1.pointA.y - gradientOfpath1 * path1.pointA.x;
+            let gradientOfpath2 = -1 / gradientOfpath1;
+            let interceptOfpath2 = path2.pointA.y - gradientOfpath2 * path2.pointA.x;
             path2.pointB.x = (interceptOfpath1 - interceptOfpath2) / (gradientOfpath2 - gradientOfpath1);
             path2.pointB.y = gradientOfpath2 * path2.pointB.x + interceptOfpath2;
 
@@ -459,7 +461,7 @@ function drawLine() {
     }
 
     function findRightTriangle(startCoords, endCoords) {
-        let rightTriangleData = {
+        let rightTriangleDataA = {
             coords: {
                 coord_A:[startCoords.x, startCoords.y],
                 coord_B:[endCoords.x, endCoords.y],
@@ -471,149 +473,141 @@ function drawLine() {
                 side_C: getDistance(endCoords.x, endCoords.y, startCoords.x, startCoords.y)
             },
         }
-        return rightTriangleData
+        return rightTriangleDataA
     }
 
-    function solvTriangleALL(triangleA_sides, p1x, p1y, p2x, p2y, curvePointLineX, curvePointLineY, cpX, cpY, otherAnchorPx, otherAnchorPy) {
+    function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY) {
         let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
         let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
         let angle_A = base_angle_A * (Math.PI/180)
         let side_C_length = triangleA_sides.side_C / 2
         let side_A_length = side_C_length * (Math.sin(angle_A))
         let side_B_length = side_C_length * (Math.cos(angle_A))
-        let coord_A = findLineMidpoint(p1x, p1y, p2x, p2y)
+        let coord_A = findLineMidpoint(ap1x, ap1y, cpX, cpY)
         let coord_C = ''
         let coord_B = ''
-        let math
-        let anchorPointX
-        let anchorPointY
-        let arcFlagWestVar = 0
-        let arcFlagEastVar = 0
+
+        let arcFlagVar = 0
         let sweepFlagWestVar = 0
         let sweepFlagEastVar = 0
 
-        if (p1x != cpX || p1y != cpY) {
-            math = 'west'
-            anchorPointX = p1x
-            anchorPointY = p1y
-        } else if(p1x == cpX & p1y == cpY) {
-            math = 'east'
-            anchorPointX = p2x
-            anchorPointY = p2y
-        }
+        findPoints(ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY)
 
-        if (math === 'west') {
-            let anchorPoint1x = p1x
-            let anchorPoint1y = p1y
-            let anchorPoint2x = otherAnchorPx
-            let anchorPoint2y = otherAnchorPy
-            let curvePointX = p2x
-            let curvePointY = p2y
-            let curvePointAnchorX = curvePointLineX
-            let curvePointAnchorY = curvePointLineY
-
+        function findPoints(anchorPoint1x, anchorPoint1y, anchorPoint2x, anchorPoint2y, curvePointX, curvePointY, curvePointAnchorX, curvePointAnchorY) {
             if (anchorPoint1y < anchorPoint2y) {
                 if (anchorPoint1x < anchorPoint2x) {
                     if (curvePointY < curvePointAnchorY) {
                         console.log('Shape 1')
+                        sweepFlagWestVar = 0
+                        sweepFlagEastVar = 1
                         if (anchorPoint1x > curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
+                            arcFlagVar = 1
                             if(anchorPoint1x > curvePointX) {
-                                console.log('XY Axis Section 1 - 1')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2 - 2')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1y > curvePointY) {
-                                console.log('XY Axis Section 1 - 3')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2 - 4')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            if(anchorPoint1y > curvePointY) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     } else {
-                        console.log('Shape 2')
+                        // console.log('Shape 2')
+                        sweepFlagWestVar = 1
+                        sweepFlagEastVar = 0
                         if (anchorPoint1x < curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
                             if(anchorPoint1x < curvePointX) {
-                                console.log('XY Axis Section 1 - 5')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2 - 6')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1y < curvePointY) {
-                                console.log('XY Axis Section 1 - 7')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2 - 8')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            arcFlagVar = 1
+                            if(anchorPoint1y < curvePointY) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     }
                 } else {
                     if (curvePointY < curvePointAnchorY) {
-                        console.log('Shape 3')
+                        // console.log('Shape 3')
+                        sweepFlagWestVar = 1
+                        sweepFlagEastVar = 0
                         if (anchorPoint1x > curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
                             if(anchorPoint1y < curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1x > curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            arcFlagVar = 1
+                            if(anchorPoint1x > curvePointX) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     } else {
-                        console.log('Shape 4')
+                        // console.log('Shape 4')
+                        sweepFlagWestVar = 0
+                        sweepFlagEastVar = 1
                         if (anchorPoint1x < curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
+                            arcFlagVar = 1
                             if(anchorPoint1y > curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1x < curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            if(anchorPoint1x < curvePointX) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     }
@@ -621,282 +615,148 @@ function drawLine() {
             } else {
                 if (anchorPoint1x < anchorPoint2x) {
                     if (curvePointY < curvePointAnchorY) {
-                        console.log('Shape 5')
+                        // console.log('Shape 5')
+                        sweepFlagWestVar = 0
+                        sweepFlagEastVar = 1
                         if (anchorPoint1x > curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
+                            arcFlagVar = 1
                             if(anchorPoint1y < curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1x > curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            if(anchorPoint1x > curvePointX) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     } else {
-                        console.log('Shape 6')
+                        // console.log('Shape 6')
+                        sweepFlagWestVar = 1
+                        sweepFlagEastVar = 0
                         if (anchorPoint1x < curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
                             if(anchorPoint1y > curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1x < curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            arcFlagVar = 1
+                            if(anchorPoint1x < curvePointX) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                             }
                         }
                     }
                 } else {
                     if (curvePointY < curvePointAnchorY) {
-                        console.log('Shape 7')
+                        // console.log('Shape 7')
+                        sweepFlagWestVar = 1
+                        sweepFlagEastVar = 0
                         if (anchorPoint1x > curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
                             if(anchorPoint1x > curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1y > curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            arcFlagVar = 1
+                            if(anchorPoint1y > curvePointY) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     } else {
-                        console.log('Shape 8')
+                        // console.log('Shape 8')
+                        sweepFlagWestVar = 0
+                        sweepFlagEastVar = 1
                         if (anchorPoint1x < curvePointAnchorX) {
-                            console.log('AP Axis Section 1')
+                            // console.log('AP Axis Section 1')
+                            arcFlagVar = 1
                             if(anchorPoint1x < curvePointX) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            }
-                        } else {
-                            console.log('AP Axis Section 2')
-                            if(anchorPoint1y < curvePointY) {
-                                console.log('XY Axis Section 1')
-                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                                coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-                            } else {
-                                console.log('XY Axis Section 2')
+                                // console.log('XY Axis Section 1')
                                 coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
                                 coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            }
+                        } else {
+                            // console.log('AP Axis Section 2')
+                            if(anchorPoint1y < curvePointY) {
+                                // console.log('XY Axis Section 1')
+                                coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            } else {
+                                // console.log('XY Axis Section 2')
+                                coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                                coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                             }
                         }
                     }
                 }
             }
-
-            // if (anchorPoint1x < curvePointAnchorX) {
-            //     console.log('AP Axis Section 1')
-            //     // AP Axis Section 1
-            // } else {
-            //     console.log('AP Axis Section 2')
-            //     // AP Axis Section 2
-            // }
-
-            // if(anchorPoint1x < curvePointX) {
-            //     if (anchorPoint1y < curvePointY){
-            //         console.log('XY Axis Section 1')
-            //         // XY Axis Section 1
-            //     } else {
-            //         console.log('XY Axis Section 2')
-            //         // XY Axis Section 2
-            //     }
-            // } else {
-            //     if (anchorPoint1y > curvePointY){
-            //         console.log('XY Axis Section 3')
-            //         // XY Axis Section 3
-            //     } else {
-            //         console.log('XY Axis Section 4')
-            //         // XY Axis Section 4
-            //     }
-            // }
-        } else {
         }
 
-        // function findShape() {
-        //     if (anchorPoint1y < anchorPoint2y) {
-        //         if (anchorPoint1x < anchorPoint2x) {
-        //             if (curvePointY < curvePointAnchorY) {
-        //                 findSection1()
-        //             } else {
-        //                 findSection1()
-        //             }
-        //         }
-        //     }
-        // }
-
-        // function findSection1() {
-        //     if (anchorPoint1x < curvePointAnchorX) {
-        //         findSection2()
-        //     } else {
-        //         findSection2()
-        //     }
-        // }
-
-        // function findSection2() {
-        //     if(anchorPoint1x < curvePointX) {
-        //         if (anchorPoint1y < curvePointY){
-        //             plotPoint()
-        //         } else {
-        //             plotPoint()
-        //         }
-        //     } else {
-        //         if (anchorPoint1y > curvePointY){
-        //             plotPoint()
-        //         } else {
-        //             plotPoint()
-        //         }
-        //     }
-        // }
-
-        // function plotPoint() {
-        //     coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-        //     coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        // }
-        
-
-
-
-        // if (p1x == p2x && p1y == p2y) {
+        // if (ap1x == ap2x && ap1y == ap2y) {
         //     if(math === 'west'){console.log('No Line')}
         //     coord_C = [coord_A[0], coord_A[1]]
         //     coord_B = [coord_C[0], coord_C[1]]
-        // } else if (p1x > p2x && p1y == p2y) {
+        // } else if (ap1x > ap2x && ap1y == ap2y) {
         //     // if(math === 'west'){console.log('Y+ Horizontal WEST')}
         //     // if(math === 'east'){console.log('Y+ Horizontal EAST')}
         //     coord_C = [(coord_A[0]), coord_A[1]]
         //     coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-        // } else if (p1x == p2x && p1y > p2y) {
+        // } else if (ap1x == ap2x && ap1y > ap2y) {
         //     // if(math === 'west'){console.log('X+ Vertical WEST')}
         //     // if(math === 'east'){console.log('X+ Vertical EAST')}
         //     coord_C = (math === 'west') ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
         //     coord_B = [coord_C[0], (coord_C[1])]
-        // } else if (p1x < p2x && p1y == p2y) {
+        // } else if (ap1x < ap2x && ap1y == ap2y) {
         //     // if(math === 'west'){console.log('Y- Horizontal WEST')}
         //     // if(math === 'east'){console.log('Y- Horizontal EAST')}
         //     coord_C = [(coord_A[0]), coord_A[1]]
         //     coord_B = (math === 'west') ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-        // } else if (p1x == p2x && p1y < p2y) {
+        // } else if (ap1x == ap2x && ap1y < ap2y) {
         //     // if(math === 'west'){console.log('X- Vertical WEST')}
         //     // if(math === 'east'){console.log('X- Vertical EAST')}
         //     coord_C = (math === 'west') ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
         //     coord_B = [coord_C[0], (coord_C[1])]
-
-
-
-        // } else if (anchorPointX > curvePointLineX && curvePointLineY > cpY) {
-        //     // if(math === 'west'){console.log('1W')}
-        //     // if(math === 'east'){console.log('1E')}
-        //     if(math === 'west'){arcFlagWestVar = 1}
-        //     if(math === 'east'){arcFlagEastVar = 0}
-
-        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-        //     // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
-        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        //     } else {
-        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-        //     }
-        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
-        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-        //     } else {
-        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
-        //     }
-        // } else if (anchorPointX < curvePointLineX && curvePointLineY < cpY) {
-        //     // if(math === 'west'){console.log('2W')}
-        //     // if(math === 'east'){console.log('2E')}
-        //     if(math === 'west'){arcFlagWestVar = 0}
-        //     if(math === 'east'){arcFlagEastVar = 1}
-
-        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
-        //     // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
-        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        //     } else {
-        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-        //     }
-        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
-        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-        //     } else {
-        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
-        //     }
-        // } else if (anchorPointX > curvePointLineX && curvePointLineY < cpY) {
-        //     // if(math === 'west'){console.log('3W')}
-        //     // if(math === 'east'){console.log('3E')}
-        //     if(math === 'west'){arcFlagWestVar = 1}
-        //     if(math === 'east'){arcFlagEastVar = 0}
-
-        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
-        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-        //     } else {
-        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
-        //     }
-        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
-        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-        //     } else {
-        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
-        //     }
-        //     // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
-        // } else if (anchorPointX < curvePointLineX && curvePointLineY > cpY) {
-        //     // if(math === 'west'){console.log('4W')}
-        //     // if(math === 'east'){console.log('4E')}
-        //     if(math === 'west'){arcFlagWestVar = 0}
-        //     if(math === 'east'){arcFlagEastVar = 1}
-            
-        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
-        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-        //     } else {
-        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
-        //     }
-        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
-        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-        //     } else {
-        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
-        //     }
-        //     // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
         // }
 
         let solveTriangleData = {
@@ -905,17 +765,18 @@ function drawLine() {
                 coord_B: coord_B,
                 coord_C: coord_C,
             },
-            arcFlagWest: arcFlagWestVar,
-            arcFlagEast: arcFlagEastVar,
+
+            arcFlag: arcFlagVar,
             sweepFlagWest: sweepFlagWestVar,
-            sweepFlagEast: sweepFlagEastVar
+            sweepFlagEast: sweepFlagEastVar,
+
         }
         return solveTriangleData
     }
 
-    function findIntersectingPoint_lineInfinite(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
+    function findIntersectingPoint(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
         // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
-        var denominator, a, b, numerator1, numerator2, result = {
+        let denominator, a, b, numerator1, numerator2, result = {
             x: null,
             y: null,
             onLine1: false,
@@ -947,16 +808,25 @@ function drawLine() {
         // if line1 and line2 are segments, they intersect if both of the above are trues
         return result;
     };
-
-    function describeArc(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY, arcFlagPass, sweepFlagPass){
-        let arcFlag = arcFlagPass
-        // let sweepFlag = sweepFlagPass
-        let sweepFlag = perpPointY > curvePointY ? 0 : 1
+    
+    function describeArcPath(radius, x1, y1, x2, y2, arcFlag, sweepFlag){
         let d = [
             "M", x1, y1, 
             "A", radius, radius, 0, arcFlag, sweepFlag, x2, y2,
         ].join(" ");
         return d;
+    }
+    
+    function describeStraightPath(x1, y1, x2, y2){
+        let d = [
+            "M", x1, y1, 
+            "L", x2, y2,
+        ].join(" ");
+        return d;
+    }
+    
+    function inRange(x, min, max) {
+        return ((x-min)*(x-max) <= 0);
     }
 }
 
@@ -1030,14 +900,103 @@ function figureItOUT() {
     // if (anchorPointPathX ~ anchorPointCurveX && anchorPointCurveY ~ curvePointY) {}
     // if (anchorPointX ~ cpX) {}
     // if (anchorPointY ~ cpY) {}
-    
-
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // } else if (anchorPointX > cpAnchorX && cpAnchorY > cpY) {
+        //     // if(math === 'west'){console.log('1W')}
+        //     // if(math === 'east'){console.log('1E')}
+        //     if(math === 'west'){arcFlagWestVar = 1}
+        //     if(math === 'east'){arcFlagEastVar = 0}
+
+        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     // coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX > cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]
+        //     }
+        // } else if (anchorPointX < cpAnchorX && cpAnchorY < cpY) {
+        //     // if(math === 'west'){console.log('2W')}
+        //     // if(math === 'east'){console.log('2E')}
+        //     if(math === 'west'){arcFlagWestVar = 0}
+        //     if(math === 'east'){arcFlagEastVar = 1}
+
+        //     coord_C = ((anchorPointY < cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
+        //     // coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+        //     } else {
+        //         coord_B = (anchorPointX < cpX) ? [coord_C[0], (coord_C[1] - side_B_length)] : [coord_C[0], (coord_C[1] + side_B_length)]
+        //     }
+        // } else if (anchorPointX > cpAnchorX && cpAnchorY < cpY) {
+        //     // if(math === 'west'){console.log('3W')}
+        //     // if(math === 'east'){console.log('3E')}
+        //     if(math === 'west'){arcFlagWestVar = 1}
+        //     if(math === 'east'){arcFlagEastVar = 0}
+
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY < cpY) ? [(coord_A[0] - side_A_length), coord_A[1]] : [(coord_A[0] + side_A_length), coord_A[1]]
+        //     }
+        //     // coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
+        // } else if (anchorPointX < cpAnchorX && cpAnchorY > cpY) {
+        //     // if(math === 'west'){console.log('4W')}
+        //     // if(math === 'east'){console.log('4E')}
+        //     if(math === 'west'){arcFlagWestVar = 0}
+        //     if(math === 'east'){arcFlagEastVar = 1}
+            
+        //     if (math === 'west' && anchorPointY > otherAnchorPy) {
+        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
+        //     }
+        //     if (math === 'east' && anchorPointY < otherAnchorPy) {
+        //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     } else {
+        //         coord_C = (anchorPointY > cpY) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]
+        //     }
+        //     // coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+        //     coord_B = ((anchorPointX < cpX) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
+
+
+
+
 // function describeArcWest(x, y, radius, startAngle, endAngle, x1, y1, x2, y2, perpPointX, perpPointY, curvePointX, curvePointY, arcFlag){
-//     //   var start = polarToCartesian(x, y, radius, endAngle);
-//     //   var end = polarToCartesian(x, y, radius, startAngle);
+//     //   let start = polarToCartesian(x, y, radius, endAngle);
+//     //   let end = polarToCartesian(x, y, radius, startAngle);
 
 //     // let upDown
 //     // if (x1 > x2) {
@@ -1050,7 +1009,7 @@ function figureItOUT() {
 
 //     let arcFlag1 = arcFlag
 //     let sweepFlag = perpPointY > curvePointY ? 0 : 1
-//     // var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+//     // let arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
 //     // let arcSweep = 0
 //     // let arcSweep = 1
 
@@ -1068,7 +1027,7 @@ function figureItOUT() {
 
 
 
-// function solvTriangleWEST(triangleA_sides, p1x, p1y, p2x, p2y, curvePointLineX, curvePointLineY, cpX, cpY) {
+// function solvTriangleWEST(triangleA_sides, p1x, p1y, p2x, p2y, cpAnchorX, cpAnchorY, cpX, cpY) {
 //     let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
 //     let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
 //     let angle_A = base_angle_A * (Math.PI/180)
@@ -1102,35 +1061,35 @@ function figureItOUT() {
 
 
 
-//     } else if (p1x > curvePointLineX && curvePointLineY > p2y) {
+//     } else if (p1x > cpAnchorX && cpAnchorY > p2y) {
 //         // console.log('1')
 //         coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
 //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-//     } else if (p1x < curvePointLineX && curvePointLineY < p2y) {
+//     } else if (p1x < cpAnchorX && cpAnchorY < p2y) {
 //         // console.log('2')
 //         coord_C = ((p1y < p2y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
 //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-//     } else if (p1x > curvePointLineX && curvePointLineY < p2y) {
+//     } else if (p1x > cpAnchorX && cpAnchorY < p2y) {
 //         // console.log('3')
 //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
 //         coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)])
-//     } else if (p1x < curvePointLineX && curvePointLineY > p2y) {
+//     } else if (p1x < cpAnchorX && cpAnchorY > p2y) {
 //         // console.log('4')
 //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
 //         coord_B = ((p1x < p2x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
 //     }
 
-//     let solveTriangleData = {
+//     let solveTriangleDataA = {
 //         coords: {
 //             coord_A: coord_A,
 //             coord_B: coord_B,
 //             coord_C: coord_C,
 //         },
 //     }
-//     return solveTriangleData
+//     return solveTriangleDataA
 // }
 
-// function solvTriangleEAST(triangleA_sides, p1x, p1y, p2x, p2y, curvePointLineX, curvePointLineY, cpX, cpY) {
+// function solvTriangleEAST(triangleA_sides, p1x, p1y, p2x, p2y, cpAnchorX, cpAnchorY, cpX, cpY) {
 //     let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
 //     let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
 //     let angle_A = base_angle_A * (Math.PI/180)
@@ -1162,32 +1121,32 @@ function figureItOUT() {
 //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]] // DIFFERENT ( + / - )
 //         coord_B = [coord_C[0], (coord_C[1])]
 
-//     } else if (p2x > curvePointLineX && curvePointLineY > p1y) {
+//     } else if (p2x > cpAnchorX && cpAnchorY > p1y) {
 //         // console.log('1')
 //         coord_C = ((p2y < p1y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
 //         coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
-//     } else if (p2x < curvePointLineX && curvePointLineY < p1y) {
+//     } else if (p2x < cpAnchorX && cpAnchorY < p1y) {
 //         // console.log('2')
 //         coord_C = ((p2y < p1y) ? [(coord_A[0] + side_A_length), coord_A[1]] : [(coord_A[0] - side_A_length), coord_A[1]]);
 //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
-//     } else if (p2x > curvePointLineX && curvePointLineY < p1y) {
+//     } else if (p2x > cpAnchorX && cpAnchorY < p1y) {
 //         // console.log('3')
 //         coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
 //         coord_B = ((p2x < p1x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
-//     } else if (p2x < curvePointLineX && curvePointLineY > p1y) {
+//     } else if (p2x < cpAnchorX && cpAnchorY > p1y) {
 //         // console.log('4')
 //         coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
 //         coord_B = ((p2x < p1x) ? [coord_C[0], (coord_C[1] + side_B_length)] : [coord_C[0], (coord_C[1] - side_B_length)]);
 //     }
 
-//     let solveTriangleData = {
+//     let solveTriangleDataA = {
 //         coords: {
 //             coord_A: coord_A,
 //             coord_B: coord_B,
 //             coord_C: coord_C,
 //         },
 //     }
-//     return solveTriangleData
+//     return solveTriangleDataA
 // }
 
 
@@ -1207,12 +1166,12 @@ function figureItOUT() {
     // let path = d3.select(self.pathElement[0][0]);
     // path.attr({
     //     d:"M " + self.lineData[0].x + " " + self.lineData[0].x + 
-    //     " A " + circRadius + " " + circRadius+ " " + 
+    //     " A " + circRadiusA + " " + circRadiusA+ " " + 
     //     0 + " " + 0 + " " + 0 + " " + 
     //     self.curvePointData[0].x + " " + self.curvePointData[0].y});
 
 
-    // function solvTriangleEAST(triangleA_sides, x1, y1, x2, y2, curvePointLineX) {
+    // function solvTriangleEAST(triangleA_sides, x1, y1, x2, y2, cpAnchorX) {
     //     let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
     //     let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)
     //     let angle_A = base_angle_A * (Math.PI/180)
@@ -1262,12 +1221,12 @@ function figureItOUT() {
     //         coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
     //     }
 
-    //     let solveTriangleData = {
+    //     let solveTriangleDataA = {
     //         coords: {
     //             coord_A: coord_A,
     //             coord_B: coord_B,
     //             coord_C: coord_C,
     //         },
     //     }
-    //     return solveTriangleData
+    //     return solveTriangleDataA
     // }
