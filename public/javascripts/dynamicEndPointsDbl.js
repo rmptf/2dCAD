@@ -84,7 +84,6 @@ function drawPath(){
     }
 
     function mouseup() {
-        console.log("double click")
         svg.on("click", null);
         svg.on("mousemove", null);
 
