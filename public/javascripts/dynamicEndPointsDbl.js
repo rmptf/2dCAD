@@ -18,10 +18,18 @@ let endPointsGroups = []
 
 function drawPath(){
     let self = this, m1, isDown = false, isDrag = false, thisCount;
+    let ass = false
+    console.log(!ass)
+    var line;
 
-    svg.on('mousedown', function(event) {
+    svg.on('click', mousedown);
+    svg.on('dblclick', mouseup);
+    
+
+    function mousedown(event) {
         m1 = d3.pointer(event);
-        if (!isDown && !isDrag) {
+        if (isDown === false) {
+            console.log(11111)
             groupCounter = groupCounter + 1
             thisCount = groupCounter
 
@@ -46,34 +54,46 @@ function drawPath(){
             endPointsGroups.push(endPoints)
             // DYNAMIC END POINTS
 
+            isDown = true
             updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            svg.on("mousemove", mousemove);
         } else {
-            isDrag = true;
-
             // Prob needs some work
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
             // Prob needs some work
 
-            for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
-                // should do 1 at a time. Prob cant impliment until we build double click method or something.
-                let currentEndPoint = endPointsGroups[thisCount][i]
-                currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
-            }
-
             updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            svg.on("mousemove", mousemove);
         }
-        isDown = !isDown
-    })
+    }
 
-    .on('mousemove', function(event) {
+    function mousemove(event) {
+    // .on('mousemove', function(event) {
+        mostRecentEndPoint = pathDatas[thisCount].length - 1
+        console.log(44444)
         m2 = d3.pointer(event);
-        if(isDown && !isDrag) {
-            pathDatas[thisCount][1].coords.x = m2[0]
-            pathDatas[thisCount][1].coords.y = m2[1]
+        // if(isDown && !isDrag) {
+        if(isDown === true) {
+            // console.log('thicc ass')
+            pathDatas[thisCount][mostRecentEndPoint].coords.x = m2[0]
+            pathDatas[thisCount][mostRecentEndPoint].coords.y = m2[1]
             updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         } 
-    })
+    // })
+    }
+
+    function mouseup() {
+        console.log("double click")
+        svg.on("click", null);
+        svg.on("mousemove", null);
+
+        for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
+            // should do 1 at a time. Prob cant impliment until we build double click method or something.
+            let currentEndPoint = endPointsGroups[thisCount][i]
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+        }
+    }
 }
 
 // PATH
