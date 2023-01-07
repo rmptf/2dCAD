@@ -37,7 +37,8 @@ d3.select("body").insert("div")
 
 let groupCounter = -1
 let pathDatas = []
-let paths = []
+let mainPaths = []
+// let secondaryPathGroups = []
 let endPointsGroups = []
 
 function whatsThis() {
@@ -56,16 +57,22 @@ function drawPath(){
             thisCount = groupCounter
 
             self.group = svg.append('g').attr('class', 'figureGroup')
-            self.pathGroup = self.group.append('g').attr('class', 'pathGroup')
+            self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
+            // self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
 
-            // PATH
+            // MAIN PATH
             pathDatas.push([
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            paths.push(self.pathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {pathClick(this, event)}))
-            // PATH
+            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event)}))
+            // MAIN PATH
+            // // secondaryPathGroup
+            // let secondaryPathGroup
+            // secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function() {secondaryPathClick(this, event)}))
+            // secondaryPathGroups.push(secondaryPathGroup)
+            // // secondaryPathGroup
 
             // DYNAMIC END POINTS
             let endPoints = []
@@ -77,12 +84,12 @@ function drawPath(){
             // DYNAMIC END POINTS
 
             isDown = true
-            updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
         } else {
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
         }
     }
@@ -92,7 +99,7 @@ function drawPath(){
         if(isDown === true) {
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
-            updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         }
     }
 
@@ -106,16 +113,16 @@ function drawPath(){
             endPointsGroups[thisCount].at(-1).remove()
             endPointsGroups[thisCount].pop()
         }
-        updateSVG(paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+        updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         
         for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
             let currentEndPoint = endPointsGroups[thisCount][i]
-            currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, paths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
         }
     }
 }
 
-function pathClick(this1){
+function mainPathClick(this1){
     m2 = d3.pointer(event)
     console.log(m2)
     console.log(this1)
