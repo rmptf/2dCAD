@@ -1,7 +1,7 @@
 // OBJECTIVE:
 //     Add a new path segment and end point element to existing path element at coordinate the path element is clicked.
 // METHOD:
-//     Create a second layer of invisible path elements on top of the main path element.
+//     √    Create a second layer of invisible path elements on top of the main path element.
 //     The second layer will be a group of single path elements, each corrosponding to the path segments of the main path element.
 //     Each main path element's segment coordnite and each invisible path element's coordinates will be placed in their own array.
 //     When the main path element is clicked the second layer will actually recieve the click event and return the coordinates of the single path element that was clicked and the mouse coordinates.
@@ -16,6 +16,7 @@
 //     This way if a point is added to a straight path, but the path is wider than 1px and the path was clicked outside of its center, the new path segment will be added to its center so the new path will stay straight.
 // METHOD:
 //     TBD.
+
 
 const width = '100%'
 const height = '600px'
@@ -38,14 +39,14 @@ d3.select("body").insert("div")
 let groupCounter = -1
 let pathDatas = []
 let mainPaths = []
-// let secondaryPathGroups = []
+let secondaryPathGroups = []
 let endPointsGroups = []
 
 function whatsThis() {
     console.log(this)
 }
 function drawPath(){
-    let self = this, m1, isDown = false, thisCount
+    let self = this, m1, isDown = false, thisCount, secondaryPathCount = 0
 
     svg.on('click', mouseDown)
     svg.on('dblclick', mouseUp)
@@ -58,7 +59,7 @@ function drawPath(){
 
             self.group = svg.append('g').attr('class', 'figureGroup')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
-            // self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
+            self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
 
             // MAIN PATH
@@ -66,13 +67,13 @@ function drawPath(){
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event)}))
+            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event)}))
             // MAIN PATH
-            // // secondaryPathGroup
-            // let secondaryPathGroup
-            // secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function() {secondaryPathClick(this, event)}))
-            // secondaryPathGroups.push(secondaryPathGroup)
-            // // secondaryPathGroup
+            // secondaryPathGroup
+            let secondaryPathGroup = []
+            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, secondaryPathCount)}))
+            secondaryPathGroups.push(secondaryPathGroup)
+            // secondaryPathGroup
 
             // DYNAMIC END POINTS
             let endPoints = []
@@ -84,13 +85,18 @@ function drawPath(){
             // DYNAMIC END POINTS
 
             isDown = true
-            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
         } else {
+            secondaryPathCount = secondaryPathCount + 1
+            // counter could be somethin like this? but doesnt work
+            // secondaryPathGroups[thisCount].indexOf(this)
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, secondaryPathCount)}))
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
+            console.log(secondaryPathCount)
         }
     }
 
@@ -99,7 +105,7 @@ function drawPath(){
         if(isDown === true) {
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
-            updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         }
     }
 
@@ -107,55 +113,78 @@ function drawPath(){
         svg.on("click", null)
         svg.on("dblclick", null)
         svg.on("mousemove", null)
-
+        secondaryPathCount = secondaryPathCount - 1
         for (let i = 0; i < 2; i++) {
             pathDatas[thisCount].pop()
             endPointsGroups[thisCount].at(-1).remove()
             endPointsGroups[thisCount].pop()
+            secondaryPathGroups[thisCount].at(-1).remove()
+            secondaryPathGroups[thisCount].pop()
         }
-        updateSVG(mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+        console.log(secondaryPathCount)
+        updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         
         for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
             let currentEndPoint = endPointsGroups[thisCount][i]
-            currentEndPoint.call(d3.drag().on("drag", function(event) {dynamicDragEndPoint(event, i, mainPaths[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
         }
     }
 }
 
-function mainPathClick(this1){
-    m2 = d3.pointer(event)
-    console.log(m2)
-    console.log(this1)
+function mainPathClick(this1, event, pathCount){
+    console.log('Main Path Click')
+    // m2 = d3.pointer(event)
+    // console.log(this1)
+    // console.log(m2)
+    // console.log(pathCount)
 }
+
+function secondaryPathClick(this1, event, pathCount){
+    m2 = d3.pointer(event)
+    console.log(this1)
+    console.log(m2)
+    console.log(pathCount)
+}
+
 // PATH
-function dragPath(event, pathsArray, endPointsArray, pathData) {
+function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     for (let i = 0; i < pathData.length; i++) {
         pathData[i].coords.x += event.dx,
         pathData[i].coords.y += event.dy
     }
-    d3.select(pathsArray._groups[0][0])
+    d3.select(mainPathsArray._groups[0][0])
         .attr({d: describeComplexPath(pathData)})
-    updateSVG(pathsArray, endPointsArray, pathData)
+    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // PATH
 
 // DYNAMIC END POINTS
-function dynamicDragEndPoint(event, selector, pathsArray, endPointsArray, pathData) {
+function dragEndPoint(event, selector, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     d3.select(endPointsArray[selector]._groups[0][0])
         .attr('cx', pathData[selector].coords.x += event.dx )
         .attr('cy', pathData[selector].coords.y += event.dy )   
-    updateSVG(pathsArray, endPointsArray, pathData)
+    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // DYNAMIC END POINTS
 
-function updateSVG(pathsArray, endPointsArray, pathData) {
+function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     // PATH
-    let path = d3.select(pathsArray._groups[0][0])
+    let path = d3.select(mainPathsArray._groups[0][0])
         path.attr('d', describeComplexPath(pathData))
         path.style('fill', 'none')
         path.style('stroke', 'grey')
-        path.style('stroke-width', 10)
+        path.style('stroke-width', 21)
     // PATH
+
+    // SECONDARY PATH
+    for (let i = 0; i < secondaryPathsArray.length; i++) {
+        let secondaryPath = d3.select(secondaryPathsArray[i]._groups[0][0])
+            secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
+            secondaryPath.style('fill', 'none')
+            secondaryPath.style('stroke', 'red')
+            secondaryPath.style('stroke-width', 7)
+    }
+    // SECONDARY PATH
 
     // DYNAMIC END POINTS
     for (let i = 0; i < endPointsArray.length; i++) {
