@@ -144,12 +144,21 @@ function drawPath(){
         m1 = d3.pointer(event)
 
         endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-        secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-    
+        // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+        secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
+
+        let counter = -1
+        for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
+            counter = counter + 1
+            let pooper = counter
+            console.log(pooper)
+            secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, pooper)})
+        }
+
         let index = pathCount + 1
         let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
         pathDatas[thisCount].splice(index, 0, data);
-    
+
         updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
         for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
@@ -157,12 +166,12 @@ function drawPath(){
             currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
         }
 
-        console.log(this1)
-        console.log(m2)
-        console.log(thisCount)
-        console.log(pathCount)
-        console.log(pathDatas[thisCount])
-    
+        // console.log(this1)
+        // console.log(m2)
+        // console.log(thisCount)
+        // console.log(pathCount)
+        // console.log(pathDatas[thisCount])
+
     }
 }
 
