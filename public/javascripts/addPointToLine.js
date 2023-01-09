@@ -1,21 +1,28 @@
 // OBJECTIVE:
 //     Add a new path segment and end point element to existing path element at coordinate the path element is clicked.
 // METHOD:
-//     √    Create a second layer of invisible path elements on top of the main path element.
-//     The second layer will be a group of single path elements, each corrosponding to the path segments of the main path element.
-//     Each main path element's segment coordnite and each invisible path element's coordinates will be placed in their own array.
-//     When the main path element is clicked the second layer will actually recieve the click event and return the coordinates of the single path element that was clicked and the mouse coordinates.
-//     The coordinates of the single path element will be used to search the array of single path element's coordinates and return the index of the coordinates found in the array.
-//     The index returned can be used to determine the index of the main path segments that corrosponds to the single path element.
-//     That segment from the main path can be split into two more segments at the corrosponding point clicked by adding a new segment coordinate at the correct index of the original path node array.
-//     A corrosponding end point can be added at the correct coordinate and its data can be added to the correct index of the end point array.
-//     Then the second path layer can be updated using the new main path segment data.
+//     √ Create a second layer of invisible path elements on top of the main path element.
+//     √ The second layer will be a group of single path elements, each corrosponding to the path segments of the main path element.
+//     √ Each main path element's segment coordnite and each invisible path element's coordinates will be placed in their own array.
+//     √ When the main path element is clicked the second layer will actually recieve the click event and return the coordinates of the single path element that was clicked and the mouse coordinates.
+//     √ The coordinates of the single path element will be used to search the array of single path element's coordinates and return the index of the coordinates found in the array.
+//     √ The index returned can be used to determine the index of the main path segments that corrosponds to the single path element.
+//     √ That segment from the main path can be split into two more segments at the corrosponding point clicked by adding a new segment coordinate at the correct index of the original path node array.
+//     √ A corrosponding end point can be added at the correct coordinate and its data can be added to the correct index of the end point array.
+//     √ Then the second path layer can be updated using the new main path segment data.
+//     Fix path counting issues
 
-// ADDITIONAL OBJECTIVE:
+// ADDITIONAL OBJECTIVES:
+// Find Center:
 //     Add an algorithm to find the point of the CENTER of the path closest to where the path was clicked IF the path is wider than 1px.
 //     This way if a point is added to a straight path, but the path is wider than 1px and the path was clicked outside of its center, the new path segment will be added to its center so the new path will stay straight.
 // METHOD:
 //     TBD.
+
+// Curve Points:
+//      Destinguish between regular points and curve points
+// METHOD
+//      TBD.
 
 
 const width = '100%'
@@ -37,6 +44,7 @@ d3.select("body").insert("div")
     .on("click", whatsThis)
 
 let groupCounter = -1
+
 let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
@@ -46,7 +54,8 @@ function whatsThis() {
     console.log(this)
 }
 function drawPath(){
-    let self = this, m1, isDown = false, thisCount, secondaryPathCount = 0
+    let self = this, m1, isDown = false, thisCount
+    let secondaryPathCount = 0
 
     svg.on('click', mouseDown)
     svg.on('dblclick', mouseUp)
@@ -56,6 +65,7 @@ function drawPath(){
         if (isDown === false) {
             groupCounter = groupCounter + 1
             thisCount = groupCounter
+            let thisPathCount = 0
 
             self.group = svg.append('g').attr('class', 'figureGroup')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
@@ -69,11 +79,12 @@ function drawPath(){
             ])
             mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event)}))
             // MAIN PATH
-            // secondaryPathGroup
+
+            // SECONDARY PATH
             let secondaryPathGroup = []
-            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, secondaryPathCount)}))
+            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             secondaryPathGroups.push(secondaryPathGroup)
-            // secondaryPathGroup
+            // SECONDARY PATH
 
             // DYNAMIC END POINTS
             let endPoints = []
@@ -89,11 +100,10 @@ function drawPath(){
             svg.on("mousemove", mousemove)
         } else {
             secondaryPathCount = secondaryPathCount + 1
-            // counter could be somethin like this? but doesnt work
-            // secondaryPathGroups[thisCount].indexOf(this)
+            let thisPathCount = secondaryPathCount
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, secondaryPathCount)}))
+            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
             console.log(secondaryPathCount)
@@ -129,6 +139,31 @@ function drawPath(){
             currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
         }
     }
+
+    function secondaryPathClick(this1, event, thisCount, pathCount){
+        m1 = d3.pointer(event)
+
+        endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
+        secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+    
+        let index = pathCount + 1
+        let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
+        pathDatas[thisCount].splice(index, 0, data);
+    
+        updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+
+        for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
+            let currentEndPoint = endPointsGroups[thisCount][i]
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+        }
+
+        console.log(this1)
+        console.log(m2)
+        console.log(thisCount)
+        console.log(pathCount)
+        console.log(pathDatas[thisCount])
+    
+    }
 }
 
 function mainPathClick(this1, event, pathCount){
@@ -139,12 +174,7 @@ function mainPathClick(this1, event, pathCount){
     // console.log(pathCount)
 }
 
-function secondaryPathClick(this1, event, pathCount){
-    m2 = d3.pointer(event)
-    console.log(this1)
-    console.log(m2)
-    console.log(pathCount)
-}
+
 
 // PATH
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
