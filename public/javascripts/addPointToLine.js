@@ -10,7 +10,7 @@
 //     √ That segment from the main path can be split into two more segments at the corrosponding point clicked by adding a new segment coordinate at the correct index of the original path node array.
 //     √ A corrosponding end point can be added at the correct coordinate and its data can be added to the correct index of the end point array.
 //     √ Then the second path layer can be updated using the new main path segment data.
-//     Fix path counting issues
+//     √ Fix path counting issues
 
 // ADDITIONAL OBJECTIVES:
 // Find Center:
@@ -40,8 +40,8 @@ d3.select("body").insert("div")
 
 d3.select("body").insert("div")
     .append("button")
-    .text("Draw This")
-    .on("click", whatsThis)
+    .text("Add Curve Point")
+    .on("click", addCurvePoint)
 
 let groupCounter = -1
 
@@ -49,11 +49,13 @@ let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
+let addCurve = false
 
-function whatsThis() {
-    console.log(this)
+function addCurvePoint() {
+    addCurve = true
 }
 function drawPath(){
+    addCurve = false
     let self = this, m1, isDown = false, thisCount
     let secondaryPathCount = 0
 
@@ -106,7 +108,7 @@ function drawPath(){
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
-            console.log(secondaryPathCount)
+            // console.log(secondaryPathCount)
         }
     }
 
@@ -131,7 +133,6 @@ function drawPath(){
             secondaryPathGroups[thisCount].at(-1).remove()
             secondaryPathGroups[thisCount].pop()
         }
-        console.log(secondaryPathCount)
         updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         
         for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
@@ -143,28 +144,34 @@ function drawPath(){
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
 
-        endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-        // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-        secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
-
-        let counter = -1
-        for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
-            counter = counter + 1
-            let pooper = counter
-            console.log(pooper)
-            secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, pooper)})
+        if (addCurve === false) {
+            console.log(m1[0], m1[1])
+            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
+            // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
+    
+            let counter = -1
+            for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
+                counter = counter + 1
+                let pooper = counter
+                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, pooper)})
+            }
+    
+            let index = pathCount + 1
+            let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
+            pathDatas[thisCount].splice(index, 0, data);
+    
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+    
+            for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
+                let currentEndPoint = endPointsGroups[thisCount][i]
+                currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+            }
+        } else if (addCurve === true) {
+            console.log('asser')
+            addCurve = false
         }
-
-        let index = pathCount + 1
-        let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
-        pathDatas[thisCount].splice(index, 0, data);
-
-        updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-
-        for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
-            let currentEndPoint = endPointsGroups[thisCount][i]
-            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
-        }
+        
 
         // console.log(this1)
         // console.log(m2)
@@ -182,8 +189,6 @@ function mainPathClick(this1, event, pathCount){
     // console.log(m2)
     // console.log(pathCount)
 }
-
-
 
 // PATH
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
@@ -221,7 +226,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
             secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
             secondaryPath.style('fill', 'none')
             secondaryPath.style('stroke', 'red')
-            secondaryPath.style('stroke-width', 7)
+            secondaryPath.style('stroke-width', 3)
     }
     // SECONDARY PATH
 
