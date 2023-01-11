@@ -171,11 +171,23 @@ function drawPath(){
             console.log('asser')
             addCurve = false
         }
+        
+
+        // console.log(this1)
+        // console.log(m2)
+        // console.log(thisCount)
+        // console.log(pathCount)
+        // console.log(pathDatas[thisCount])
+
     }
 }
 
 function mainPathClick(this1, event, pathCount){
     console.log('Main Path Click')
+    // m2 = d3.pointer(event)
+    // console.log(this1)
+    // console.log(m2)
+    // console.log(pathCount)
 }
 
 // PATH
@@ -205,7 +217,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
         path.attr('d', describeComplexPath(pathData))
         path.style('fill', 'none')
         path.style('stroke', 'grey')
-        path.style('stroke-width', 23)
+        path.style('stroke-width', 21)
     // PATH
 
     // SECONDARY PATH
@@ -214,7 +226,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
             secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
             secondaryPath.style('fill', 'none')
             secondaryPath.style('stroke', 'red')
-            secondaryPath.style('stroke-width', 9)
+            secondaryPath.style('stroke-width', 3)
     }
     // SECONDARY PATH
 
