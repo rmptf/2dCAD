@@ -141,6 +141,7 @@ function describeStraightPath(x1, y1, x2, y2){
         "M", x1, y1, 
         "L", x2, y2,
     ].join(" ");
+    // console.log(d)
     return d;
 }
 
