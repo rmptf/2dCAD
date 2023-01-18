@@ -97,7 +97,7 @@ function drawPath(){
             // DYNAMIC END POINTS
 
             isDown = true
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount], false)
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
         } else {
             secondaryPathCount = secondaryPathCount + 1
@@ -105,7 +105,7 @@ function drawPath(){
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount], false)
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
             // console.log(secondaryPathCount)
         }
@@ -116,7 +116,7 @@ function drawPath(){
         if(isDown === true) {
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount], false)
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         }
     }
 
@@ -132,7 +132,7 @@ function drawPath(){
             secondaryPathGroups[thisCount].at(-1).remove()
             secondaryPathGroups[thisCount].pop()
         }
-        updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount], false)
+        updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         
         for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
             let currentEndPoint = endPointsGroups[thisCount][i]
@@ -153,9 +153,12 @@ function drawPath(){
                 secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)})
             }
     
+            // old: exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west'
             let index = pathCount + 1
-            let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0}}
-            pathDatas[thisCount][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0}
+            // let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, side: 'east'}}
+            // pathDatas[thisCount][pathCount + 1].arc = {exist: true, side: 'west'}
+            let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east'}}
+            pathDatas[thisCount][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west'}
             pathDatas[thisCount].splice(index, 0, data);
 
             for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
@@ -163,7 +166,7 @@ function drawPath(){
                 currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
             }
 
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount], false)
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         } else if (pressAddCurveButton === true) {
             console.log('path Arc exist = true')
             pressAddCurveButton = false
@@ -176,53 +179,42 @@ function mainPathClick(this1, event, pathCount){
     console.log('Main Path Click')
 }
 
-function describeNEWComplexPath(pathDataPass) {
+function describeComplexPath(pathDataPass) {
     let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
     let arcsAndLines = []
     for (let i = 1; i < pathDataPass.length; i++) {
         if (pathDataPass[i].arc.exist == true) {
-            // have to add a check to see if previous path segment DOESNT have a curve
-            if(typeof pathDataPass[i + 1] !== 'undefined') {
-                if(pathDataPass[i].arc.exist == true && pathDataPass[i + 1].arc.exist == true){
-                    console.log('1')
-                    let curvePointAnchor = findPerpendicularFromPoint(pathDataPass[i], pathDataPass[i-1], pathDataPass[i+1])
-                    let rightTriangleDataA = findRightTriangle(pathDataPass[i - 1].coords, pathDataPass[i].coords)
-                    let solveTriangleDataA = solvTriangleALL(rightTriangleDataA.sides, pathDataPass[i - 1].coords, pathDataPass[i + 1].coords, pathDataPass[i].coords, curvePointAnchor)
-                    let intersectingPointA = findIntersectingPoint(pathDataPass[i].coords, curvePointAnchor, solveTriangleDataA.coords)
-                    let circRadiusA = getDistance(pathDataPass[i].coords.x, pathDataPass[i].coords.y, intersectingPointA.x, intersectingPointA.y)
-                    if(inRange(pathDataPass[i].coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(pathDataPass[i].coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
-                        // console.log('str1')
-                        arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-                    } else {
-                        // console.log('arc1')
-                        arcsAndLines.push(['A', circRadiusA, circRadiusA, 0, solveTriangleDataA.arcFlag, solveTriangleDataA.sweepFlagEast, pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-                    }
-                } else {
-                    // console.log('2')
-                    console.log('2 error')
-                    arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-                }
-            } else if (pathDataPass[i - 1].arc.exist == true && pathDataPass[i].arc.exist == true) {
-                // console.log('3')
-                let curvePointAnchor = findPerpendicularFromPoint(pathDataPass[i-1], pathDataPass[i], pathDataPass[i-2])
-                let rightTriangleDataB = findRightTriangle(pathDataPass[i - 1].coords, pathDataPass[i].coords)
-                let solveTriangleDataB = solvTriangleALL(rightTriangleDataB.sides, pathDataPass[i].coords, pathDataPass[i - 2].coords, pathDataPass[i - 1].coords, curvePointAnchor)
-                let intersectingPointB = findIntersectingPoint(pathDataPass[i - 1].coords, curvePointAnchor, solveTriangleDataB.coords)
-                let circRadiusB = getDistance(pathDataPass[i].coords.x, pathDataPass[i].coords.y, intersectingPointB.x, intersectingPointB.y)
-                if(inRange(pathDataPass[i - 1].coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(pathDataPass[i - 1].coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
-                    // console.log('str2')
-                    arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-                } else {
-                    // console.log('arc2')
-                    arcsAndLines.push(['A', circRadiusB, circRadiusB, 0, solveTriangleDataB.arcFlag, solveTriangleDataB.sweepFlagWest, pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-                }
-            } else {
-                // console.log('4')
-                console.log('4 major error')
+            arcsAndLines.push(['A', pathDataPass[i].arc.radius, pathDataPass[i].arc.radius, pathDataPass[i].arc.rotation, pathDataPass[i].arc.arcFlag, pathDataPass[i].arc.sweepFlag, pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+        } if (pathDataPass[i].arc.exist == false){
+            arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+        }
+        }
+    let d = [
+        M, 
+        arcsAndLines.join(' ')
+    ].join(' ')
+    return d
+}
+
+function calculateArcAndDescribePath(pathDataPass) {
+    let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
+    let arcsAndLines = []
+    for (let i = 1; i < pathDataPass.length; i++) {
+        if (pathDataPass[i].arc.exist === true) {
+            if(pathDataPass[i].arc.side === 'east') {
+                let thisPoint = pathDataPass[i]
+                let curvePoint = pathDataPass[i]
+                let anchorPointStart = pathDataPass[i - 1]
+                let anchorPointEnd = pathDataPass[i + 1]
+                solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, thisPoint.arc.side)
+            } else if (pathDataPass[i].arc.side === 'west') {
+                let thisPoint = pathDataPass[i]
+                let curvePoint = pathDataPass[i - 1]
+                let anchorPointStart = pathDataPass[i]
+                let anchorPointEnd = pathDataPass[i - 2]
+                solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, thisPoint.arc.side)
             }
-            
-        } if(pathDataPass[i].arc.exist == false){
-            console.log('5')
+        } if(pathDataPass[i].arc.exist === false){
             arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
         }
       }
@@ -231,24 +223,32 @@ function describeNEWComplexPath(pathDataPass) {
         arcsAndLines.join(' ')
     ].join(' ')
     return d
-}
 
-function describeComplexPath(pathDataPass) {
-        let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
-        let arcsAndLines = []
-        for (let i = 1; i < pathDataPass.length; i++) {
-            if (pathDataPass[i].arc.exist == true) {
-                arcsAndLines.push(['A', pathDataPass[i].arc.radius, pathDataPass[i].arc.radius, pathDataPass[i].arc.rotation, pathDataPass[i].arc.arcFlag, pathDataPass[i].arc.sweepFlag, pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
-            } if (pathDataPass[i].arc.exist == false){
-                arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+    function solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, side) {
+        let curvePointAnchor = findPerpendicularFromPoint(curvePoint, anchorPointStart, anchorPointEnd)
+        let rightTriangleData = findRightTriangle(anchorPointStart.coords, curvePoint.coords)
+        let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
+        let intersectingPoint = findIntersectingPoint(curvePoint.coords, curvePointAnchor, solveTriangleData.coords)
+        let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
+        if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
+            // console.log('str1')
+            arcsAndLines.push(['L', thisPoint.coords.x, thisPoint.coords.y].join(' '))
+        } else {
+            // console.log('arc1')
+            if(side === 'east'){
+                arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagEast, thisPoint.coords.x, thisPoint.coords.y].join(' '))
+                thisPoint.arc.radius = circRadius,
+                thisPoint.arc.arcFlag = solveTriangleData.arcFlag,
+                thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagEast
+            } else if(side === 'west'){
+                arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagWest, thisPoint.coords.x, thisPoint.coords.y].join(' '))
+                thisPoint.arc.radius = circRadius,
+                thisPoint.arc.arcFlag = solveTriangleData.arcFlag,
+                thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagWest
             }
-          }
-        let d = [
-            M, 
-            arcsAndLines.join(' ')
-        ].join(' ')
-        return d
+        }
     }
+}
 
 // PATH
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
@@ -258,7 +258,7 @@ function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pa
     }
     d3.select(mainPathsArray._groups[0][0])
         .attr({d: describeComplexPath(pathData)})
-    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData, false)
+    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // PATH
 
@@ -267,15 +267,14 @@ function dragEndPoint(event, selector, mainPathsArray, secondaryPathsArray, endP
     d3.select(endPointsArray[selector]._groups[0][0])
         .attr('cx', pathData[selector].coords.x += event.dx )
         .attr('cy', pathData[selector].coords.y += event.dy )   
-    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData, selector)
+    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // DYNAMIC END POINTS
 
-function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData, selector) {
+function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     // PATH
     let path = d3.select(mainPathsArray._groups[0][0])
-        // path.attr('d', describeComplexPath(pathData))
-        path.attr('d', describeNEWComplexPath(pathData))
+        path.attr('d', calculateArcAndDescribePath(pathData))
         path.style('fill', 'none')
         path.style('stroke', 'grey')
         path.style('stroke-width', 21)
@@ -330,23 +329,14 @@ function findSlope(x1, y1, x2, y2){
 }
 
 function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
-    // let lineData0 = pathDataPass[i - 1]
-    // let lineData1 = pathDataPass[i + 1]
-    // let curvePoint0 = pathDataPass[i]
     let lineData0 = firstPoint
     let lineData1 = secondPoint
     let curvePoint0 = curvePoint
-
 
     let path1 = {pointA:{x:lineData0.coords.x, y:lineData0.coords.y},pointB:{x:lineData1.coords.x, y:lineData1.coords.y}}
     let path2 = {pointA:{x:0, y:0},pointB:{x:0, y:0}}
     path2.pointA.x = curvePoint0.coords.x
     path2.pointA.y = curvePoint0.coords.y
-
-    // let path1 = {pointA:{x:lineData[0].x, y:lineData[0].y},pointB:{x:lineData[1].x, y:lineData[1].y}}
-    // let path2 = {pointA:{x:0, y:0},pointB:{x:0, y:0}}
-    // path2.pointA.x = curvePoint.x
-    // path2.pointA.y = curvePoint.y
 
     if (path1.pointA.y == path1.pointB.y) { // AB is horizontal
         path2.pointB.x = path2.pointA.x
@@ -392,7 +382,6 @@ function findRightTriangle(startCoords, endCoords) {
     return rightTriangleDataA
 }
 
-// function findIntersectingPoint(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
 function findIntersectingPoint(line1Start, line1End, line2) {
     let line1StartX = line1Start.x
     let line1StartY = line1Start.y
@@ -458,7 +447,6 @@ function inRange(x, min, max) {
     return ((x-min)*(x-max) <= 0);
 }
 
-// function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY) {
 function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     let ap1x = apStart.x
     let ap1y = apStart.y
