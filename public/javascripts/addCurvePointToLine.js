@@ -153,10 +153,7 @@ function drawPath(){
                 secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)})
             }
     
-            // old: exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west'
             let index = pathCount + 1
-            // let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, side: 'east'}}
-            // pathDatas[thisCount][pathCount + 1].arc = {exist: true, side: 'west'}
             let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east'}}
             pathDatas[thisCount][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west'}
             pathDatas[thisCount].splice(index, 0, data);
@@ -199,6 +196,7 @@ function describeComplexPath(pathDataPass) {
 function calculateArcAndDescribePath(pathDataPass) {
     let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
     let arcsAndLines = []
+
     for (let i = 1; i < pathDataPass.length; i++) {
         if (pathDataPass[i].arc.exist === true) {
             if(pathDataPass[i].arc.side === 'east') {
@@ -217,7 +215,8 @@ function calculateArcAndDescribePath(pathDataPass) {
         } if(pathDataPass[i].arc.exist === false){
             arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
         }
-      }
+    }
+
     let d = [
         M, 
         arcsAndLines.join(' ')
@@ -286,6 +285,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
             secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
             secondaryPath.style('fill', 'none')
             secondaryPath.style('stroke', 'red')
+            secondaryPath.style('opacity', '.2')
             secondaryPath.style('stroke-width', 9)
     }
     // SECONDARY PATH
