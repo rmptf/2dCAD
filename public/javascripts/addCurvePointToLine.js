@@ -276,7 +276,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
         path.attr('d', calculateArcAndDescribePath(pathData))
         path.style('fill', 'none')
         path.style('stroke', 'grey')
-        path.style('stroke-width', 21)
+        path.style('stroke-width', 100)
     // PATH
 
     // SECONDARY PATH
