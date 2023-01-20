@@ -1,29 +1,3 @@
-//     Add a new path segment and end point element to existing path element at coordinate the path element is clicked.
-// METHOD:
-//     √ Create a second layer of invisible path elements on top of the main path element.
-//     √ The second layer will be a group of single path elements, each corrosponding to the path segments of the main path element.
-//     √ Each main path element's segment coordnite and each invisible path element's coordinates will be placed in their own array.
-//     √ When the main path element is clicked the second layer will actually recieve the click event and return the coordinates of the single path element that was clicked and the mouse coordinates.
-//     √ The coordinates of the single path element will be used to search the array of single path element's coordinates and return the index of the coordinates found in the array.
-//     √ The index returned can be used to determine the index of the main path segments that corrosponds to the single path element.
-//     √ That segment from the main path can be split into two more segments at the corrosponding point clicked by adding a new segment coordinate at the correct index of the original path node array.
-//     √ A corrosponding end point can be added at the correct coordinate and its data can be added to the correct index of the end point array.
-//     √ Then the second path layer can be updated using the new main path segment data.
-//     √ Fix path counting issues
-
-// ADDITIONAL OBJECTIVES:
-// Find Center:
-//     Add an algorithm to find the point of the CENTER of the path closest to where the path was clicked IF the path is wider than 1px.
-//     This way if a point is added to a straight path, but the path is wider than 1px and the path was clicked outside of its center, the new path segment will be added to its center so the new path will stay straight.
-// METHOD:
-//     TBD.
-
-// Curve Points:
-//      Destinguish between regular points and curve points
-// METHOD
-//      TBD.
-
-
 const width = '100%'
 const height = '600px'
 
