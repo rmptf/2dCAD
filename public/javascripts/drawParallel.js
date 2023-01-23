@@ -172,6 +172,7 @@ function drawPath(){
         let parallelPathGroup = []
         let parallelPathData = []
         let distance = 50;
+
         for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
             let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
             let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
@@ -194,6 +195,7 @@ function drawPath(){
                 {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
             ])
         }
+        
         parallelEndPointsGroups.push(parallelEndPoints)
         parallelPathsGroups.push(parallelPathGroup)
         parallelPathDatas.push(parallelPathData)
