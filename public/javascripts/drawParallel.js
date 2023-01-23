@@ -166,71 +166,39 @@ function drawPath(){
         // console.log(pathCount)
         console.log('Main Path Click')
 
-
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
-        let parallelEndPoints = []
-        let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-        let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-        let newParallelPoint3 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-        let newParallelPoint4 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-        parallelEndPoints.push(newParallelPoint1, newParallelPoint2, newParallelPoint3, newParallelPoint4)
-        parallelEndPointsGroups.push(parallelEndPoints)
-
-
-        // self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
-        // let parallelPathGroup = []
-        // let parallelPath = (self.parallelPathGroup.append('line').attr('class', 'line'))
-        // // let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
-        // let parallelPath2 = (self.parallelPathGroup.append('line').attr('class', 'line'))
-        // parallelPathGroup.push(parallelPath1, parallelPath2)
-        // parallelPathsGroups.push(parallelPath)
-
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
+        let parallelEndPoints = []
         let parallelPathGroup = []
-        let parallelPath1 = (self.parallelPathGroup.append('line').attr('class', 'line'))
-        let parallelPath2 = (self.parallelPathGroup.append('line').attr('class', 'line'))
-        parallelPathGroup.push(parallelPath1, parallelPath2)
-        parallelPathsGroups.push(parallelPathGroup)
-        
+        let parallelPathData = []
+        let distance = 50;
+        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+            parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
 
-        const distance = 50;
+            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
+            parallelPathGroup.push(parallelPath)
 
+            let thisPathData = pathDatas[thisCount][i].coords
+            let nextPathData = pathDatas[thisCount][i + 1].coords
 
-        // let coords123 = []
-        // for (let i = 0; i < pathDatas[thisCount].length; i++) {
-        //     console.log(pathDatas[thisCount][i])
-        //     let thisPathData = pathDatas[thisCount][i].coords
-        //     let nextPathData = pathDatas[thisCount][i + 1].coords
+            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
 
-        //     let XX11 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-        //     let YY11 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
             
-        //     coords123.push([
-        //         {coords: {x: XX11, y: YY11}, arc: {exist: false}},
-        //     ])
-        // }
-        // parallelPathDatas[thisCount].push(coords123)
+            parallelPathData.push([
+                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+            ])
+        }
+        parallelEndPointsGroups.push(parallelEndPoints)
+        parallelPathsGroups.push(parallelPathGroup)
+        parallelPathDatas.push(parallelPathData)
 
-
-        let pathData0 = pathDatas[0][0].coords
-        let pathData1 = pathDatas[0][1].coords
-        let pathData2 = pathDatas[0][2].coords
-
-        let XX1 = pathData0.x - (distance * Math.sin(Math.atan2(pathData0.y - pathData1.y, pathData0.x - pathData1.x)))
-        let YY1 = pathData0.y + (distance * Math.cos(Math.atan2(pathData0.y - pathData1.y, pathData0.x - pathData1.x)))
-
-        let XX2 = pathData1.x - (distance * Math.sin(Math.atan2(pathData0.y - pathData1.y, pathData0.x - pathData1.x)))
-        let YY2 = pathData1.y + (distance * Math.cos(Math.atan2(pathData0.y - pathData1.y, pathData0.x - pathData1.x)))
-
-        let XX3 = pathData1.x - (distance * Math.sin(Math.atan2(pathData1.y - pathData2.y, pathData1.x - pathData2.x)))
-        let YY3 = pathData1.y + (distance * Math.cos(Math.atan2(pathData1.y - pathData2.y, pathData1.x - pathData2.x)))
-
-        let XX4 = pathData2.x - (distance * Math.sin(Math.atan2(pathData1.y - pathData2.y, pathData1.x - pathData2.x)))
-        let YY4 = pathData2.y + (distance * Math.cos(Math.atan2(pathData1.y - pathData2.y, pathData1.x - pathData2.x)))
-
-
-        updateSVG2(parallelEndPointsGroups[thisCount], parallelPathsGroups[thisCount], XX1, YY1, XX2, YY2, XX3, YY3, XX4, YY4)
-        // updateSVG2(parallelEndPointsGroups[thisCount], parallelPathsGroups[thisCount], parallelPathDatas[thisCount])
+        updateSVG2(parallelEndPointsGroups[thisCount], parallelPathsGroups[thisCount], parallelPathDatas[thisCount])
     }
 }
 
@@ -281,7 +249,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
             .attr('cx', pathData[i].coords.x)
             .attr('cy', pathData[i].coords.y)
         if(i % 2 == 0) {
-            endPoint.attr('fill', 'red')
+            endPoint.attr('fill', 'green')
         } else {
             endPoint.attr('fill', 'blue')
         }
@@ -289,60 +257,30 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
     // DYNAMIC END POINTS
 }
 
-function updateSVG2(parallelEndPointsArray, parallelPathsArray, XX1, YY1, XX2, YY2, XX3, YY3, XX4, YY4) {
-    console.log(parallelEndPointsArray[0], parallelEndPointsArray[1])
+function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData) {
     // PARALLEL END POINTS
-    // for (let i = 0; i < endPointsArray.length; i++) {
-    let endPoint1 = d3.select(parallelEndPointsArray[0]._groups[0][0])
-    endPoint1.attr('r', 5)
-        .attr('cx', XX1)
-        .attr('cy', YY1)
-        .attr('fill', 'green')
-    // }
+    let k = -1
+    for (let i = 0; i < parallelPathsArray.length; i++) {
+        for (let j = 0; j < parallelPathData[i].length; j++) {
+            k = k + 1
+            let endPoint1 = d3.select(parallelEndPointsArray[k]._groups[0][0])
+            endPoint1.attr('r', 5)
+                .attr('cx', parallelPathData[i][j].coords.x)
+                .attr('cy', parallelPathData[i][j].coords.y)
+                .attr('fill', 'purple')
+        }
+    }
     // PARALLEL END POINTS
 
-    let endPoint2 = d3.select(parallelEndPointsArray[1]._groups[0][0])
-        endPoint2.attr('r', 5)
-            .attr('cx', XX2)
-            .attr('cy', YY2)
-            .attr('fill', 'green')
-
-    let endPoint3 = d3.select(parallelEndPointsArray[2]._groups[0][0])
-    endPoint3.attr('r', 5)
-        .attr('cx', XX3)
-        .attr('cy', YY3)
-        .attr('fill', 'yellow')
-
-    let endPoint4 = d3.select(parallelEndPointsArray[3]._groups[0][0])
-    endPoint4.attr('r', 5)
-        .attr('cx', XX4)
-        .attr('cy', YY4)
-        .attr('fill', 'yellow')
-
-    let path1 = d3.select(parallelPathsArray[0]._groups[0][0])
-    path1.attr('x1', XX1)
-        .attr('y1', YY1)
-        .attr('x2', XX2)
-        .attr('y2', YY2)
-        path1.style('stroke', 'green')
-        path1.style('stroke-width', 1)
-
-    let path2 = d3.select(parallelPathsArray[1]._groups[0][0])
-    path2.attr('x1', XX3)
-        .attr('y1', YY3)
-        .attr('x2', XX4)
-        .attr('y2', YY4)
-        path2.style('stroke', 'yellow')
-        path2.style('stroke-width', 1)
-
-    // // PATH
-    // let path = d3.select(parallelPathsArray._groups[0][0])
-    //     path.attr('d', describeComplexPath(pathData))
-    //     path.style('fill', 'none')
-    //     path.style('stroke', 'yellow')
-    //     path.style('stroke-width', 1)
-    // // PATH
-
+    // PARALLEL PATH
+    for (let i = 0; i < parallelPathsArray.length; i++) {
+        let parallelPath = d3.select(parallelPathsArray[i]._groups[0][0])
+            parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
+            parallelPath.style('fill', 'none')
+            parallelPath.style('stroke', 'yellow')
+            parallelPath.style('stroke-width', 1)
+    }
+    // PARALLEL PATH
 }
 
 function describeComplexPath(pathDataPass) {
@@ -361,3 +299,5 @@ function describeComplexPath(pathDataPass) {
     ].join(' ')
     return d
 }
+
+function isOdd(num) { return num % 2;}
