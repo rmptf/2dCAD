@@ -1,6 +1,5 @@
 // OBJECTIVE:
 // METHOD:
-
 // ADDITIONAL OBJECTIVES:
 // OBJECTIVE:
 // METHOD:
@@ -25,22 +24,27 @@ d3.select("body").insert("div")
     .on("click", addCurvePoint)
 
 let groupCounter = -1
+let secondGroupCounter = -1
+let oldCount
+let clickTrue = false
+
 
 let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
-let addCurve = false
+
 
 let parallelPathDatas = []
-let parallelEndPointsGroups = []
 let parallelPathsGroups = []
+let parallelEndPointsGroups = []
+
 
 function addCurvePoint() {
-    addCurve = true
+    clickTrue = true
 }
 function drawPath(){
-    addCurve = false
+    clickTrue = false
     let self = this, m1, isDown = false, thisCount
     let secondaryPathCount = 0
 
@@ -52,6 +56,7 @@ function drawPath(){
         if (isDown === false) {
             groupCounter = groupCounter + 1
             thisCount = groupCounter
+            oldCount = thisCount
             let thisPathCount = 0
 
             self.group = svg.append('g').attr('class', 'figureGroup')
@@ -65,7 +70,7 @@ function drawPath(){
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event)}))
+            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, thisPathCount)}))
             // MAIN PATH
 
             // SECONDARY PATH
@@ -82,6 +87,12 @@ function drawPath(){
             }
             endPointsGroups.push(endPoints)
             // DYNAMIC END POINTS
+
+            // PARALLEL GROUPS
+            parallelPathDatas.push([])
+            parallelPathsGroups.push([])
+            parallelEndPointsGroups.push([])
+            // PARALLEL GROUPS
 
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
@@ -130,7 +141,7 @@ function drawPath(){
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
 
-        if (addCurve === false) {
+        if (clickTrue === false) {
             console.log(m1[0], m1[1])
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
             // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
@@ -153,18 +164,48 @@ function drawPath(){
                 let currentEndPoint = endPointsGroups[thisCount][i]
                 currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
             }
-        } else if (addCurve === true) {
+        } else if (clickTrue === true) {
             console.log('asser')
-            addCurve = false
+            clickTrue = false
         }
     }
 
-    function mainPathClick(this1, event, pathCount) {
+    function mainPathClick(this1, event, thisCountPass, pathCount) {
         // m2 = d3.pointer(event)
         // console.log(this1)
         // console.log(m2)
         // console.log(pathCount)
-        console.log('Main Path Click')
+        // console.log('Main Path Click')
+
+        // √ Make a counter that can count how many parallel lines i make for each figure
+        // √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
+        // √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
+        // √ So it will look like [0][0] ([thisCount][thisCountParallel])
+
+        // Current error, 'thisCount2' doesnt reset to 0 after each new figure.
+        // 'thisCount2' needs to keep counting unless a new figure has been started in which case it should be reset to 0
+        // but if an old figure is clicked 'thisCount2' needs to start from where it last left off
+        // I think we keep track of 'oldCount' check if its different then update it to 'thisCount' after figuring out what to do
+
+
+        let self2 = this, thisCount2
+
+        secondGroupCounter = secondGroupCounter + 1
+        thisCount2 = secondGroupCounter
+
+        if(thisCount != oldCount) {
+            oldCount = thisCount
+            console.log('Different figure.')
+            // ???
+        } else {
+            console.log('Same figure.')
+            // ???
+        }
+
+        // console.log(oldCount)
+        // console.log(thisCountPass)
+        // console.log(thisCount)
+        // console.log(thisCount2)
 
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
@@ -195,12 +236,21 @@ function drawPath(){
                 {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
             ])
         }
-        
-        parallelEndPointsGroups.push(parallelEndPoints)
-        parallelPathsGroups.push(parallelPathGroup)
-        parallelPathDatas.push(parallelPathData)
 
-        updateSVG2(parallelEndPointsGroups[thisCount], parallelPathsGroups[thisCount], parallelPathDatas[thisCount])
+        parallelEndPointsGroups[thisCount].push(parallelEndPoints)
+        parallelPathsGroups[thisCount].push(parallelPathGroup)
+        parallelPathDatas[thisCount].push(parallelPathData)
+
+        // parallelEndPointsGroups.push(parallelEndPoints)
+        // parallelPathsGroups.push(parallelPathGroup)
+        // parallelPathDatas.push(parallelPathData)
+        
+        // endPointsGroups.push(parallelEndPoints)
+        // secondaryPathGroups.push(parallelPathGroup)
+        // pathDatas.push(parallelPathData)
+
+        // updateSVG2(parallelEndPointsGroups[thisCount][thisCount2], parallelPathsGroups[thisCount][thisCount2], parallelPathDatas[thisCount][thisCount2])
+        // updateSVG2(endPointsGroups[thisCount], secondaryPathGroups[thisCount], pathDatas[thisCount])
     }
 }
 
