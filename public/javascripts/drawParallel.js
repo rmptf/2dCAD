@@ -249,7 +249,7 @@ function drawPath(){
         // secondaryPathGroups.push(parallelPathGroup)
         // pathDatas.push(parallelPathData)
 
-        // updateSVG2(parallelEndPointsGroups[thisCount][thisCount2], parallelPathsGroups[thisCount][thisCount2], parallelPathDatas[thisCount][thisCount2])
+        updateSVG2(parallelEndPointsGroups[thisCount][thisCount2], parallelPathsGroups[thisCount][thisCount2], parallelPathDatas[thisCount][thisCount2])
         // updateSVG2(endPointsGroups[thisCount], secondaryPathGroups[thisCount], pathDatas[thisCount])
     }
 }
