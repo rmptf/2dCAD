@@ -24,16 +24,17 @@ d3.select("body").insert("div")
     .on("click", addCurvePoint)
 
 let groupCounter = -1
-let secondGroupCounter = -1
-let oldCount
-let clickTrue = false
 
+let parallelGroupCountArray = []
+let parallelGroupCount = 0
+let currentParallelGroupCount = 0
+
+let clickTrue = false
 
 let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
-
 
 let parallelPathDatas = []
 let parallelPathsGroups = []
@@ -56,14 +57,13 @@ function drawPath(){
         if (isDown === false) {
             groupCounter = groupCounter + 1
             thisCount = groupCounter
-            oldCount = thisCount
             let thisPathCount = 0
-
+            parallelGroupCountArray.push(0)
+            
             self.group = svg.append('g').attr('class', 'figureGroup')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
             self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
-            
 
             // MAIN PATH
             pathDatas.push([
@@ -105,7 +105,6 @@ function drawPath(){
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
-            // console.log(secondaryPathCount)
         }
     }
 
@@ -165,7 +164,6 @@ function drawPath(){
                 currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
             }
         } else if (clickTrue === true) {
-            console.log('asser')
             clickTrue = false
         }
     }
@@ -177,36 +175,37 @@ function drawPath(){
         // console.log(pathCount)
         // console.log('Main Path Click')
 
+        // STEP 1
         // √ Make a counter that can count how many parallel lines i make for each figure
         // √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
         // √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
         // √ So it will look like [0][0] ([thisCount][thisCountParallel])
 
-        // Current error, 'thisCount2' doesnt reset to 0 after each new figure.
-        // 'thisCount2' needs to keep counting unless a new figure has been started in which case it should be reset to 0
-        // but if an old figure is clicked 'thisCount2' needs to start from where it last left off
-        // I think we keep track of 'oldCount' check if its different then update it to 'thisCount' after figuring out what to do
+        // STEP 2
+        // √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
+        // √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
+        // √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
+        // √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
 
+        // STEP 3
+        // continue corners around points for parallel lines
+        // continue corners around points 'seam allowances'
 
-        let self2 = this, thisCount2
+        // STEP 4
+        // drag parallel line to distance away from origin
 
-        secondGroupCounter = secondGroupCounter + 1
-        thisCount2 = secondGroupCounter
-
-        if(thisCount != oldCount) {
-            oldCount = thisCount
-            console.log('Different figure.')
-            // ???
+        if(thisCount != currentParallelGroupCount) {
+            // console.log('Different figure.')
+            currentParallelGroupCount = thisCount
+            parallelGroupCount = parallelGroupCountArray[thisCount] + 1
+            parallelGroupCountArray[thisCount] = parallelGroupCount
         } else {
-            console.log('Same figure.')
-            // ???
+            // console.log('Same figure.')
+            parallelGroupCount = parallelGroupCount + 1
+            parallelGroupCountArray[thisCount] = parallelGroupCount
         }
 
-        // console.log(oldCount)
-        // console.log(thisCountPass)
-        // console.log(thisCount)
-        // console.log(thisCount2)
-
+        // Adds new parallel elements to wrong group after creating new figure and adding parallel lines to old figures
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
         let parallelEndPoints = []
@@ -241,16 +240,7 @@ function drawPath(){
         parallelPathsGroups[thisCount].push(parallelPathGroup)
         parallelPathDatas[thisCount].push(parallelPathData)
 
-        // parallelEndPointsGroups.push(parallelEndPoints)
-        // parallelPathsGroups.push(parallelPathGroup)
-        // parallelPathDatas.push(parallelPathData)
-        
-        // endPointsGroups.push(parallelEndPoints)
-        // secondaryPathGroups.push(parallelPathGroup)
-        // pathDatas.push(parallelPathData)
-
-        updateSVG2(parallelEndPointsGroups[thisCount][thisCount2], parallelPathsGroups[thisCount][thisCount2], parallelPathDatas[thisCount][thisCount2])
-        // updateSVG2(endPointsGroups[thisCount], secondaryPathGroups[thisCount], pathDatas[thisCount])
+        updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
     }
 }
 
