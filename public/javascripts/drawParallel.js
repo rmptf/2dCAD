@@ -4,6 +4,28 @@
 // OBJECTIVE:
 // METHOD:
 
+// STEP 1
+// √ Make a counter that can count how many parallel lines i make for each figure
+// √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
+// √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
+// √ So it will look like [0][0] ([thisCount][thisCountParallel])
+
+// STEP 2
+// √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
+// √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
+// √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
+// √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
+
+// STEP 3
+// drag parallel line to distance away from origin
+
+// STEP 4
+// Add curve points to parallel lines
+
+// STEP 4
+// continue corners around points for parallel lines
+// continue corners around points 'seam allowances'
+
 
 const width = '100%'
 const height = '600px'
@@ -46,7 +68,7 @@ function addCurvePoint() {
 }
 function drawPath(){
     clickTrue = false
-    let self = this, m1, isDown = false, thisCount
+    let self = this, m1, isDown = false, isDown2 = false, thisCount
     let secondaryPathCount = 0
 
     svg.on('click', mouseDown)
@@ -70,7 +92,7 @@ function drawPath(){
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, thisPathCount)}))
+            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function(event) {mainPathClick(this, event, thisCount, thisPathCount)}))
             // MAIN PATH
 
             // SECONDARY PATH
@@ -175,24 +197,40 @@ function drawPath(){
         // console.log(pathCount)
         // console.log('Main Path Click')
 
-        // STEP 1
-        // √ Make a counter that can count how many parallel lines i make for each figure
-        // √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
-        // √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
-        // √ So it will look like [0][0] ([thisCount][thisCountParallel])
 
-        // STEP 2
-        // √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
-        // √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
-        // √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
-        // √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
+        // console.log(event.x, event.y)
+        let isDown3 = false
+        if (isDown2 === false) {
+            isDown2 = true
+            svg.on("mousemove", mousemove2)
+            svg.on('click', mouseDown2)
+            console.log(111)
 
-        // STEP 3
-        // continue corners around points for parallel lines
-        // continue corners around points 'seam allowances'
+            // updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+        }
 
-        // STEP 4
-        // drag parallel line to distance away from origin
+        function mouseDown2() {
+            if (isDown3 === false) {
+                console.log(222)
+                isDown3 = true
+            } else {
+                console.log(333)
+                isDown2 = false
+                // svg.on("mousemove", mousemove2)
+            }
+        }
+
+        function mousemove2(event) {
+            // m2 = d3.pointer(event)
+            console.log(444)
+            if(isDown2 === true) {
+                console.log(555)
+                // pathDatas[thisCount].at(-1).coords.x = m2[0]
+                // pathDatas[thisCount].at(-1).coords.y = m2[1]
+                // updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            }
+        }
+
 
         if(thisCount != currentParallelGroupCount) {
             // console.log('Different figure.')
@@ -342,4 +380,13 @@ function describeComplexPath(pathDataPass) {
     return d
 }
 
-function isOdd(num) { return num % 2;}
+function isOdd(num) { 
+    return num % 2
+}
+
+function getDistance(x1, y1, x2, y2) {
+    let y = x2 - x1;
+    let x = y2 - y1;
+
+    return Math.sqrt(x * x + y * y);
+}
