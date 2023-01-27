@@ -5,22 +5,38 @@
 // METHOD:
 
 // STEP 1
-// √ Make a counter that can count how many parallel lines i make for each figure
-// √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
-// √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
-// √ So it will look like [0][0] ([thisCount][thisCountParallel])
+// Make 1 parallel line path & 2 parallel end points for each path segment of the Figure
+    // √ Make a counter that can count how many parallel lines i make for each figure
+    // √ Use 'thisCount' to track the number of figures but have an array of parallel lines that i track inside of each 'thisCount'
+    // √ 'thisCount' can be [0] but 'thisCountParallel' can be [0] or [1] or [2] etc...
+    // √ So it will look like [0][0] ([thisCount][thisCountParallel])
 
 // STEP 2
-// √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
-// √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
-// √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
-// √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
+// Allow for multiple parallel path groups & end point groups for each Figure && across different Figures
+    // √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
+    // √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
+    // √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
+    // √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
 
 // STEP 3
-// drag parallel line to distance away from origin
+// Drag parallel line to distance away from origin
+    // Get click functionality to work
+        // First click line: Start function
+        // Move mouse after first click: Determine (perpendicular) dinstance away from point clicked
+            // Start with getDistance() function
+            // Advance to findPerpendicular() function to determine length of perpendicular line between line clicked and relative position of cursor
+                // Might have to create new function based off findPerpendicular() function because this function returns the coords of a point on original line perpendicular to cursor position
+                // rather than the distance between these two points
+            // Draw parallel line at determined distance while moving cursor
+        // Second click anywhere: Ends function
+            // Stop tracking mouse events
+
 
 // STEP 4
 // Add curve points to parallel lines
+    // Decide method for parallel curve
+        // 1: Copy arc but increase / decrease radius and adjust end points
+        // 2: Create algorythm that recreates curve or line with arcs (unsure how to do, but pretty sure this is what Lectra does)
 
 // STEP 4
 // continue corners around points for parallel lines
@@ -198,87 +214,97 @@ function drawPath(){
         // console.log('Main Path Click')
 
 
-        // console.log(event.x, event.y)
+        
+        console.log('Line clicked')
+
+        let clickSpot = [event.x, event.y]
+        let segmentCLicked = '???'
+        let distance 
         let isDown3 = false
+
         if (isDown2 === false) {
             isDown2 = true
             svg.on("mousemove", mousemove2)
             svg.on('click', mouseDown2)
-            console.log(111)
-
+            console.log('Start function')
             // updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
         }
 
         function mouseDown2() {
             if (isDown3 === false) {
-                console.log(222)
+                console.log('First click')
                 isDown3 = true
             } else {
-                console.log(333)
+                console.log('Last click')
                 isDown2 = false
-                // svg.on("mousemove", mousemove2)
+                svg.on("mousemove", null)
+                svg.on('click', null)
+
+
+
+                if(thisCount != currentParallelGroupCount) {
+                    // console.log('Different figure.')
+                    currentParallelGroupCount = thisCount
+                    parallelGroupCount = parallelGroupCountArray[thisCount] + 1
+                    parallelGroupCountArray[thisCount] = parallelGroupCount
+                } else {
+                    // console.log('Same figure.')
+                    parallelGroupCount = parallelGroupCount + 1
+                    parallelGroupCountArray[thisCount] = parallelGroupCount
+                }
+        
+
+                self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
+                self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
+                let parallelEndPoints = []
+                let parallelPathGroup = []
+                let parallelPathData = []
+                // let distance = 50;
+        
+
+                for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                    let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+                    let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+                    parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
+        
+                    let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
+                    parallelPathGroup.push(parallelPath)
+        
+                    let thisPathData = pathDatas[thisCount][i].coords
+                    let nextPathData = pathDatas[thisCount][i + 1].coords
+        
+                    let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+        
+                    let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    
+                    parallelPathData.push([
+                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                    ])
+                }
+        
+
+                parallelEndPointsGroups[thisCount].push(parallelEndPoints)
+                parallelPathsGroups[thisCount].push(parallelPathGroup)
+                parallelPathDatas[thisCount].push(parallelPathData)
+        
+
+                updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
             }
         }
 
         function mousemove2(event) {
-            // m2 = d3.pointer(event)
-            console.log(444)
+            m2 = d3.pointer(event)
             if(isDown2 === true) {
-                console.log(555)
+                distance = getDistance(clickSpot[0], clickSpot[1], m2[0], m2[1])
+                console.log(distance)
                 // pathDatas[thisCount].at(-1).coords.x = m2[0]
                 // pathDatas[thisCount].at(-1).coords.y = m2[1]
                 // updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             }
         }
-
-
-        if(thisCount != currentParallelGroupCount) {
-            // console.log('Different figure.')
-            currentParallelGroupCount = thisCount
-            parallelGroupCount = parallelGroupCountArray[thisCount] + 1
-            parallelGroupCountArray[thisCount] = parallelGroupCount
-        } else {
-            // console.log('Same figure.')
-            parallelGroupCount = parallelGroupCount + 1
-            parallelGroupCountArray[thisCount] = parallelGroupCount
-        }
-
-        // Adds new parallel elements to wrong group after creating new figure and adding parallel lines to old figures
-        self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
-        self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
-        let parallelEndPoints = []
-        let parallelPathGroup = []
-        let parallelPathData = []
-        let distance = 50;
-
-        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-            parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
-
-            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
-            parallelPathGroup.push(parallelPath)
-
-            let thisPathData = pathDatas[thisCount][i].coords
-            let nextPathData = pathDatas[thisCount][i + 1].coords
-
-            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-
-            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-            
-            parallelPathData.push([
-                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
-                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
-            ])
-        }
-
-        parallelEndPointsGroups[thisCount].push(parallelEndPoints)
-        parallelPathsGroups[thisCount].push(parallelPathGroup)
-        parallelPathDatas[thisCount].push(parallelPathData)
-
-        updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
     }
 }
 
