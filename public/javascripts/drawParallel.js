@@ -296,17 +296,6 @@ function drawPath(){
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
                 let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-                
-
-                
-                // // let distanceTracker = 'postive'
-                // if(perpendicularPoint[0] < m2[0]) {
-                //     // distanceTracker = 'positive'
-                //     console.log('postive')
-                // } else {
-                //     // distanceTracker = 'negative'
-                //     console.log('negative')
-                // }
 
                 let shape
                 let direction
@@ -343,6 +332,9 @@ function drawPath(){
                 }
                 // console.log(shape)
                 // console.log(direction)
+                if (shape === 1 || shape === 3){
+
+                } else if(shape === 2 || shape === 4)
                 if(direction === 'positive'){
                     distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
                 } else if(direction === 'negative') {
