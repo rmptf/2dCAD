@@ -292,31 +292,66 @@ function drawPath(){
             if(isDown2 === true) {
 
 
-
                 let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
                 let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-                distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-
-                // let distanceTracker = 'postive'
-                if(perpendicularPoint[0] < m2[0]) {
-                    // distanceTracker = 'positive'
-                    console.log('postive')
-                } else {
-                    // distanceTracker = 'negative'
-                    console.log('negative')
-                }
-
-                // if(distanceTracker === positive) {
-                //     distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                // } else {
-                //     distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) *-1
-                // }
-                // distance = getDistance(clickSpot[0], clickSpot[1], m2[0], m2[1])
-
                 
 
+                
+                // // let distanceTracker = 'postive'
+                // if(perpendicularPoint[0] < m2[0]) {
+                //     // distanceTracker = 'positive'
+                //     console.log('postive')
+                // } else {
+                //     // distanceTracker = 'negative'
+                //     console.log('negative')
+                // }
+
+                let shape
+                let direction
+                if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
+                    shape = 2
+                    if(perpendicularPoint[0] < m2[0]) {
+                        direction = 'positive'
+                    } else {
+                        direction = 'negative'
+                    }
+                    if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                        shape = 1
+                        if(perpendicularPoint[0] < m2[0]) {
+                            direction = 'negative'
+                        } else {
+                            direction = 'positive'
+                        }
+                    }
+                } else {
+                    shape = 3
+                    if(perpendicularPoint[0] < m2[0]) {
+                        direction = 'positive'
+                    } else {
+                        direction = 'negative'
+                    }
+                    if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                        shape = 4
+                        if(perpendicularPoint[0] < m2[0]) {
+                            direction = 'negative'
+                        } else {
+                            direction = 'positive'
+                        }
+                    }
+                }
+                // console.log(shape)
+                // console.log(direction)
+                if(direction === 'positive'){
+                    distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                } else if(direction === 'negative') {
+                    distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
+                }
+                
+
+
+        
                 for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
                     let thisPathData = pathDatas[thisCount][i].coords
                     let nextPathData = pathDatas[thisCount][i + 1].coords
