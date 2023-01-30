@@ -40,7 +40,7 @@
         // 1: Copy arc but increase / decrease radius and adjust end points
         // 2: Create algorythm that recreates curve or line with arcs (unsure how to do, but pretty sure this is what Lectra does)
 
-// STEP 4
+// STEP 5
 // continue corners around points for parallel lines
 // continue corners around points 'seam allowances'
 
@@ -290,12 +290,32 @@ function drawPath(){
         function mousemove2(event) {
             m2 = d3.pointer(event)
             if(isDown2 === true) {
+
+
+
                 let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
                 let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
                 distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+
+                // let distanceTracker = 'postive'
+                if(perpendicularPoint[0] < m2[0]) {
+                    // distanceTracker = 'positive'
+                    console.log('postive')
+                } else {
+                    // distanceTracker = 'negative'
+                    console.log('negative')
+                }
+
+                // if(distanceTracker === positive) {
+                //     distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                // } else {
+                //     distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) *-1
+                // }
                 // distance = getDistance(clickSpot[0], clickSpot[1], m2[0], m2[1])
+
+                
 
                 for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
                     let thisPathData = pathDatas[thisCount][i].coords
@@ -456,6 +476,8 @@ function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
         let interceptOfpath1 = path1.pointA.y - gradientOfpath1 * path1.pointA.x;
         let gradientOfpath2 = -1 / gradientOfpath1;
         let interceptOfpath2 = path2.pointA.y - gradientOfpath2 * path2.pointA.x;
+
+        
         path2.pointB.x = (interceptOfpath1 - interceptOfpath2) / (gradientOfpath2 - gradientOfpath1);
         path2.pointB.y = gradientOfpath2 * path2.pointB.x + interceptOfpath2;
 
