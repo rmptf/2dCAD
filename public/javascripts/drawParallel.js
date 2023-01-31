@@ -22,14 +22,24 @@
 // √ Drag parallel line to distance away from origin
     // Get click functionality to work
         // √ First click line: Start function
-        // Move mouse after first click: Determine (perpendicular) dinstance away from point clicked
+        // Move mouse after first click: Determine (perpendicular) distance away from point clicked
             // √ Start with getDistance() function
-            // Advance to findPerpendicular() function to determine length of perpendicular line between line clicked and relative position of cursor
-                // Find section of path clicked by user (need to use secondary paths for this)
-                    // √ Start by using first section ([0] & [1] hardcoded into function)
+            // √ Advance to findPerpendicular() function to determine length of perpendicular line between line clicked and relative position of cursor
+                // √ First start by using first section ([0] & [1] hardcoded into function)
+                // Next find section of path clicked by user (need to use secondary paths for this)
+                    // Create separate buttons for addPoint() and drawParallel()
+                        // if secondaryPathSegment clicked before either button, nothing happens
+                        // if secondaryPathSegment clicked after addPoint() is clicked, run addPoint() function
+                        // if secondaryPathSegment clicked after drawParallel() is clicked, run drawParallel() function
+                            // create variables for addPointCheck and drawParalleCheck, set both to false
+                            // if either button clicked, sets corrosponding veriable to true 
+                            // secondaryPathSegment() has built in onclick function, checks it addPointCheck or drawParallelCheck are set to true
+                            // runs either function if one is set to true, else console logs out indication no action selected.
+                    // Use secondaryPathClick to determin path segment clicked by user
                 // √ Use findPerpendicular() and MouseX,Y to getDistance() to determine distance or parallel line
-                // Make or use a function to determine if the distance of parallel line should be positive or negative
-                    // Probably related to relationship between clickPoint and perpendicularPoint in findPerpendicular() function 
+                // √ Make or use a function to determine if the distance of parallel line should be positive or negative
+                    // √ Find  out what shape the path is
+                    // √ Then related to relationship between clickPoint and perpendicularPoint in findPerpendicular() function 
             // √ Draw parallel line at determined distance while moving cursor
         // √ Second click anywhere: Ends function
             // √ Stop tracking mouse events
@@ -38,6 +48,18 @@
 // Add curve points to parallel lines
     // Decide method for parallel curve
         // 1: Copy arc but increase / decrease radius and adjust end points
+            // Incorporate arcs into parallel functionality
+            // Decide how to determine distance of parallel line functionality with an arc
+                // Option 1
+                    // Find point of mouse relative to center of arc
+                    // Find Tangent of arc at point where line from point of mouse to center of arc intersects with arc
+                    // Use findPerpendicular() between mouse location and Tangent
+                // Option 2
+                    // Dont use findPerpendicular(), create new function
+                    // Find point of mouse location relative to center of arc (radianLine)
+                    // Find point on arc that intersects with radianLine
+                    // Determin dinstance between point on arc that intects with radianLine and mouse location
+                    // Pass distance to describe parallel function
         // 2: Create algorythm that recreates curve or line with arcs (unsure how to do, but pretty sure this is what Lectra does)
 
 // STEP 5
@@ -217,7 +239,7 @@ function drawPath(){
 
 
         
-        console.log('Line clicked')
+        // console.log('Line clicked')
         let clickSpot = [event.x, event.y]
         let segmentCLicked = '???'
         let distance 
@@ -226,7 +248,7 @@ function drawPath(){
             isDown2 = true
             svg.on("mousemove", mousemove2)
             svg.on('click', mouseDown2)
-            console.log('Start function')
+            // console.log('Start function')
 
             if(thisCount != currentParallelGroupCount) {
                 // console.log('Different figure.')
@@ -277,10 +299,10 @@ function drawPath(){
 
         function mouseDown2() {
             if (isDown3 === false) {
-                console.log('First click')
+                // console.log('First click')
                 isDown3 = true
             } else {
-                console.log('Last click')
+                // console.log('Last click')
                 isDown2 = false
                 svg.on("mousemove", null)
                 svg.on('click', null)
@@ -290,15 +312,13 @@ function drawPath(){
         function mousemove2(event) {
             m2 = d3.pointer(event)
             if(isDown2 === true) {
-
-
                 let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
                 let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-
                 let shape
                 let direction
+
                 if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
                     shape = 2
                     if(perpendicularPoint[0] < m2[0]) {
@@ -330,20 +350,13 @@ function drawPath(){
                         }
                     }
                 }
-                // console.log(shape)
-                // console.log(direction)
-                if (shape === 1 || shape === 3){
-
-                } else if(shape === 2 || shape === 4)
+                
                 if(direction === 'positive'){
                     distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
                 } else if(direction === 'negative') {
                     distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
                 }
                 
-
-
-        
                 for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
                     let thisPathData = pathDatas[thisCount][i].coords
                     let nextPathData = pathDatas[thisCount][i + 1].coords
