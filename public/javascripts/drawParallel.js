@@ -46,25 +46,37 @@
 
 // STEP 4
 // Add curve points to parallel lines
-    // Decide method for parallel curve
-        // 1: Copy arc but increase / decrease radius and adjust end points
+    // √ Decide method for parallel curve
+        // 1: (DO THIS) Copy arc but increase / decrease radius and adjust end points
             // Incorporate arcs into parallel functionality
             // Decide how to determine distance of parallel line functionality with an arc
                 // Option 1
+                    // Dont use findPerpendicular(), create new function
+                    // Find coords of center of arc
+                    // Find point of mouse location relative to center of arc (radianLine)
+                    // Find point on arc that intersects with radianLine
+                    // Determine "arcDinstance" between point on arc that intects with radianLine and mouse location
+                    // Use found "arcDistance" to find Arc Parallel Paths and End Points
+                        // Parallel arc end points:
+                            // Find line between current end point and center of arc
+                            // Place new end point along that line at a point at the "arcDistance" away from original end point
+                        // Parallel arc path:
+                            // Pass distance to describe parallel arcs ne radius
+                // Option 2
                     // Find point of mouse relative to center of arc
                     // Find Tangent of arc at point where line from point of mouse to center of arc intersects with arc
                     // Use findPerpendicular() between mouse location and Tangent
-                // Option 2
-                    // Dont use findPerpendicular(), create new function
-                    // Find point of mouse location relative to center of arc (radianLine)
-                    // Find point on arc that intersects with radianLine
-                    // Determin dinstance between point on arc that intects with radianLine and mouse location
-                    // Pass distance to describe parallel function
-        // 2: Create algorythm that recreates curve or line with arcs (unsure how to do, but pretty sure this is what Lectra does)
+        // 2: (DON'T DO THIS) Create algorythm that recreates curve or line with arcs (unsure how to do, but pretty sure this is what Lectra does)
+            // Leaving this in the note but not necessary for this functionality.
+            // Might need in future but not needed for parallel arcs.
 
 // STEP 5
 // continue corners around points for parallel lines
 // continue corners around points 'seam allowances'
+
+// NEXT TASK TO WORK ON:
+// - Find center of arc
+    // - Given two coords and arc radius
 
 
 const width = '100%'
@@ -131,6 +143,7 @@ function drawPath(){
             pathDatas.push([
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
+                // {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
             ])
             mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function(event) {mainPathClick(this, event, thisCount, thisPathCount)}))
             // MAIN PATH
@@ -163,6 +176,8 @@ function drawPath(){
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
+            // pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}})
+            
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
@@ -287,6 +302,7 @@ function drawPath(){
                 parallelPathData.push([
                     {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
                     {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                    // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
                 ])
             }
 
@@ -312,6 +328,7 @@ function drawPath(){
         function mousemove2(event) {
             m2 = d3.pointer(event)
             if(isDown2 === true) {
+
                 let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
@@ -319,58 +336,59 @@ function drawPath(){
                 let shape
                 let direction
 
-                if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
-                    shape = 2
-                    if(perpendicularPoint[0] < m2[0]) {
-                        direction = 'positive'
-                    } else {
-                        direction = 'negative'
-                    }
-                    if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                        shape = 1
+                
+                    if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
+                        shape = 2
                         if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'negative'
-                        } else {
                             direction = 'positive'
+                        } else {
+                            direction = 'negative'
+                        }
+                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                            shape = 1
+                            if(perpendicularPoint[0] < m2[0]) {
+                                direction = 'negative'
+                            } else {
+                                direction = 'positive'
+                            }
+                        }
+                    } else {
+                        shape = 3
+                        if(perpendicularPoint[0] < m2[0]) {
+                            direction = 'positive'
+                        } else {
+                            direction = 'negative'
+                        }
+                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                            shape = 4
+                            if(perpendicularPoint[0] < m2[0]) {
+                                direction = 'negative'
+                            } else {
+                                direction = 'positive'
+                            }
                         }
                     }
-                } else {
-                    shape = 3
-                    if(perpendicularPoint[0] < m2[0]) {
-                        direction = 'positive'
-                    } else {
-                        direction = 'negative'
+                    
+                    if(direction === 'positive'){
+                        distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                    } else if(direction === 'negative') {
+                        distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
                     }
-                    if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                        shape = 4
-                        if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'negative'
-                        } else {
-                            direction = 'positive'
-                        }
+                    
+                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                        let thisPathData = pathDatas[thisCount][i].coords
+                        let nextPathData = pathDatas[thisCount][i + 1].coords
+
+                        let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
+                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
+                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
+                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
+                        // parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
                     }
-                }
-                
-                if(direction === 'positive'){
-                    distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                } else if(direction === 'negative') {
-                    distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
-                }
-                
-                for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                    let thisPathData = pathDatas[thisCount][i].coords
-                    let nextPathData = pathDatas[thisCount][i + 1].coords
-
-                    let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-
-                    parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                    parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                    parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                    parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                }
 
                 updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
             }
