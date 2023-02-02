@@ -53,6 +53,9 @@
                 // Option 1
                     // Dont use findPerpendicular(), create new function
                     // Find coords of center of arc
+                        // Find (A): midpoint between endPoint1 and endPoint2
+                        // Find (B): height of the isosceles triangle created by midPoint1, midPoint2 and the center of the arc they create: Base = endPoint1 & endPoint2, SideLength = ArcRadius
+                        // Center of arc is at the coords perpendicular to (A), at a distance of (B)
                     // Find point of mouse location relative to center of arc (radianLine)
                     // Find point on arc that intersects with radianLine
                     // Determine "arcDinstance" between point on arc that intects with radianLine and mouse location
@@ -328,69 +331,90 @@ function drawPath(){
         function mousemove2(event) {
             m2 = d3.pointer(event)
             if(isDown2 === true) {
-
-                let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
                 let hardCodedPathSegment1 = pathDatas[thisCount][0]
                 let hardCodedPathSegment2 = pathDatas[thisCount][1]
-                let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-                let shape
-                let direction
 
-                
-                    if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
-                        shape = 2
-                        if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'positive'
-                        } else {
-                            direction = 'negative'
-                        }
-                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                            shape = 1
+                if(hardCodedPathSegment2.arc.exist === false) {
+                    let isoscSideLength = hardCodedPathSegment2.arc.radius
+                    // Find length of base
+                    let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+                    // Find midPoint of endPoint1 & endPoint2
+                    let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+                    // Find perpendicular line to base
+                    let basePerpendicularSlope = '???'
+                    // Find height of isosceles triangle
+                    let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
+                    // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
+                    let arcCenter = '???'
+
+                    // Find parallelDistance
+                    // Find parallelEndPoints
+                    // Describe parallelArc
+                        // Increase radius of original arc by parallelDistance to create new parallelArc
+                }
+
+                if(hardCodedPathSegment2.arc.exist === false) {
+                    let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
+                    let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
+                    let shape
+                    let direction
+
+                    
+                        if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
+                            shape = 2
                             if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'negative'
-                            } else {
                                 direction = 'positive'
+                            } else {
+                                direction = 'negative'
+                            }
+                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                                shape = 1
+                                if(perpendicularPoint[0] < m2[0]) {
+                                    direction = 'negative'
+                                } else {
+                                    direction = 'positive'
+                                }
+                            }
+                        } else {
+                            shape = 3
+                            if(perpendicularPoint[0] < m2[0]) {
+                                direction = 'positive'
+                            } else {
+                                direction = 'negative'
+                            }
+                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                                shape = 4
+                                if(perpendicularPoint[0] < m2[0]) {
+                                    direction = 'negative'
+                                } else {
+                                    direction = 'positive'
+                                }
                             }
                         }
-                    } else {
-                        shape = 3
-                        if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'positive'
-                        } else {
-                            direction = 'negative'
+                        
+                        if(direction === 'positive'){
+                            distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                        } else if(direction === 'negative') {
+                            distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
                         }
-                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                            shape = 4
-                            if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'negative'
-                            } else {
-                                direction = 'positive'
-                            }
+                        
+                        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                            let thisPathData = pathDatas[thisCount][i].coords
+                            let nextPathData = pathDatas[thisCount][i + 1].coords
+
+                            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
+                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
+                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
+                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
+                            // parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
                         }
-                    }
-                    
-                    if(direction === 'positive'){
-                        distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                    } else if(direction === 'negative') {
-                        distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
-                    }
-                    
-                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                        let thisPathData = pathDatas[thisCount][i].coords
-                        let nextPathData = pathDatas[thisCount][i + 1].coords
 
-                        let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                        parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                        // parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
-                    }
-
-                updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
+                    updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
+                }
             }
         }
     }
@@ -543,4 +567,11 @@ function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
         
         return xy2
     }
+}
+
+function getDistance(x1, y1, x2, y2) {
+    let y = x2 - x1;
+    let x = y2 - y1;
+
+    return Math.sqrt(x * x + y * y);
 }
