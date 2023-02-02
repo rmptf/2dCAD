@@ -351,6 +351,8 @@ function drawPath(){
                     // Find parallelEndPoints
                     // Describe parallelArc
                         // Increase radius of original arc by parallelDistance to create new parallelArc
+
+                    // updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
                 }
 
                 if(hardCodedPathSegment2.arc.exist === false) {
