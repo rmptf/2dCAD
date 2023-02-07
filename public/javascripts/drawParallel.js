@@ -13,10 +13,10 @@
 
 // STEP 2
 // Allow for multiple parallel path groups & end point groups for each Figure && across different Figures
-    // √ 'parallelGroupCountArray' doesnt reset to 0 after each new figure.
-    // √ 'parallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
-    // √ but if an old figure is clicked 'parallelGroupCountArray' needs to start from where it last left off
-    // √ I think we keep track of 'currentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
+    // √ 'GLOBALparallelGroupCountArray' doesnt reset to 0 after each new figure.
+    // √ 'GLOBALparallelGroupCountArray' needs to keep counting unless a new figure has been started in which case it should be reset to 0
+    // √ but if an old figure is clicked 'GLOBALparallelGroupCountArray' needs to start from where it last left off
+    // √ I think we keep track of 'GLOBALcurrentParallelGroupCount' check if its different then update it to 'thisCount' after figuring out what to do
 
 // STEP 3
 // √ Drag parallel line to distance away from origin
@@ -97,32 +97,30 @@ d3.select("body").insert("div")
 
 d3.select("body").insert("div")
     .append("button")
-    .text("Add Curve Point")
-    .on("click", addCurvePoint)
+    .text("Add Point")
+    .on("click", addPoint)
 
 let groupCounter = -1
-
-let parallelGroupCountArray = []
-let parallelGroupCount = 0
-let currentParallelGroupCount = 0
-
-let clickTrue = false
 
 let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
+let pressAddPointButton = false
 
-let parallelPathDatas = []
-let parallelPathsGroups = []
-let parallelEndPointsGroups = []
+let GLOBALparallelGroupCountArray = []
+let GLOBALparallelGroupCount = 0
+let GLOBALcurrentParallelGroupCount = 0
 
+let GLOBALparallelPathDatas = []
+let GLOBALparallelPathsGroups = []
+let GLOBALparallelEndPointsGroups = []
 
-function addCurvePoint() {
-    clickTrue = true
+function addPoint() {
+    pressAddPointButton = true
 }
 function drawPath(){
-    clickTrue = false
+    pressAddPointButton = false
     let self = this, m1, isDown = false, isDown2 = false, thisCount
     let secondaryPathCount = 0
 
@@ -135,12 +133,13 @@ function drawPath(){
             groupCounter = groupCounter + 1
             thisCount = groupCounter
             let thisPathCount = 0
-            parallelGroupCountArray.push(0)
+            GLOBALparallelGroupCountArray.push(0)
             
             self.group = svg.append('g').attr('class', 'figureGroup')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
             self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
+            
 
             // MAIN PATH
             pathDatas.push([
@@ -167,9 +166,9 @@ function drawPath(){
             // DYNAMIC END POINTS
 
             // PARALLEL GROUPS
-            parallelPathDatas.push([])
-            parallelPathsGroups.push([])
-            parallelEndPointsGroups.push([])
+            GLOBALparallelPathDatas.push([])
+            GLOBALparallelPathsGroups.push([])
+            GLOBALparallelEndPointsGroups.push([])
             // PARALLEL GROUPS
 
             isDown = true
@@ -219,32 +218,33 @@ function drawPath(){
 
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
+        if (pressAddPointButton === false) {
+            console.log('Just Secondary Path Clicked')
+        } else if (pressAddPointButton === true) {
+            console.log('Add Point + Secondary Path Clicked')
 
-        if (clickTrue === false) {
-            console.log(m1[0], m1[1])
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
     
-            let counter = -1
+            let newPathCounter = -1
             for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
-                counter = counter + 1
-                let pooper = counter
-                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, pooper)})
+                newPathCounter = newPathCounter + 1
+                let thisPathCount = newPathCounter
+                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)})
             }
     
             let index = pathCount + 1
             let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
             pathDatas[thisCount].splice(index, 0, data);
     
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-    
             for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
                 let currentEndPoint = endPointsGroups[thisCount][i]
                 currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
             }
-        } else if (clickTrue === true) {
-            clickTrue = false
+
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+
+            pressAddPointButton = false
         }
     }
 
@@ -255,173 +255,172 @@ function drawPath(){
         // console.log(pathCount)
         // console.log('Main Path Click')
 
+        drawParallel(event, thisCount, isDown2, self)
+    }
+}
 
-        
-        // console.log('Line clicked')
-        let clickSpot = [event.x, event.y]
-        let segmentCLicked = '???'
-        let distance 
-        let isDown3 = false
-        if (isDown2 === false) {
-            isDown2 = true
-            svg.on("mousemove", mousemove2)
-            svg.on('click', mouseDown2)
-            // console.log('Start function')
+function drawParallel(event, thisCount, isDown2, self) {
+    // console.log('Line clicked')
+    let clickSpot = [event.x, event.y]
+    let segmentCLicked = '???'
+    let distance 
+    let isDown3 = false
+    if (isDown2 === false) {
+        isDown2 = true
+        svg.on("mousemove", mousemove2)
+        svg.on('click', mouseDown2)
+        // console.log('Start function')
 
-            if(thisCount != currentParallelGroupCount) {
-                // console.log('Different figure.')
-                currentParallelGroupCount = thisCount
-                parallelGroupCount = parallelGroupCountArray[thisCount] + 1
-                parallelGroupCountArray[thisCount] = parallelGroupCount
-            } else {
-                // console.log('Same figure.')
-                parallelGroupCount = parallelGroupCount + 1
-                parallelGroupCountArray[thisCount] = parallelGroupCount
-            }
-    
-            self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
-            self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
-            let parallelEndPoints = []
-            let parallelPathGroup = []
-            let parallelPathData = []
-    
-            for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-                let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-                parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
-    
-                let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
-                parallelPathGroup.push(parallelPath)
-    
-                let thisPathData = pathDatas[thisCount][i].coords
-                let nextPathData = pathDatas[thisCount][i + 1].coords
-    
-                let parallelAnchorPointX1 = thisPathData.x
-                let parallelAnchorPointY1 = thisPathData.y
-    
-                let parallelAnchorPointX2 = nextPathData.x
-                let parallelAnchorPointY2 = nextPathData.y
-
-                parallelPathData.push([
-                    {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
-                    {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
-                    // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
-                ])
-            }
-
-            parallelEndPointsGroups[thisCount].push(parallelEndPoints)
-            parallelPathsGroups[thisCount].push(parallelPathGroup)
-            parallelPathDatas[thisCount].push(parallelPathData)
-
-            updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
+        if(thisCount != GLOBALcurrentParallelGroupCount) {
+            // console.log('Different figure.')
+            GLOBALcurrentParallelGroupCount = thisCount
+            GLOBALparallelGroupCount = GLOBALparallelGroupCountArray[thisCount] + 1
+            GLOBALparallelGroupCountArray[thisCount] = GLOBALparallelGroupCount
+        } else {
+            // console.log('Same figure.')
+            GLOBALparallelGroupCount = GLOBALparallelGroupCount + 1
+            GLOBALparallelGroupCountArray[thisCount] = GLOBALparallelGroupCount
         }
 
-        function mouseDown2() {
-            if (isDown3 === false) {
-                // console.log('First click')
-                isDown3 = true
-            } else {
-                // console.log('Last click')
-                isDown2 = false
-                svg.on("mousemove", null)
-                svg.on('click', null)
-            }
+        self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
+        self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
+        let parallelEndPoints = []
+        let parallelPathGroup = []
+        let parallelPathData = []
+
+        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+            parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
+
+            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
+            parallelPathGroup.push(parallelPath)
+
+            let thisPathData = pathDatas[thisCount][i].coords
+            let nextPathData = pathDatas[thisCount][i + 1].coords
+
+            let parallelAnchorPointX1 = thisPathData.x
+            let parallelAnchorPointY1 = thisPathData.y
+
+            let parallelAnchorPointX2 = nextPathData.x
+            let parallelAnchorPointY2 = nextPathData.y
+
+            parallelPathData.push([
+                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
+            ])
         }
 
-        function mousemove2(event) {
-            m2 = d3.pointer(event)
-            if(isDown2 === true) {
-                let hardCodedPathSegment1 = pathDatas[thisCount][0]
-                let hardCodedPathSegment2 = pathDatas[thisCount][1]
+        GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
+        GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
+        GLOBALparallelPathDatas[thisCount].push(parallelPathData)
 
-                if(hardCodedPathSegment2.arc.exist === false) {
-                    let isoscSideLength = hardCodedPathSegment2.arc.radius
-                    // Find length of base
-                    let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-                    // Find midPoint of endPoint1 & endPoint2
-                    let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-                    // Find perpendicular line to base
-                    let basePerpendicularSlope = '???'
-                    // Find height of isosceles triangle
-                    let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
-                    // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
-                    let arcCenter = '???'
+        updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+    }
 
-                    // Find parallelDistance
-                    // Find parallelEndPoints
-                    // Describe parallelArc
-                        // Increase radius of original arc by parallelDistance to create new parallelArc
+    function mouseDown2() {
+        if (isDown3 === false) {
+            // console.log('First click')
+            isDown3 = true
+        } else {
+            // console.log('Last click')
+            isDown2 = false
+            svg.on("mousemove", null)
+            svg.on('click', null)
+        }
+    }
 
-                    // updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
-                }
+    function mousemove2(event) {
+        m2 = d3.pointer(event)
+        if(isDown2 === true) {
+            let hardCodedPathSegment1 = pathDatas[thisCount][0]
+            let hardCodedPathSegment2 = pathDatas[thisCount][1]
 
-                if(hardCodedPathSegment2.arc.exist === false) {
-                    let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
-                    let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-                    let shape
-                    let direction
+            if(hardCodedPathSegment2.arc.exist === true) {
+                let isoscSideLength = hardCodedPathSegment2.arc.radius
+                // Find length of base
+                let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+                // Find midPoint of endPoint1 & endPoint2
+                let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+                // Find perpendicular line to base
+                let basePerpendicularSlope = '???'
+                // Find height of isosceles triangle
+                let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
+                // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
+                let arcCenter = '???'
 
-                    
-                        if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
-                            shape = 2
-                            if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'positive'
-                            } else {
-                                direction = 'negative'
-                            }
-                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                                shape = 1
-                                if(perpendicularPoint[0] < m2[0]) {
-                                    direction = 'negative'
-                                } else {
-                                    direction = 'positive'
-                                }
-                            }
+                // Find parallelDistance
+                // Find parallelEndPoints
+                // Describe parallelArc
+                    // Increase radius of original arc by parallelDistance to create new parallelArc
+
+                // updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+            }
+
+            if(hardCodedPathSegment2.arc.exist === false) {
+                let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
+                let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
+                let shape
+                let direction
+                    if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
+                        shape = 2
+                        if(perpendicularPoint[0] < m2[0]) {
+                            direction = 'positive'
                         } else {
-                            shape = 3
+                            direction = 'negative'
+                        }
+                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                            shape = 1
                             if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'positive'
-                            } else {
                                 direction = 'negative'
-                            }
-                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                                shape = 4
-                                if(perpendicularPoint[0] < m2[0]) {
-                                    direction = 'negative'
-                                } else {
-                                    direction = 'positive'
-                                }
+                            } else {
+                                direction = 'positive'
                             }
                         }
-                        
-                        if(direction === 'positive'){
-                            distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                        } else if(direction === 'negative') {
-                            distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
+                    } else {
+                        shape = 3
+                        if(perpendicularPoint[0] < m2[0]) {
+                            direction = 'positive'
+                        } else {
+                            direction = 'negative'
                         }
-                        
-                        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                            let thisPathData = pathDatas[thisCount][i].coords
-                            let nextPathData = pathDatas[thisCount][i + 1].coords
-
-                            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                            parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                            // parallelPathDatas[thisCount][parallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
+                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                            shape = 4
+                            if(perpendicularPoint[0] < m2[0]) {
+                                direction = 'negative'
+                            } else {
+                                direction = 'positive'
+                            }
                         }
+                    }
+                    
+                    if(direction === 'positive'){
+                        distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                    } else if(direction === 'negative') {
+                        distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
+                    }
+                    
+                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                        let thisPathData = pathDatas[thisCount][i].coords
+                        let nextPathData = pathDatas[thisCount][i + 1].coords
 
-                    updateSVG2(parallelEndPointsGroups[thisCount][parallelGroupCount - 1], parallelPathsGroups[thisCount][parallelGroupCount - 1], parallelPathDatas[thisCount][parallelGroupCount - 1])
-                }
+                        let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
+                        // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
+                    }
+
+                updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
         }
     }
 }
-
 // PATH
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     for (let i = 0; i < pathData.length; i++) {
@@ -530,6 +529,11 @@ function getDistance(x1, y1, x2, y2) {
 
     return Math.sqrt(x * x + y * y);
 }
+
+function findLineMidpoint(x1, y1, x2, y2) {
+    return [(x1 + x2) / 2, (y1 + y2) / 2];
+}
+
 
 function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
     let lineData0 = firstPoint

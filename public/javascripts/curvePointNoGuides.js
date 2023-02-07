@@ -362,12 +362,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1x > curvePointX) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         }
                     } else {
                         // console.log('AP Axis Section 2')
@@ -401,12 +401,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1y < curvePointY) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         }
                     }
                 }
@@ -431,12 +431,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1x > curvePointX) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         }
                     }
                 } else {
@@ -448,12 +448,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1y > curvePointY) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         }
                     } else {
                         // console.log('AP Axis Section 2')
@@ -480,12 +480,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1y < curvePointY) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         }
                     } else {
                         // console.log('AP Axis Section 2')
@@ -519,12 +519,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1x < curvePointX) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         }
                     }
                 }
@@ -549,12 +549,12 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                         arcFlagVar = 1
                         if(anchorPoint1y > curvePointY) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         }
                     }
                 } else {
@@ -562,16 +562,16 @@ function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAn
                     sweepFlagWestVar = 0
                     sweepFlagEastVar = 1
                     if (anchorPoint1x < curvePointAnchorX) {
-                        // self.lineElement = svg.append('line').attr('class', 'line').call(dragL);('AP Axis Section 1')
+                        // console.log('AP Axis Section 1')
                         arcFlagVar = 1
                         if(anchorPoint1x < curvePointX) {
                             // console.log('XY Axis Section 1')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
                         } else {
                             // console.log('XY Axis Section 2')
-                            coord_C = [(coord_A[0] - side_A_length), coord_A[1]]
-                            coord_B = [coord_C[0], (coord_C[1] - side_B_length)]
+                            coord_C = [(coord_A[0] + side_A_length), coord_A[1]]
+                            coord_B = [coord_C[0], (coord_C[1] + side_B_length)]
                         }
                     } else {
                         // console.log('AP Axis Section 2')

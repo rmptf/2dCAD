@@ -40,8 +40,8 @@ d3.select("body").insert("div")
 
 d3.select("body").insert("div")
     .append("button")
-    .text("Add Curve Point")
-    .on("click", addCurvePoint)
+    .text("Add Point")
+    .on("click", addPoint)
 
 let groupCounter = -1
 
@@ -49,13 +49,13 @@ let pathDatas = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
-let addCurve = false
+let pressAddPointButton = false
 
-function addCurvePoint() {
-    addCurve = true
+function addPoint() {
+    pressAddPointButton = true
 }
 function drawPath(){
-    addCurve = false
+    pressAddPointButton = false
     let self = this, m1, isDown = false, thisCount
     let secondaryPathCount = 0
 
@@ -143,42 +143,34 @@ function drawPath(){
 
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
+        if (pressAddPointButton === false) {
+            console.log('Just Secondary Path Clicked')
+        } else if (pressAddPointButton === true) {
+            console.log('Add Point + Secondary Path Clicked')
 
-        if (addCurve === false) {
-            console.log(m1[0], m1[1])
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            // secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
     
-            let counter = -1
+            let newPathCounter = -1
             for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
-                counter = counter + 1
-                let pooper = counter
-                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, pooper)})
+                newPathCounter = newPathCounter + 1
+                let thisPathCount = newPathCounter
+                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)})
             }
     
             let index = pathCount + 1
             let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}}
             pathDatas[thisCount].splice(index, 0, data);
     
-            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-    
             for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
                 let currentEndPoint = endPointsGroups[thisCount][i]
                 currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
             }
-        } else if (addCurve === true) {
-            console.log('asser')
-            addCurve = false
+
+            updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+
+            pressAddPointButton = false
         }
-        
-
-        // console.log(this1)
-        // console.log(m2)
-        // console.log(thisCount)
-        // console.log(pathCount)
-        // console.log(pathDatas[thisCount])
-
     }
 }
 
