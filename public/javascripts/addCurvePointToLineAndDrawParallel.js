@@ -246,8 +246,10 @@ function drawParallel(event, thisCount, isDown2, self) {
         if(isDown2 === true) {
             let hardCodedPathSegment1 = pathDatas[thisCount][0]
             let hardCodedPathSegment2 = pathDatas[thisCount][1]
+            // let hardCodedPathSegment3 = pathDatas[thisCount][2]
 
             if(hardCodedPathSegment2.arc.exist === true) {
+                // console.log('ass')
                 // console.log(hardCodedPathSegment2.arc.center)
                 // console.log(hardCodedPathSegment2.arc.radius)
                 // let isoscSideLength = hardCodedPathSegment2.arc.radius
@@ -284,14 +286,9 @@ function drawParallel(event, thisCount, isDown2, self) {
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                    // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].arc.radius =  this(arc.radius) + newDistance
                 }
                 
-                // console.log(GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1])
-                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1].arc.radius =  this(arc.radius) + newDistance
-                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1].arc.radius =  this(arc.radius) + newDistance
-                // thisAss = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
-
+                // let thisAss = hardCodedPathSegment2
                 // thisAss.arc = true,
                 // thisAss.arc.radius = pointerToArcCenter,
                 // // thisAss.arc.arcFlag = solveTriangleData.arcFlag,
@@ -524,7 +521,8 @@ function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData
     // PARALLEL PATH
     for (let i = 0; i < parallelPathsArray.length; i++) {
         let parallelPath = d3.select(parallelPathsArray[i]._groups[0][0])
-            parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
+            parallelPath.attr('d', calculateArcAndDescribePath([parallelPathData[i][0], parallelPathData[i][1]]))
+            // parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
             parallelPath.style('fill', 'none')
             parallelPath.style('stroke', 'yellow')
             parallelPath.style('stroke-width', 1)
