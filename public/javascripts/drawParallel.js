@@ -337,18 +337,18 @@ function drawParallel(event, thisCount, isDown2, self) {
             let hardCodedPathSegment1 = pathDatas[thisCount][0]
             let hardCodedPathSegment2 = pathDatas[thisCount][1]
 
-            if(hardCodedPathSegment2.arc.exist === true) {
-                let isoscSideLength = hardCodedPathSegment2.arc.radius
-                // Find length of base
-                let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-                // Find midPoint of endPoint1 & endPoint2
-                let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-                // Find perpendicular line to base
-                let basePerpendicularSlope = '???'
-                // Find height of isosceles triangle
-                let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
-                // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
-                let arcCenter = '???'
+            // if(hardCodedPathSegment2.arc.exist === true) {
+            //     let isoscSideLength = hardCodedPathSegment2.arc.radius
+            //     // Find length of base
+            //     let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+            //     // Find midPoint of endPoint1 & endPoint2
+            //     let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
+            //     // Find perpendicular line to base
+            //     let basePerpendicularSlope = '???'
+            //     // Find height of isosceles triangle
+            //     let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
+            //     // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
+            //     let arcCenter = '???'
 
                 // Find parallelDistance
                 // Find parallelEndPoints
@@ -356,7 +356,7 @@ function drawParallel(event, thisCount, isDown2, self) {
                     // Increase radius of original arc by parallelDistance to create new parallelArc
 
                 // updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
-            }
+            // }
 
             if(hardCodedPathSegment2.arc.exist === false) {
                 let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
@@ -573,11 +573,4 @@ function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
         
         return xy2
     }
-}
-
-function getDistance(x1, y1, x2, y2) {
-    let y = x2 - x1;
-    let x = y2 - y1;
-
-    return Math.sqrt(x * x + y * y);
 }
