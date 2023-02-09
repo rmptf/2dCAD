@@ -216,8 +216,11 @@ function drawParallel(event, thisCount, isDown2, self) {
             let parallelAnchorPointY2 = nextPathData.y
 
             parallelPathData.push([
-                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
-                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                // {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
+                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
+                // {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
                 // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
             ])
         }
@@ -246,57 +249,49 @@ function drawParallel(event, thisCount, isDown2, self) {
         if(isDown2 === true) {
             let hardCodedPathSegment1 = pathDatas[thisCount][0]
             let hardCodedPathSegment2 = pathDatas[thisCount][1]
-            // let hardCodedPathSegment3 = pathDatas[thisCount][2]
+            let hardCodedPathSegment3 = pathDatas[thisCount][2]
 
             if(hardCodedPathSegment2.arc.exist === true) {
-                // console.log('ass')
-                // console.log(hardCodedPathSegment2.arc.center)
-                // console.log(hardCodedPathSegment2.arc.radius)
-                // let isoscSideLength = hardCodedPathSegment2.arc.radius
-            //     // Find length of base
-                // let isoscBaseLength = getDistance(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-            //     // Find midPoint of endPoint1 & endPoint2
-                // let isoscBaseMidPoint = findLineMidpoint(hardCodedPathSegment1.coords.x, hardCodedPathSegment1.coords.x, hardCodedPathSegment2.coords.x, hardCodedPathSegment2.coords.y)
-            //     // Find perpendicular line to base
-                // let basePerpendicularSlope = '???'
-            //     // Find height of isosceles triangle
-                // let isoscHeight =  Math.sqrt((Math.pow(isoscSideLength, 2)) - (Math.pow((isoscBaseLength / 2), 2)))
-            //     // Find coords of point moving along basePerpendicularSlope at distance of isoscHeight
-            //     let arcCenter = '???'
 
-                // Find parallelDistance
-                // Find parallelEndPoints
-                // Describe parallelArc
-                    // Increase radius of original arc by parallelDistance to create new parallelArc
-
-                let arcRadius = hardCodedPathSegment2.arc.radius
-                let pointerToArcCenter = getDistance(hardCodedPathSegment2.arc.center.x, hardCodedPathSegment2.arc.center.y, m2[0], m2[1])
-                // (Need to determine Shape to solve this correctly)
-                let distance = pointerToArcCenter - arcRadius
+                let arcRadius1 = hardCodedPathSegment2.arc.radius
+                let arcRadius2 = hardCodedPathSegment3.arc.radius
+                let pointerToArcCenter1 = getDistance(hardCodedPathSegment2.arc.center.x, hardCodedPathSegment2.arc.center.y, m2[0], m2[1])
+                let pointerToArcCenter2 = getDistance(hardCodedPathSegment3.arc.center.x, hardCodedPathSegment3.arc.center.y, m2[0], m2[1])
+                let distance1 = pointerToArcCenter1 - arcRadius1
+                // let distance2 = pointerToArcCenter2 - arcRadius2
 
                 for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
                     let thisPathData = pathDatas[thisCount][i].coords
                     let nextPathData = pathDatas[thisCount][i + 1].coords
 
-                    let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointX1 = thisPathData.x - (distance1 * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointY1 = thisPathData.y + (distance1 * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointX2 = nextPathData.x - (distance1 * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                    let parallelAnchorPointY2 = nextPathData.y + (distance1 * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
                 }
                 
-                // let thisAss = hardCodedPathSegment2
-                // thisAss.arc = true,
-                // thisAss.arc.radius = pointerToArcCenter,
-                // // thisAss.arc.arcFlag = solveTriangleData.arcFlag,
-                // // thisAss.arc.sweepFlag = solveTriangleData.sweepFlagEast,
-                // thisAss.arc.arcFlag = 0,
-                // thisAss.arc.sweepFlag = 0,
-                // thisAss.arc.center.x = 0,
-                // thisAss.arc.center.y = 0
+
+
+                // let thisPath = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0]
+                // thisPath.arc.radius = pointerToArcCenter
+                
+                let thisPath2 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1]
+                thisPath2.arc.radius = pointerToArcCenter1
+                thisPath2.arc.arcFlag = 0
+                thisPath2.arc.sweepFlag = 1
+
+                // let thisPath11 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][0]
+                // thisPath11.arc.radius = pointerToArcCenter
+                
+                let thisPath22 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
+                thisPath22.arc.radius = pointerToArcCenter2
+                thisPath22.arc.arcFlag = 0
+                thisPath22.arc.sweepFlag = 1
+
 
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
@@ -521,8 +516,8 @@ function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData
     // PARALLEL PATH
     for (let i = 0; i < parallelPathsArray.length; i++) {
         let parallelPath = d3.select(parallelPathsArray[i]._groups[0][0])
-            parallelPath.attr('d', calculateArcAndDescribePath([parallelPathData[i][0], parallelPathData[i][1]]))
-            // parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
+            // parallelPath.attr('d', calculateArcAndDescribePath([parallelPathData[i][0], parallelPathData[i][1]]))
+            parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
             parallelPath.style('fill', 'none')
             parallelPath.style('stroke', 'yellow')
             parallelPath.style('stroke-width', 1)
