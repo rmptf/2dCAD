@@ -272,8 +272,28 @@ function drawParallel(event, thisCount, isDown2, self) {
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
                     GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
+
+
                 }
-                
+
+                // This finds a point along the slope of a line between the anchor point and the center of the arc and adds a point a distance away
+                // Needs work, determine correct anchor points
+                console.log(pathDatas[thisCount])
+                let x1 = hardCodedPathSegment1.coords.x
+                let y1 = hardCodedPathSegment1.coords.y
+                let x2 = hardCodedPathSegment3.arc.center.x
+                let y2 = hardCodedPathSegment3.arc.center.y
+
+                let d = getDistance(x1,y1,x2,y2)
+                let t = distance / d
+                // ((1−𝑡)𝑥0+𝑡𝑥1)
+                let x3 = (((1-t) * x1) + (t * x2))
+                // ((1−𝑡)𝑦0+𝑡𝑦1))
+                let y3 = (((1-t) * y1) + (t * y2))
+
+                // this >>>>>
+                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0].coords.x = x3
+                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0].coords.y = y3
 
 
                 // let thisPath = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0]
