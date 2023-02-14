@@ -216,12 +216,10 @@ function drawParallel(event, thisCount, isDown2, self) {
             let parallelAnchorPointY2 = nextPathData.y
 
             parallelPathData.push([
-                // {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
                 {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
                 {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
                 // {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
                 // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
-                // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 150, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east'}},
             ])
         }
 
@@ -247,140 +245,155 @@ function drawParallel(event, thisCount, isDown2, self) {
     function mousemove2(event) {
         m2 = d3.pointer(event)
         if(isDown2 === true) {
-            let hardCodedPathSegment1 = pathDatas[thisCount][0]
-            let hardCodedPathSegment2 = pathDatas[thisCount][1]
-            let hardCodedPathSegment3 = pathDatas[thisCount][2]
+            // Use secondaryPathClick to find out which path segment is clicked
+                // For now thisPathSegment will just be hardcoded as the first path segment
+                    // Data needed from selected path segment
+                    // This pathCount comes from secondary path click, but currently hardcoded to '0'
+                    // let pathCount = 0
+                    let thisPathSegment = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1]
+                    // Find data from PathSegment selected (use red Paths to determin this, for now using hardcoded first data)
+                    let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][1].coords.x, pathDatas[thisCount][1].coords.y, pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y)
+                    let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y, m2[0], m2[1])
+                    let thisPathSegmentArcToCursorDistance = thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance
 
-            if(hardCodedPathSegment2.arc.exist === true) {
+                    // this path segment
+                    thisPathSegment.arc.radius = thisPathSegmentCursorToCenterDistance
+                    thisPathSegment.arc.arcFlag = 0
+                    thisPathSegment.arc.sweepFlag = 1
+                    
+            // for (let i = 1; i < pathDatas[thisCount].length - 1; i++) {
+                if(pathDatas[thisCount][1].arc.exist === true) {
+                    // console.log('Yes Arc')
+                    // console.log(i)
 
-                let arcRadius1 = hardCodedPathSegment2.arc.radius
-                let arcRadius2 = hardCodedPathSegment3.arc.radius
-                let pointerToArcCenter1 = getDistance(hardCodedPathSegment2.arc.center.x, hardCodedPathSegment2.arc.center.y, m2[0], m2[1])
-                let pointerToArcCenter2 = getDistance(hardCodedPathSegment3.arc.center.x, hardCodedPathSegment3.arc.center.y, m2[0], m2[1])
-                let distance1 = pointerToArcCenter1 - arcRadius1
-                // let distance2 = pointerToArcCenter2 - arcRadius2
+                    // HARDCODED
+                    // Other Paths
+                    let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
+                    let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][2].coords.x, pathDatas[thisCount][2].coords.y, pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y)
+                    let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
+                    // let pointerToArcCenter2 = getDistance(pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y, m2[0], m2[1])
 
-                for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                    let thisPathData = pathDatas[thisCount][i].coords
-                    let nextPathData = pathDatas[thisCount][i + 1].coords
+                    // Should handle this in solve arc dynamically later
+                    // other path segment
+                    nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    nextPathSegmentHARDCODED.arc.arcFlag = 0
+                    nextPathSegmentHARDCODED.arc.sweepFlag = 1
 
-                    let parallelAnchorPointX1 = thisPathData.x - (distance1 * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY1 = thisPathData.y + (distance1 * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointX2 = nextPathData.x - (distance1 * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    let parallelAnchorPointY2 = nextPathData.y + (distance1 * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                    GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                    GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                    GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                    GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
+                    // //DYNAMIC
+                    // // Other Paths
+                    // let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
+                    // let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][i].coords.x, pathDatas[thisCount][i].coords.y, pathDatas[thisCount][i].arc.center.x, pathDatas[thisCount][i].arc.center.y)
+                    // let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
+                    // // let pointerToArcCenter2 = getDistance(pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y, m2[0], m2[1])
+
+                    // // Should handle this in solve arc dynamically later
+                    // // other path segment
+                    // nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    // nextPathSegmentHARDCODED.arc.arcFlag = 0
+                    // nextPathSegmentHARDCODED.arc.sweepFlag = 1
 
 
+
+                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                        // **** THIS METHOD CAN BE USED FOR STRAIGHT LINES
+                        //  Find 'center of circle' between two points using right angle and move line based on that.
+                        let thisPathData = pathDatas[thisCount][i]
+                        let nextPathData = pathDatas[thisCount][i + 1]
+
+                        let parallelAnchorPoints1 = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+                        let parallelAnchorPoints2 = findPointAlongSlopeAtDistance([nextPathData.coords.x, nextPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPoints1[0]
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPoints1[1]
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPoints2[0]
+                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPoints2[1]
+                    }
+
+                    updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
                 }
 
-                // This finds a point along the slope of a line between the anchor point and the center of the arc and adds a point a distance away
-                // Needs work, determine correct anchor points
-                console.log(pathDatas[thisCount])
-                let x1 = hardCodedPathSegment1.coords.x
-                let y1 = hardCodedPathSegment1.coords.y
-                let x2 = hardCodedPathSegment3.arc.center.x
-                let y2 = hardCodedPathSegment3.arc.center.y
-
-                let d = getDistance(x1,y1,x2,y2)
-                let t = distance / d
-                // ((1−𝑡)𝑥0+𝑡𝑥1)
-                let x3 = (((1-t) * x1) + (t * x2))
-                // ((1−𝑡)𝑦0+𝑡𝑦1))
-                let y3 = (((1-t) * y1) + (t * y2))
-
-                // this >>>>>
-                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0].coords.x = x3
-                // GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0].coords.y = y3
-
-
-                // let thisPath = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][0]
-                // thisPath.arc.radius = pointerToArcCenter
-                
-                let thisPath2 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1]
-                thisPath2.arc.radius = pointerToArcCenter1
-                thisPath2.arc.arcFlag = 0
-                thisPath2.arc.sweepFlag = 1
-
-                // let thisPath11 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][0]
-                // thisPath11.arc.radius = pointerToArcCenter
-                
-                let thisPath22 = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
-                thisPath22.arc.radius = pointerToArcCenter2
-                thisPath22.arc.arcFlag = 0
-                thisPath22.arc.sweepFlag = 1
-
-
-                updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
-            }
-
-            if(hardCodedPathSegment2.arc.exist === false) {
-                console.log('ass')
-                let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
-                let perpendicularPoint = findPerpendicularFromPoint(m2InForm, hardCodedPathSegment1, hardCodedPathSegment2)
-                let shape
-                let direction
-                    if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
-                        shape = 2
-                        if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'positive'
-                        } else {
-                            direction = 'negative'
-                        }
-                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                            shape = 1
+                if(pathDatas[thisCount][1].arc.exist === false) {
+                    console.log('No Arc')
+                    let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
+                    let perpendicularPoint = findPerpendicularFromPoint(m2InForm, pathDatas[thisCount][0], pathDatas[thisCount][1])
+                    let shape
+                    let direction
+                        if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
+                            shape = 2
                             if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'negative'
-                            } else {
                                 direction = 'positive'
+                            } else {
+                                direction = 'negative'
+                            }
+                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                                shape = 1
+                                if(perpendicularPoint[0] < m2[0]) {
+                                    direction = 'negative'
+                                } else {
+                                    direction = 'positive'
+                                }
+                            }
+                        } else {
+                            shape = 3
+                            if(perpendicularPoint[0] < m2[0]) {
+                                direction = 'positive'
+                            } else {
+                                direction = 'negative'
+                            }
+                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
+                                shape = 4
+                                if(perpendicularPoint[0] < m2[0]) {
+                                    direction = 'negative'
+                                } else {
+                                    direction = 'positive'
+                                }
                             }
                         }
-                    } else {
-                        shape = 3
-                        if(perpendicularPoint[0] < m2[0]) {
-                            direction = 'positive'
-                        } else {
-                            direction = 'negative'
+                        
+                        if(direction === 'positive'){
+                            distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
+                        } else if(direction === 'negative') {
+                            distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
                         }
-                        if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                            shape = 4
-                            if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'negative'
-                            } else {
-                                direction = 'positive'
-                            }
+                        
+                        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
+                            let thisPathData = pathDatas[thisCount][i].coords
+                            let nextPathData = pathDatas[thisCount][i + 1].coords
+
+                            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
+                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
+                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
+                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
+                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
                         }
-                    }
-                    
-                    if(direction === 'positive'){
-                        distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                    } else if(direction === 'negative') {
-                        distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
-                    }
-                    
-                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                        let thisPathData = pathDatas[thisCount][i].coords
-                        let nextPathData = pathDatas[thisCount][i + 1].coords
 
-                        let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                    }
-
-                updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
-            }
+                    updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+                }
+            // }
         }
     }
 }
 
+// function findPointAlongSlopeAtDistance(startingPoint, endPoint, midPoint, distanceRatioArc1, distanceAwayCenterArc1, distanceAwayArcArc1){
+function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcArc1){
+    let newPoint = [0,0]
+    let startPtX = startingPoint[0]
+    let startPtY = startingPoint[1]
+    let endPtX = endPoint[0]
+    let endPtY = endPoint[1]
 
+    let totalDistance = getDistance(startPtX,startPtY,endPtX,endPtY)
+
+    let distanceRatioUsingArc1DistanceFromCenter = distanceAwayArcArc1 / totalDistance
+
+    newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
+    newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtY))
+    
+    return newPoint
+}
 
 
 

@@ -77,10 +77,6 @@
 // continue corners around points for parallel lines
 // continue corners around points 'seam allowances'
 
-// NEXT TASK TO WORK ON:
-// - Find center of arc
-    // - Given two coords and arc radius
-
 
 const width = '100%'
 const height = '600px'
