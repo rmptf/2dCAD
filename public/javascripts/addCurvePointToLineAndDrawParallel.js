@@ -247,57 +247,35 @@ function drawParallel(event, thisCount, isDown2, self) {
         m2 = d3.pointer(event)
         if(isDown2 === true) {
 
-
             // HANDLE SELECTED ARC
-            let segmentId = 0
+            let segmentId = 1
             let parallelPathDatas = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
-            let thisPathSegment = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1]
-            let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][1].coords.x, pathDatas[thisCount][1].coords.y, pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y)
-            let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y, m2[0], m2[1])
+            let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][segmentId + 1].coords.x, pathDatas[thisCount][segmentId + 1].coords.y, pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y)
+            let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y, m2[0], m2[1])
             let thisPathSegmentArcToCursorDistance = thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance
 
-            // this path segment
-            thisPathSegment.arc.radius = thisPathSegmentCursorToCenterDistance
-            thisPathSegment.arc.arcFlag = 0
-            thisPathSegment.arc.sweepFlag = 1
-
-            // HARDCODIG THIS FOR BUG FIXES
-            // HANDLE OTHER ARCS
-            let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
-            let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][2].coords.x, pathDatas[thisCount][2].coords.y, pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y)
-            let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-            // let pointerToArcCenter2 = getDistance(pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y, m2[0], m2[1])
-
-            // other path segment
-            nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-            nextPathSegmentHARDCODED.arc.arcFlag = 0
-            nextPathSegmentHARDCODED.arc.sweepFlag = 1
-            // HARDCODIG THIS FOR BUG FIXES
-
-
-            console.log('-')
-            
             for (let i = 0; i < parallelPathDatas.length; i++) {
-                let thisParallelPathData = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
-                if (thisParallelPathData.arc.exist === true) {
-                    // PUT HARDCODED HERE AND MAKE DYNAMIC
-
-                    // HANDLE END POINTS
-                    let thisPathData = pathDatas[thisCount][i]
-                    let nextPathData = pathDatas[thisCount][i + 1]
-
-                    console.log(thisPathData, nextPathData)
+                if (parallelPathDatas[i][1].arc.exist === true) {
+                    // HANDLE OTHER ARCS
+                    let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
+                    let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][i+1].coords.x, pathDatas[thisCount][i+1].coords.y, pathDatas[thisCount][i+1].arc.center.x, pathDatas[thisCount][i+1].arc.center.y)
+                    let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
+                    let thisPathDataForSegment = pathDatas[thisCount][i + 1]
+                    // Path segment
+                    nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    nextPathSegmentHARDCODED.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
+                    nextPathSegmentHARDCODED.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
 
                     for (let j = 0; j < parallelPathDatas[i].length; j++) {
-                        let thisParallelPathData11 = parallelPathDatas[i][j]
+                        let thisPathData = pathDatas[thisCount][i + j]
+                        let nextPathData = pathDatas[thisCount][i + 1]
+                        let thisParallelPathData = parallelPathDatas[i][j]
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
 
-                        let parallelAnchorPoints1 = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
-                        thisParallelPathData11.coords.x = parallelAnchorPoints1[0]
-                        thisParallelPathData11.coords.y = parallelAnchorPoints1[1]
+                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
                     }
 
-                    // UPDATE SVG
                     updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
 
                 } else {
