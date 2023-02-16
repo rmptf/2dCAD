@@ -252,15 +252,24 @@ function drawParallel(event, thisCount, isDown2, self) {
             let parallelPathDatas = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
             let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][segmentId + 1].coords.x, pathDatas[thisCount][segmentId + 1].coords.y, pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y)
             let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y, m2[0], m2[1])
-            let thisPathSegmentArcToCursorDistance = thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance
+            let thisPathSegmentArcToCursorDistance
 
+            console.log('-')
             for (let i = 0; i < parallelPathDatas.length; i++) {
                 if (parallelPathDatas[i][1].arc.exist === true) {
                     // HANDLE OTHER ARCS
+                    let thisPathDataForSegment = pathDatas[thisCount][i + 1]
+                    
+                    if (thisPathDataForSegment.arc.sweepFlag === pathDatas[thisCount][1].arc.sweepFlag) {
+                        thisPathSegmentArcToCursorDistance = (thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance)
+                    } else {
+                        thisPathSegmentArcToCursorDistance = (thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance) * -1
+                    }
+
                     let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
                     let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][i+1].coords.x, pathDatas[thisCount][i+1].coords.y, pathDatas[thisCount][i+1].arc.center.x, pathDatas[thisCount][i+1].arc.center.y)
                     let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-                    let thisPathDataForSegment = pathDatas[thisCount][i + 1]
+
                     // Path segment
                     nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
                     nextPathSegmentHARDCODED.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
@@ -270,10 +279,11 @@ function drawParallel(event, thisCount, isDown2, self) {
                         let thisPathData = pathDatas[thisCount][i + j]
                         let nextPathData = pathDatas[thisCount][i + 1]
                         let thisParallelPathData = parallelPathDatas[i][j]
-                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
 
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
+
                     }
 
                     updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
@@ -441,6 +451,26 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
 
     newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
     newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtY))
+    
+    return newPoint
+}
+
+function findPointAlongSlopeAtDistanceNegative(startingPoint, endPoint, distanceAwayArcArc1){
+    let newPoint = [0,0]
+    let startPtX = startingPoint[0]
+    let startPtY = startingPoint[1]
+    let endPtX = endPoint[0]
+    let endPtY = endPoint[1]
+
+    let totalDistance = getDistance(startPtX,startPtY,endPtX,endPtY)
+
+    let distanceRatioUsingArc1DistanceFromCenter =  totalDistance / distanceAwayArcArc1
+
+    // newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) - (distanceRatioUsingArc1DistanceFromCenter * endPtX))
+    // newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) - (distanceRatioUsingArc1DistanceFromCenter * endPtY))
+
+    newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
+    newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
     
     return newPoint
 }
