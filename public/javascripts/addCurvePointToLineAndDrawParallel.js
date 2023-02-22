@@ -16,6 +16,11 @@ d3.select("body").insert("div")
     .text("Add Curve Point")
     .on("click", addCurvePoint)
 
+d3.select("body").insert("div")
+    .append("button")
+    .text("Add Parallel")
+    .on("click", addParallelPath)
+
 let groupCounter = -1
 
 let pathDatas = []
@@ -23,6 +28,7 @@ let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
 let pressAddCurveButton = false
+let pressAddParallelButton = false
 
 let GLOBALparallelGroupCountArray = []
 let GLOBALparallelGroupCount = 0
@@ -35,8 +41,14 @@ let GLOBALparallelEndPointsGroups = []
 function addCurvePoint() {
     pressAddCurveButton = true
 }
+
+function addParallelPath() {
+    pressAddParallelButton = true
+}
+
 function drawPath(){
     pressAddCurveButton = false
+    pressAddParallelButton = false
     let self = this, m1, isDown = false, isDown2 = false, thisCount
     let secondaryPathCount = 0
 
@@ -49,7 +61,7 @@ function drawPath(){
             groupCounter = groupCounter + 1
             thisCount = groupCounter
             let thisPathCount = 0
-
+            
             self.group = svg.append('g').attr('class', 'figureGroup')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
             self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
@@ -79,6 +91,7 @@ function drawPath(){
             // DYNAMIC END POINTS
 
              // PARALLEL GROUPS
+             GLOBALparallelGroupCountArray.push(0)
              GLOBALparallelPathDatas.push([])
              GLOBALparallelPathsGroups.push([])
              GLOBALparallelEndPointsGroups.push([])
@@ -130,7 +143,12 @@ function drawPath(){
 
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
-        if (pressAddCurveButton === false) {
+        console.log('path Clicked')
+        if (pressAddCurveButton === false && pressAddParallelButton === false) {
+            console.log('path Clicked, All other path click functions off')
+        } else if (pressAddCurveButton === true) {
+            console.log('Add Path Arc = true')
+
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
     
@@ -152,35 +170,35 @@ function drawPath(){
             }
 
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-        } else if (pressAddCurveButton === true) {
-            console.log('path Arc exist = true')
+
             pressAddCurveButton = false
+        } else if (pressAddParallelButton === true) {
+            console.log('Add Parallel = true')
+            drawParallel(event, thisCount, isDown2, self, pathCount)
+            pressAddParallelButton = false
         }
-        
     }
 }
 
 function mainPathClick(this1, event, thisCount, isDown2, self){
     console.log('Main Path Click')
-    drawParallel(event, thisCount, isDown2, self)
 }
 
 
 
 
 
-function drawParallel(event, thisCount, isDown2, self) {
-    // console.log('Line clicked')
+function drawParallel(event, thisCount, isDown2, self, pathCount) {
     let clickSpot = [event.x, event.y]
-    let segmentCLicked = '???'
-    let distance 
+    let secondaryPathId = pathCount
+    
     let isDown3 = false
+
     if (isDown2 === false) {
         isDown2 = true
         svg.on("mousemove", mousemove2)
         svg.on('click', mouseDown2)
         // console.log('Start function')
-
         if(thisCount != GLOBALcurrentParallelGroupCount) {
             // console.log('Different figure.')
             GLOBALcurrentParallelGroupCount = thisCount
@@ -194,6 +212,7 @@ function drawParallel(event, thisCount, isDown2, self) {
 
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
+
         let parallelEndPoints = []
         let parallelPathGroup = []
         let parallelPathData = []
@@ -215,12 +234,35 @@ function drawParallel(event, thisCount, isDown2, self) {
             let parallelAnchorPointX2 = nextPathData.x
             let parallelAnchorPointY2 = nextPathData.y
 
-            parallelPathData.push([
-                {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
-                {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
-                // {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
-                // {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
-            ])
+            if (pathDatas[thisCount][i].arc.exist === false){
+                if(pathDatas[thisCount][i].arc.exist === false && pathDatas[thisCount][i + 1].arc.exist === true){
+                    // console.log('YES AFTER')
+                    parallelPathData.push([
+                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
+                    ])
+                } else {
+                    // console.log('NO')
+                    parallelPathData.push([
+                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                    ])
+                }
+            } else if(pathDatas[thisCount][i].arc.exist === true) {
+                if(pathDatas[thisCount][i].arc.exist === true && pathDatas[thisCount][i + 1].arc.exist === false){
+                    // console.log('YES BEFORE')
+                    parallelPathData.push([
+                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                    ])
+                } else {
+                    // console.log('YES')
+                    parallelPathData.push([
+                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
+                    ])
+                }
+            }
         }
 
         GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
@@ -242,197 +284,94 @@ function drawParallel(event, thisCount, isDown2, self) {
         }
     }
 
-    // function mousemove2TURNEDOFF(event) {
     function mousemove2(event) {
-        m2 = d3.pointer(event)
+        let m1P = d3.pointer(event)
+        let parallelDistance 
         if(isDown2 === true) {
+            let selectedPathData0 = pathDatas[thisCount][secondaryPathId]
+            let selectedPathData1 = pathDatas[thisCount][secondaryPathId + 1]
 
-            // HANDLE SELECTED ARC
-            let segmentId = 1
+            let parallelDistanceFromLine
+            let parallelDistanceFromArc
+
             let parallelPathDatas = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
-            let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][segmentId + 1].coords.x, pathDatas[thisCount][segmentId + 1].coords.y, pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y)
-            let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][segmentId + 1].arc.center.x, pathDatas[thisCount][segmentId + 1].arc.center.y, m2[0], m2[1])
-            let thisPathSegmentArcToCursorDistance
 
-            console.log('-')
+            // console.log(GLOBALparallelGroupCount - 1)
+
+            if(selectedPathData1.arc.exist === true) {
+                let selectedPathSegmentArcToCenterTotalDistance = getDistance(selectedPathData1.coords.x, selectedPathData1.coords.y, selectedPathData1.arc.center.x, selectedPathData1.arc.center.y)
+                let selectedPathSegmentCursorToCenterDistance = getDistance(selectedPathData1.arc.center.x, selectedPathData1.arc.center.y, m1P[0], m1P[1])
+                // Find position of arc's SweepFlag
+                // Returns int: 1 or 0
+                let direction = selectedPathData1.arc.sweepFlag
+                // Set parallelDistanceFromArc, if sweepFlag is set as 1, set as a negative number
+                parallelDistanceFromArc = (selectedPathSegmentArcToCenterTotalDistance - selectedPathSegmentCursorToCenterDistance)
+                if (direction === 1) {
+                    parallelDistanceFromArc = parallelDistanceFromArc * -1
+                }
+                parallelDistance = parallelDistanceFromArc
+            } else if (selectedPathData1.arc.exist === false) {
+                let m1PInForm = {coords: {x: m1P[0], y: m1P[1]}}
+                let perpendicularPoint = findPerpendicularFromPoint(m1PInForm, selectedPathData0, selectedPathData1)
+                // Find relationship between point A and a path between Point B and C
+                // Returns string: 'postive' or 'negative'
+                let direction = directionOfARelatedToPathBetweenBandC(m1P, [selectedPathData0.coords.x, selectedPathData0.coords.y], [selectedPathData1.coords.x, selectedPathData1.coords.y], perpendicularPoint)
+                // Set parallelDistanceFromLine, if direction returned 'negative', set as a negative number
+                parallelDistanceFromLine = getDistance(perpendicularPoint[0], perpendicularPoint[1], m1P[0], m1P[1])
+                if(direction === 'negative'){
+                    parallelDistanceFromLine = parallelDistanceFromLine * -1
+                }
+                parallelDistance = parallelDistanceFromLine
+            } else {
+                console.log('No arc data.')
+            }
+            
             for (let i = 0; i < parallelPathDatas.length; i++) {
                 if (parallelPathDatas[i][1].arc.exist === true) {
-                    // HANDLE OTHER ARCS
+                    let thisPathSegmentArcToCursorDistance
                     let thisPathDataForSegment = pathDatas[thisCount][i + 1]
-                    
-                    if (thisPathDataForSegment.arc.sweepFlag === pathDatas[thisCount][1].arc.sweepFlag) {
-                        thisPathSegmentArcToCursorDistance = (thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance)
+                    // Set direction of parallelDistance for all remaining arc based on their sweepFlags
+                    if (thisPathDataForSegment.arc.sweepFlag === 0) {
+                        thisPathSegmentArcToCursorDistance = parallelDistance
                     } else {
-                        thisPathSegmentArcToCursorDistance = (thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance) * -1
+                        thisPathSegmentArcToCursorDistance = parallelDistance * -1
                     }
-
-                    let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
-                    let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][i+1].coords.x, pathDatas[thisCount][i+1].coords.y, pathDatas[thisCount][i+1].arc.center.x, pathDatas[thisCount][i+1].arc.center.y)
+                    let thisParallelPathData1 = parallelPathDatas[i][1]
+                    let nextPathSegmentArcToCenterTotalDistance = getDistance(thisPathDataForSegment.coords.x, thisPathDataForSegment.coords.y, thisPathDataForSegment.arc.center.x, thisPathDataForSegment.arc.center.y)
                     let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
 
-                    // Path segment
-                    nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-                    nextPathSegmentHARDCODED.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
-                    nextPathSegmentHARDCODED.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
+                    thisParallelPathData1.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    thisParallelPathData1.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
+                    thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
 
                     for (let j = 0; j < parallelPathDatas[i].length; j++) {
                         let thisPathData = pathDatas[thisCount][i + j]
                         let nextPathData = pathDatas[thisCount][i + 1]
                         let thisParallelPathData = parallelPathDatas[i][j]
-
                         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
-
                     }
-
-                    updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
-
                 } else {
-                    console.log('Handle straight line.')
-                }
-            }
-        }
-    }
+                    let thisPathDataOutside = pathDatas[thisCount][i]
+                    let nextPathDataOutside = pathDatas[thisCount][i+1]
 
+                    for (let j = 0; j < parallelPathDatas[i].length; j++) {
+                        let thisPathDataInside = pathDatas[thisCount][i + j]
+                        let parallelAnchorPointX = thisPathDataInside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
+                        let parallelAnchorPointY = thisPathDataInside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
 
+                        parallelPathDatas[i][j].coords.x = parallelAnchorPointX
+                        parallelPathDatas[i][j].coords.y = parallelAnchorPointY
 
-
-
-    function mousemove2TURNEDOFF(event) {
-    // function mousemove2(event) {
-        m2 = d3.pointer(event)
-        if(isDown2 === true) {
-            // Use secondaryPathClick to find out which path segment is clicked
-                // For now thisPathSegment will just be hardcoded as the first path segment
-                    // Data needed from selected path segment
-                    // This pathCount comes from secondary path click, but currently hardcoded to '0'
-                    // let pathCount = 0
-                    let thisPathSegment = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][0][1]
-                    // Find data from PathSegment selected (use red Paths to determin this, for now using hardcoded first data)
-                    let thisPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][1].coords.x, pathDatas[thisCount][1].coords.y, pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y)
-                    let thisPathSegmentCursorToCenterDistance = getDistance(pathDatas[thisCount][1].arc.center.x, pathDatas[thisCount][1].arc.center.y, m2[0], m2[1])
-                    let thisPathSegmentArcToCursorDistance = thisPathSegmentArcToCenterTotalDistance - thisPathSegmentCursorToCenterDistance
-
-                    // this path segment
-                    thisPathSegment.arc.radius = thisPathSegmentCursorToCenterDistance
-                    thisPathSegment.arc.arcFlag = 0
-                    thisPathSegment.arc.sweepFlag = 1
-                    
-            // for (let i = 1; i < pathDatas[thisCount].length - 1; i++) {
-                if(pathDatas[thisCount][1].arc.exist === true) {
-                    // console.log('Yes Arc')
-                    // console.log(i)
-                    // HARDCODED
-                    // Other Paths
-                    let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][1][1]
-                    let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][2].coords.x, pathDatas[thisCount][2].coords.y, pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y)
-                    let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-                    // let pointerToArcCenter2 = getDistance(pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y, m2[0], m2[1])
-
-                    // Should handle this in solve arc dynamically later
-                    // other path segment
-                    nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-                    nextPathSegmentHARDCODED.arc.arcFlag = 0
-                    nextPathSegmentHARDCODED.arc.sweepFlag = 1
-
-                    // //DYNAMIC
-                    // // Other Paths
-                    // let nextPathSegmentHARDCODED = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1]
-                    // let nextPathSegmentArcToCenterTotalDistance = getDistance(pathDatas[thisCount][i].coords.x, pathDatas[thisCount][i].coords.y, pathDatas[thisCount][i].arc.center.x, pathDatas[thisCount][i].arc.center.y)
-                    // let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-                    // // let pointerToArcCenter2 = getDistance(pathDatas[thisCount][2].arc.center.x, pathDatas[thisCount][2].arc.center.y, m2[0], m2[1])
-
-                    // // Should handle this in solve arc dynamically later
-                    // // other path segment
-                    // nextPathSegmentHARDCODED.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-                    // nextPathSegmentHARDCODED.arc.arcFlag = 0
-                    // nextPathSegmentHARDCODED.arc.sweepFlag = 1
-
-
-                    console.log('-')
-
-                    for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                        // **** THIS METHOD CAN BE USED FOR STRAIGHT LINES
-                        //  Find 'center of circle' between two points using right angle and move line based on that.
-                        let thisPathData = pathDatas[thisCount][i]
-                        let nextPathData = pathDatas[thisCount][i + 1]
-
-                        let parallelAnchorPoints1 = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-                        let parallelAnchorPoints2 = findPointAlongSlopeAtDistance([nextPathData.coords.x, nextPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
-                        console.log(parallelAnchorPoints1)
-
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPoints1[0]
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPoints1[1]
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPoints2[0]
-                        GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPoints2[1]
+                        // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y], [parallelPathDatas[0][1].coords.x, parallelPathDatas[0][1].coords.y], [parallelPathDatas[1][0].coords.x, parallelPathDatas[1][0].coords.y], [parallelPathDatas[1][1].coords.x, parallelPathDatas[1][1].coords.y])
+                        // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y])
+                        // console.log(INTERSECTOR)
                     }
-
-                    updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
                 }
-
-                if(pathDatas[thisCount][1].arc.exist === false) {
-                    console.log('No Arc')
-                    let m2InForm = {coords: {x: m2[0], y: m2[1]}, arc: {exist: false}}
-                    let perpendicularPoint = findPerpendicularFromPoint(m2InForm, pathDatas[thisCount][0], pathDatas[thisCount][1])
-                    let shape
-                    let direction
-                        if(pathDatas[thisCount][0].coords.x < pathDatas[thisCount][1].coords.x) {
-                            shape = 2
-                            if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'positive'
-                            } else {
-                                direction = 'negative'
-                            }
-                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                                shape = 1
-                                if(perpendicularPoint[0] < m2[0]) {
-                                    direction = 'negative'
-                                } else {
-                                    direction = 'positive'
-                                }
-                            }
-                        } else {
-                            shape = 3
-                            if(perpendicularPoint[0] < m2[0]) {
-                                direction = 'positive'
-                            } else {
-                                direction = 'negative'
-                            }
-                            if(pathDatas[thisCount][0].coords.y > pathDatas[thisCount][1].coords.y) {
-                                shape = 4
-                                if(perpendicularPoint[0] < m2[0]) {
-                                    direction = 'negative'
-                                } else {
-                                    direction = 'positive'
-                                }
-                            }
-                        }
-                        
-                        if(direction === 'positive'){
-                            distance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])
-                        } else if(direction === 'negative') {
-                            distance = (getDistance(perpendicularPoint[0], perpendicularPoint[1], m2[0], m2[1])) * -1
-                        }
-                        
-                        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-                            let thisPathData = pathDatas[thisCount][i].coords
-                            let nextPathData = pathDatas[thisCount][i + 1].coords
-
-                            let parallelAnchorPointX1 = thisPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointY1 = thisPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointX2 = nextPathData.x - (distance * Math.sin(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            let parallelAnchorPointY2 = nextPathData.y + (distance * Math.cos(Math.atan2(thisPathData.y - nextPathData.y, thisPathData.x - nextPathData.x)))
-                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.x = parallelAnchorPointX1
-                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][0].coords.y = parallelAnchorPointY1
-                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.x = parallelAnchorPointX2
-                            GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][i][1].coords.y = parallelAnchorPointY2
-                        }
-
-                    updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
-                }
-            // }
+                updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+            }
         }
     }
 }
@@ -529,7 +468,7 @@ function calculateArcAndDescribePath(pathDataPass) {
         let curvePointAnchor = findPerpendicularFromPoint(curvePoint, anchorPointStart, anchorPointEnd)
         let rightTriangleData = findRightTriangle(anchorPointStart.coords, curvePoint.coords)
         let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
-        let intersectingPoint = findIntersectingPoint(curvePoint.coords, curvePointAnchor, solveTriangleData.coords)
+        let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
         let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
         if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
             // console.log('str1')
@@ -582,7 +521,8 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
         path.attr('d', calculateArcAndDescribePath(pathData))
         path.style('fill', 'none')
         path.style('stroke', 'grey')
-        path.style('stroke-width', 100)
+        path.style('opacity', '.2')
+        path.style('stroke-width', 30)
     // PATH
 
     // SECONDARY PATH
@@ -591,8 +531,8 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
             secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
             secondaryPath.style('fill', 'none')
             secondaryPath.style('stroke', 'red')
-            secondaryPath.style('opacity', '.2')
-            secondaryPath.style('stroke-width', 9)
+            secondaryPath.style('opacity', '1')
+            secondaryPath.style('stroke-width', 5)
     }
     // SECONDARY PATH
 
@@ -718,16 +658,16 @@ function findRightTriangle(startCoords, endCoords) {
     return rightTriangleDataA
 }
 
-function findIntersectingPoint(line1Start, line1End, line2) {
-    let line1StartX = line1Start.x
-    let line1StartY = line1Start.y
+function findIntersectingPoint(line1Start, line1End, line2Start, line2End) {
+    let line1StartX = line1Start[0]
+    let line1StartY = line1Start[1]
     let line1EndX = line1End[0]
     let line1EndY = line1End[1]
 
-    let line2StartX = line2.coord_A[0]
-    let line2StartY = line2.coord_A[1]
-    let line2EndX = line2.coord_B[0]
-    let line2EndY = line2.coord_B[1]
+    let line2StartX = line2Start[0]
+    let line2StartY = line2Start[1]
+    let line2EndX = line2End[0]
+    let line2EndY = line2End[1]
 
     // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
     let denominator, a, b, numerator1, numerator2, result = {
@@ -781,6 +721,38 @@ function describeStraightPath(x1, y1, x2, y2){
 
 function inRange(x, min, max) {
     return ((x-min)*(x-max) <= 0);
+}
+
+function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
+    let thisDirection
+    if(b[0] < c[0]) {
+        if(perpendicularPoint[0] < a[0]) {
+            thisDirection = 'positive'
+        } else {
+            thisDirection = 'negative'
+        }
+        if(b[1] > c[1]) {
+            if(perpendicularPoint[0] > a[0]) {
+                thisDirection = 'positive'
+            } else {
+                thisDirection = 'negative'
+            }
+        }
+    } else {
+        if(perpendicularPoint[0] < a[0]) {
+            thisDirection = 'positive'
+        } else {
+            thisDirection = 'negative'
+        }
+        if(b[1] > c[1]) {
+            if(perpendicularPoint[0] > a[0]) {
+                thisDirection = 'positive'
+            } else {
+                thisDirection = 'negative'
+            }
+        }
+    }
+    return thisDirection
 }
 
 function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {

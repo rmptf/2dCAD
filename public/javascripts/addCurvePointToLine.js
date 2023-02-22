@@ -201,7 +201,7 @@ function calculateArcAndDescribePath(pathDataPass) {
         let curvePointAnchor = findPerpendicularFromPoint(curvePoint, anchorPointStart, anchorPointEnd)
         let rightTriangleData = findRightTriangle(anchorPointStart.coords, curvePoint.coords)
         let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
-        let intersectingPoint = findIntersectingPoint(curvePoint.coords, curvePointAnchor, solveTriangleData.coords)
+        let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
         let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
         if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
             // console.log('str1')
@@ -356,16 +356,16 @@ function findRightTriangle(startCoords, endCoords) {
     return rightTriangleDataA
 }
 
-function findIntersectingPoint(line1Start, line1End, line2) {
-    let line1StartX = line1Start.x
-    let line1StartY = line1Start.y
+function findIntersectingPoint(line1Start, line1End, line2Start, line2End) {
+    let line1StartX = line1Start[0]
+    let line1StartY = line1Start[1]
     let line1EndX = line1End[0]
     let line1EndY = line1End[1]
 
-    let line2StartX = line2.coord_A[0]
-    let line2StartY = line2.coord_A[1]
-    let line2EndX = line2.coord_B[0]
-    let line2EndY = line2.coord_B[1]
+    let line2StartX = line2Start[0]
+    let line2StartY = line2Start[1]
+    let line2EndX = line2End[0]
+    let line2EndY = line2End[1]
 
     // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
     let denominator, a, b, numerator1, numerator2, result = {
