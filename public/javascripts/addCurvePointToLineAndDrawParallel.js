@@ -296,17 +296,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
             let parallelPathDatas = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
 
-            let poopyCaca = []
+            let intersectingParallelPathDatas = []
             for (let i = 0; i < parallelPathDatas.length; i++) {
-                poopyCaca.push([{x: 0, y: 0}, {x: 0, y: 0}])
-                // poopyCaca[i].push({x: 0, y: 0})
+                intersectingParallelPathDatas.push([{x: parallelPathDatas[i][0].coords.x, y: parallelPathDatas[i][0].coords.y}, {x: parallelPathDatas[i][1].coords.x, y: parallelPathDatas[i][1].coords.y}])
             }
-            // console.log('poop')
-            // console.log(poopyCaca)
-            // console.log('path')
-            // console.log(parallelPathDatas)
-
-            // console.log(GLOBALparallelGroupCount - 1)
+            let one
+            let two
+            let three
+            let four
 
             if(selectedPathData1.arc.exist === true) {
                 let selectedPathSegmentArcToCenterTotalDistance = getDistance(selectedPathData1.coords.x, selectedPathData1.coords.y, selectedPathData1.arc.center.x, selectedPathData1.arc.center.y)
@@ -337,8 +334,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             }
 
             for (let i = 0; i < parallelPathDatas.length; i++) {
-                // poopyCaca.push([{x: 0, y: 0}])
-                // poopyCaca[i].push({x: 0, y: 0})
                 if (parallelPathDatas[i][1].arc.exist === true) {
                     let thisPathSegmentArcToCursorDistance
                     let thisPathDataForSegment = pathDatas[thisCount][i + 1]
@@ -371,63 +366,56 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     let nextPathDataOutside = pathDatas[thisCount][i + 1]
 
                     for (let j = 0; j < parallelPathDatas[i].length; j++) {
-                        // poopyCaca[i].push([])
                         let thisPathDataInside = pathDatas[thisCount][i + j]
 
                         let parallelAnchorPointX = thisPathDataInside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                         let parallelAnchorPointY = thisPathDataInside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
 
-                        console.log('tits', poopyCaca[0][1])
-
-                        poopyCaca[i][j].x = parallelAnchorPointX
-                        poopyCaca[i][j].y = parallelAnchorPointY
-
-                        console.log('ass', poopyCaca[0][1])
-
-                        // console.log('tits', parallelPathDatas[0][1].coords)
+                        intersectingParallelPathDatas[i][j].x = parallelAnchorPointX
+                        intersectingParallelPathDatas[i][j].y = parallelAnchorPointY
 
                         // parallelPathDatas[i][j].coords.x = parallelAnchorPointX
                         // parallelPathDatas[i][j].coords.y = parallelAnchorPointY
 
-                        // console.log('ass', parallelPathDatas[0][1].coords)
 
-                        // let INTERSECTORpath = findIntersectingPoint([parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y], [parallelPathDatas[0][1].coords.x, parallelPathDatas[0][1].coords.y], [parallelPathDatas[1][0].coords.x, parallelPathDatas[1][0].coords.y], [parallelPathDatas[1][1].coords.x, parallelPathDatas[1][1].coords.y])
-                        // console.log(INTERSECTORpath)
-
-                        // let INTERSECTORcaca = findIntersectingPoint([poopyCaca[0][0].x, poopyCaca[0][0].y], [poopyCaca[0][1].x, poopyCaca[0][1].y], [poopyCaca[1][0].x, poopyCaca[1][0].y], [poopyCaca[1][1].x, poopyCaca[1][1].y])
-                        // console.log(INTERSECTORcaca)
-
-
-                        // asser()
-                        function asser(){
-                            let INTERSECTOR = findIntersectingPoint([poopyCaca[0][0].x, poopyCaca[0][0].y], [poopyCaca[0][1].x, poopyCaca[0][1].y], [poopyCaca[1][0].x, poopyCaca[1][0].y], [poopyCaca[1][1].x, poopyCaca[1][1].y])
-                            // // console.log(INTERSECTOR)
-
+                        findParallelPathIntersectingPoint()
+                        function findParallelPathIntersectingPoint(){
                             if (i === 0) {
-                                console.log(i, "ii === 0")
+                                // console.log(i, "first")
                                 if (j === 0) {
                                     // console.log(j, "j === 0")
                                     parallelPathDatas[i][j].coords.x = parallelAnchorPointX
                                     parallelPathDatas[i][j].coords.y = parallelAnchorPointY
                                 } else {
                                     // console.log(j, "j === 1")
-                                    // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y], [parallelPathDatas[0][1].coords.x, parallelPathDatas[0][1].coords.y], [parallelPathDatas[1][0].coords.x, parallelPathDatas[1][0].coords.y], [parallelPathDatas[1][1].coords.x, parallelPathDatas[1][1].coords.y])
-                                    // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[i][j - 1].coords.x, parallelPathDatas[i][j - 1].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i + 1][j - 1].coords.x, parallelPathDatas[i + 1][j - 1].coords.y], [parallelPathDatas[i + 1][j].coords.x, parallelPathDatas[i + 1][j].coords.y])
-                                    parallelPathDatas[i][j].coords.x = INTERSECTOR.x
-                                    parallelPathDatas[i][j].coords.y = INTERSECTOR.y
+                                    let parallelPathDatasIntersectingPoint = findIntersectingPoint([intersectingParallelPathDatas[0][0].x, intersectingParallelPathDatas[0][0].y], [intersectingParallelPathDatas[0][1].x, intersectingParallelPathDatas[0][1].y], [intersectingParallelPathDatas[1][0].x, intersectingParallelPathDatas[1][0].y], [intersectingParallelPathDatas[1][1].x, intersectingParallelPathDatas[1][1].y])
+                                    parallelPathDatas[i][j].coords.x = parallelPathDatasIntersectingPoint.x
+                                    parallelPathDatas[i][j].coords.y = parallelPathDatasIntersectingPoint.y
                                 }
                             } else if (i != 0 && i !== parallelPathDatas.length - 1) {
-                                console.log(i, "ii != parallelPathDatas.length")
-                                // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y], [parallelPathDatas[0][1].coords.x, parallelPathDatas[0][1].coords.y], [parallelPathDatas[1][0].coords.x, parallelPathDatas[1][0].coords.y], [parallelPathDatas[1][1].coords.x, parallelPathDatas[1][1].coords.y])
-                                parallelPathDatas[i][j].coords.x = INTERSECTOR.x
-                                parallelPathDatas[i][j].coords.y = INTERSECTOR.y
-                            } else if (i != 0 && i === parallelPathDatas.length - 1) {
-                                console.log(i, "ii === parallelPathDatas.length")
+                                // console.log(i, "middle")
                                 if (j === 0) {
                                     // console.log(j, "j === 0")
-                                    // let INTERSECTOR = findIntersectingPoint([parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y], [parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y])
-                                    parallelPathDatas[i][j].coords.x = INTERSECTOR.x
-                                    parallelPathDatas[i][j].coords.y = INTERSECTOR.y
+                                    let parallelPathDatasIntersectingPoint = findIntersectingPoint([intersectingParallelPathDatas[i-1][0].x, intersectingParallelPathDatas[i-1][0].y], [intersectingParallelPathDatas[i-1][1].x, intersectingParallelPathDatas[i-1][1].y], [intersectingParallelPathDatas[i][0].x, intersectingParallelPathDatas[i][0].y], [intersectingParallelPathDatas[i][1].x, intersectingParallelPathDatas[i][1].y])
+                                    parallelPathDatas[i][j].coords.x = parallelPathDatasIntersectingPoint.x
+                                    parallelPathDatas[i][j].coords.y = parallelPathDatasIntersectingPoint.y
+                                    one  = parallelPathDatasIntersectingPoint.x
+                                    two = parallelPathDatasIntersectingPoint.y
+                                } else {
+                                    // console.log(j, "j === 1")
+                                    let parallelPathDatasIntersectingPoint = findIntersectingPoint([intersectingParallelPathDatas[i][0].x, intersectingParallelPathDatas[i][0].y], [intersectingParallelPathDatas[i][1].x, intersectingParallelPathDatas[i][1].y], [intersectingParallelPathDatas[i+1][0].x, intersectingParallelPathDatas[i+1][0].y], [intersectingParallelPathDatas[i+1][1].x, intersectingParallelPathDatas[+1][1].y])
+                                    parallelPathDatas[i][j].coords.x = parallelPathDatasIntersectingPoint.x
+                                    parallelPathDatas[i][j].coords.y = parallelPathDatasIntersectingPoint.y
+                                    three = parallelPathDatasIntersectingPoint.x
+                                    four = parallelPathDatasIntersectingPoint.y
+                                }
+                            } else if (i != 0 && i === parallelPathDatas.length - 1) {
+                                // console.log(i, "last")
+                                if (j === 0) {
+                                    // console.log(j, "j === 0")
+                                    let parallelPathDatasIntersectingPoint = findIntersectingPoint([intersectingParallelPathDatas[i-1][0].x, intersectingParallelPathDatas[i-1][0].y], [intersectingParallelPathDatas[i-1][1].x, intersectingParallelPathDatas[i-1][1].y], [intersectingParallelPathDatas[i][0].x, intersectingParallelPathDatas[i][0].y], [intersectingParallelPathDatas[i][1].x, intersectingParallelPathDatas[i][1].y])
+                                    parallelPathDatas[i][j].coords.x = parallelPathDatasIntersectingPoint.x
+                                    parallelPathDatas[i][j].coords.y = parallelPathDatasIntersectingPoint.y
                                 } else {
                                     // console.log(j, "j === 1")
                                     parallelPathDatas[i][j].coords.x = parallelAnchorPointX
@@ -437,11 +425,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                     }
                 }
-                // console.log('poop')
-                // console.log(poopyCaca)
-                // console.log('pathdata')
-                // console.log(parallelPathDatas)
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+            }
+            let length = getDistance(one, two, three, four)
+            // console.log(length)
+            if(length < 1 && length > -1) {
+                console.log("INTERSECTING")
             }
         }
     }
