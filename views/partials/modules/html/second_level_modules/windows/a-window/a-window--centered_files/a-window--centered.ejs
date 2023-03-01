@@ -1,0 +1,45 @@
+<div class="a-window <%= THEME_windowContainerFill %>">
+    <div class="a-window__header">
+        <div class="a-window__header-container a-window__header-container--centered">
+            <div class="a-window__title-container a-window__title-container--centered">
+                <div class="a-window__title a-window__title--centered">
+                    <h2 class="heading_2 bold--medium <%= THEME_windowTitleColor %>">
+                        <%= CONTENT_aWindow_Centered_content.HEADER.heading %>
+                    </h2>
+                </div>
+            </div>
+            <div class="a-window__copy-container a-window__copy-container--centered">
+                <div class="a-window__copy a-window__copy--centered">
+                    <p class="heading_3 <%= THEME_windowCopyColor %>">
+                        <%= CONTENT_aWindow_Centered_content.HEADER.paragraph %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="a-window__body">
+        <div class="a-window__body-container">
+            <div class="a-window__slot">
+                <% if(MODULE_aWindow_centered_first) { %>
+                    <%- include(MODULE_aWindow_centered_first, {}) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="a-window__footer">
+        <div class="a-window__footer-container">
+            <div class="a-window__actions">
+                <div class="btn-container--row btn-align--<%= ACTIONS_aWindow_Centered_footerBtnAlign %>">
+                    <% if (ACTIONS_aWindow_Centered_footerBtnExist === true) { %>
+                        <button class="btn button__btn btn--contained <%= ACTIONS_aWindow_Centered_btnMode %>" type="button" onclick=<%= ACTIONS_aWindow_Centered_btnHref %>><%= ACTIONS_aWindow_Centered_footerBtnText %></button>
+                    <% } %>
+                    <div class="a-window__slot">
+                        <% if (MODULE_aWindow_centered_second && ACTIONS_bForm_exist === true) { %>
+                            <%- include(MODULE_aWindow_centered_second, {}) %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

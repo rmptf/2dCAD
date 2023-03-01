@@ -1,0 +1,79 @@
+.a-pane {
+  overflow: auto;
+  /* outline: solid 1pt black; */
+  /* background-color: red; */
+}
+
+.a-pane__vertical-margins {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+
+  background-color: var(--br-0);
+}
+/* modifer */
+.a-pane__vertical-margins--a-header {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.a-pane__vertical-padding {
+  height: 100%;
+  width: 100%;
+
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+
+  background-color: var(--br-1);
+}
+
+.a-pane__horizontal-padding {
+  height: 100%;
+  width: 100%;
+
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+
+  background-color: var(--br-2);
+}
+/* modifer */
+.a-pane__horizontal-padding--a-header {
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
+
+.a-pane__horizontal-margins {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* modifier */
+.a-pane__horizontal-margins--a-header {
+  /* max-width: unset; */
+}
+
+.a-pane__flex-direction {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--br-1);
+}
+
+@media screen and (max-width: 1024px) {
+  .a-pane__horizontal-margins {
+    max-width: 696px;
+  }
+  /* modifier */
+  .a-pane__horizontal-margins--a-header {
+    max-width: unset;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .a-pane__horizontal-padding {
+    max-width: unset;
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+}

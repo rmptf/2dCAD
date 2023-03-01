@@ -1,0 +1,29 @@
+:root {
+    /* Max Widths */
+    --max-width--narrowest: 720px;
+    --max-width--narrower: 980px;
+    --max-width--narrow: 1050px;
+    --max-width--wide: 1200px;
+    --max-width--wider: 1600px;
+    --max-width--widest: unset;
+}
+
+/* Max Widths */
+.max-width__narrowest {
+    max-width: var(--max-width--narrowest);
+}
+.max-width__narrower {
+    max-width: var(--max-width--narrower);
+}
+.max-width__narrow {
+    max-width: var(--max-width--narrow);
+}
+.max-width__wide {
+    max-width: var(--max-width--wide);
+}
+.max-width__wider {
+    max-width: var(--max-width--wider);
+}
+.max-width__widest {
+    max-width: var(--max-width--widest);
+}

@@ -1,25 +1,41 @@
 /* Base */
-  @import "shared/base/color_modifiers.css";
-  /* @import "shared/base/font-face.css"; */
+  @import "shared/base/color_modifiers_html.css";
+  /* @import "shared/base/color_modifiers_svg.css"; */
+  @import "shared/base/font_modifiers.css";
+  @import "shared/base/resolution_modifiers.css";
 /* Base */
 
 /* Layouts */
   /* @import "shared/layouts/layouts.css"; */
 /* Layouts */
 
+/* Will Remove Later (Adding these to modules: html/svg) */
 /* Global Components */
-  @import "shared/base/svg/svg.css";
   /* @import "shared/base/buttons/buttons.css"; */
 /* Global Components */
+/* Will Remove Later (Adding these to modules: html/svg) */
 
 /* Modules */
-  /* 1st Level Modules */
-    /* @import "shared/modules/panes/a-pane/a-pane.css"; */
-  /* 2nd Level Modules */
-    /* @import "shared/modules/windows/a-window/a-window.css"; */
-  /* 3rd Level Modules */
-    /* @import "shared/modules/headers/a-header/a-header.css"; */
-  /* 4th Level Modules */
+  /* HTML */
+    /* 1st Level Modules */
+      @import "shared/modules/html/first_level_modules/panes/a-pane/a-pane.css";
+    /* 2nd Level Modules */
+      @import "shared/modules/html/second_level_modules/windows/a-window/a-window.css";
+    /* 3rd Level Modules */
+      /* @import "shared/modules/headers/a-header/a-header.css"; */
+    /* 4th Level Modules */
+      /* @import "shared/modules/buttons/a-buttons/a-buttons.css"; */
+  /* HTML */
+
+  /* SVG */
+    /* 1st Level Modules */
+      @import "shared/modules/svg/first_level_modules/svgs/a-svg/a-svg.css";
+      /* windows */
+    /* 2nd Level Modules */
+      /* elements */
+    /* 3rd Level Modules */
+      /* buttons */
+  /* SVG */
 /* Modules */
 
 /* Global Settings */
@@ -59,9 +75,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-/* DELETE LATER (Once individual css files are created */
-body{
-  background-color: black;
-}
-/* DELETE LATER (Once individual css files are created */

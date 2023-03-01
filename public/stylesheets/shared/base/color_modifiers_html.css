@@ -122,7 +122,7 @@
     color: var(--translucent-overlay)
 }
 /* 
-Colors using Fills 
+Fills using Colors 
 *Should be rarely used.
 */
 .clr-theme__accent-secondary--muted--color--fill {
@@ -157,6 +157,8 @@ Colors using Fills
 
 
 /* Psudo Classes */
+
+/* HOVERS */
 /* hover color*/
 .clr-theme__accent-primary--hover:hover{
     color: var(--accent-primary);
@@ -172,18 +174,11 @@ Colors using Fills
     /* cursor: pointer; */
 }
 
-/* Mini Elements */
-/* border */
+/* BORDERS */
+/* border color */
 .clr-theme__main--border-color {
     border-color: var(--main);
 }
 .clr-theme__translucent-overlay--border-color {
     border-color: var(--translucent-overlay);
-}
-
-.TESTCOLOR-borderCOLORwith-psudo-class{
-    border-color: hotpink;
-}
-.TESTCOLOR-borderCOLORwith-psudo-class:last-of-type{
-    border-color: hotpink;
 }

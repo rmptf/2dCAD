@@ -1,0 +1,17 @@
+<div class="a-pane <%= THEME_moduleTheme %> <%= THEME_paneContainerFill %>">
+    <div class="a-pane__vertical-margins">
+        <div class="a-pane__vertical-padding">
+            <div class="a-pane__horizontal-padding">
+                <div class="a-pane__horizontal-margins <%= THEME_paneMaxWidth %>">
+                    <div class="a-pane__flex-direction">
+                        <div class="a-pane__slot">
+                            <% if (MODULE_aPane_first) { %>
+                                <%- include(MODULE_aPane_first) %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
