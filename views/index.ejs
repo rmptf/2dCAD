@@ -1,10 +1,11 @@
 <!-- FIRST PAGE -->
-<%- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
+<%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
 
 
-<%#- include(moduleLocationVARS.A_PANE, {
+<%- include(moduleLocationVARS.A_PANE, {
     // MAIN Theme Class
         THEME_moduleTheme: colorVars.THEMECLASS.mainThemeClass,
+        // THEME_moduleTheme: colorVars.THEMECLASS.fourthThemeClass,
 
     // ALL Modules
     // ------------------------------------------------------------------------------------------
@@ -39,6 +40,7 @@
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            // THEME_windowTitleOpacity: colorVars.OPACITY.op90
     // ------------------------------------------------------------------------------------------
     }) 
 %>

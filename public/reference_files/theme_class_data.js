@@ -40,6 +40,17 @@ const COLORVARS = {
         mainBorderColor: "clr-theme__main--border-color",
         translucentOverlayBorderColor: "clr-theme__translucent-overlay--border-color",
     },
+    OPACITY: {
+        op90: "opacity--90",
+        op80: "opacity--80",
+        op70: "opacity--70",
+        op60: "opacity--60",
+        op50: "opacity--50",
+        op40: "opacity--40",
+        op30: "opacity--30",
+        op20: "opacity--20",
+        op10: "opacity--10",
+    }
 }
 
 const WIDTHVARS = {

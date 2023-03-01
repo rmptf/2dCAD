@@ -1,27 +1,30 @@
 :root {
+    --opacity-var: 1.0;
+
     /* Colors */
-    --main: rgb(0, 0, 0);
-    --main--muted: rgb(45, 45, 45);
-    --accent-primary: rgb(151, 135, 135);
-    --accent-primary--muted: rgb(200, 182, 182);
-    --accent-secondary: rgb(213, 165, 83);
-    --accent-secondary--muted: rgb(184, 142, 70);
+    /* --main: rgba(0, 0, 0); */
+    --main: 0, 0, 0;
+    /* --main--muted: rgba(45, 45, 45); */
+    --main--muted: 45, 45, 45;
+    /* --accent-primary: rgba(151, 135, 135); */
+    --accent-primary: 151, 135, 135;
+    /* --accent-primary--muted: rgba(200, 182, 182); */
+    --accent-primary--muted: 200, 182, 182;
+    /* --accent-secondary: rgba(213, 165, 83); */
+    --accent-secondary: 213, 165, 83;
+    /* --accent-secondary--muted: rgba(184, 142, 70); */
+    --accent-secondary--muted: 184, 142, 70;
 
     /* Fills */
-    --main--fill: rgb(255, 255, 255);
-    --main--muted--fill: rgb(190, 186, 186);
-    --accent-primary--fill: rgb(147, 147, 147);
-    --accent-primary--muted--fill: rgb(174, 160, 160);
-    --accent-secondary--fill: rgb(211, 183, 135);
-    --accent-secondary--muted--fill: rgb(187, 167, 130);
+    --main--fill: rgba(255, 255, 255);
+    --main--muted--fill: rgba(190, 186, 186);
+    --accent-primary--fill: rgba(147, 147, 147);
+    --accent-primary--muted--fill: rgba(174, 160, 160);
+    --accent-secondary--fill: rgba(211, 183, 135);
+    --accent-secondary--muted--fill: rgba(187, 167, 130);
 
-    /* Opacity` */
+    /* Shader Overlay */
     --translucent-overlay: rgba(0, 0, 0, 0.1);
-
-
-    --neutral: rgb(214, 214, 214);
-    --success: rgb(95, 187, 95);
-    --warning: rgb(249, 90, 90);
 }
 
 .clr-theme__test1 {
@@ -41,13 +44,8 @@
     --accent-secondary--fill: rgb(211, 183, 135);
     --accent-secondary--muted--fill: rgb(187, 167, 130);
 
-    /* Opacity` */
+    /* Shader Overlay */
     --translucent-overlay: hsla(0, 0%, 0%, 0.3);
-
-
-    --neutral: rgb(214, 214, 214);
-    --success: rgb(95, 187, 95);
-    --warning: rgb(249, 90, 90);
 }
 
 .clr-theme__test2 {
@@ -68,12 +66,8 @@
     --accent-secondary--fill: rgb(211, 183, 135);
     --accent-secondary--muted--fill: rgb(187, 167, 130);
 
-    /* Opacity` */
+    /* Shader Overlay */
     --translucent-overlay: hsla(0, 0%, 0%, 1);
-
-    --neutral: rgb(214, 214, 214);
-    --success: rgb(95, 187, 95);
-    --warning: rgb(249, 90, 90);
 }
 
 .clr-theme__test3 {
@@ -93,33 +87,42 @@
     --accent-secondary--fill: rgb(213, 165, 83);
     --accent-secondary--muted--fill: rgb(184, 142, 70);
 
-    /* Opacity` */
+    /* Shader Overlay */
     --translucent-overlay: rgba(255, 255, 255, 0.1);
 }
 
 
+
+
 /* Colors */
 .clr-theme__main {
-    color: var(--main);
+    /* color: var(--main); */
+    color: rgba(var(--main), var(--opacity-var))
 }
 .clr-theme__main--muted {
-    color: var(--main--muted);
+    /* color: var(--main--muted); */
+    color: rgba(var(--main--muted), var(--opacity-var))
 }
 .clr-theme__accent-primary {
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
+    color: rgba(var(--accent-primary), var(--opacity-var))
 }
 .clr-theme__accent-primary--muted {
-    color: var(--accent-primary--muted);
+    /* color: var(--accent-primary--muted); */
+    color: rgba(var(--accent-primary--muted), var(--opacity-var))
 }
 .clr-theme__accent-secondary {
-    color: var(--accent-secondary);
+    /* color: var(--accent-secondary); */
+    color: rgba(var(--accent-secondary), var(--opacity-var))
 }
 .clr-theme__accent-secondary--muted {
-    color: var(--accent-secondary--muted);
+    /* color: var(--accent-secondary--muted); */
+    color: rgba(var(--accent-secondary--muted), var(--opacity-var))
 }
 /* Translucent Overlay */
 .clr-theme__translucent-overlay{
-    color: var(--translucent-overlay)
+    /* color: var(--translucent-overlay) */
+    color: rgba(var(--translucent-overlay), var(--opacity-var))
 }
 /* 
 Fills using Colors 
@@ -128,7 +131,6 @@ Fills using Colors
 .clr-theme__accent-secondary--muted--color--fill {
     background-color: var(--accent-secondary--muted);
 }
-
 
 /* Fills */
 .clr-theme__main--fill {
@@ -154,10 +156,7 @@ Fills using Colors
     background-color: var(--translucent-overlay)
 }
 
-
-
 /* Psudo Classes */
-
 /* HOVERS */
 /* hover color*/
 .clr-theme__accent-primary--hover:hover{
@@ -173,7 +172,6 @@ Fills using Colors
     background-color: var(--translucent-overlay);
     /* cursor: pointer; */
 }
-
 /* BORDERS */
 /* border color */
 .clr-theme__main--border-color {
@@ -181,4 +179,32 @@ Fills using Colors
 }
 .clr-theme__translucent-overlay--border-color {
     border-color: var(--translucent-overlay);
+}
+
+.opacity--90{
+    --opacity-var: 0.9
+}
+.opacity--80{
+    --opacity-var: 0.8
+}
+.opacity--70{
+    --opacity-var: 0.7
+}
+.opacity--60{
+    --opacity-var: 0.6
+}
+.opacity--50{
+    --opacity-var: 0.5
+}
+.opacity--40{
+    --opacity-var: 0.4
+}
+.opacity--30{
+    --opacity-var: 0.3
+}
+.opacity--20{
+    --opacity-var: 0.2
+}
+.opacity--10{
+    --opacity-var: 0.1
 }
