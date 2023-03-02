@@ -1,4 +1,5 @@
 :root {
+    /* Opacity */
     --opacity-var: 1.0;
 
     /* Colors */
@@ -22,55 +23,9 @@
     --accent-primary--muted--fill: rgba(174, 160, 160);
     --accent-secondary--fill: rgba(211, 183, 135);
     --accent-secondary--muted--fill: rgba(187, 167, 130);
-
-    /* Shader Overlay */
-    --translucent-overlay: rgba(0, 0, 0, 0.1);
 }
 
-.clr-theme__test1 {
-    /* Colors */
-    --main: hsl(0, 0%, 11%);
-    --main--muted: hsl(0, 0%, 29%);
-    --accent-primary: hsl(351, 100%, 66%);
-    --accent-primary--muted: hsla(351, 50%, 66%, 1);
-    --accent-secondary: hsl(180, 76%, 49%);
-    --accent-secondary--muted: hsla(180, 33%, 49%, 1);
-
-    /* Fills */
-    --main--fill: hsl(0, 41%, 19%);
-    --main--muted--fill: hsl(0, 41%, 25%);
-    --accent-primary--fill: hsl(185, 35%, 32%);
-    --accent-primary--muted--fill: hsl(186, 28%, 28%);
-    --accent-secondary--fill: rgb(211, 183, 135);
-    --accent-secondary--muted--fill: rgb(187, 167, 130);
-
-    /* Shader Overlay */
-    --translucent-overlay: hsla(0, 0%, 0%, 0.3);
-}
-
-.clr-theme__test2 {
-    /* Colors */
-    --main: hsl(54, 86%, 31%);
-    --main--muted: hsl(54, 40%, 31%);
-    --accent-primary: hsl(136, 53%, 41%);
-    --accent-primary--muted: hsl(136, 27%, 41%);
-    --accent-secondary: hsl(16, 76%, 49%);
-    --accent-secondary--muted: hsl(16, 38%, 49%);
-    /* --accent-secondary--muted: blue; */
-
-    /* Fills */
-    --main--fill: hsl(0, 59%, 55%);
-    --main--muted--fill: hsl(0, 44%, 47%);
-    --accent-primary--fill: hsl(143, 59%, 55%);
-    --accent-primary--muted--fill: hsl(0, 24%, 55%);
-    --accent-secondary--fill: rgb(211, 183, 135);
-    --accent-secondary--muted--fill: rgb(187, 167, 130);
-
-    /* Shader Overlay */
-    --translucent-overlay: hsla(0, 0%, 0%, 1);
-}
-
-.clr-theme__test3 {
+.clr-theme__one {
     /* Colors */
     --main: rgb(255, 255, 255);
     --main--muted: rgb(190, 186, 186);
@@ -86,13 +41,7 @@
     --accent-primary--muted--fill: rgb(200, 182, 182);
     --accent-secondary--fill: rgb(213, 165, 83);
     --accent-secondary--muted--fill: rgb(184, 142, 70);
-
-    /* Shader Overlay */
-    --translucent-overlay: rgba(255, 255, 255, 0.1);
 }
-
-
-
 
 /* Colors */
 .clr-theme__main {
@@ -125,12 +74,9 @@
     color: rgba(var(--translucent-overlay), var(--opacity-var))
 }
 /* 
-Fills using Colors 
+Colors using Fills 
 *Should be rarely used.
 */
-.clr-theme__accent-secondary--muted--color--fill {
-    background-color: var(--accent-secondary--muted);
-}
 
 /* Fills */
 .clr-theme__main--fill {
@@ -151,26 +97,27 @@ Fills using Colors
 .clr-theme__accent-secondary--muted--fill {
     background-color: var(--accent-secondary--muted--fill);
 }
-/* Translucent Overlay */
-.clr-theme__translucent-overlay--fill{
-    background-color: var(--translucent-overlay)
+/* 
+Fills using Colors 
+*Should be rarely used.
+*/
+.clr-theme__accent-secondary--muted--color--fill {
+    background-color: var(--accent-secondary--muted);
 }
+
 
 /* Psudo Classes */
 /* HOVERS */
 /* hover color*/
 .clr-theme__accent-primary--hover:hover{
     color: var(--accent-primary);
-    cursor: pointer;
 }
 .clr-theme__accent-secondary--muted--hover:hover{
     color: var(--accent-secondary--muted);
-    cursor: pointer;
 }
 /* hover fill*/
 .clr-theme__translucent-overlay--fill--hover:hover{
     background-color: var(--translucent-overlay);
-    /* cursor: pointer; */
 }
 /* BORDERS */
 /* border color */
@@ -181,6 +128,8 @@ Fills using Colors
     border-color: var(--translucent-overlay);
 }
 
+/* Theme Adjusters */
+/* OPACITY */
 .opacity--90{
     --opacity-var: 0.9
 }
@@ -208,3 +157,6 @@ Fills using Colors
 .opacity--10{
     --opacity-var: 0.1
 }
+
+
+

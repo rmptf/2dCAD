@@ -1,9 +1,7 @@
 const COLORVARS = {
     THEMECLASS: {
         mainThemeClass: "",
-        secondaryThemeClass: "clr-theme__test1",
-        tertiaryThemeClass: "clr-theme__test2",
-        fourthThemeClass: "clr-theme__test3",
+        secondaryThemeClass: "clr-theme__one",
     },
     COLORS: {
         main: "clr-theme__main",
@@ -12,10 +10,6 @@ const COLORVARS = {
         accentPrimaryMuted: "clr-theme__accent-primary--muted",
         accentSecondary: "clr-theme__accent-secondary",
         accentSecondaryMuted: "clr-theme__accent-secondary--muted",
-        /* Translucent Overlay */
-        translucentOverlay: "clr-theme__translucent-overlay",
-        // *Colors as Fills
-        accentSecondaryMutedColorFill: "clr-theme__accent-secondary--muted--color--fill",
     },
     FILLS: {
         mainFill: "clr-theme__main--fill",
@@ -24,8 +18,6 @@ const COLORVARS = {
         accentPrimaryMutedFill: "clr-theme__accent-primary--muted--fill",
         accentSecondaryFill: "clr-theme__accent-secondary--fill",
         accentSecondaryMutedFill: "clr-theme__accent-secondary--muted--fill",
-        /* Translucent Overlay */
-        translucentOverlayFill: "clr-theme__translucent-overlay--fill",
     },
     HOVERS: {
         COLOR: {
