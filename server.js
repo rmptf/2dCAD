@@ -24,4 +24,9 @@ app.use(express.json())
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
 
+// Works for testing with hardcoded variables, but need to make adjustable from browser, probably something to do with local storage
+// https://stackoverflow.com/questions/16452123/how-to-create-global-variables-accessible-in-all-views-using-express-node-js
+global.globalModeClass = 'mode-theme_light';
+// global.globalModeClass = 'mode-theme_dark';
+
 app.listen(3000, () => console.log('Server started on Port 3000.'))

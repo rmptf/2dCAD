@@ -1,7 +1,11 @@
 const COLORVARS = {
+    // MODECLASS: {
+    //     lightModeClass: "mode-theme_light",
+    //     darkModeClass: "mode-theme_dark",
+    // },
     THEMECLASS: {
-        mainThemeClass: "",
-        secondaryThemeClass: "clr-theme__one",
+        defaultThemeClass: "",
+        secondaryThemeClass: "module-theme_secondary",
     },
     COLORS: {
         main: "clr-theme__main",

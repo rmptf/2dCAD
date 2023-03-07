@@ -1,77 +1,191 @@
 :root {
+    /* https://uicolors.app/edit?sv1=casablanca:50-fff9ed/100-fef1d6/200-fcdfac/300-fbc876/400-f8ab4b/500-f58b1a/600-e66f10/700-bf540f/800-984314/900-7a3914;casper:50-f4f7fa/100-e7ecf2/200-d4dce9/300-acbdd3/400-94a8c6/500-7b8fb6/600-687aa8/700-5d6a98/800-4f587e/900-434b65;medium-purple:50-faf6fe/100-f4eafd/200-ead8fc/300-dabaf8/400-c38df3/500-aa5eea/600-9741dc/700-812fc1/800-6e2b9e/900-5a247f;java:50-f0fdf9/100-cdfaef/200-9af5df/300-60e8cd/400-2fd2b5/500-18c4a9/600-0f9280/700-107568/800-125d54/900-144d46;mandy:50-fdf3f3/100-fde3e3/200-fccccc/300-f8a9a9/400-f27777/500-ea5e5e/600-d42e2e/700-b22323/800-942020/900-7b2121;blue-bayoux:50-f6f7f9/100-ebeef3/200-d4dae3/300-adbacc/400-8195af/500-617796/600-4d607c/700-3f4d65/800-374355/900-313a49;royal-blue:50-eff8ff/100-daeeff/200-bee2ff/300-91d0ff/400-5eb5fc/500-3895f9/600-2f7fef/700-1a61db/800-1c4eb1/900-1c458c */
+    /* colors */
+    --blue-grey: #768ba7;
+    --default: #2f7fef;
+    --blue: #2f7fef;
+    --dusk: #4d607c;
+    --coral: #ea5e5e;
+    --topaz: #18c4a9;
+    --purple: #aa5eea;
+    --cloudy: #acbdd3;
+    --orange: #f8a949;
+
+    --blue-050:#e9fcf8;
+    --blue-100:#daeeff;
+    --blue-200:#bee2ff;
+    --blue-300:#91d0ff;
+    --blue-400:#5eb5fc;
+    --blue-500:#3895f9;
+    --blue-600:#2f7fef;
+    --blue-700:#1a61db;
+    --blue-800:#1c4eb1;
+    --blue-900:#1c458c;
+
+    --dusk-050:#f6f7f9;
+    --dusk-100:#ebeef3;
+    --dusk-200:#d4dae3;
+    --dusk-300:#adbacc;
+    --dusk-400:#8195af;
+    --dusk-500:#617796;
+    --dusk-600:#4d607c;
+    --dusk-700:#3f4d65;
+    --dusk-800:#374355;
+    --dusk-900:#313a49;
+
+    --coral-050:#fdf3f3;
+    --coral-100:#fde3e3;
+    --coral-200:#fccccc;
+    --coral-300:#f8a9a9;
+    --coral-400:#f27777;
+    --coral-500:#ea5e5e;
+    --coral-600:#d42e2e;
+    --coral-700:#b22323;
+    --coral-800:#942020;
+    --coral-900:#7b2121;
+
+    --topaz-050:#e9fcf8;
+    --topaz-100:#cef8f1;
+    --topaz-200:#9df1e3;
+    --topaz-300:#5ee8d8;
+    --topaz-400:#2ed1c1;
+    --topaz-500:#1bc0b5;
+    --topaz-600:#148f89;
+    --topaz-700:#11746f;
+    --topaz-800:#125e5c;
+    --topaz-900:#144d4b;
+
+
+    /* colors */
+
+
+
     /* Opacity */
     --opacity-var: 1.0;
+    /* LIGHT MODE */
+        /* Colors */
+        --main_LIGHT: rgb(67, 67, 67);
+        --main--muted_LIGHT: rgb(111, 111, 111);
+        --accent-primary_LIGHT: rgba(151, 135, 135);
+        --accent-primary--muted_LIGHT: rgba(200, 182, 182);
+        --accent-secondary_LIGHT: rgba(213, 165, 83);
+        --accent-secondary--muted_LIGHT: rgba(184, 142, 70);
+        /* Fills */
+        --main--fill_LIGHT: rgb(232, 232, 232);
+        --main--muted--fill_LIGHT: rgb(184, 184, 184);
+        --accent-primary--fill_LIGHT: rgba(147, 147, 147);
+        --accent-primary--muted--fill_LIGHT: rgba(174, 160, 160);
+        --accent-secondary--fill_LIGHT: rgba(211, 183, 135);
+        --accent-secondary--muted--fill_LIGHT: rgba(187, 167, 130);
 
-    /* Colors */
-    /* --main: rgba(0, 0, 0); */
-    --main: 0, 0, 0;
-    /* --main--muted: rgba(45, 45, 45); */
-    --main--muted: 45, 45, 45;
-    /* --accent-primary: rgba(151, 135, 135); */
-    --accent-primary: 151, 135, 135;
-    /* --accent-primary--muted: rgba(200, 182, 182); */
-    --accent-primary--muted: 200, 182, 182;
-    /* --accent-secondary: rgba(213, 165, 83); */
-    --accent-secondary: 213, 165, 83;
-    /* --accent-secondary--muted: rgba(184, 142, 70); */
-    --accent-secondary--muted: 184, 142, 70;
+    /* DARKMODE */
+        /* Colors */
+        --main_DARK: rgb(187, 187, 187);
+        --main--muted_DARK: rgb(137, 137, 137);
+        --accent-primary_DARK: rgba(151, 135, 135);
+        --accent-primary--muted_DARK: rgba(200, 182, 182);
+        --accent-secondary_DARK: rgba(213, 165, 83);
+        --accent-secondary--muted_DARK: rgba(184, 142, 70);
 
-    /* Fills */
-    --main--fill: rgba(255, 255, 255);
-    --main--muted--fill: rgba(190, 186, 186);
-    --accent-primary--fill: rgba(147, 147, 147);
-    --accent-primary--muted--fill: rgba(174, 160, 160);
-    --accent-secondary--fill: rgba(211, 183, 135);
-    --accent-secondary--muted--fill: rgba(187, 167, 130);
+        /* Fills */
+        --main--fill_DARK: rgb(0, 0, 0);
+        --main--muted--fill_DARK: rgb(75, 75, 75);
+        --accent-primary--fill_DARK: rgba(147, 147, 147);
+        --accent-primary--muted--fill_DARK: rgba(174, 160, 160);
+        --accent-secondary--fill_DARK: rgba(211, 183, 135);
+        --accent-secondary--muted--fill_DARK: rgba(187, 167, 130);
 }
 
-.clr-theme__one {
-    /* Colors */
-    --main: rgb(255, 255, 255);
-    --main--muted: rgb(190, 186, 186);
-    --accent-primary: rgb(147, 147, 147);
-    --accent-primary--muted: rgb(174, 160, 160);
-    --accent-secondary: rgb(211, 183, 135);
-    --accent-secondary--muted: rgb(187, 167, 130);
+.module-theme_secondary {
+    /* Opacity */
+    --opacity-var: 1.0;
+    /* LIGHT MODE */
+        /* Colors */
+        --main_LIGHT: rgb(98, 37, 37);
+        --main--muted_LIGHT: rgb(89, 72, 72);
+        --accent-primary_LIGHT: rgb(84, 27, 36);
+        --accent-primary--muted_LIGHT: rgb(124, 73, 80);
+        --accent-secondary_LIGHT: rgb(13, 86, 86);
+        --accent-secondary--muted_LIGHT: rgb(49, 98, 98);
+        /* Fills */
+        --main--fill_LIGHT: rgb(234, 174, 174);
+        --main--muted--fill_LIGHT: rgb(231, 193, 193);
+        --accent-primary--fill_LIGHT: rgb(101, 201, 210);
+        --accent-primary--muted--fill_LIGHT: rgb(119, 204, 213);
+        --accent-secondary--fill_LIGHT: rgb(103, 89, 66);
+        --accent-secondary--muted--fill_LIGHT: rgb(83, 74, 58);
 
-    /* Fills */
-    --main--fill: rgb(0, 0, 0);
-    --main--muted--fill: rgb(45, 45, 45);
-    --accent-primary--fill: rgb(151, 135, 135);
-    --accent-primary--muted--fill: rgb(200, 182, 182);
-    --accent-secondary--fill: rgb(213, 165, 83);
-    --accent-secondary--muted--fill: rgb(184, 142, 70);
+     /* DARK MODE */
+        /* Colors */
+        --main_DARK: rgb(234, 174, 174);
+        --main--muted_DARK: rgb(231, 193, 193);
+        --accent-primary_DARK: rgba(255, 82, 108);
+        --accent-primary--muted_DARK: rgba(212, 125, 138);
+        --accent-secondary_DARK: rgba(30, 220, 220);
+        --accent-secondary--muted_DARK: rgba(84, 166, 166);
+        /* Fills */
+        --main--fill_DARK: rgb(72, 20, 20);
+        --main--muted--fill_DARK: rgba(90, 38, 38);
+        --accent-primary--fill_DARK: rgba(53, 105, 110);
+        --accent-primary--muted--fill_DARK: rgba(51, 87, 91);
+        --accent-secondary--fill_DARK: rgba(211, 183, 135);
+        --accent-secondary--muted--fill_DARK: rgba(187, 167, 130);
+}
+
+.mode-theme_light {
+    --main: var(--main_LIGHT);
+    --main--muted: var(--main--muted_LIGHT);
+    --accent-primary: var(--accent-primary_LIGHT);
+    --accent-primary--muted: var(--accent-primary--muted_LIGHT);
+    --accent-secondary: var(--accent-secondary_LIGHT);
+    --accent-secondary--muted: var(--accent-secondary--muted_LIGHT);
+
+    --main--fill: var(--main--fill_LIGHT);
+    --main--muted--fill: var(--main--muted--fill_LIGHT);
+    --accent-primary--fill: var(--accent-primary--fill_LIGHT);
+    --accent-primary--muted--fill: var(--accent-primary--muted--fill_LIGHT);
+    --accent-secondary--fill: var(--accent-secondary--fill_LIGHT);
+    --accent-secondary--muted--fill: var(--accent-secondary--muted--fill_LIGHT);
+}
+
+.mode-theme_dark {
+    --main: var(--main_DARK);
+    --main--muted: var(--main--muted_DARK);
+    --accent-primary: var(--accent-primary_DARK);
+    --accent-primary--muted: var(--accent-primary--muted_DARK);
+    --accent-secondary: var(--accent-secondary_DARK);
+    --accent-secondary--muted: var(--accent-secondary--muted_DARK);
+
+    --main--fill: var(--main--fill_DARK);
+    --main--muted--fill: var(--main--muted--fill_DARK);
+    --accent-primary--fill: var(--accent-primary--fill_DARK);
+    --accent-primary--muted--fill: var(--accent-primary--muted--fill_DARK);
+    --accent-secondary--fill: var(--accent-secondary--fill_DARK);
+    --accent-secondary--muted--fill: var(--accent-secondary--muted--fill_DARK);
 }
 
 /* Colors */
 .clr-theme__main {
-    /* color: var(--main); */
-    color: rgba(var(--main), var(--opacity-var))
+    color: var(--main);
 }
 .clr-theme__main--muted {
-    /* color: var(--main--muted); */
-    color: rgba(var(--main--muted), var(--opacity-var))
+    color: var(--main--muted);
 }
 .clr-theme__accent-primary {
-    /* color: var(--accent-primary); */
-    color: rgba(var(--accent-primary), var(--opacity-var))
+    color: var(--accent-primary);
 }
 .clr-theme__accent-primary--muted {
-    /* color: var(--accent-primary--muted); */
-    color: rgba(var(--accent-primary--muted), var(--opacity-var))
+    color: var(--accent-primary--muted);
 }
 .clr-theme__accent-secondary {
-    /* color: var(--accent-secondary); */
-    color: rgba(var(--accent-secondary), var(--opacity-var))
+    color: var(--accent-secondary);
 }
 .clr-theme__accent-secondary--muted {
-    /* color: var(--accent-secondary--muted); */
-    color: rgba(var(--accent-secondary--muted), var(--opacity-var))
+    color: var(--accent-secondary--muted);
 }
 /* Translucent Overlay */
 .clr-theme__translucent-overlay{
-    /* color: var(--translucent-overlay) */
-    color: rgba(var(--translucent-overlay), var(--opacity-var))
+    color: var(--translucent-overlay)
 }
 /* 
 Colors using Fills 
@@ -105,7 +219,6 @@ Fills using Colors
     background-color: var(--accent-secondary--muted);
 }
 
-
 /* Psudo Classes */
 /* HOVERS */
 /* hover color*/
@@ -128,9 +241,62 @@ Fills using Colors
     border-color: var(--translucent-overlay);
 }
 
+
+
+
+
+
+
+
+/* STRUCTURE FOR OPACTIY CLASS ADJUSTERS */
+/* :root { */
+    /* Opacity */
+    /* --opacity-var: 1.0; */
+
+    /* Colors */
+    /* --main: 0, 0, 0;
+    --main--muted: 45, 45, 45;
+    --accent-primary: 151, 135, 135;
+    --accent-primary--muted: 200, 182, 182;
+    --accent-secondary: 213, 165, 83;
+    --accent-secondary--muted: 184, 142, 70; */
+
+    /* Fills */
+    /* --main--fill: rgba(255, 255, 255);
+    --main--muted--fill: rgba(190, 186, 186);
+    --accent-primary--fill: rgba(147, 147, 147);
+    --accent-primary--muted--fill: rgba(174, 160, 160);
+    --accent-secondary--fill: rgba(211, 183, 135);
+    --accent-secondary--muted--fill: rgba(187, 167, 130); */
+/* } */
+
+/* Colors */
+/* .clr-theme__main {
+    color: rgba(var(--main), var(--opacity-var))
+}
+.clr-theme__main--muted {
+    color: rgba(var(--main--muted), var(--opacity-var))
+}
+.clr-theme__accent-primary {
+    color: rgba(var(--accent-primary), var(--opacity-var))
+}
+.clr-theme__accent-primary--muted {
+    color: rgba(var(--accent-primary--muted), var(--opacity-var))
+}
+.clr-theme__accent-secondary {
+    color: rgba(var(--accent-secondary), var(--opacity-var))
+}
+.clr-theme__accent-secondary--muted {
+    color: rgba(var(--accent-secondary--muted), var(--opacity-var))
+} */
+/* Translucent Overlay */
+/* .clr-theme__translucent-overlay{
+    color: rgba(var(--translucent-overlay), var(--opacity-var))
+} */
+
 /* Theme Adjusters */
 /* OPACITY */
-.opacity--90{
+/* .opacity--90{
     --opacity-var: 0.9
 }
 .opacity--80{
@@ -156,7 +322,4 @@ Fills using Colors
 }
 .opacity--10{
     --opacity-var: 0.1
-}
-
-
-
+} */
