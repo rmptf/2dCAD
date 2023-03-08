@@ -1,5 +1,23 @@
+.BASICALLY_COLORS_USED{
+    /* MAIN */
+    --MAIN1: #fff;
+    --MAIN2: #445670;
+    --MAIN3: #617796;
+    --MAIN4: #96b9e9;
+    --HILI5: #2f7fef;
+    /* HIGHLIGHTS */
+    --HILI1: #2f7fef;
+    --HILI2: #ea5e5e;
+    --HILI3: #18c4a9;
+    --HILI4: #aa5eea;
+    --HILI5: #acbdd3;
+    --HILI6: #f8ab4b;
+    --HILI7: #EB60BC;
+    --HILI8: #99CE43;
+}
+
 :root {
-    /* https://uicolors.app/edit?sv1=casablanca:50-fff9ed/100-fef1d6/200-fcdfac/300-fbc876/400-f8ab4b/500-f58b1a/600-e66f10/700-bf540f/800-984314/900-7a3914;casper:50-f4f7fa/100-e7ecf2/200-d4dce9/300-acbdd3/400-94a8c6/500-7b8fb6/600-687aa8/700-5d6a98/800-4f587e/900-434b65;medium-purple:50-faf6fe/100-f4eafd/200-ead8fc/300-dabaf8/400-c38df3/500-aa5eea/600-9741dc/700-812fc1/800-6e2b9e/900-5a247f;java:50-f0fdf9/100-cdfaef/200-9af5df/300-60e8cd/400-2fd2b5/500-18c4a9/600-0f9280/700-107568/800-125d54/900-144d46;mandy:50-fdf3f3/100-fde3e3/200-fccccc/300-f8a9a9/400-f27777/500-ea5e5e/600-d42e2e/700-b22323/800-942020/900-7b2121;blue-bayoux:50-f6f7f9/100-ebeef3/200-d4dae3/300-adbacc/400-8195af/500-617796/600-4d607c/700-3f4d65/800-374355/900-313a49;royal-blue:50-eff8ff/100-daeeff/200-bee2ff/300-91d0ff/400-5eb5fc/500-3895f9/600-2f7fef/700-1a61db/800-1c4eb1/900-1c458c */
+    /* https://uicolors.app/edit?sv1=atlantis:50-f6fbea/100-eaf6d1/200-d6eea8/300-b9e076/400-99ce43/500-7fb52d/600-629020/700-4b6e1d/800-3e581c/900-354b1c;brilliant-rose:50-fdf2fa/100-fce7f7/200-fad0ef/300-f7aae1/400-f175cb/500-eb60bc/600-d72b94/700-ba1c79/800-9a1a63/900-811a54;casablanca:50-fff9ed/100-fef1d6/200-fcdfac/300-fbc876/400-f8ab4b/500-f58b1a/600-e66f10/700-bf540f/800-984314/900-7a3914;casper:50-f4f7fa/100-e7ecf2/200-d4dce9/300-acbdd3/400-94a8c6/500-7b8fb6/600-687aa8/700-5d6a98/800-4f587e/900-434b65;medium-purple:50-faf6fe/100-f4eafd/200-ead8fc/300-dabaf8/400-c38df3/500-aa5eea/600-9741dc/700-812fc1/800-6e2b9e/900-5a247f;java:50-f0fdf9/100-cdfaef/200-9af5df/300-60e8cd/400-2fd2b5/500-18c4a9/600-0f9280/700-107568/800-125d54/900-144d46;mandy:50-fdf3f3/100-fde3e3/200-fccccc/300-f8a9a9/400-f27777/500-ea5e5e/600-d42e2e/700-b22323/800-942020/900-7b2121;blue-bayoux:50-f6f7f9/100-ebeef3/200-d4dae3/300-adbacc/400-8195af/500-617796/600-4d607c/700-3f4d65/800-374355/900-313a49;royal-blue:50-eff8ff/100-daeeff/200-bee2ff/300-91d0ff/400-5eb5fc/500-3895f9/600-2f7fef/700-1a61db/800-1c4eb1/900-1c458c */
     /* colors */
     --blue-grey: #768ba7;
     --default: #2f7fef;
@@ -10,26 +28,30 @@
     --purple: #aa5eea;
     --cloudy: #acbdd3;
     --orange: #f8a949;
+    --pink: #eb60bc;
+    --green: #99ce43;
 
     --blue-050:#e9fcf8;
     --blue-100:#daeeff;
     --blue-200:#bee2ff;
     --blue-300:#91d0ff;
+    --blue-XXX:#96b9e9; /* OCT */
     --blue-400:#5eb5fc;
     --blue-500:#3895f9;
-    --blue-600:#2f7fef;
+    --blue-600:#2f7fef; /* OCT */
     --blue-700:#1a61db;
     --blue-800:#1c4eb1;
     --blue-900:#1c458c;
 
-    --dusk-050:#f6f7f9;
+    --dusk-050:#f6f7f9; /* OCT */
     --dusk-100:#ebeef3;
     --dusk-200:#d4dae3;
     --dusk-300:#adbacc;
     --dusk-400:#8195af;
-    --dusk-500:#617796;
+    --dusk-500:#617796; /* OCT */
     --dusk-600:#4d607c;
-    --dusk-700:#3f4d65;
+    --dusk-XXX:#445670; /* OCT */
+    --dusk-700:#3f4d65;    
     --dusk-800:#374355;
     --dusk-900:#313a49;
 
@@ -87,8 +109,33 @@
     --orange-700:#bf540f;
     --orange-800:#984314;
     --orange-900:#7a3914;
-    
+
+    --pink-050:#fdf2fa;
+    --pink-100:#fce7f7;
+    --pink-200:#fad0ef;
+    --pink-300:#f7aae1;
+    --pink-400:#f175cb;
+    --pink-500:#eb60bc;
+    --pink-600:#d72b94;
+    --pink-700:#ba1c79;
+    --pink-800:#9a1a63;
+    --pink-900:#811a54;
+
+    --green-050:#f6fbea;
+    --green-100:#eaf6d1;
+    --green-200:#d6eea8;
+    --green-300:#b9e076;
+    --green-400:#99ce43;
+    --green-500:#7fb52d;
+    --green-600:#629020;
+    --green-700:#4b6e1d;
+    --green-800:#3e581c;
+    --green-900:#354b1c;
     /* colors */
+
+
+
+
 
 
 

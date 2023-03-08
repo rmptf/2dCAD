@@ -1,5 +1,23 @@
+.BASICALLY_COLORS_USED{
+    /* MAIN */
+    --MAIN1: #f6f7f9;
+    --MAIN2: #445670;
+    --MAIN3: #617796;
+    --MAIN4: #96b9e9;
+    /* HIGHLIGHTS */
+    --HILI1: #2f7fef;
+    --HILI2: #ea5e5e;
+    --HILI3: #18c4a9;
+    --HILI4: #aa5eea;
+    --HILI5: #acbdd3;
+    --HILI6: #f8ab4b;
+    --HILI7: #EB60BC;
+    --HILI8: #99CE43;
+}
+
 :root {
     --blue-grey: #768ba7;
+    /* COOKIE ACCEPT */
     --clear-blue: #2f7fef;
     --default: #2f7fef;
     --blue: #2f7fef;
@@ -25,13 +43,20 @@
     --page-color-purple: #aa5eea;
     --page-color-cloudy: #acbdd3;
     --page-color-orange: #f8ab4b;
+    /* SOME COLORED SQUARES BLUE */
     --block-color-default: #2f7fef;
+    /* OTHER COLORED SQUARES BLUE */
     --block-color-blue: #2f7fef;
+    /* SOME COLORED SQUARES CORAL */
     --block-color-coral: #ea5e5e;
+    /* SOME COLORED SQUARES TOPAZ */
     --block-color-topaz: #18c4a9;
+    /* SOME COLORED SQUARES PURLE */
     --block-color-purple: #aa5eea;
+    /* SOME COLORED SQUARES CLOUDY */
     --block-color-cloudy: #acbdd3;
-    --block-color-orange: #f8ab4b
+    /* SOME COLORED SQUARES ORANGE */
+    --block-color-orange: #f8ab4b;
 }
 
 .--theme-default,.--theme-light {
@@ -42,7 +67,9 @@
 }
 
 .--theme-dark {
+    /* MAIN BLOCK OUTLINE */
     --page-color-default: #96b9e9;
+    /* MAIN BLOCK HEADING TEXT */
     --page-color-blue: #96b9e9;
     --page-color-dusk: #9db8e5;
     --block-color-dusk: #768ba7
@@ -57,6 +84,7 @@
     --color-code-topaz-20: #d9fef8;
     --color-code-coral: #ea5e5e;
     --color-code-coral-20: #ffe1e1;
+    /* MAIN LOGO COLOR */
     --color-code-purple: #aa5eea;
     --color-code-purple-20: #f8d4f8;
     --color-code-purple-30: #e8a6f9;
@@ -65,6 +93,7 @@
     --color-code-orange-20: #fff4ca;
     --color-code-yellow: #fefa6c;
     --color-code-yellow-20: #f4ee0f;
+    /* MAIN BODY TEXT COLOR */
     --color-code-bw: #fff;
     --color-code-bw-20: #f3f7fb;
     --color-code-bw-30: #e8eff7;
@@ -83,6 +112,7 @@
     --color-code-bw-43: rgba(172,189,211,0.25);
     --color-code-bw-30-alpha-50: rgba(232,239,247,0.5);
     --color-code-bw-50-alpha-50: rgba(118,139,167,0.5);
+    /* MAN BUTTON BG COLOR */
     --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
     --color-code-bw-40-alpha-80: rgba(172,189,211,0.8);
     --color-code-bw-60-alpha-20: rgba(77,96,124,0.2);
@@ -117,19 +147,23 @@
 
 /* commented out colors are not in root colors vars */
 .--theme-dark {
+    /* MAIN LOGO TEXT COLOR */
     --color-code-blue-11: #9db8e5;  /* NOT IN MAIN */
+    /* MAIN UI BUTTON BG COLOR */
     --color-code-blue-12: #fff;
     --color-code-blue-13: #2f7fef;
     --color-code-topaz-21: #557177; /* NOT IN MAIN */
     --color-code-coral-21: #885e72; /* NOT IN MAIN */
     --color-code-purple-21: #77608a;    /* NOT IN MAIN */
     --color-code-orange-21: #7a6c62;    /* NOT IN MAIN */
+    /* MAIN BG COLOR */
     --color-code-bw-11: #445670;
     --color-code-bw-12: #4d607c;
     --color-code-bw-13: #5e718b;    /* NOT IN MAIN */
     --color-code-bw-21: #5e718b;    /* NOT IN MAIN */
     --color-code-bw-31: #6e839e;    /* NOT IN MAIN */
     --color-code-bw-44: rgba(172,189,211,0.5);
+    /* UI BUTTON TEXT COLOR */
     --color-code-bw-51: #e8eff7;
     --color-code-bw-52: #acbdd3;
     --color-code-bw-53: #445670;
@@ -140,4 +174,63 @@
     --color-code-add-block-icon: #4d607c;
     --color-code-add-block-background: #9db8e5; /* NOT IN MAIN */
     --color-code-bw-63-alpha-20: rgba(68,86,112,0.2);   /* NOT IN MAIN */
+}
+
+.NOTINPALLETTE{
+    /* SOME COLORED SQUARES HOTPINK */
+    --NOT-IN-PALLETE: #EB60BC;
+    /* SOME COLORED SQUARES ACID GREEN */
+    --NOT-IN-PALLETE: #99CE43;
+}
+
+.ALLCOLROSUSED{
+    /* MAIN BODY TEXT COLOR */
+    /* MAIN UI BUTTON BG COLOR */
+    /* UI BUTTON TEXT COLOR */
+    --color-code-bw: #fff;
+    /* MAIN BG COLOR */
+    --color-code-bw-11: #445670;
+    /* MAIN BLOCK OUTLINE */
+    /* MAIN BLOCK HEADING TEXT */
+    /* MAIN LOGO TEXT COLOR */
+    --page-color-blue: #96b9e9;
+    /* MAN BUTTON BG COLOR */
+    /* COLOR SLIGHTLY LIGHTER THAN MAIN BG COLOR */
+    /* USED A LIGHT COLOR WITH LOW OPACITY */
+    /* USE THIS */
+    --dusk-500:#617796;
+    /* MAIN LOGO COLOR */
+    --color-code-purple: #aa5eea;
+    /* COOKIE ACCEPT */
+    --clear-blue: #2f7fef;
+
+    /* OTHER COLORED SQUARES BLUE */
+    --block-color-blue: #2f7fef;
+    /* SOME COLORED SQUARES CORAL */
+    --block-color-coral: #ea5e5e;
+    /* SOME COLORED SQUARES TOPAZ */
+    --block-color-topaz: #18c4a9;
+    /* SOME COLORED SQUARES PURLE */
+    --block-color-purple: #aa5eea;
+    /* SOME COLORED SQUARES CLOUDY */
+    --block-color-cloudy: #acbdd3;
+    /* SOME COLORED SQUARES ORANGE */
+    --block-color-orange: #f8ab4b;
+    /* SOME COLORED SQUARES HOTPINK */
+    --NOT-IN-PALLETE: #EB60BC;
+    /* SOME COLORED SQUARES ACID GREEN */
+    --NOT-IN-PALLETE: #99CE43;
+
+    /* SIMILAR COLORS, DIFFERENT CODE */
+    /* MAIN LOGO TEXT COLOR */
+    --color-code-blue-11: #9db8e5;  /* NOT IN MAIN */
+    /* VERY CLOSE TO  */
+    /* MAIN BLOCK HEADING TEXT */
+    /* USING THAT INSTEAD */
+
+    /* UI BUTTON TEXT COLOR */
+    --color-code-bw-51: #e8eff7;
+    /* VERY CLOSE TO  */
+    /* MAIN UI BUTTON BG COLOR */
+    /* USING THAT INSTEAD */
 }
