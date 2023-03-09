@@ -3,7 +3,7 @@
         <div class="a-window__header-container">
             <div class="a-window__title-container">
                 <div class="a-window__title">
-                    <h2 class="heading_2 bold--medium <%= THEME_windowTitleColor %> <%#= THEME_windowTitleOpacity %>">
+                    <h2 class="heading_2 bold--medium <%= THEME_windowTitleColor %>">
                         <%= CONTENT_aWindow_content.HEADER.heading %>
                     </h2>
                 </div>
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="a-window__footer">
-        <div class="a-window__footer-container">
+        <div class="a-window__footer-container <%= THEME_windowFooterFill %> <%= THEME_windowFooterColor %>">
             <div class="a-window__actions">
                 <div class="btn-container--row btn-align--<%= ACTIONS_aWindow_footerBtnAlign %>">
                     <% if (ACTIONS_aWindow_footerBtnExist === true) { %>

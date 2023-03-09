@@ -1,9 +1,26 @@
 .BASICALLY_COLORS_USED{
+    /* LIGHT */
+    /* MAIN */
+    --MAIN1: #2f7fef;
+    --MAIN2: #fff;
+    --MAIN3: #768ba7;
+    --MAIN4: rgba(172,189,211,0.25);;
+    /* HIGHLIGHTS */
+    --HILI1: #2f7fef;
+    --HILI2: #ea5e5e;
+    --HILI3: #18c4a9;
+    --HILI4: #aa5eea;
+    --HILI5: #acbdd3;
+    --HILI6: #f8ab4b;
+    --HILI7: #EB60BC;
+    --HILI8: #99CE43;
+
+    /* DARK */
     /* MAIN */
     --MAIN1: #f6f7f9;
     --MAIN2: #445670;
-    --MAIN3: #617796;
-    --MAIN4: #96b9e9;
+    --MAIN3: #96b9e9;
+    --MAIN4: rgba(172,189,211,0.25);
     /* HIGHLIGHTS */
     --HILI1: #2f7fef;
     --HILI2: #ea5e5e;
@@ -113,6 +130,7 @@
     --color-code-bw-30-alpha-50: rgba(232,239,247,0.5);
     --color-code-bw-50-alpha-50: rgba(118,139,167,0.5);
     /* MAN BUTTON BG COLOR */
+    /* light and dark */
     --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
     --color-code-bw-40-alpha-80: rgba(172,189,211,0.8);
     --color-code-bw-60-alpha-20: rgba(77,96,124,0.2);
@@ -176,6 +194,35 @@
     --color-code-bw-63-alpha-20: rgba(68,86,112,0.2);   /* NOT IN MAIN */
 }
 
+.--theme-default, .--theme-light, :root {
+    /* MAIN LOGO TEXT COLOR */
+    --color-code-blue-11: #2f7fef;
+    --color-code-blue-12: #2f7fef;
+    /* MAIN BG COLOR */
+    --color-code-blue-13: #fff;
+    --color-code-topaz-21: #9ce7f1;
+    --color-code-coral-21: #ffe1e1;
+    --color-code-purple-21: #f8d4f8;
+    --color-code-orange-21: #fff4ca;
+    --color-code-bw-11: #fff;
+    --color-code-bw-12: #fff;
+    --color-code-bw-13: #fff;
+    --color-code-bw-21: #f3f7fb;
+    --color-code-bw-31: #e8eff7;
+    --color-code-bw-44: #acbdd3;
+    /* UI BUTTON TEXT COLOR */
+    --color-code-bw-51: #768ba7;
+    --color-code-bw-52: #768ba7;
+    --color-code-bw-53: #768ba7;
+    --color-code-bw-61: #4d607c;
+    --color-code-bw-62: #4d607c;
+    --color-code-bw-63: #445670;
+    --color-code-toolbar-icon: #2f7fef;
+    --color-code-add-block-icon: #2f7fef;
+    --color-code-add-block-background: #e8eff7;
+    --color-code-bw-63-alpha-20: rgba(77,96,124,0.2);
+}
+
 .NOTINPALLETTE{
     /* SOME COLORED SQUARES HOTPINK */
     --NOT-IN-PALLETE: #EB60BC;
@@ -184,6 +231,48 @@
 }
 
 .ALLCOLROSUSED{
+    /* LIGHT */
+
+    /* MAIN BODY TEXT COLOR */
+    /* MAIN UI BUTTON BG COLOR */
+    /* MAIN BLOCK OUTLINE */
+    /* MAIN BLOCK HEADING TEXT */
+    /* MAIN LOGO TEXT COLOR */
+    /* COOKIE ACCEPT */
+    --color-code-bw: #2f7fef;
+    /* MAIN BG COLOR */
+    --color-code-bw-11: #fff;
+    /* MAN BUTTON BG COLOR */
+    /* COLOR SLIGHTLY LIGHTER THAN MAIN BG COLOR */
+    /* USED A LIGHT COLOR WITH LOW OPACITY */
+    /* USE THIS */
+    --MAIN4:#adbacc;
+    /* WAS */
+    --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
+    /* MAIN LOGO COLOR */
+    --color-code-purple: #aa5eea;
+    /* UI BUTTON TEXT COLOR */
+    --color-code-bw-51: #768ba7;
+
+    /* OTHER COLORED SQUARES BLUE */
+    --block-color-blue: #2f7fef;
+    /* SOME COLORED SQUARES CORAL */
+    --block-color-coral: #ea5e5e;
+    /* SOME COLORED SQUARES TOPAZ */
+    --block-color-topaz: #18c4a9;
+    /* SOME COLORED SQUARES PURLE */
+    --block-color-purple: #aa5eea;
+    /* SOME COLORED SQUARES CLOUDY */
+    --block-color-cloudy: #acbdd3;
+    /* SOME COLORED SQUARES ORANGE */
+    --block-color-orange: #f8ab4b;
+    /* SOME COLORED SQUARES HOTPINK */
+    --NOT-IN-PALLETE: #EB60BC;
+    /* SOME COLORED SQUARES ACID GREEN */
+    --NOT-IN-PALLETE: #99CE43;
+
+    
+    /* DARK */
     /* MAIN BODY TEXT COLOR */
     /* MAIN UI BUTTON BG COLOR */
     /* UI BUTTON TEXT COLOR */
@@ -198,7 +287,9 @@
     /* COLOR SLIGHTLY LIGHTER THAN MAIN BG COLOR */
     /* USED A LIGHT COLOR WITH LOW OPACITY */
     /* USE THIS */
-    --dusk-500:#617796;
+    --MAIN4: #617796;
+    /* WAS */
+    --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
     /* MAIN LOGO COLOR */
     --color-code-purple: #aa5eea;
     /* COOKIE ACCEPT */
@@ -220,6 +311,8 @@
     --NOT-IN-PALLETE: #EB60BC;
     /* SOME COLORED SQUARES ACID GREEN */
     --NOT-IN-PALLETE: #99CE43;
+
+
 
     /* SIMILAR COLORS, DIFFERENT CODE */
     /* MAIN LOGO TEXT COLOR */

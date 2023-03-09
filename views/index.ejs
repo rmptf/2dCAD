@@ -29,7 +29,7 @@
                 },
             },
         // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: false,
+            ACTIONS_aWindow_footerBtnExist: true,
             ACTIONS_aWindow_footerBtnText: "Get Started",
             ACTIONS_aWindow_footerBtnAlign: "center",
             ACTIONS_aWindow_btnMode: "btn--default-light",
@@ -38,6 +38,8 @@
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
     // ------------------------------------------------------------------------------------------
     })
 %>
@@ -71,7 +73,7 @@
                 },
             },
         // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: false,
+            ACTIONS_aWindow_footerBtnExist: true,
             ACTIONS_aWindow_footerBtnText: "Get Started",
             ACTIONS_aWindow_footerBtnAlign: "center",
             ACTIONS_aWindow_btnMode: "btn--default-light",
@@ -80,6 +82,52 @@
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
+    // ------------------------------------------------------------------------------------------
+    })
+%>
+
+<%- include(moduleLocationVARS.A_PANE, {
+    // GLOBAL Mode Class
+        THEME_globalMode: globalModeClass,
+    // MODULE Theme Class
+        THEME_moduleTheme: colorVars.THEMECLASS.tertiaryThemeClass,
+
+    // ALL Modules
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Pane
+        // MODULE
+            MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
+        // THEME
+            THEME_paneContainerFill: colorVars.FILLS.mainFill,
+            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Window
+        // MODULE
+            MODULE_aWindow_first: '',
+            MODULE_aWindow_second: '',
+        // CONTENT
+            CONTENT_aWindow_content: {
+                HEADER: {
+                    heading: "Welcome to Notcher",
+                    paragraph: "Notcher is a web-based 2dcad application.",
+                },
+            },
+        // ACTIONS
+            ACTIONS_aWindow_footerBtnExist: true,
+            ACTIONS_aWindow_footerBtnText: "Get Started",
+            ACTIONS_aWindow_footerBtnAlign: "center",
+            ACTIONS_aWindow_btnMode: "btn--default-light",
+            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
+        // THEME
+            THEME_windowContainerFill: colorVars.FILLS.mainFill,
+            THEME_windowTitleColor: colorVars.COLORS.main,
+            THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
     // ------------------------------------------------------------------------------------------
     })
 %>

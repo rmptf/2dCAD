@@ -1,10 +1,30 @@
 .BASICALLY_COLORS_USED{
+    /* LIGHT */
+    /* MAIN */
+    --MAIN1: #2f7fef;
+    --MAIN2: #fff;
+    --MAIN3: #768ba7;
+    --MAIN4:#adbacc;
+    /* (ACTUALLY USED, USE ABOVE INSTEAD) */
+    --MAIN4: rgba(172,189,211,0.25);;
+    /* HIGHLIGHTS */
+    --HILI1: #2f7fef;
+    --HILI2: #ea5e5e;
+    --HILI3: #18c4a9;
+    --HILI4: #aa5eea;
+    --HILI5: #acbdd3;
+    --HILI6: #f8ab4b;
+    --HILI7: #EB60BC;
+    --HILI8: #99CE43;
+    
+    /* DARK */
     /* MAIN */
     --MAIN1: #fff;
     --MAIN2: #445670;
-    --MAIN3: #617796;
-    --MAIN4: #96b9e9;
-    --HILI5: #2f7fef;
+    --MAIN3: #96b9e9;
+    --MAIN4: #617796;
+    /* (ACTUALLY USED, USE ABOVE INSTEAD) */
+    --MAIN4: rgba(172,189,211,0.25);;
     /* HIGHLIGHTS */
     --HILI1: #2f7fef;
     --HILI2: #ea5e5e;
@@ -19,9 +39,9 @@
 :root {
     /* https://uicolors.app/edit?sv1=atlantis:50-f6fbea/100-eaf6d1/200-d6eea8/300-b9e076/400-99ce43/500-7fb52d/600-629020/700-4b6e1d/800-3e581c/900-354b1c;brilliant-rose:50-fdf2fa/100-fce7f7/200-fad0ef/300-f7aae1/400-f175cb/500-eb60bc/600-d72b94/700-ba1c79/800-9a1a63/900-811a54;casablanca:50-fff9ed/100-fef1d6/200-fcdfac/300-fbc876/400-f8ab4b/500-f58b1a/600-e66f10/700-bf540f/800-984314/900-7a3914;casper:50-f4f7fa/100-e7ecf2/200-d4dce9/300-acbdd3/400-94a8c6/500-7b8fb6/600-687aa8/700-5d6a98/800-4f587e/900-434b65;medium-purple:50-faf6fe/100-f4eafd/200-ead8fc/300-dabaf8/400-c38df3/500-aa5eea/600-9741dc/700-812fc1/800-6e2b9e/900-5a247f;java:50-f0fdf9/100-cdfaef/200-9af5df/300-60e8cd/400-2fd2b5/500-18c4a9/600-0f9280/700-107568/800-125d54/900-144d46;mandy:50-fdf3f3/100-fde3e3/200-fccccc/300-f8a9a9/400-f27777/500-ea5e5e/600-d42e2e/700-b22323/800-942020/900-7b2121;blue-bayoux:50-f6f7f9/100-ebeef3/200-d4dae3/300-adbacc/400-8195af/500-617796/600-4d607c/700-3f4d65/800-374355/900-313a49;royal-blue:50-eff8ff/100-daeeff/200-bee2ff/300-91d0ff/400-5eb5fc/500-3895f9/600-2f7fef/700-1a61db/800-1c4eb1/900-1c458c */
     /* colors */
-    --blue-grey: #768ba7;
     --default: #2f7fef;
     --blue: #2f7fef;
+    --blue-grey: #768ba7;
     --dusk: #4d607c;
     --coral: #ea5e5e;
     --topaz: #18c4a9;
@@ -30,27 +50,38 @@
     --orange: #f8a949;
     --pink: #eb60bc;
     --green: #99ce43;
+    --bw-050: #f7f7f7;
+    --bw-900: #131313;
 
     --blue-050:#e9fcf8;
     --blue-100:#daeeff;
     --blue-200:#bee2ff;
-    --blue-300:#91d0ff;
-    --blue-XXX:#96b9e9; /* OCT */
+    --blue-300:#91d0ff; /* OCT DARK use this for #96b9e9*/
     --blue-400:#5eb5fc;
     --blue-500:#3895f9;
-    --blue-600:#2f7fef; /* OCT */
+    --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
     --blue-700:#1a61db;
     --blue-800:#1c4eb1;
     --blue-900:#1c458c;
+    
+    --blue-grey-050:#f6f7f9;
+    --blue-grey-100:#ebeef3;
+    --blue-grey-200:#d4dae3;
+    --blue-grey-300:#aebacb;
+    --blue-grey-400:#768ba7; /* OCT LIGHT */
+    --blue-grey-500:#627895;
+    --blue-grey-600:#4d607c;
+    --blue-grey-700:#404d64;
+    --blue-grey-800:#374255;
+    --blue-grey-900:#323a48;
 
-    --dusk-050:#f6f7f9; /* OCT */
+    --dusk-050:#f6f7f9;
     --dusk-100:#ebeef3;
     --dusk-200:#d4dae3;
-    --dusk-300:#adbacc;
+    --dusk-300:#adbacc; /* OCT LIGHT */
     --dusk-400:#8195af;
-    --dusk-500:#617796; /* OCT */
-    --dusk-600:#4d607c;
-    --dusk-XXX:#445670; /* OCT */
+    --dusk-500:#617796; /* OCT DARK */
+    --dusk-600:#4d607c; /* OCT DARK use this for #445670*/
     --dusk-700:#3f4d65;    
     --dusk-800:#374355;
     --dusk-900:#313a49;
@@ -71,7 +102,7 @@
     --topaz-200:#9df1e3;
     --topaz-300:#5ee8d8;
     --topaz-400:#2ed1c1;
-    --topaz-500:#1bc0b5;
+    --topaz-500:#18c4a9;
     --topaz-600:#148f89;
     --topaz-700:#11746f;
     --topaz-800:#125e5c;
@@ -103,7 +134,7 @@
     --orange-100:#fef1d6;
     --orange-200:#fcdfac;
     --orange-300:#fbc876;
-    --orange-400:#f8ab4b;
+    --orange-400:#f8a949;
     --orange-500:#f58b1a;
     --orange-600:#e66f10;
     --orange-700:#bf540f;
@@ -131,48 +162,88 @@
     --green-700:#4b6e1d;
     --green-800:#3e581c;
     --green-900:#354b1c;
+
+    --bw-050:#f7f7f7; /* OCT DARK use this for #fff*/ /* OCT LIGHT use this for #fff*/
+    --bw-100:#e3e3e3;
+    --bw-200:#c8c8c8;
+    --bw-300:#a4a4a4;
+    --bw-400:#818181;
+    --bw-500:#666666;
+    --bw-600:#515151;
+    --bw-700:#434343;
+    --bw-800:#383838;
+    --bw-900:#131313;
     /* colors */
 
 
+        /* MAIN BODY TEXT COLOR */
+    /* MAIN UI BUTTON BG COLOR */
+    /* MAIN BLOCK OUTLINE */
+    /* MAIN BLOCK HEADING TEXT */
+    /* MAIN LOGO TEXT COLOR */
+    /* COOKIE ACCEPT */
+    --color-code-bw: #2f7fef;
+    /* MAIN BG COLOR */
+    --color-code-bw-11: #fff;
+    /* MAN BUTTON BG COLOR */
+    /* COLOR SLIGHTLY LIGHTER THAN MAIN BG COLOR */
+    /* USED A LIGHT COLOR WITH LOW OPACITY */
+    /* USE THIS */
+    --MAIN4:#adbacc;
+    /* WAS */
+    --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
+    /* MAIN LOGO COLOR */
+    --color-code-purple: #aa5eea;
+    /* UI BUTTON TEXT COLOR */
+    --color-code-bw-51: #768ba7;
 
 
+    /* DELETE ONCE iNSIde THeME */
+    --blue-grey-400:#768ba7; /* OCT LIGHT */
+    --dusk-300:#adbacc; /* OCT LIGHT */
+    --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
+    --bw-050:#f7f7f7; /* OCT DARK use this for #fff*/ /* OCT LIGHT use this for #fff*/
 
+    --blue-300:#91d0ff; /* OCT DARK use this for #96b9e9*/
+    --dusk-500:#617796; /* OCT DARK */
+    --dusk-600:#4d607c; /* OCT DARK use this for #445670*/
+    --bw-050:#f7f7f7; /* OCT DARK use this for #fff*/ /* OCT LIGHT use this for #fff*/
 
+    --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
 
     /* Opacity */
     --opacity-var: 1.0;
     /* LIGHT MODE */
         /* Colors */
-        --main_LIGHT: rgb(67, 67, 67);
-        --main--muted_LIGHT: rgb(111, 111, 111);
-        --accent-primary_LIGHT: rgba(151, 135, 135);
-        --accent-primary--muted_LIGHT: rgba(200, 182, 182);
-        --accent-secondary_LIGHT: rgba(213, 165, 83);
-        --accent-secondary--muted_LIGHT: rgba(184, 142, 70);
+        --main_LIGHT: var(--blue-600);
+        --main--muted_LIGHT: var(--blue-400);
+        --accent-primary_LIGHT: var(--blue-grey-400);
+        --accent-primary--muted_LIGHT: var(--blue-grey-600);
+        --accent-secondary_LIGHT: var();
+        --accent-secondary--muted_LIGHT: var();
         /* Fills */
-        --main--fill_LIGHT: rgb(232, 232, 232);
-        --main--muted--fill_LIGHT: rgb(184, 184, 184);
-        --accent-primary--fill_LIGHT: rgba(147, 147, 147);
-        --accent-primary--muted--fill_LIGHT: rgba(174, 160, 160);
-        --accent-secondary--fill_LIGHT: rgba(211, 183, 135);
-        --accent-secondary--muted--fill_LIGHT: rgba(187, 167, 130);
+        --main--fill_LIGHT: var(--bw-050);
+        --main--muted--fill_LIGHT: var(--bw-200);
+        --accent-primary--fill_LIGHT: var(--dusk-300);
+        --accent-primary--muted--fill_LIGHT: var(--dusk-500);
+        --accent-secondary--fill_LIGHT: var();
+        --accent-secondary--muted--fill_LIGHT: var();
 
-    /* DARKMODE */
+     /* DARK MODE */
         /* Colors */
-        --main_DARK: rgb(187, 187, 187);
-        --main--muted_DARK: rgb(137, 137, 137);
-        --accent-primary_DARK: rgba(151, 135, 135);
-        --accent-primary--muted_DARK: rgba(200, 182, 182);
-        --accent-secondary_DARK: rgba(213, 165, 83);
-        --accent-secondary--muted_DARK: rgba(184, 142, 70);
-
+        --main_DARK: var(--cloudy-200);
+        --main--muted_DARK: var(--cloudy-400);
+        --accent-primary_DARK: var(--orange-400);
+        --accent-primary--muted_DARK: var(--orange-600);
+        --accent-secondary_DARK: var(--purple-400);
+        --accent-secondary--muted_DARK: var(--purple-600);
         /* Fills */
-        --main--fill_DARK: rgb(0, 0, 0);
-        --main--muted--fill_DARK: rgb(75, 75, 75);
-        --accent-primary--fill_DARK: rgba(147, 147, 147);
-        --accent-primary--muted--fill_DARK: rgba(174, 160, 160);
-        --accent-secondary--fill_DARK: rgba(211, 183, 135);
-        --accent-secondary--muted--fill_DARK: rgba(187, 167, 130);
+        --main--fill_DARK: var(--dusk-600);
+        --main--muted--fill_DARK: var(--dusk-400);
+        --accent-primary--fill_DARK: var(--purple-600);
+        --accent-primary--muted--fill_DARK: var(--purple-400);
+        --accent-secondary--fill_DARK: var(--topaz-600);
+        --accent-secondary--muted--fill_DARK: var(--topaz-400);
 }
 
 .module-theme_secondary {
@@ -207,6 +278,43 @@
         --main--muted--fill_DARK: rgba(90, 38, 38);
         --accent-primary--fill_DARK: rgba(53, 105, 110);
         --accent-primary--muted--fill_DARK: rgba(51, 87, 91);
+        --accent-secondary--fill_DARK: rgba(211, 183, 135);
+        --accent-secondary--muted--fill_DARK: rgba(187, 167, 130);
+}
+
+.module-theme_tertiary {
+    /* Opacity */
+    --opacity-var: 1.0;
+    /* LIGHT MODE */
+        /* Colors */
+        --main_LIGHT: rgb(67, 67, 67);
+        --main--muted_LIGHT: rgb(111, 111, 111);
+        --accent-primary_LIGHT: rgba(151, 135, 135);
+        --accent-primary--muted_LIGHT: rgba(200, 182, 182);
+        --accent-secondary_LIGHT: rgba(213, 165, 83);
+        --accent-secondary--muted_LIGHT: rgba(184, 142, 70);
+        /* Fills */
+        --main--fill_LIGHT: rgb(232, 232, 232);
+        --main--muted--fill_LIGHT: rgb(184, 184, 184);
+        --accent-primary--fill_LIGHT: rgba(147, 147, 147);
+        --accent-primary--muted--fill_LIGHT: rgba(174, 160, 160);
+        --accent-secondary--fill_LIGHT: rgba(211, 183, 135);
+        --accent-secondary--muted--fill_LIGHT: rgba(187, 167, 130);
+
+    /* DARKMODE */
+        /* Colors */
+        --main_DARK: rgb(187, 187, 187);
+        --main--muted_DARK: rgb(137, 137, 137);
+        --accent-primary_DARK: rgba(151, 135, 135);
+        --accent-primary--muted_DARK: rgba(200, 182, 182);
+        --accent-secondary_DARK: rgba(213, 165, 83);
+        --accent-secondary--muted_DARK: rgba(184, 142, 70);
+
+        /* Fills */
+        --main--fill_DARK: rgb(0, 0, 0);
+        --main--muted--fill_DARK: rgb(75, 75, 75);
+        --accent-primary--fill_DARK: rgba(147, 147, 147);
+        --accent-primary--muted--fill_DARK: rgba(174, 160, 160);
         --accent-secondary--fill_DARK: rgba(211, 183, 135);
         --accent-secondary--muted--fill_DARK: rgba(187, 167, 130);
 }

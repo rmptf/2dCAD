@@ -6,6 +6,7 @@ const COLORVARS = {
     THEMECLASS: {
         defaultThemeClass: "",
         secondaryThemeClass: "module-theme_secondary",
+        tertiaryThemeClass: "module-theme_tertiary",
     },
     COLORS: {
         main: "clr-theme__main",
