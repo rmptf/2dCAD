@@ -27,6 +27,10 @@
                     heading: "Welcome to Notcher",
                     paragraph: "Notcher is a web-based 2dcad application.",
                 },
+                BODY: {
+                    paragraphFirst: "Accent Primary",
+                    paragraphSecond: "Accent Secondary",
+                }
             },
         // ACTIONS
             ACTIONS_aWindow_footerBtnExist: true,
@@ -38,13 +42,84 @@
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowBodyFirstFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowBodyFirstColor: colorVars.COLORS.accentPrimary,
+            THEME_windowBodySecondFill: colorVars.FILLS.accentSecondaryFill,
+            THEME_windowBodySecondColor: colorVars.COLORS.accentSecondary,
             THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
             THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
+
+        // TEST
+        // HIGHLIGHTS
+            testBtnText__hl1: "HIGHLIGHT 1",
+            testColor__hl1: colorVars.COLORS.accentPrimary,
+            testFill__hl1: colorVars.FILLS.hl10,
+
+            testBtnText__hl2: "HIGHLIGHT 2",
+            testColor__hl2: colorVars.COLORS.accentPrimary,
+            testFill__hl2: colorVars.FILLS.hl20,
+
+            testBtnText__hl3: "HIGHLIGHT 3",
+            testColor__hl3: colorVars.COLORS.accentPrimary,
+            testFill__hl3: colorVars.FILLS.hl30,
+
+            testBtnText__hl4: "HIGHLIGHT 4",
+            testColor__hl4: colorVars.COLORS.accentPrimary,
+            testFill__hl4: colorVars.FILLS.hl40,
+
+            testBtnText__hl5: "HIGHLIGHT 5",
+            testColor__hl5: colorVars.COLORS.accentPrimary,
+            testFill__hl5: colorVars.FILLS.hl50,
+
+            testBtnText__hl6: "HIGHLIGHT 6",
+            testColor__hl6: colorVars.COLORS.accentPrimary,
+            testFill__hl6: colorVars.FILLS.hl60,
+
+            testBtnText__hl7: "HIGHLIGHT 7",
+            testColor__hl7: colorVars.COLORS.accentPrimary,
+            testFill__hl7: colorVars.FILLS.hl70,
+
+            testBtnText__hl8: "HIGHLIGHT 8",
+            testColor__hl8: colorVars.COLORS.accentPrimary,
+            testFill__hl8: colorVars.FILLS.hl80,
+
+            testBtnText__hl9: "HIGHLIGHT 9",
+            testColor__hl9: colorVars.COLORS.accentPrimary,
+            testFill__hl9: colorVars.FILLS.hl90,
+
+        // ALERTS
+            testBtnText__succ: "SUCCESS",
+            testColor__succ: colorVars.COLORS.alertSuccess,
+            testFill__succ: colorVars.FILLS.alertSuccess,
+
+            testBtnText__dang: "DANGER",
+            testColor__dang: colorVars.COLORS.alertDanger,
+            testFill__dang: colorVars.FILLS.alertDanger,
+
+            testBtnText__warn: "WARN",
+            testColor__warn: colorVars.COLORS.alertWarning,
+            testFill__warn: colorVars.FILLS.alertWarning,
+
+            testBtnText__info: "INFO",
+            testColor__info: colorVars.COLORS.alertInfo,
+            testFill__info: colorVars.FILLS.alertInfo,
+
+            testBtnText__prim: "PRIMARY",
+            testColor__prim: colorVars.COLORS.alertPrimary,
+            testFill__prim: colorVars.FILLS.alertPrimary,
+
+            testBtnText__secon: "SECONDARY",
+            testColor__secon: colorVars.COLORS.alertSecondary,
+            testFill__secon: colorVars.FILLS.alertSecondary,
+
+            testBtnText__disa: "DISSABLED",
+            testColor__disa: colorVars.COLORS.alertDisabled,
+            testFill__disa: colorVars.FILLS.alertDisabled,
     // ------------------------------------------------------------------------------------------
     })
 %>
 
-<%- include(moduleLocationVARS.A_PANE, {
+<%#- include(moduleLocationVARS.A_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,
     // MODULE Theme Class
@@ -88,7 +163,7 @@
     })
 %>
 
-<%- include(moduleLocationVARS.A_PANE, {
+<%#- include(moduleLocationVARS.A_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,
     // MODULE Theme Class

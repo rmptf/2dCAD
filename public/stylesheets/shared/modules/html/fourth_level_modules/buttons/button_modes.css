@@ -1,0 +1,93 @@
+.button--success {
+    --color-1: var(--alert-success--fill);
+    --color-2: var(--alert-success);
+    --color-highlight: var(--alert-success--fill);
+}
+.button--success:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--danger {
+    --color-1: var(--alert-danger--fill);
+    --color-2: var(--alert-danger);
+    --color-highlight: var(--alert-danger--fill);
+}
+.button--danger:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--warning {
+    --color-1: var(--alert-warning--fill);
+    --color-2: var(--alert-warning);
+    --color-highlight: var(--alert-warning--fill);
+}
+.button--warning:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--info {
+    --color-1: var(--alert-info--fill);
+    --color-2: var(--alert-info);
+    --color-highlight: var(--alert-info--fill);
+}
+.button--info:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--primary {
+    --color-1: var(--alert-primary--fill);
+    --color-2: var(--alert-primary);
+    --color-highlight: var(--alert-primary--fill);
+}
+.button--primary:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--secondary {
+    --color-1: var(--alert-secondary--fill);
+    --color-2: var(--alert-secondary);
+    --color-highlight: var(--alert-secondary--fill);
+}
+.button--secondary:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--disabled {
+    --color-1: var(--state-disabled--fill);
+    --color-2: var(--state-disabled);
+    --color-highlight: var(--state-disabled--fill);
+}
+.button--disabled:focus {
+    box-shadow: 0 0 3pt 2pt rgba(var(--color-1), 0.6);
+}
+
+.button--contained {
+    /* background-color: rgba(var(--color-1), 0.8);
+    color: rgba(var(--color-2), 0.8);
+    border: 1px solid rgba(var(--color-1), 0); */
+    background-color: var(--color-1);
+    color: var(--color-2);
+    border: 1px solid var(--color-1);
+}
+.button--contained:hover {
+    /* background-color: rgba(var(--color-1), 1);
+    color: rgba(var(--color-2), 1);
+    border: 1px solid rgba(var(--color-1), 0); */
+    background-color: var(--color-1);
+    color: var(--color-2);
+    border: 1px solid var(--color-1);
+}
+
+.button--outlined {
+    /* background-color: rgba(var(--color-1), 0);
+    color: rgba(var(--color-1), 0.8);
+    border: 1px solid rgba(var(--color-1), 0.8); */
+    background-color: unset;
+    color: var(--color-1);
+    border: 1px solid var(--color-1);
+}
+.button--outlined:hover {
+    background-color: rgba(var(--color-1), 0.2);
+    color: rgba(var(--color-1), 1);
+    border: 1px solid rgba(var(--color-1), 1);
+}

@@ -41,6 +41,7 @@
     /* colors */
     --default: #2f7fef;
     --blue: #2f7fef;
+    --blue-light: #96b9e9;
     --blue-grey: #768ba7;
     --dusk: #4d607c;
     --coral: #ea5e5e;
@@ -56,13 +57,24 @@
     --blue-050:#e9fcf8;
     --blue-100:#daeeff;
     --blue-200:#bee2ff;
-    --blue-300:#91d0ff; /* OCT DARK use this for #96b9e9*/
+    --blue-300:#91d0ff;
     --blue-400:#5eb5fc;
     --blue-500:#3895f9;
     --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
     --blue-700:#1a61db;
     --blue-800:#1c4eb1;
     --blue-900:#1c458c;
+
+    --blue-light-050:#f2f5fc;
+    --blue-light-100:#e1eaf8;
+    --blue-light-200:#c9daf4;
+    --blue-light-300:#96b9e9;  /* OCT DARK */
+    --blue-light-400:#79a3e1;
+    --blue-light-500:#5983d8;
+    --blue-light-600:#4568cb;
+    --blue-light-700:#3b56ba;
+    --blue-light-800:#354798;
+    --blue-light-900:#2f3e79;
     
     --blue-grey-050:#f6f7f9;
     --blue-grey-100:#ebeef3;
@@ -102,7 +114,7 @@
     --topaz-200:#9df1e3;
     --topaz-300:#5ee8d8;
     --topaz-400:#2ed1c1;
-    --topaz-500:#18c4a9;
+    --topaz-500:#18c4a9; /* OCT DARK */ /* OCT LIGHT */
     --topaz-600:#148f89;
     --topaz-700:#11746f;
     --topaz-800:#125e5c;
@@ -175,80 +187,122 @@
     --bw-900:#131313;
     /* colors */
 
+    /* COLORS THAT DON'T CHANGE BASED ON THEME OR MODE */
+    --bw-00: var(--bw-050);
+    --bw-10: var(--bw-100);
+    --bw-20: var(--bw-200);
+    --bw-30: var(--bw-300);
+    --bw-40: var(--bw-400);
+    --bw-50: var(--bw-500);
+    --bw-60: var(--bw-600);
+    --bw-70: var(--bw-700);
+    --bw-80: var(--bw-800);
+    --bw-90: var(--bw-900);
+    --bw-00--fill: var(--bw-050);
+    --bw-10--fill: var(--bw-100);
+    --bw-20--fill: var(--bw-200);
+    --bw-30--fill: var(--bw-300);
+    --bw-40--fill: var(--bw-400);
+    --bw-50--fill: var(--bw-500);
+    --bw-60--fill: var(--bw-600);
+    --bw-70--fill: var(--bw-700);
+    --bw-80--fill: var(--bw-800);
+    --bw-90--fill: var(--bw-900);
+    /* COLORS THAT DON'T CHANGE BASED ON THEME OR MODE */
 
-        /* MAIN BODY TEXT COLOR */
-    /* MAIN UI BUTTON BG COLOR */
-    /* MAIN BLOCK OUTLINE */
-    /* MAIN BLOCK HEADING TEXT */
-    /* MAIN LOGO TEXT COLOR */
-    /* COOKIE ACCEPT */
-    --color-code-bw: #2f7fef;
-    /* MAIN BG COLOR */
-    --color-code-bw-11: #fff;
-    /* MAN BUTTON BG COLOR */
-    /* COLOR SLIGHTLY LIGHTER THAN MAIN BG COLOR */
-    /* USED A LIGHT COLOR WITH LOW OPACITY */
-    /* USE THIS */
-    --MAIN4:#adbacc;
-    /* WAS */
-    --color-code-bw-40-alpha-25: rgba(172,189,211,0.25);
-    /* MAIN LOGO COLOR */
-    --color-code-purple: #aa5eea;
-    /* UI BUTTON TEXT COLOR */
-    --color-code-bw-51: #768ba7;
+    /* COLORS THAT DON'T CHANGE BASED ON MODE */
+    --highlight-10: var(--blue);
+    --highlight-20: var(--dusk);
+    --highlight-30: var(--coral);
+    --highlight-40: var(--topaz);
+    --highlight-50: var(--purple);
+    --highlight-60: var(--cloudy);
+    --highlight-70: var(--orange);
+    --highlight-80: var(--pink);
+    --highlight-90: var(--green);
+    --highlight-10--fill: var(--blue);
+    --highlight-20--fill: var(--dusk);
+    --highlight-30--fill: var(--coral);
+    --highlight-40--fill: var(--topaz);
+    --highlight-50--fill: var(--purple);
+    --highlight-60--fill: var(--cloudy);
+    --highlight-70--fill: var(--orange);
+    --highlight-80--fill: var(--pink);
+    --highlight-90--fill: var(--green);
+    /* COLORS THAT DON'T CHANGE BASED ON MODE */
+    
+    /* DEFAULT THEME */
+        /* LIGHT MODE */
+            /* Colors */
+                --main_LIGHT: var(--blue-600);
+                --main--muted_LIGHT: var(--blue-400);
+                --accent-primary_LIGHT: var(--blue-grey-500);
+                --accent-primary--muted_LIGHT: var(--blue-grey-300);
+                --accent-secondary_LIGHT: var(--blue-200);
+                --accent-secondary--muted_LIGHT: var(--blue-100);
+                /* Alerts */
+                    --alert-success_LIGHT: var(--green-100);
+                    --alert-danger_LIGHT: var(--coral-300);
+                    --alert-warning_LIGHT: var(--orange-200);
+                    --alert-info_LIGHT: var(--orange-300);
+                    --alert-primary_LIGHT: var(--blue-200);
+                    --alert-secondary_LIGHT: var(--cloudy-100);
+                /* State */
+                    --state-disabled_LIGHT: var(--dusk-100);
+            /* Fills */
+                --main--fill_LIGHT: var(--bw-050);
+                --main--muted--fill_LIGHT: var(--bw-200);
+                --accent-primary--fill_LIGHT: var(--dusk-300);
+                --accent-primary--muted--fill_LIGHT: var(--dusk-500);
+                --accent-secondary--fill_LIGHT: var(--blue-600);
+                --accent-secondary--muted--fill_LIGHT: var(--blue-400);
+                /* Alerts */
+                    --alert-success--fill_LIGHT: var(--green-400);
+                    --alert-danger--fill_LIGHT: var(--coral-600);
+                    --alert-warning--fill_LIGHT: var(--orange-400);
+                    --alert-info--fill_LIGHT: var(--orange-600);
+                    --alert-primary--fill_LIGHT: var(--blue-600);
+                    --alert-secondary--fill_LIGHT: var(--cloudy-300);
+                /* State */
+                    --state-disabled--fill_LIGHT: var(--dusk-200);
 
-
-    /* DELETE ONCE iNSIde THeME */
-    --blue-grey-400:#768ba7; /* OCT LIGHT */
-    --dusk-300:#adbacc; /* OCT LIGHT */
-    --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
-    --bw-050:#f7f7f7; /* OCT DARK use this for #fff*/ /* OCT LIGHT use this for #fff*/
-
-    --blue-300:#91d0ff; /* OCT DARK use this for #96b9e9*/
-    --dusk-500:#617796; /* OCT DARK */
-    --dusk-600:#4d607c; /* OCT DARK use this for #445670*/
-    --bw-050:#f7f7f7; /* OCT DARK use this for #fff*/ /* OCT LIGHT use this for #fff*/
-
-    --blue-600:#2f7fef; /* OCT DARK */ /* OCT LIGHT */
-
-    /* Opacity */
-    --opacity-var: 1.0;
-    /* LIGHT MODE */
-        /* Colors */
-        --main_LIGHT: var(--blue-600);
-        --main--muted_LIGHT: var(--blue-400);
-        --accent-primary_LIGHT: var(--blue-grey-400);
-        --accent-primary--muted_LIGHT: var(--blue-grey-600);
-        --accent-secondary_LIGHT: var();
-        --accent-secondary--muted_LIGHT: var();
-        /* Fills */
-        --main--fill_LIGHT: var(--bw-050);
-        --main--muted--fill_LIGHT: var(--bw-200);
-        --accent-primary--fill_LIGHT: var(--dusk-300);
-        --accent-primary--muted--fill_LIGHT: var(--dusk-500);
-        --accent-secondary--fill_LIGHT: var();
-        --accent-secondary--muted--fill_LIGHT: var();
-
-     /* DARK MODE */
-        /* Colors */
-        --main_DARK: var(--cloudy-200);
-        --main--muted_DARK: var(--cloudy-400);
-        --accent-primary_DARK: var(--orange-400);
-        --accent-primary--muted_DARK: var(--orange-600);
-        --accent-secondary_DARK: var(--purple-400);
-        --accent-secondary--muted_DARK: var(--purple-600);
-        /* Fills */
-        --main--fill_DARK: var(--dusk-600);
-        --main--muted--fill_DARK: var(--dusk-400);
-        --accent-primary--fill_DARK: var(--purple-600);
-        --accent-primary--muted--fill_DARK: var(--purple-400);
-        --accent-secondary--fill_DARK: var(--topaz-600);
-        --accent-secondary--muted--fill_DARK: var(--topaz-400);
+        /* DARK MODE */
+            /* Colors */
+            --main_DARK: var(--blue-light-300);
+            --main--muted_DARK: var(--blue-light-500);
+            --accent-primary_DARK: var(--bw-050);
+            --accent-primary--muted_DARK: var(--bw-200);
+            --accent-secondary_DARK: var(--blue-200);
+            --accent-secondary--muted_DARK: var(--blue-300);
+            /* Alerts */
+                --alert-success_DARK: var(--green-800);
+                --alert-danger_DARK: var(--coral-800);
+                --alert-warning_DARK: var(--orange-700);
+                --alert-info_DARK: var(--orange-800);
+                --alert-primary_DARK: var(--blue-900);
+                --alert-secondary_DARK: var(--cloudy-700);
+            /* State */
+                --state-disabled_DARK: var(--dusk-700);
+            /* Fills */
+            --main--fill_DARK: var(--dusk-600);
+            --main--muted--fill_DARK: var(--dusk-400);
+            --accent-primary--fill_DARK: var(--dusk-500);
+            --accent-primary--muted--fill_DARK: var(--dusk-300);
+            --accent-secondary--fill_DARK: var(--blue-600);
+            --accent-secondary--muted--fill_DARK: var(--blue-400);
+            /* Alerts */
+                --alert-success--fill_DARK: var(--green-400);
+                --alert-danger--fill_DARK: var(--coral-500);
+                --alert-warning--fill_DARK: var(--orange-300);
+                --alert-info--fill_DARK: var(--orange-500);
+                --alert-primary--fill_DARK: var(--blue-600);
+                --alert-secondary--fill_DARK: var(--cloudy-200);
+            /* State */
+                --state-disabled--fill_DARK: var(--dusk-400);
+    /* DEFAULT THEME */
 }
 
 .module-theme_secondary {
-    /* Opacity */
-    --opacity-var: 1.0;
     /* LIGHT MODE */
         /* Colors */
         --main_LIGHT: rgb(98, 37, 37);
@@ -283,8 +337,6 @@
 }
 
 .module-theme_tertiary {
-    /* Opacity */
-    --opacity-var: 1.0;
     /* LIGHT MODE */
         /* Colors */
         --main_LIGHT: rgb(67, 67, 67);
@@ -333,6 +385,25 @@
     --accent-primary--muted--fill: var(--accent-primary--muted--fill_LIGHT);
     --accent-secondary--fill: var(--accent-secondary--fill_LIGHT);
     --accent-secondary--muted--fill: var(--accent-secondary--muted--fill_LIGHT);
+
+    /* Alerts */
+    --alert-success: var(--alert-success_LIGHT);
+    --alert-danger: var(--alert-danger_LIGHT);
+    --alert-warning: var(--alert-warning_LIGHT);
+    --alert-info: var(--alert-info_LIGHT);
+    --alert-primary: var(--alert-primary_LIGHT);
+    --alert-secondary: var(--alert-secondary_LIGHT);
+    /* State */
+    --state-disabled: var(--state-disabled_LIGHT);
+
+    --alert-success--fill: var(--alert-success--fill_LIGHT);
+    --alert-danger--fill: var(--alert-danger--fill_LIGHT);
+    --alert-warning--fill: var(--alert-warning--fill_LIGHT);
+    --alert-info--fill: var(--alert-info--fill_LIGHT);
+    --alert-primary--fill: var(--alert-primary--fill_LIGHT);
+    --alert-secondary--fill: var(--alert-secondary--fill_LIGHT);
+    /* State */
+    --state-disabled--fill: var(--state-disabled--fill_LIGHT);
 }
 
 .mode-theme_dark {
@@ -349,29 +420,136 @@
     --accent-primary--muted--fill: var(--accent-primary--muted--fill_DARK);
     --accent-secondary--fill: var(--accent-secondary--fill_DARK);
     --accent-secondary--muted--fill: var(--accent-secondary--muted--fill_DARK);
+
+    /* Alerts */
+    --alert-success: var(--alert-success_DARK);
+    --alert-danger: var(--alert-danger_DARK);
+    --alert-warning: var(--alert-warning_DARK);
+    --alert-info: var(--alert-info_DARK);
+    --alert-primary: var(--alert-primary_DARK);
+    --alert-secondary: var(--alert-secondary_DARK);
+    /* State */
+    --state-disabled: var(--state-disabled_DARK);
+
+    --alert-success--fill: var(--alert-success--fill_DARK);
+    --alert-danger--fill: var(--alert-danger--fill_DARK);
+    --alert-warning--fill: var(--alert-warning--fill_DARK);
+    --alert-info--fill: var(--alert-info--fill_DARK);
+    --alert-primary--fill: var(--alert-primary--fill_DARK);
+    --alert-secondary--fill: var(--alert-secondary--fill_DARK);
+    /* State */
+    --state-disabled--fill: var(--state-disabled--fill_DARK);
 }
 
 /* Colors */
-.clr-theme__main {
+/* DOESNT CHANGE WITH THEME OR MODE */
+.color__bw00 {
+    color: var(--bw-00);
+}
+.color__bw10 {
+    color: var(--bw-10);
+}
+.color__bw20 {
+    color: var(--bw-20);
+}
+.color__bw30 {
+    color: var(--bw-30);
+}
+.color__bw40 {
+    color: var(--bw-40);
+}
+.color__bw50 {
+    color: var(--bw-50);
+}
+.color__bw60 {
+    color: var(--bw-60);
+}
+.color__bw70 {
+    color: var(--bw-70);
+}
+.color__bw80 {
+    color: var(--bw-80);
+}
+.color__bw90 {
+    color: var(--bw-90);
+}
+/* DOESNT CHANGE WITH THEME OR MODE */
+
+/* DOESNT CHANGE WITH MODE */
+.color__hl10 {
+    color: var(--highlight-10);
+}
+.color__hl20 {
+    color: var(--highlight-20);
+}
+.color__hl30 {
+    color: var(--highlight-30);
+}
+.color__hl40 {
+    color: var(--highlight-40);
+}
+.color__hl50 {
+    color: var(--highlight-50);
+}
+.color__hl60 {
+    color: var(--highlight-60);
+}
+.color__hl70 {
+    color: var(--highlight-70);
+}
+.color__hl80 {
+    color: var(--highlight-80);
+}
+.color__hl90 {
+    color: var(--highlight-90);
+}
+/* DOESNT CHANGE WITH MODE */
+
+.theme-color__main {
     color: var(--main);
 }
-.clr-theme__main--muted {
+.theme-color__main--muted {
     color: var(--main--muted);
 }
-.clr-theme__accent-primary {
+.theme-color__accent-primary {
     color: var(--accent-primary);
 }
-.clr-theme__accent-primary--muted {
+.theme-color__accent-primary--muted {
     color: var(--accent-primary--muted);
 }
-.clr-theme__accent-secondary {
+.theme-color__accent-secondary {
     color: var(--accent-secondary);
 }
-.clr-theme__accent-secondary--muted {
+.theme-color__accent-secondary--muted {
     color: var(--accent-secondary--muted);
 }
+/* Alerts */
+.theme-color__alert-success {
+    color: var(--alert-success)
+}
+.theme-color__alert-danger {
+    color: var(--alert-danger)
+}
+.theme-color__alert-warning {
+    color: var(--alert-warning)
+}
+.theme-color__alert-info {
+    color: var(--alert-info)
+}
+.theme-color__alert-primary {
+    color: var(--alert-primary)
+}
+.theme-color__alert-secondary {
+    color: var(--alert-secondary)
+}
+/* Alerts */
+/* State */
+.theme-color__state-disabled {
+    color: var(--state-disabled)
+}
+/* State */
 /* Translucent Overlay */
-.clr-theme__translucent-overlay{
+.theme-color__translucent-overlay{
     color: var(--translucent-overlay)
 }
 /* 
@@ -380,133 +558,137 @@ Colors using Fills
 */
 
 /* Fills */
-.clr-theme__main--fill {
+/* DOESNT CHANGE WITH THEME OR MODE*/
+.fill__bw00 {
+    background-color: var(--bw-00);
+}
+.fill__bw10 {
+    background-color: var(--bw-10);
+}
+.fill__bw20 {
+    background-color: var(--bw-20);
+}
+.fill__bw30 {
+    background-color: var(--bw-30);
+}
+.fill__bw40 {
+    background-color: var(--bw-40);
+}
+.fill__bw50 {
+    background-color: var(--bw-50);
+}
+.fill__bw60 {
+    background-color: var(--bw-60);
+}
+.fill__bw70 {
+    background-color: var(--bw-70);
+}
+.fill__bw80 {
+    background-color: var(--bw-80);
+}
+.fill__bw90 {
+    background-color: var(--bw-90);
+}
+/* DOESNT CHANGE WITH THEME OR MODE*/
+
+/* DOESNT CHANGE WITH  MODE*/
+.fill__hl10 {
+    background-color: var(--highlight-10);
+}
+.fill__hl20 {
+    background-color: var(--highlight-20);
+}
+.fill__hl30 {
+    background-color: var(--highlight-30);
+}
+.fill__hl40 {
+    background-color: var(--highlight-40);
+}
+.fill__hl50 {
+    background-color: var(--highlight-50);
+}
+.fill__hl60 {
+    background-color: var(--highlight-60);
+}
+.fill__hl70 {
+    background-color: var(--highlight-70);
+}
+.fill__hl80 {
+    background-color: var(--highlight-80);
+}
+.fill__hl90 {
+    background-color: var(--highlight-90);
+}
+/* DOESNT CHANGE WITH  MODE*/
+
+.theme-fill__main {
     background-color: var(--main--fill);
 }
-.clr-theme__main--muted--fill {
+.theme-fill__main--muted {
     background-color: var(--main--muted--fill);
 }
-.clr-theme__accent-primary--fill {
+.theme-fill__accent-primary {
     background-color: var(--accent-primary--fill);
 }
-.clr-theme__accent-primary--muted--fill {
+.theme-fill__accent-primary--muted {
     background-color: var(--accent-primary--muted--fill);
 }
-.clr-theme__accent-secondary--fill {
+.theme-fill__accent-secondary {
     background-color: var(--accent-secondary--fill);
 }
-.clr-theme__accent-secondary--muted--fill {
+.theme-fill__accent-secondary--muted {
     background-color: var(--accent-secondary--muted--fill);
 }
+/* Alerts */
+.theme-fill__alert-success {
+    background-color: var(--alert-success--fill)
+}
+.theme-fill__alert-danger {
+    background-color: var(--alert-danger--fill)
+}
+.theme-fill__alert-warning {
+    background-color: var(--alert-warning--fill)
+}
+.theme-fill__alert-info {
+    background-color: var(--alert-info--fill)
+}
+.theme-fill__alert-primary {
+    background-color: var(--alert-primary--fill)
+}
+.theme-fill__alert-secondary {
+    background-color: var(--alert-secondary--fill)
+}
+/* Alerts */
+/* State */
+.theme-fill__state-disabled {
+    background-color: var(--state-disabled--fill)
+}
+/* State */
+
 /* 
 Fills using Colors 
 *Should be rarely used.
 */
-.clr-theme__accent-secondary--muted--color--fill {
-    background-color: var(--accent-secondary--muted);
-}
 
 /* Psudo Classes */
 /* HOVERS */
 /* hover color*/
-.clr-theme__accent-primary--hover:hover{
+.theme-color__accent-primary--hover:hover{
     color: var(--accent-primary);
 }
-.clr-theme__accent-secondary--muted--hover:hover{
+.theme-color__accent-secondary--muted--hover:hover{
     color: var(--accent-secondary--muted);
 }
 /* hover fill*/
-.clr-theme__translucent-overlay--fill--hover:hover{
+.theme-fill__translucent-overlay--hover:hover{
     background-color: var(--translucent-overlay);
 }
+
 /* BORDERS */
 /* border color */
-.clr-theme__main--border-color {
+.theme-color__main--border-color {
     border-color: var(--main);
 }
-.clr-theme__translucent-overlay--border-color {
+.theme-color__translucent-overlay--border-color {
     border-color: var(--translucent-overlay);
 }
-
-
-
-
-
-
-
-
-/* STRUCTURE FOR OPACTIY CLASS ADJUSTERS */
-/* :root { */
-    /* Opacity */
-    /* --opacity-var: 1.0; */
-
-    /* Colors */
-    /* --main: 0, 0, 0;
-    --main--muted: 45, 45, 45;
-    --accent-primary: 151, 135, 135;
-    --accent-primary--muted: 200, 182, 182;
-    --accent-secondary: 213, 165, 83;
-    --accent-secondary--muted: 184, 142, 70; */
-
-    /* Fills */
-    /* --main--fill: rgba(255, 255, 255);
-    --main--muted--fill: rgba(190, 186, 186);
-    --accent-primary--fill: rgba(147, 147, 147);
-    --accent-primary--muted--fill: rgba(174, 160, 160);
-    --accent-secondary--fill: rgba(211, 183, 135);
-    --accent-secondary--muted--fill: rgba(187, 167, 130); */
-/* } */
-
-/* Colors */
-/* .clr-theme__main {
-    color: rgba(var(--main), var(--opacity-var))
-}
-.clr-theme__main--muted {
-    color: rgba(var(--main--muted), var(--opacity-var))
-}
-.clr-theme__accent-primary {
-    color: rgba(var(--accent-primary), var(--opacity-var))
-}
-.clr-theme__accent-primary--muted {
-    color: rgba(var(--accent-primary--muted), var(--opacity-var))
-}
-.clr-theme__accent-secondary {
-    color: rgba(var(--accent-secondary), var(--opacity-var))
-}
-.clr-theme__accent-secondary--muted {
-    color: rgba(var(--accent-secondary--muted), var(--opacity-var))
-} */
-/* Translucent Overlay */
-/* .clr-theme__translucent-overlay{
-    color: rgba(var(--translucent-overlay), var(--opacity-var))
-} */
-
-/* Theme Adjusters */
-/* OPACITY */
-/* .opacity--90{
-    --opacity-var: 0.9
-}
-.opacity--80{
-    --opacity-var: 0.8
-}
-.opacity--70{
-    --opacity-var: 0.7
-}
-.opacity--60{
-    --opacity-var: 0.6
-}
-.opacity--50{
-    --opacity-var: 0.5
-}
-.opacity--40{
-    --opacity-var: 0.4
-}
-.opacity--30{
-    --opacity-var: 0.3
-}
-.opacity--20{
-    --opacity-var: 0.2
-}
-.opacity--10{
-    --opacity-var: 0.1
-} */
