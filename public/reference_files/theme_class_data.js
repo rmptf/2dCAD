@@ -98,7 +98,38 @@ const WIDTHVARS = {
     },
 }
 
+const BTNVARS = {
+    BTNCLASS: {
+        aButton: "a-button"
+    },
+    BTNTYPES: {
+        default: "a-button__a-btn--default"
+    },
+    BTNSIZES: {
+        extraSmall: "",
+        small: "a-btn__default--small",
+        medium: "a-btn__default--medium",
+        large: "",
+    },
+    BTNSTATUS: {
+        primary: "button--primary",
+        secondary: "button--secondary",
+        disabled: "button--disabled",
+        success: "button--success",
+        danger: "button--danger",
+        warning: "button--warning",
+        info: "button--info",
+
+    },
+    BTNSTYLE: {
+        contained: "button--contained",
+        outlined: "button--outlined",
+        text: "button--text",
+    }
+}
+
 module.exports = { 
     COLORVARS,
     WIDTHVARS,
+    BTNVARS,
 }

@@ -62,32 +62,32 @@
 }
 
 .button--contained {
-    /* background-color: rgba(var(--color-1), 0.8);
-    color: rgba(var(--color-2), 0.8);
-    border: 1px solid rgba(var(--color-1), 0); */
     background-color: var(--color-1);
     color: var(--color-2);
     border: 1px solid var(--color-1);
 }
 .button--contained:hover {
-    /* background-color: rgba(var(--color-1), 1);
-    color: rgba(var(--color-2), 1);
-    border: 1px solid rgba(var(--color-1), 0); */
-    background-color: var(--color-1);
-    color: var(--color-2);
-    border: 1px solid var(--color-1);
+    background-color: var(--color-2);
+    color: var(--color-1);
+    border: 1px solid var(--color-2);
 }
 
 .button--outlined {
-    /* background-color: rgba(var(--color-1), 0);
-    color: rgba(var(--color-1), 0.8);
-    border: 1px solid rgba(var(--color-1), 0.8); */
     background-color: unset;
     color: var(--color-1);
     border: 1px solid var(--color-1);
 }
 .button--outlined:hover {
-    background-color: rgba(var(--color-1), 0.2);
-    color: rgba(var(--color-1), 1);
-    border: 1px solid rgba(var(--color-1), 1);
+    background-color: unset;
+    color: var(--color-2);
+    border: 1px solid var(--color-2);
+}
+
+.button--text {
+    background-color: unset;
+    color: var(--color-1);
+    border: 0px solid var(--color-1);
+  }
+.button--text:hover {
+    color: var(--color-2);
 }

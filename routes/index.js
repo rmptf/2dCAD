@@ -10,6 +10,7 @@ const {
 const { 
     COLORVARS,
     WIDTHVARS,
+    BTNVARS,
 } = require('../public/reference_files/theme_class_data')
 // Data
 
@@ -19,6 +20,7 @@ router.get('/', (req,res) => {
         moduleLocationVARS: MODULE_LOCATIONS,
         colorVars: COLORVARS,
         widthVars: WIDTHVARS,
+        btnVars: BTNVARS,
     })
 })
 
