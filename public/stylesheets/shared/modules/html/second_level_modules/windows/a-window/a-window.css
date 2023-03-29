@@ -61,24 +61,6 @@
   background-color: var(--br-6);
 }
 
-.a-widnow__row_test {
-  display: flex;
-  flex-direction: row;
-}
-.a-window__body_test {
-  flex: 1 1 auto;
-}
-.a-window__copy_test p {
-  display: flex;
-  padding-top: 1rem;
-  padding-bottom: 8rem;
-  margin: 1rem;
-  max-width: 20rem;
-  border-radius: 9px;
-  align-items: center;
-  justify-content: center;
-}
-
 .a-window__footer {
   min-height: 1rem;
   margin-top: 6rem;

@@ -1,0 +1,19 @@
+.a-tester__copy {
+}
+.a-tester__row {
+    display: flex;
+    flex-direction: row;
+}
+.a-tester__body {
+    flex: 1 1 auto;
+}
+.a-tester__copy p {
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 8rem;
+    margin: 1rem;
+    max-width: 20rem;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: center;
+}

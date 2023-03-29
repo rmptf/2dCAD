@@ -22,6 +22,7 @@
     /* 2nd Level Modules */
       @import "shared/modules/html/second_level_modules/windows/a-window/a-window.css";
     /* 3rd Level Modules */
+      @import "shared/modules/html/third_level_modules/testers/a-tester/a-tester.css";
       /* @import "shared/modules/headers/a-header/a-header.css"; */
     /* 4th Level Modules */
       @import "shared/modules/html/fourth_level_modules/buttons/button_modes.css";
