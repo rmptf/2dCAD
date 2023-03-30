@@ -1,40 +1,49 @@
 <%- include(moduleLocationVARS.A_PANE, {
-    // // MAIN Theme Class
-    //     THEME_moduleTheme: colorVars.THEMECLASS.defaultThemeClass,
+    // GLOBAL Mode Class
+        THEME_globalMode: globalModeClass,
+    // MODULE Theme Class
+        THEME_moduleTheme: colorVars.THEMECLASS.defaultThemeClass,
 
-    // // ALL Modules
-    // // ------------------------------------------------------------------------------------------
-    // // MODULE: a-Pane
-    //     // MODULE
-    //         MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
-    //     // THEME
-    //         THEME_paneContainerFill: colorVars.FILLS.mainFill,
-    //         THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
-    // // ------------------------------------------------------------------------------------------
+    // ALL Modules
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Pane
+        // MODULE
+            MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
+        // THEME
+    // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
-    // MODULE: a-Window--Centered
+    // MODULE: a-Window
         // MODULE
-        MODULE_aWindow_centered_first: "",
-            MODULE_aWindow_centered_second: "",
+            MODULE_aWindow_first: '',
+            MODULE_aWindow_second: '',
         // CONTENT
-            CONTENT_aWindow_Centered_content: {
+            CONTENT_aWindow_content: {
                 HEADER: {
-                    heading: "",
-                    paragraph: "",
+                    heading: "Welcome to Notcher",
+                    paragraph: "Notcher is a web-based 2dcad application.",
                 },
+                BODY: {
+                    paragraphFirst: "Accent Primary",
+                    paragraphSecond: "Accent Secondary",
+                }
             },
         // ACTIONS
-            ACTIONS_aWindow_Centered_footerBtnExist: true,
-            ACTIONS_aWindow_Centered_footerBtnText: "",
-            ACTIONS_aWindow_Centered_footerBtnAlign: "center",
-            ACTIONS_aWindow_Centered_btnMode: "btn--default-dark",
-            ACTIONS_aWindow_Centered_btnHref: "/",
+            ACTIONS_aWindow_footerBtnExist: true,
+            ACTIONS_aWindow_footerBtnText: "Get Started",
+            ACTIONS_aWindow_footerBtnAlign: "center",
+            ACTIONS_aWindow_btnMode: "btn--default-light",
+            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
         // THEME
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowBodyFirstFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowBodyFirstColor: colorVars.COLORS.accentPrimary,
+            THEME_windowBodySecondFill: colorVars.FILLS.accentSecondaryFill,
+            THEME_windowBodySecondColor: colorVars.COLORS.accentSecondary,
+            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
     // ------------------------------------------------------------------------------------------
-
-    }) 
+    })
 %>

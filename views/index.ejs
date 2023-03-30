@@ -16,7 +16,7 @@
             THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
     // ------------------------------------------------------------------------------------------
 
-    
+    // ------------------------------------------------------------------------------------------
     // MODULE: a-Window
         // MODULE
             MODULE_aWindow_first: moduleLocationVARS.A_TESTER,
@@ -65,9 +65,8 @@
             CONTENT_aTester_testElem__hl8: "HIGHLIGHT 8",
             CONTENT_aTester_testElem__hl9: "HIGHLIGHT 9",
         // ACTIONS
-            ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
-            
+            // ACTIONS_aWindow_footerBtnAlign: "center",
+            ACTIONS_aTester_btnHref: "window.location.href='/pages/home'",
             ACTIONS_aTester_testBtnText__primary: "PRIMARY",
             ACTIONS_aTester_testBtnText__secondary: "SECONDARY",
             ACTIONS_aTester_testBtnText__disabled: "DISABLED",
@@ -77,127 +76,39 @@
             ACTIONS_aTester_testBtnText__info: "INFO",
         // THEME
             // HIGHLIGHTS
-                testColor__hl1: colorVars.COLORS.accentPrimary,
-                testFill__hl1: colorVars.FILLS.hl10,
-                testColor__hl2: colorVars.COLORS.accentPrimary,
-                testFill__hl2: colorVars.FILLS.hl20,
-                testColor__hl3: colorVars.COLORS.accentPrimary,
-                testFill__hl3: colorVars.FILLS.hl30,
-                testColor__hl4: colorVars.COLORS.accentPrimary,
-                testFill__hl4: colorVars.FILLS.hl40,
-                testColor__hl5: colorVars.COLORS.accentPrimary,
-                testFill__hl5: colorVars.FILLS.hl50,
-                testColor__hl6: colorVars.COLORS.accentPrimary,
-                testFill__hl6: colorVars.FILLS.hl60,
-                testColor__hl7: colorVars.COLORS.accentPrimary,
-                testFill__hl7: colorVars.FILLS.hl70,
-                testColor__hl8: colorVars.COLORS.accentPrimary,
-                testFill__hl8: colorVars.FILLS.hl80,
-                testColor__hl9: colorVars.COLORS.accentPrimary,
-                testFill__hl9: colorVars.FILLS.hl90,
+                THEME_aTester_tetElemColor__hl1: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl1: colorVars.FILLS.hl10,
+                THEME_aTester_tetElemColor__hl2: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl2: colorVars.FILLS.hl20,
+                THEME_aTester_tetElemColor__hl3: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl3: colorVars.FILLS.hl30,
+                THEME_aTester_tetElemColor__hl4: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl4: colorVars.FILLS.hl40,
+                THEME_aTester_tetElemColor__hl5: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl5: colorVars.FILLS.hl50,
+                THEME_aTester_tetElemColor__hl6: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl6: colorVars.FILLS.hl60,
+                THEME_aTester_tetElemColor__hl7: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl7: colorVars.FILLS.hl70,
+                THEME_aTester_tetElemColor__hl8: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl8: colorVars.FILLS.hl80,
+                THEME_aTester_tetElemColor__hl9: colorVars.COLORS.accentPrimary,
+                THEME_aTester_tetElemFill__hl9: colorVars.FILLS.hl90,
             // ALERTS
-                testBtnClass__aBtn: btnVars.BTNCLASS.aButton,
-                testBtnType__default: btnVars.BTNTYPES.default,
-                testBtnSize__small: btnVars.BTNSIZES.small,
-                testBtnSize__medium: btnVars.BTNSIZES.medium,
-                testBtnStatus__primary: btnVars.BTNSTATUS.primary,
-                testBtnStatus__secondary: btnVars.BTNSTATUS.secondary,
-                testBtnStatus__disabled: btnVars.BTNSTATUS.disabled,
-                testBtnStatus__success: btnVars.BTNSTATUS.success,
-                testBtnStatus__danger: btnVars.BTNSTATUS.danger,
-                testBtnStatus__warning: btnVars.BTNSTATUS.warning,
-                testBtnStatus__info: btnVars.BTNSTATUS.info,
-                testBtnStyle_contained: btnVars.BTNSTYLE.contained,
-                testBtnStyle_outlined: btnVars.BTNSTYLE.outlined,
-                testBtnStyle_text: btnVars.BTNSTYLE.text,
-    // ------------------------------------------------------------------------------------------
-    })
-%>
-
-<%#- include(moduleLocationVARS.A_PANE, {
-    // GLOBAL Mode Class
-        THEME_globalMode: globalModeClass,
-    // MODULE Theme Class
-        THEME_moduleTheme: colorVars.THEMECLASS.secondaryThemeClass,
-
-    // ALL Modules
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Pane
-        // MODULE
-            MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
-        // THEME
-            THEME_paneContainerFill: colorVars.FILLS.mainFill,
-            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
-    // ------------------------------------------------------------------------------------------
-
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Window
-        // MODULE
-            MODULE_aWindow_first: '',
-            MODULE_aWindow_second: '',
-        // CONTENT
-            CONTENT_aWindow_content: {
-                HEADER: {
-                    heading: "Welcome to Notcher",
-                    paragraph: "Notcher is a web-based 2dcad application.",
-                },
-            },
-        // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: true,
-            ACTIONS_aWindow_footerBtnText: "Get Started",
-            ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aWindow_btnMode: "btn--default-light",
-            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
-        // THEME
-            THEME_windowContainerFill: colorVars.FILLS.mainFill,
-            THEME_windowTitleColor: colorVars.COLORS.main,
-            THEME_windowCopyColor: colorVars.COLORS.mainMuted,
-            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
-            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
-    // ------------------------------------------------------------------------------------------
-    })
-%>
-
-<%#- include(moduleLocationVARS.A_PANE, {
-    // GLOBAL Mode Class
-        THEME_globalMode: globalModeClass,
-    // MODULE Theme Class
-        THEME_moduleTheme: colorVars.THEMECLASS.tertiaryThemeClass,
-
-    // ALL Modules
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Pane
-        // MODULE
-            MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
-        // THEME
-            THEME_paneContainerFill: colorVars.FILLS.mainFill,
-            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
-    // ------------------------------------------------------------------------------------------
-
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Window
-        // MODULE
-            MODULE_aWindow_first: '',
-            MODULE_aWindow_second: '',
-        // CONTENT
-            CONTENT_aWindow_content: {
-                HEADER: {
-                    heading: "Welcome to Notcher",
-                    paragraph: "Notcher is a web-based 2dcad application.",
-                },
-            },
-        // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: true,
-            ACTIONS_aWindow_footerBtnText: "Get Started",
-            ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aWindow_btnMode: "btn--default-light",
-            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
-        // THEME
-            THEME_windowContainerFill: colorVars.FILLS.mainFill,
-            THEME_windowTitleColor: colorVars.COLORS.main,
-            THEME_windowCopyColor: colorVars.COLORS.mainMuted,
-            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
-            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
+                THEME_aTester_testBtnClass__aBtn: btnVars.BTNCLASS.aButton,
+                THEME_aTester_testBtnType__default: btnVars.BTNTYPES.default,
+                THEME_aTester_testBtnSize__small: btnVars.BTNSIZES.small,
+                THEME_aTester_testBtnSize__medium: btnVars.BTNSIZES.medium,
+                THEME_aTester_testBtnStatus__primary: btnVars.BTNSTATUS.primary,
+                THEME_aTester_testBtnStatus__secondary: btnVars.BTNSTATUS.secondary,
+                THEME_aTester_testBtnStatus__disabled: btnVars.BTNSTATUS.disabled,
+                THEME_aTester_testBtnStatus__success: btnVars.BTNSTATUS.success,
+                THEME_aTester_testBtnStatus__danger: btnVars.BTNSTATUS.danger,
+                THEME_aTester_testBtnStatus__warning: btnVars.BTNSTATUS.warning,
+                THEME_aTester_testBtnStatus__info: btnVars.BTNSTATUS.info,
+                THEME_aTester_testBtnStyle__contained: btnVars.BTNSTYLE.contained,
+                THEME_aTester_testBtnStyle__outlined: btnVars.BTNSTYLE.outlined,
+                THEME_aTester_testBtnStyle__text: btnVars.BTNSTYLE.text,
     // ------------------------------------------------------------------------------------------
     })
 %>
