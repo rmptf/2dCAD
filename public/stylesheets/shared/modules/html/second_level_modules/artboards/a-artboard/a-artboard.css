@@ -1,0 +1,9 @@
+.a-artboard {
+    overflow: auto;
+    /* outline: solid 1pt black; */
+    /* background-color: red; */
+  }
+
+  .a-artboard__container {
+    color: hotpink;
+  }

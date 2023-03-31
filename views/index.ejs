@@ -10,6 +10,74 @@
     // ------------------------------------------------------------------------------------------
     // MODULE: a-Pane
         // MODULE
+            MODULE_aPane_first: moduleLocationVARS.A_ARTBOARD,
+        // THEME
+            THEME_paneContainerFill: colorVars.FILLS.mainFill,
+            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Artboard
+        // MODULE
+            MODULE_aArtboard_first: moduleLocationVARS.B_HEADER,
+            MODULE_aArtboard_second: moduleLocationVARS.A_SVGCANVAS,
+            MODULE_aArtboard_third: moduleLocationVARS.B_FOOTER,
+        // CONTENT
+            // CONTENT_aArtboard_content: ''
+        // ACTIONS
+            // ACTIONS_aArtboard_footerBtnExist: false,
+        // THEME
+            THEME_artboardContainerFill: colorVars.FILLS.mainFill,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: b-Header
+        // MODULE
+            // MODULE_bHeader_first: '',
+        // CONTENT
+            // CONTENT_bHeader_content: ''
+        // ACTIONS
+            // ACTIONS_bHeader_footerBtnExist: false,
+        // THEME
+            THEME_bHeaderContainerFill: colorVars.FILLS.mainFill,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-SvgCanvas
+        // MODULE
+            // MODULE_aSvgCanvas_first: '',
+        // CONTENT
+            // CONTENT_aSvgCanvas_content: ''
+        // ACTIONS
+            // ACTIONS_aSvgCanvas_footerBtnExist: false,
+        // THEME
+            // THEME_windowContainerFill: colorVars.FILLS.mainFill,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: b-Footer
+        // MODULE
+            // MODULE_bFooter_first: '',
+        // CONTENT
+            // CONTENT_bFooter_content: ''
+        // ACTIONS
+            // ACTIONS_bFooter_footerBtnExist: false,
+        // THEME
+            // THEME_windowContainerFill: colorVars.FILLS.mainFill,
+    // ------------------------------------------------------------------------------------------
+    })
+%>
+
+<%- include(moduleLocationVARS.A_PANE, {
+    // GLOBAL Mode Class
+        THEME_globalMode: globalModeClass,
+    // MODULE Theme Class
+        THEME_moduleTheme: colorVars.THEMECLASS.defaultThemeClass,
+
+    // ALL Modules
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Pane
+        // MODULE
             MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
         // THEME
             THEME_paneContainerFill: colorVars.FILLS.mainFill,

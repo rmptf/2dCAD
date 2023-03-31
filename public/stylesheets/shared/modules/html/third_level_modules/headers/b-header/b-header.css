@@ -1,0 +1,9 @@
+.b-header {
+    overflow: auto;
+    /* outline: solid 1pt black; */
+    /* background-color: red; */
+  }
+  
+  .b-header__container {
+    background-color: hotpink;
+  }
