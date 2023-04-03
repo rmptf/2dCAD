@@ -41,7 +41,13 @@
             <div class="a-window__actions">
                 <div class="<%= ACTIONS_aWindow_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_aWindow_btn_cont.btn_cont_01.btnAlign %>">
                     <% if (ACTIONS_aWindow_btn.btn_01.btnExist === true) { %>
-                        <button class="<%= ACTIONS_aWindow_btn.btn_01.btnTheme_class %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_type %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_size %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_status %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_style %>" id=<%= ACTIONS_aWindow_btn.btn_01.btnId %> type=<%= ACTIONS_aWindow_btn.btn_01.btnType %> onclick=<%= ACTIONS_aWindow_btn.btn_01.btnHref %>><%= ACTIONS_aWindow_btn.btn_01.btnText %></button>
+                        <button
+                            class="<%= ACTIONS_aWindow_btn.btn_01.btnTheme_class %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_type %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_size %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_status %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_style %>"
+                            id=<%= ACTIONS_aWindow_btn.btn_01.btnId %>
+                            type=<%= ACTIONS_aWindow_btn.btn_01.btnType %>
+                            onclick=<%= ACTIONS_aWindow_btn.btn_01.btnHref %>>
+                            <%= ACTIONS_aWindow_btn.btn_01.btnText %>
+                        </button>
                     <% } %>
                     <div class="a-window__slot">
                         <% if (MODULE_aWindow_second && ACTIONS_bForm_exist === true) { %>
