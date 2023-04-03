@@ -5,7 +5,7 @@
     --max-width--narrow: 1050px;
     --max-width--wide: 1200px;
     --max-width--wider: 1600px;
-    --max-width--widest: unset;
+    --max-width--unset: unset;
 }
 
 /* Max Widths */
@@ -24,6 +24,6 @@
 .max-width__wider {
     max-width: var(--max-width--wider);
 }
-.max-width__widest {
-    max-width: var(--max-width--widest);
+.max-width__unset {
+    max-width: var(--max-width--unset);
 }

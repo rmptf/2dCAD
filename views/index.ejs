@@ -1,6 +1,6 @@
 <%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
 
-<%- include(moduleLocationVARS.A_PANE, {
+<%- include(moduleLocationVARS.B_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,
     // MODULE Theme Class
@@ -10,10 +10,10 @@
     // ------------------------------------------------------------------------------------------
     // MODULE: a-Pane
         // MODULE
-            MODULE_aPane_first: moduleLocationVARS.A_ARTBOARD,
+            MODULE_bPane_first: moduleLocationVARS.A_ARTBOARD,
         // THEME
-            THEME_paneContainerFill: colorVars.FILLS.mainFill,
-            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
+            THEME_bPaneContainerFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_bPaneMaxWidth: widthVars.MAXWIDTHS.maxWidthUnset,
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@
         // ACTIONS
             // ACTIONS_aSvgCanvas_footerBtnExist: false,
         // THEME
-            // THEME_windowContainerFill: colorVars.FILLS.mainFill,
+            THEME_aSvgCanvasContainerFill: colorVars.FILLS.mainFill,
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
@@ -63,12 +63,12 @@
         // ACTIONS
             // ACTIONS_bFooter_footerBtnExist: false,
         // THEME
-            // THEME_windowContainerFill: colorVars.FILLS.mainFill,
+            THEME_bFooterContainerFill: colorVars.FILLS.mainFill,
     // ------------------------------------------------------------------------------------------
     })
 %>
 
-<%- include(moduleLocationVARS.A_PANE, {
+<%#- include(moduleLocationVARS.A_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,
     // MODULE Theme Class
@@ -80,8 +80,8 @@
         // MODULE
             MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
         // THEME
-            THEME_paneContainerFill: colorVars.FILLS.mainFill,
-            THEME_paneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
+            THEME_aPaneContainerFill: colorVars.FILLS.mainFill,
+            THEME_aPaneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
@@ -101,11 +101,29 @@
                 }
             },
         // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: true,
-            ACTIONS_aWindow_footerBtnText: "Get Started",
-            ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aWindow_btnMode: "btn--default-light",
-            ACTIONS_aWindow_btnHref: "window.location.href='/pages/home'",
+            // BTN CONTAINER
+                ACTIONS_aWindow_btn_cont: {
+                        btn_cont_01: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--center",
+                        },
+                    },
+            // BTN
+                ACTIONS_aWindow_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Get Started",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                },
+
         // THEME
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
@@ -142,6 +160,28 @@
             ACTIONS_aTester_testBtnText__danger: "DANGER",
             ACTIONS_aTester_testBtnText__warning: "WARN",
             ACTIONS_aTester_testBtnText__info: "INFO",
+
+
+
+
+            // BTN_01 CONTAINER
+                ACTIONS_aWindow_btn01_cont_footerBtnDirection: "btn-container--row",
+                ACTIONS_aWindow_btn01_cont_footerBtnAlign: "btn-align--center",
+            // BTN_01
+                ACTIONS_aWindow_btn01_footerBtnExist: true,
+                ACTIONS_aWindow_btn01_btnType: "button",
+                ACTIONS_aWindow_btn01_footerBtnText: "Get Started",
+                ACTIONS_aWindow_btn01_btnHref: "window.location.href='/pages/home'",
+                ACTIONS_aWindow_btn01_btnId: "",
+                ACTIONS_aWindow_btn01_btnTheme_class: btnVars.BTNCLASS.aButton,
+                ACTIONS_aWindow_btn01_btnTheme_type: btnVars.BTNTYPES.default,
+                ACTIONS_aWindow_btn01_btnTheme_size: btnVars.BTNSIZES.small,
+                ACTIONS_aWindow_btn01_btnTheme_status: btnVars.BTNSTATUS.primary,
+                ACTIONS_aWindow_btn01_btnTheme_style: btnVars.BTNSTYLE.contained,
+
+
+
+
         // THEME
             // HIGHLIGHTS
                 THEME_aTester_tetElemColor__hl1: colorVars.COLORS.accentPrimary,

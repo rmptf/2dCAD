@@ -1,0 +1,19 @@
+.a-canvas {
+    overflow: auto;
+    /* outline: solid 1pt black; */
+    /* background-color: red; */
+    height: 100%;
+    width: 100%;
+    /* overflow: hidden; */
+}
+  
+.a-canvas__container {
+    height: 100%;
+    width: 100%;
+}
+
+.a-canvas__canvas {
+    width: 100%;
+    height: 100%;
+    background-color: hotpink;;
+}

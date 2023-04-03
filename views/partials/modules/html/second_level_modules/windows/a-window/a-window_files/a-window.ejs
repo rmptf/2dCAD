@@ -39,9 +39,9 @@
     <div class="a-window__footer">
         <div class="a-window__footer-container <%= THEME_windowFooterFill %> <%= THEME_windowFooterColor %>">
             <div class="a-window__actions">
-                <div class="btn-container--row btn-align--<%= ACTIONS_aWindow_footerBtnAlign %>">
-                    <% if (ACTIONS_aWindow_footerBtnExist === true) { %>
-                        <button class="a-button a-button__a-btn--default a-btn__default--small button--primary button--contained <%= ACTIONS_aWindow_btnMode %>" type="button" onclick=<%= ACTIONS_aWindow_btnHref %>><%= ACTIONS_aWindow_footerBtnText %></button>
+                <div class="<%= ACTIONS_aWindow_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_aWindow_btn_cont.btn_cont_01.btnAlign %>">
+                    <% if (ACTIONS_aWindow_btn.btn_01.btnExist === true) { %>
+                        <button class="<%= ACTIONS_aWindow_btn.btn_01.btnTheme_class %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_type %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_size %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_status %> <%= ACTIONS_aWindow_btn.btn_01.btnTheme_style %>" id=<%= ACTIONS_aWindow_btn.btn_01.btnId %> type=<%= ACTIONS_aWindow_btn.btn_01.btnType %> onclick=<%= ACTIONS_aWindow_btn.btn_01.btnHref %>><%= ACTIONS_aWindow_btn.btn_01.btnText %></button>
                     <% } %>
                     <div class="a-window__slot">
                         <% if (MODULE_aWindow_second && ACTIONS_bForm_exist === true) { %>

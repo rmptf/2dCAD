@@ -1,19 +1,23 @@
 <div class="a-artboard <%= THEME_moduleTheme %> <%= THEME_artboardContainerFill %>">
     <div class="a-artboard__container">
-        <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_first) { %>
-                <%- include(MODULE_aArtboard_first, {}) %>
-            <% } %>
+        <%- include(MODULE_aArtboard_first, {}) %>
+        <%- include(MODULE_aArtboard_second, {}) %>
+        <%- include(MODULE_aArtboard_third, {}) %>
+        
+        <!-- <div class="a-artboard__slot">
+            <%# if (MODULE_aArtboard_first) { %>
+                <%#- include(MODULE_aArtboard_first, {}) %>
+            <%# } %>
         </div>
         <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_second) { %>
-                <%- include(MODULE_aArtboard_second, {}) %>
-            <% } %>
+            <%# if (MODULE_aArtboard_second) { %>
+                <%#- include(MODULE_aArtboard_second, {}) %>
+            <%# } %>
         </div>
         <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_third) { %>
-                <%- include(MODULE_aArtboard_third, {}) %>
-            <% } %>
-        </div>
+            <%# if (MODULE_aArtboard_third) { %>
+                <%#- include(MODULE_aArtboard_third, {}) %>
+            <%# } %>
+        </div> -->
     </div>
 </div>

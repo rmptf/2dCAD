@@ -1,0 +1,42 @@
+.b-footer {
+    overflow: auto;
+    /* outline: solid 1pt black; */
+    /* background-color: red; */
+}
+  
+.b-footer__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    height: unset;
+    width: 100%;
+    padding: 1rem;
+    pointer-events: none;
+    
+  
+    background-color: #00000050;
+    color: hotpink;
+}
+  
+.b-footer__sidebar {
+    display: flex;
+    flex-direction: row;
+    pointer-events: all;
+}
+.b-footer__sidebar--left {
+    background-color: #00000050;
+}
+
+.b-footer__sidebar--right {
+    background-color: #00000050;
+}
+
+.b-footer__logo-container {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #00000050;
+}

@@ -1,0 +1,17 @@
+<div class="b-pane <%= THEME_globalMode %> <%= THEME_moduleTheme %> <%= THEME_bPaneContainerFill %>">
+    <div class="b-pane__vertical-margins">
+        <div class="b-pane__vertical-padding">
+            <div class="b-pane__horizontal-padding">
+                <div class="b-pane__horizontal-margins <%= THEME_bPaneMaxWidth %>">
+                    <div class="b-pane__flex-direction">
+                        <div class="b-pane__slot">
+                            <% if (MODULE_bPane_first) { %>
+                                <%- include(MODULE_bPane_first) %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

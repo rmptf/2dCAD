@@ -94,7 +94,7 @@ const WIDTHVARS = {
         maxWidthNarrow: "max-width__narrow",
         maxWidthWide: "max-width__wide",
         maxWidthWider: "max-width__wider",
-        maxWidthWidest: "max-width__widest",
+        maxWidthUnset: "max-width__unset",
     },
 }
 
