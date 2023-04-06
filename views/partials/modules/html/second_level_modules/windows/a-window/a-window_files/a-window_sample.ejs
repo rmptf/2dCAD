@@ -15,25 +15,52 @@
     // ------------------------------------------------------------------------------------------
     // MODULE: a-Window
         // MODULE
-            MODULE_aWindow_first: "",
-            MODULE_aWindow_second: "",
+        MODULE_aWindow_first: moduleLocationVARS.A_TESTER,
+            MODULE_aWindow_second: '',
         // CONTENT
             CONTENT_aWindow_content: {
                 HEADER: {
-                    heading: "",
-                    paragraph: """,
+                    heading: "Welcome to Notcher",
+                    paragraph: "Notcher is a web-based 2dcad application.",
                 },
+                BODY: {
+                    paragraphFirst: "Accent Primary",
+                    paragraphSecond: "Accent Secondary",
+                }
             },
         // ACTIONS
-            ACTIONS_aWindow_footerBtnExist: false,
-            ACTIONS_aWindow_footerBtnText: "",
-            ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aWindow_btnMode: "btn--default-light",
-            ACTIONS_aWindow_btnHref: "/",
+            // BTN CONTAINER
+                ACTIONS_aWindow_btn_cont: {
+                        btn_cont_01: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--center",
+                        },
+                    },
+            // BTN
+                ACTIONS_aWindow_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Get Started",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                },
         // THEME
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
             THEME_windowCopyColor: colorVars.COLORS.mainMuted,
+            THEME_windowBodyFirstFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowBodyFirstColor: colorVars.COLORS.accentPrimary,
+            THEME_windowBodySecondFill: colorVars.FILLS.accentSecondaryFill,
+            THEME_windowBodySecondColor: colorVars.COLORS.accentSecondary,
+            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
+            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
     // ------------------------------------------------------------------------------------------
     }) 
 %>

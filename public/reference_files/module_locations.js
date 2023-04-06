@@ -10,7 +10,7 @@ const MODULE_LOCATIONS = {
     A_WINDOW_CENTERED: '../../../../../../../../views/partials/modules/html/second_level_modules/windows/a-window/a-window--centered_files/a-window--centered.ejs',
 
     // THIRD LEVEL
-    A_SVGCANVAS: '../../../../../../../../views/partials/modules/html/third_level_modules/canvases/a-canvas/a-canvas_files/a-canvas.ejs',
+    A_CANVAS: '../../../../../../../../views/partials/modules/html/third_level_modules/canvases/a-canvas/a-canvas_files/a-canvas.ejs',
 
     A_HEADER: '',
     B_HEADER: '../../../../../../../../views/partials/modules/html/third_level_modules/headers/b-header/b-header_files/b-header.ejs',

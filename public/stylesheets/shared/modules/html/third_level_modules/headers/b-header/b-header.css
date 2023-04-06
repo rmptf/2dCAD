@@ -15,7 +15,7 @@
   pointer-events: none;
   
 
-  background-color: #ffffff50;
+  /* background-color: #ffffff50; */
   color: hotpink;
   
 }
@@ -26,11 +26,11 @@
   pointer-events: all;
 }
 .b-header__sidebar--left {
-  background-color: #ffffff50;
+  /* background-color: #ffffff50; */
 }
 
 .b-header__sidebar--right {
-  background-color: #ffffff50;
+  /* background-color: #ffffff50; */
 }
 
 .b-header__logo-container {
@@ -38,5 +38,5 @@
   align-items: center;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #ffffff50;
+  /* background-color: #ffffff50; */
 }

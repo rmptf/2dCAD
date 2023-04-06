@@ -8,7 +8,7 @@
 
     // ALL Modules
     // ------------------------------------------------------------------------------------------
-    // MODULE: a-Pane
+    // MODULE: b-Pane
         // MODULE
             MODULE_bPane_first: moduleLocationVARS.A_ARTBOARD,
         // THEME
@@ -20,7 +20,7 @@
     // MODULE: a-Artboard
         // MODULE
             MODULE_aArtboard_first: moduleLocationVARS.B_HEADER,
-            MODULE_aArtboard_second: moduleLocationVARS.A_SVGCANVAS,
+            MODULE_aArtboard_second: moduleLocationVARS.A_CANVAS,
             MODULE_aArtboard_third: moduleLocationVARS.B_FOOTER,
         // CONTENT
             // CONTENT_aArtboard_content: ''
@@ -37,21 +37,44 @@
         // CONTENT
             // CONTENT_bHeader_content: ''
         // ACTIONS
-            // ACTIONS_bHeader_footerBtnExist: false,
+             // BTN CONTAINER
+                ACTIONS_bHeader_btn_cont: {
+                    btn_cont_01: {
+                        btnDirection: "btn-container--row",
+                        btnAlign: "btn-align--center",
+                    },
+                },
+            // BTN
+                ACTIONS_bHeader_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Header",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                },
         // THEME
             THEME_bHeaderContainerFill: colorVars.FILLS.mainFill,
+            THEME_bHeaderLogoColor: colorVars.COLORS.hl50,
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
-    // MODULE: a-SvgCanvas
+    // MODULE: a-Canvas
         // MODULE
-            // MODULE_aSvgCanvas_first: '',
+            // MODULE_aCanvas_first: '',
         // CONTENT
-            // CONTENT_aSvgCanvas_content: ''
+            // CONTENT_aCanvas_content: ''
         // ACTIONS
-            // ACTIONS_aSvgCanvas_footerBtnExist: false,
+            // ACTIONS_aCanvas_footerBtnExist: false,
         // THEME
-            THEME_aSvgCanvasContainerFill: colorVars.FILLS.mainFill,
+            THEME_aCanvasContainerFill: colorVars.FILLS.mainFill,
+            dragshit: colorVars.COLORS.hl10,
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
@@ -61,7 +84,64 @@
         // CONTENT
             // CONTENT_bFooter_content: ''
         // ACTIONS
-            // ACTIONS_bFooter_footerBtnExist: false,
+             // BTN CONTAINER
+                ACTIONS_bFooter_btn_cont: {
+                    btn_cont_01: {
+                        btnDirection: "btn-container--row",
+                        btnAlign: "btn-align--center",
+                    },
+                },
+            // BTN
+                ACTIONS_bFooter_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Header",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_02: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Zoom_In",
+                        btnHref: "increaseScale()",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_03: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Zoom_100%",
+                        btnHref: "resetScale()",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_04: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Zoom_Out",
+                        btnHref: "decreaseScale()",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                },
         // THEME
             THEME_bFooterContainerFill: colorVars.FILLS.mainFill,
     // ------------------------------------------------------------------------------------------
@@ -123,7 +203,6 @@
                         btnTheme_style: btnVars.BTNSTYLE.contained,
                     },
                 },
-
         // THEME
             THEME_windowContainerFill: colorVars.FILLS.mainFill,
             THEME_windowTitleColor: colorVars.COLORS.main,
@@ -151,72 +230,302 @@
             CONTENT_aTester_testElem__hl8: "HIGHLIGHT 8",
             CONTENT_aTester_testElem__hl9: "HIGHLIGHT 9",
         // ACTIONS
-            // ACTIONS_aWindow_footerBtnAlign: "center",
-            ACTIONS_aTester_btnHref: "window.location.href='/pages/home'",
-            ACTIONS_aTester_testBtnText__primary: "PRIMARY",
-            ACTIONS_aTester_testBtnText__secondary: "SECONDARY",
-            ACTIONS_aTester_testBtnText__disabled: "DISABLED",
-            ACTIONS_aTester_testBtnText__success: "SUCCESS",
-            ACTIONS_aTester_testBtnText__danger: "DANGER",
-            ACTIONS_aTester_testBtnText__warning: "WARN",
-            ACTIONS_aTester_testBtnText__info: "INFO",
+            // BTN CONTAINER
+                ACTIONS_aTester_btn_cont: {
+                    btn_cont_01: {
+                        btnDirection: "btn-container--row",
+                        btnAlign: "btn-align--center",
+                    },
+                },
+            // BTN
+                ACTIONS_aTester_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_02: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_03: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.primary,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
 
 
+                    btn_04: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SECONDARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.secondary,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_05: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SECONDARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.secondary,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_06: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SECONDARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.secondary,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
 
 
-            // BTN_01 CONTAINER
-                ACTIONS_aWindow_btn01_cont_footerBtnDirection: "btn-container--row",
-                ACTIONS_aWindow_btn01_cont_footerBtnAlign: "btn-align--center",
-            // BTN_01
-                ACTIONS_aWindow_btn01_footerBtnExist: true,
-                ACTIONS_aWindow_btn01_btnType: "button",
-                ACTIONS_aWindow_btn01_footerBtnText: "Get Started",
-                ACTIONS_aWindow_btn01_btnHref: "window.location.href='/pages/home'",
-                ACTIONS_aWindow_btn01_btnId: "",
-                ACTIONS_aWindow_btn01_btnTheme_class: btnVars.BTNCLASS.aButton,
-                ACTIONS_aWindow_btn01_btnTheme_type: btnVars.BTNTYPES.default,
-                ACTIONS_aWindow_btn01_btnTheme_size: btnVars.BTNSIZES.small,
-                ACTIONS_aWindow_btn01_btnTheme_status: btnVars.BTNSTATUS.primary,
-                ACTIONS_aWindow_btn01_btnTheme_style: btnVars.BTNSTYLE.contained,
+                    btn_07: {
+                        btnExist: true,
+                        btnType: "DISABLED",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_08: {
+                        btnExist: true,
+                        btnType: "DISABLED",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_09: {
+                        btnExist: true,
+                        btnType: "DISABLED",
+                        btnText: "PRIMARY",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
 
 
+                    btn_10: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SUCCESS",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.success,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_11: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SUCCESS",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.success,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_12: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "SUCCESS",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.success,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
 
+
+                    btn_13: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "DANGER",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.danger,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_14: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "DANGER",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.danger,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_15: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "DANGER",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.danger,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
+
+
+                    btn_16: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "WARNING",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.warning,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_17: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "WARNING",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.warning,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_18: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "WARNING",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.warning,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
+
+                    
+                    btn_19: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "INFO",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.info,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_20: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "INFO",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.info,
+                        btnTheme_style: btnVars.BTNSTYLE.outlined,
+                    },
+                    btn_21: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "INFO",
+                        btnHref: "window.location.href='/pages/home'",
+                        btnId: "",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.info,
+                        btnTheme_style: btnVars.BTNSTYLE.text,
+                    },
+                },
 
         // THEME
             // HIGHLIGHTS
-                THEME_aTester_tetElemColor__hl1: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl1: colorVars.FILLS.hl10,
-                THEME_aTester_tetElemColor__hl2: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl2: colorVars.FILLS.hl20,
-                THEME_aTester_tetElemColor__hl3: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl3: colorVars.FILLS.hl30,
-                THEME_aTester_tetElemColor__hl4: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl4: colorVars.FILLS.hl40,
-                THEME_aTester_tetElemColor__hl5: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl5: colorVars.FILLS.hl50,
-                THEME_aTester_tetElemColor__hl6: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl6: colorVars.FILLS.hl60,
-                THEME_aTester_tetElemColor__hl7: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl7: colorVars.FILLS.hl70,
-                THEME_aTester_tetElemColor__hl8: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl8: colorVars.FILLS.hl80,
-                THEME_aTester_tetElemColor__hl9: colorVars.COLORS.accentPrimary,
-                THEME_aTester_tetElemFill__hl9: colorVars.FILLS.hl90,
-            // ALERTS
-                THEME_aTester_testBtnClass__aBtn: btnVars.BTNCLASS.aButton,
-                THEME_aTester_testBtnType__default: btnVars.BTNTYPES.default,
-                THEME_aTester_testBtnSize__small: btnVars.BTNSIZES.small,
-                THEME_aTester_testBtnSize__medium: btnVars.BTNSIZES.medium,
-                THEME_aTester_testBtnStatus__primary: btnVars.BTNSTATUS.primary,
-                THEME_aTester_testBtnStatus__secondary: btnVars.BTNSTATUS.secondary,
-                THEME_aTester_testBtnStatus__disabled: btnVars.BTNSTATUS.disabled,
-                THEME_aTester_testBtnStatus__success: btnVars.BTNSTATUS.success,
-                THEME_aTester_testBtnStatus__danger: btnVars.BTNSTATUS.danger,
-                THEME_aTester_testBtnStatus__warning: btnVars.BTNSTATUS.warning,
-                THEME_aTester_testBtnStatus__info: btnVars.BTNSTATUS.info,
-                THEME_aTester_testBtnStyle__contained: btnVars.BTNSTYLE.contained,
-                THEME_aTester_testBtnStyle__outlined: btnVars.BTNSTYLE.outlined,
-                THEME_aTester_testBtnStyle__text: btnVars.BTNSTYLE.text,
+                THEME_aTester_testElemColor__hl1: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl1: colorVars.FILLS.hl10,
+                THEME_aTester_testElemColor__hl2: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl2: colorVars.FILLS.hl20,
+                THEME_aTester_testElemColor__hl3: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl3: colorVars.FILLS.hl30,
+                THEME_aTester_testElemColor__hl4: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl4: colorVars.FILLS.hl40,
+                THEME_aTester_testElemColor__hl5: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl5: colorVars.FILLS.hl50,
+                THEME_aTester_testElemColor__hl6: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl6: colorVars.FILLS.hl60,
+                THEME_aTester_testElemColor__hl7: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl7: colorVars.FILLS.hl70,
+                THEME_aTester_testElemColor__hl8: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl8: colorVars.FILLS.hl80,
+                THEME_aTester_testElemColor__hl9: colorVars.COLORS.accentPrimary,
+                THEME_aTester_testElemFill__hl9: colorVars.FILLS.hl90,
+
     // ------------------------------------------------------------------------------------------
     })
 %>
