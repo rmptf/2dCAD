@@ -1,3 +1,57 @@
 svg{
-    background-color: rgb(43, 43, 43);;
-  }
+  /* background-color: rgb(43, 43, 43);; */
+}
+
+.path {
+
+}
+
+.mainPath {
+  stroke-width: 1;
+  fill: none;
+  stroke: var(--highlight-10);
+  opacity: 1;
+}
+
+.secondaryPath {
+  stroke-width: 15;
+  fill: none;
+  stroke: var(--highlight-80);
+  opacity: 0.0;
+}
+
+.parallelPath {
+  stroke-width: 1;
+  fill: none;
+  stroke: var(--dusk-500);
+  opacity: 1;
+}
+
+.endPoint {
+
+}
+
+.mainEndPoint {
+  r: 7;
+  fill: var(--dusk-500);
+  opacity: 1;
+  /* stroke-width: 0; */
+  /* stroke: black; */
+}
+
+.mainEndPointCURVE {
+  r: 5;
+  /* fill: var(--dusk-500); */
+  fill: hotpink;
+  opacity: 1;
+  /* stroke-width: 0; */
+  /* stroke: black; */
+}
+
+.parallelEndPoint {
+  r: 5;
+  fill: var(--dusk-500);
+  opacity: 1;
+  /* stroke-width: 0; */
+  /* stroke: black; */
+}

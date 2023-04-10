@@ -2,30 +2,102 @@
     <div class="a-canvas__container">
         <div class="a-canvas__canvas" id="canvas123">
 
-            <div class="drag_div" id="dragDiv">
-                <div class="drag_div_header body_1 <%= dragshit %>" id="dragDivHeader">Click here to move</div>
-                <div class="btn-container--column btn-align--center">
-                    <button class="a-button a-button__a-btn--default a-btn__default--small button--primary button--contained" type="button">eat my ass bitch</button>
-                    <button class="a-button a-button__a-btn--default a-btn__default--small button--warning button--contained" type="button">eat my ass bitch</button>
-                    <button class="a-button a-button__a-btn--default a-btn__default--small button--info button--contained" type="button">eat my ass bitch</button>
+
+
+            <div class="drag_cont" id="dragCont">
+
+
+                <div class="drag_div drag_div1" id="dragDiv1" onclick="svgElementClick(this), setSvg(this.children[3].id)">
+                    <div class="drag_div_header body_1 <%#= dragshit %>" id="dragDiv1Header">Pattern_Pc_01</div>
+                    <div class="btn-container--row btn-align--center">
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button>
+                    </div>
+                    <br>
+                    <svg class="newSvg" id="newSvg1"></svg>
                 </div>
+                
+                <div class="drag_div drag_div2" id="dragDiv2" onclick="svgElementClick(this), setSvg(this.children[3].id)">
+                    <div class="drag_div_header body_1 <%#= dragshit %>" id="dragDiv2Header">Pattern_Pc_02</div>
+                    <div class="btn-container--row btn-align--center">
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
+                        <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button>
+                    </div>
+                    <br>
+                    <svg class="newSvg" id="newSvg2"></svg>
+                </div>
+
+
             </div>
+            
+
 
         </div>
     </div>
 </div>
 
+<template id="dragDivTemp">
+    <div class="drag_div drag_div1" id="tamplateClone" onclick="svgElementClick(this), setSvg(this.children[3].id)">
+        <div class="drag_div_header body_1" id="dragDiv1Header">Pattern_Pc_01</div>
+        <div class="btn-container--row btn-align--center">
+            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
+            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
+            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
+            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button>
+        </div>
+        <br>
+        <svg class="newSvg" id="newSvg1"></svg>
+    </div>
+</template>
+
+
+
+
 <script>
-    dragElement(document.getElementById("dragDiv"));
+
+    function cloneDragDivs() {
+        console.log("Under Construction.")
+        // let content = document.getElementById("dragDivTemp").content;
+        // var targetContainer = document.getElementById('dragCont');
+        // targetContainer.appendChild(document.importNode(content, true));
+
+        // templateContent = document.getElementById("tamplateClone")
+        // console.log(templateContent.id)
+        // templateContent.id = "newID"
+        // console.log(templateContent.id)
+    }
+    
+
+
+    function svgElementClick(element, svgId123) {
+        let svgContainers = document.querySelectorAll(".drag_div")
+        let activeClass = "drag_div--active"
+        svgContainers.forEach(element => element.classList.remove(activeClass));
+        element.classList.add(activeClass)
+    }
+
+
+
+    let parentElem = document.getElementById("dragCont")
+    dragElement(parentElem);
+    let childElem1 = document.getElementById("dragDiv1")
+    dragElement(childElem1);
+    let childElem2 = document.getElementById("dragDiv2")
+    dragElement(childElem2);
     let canvasElement = document.getElementById("canvas123");
     let scale = 1
     let dragScaler
 
     function dragElement(elmnt) {
+        // console.log("count")
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById(elmnt.id + "header")) {
+        if (document.getElementById(elmnt.id + "Header")) {
             // if present, the header is where you move the DIV from:
-            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+            document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
         } else {
             // otherwise, move the DIV from anywhere inside the DIV:
             elmnt.onmousedown = dragMouseDown;
@@ -33,6 +105,7 @@
 
         function dragMouseDown(e) {
             e = e || window.event;
+            e.stopPropagation();
             e.preventDefault();
             pos3 = e.clientX;
             pos4 = e.clientY;
@@ -41,6 +114,7 @@
         }
 
         function elementDrag(e) {
+            console.log()
             e = e || window.event;
             e.preventDefault();
 
@@ -72,13 +146,17 @@
     }
 
     function resetScale(){
-        console.log("Zoom 100%")
+        console.log("Zoom 100%. Scale: " + scale)
         scale = 1
         canvasElement.style["transform"] = "scale("+scale+")";
     }
     function decreaseScale(){
-        console.log("Zoom out: 10%")
+        console.log("Zoom out: 10%. Scale: " + scale)
         scale = scale - (scale * .1)
         canvasElement.style["transform"] = "scale("+scale+")";
     }
 </script>
+<!-- <script>
+    // let testVar = tester
+</script> -->
+<script type="text/javascript" var_1="dickass" src="/javascripts/addCurvePointToLineAndDrawParallel.js"></script>

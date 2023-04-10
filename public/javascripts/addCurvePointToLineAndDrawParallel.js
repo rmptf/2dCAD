@@ -1,25 +1,34 @@
-const width = '100%'
-const height = '600px'
+let svg
+function setSvg(id){
+    console.log(id)
+    svg = d3.select('#' + id)
+}
 
-let svg = d3.select('body').append('svg')
-    .attr('width', width)
-    .attr('height', height)
-    .attr('fill', 'red')
+// let svg = d3.select('"#' + svgId + '"')
+// let svg = d3.select("#newSvg1")
 
-d3.select("body").insert("div")
-    .append("button")
-    .text("Draw Path")
-    .on("click", drawPath)
 
-d3.select("body").insert("div")
-    .append("button")
-    .text("Add Curve Point")
-    .on("click", addCurvePoint)
+// const width = '100%'
+// const height = '600px'
+// let svg = d3.select('body').append('svg')
+//     .attr('width', width)
+//     .attr('height', height)
+//     .attr('fill', 'red')
 
-d3.select("body").insert("div")
-    .append("button")
-    .text("Add Parallel")
-    .on("click", addParallelPath)
+// d3.select("body").insert("div")
+//     .append("button")
+//     .text("Draw Path")
+//     .on("click", drawPath)
+
+// d3.select("body").insert("div")
+//     .append("button")
+//     .text("Add Curve Point")
+//     .on("click", addCurvePoint)
+
+// d3.select("body").insert("div")
+//     .append("button")
+//     .text("Add Parallel")
+//     .on("click", addParallelPath)
 
 let groupCounter = -1
 
@@ -72,19 +81,19 @@ function drawPath(){
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, isDown2, self)}))
+            mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, isDown2, self)}))
             // MAIN PATH
 
             // SECONDARY PATH
             let secondaryPathGroup = []
-            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             secondaryPathGroups.push(secondaryPathGroup)
             // SECONDARY PATH
 
             // DYNAMIC END POINTS
             let endPoints = []
             for (let i = 0; i < pathDatas[thisCount].length; i++) {
-                let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint'))
+                let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint'))
                 endPoints.push(newPoint)
             }
             endPointsGroups.push(endPoints)
@@ -104,8 +113,8 @@ function drawPath(){
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
-            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
             // console.log(secondaryPathCount)
@@ -149,8 +158,8 @@ function drawPath(){
         } else if (pressAddCurveButton === true) {
             console.log('Add Path Arc = true')
 
-            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint')))
-            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path'))
+            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
     
             let newPathCounter = -1
             for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
@@ -218,11 +227,11 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         let parallelPathData = []
 
         for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
-            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint'))
+            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
             parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
 
-            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path'))
+            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
             parallelPathGroup.push(parallelPath)
 
             let thisPathData = pathDatas[thisCount][i].coords
@@ -579,34 +588,20 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
     // PATH
     let path = d3.select(mainPathsArray._groups[0][0])
         path.attr('d', calculateArcAndDescribePath(pathData))
-        path.style('fill', 'none')
-        path.style('stroke', 'grey')
-        path.style('opacity', '.2')
-        path.style('stroke-width', 30)
     // PATH
 
     // SECONDARY PATH
     for (let i = 0; i < secondaryPathsArray.length; i++) {
         let secondaryPath = d3.select(secondaryPathsArray[i]._groups[0][0])
             secondaryPath.attr('d', describeComplexPath([pathData[i], pathData[i + 1]]))
-            secondaryPath.style('fill', 'none')
-            secondaryPath.style('stroke', 'red')
-            secondaryPath.style('opacity', '1')
-            secondaryPath.style('stroke-width', 5)
     }
     // SECONDARY PATH
 
     // DYNAMIC END POINTS
     for (let i = 0; i < endPointsArray.length; i++) {
         let endPoint = d3.select(endPointsArray[i]._groups[0][0])
-        endPoint.attr('r', 10)
-            .attr('cx', pathData[i].coords.x)
-            .attr('cy', pathData[i].coords.y)
-        if(i % 2 == 0) {
-            endPoint.attr('fill', 'red')
-        } else {
-            endPoint.attr('fill', 'blue')
-        }
+        endPoint.attr('cx', pathData[i].coords.x).attr('cy', pathData[i].coords.y)
+            // .attr('r', 10)
     }
     // DYNAMIC END POINTS
 }
@@ -618,10 +613,8 @@ function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData
         for (let j = 0; j < parallelPathData[i].length; j++) {
             k = k + 1
             let endPoint1 = d3.select(parallelEndPointsArray[k]._groups[0][0])
-            endPoint1.attr('r', 5)
-                .attr('cx', parallelPathData[i][j].coords.x)
-                .attr('cy', parallelPathData[i][j].coords.y)
-                .attr('fill', 'purple')
+            endPoint1.attr('cx', parallelPathData[i][j].coords.x).attr('cy', parallelPathData[i][j].coords.y)
+                // .style('r', 5)
         }
     }
     // PARALLEL END POINTS
@@ -631,9 +624,6 @@ function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData
         let parallelPath = d3.select(parallelPathsArray[i]._groups[0][0])
             // parallelPath.attr('d', calculateArcAndDescribePath([parallelPathData[i][0], parallelPathData[i][1]]))
             parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
-            parallelPath.style('fill', 'none')
-            parallelPath.style('stroke', 'yellow')
-            parallelPath.style('stroke-width', 1)
     }
     // PARALLEL PATH
 }
@@ -1095,3 +1085,17 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     }
     return solveTriangleData
 }
+
+// function checker() {
+//     mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, isDown2, self)}))
+//     secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+//     secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
+//     secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
+//     let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+
+//     let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint'))
+//     endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+//     endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+//     let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+//     let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+// }
