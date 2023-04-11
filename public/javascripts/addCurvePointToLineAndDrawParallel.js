@@ -1,6 +1,5 @@
 let svg
 function setSvg(id){
-    console.log(id)
     svg = d3.select('#' + id)
 }
 

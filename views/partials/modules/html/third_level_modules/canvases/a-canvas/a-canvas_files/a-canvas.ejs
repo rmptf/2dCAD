@@ -12,7 +12,7 @@
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
-            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button>
+            <!-- <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button> -->
         </div>
         <br>
         <svg class="newSvg" id="newSvg00"></svg>
@@ -57,19 +57,16 @@
         function increaseCountDrgId(rootName) {
             counter1 = counter1 + 1
             let newId = rootName + counter1
-            console.log(newId)
             return newId
         }
         function increaseCountInnerText(innerText) {
             counter2 = counter2 + 1
             let newInnerText = innerText + counter2
-            console.log(newInnerText)
             return newInnerText
         }
         function increaseCountSvgId(rootName) {
             counter3 = counter3 + 1
             let newId = rootName + counter3
-            console.log(newId)
             return newId
         }
     }
@@ -103,7 +100,6 @@
         }
 
         function elementDrag(e) {
-            console.log()
             e = e || window.event;
             e.preventDefault();
             // To fix drag while scaled issued (multply pos1 & pos1 by the opposite scale)
