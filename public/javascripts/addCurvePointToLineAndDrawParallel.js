@@ -66,6 +66,7 @@ function drawPath(){
     function mouseDown(event) {
         m1 = d3.pointer(event)
         if (isDown === false) {
+            console.log("boob")
             groupCounter = groupCounter + 1
             thisCount = groupCounter
             let thisPathCount = 0
@@ -109,6 +110,7 @@ function drawPath(){
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
             svg.on("mousemove", mousemove)
         } else {
+            console.log("butt")
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
@@ -118,11 +120,24 @@ function drawPath(){
             svg.on("mousemove", mousemove)
             // console.log(secondaryPathCount)
         }
+
+        // let element = d3.select('.figureGroup').node();
+        // let ass = element.getBoundingClientRect().height;
+        // let tits = element.getBoundingClientRect().width;
+        // console.log(ass, tits)
     }
 
     function mousemove(event) {
         m2 = d3.pointer(event)
+
+        console.log(event)
+        // d3.select(endPointsArray[selector]._groups[0][0])
+        //     .attr('cx', pathData[selector].coords.x += event.dx )
+        //     .attr('cy', pathData[selector].coords.y += event.dy )   
+
+
         if(isDown === true) {
+            // console.log(m2)
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
@@ -576,6 +591,7 @@ function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pa
 
 // DYNAMIC END POINTS
 function dragEndPoint(event, selector, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
+    console.log(event)
     d3.select(endPointsArray[selector]._groups[0][0])
         .attr('cx', pathData[selector].coords.x += event.dx )
         .attr('cy', pathData[selector].coords.y += event.dy )   
