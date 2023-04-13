@@ -1,6 +1,9 @@
 let svg
+let canvas
+let canvasId = "canvas123"
 function setSvg(id){
     svg = d3.select('#' + id)
+    canvas = d3.select('#' + canvasId)
 }
 
 // let svg = d3.select('"#' + svgId + '"')
@@ -63,8 +66,18 @@ function drawPath(){
     svg.on('click', mouseDown)
     svg.on('dblclick', mouseUp)
 
+
+
     function mouseDown(event) {
+        // canvas.on('click', mouseDownCanvas)
+        // canvas.on('dblclick', mouseUpCanvas)
         m1 = d3.pointer(event)
+
+        // function mouseDownCanvas(event) {
+        //     m1canvas = d3.pointer(event)
+        //     console.log(m1)
+        //     // console.log(m1canvas)
+        // }
         if (isDown === false) {
             console.log("boob")
             groupCounter = groupCounter + 1
@@ -108,7 +121,15 @@ function drawPath(){
 
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+
+
+
+
             svg.on("mousemove", mousemove)
+            // canvas.on("mousemove", mousemove)
+
+
+
         } else {
             console.log("butt")
             secondaryPathCount = secondaryPathCount + 1
@@ -117,8 +138,16 @@ function drawPath(){
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            
+            
+            
+            
             svg.on("mousemove", mousemove)
-            // console.log(secondaryPathCount)
+            // canvas.on("mousemove", mousemove)
+
+
+
+
         }
 
         // let element = d3.select('.figureGroup').node();
@@ -127,17 +156,24 @@ function drawPath(){
         // console.log(ass, tits)
     }
 
-    function mousemove(event) {
+    function mousemove(event, m1, tits) {
         m2 = d3.pointer(event)
+        dx123 = event.movementX
+        dy123 = event.movementY
+        
 
-        console.log(event)
+        // console.log(event.movementX, event.movementY)
+        // console.log(event)
+        // console.log(m2)
+
         // d3.select(endPointsArray[selector]._groups[0][0])
         //     .attr('cx', pathData[selector].coords.x += event.dx )
         //     .attr('cy', pathData[selector].coords.y += event.dy )   
 
 
         if(isDown === true) {
-            // console.log(m2)
+            // pathDatas[thisCount].at(-1).coords.x += dx123
+            // pathDatas[thisCount].at(-1).coords.y += dy123
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
@@ -148,6 +184,9 @@ function drawPath(){
         svg.on("click", null)
         svg.on("dblclick", null)
         svg.on("mousemove", null)
+        // canvas.on("click", null)
+        // canvas.on("dblclick", null)
+        // canvas.on("mousemove", null)
         secondaryPathCount = secondaryPathCount - 1
         for (let i = 0; i < 2; i++) {
             pathDatas[thisCount].pop()
