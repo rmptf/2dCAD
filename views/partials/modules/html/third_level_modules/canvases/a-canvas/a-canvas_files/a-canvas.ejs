@@ -1,14 +1,13 @@
 <div class="a-canvas <%= THEME_moduleTheme %> <%= THEME_aCanvasContainerFill %>">
     <div class="a-canvas__container">
-        <div class="a-canvas__canvas" id="canvas123">
+        <div class="a-canvas__canvas" id="CHANGELATER_canvasId">
             <div class="drag_cont" id="dragCont"></div>
-            <svg class="newSvg" id="newSvg1"></svg>
         </div>
     </div>
 </div>
 <template id="dragDivTemp">
-    <!-- <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg(this.children[3].id)"> -->
-    <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg('newSvg1')">
+    <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg(this.id, this.children[3].id), 'CHANGELATER_canvasId'">
+    <!-- <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg('newSvg1')"> -->
         <div class="drag_div_header body_1" id="dragDiv1Header"></div>
         <div class="btn-container--row btn-align--center">
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
@@ -17,7 +16,7 @@
             <!-- <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button> -->
         </div>
         <br>
-        <!-- <svg class="newSvg" id="newSvg00"></svg> -->
+        <svg class="newSvg" id="newSvg00"></svg>
     </div>
 </template>
 
@@ -34,7 +33,7 @@
 
     let parentElem = document.getElementById("dragCont")
     dragElement(parentElem);
-    let canvasElement = document.getElementById("canvas123");
+    let canvasElement = document.getElementById("CHANGELATER_canvasId");
     
 
     function cloneDragDivs() {
@@ -44,13 +43,13 @@
 
         templateContent = document.getElementById("tamplateClone")
         templateHeader = templateContent.children[0]
-        // templateSvg = templateContent.children[3]
+        templateSvg = templateContent.children[3]
         
         let newTemplateId = increaseCountDrgId("dragDiv")
 
         templateContent.id = newTemplateId
         templateHeader.innerText = increaseCountInnerText("Pattern_Pc_")
-        // templateSvg.id = increaseCountSvgId("newSvg")
+        templateSvg.id = increaseCountSvgId("newSvg")
 
         let dragElem = document.getElementById(newTemplateId)
         dragElement(dragElem);

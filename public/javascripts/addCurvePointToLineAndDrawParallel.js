@@ -1,9 +1,12 @@
 let svg
 let canvas
-let canvasId = "canvas123"
-function setSvg(id){
-    svg = d3.select('#' + id)
+let dragDiv
+let svgHTML
+function setSvg(dragDivId, svgId, canvasId){
+    svg = d3.select('#' + svgId)
     canvas = d3.select('#' + canvasId)
+    dragDiv = document.getElementById(dragDivId)
+    svgHTML = document.getElementById(svgId)
 }
 
 // let svg = d3.select('"#' + svgId + '"')
@@ -66,25 +69,21 @@ function drawPath(){
     svg.on('click', mouseDown)
     svg.on('dblclick', mouseUp)
 
-
-
     function mouseDown(event) {
-        // canvas.on('click', mouseDownCanvas)
-        // canvas.on('dblclick', mouseUpCanvas)
         m1 = d3.pointer(event)
 
-        // function mouseDownCanvas(event) {
-        //     m1canvas = d3.pointer(event)
-        //     console.log(m1)
-        //     // console.log(m1canvas)
-        // }
+        // const height = '600px'
+        // let svg = d3.select('body').append('svg')
+        //     .attr('width', width)
+        //     .attr('height', height)
+
         if (isDown === false) {
-            console.log("boob")
+            console.log("first click")
             groupCounter = groupCounter + 1
             thisCount = groupCounter
             let thisPathCount = 0
             
-            self.group = svg.append('g').attr('class', 'figureGroup')
+            self.group = svg.append('g').attr('class', 'figureGroup').attr('id', 'figureGroup123')
             self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
             self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
@@ -122,58 +121,87 @@ function drawPath(){
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
-
-
-
-            svg.on("mousemove", mousemove)
-            // canvas.on("mousemove", mousemove)
-
-
+            let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
+            let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
+            let svgDimensions = svgHTML.getBoundingClientRect()
+            svg.on("mousemove", function(event) {mousemove(event, m1, dragDivLeftPos, dragDivTopPos, svgDimensions)})
 
         } else {
-            console.log("butt")
+            console.log("second click")
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
             pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
             endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
-            
-            
-            
-            
-            svg.on("mousemove", mousemove)
-            // canvas.on("mousemove", mousemove)
 
-
-
-
+            let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
+            let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
+            let svgDimensions = svgHTML.getBoundingClientRect()
+            svg.on("mousemove", function(event) {mousemove(event, m1, dragDivLeftPos, dragDivTopPos, svgDimensions)})
+            
         }
-
-        // let element = d3.select('.figureGroup').node();
-        // let ass = element.getBoundingClientRect().height;
-        // let tits = element.getBoundingClientRect().width;
-        // console.log(ass, tits)
     }
 
-    function mousemove(event, m1, tits) {
+    function mousemove(event, m1Origin, dragDivLeftPos, dragDivTopPos, svgDimensions) {
         m2 = d3.pointer(event)
-        dx123 = event.movementX
-        dy123 = event.movementY
-        
+        // let m2_dx = event.movementX
+        // let m2_dy = event.movementY
+        let p1_x = pathDatas[thisCount].at(-2).coords.x
+        let p1_y = pathDatas[thisCount].at(-2).coords.y
+        let p1m2Dif_x = p1_x - m2[0]
+        let p1m2Dif_y = p1_y - m2[1]
+        let m2m1dif_x = m2[0] - m1Origin[0]
+        let m2m1dif_y = m2[1] - m1Origin[1]
 
-        // console.log(event.movementX, event.movementY)
-        // console.log(event)
-        // console.log(m2)
+        // Svg Dimenstions
+        let svgWidth = svgDimensions.width
+        let svgHeight = svgDimensions.height
 
-        // d3.select(endPointsArray[selector]._groups[0][0])
-        //     .attr('cx', pathData[selector].coords.x += event.dx )
-        //     .attr('cy', pathData[selector].coords.y += event.dy )   
+        let bubble = 50
+        let distanceToTravel_x = m1Origin[0]
+        let distanceToBubble_x = distanceToTravel_x - bubble
+        let moveShitThisAmount_x = p1m2Dif_x - distanceToBubble_x
 
+        // let distanceToTravel_x_right = svgWidth - m1Origin[0]
+        // let distanceToBubble_x_right = distanceToTravel_x_right - bubble
+        // let moveShitThisAmount_x_right = p1m2Dif_x + distanceToBubble_x_right
+        // console.log()
+
+        if(m2[0] < p1_x){
+            if(p1m2Dif_x >= distanceToBubble_x) {
+                console.log('In Bubble -')
+                // Resize SVG
+                // m2m1dif_x
+                svg.attr('width', (svgWidth + moveShitThisAmount_x) + 'px')
+                // Reposition dragDiv
+                dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x) + "px"
+                // Reposition SVG Elements
+                pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x
+            }
+        } else {
+            // if(p1m2Dif_x >= distanceToBubble_x_right) {
+                console.log('In Bubble +')
+                // Resize SVG
+                // m2m1dif_x
+                // svg.attr('width', (svgWidth + moveShitThisAmount_x_right) + 'px')
+                svg.attr('width', (svgWidth + m2m1dif_x) + 'px')
+            // }
+        }
+    
+        if(m2[1] < p1_y){
+            // Resize SVG
+            svg.attr('height', (svgHeight + p1m2Dif_y)+'px')
+            // Reposition dragDiv
+            dragDiv.style.top = (dragDivTopPos - p1m2Dif_y) + "px"
+            // Reposition SVG Elements
+            pathDatas[thisCount].at(-2).coords.y = m1Origin[1] + p1m2Dif_y
+        } else {
+            // Resize SVG
+            svg.attr('height', (svgHeight + m2m1dif_y)+'px')
+        }
 
         if(isDown === true) {
-            // pathDatas[thisCount].at(-1).coords.x += dx123
-            // pathDatas[thisCount].at(-1).coords.y += dy123
             pathDatas[thisCount].at(-1).coords.x = m2[0]
             pathDatas[thisCount].at(-1).coords.y = m2[1]
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
@@ -242,9 +270,12 @@ function drawPath(){
     }
 }
 
+
+
 function mainPathClick(this1, event, thisCount, isDown2, self){
     console.log('Main Path Click')
 }
+
 
 
 
