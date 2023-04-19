@@ -7,13 +7,11 @@
 </div>
 <template id="dragDivTemp">
     <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg(this.id, this.children[3].id), 'CHANGELATER_canvasId'">
-    <!-- <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg('newSvg1')"> -->
         <div class="drag_div_header body_1" id="dragDiv1Header"></div>
         <div class="btn-container--row btn-align--center">
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
             <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
-            <!-- <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="" type="button" onclick="testFunction()">Test Btn</button> -->
         </div>
         <br>
         <svg class="newSvg" id="newSvg00"></svg>

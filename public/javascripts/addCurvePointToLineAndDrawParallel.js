@@ -158,47 +158,57 @@ function drawPath(){
         let svgWidth = svgDimensions.width
         let svgHeight = svgDimensions.height
 
+        // Set parameters to expand SVG only if element extends into buffer bubble
         let bubble = 50
-        let distanceToTravel_x = m1Origin[0]
-        let distanceToBubble_x = distanceToTravel_x - bubble
-        let moveShitThisAmount_x = p1m2Dif_x - distanceToBubble_x
 
-        // let distanceToTravel_x_right = svgWidth - m1Origin[0]
-        // let distanceToBubble_x_right = distanceToTravel_x_right - bubble
-        // let moveShitThisAmount_x_right = p1m2Dif_x + distanceToBubble_x_right
-        // console.log()
+        let distanceToTravel_x_left = m1Origin[0]
+        let distanceToBubble_x_left = distanceToTravel_x_left - bubble
+        let moveShitThisAmount_x_left = p1m2Dif_x - distanceToBubble_x_left
+
+        let distanceToTravel_x_right = svgWidth - m1Origin[0]
+        let distanceToBubble_x_right = distanceToTravel_x_right - bubble
+        let moveShitThisAmount_x_right = (p1m2Dif_x * -1) - distanceToBubble_x_right
+
+        let distanceToTravel_y_up = m1Origin[1]
+        let distanceToBubble_y_up = distanceToTravel_y_up - bubble
+        let moveShitThisAmount_y_up = p1m2Dif_y - distanceToBubble_y_up
+
+        let distanceToTravel_y_down = svgHeight - m1Origin[1]
+        let distanceToBubble_y_down = distanceToTravel_y_down - bubble
+        let moveShitThisAmount_y_down = (p1m2Dif_y * -1) - distanceToBubble_y_down
 
         if(m2[0] < p1_x){
-            if(p1m2Dif_x >= distanceToBubble_x) {
-                console.log('In Bubble -')
+            if(p1m2Dif_x >= distanceToBubble_x_left) {
                 // Resize SVG
-                // m2m1dif_x
-                svg.attr('width', (svgWidth + moveShitThisAmount_x) + 'px')
+                svg.attr('width', (svgWidth + moveShitThisAmount_x_left) + 'px')
                 // Reposition dragDiv
-                dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x) + "px"
+                dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x_left) + "px"
                 // Reposition SVG Elements
-                pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x
+                pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x_left
             }
         } else {
-            // if(p1m2Dif_x >= distanceToBubble_x_right) {
-                console.log('In Bubble +')
+            if((p1m2Dif_x * -1) >= distanceToBubble_x_right) {
                 // Resize SVG
-                // m2m1dif_x
-                // svg.attr('width', (svgWidth + moveShitThisAmount_x_right) + 'px')
-                svg.attr('width', (svgWidth + m2m1dif_x) + 'px')
-            // }
+                svg.attr('width', (svgWidth + moveShitThisAmount_x_right) + 'px')
+            }
         }
     
         if(m2[1] < p1_y){
-            // Resize SVG
-            svg.attr('height', (svgHeight + p1m2Dif_y)+'px')
-            // Reposition dragDiv
-            dragDiv.style.top = (dragDivTopPos - p1m2Dif_y) + "px"
-            // Reposition SVG Elements
-            pathDatas[thisCount].at(-2).coords.y = m1Origin[1] + p1m2Dif_y
+            if(p1m2Dif_y >= distanceToBubble_y_up) {
+                // Resize SVG
+                // p1m2Dif_y
+                svg.attr('height', (svgHeight + moveShitThisAmount_y_up)+'px')
+                // Reposition dragDiv
+                dragDiv.style.top = (dragDivTopPos - moveShitThisAmount_y_up) + "px"
+                // Reposition SVG Elements
+                pathDatas[thisCount].at(-2).coords.y = m1Origin[1] + moveShitThisAmount_y_up
+            }
         } else {
-            // Resize SVG
-            svg.attr('height', (svgHeight + m2m1dif_y)+'px')
+            if((p1m2Dif_y * -1) >= distanceToBubble_y_down) {
+                // Resize SVG
+                svg.attr('height', (svgHeight + moveShitThisAmount_y_down)+'px')
+                // svg.attr('height', (svgHeight + m2m1dif_y)+'px')
+            }
         }
 
         if(isDown === true) {
