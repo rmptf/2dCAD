@@ -121,12 +121,12 @@ function drawPath(){
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
-            let poopers = pathDatas[thisCount]
+            let CHANGELATERVAR = pathDatas[thisCount]
             let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR)})
 
         } else {
             console.log("second click")
@@ -138,17 +138,17 @@ function drawPath(){
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
 
-            let poopers = pathDatas[thisCount]
+            let CHANGELATERVAR = pathDatas[thisCount]
             let pathDatasPositions = pathDatas[thisCount]
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR)})
             
         }
     }
 
-    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers) {
+    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR) {
         m2 = d3.pointer(event)
         // let m2_dx = event.movementX
         // let m2_dy = event.movementY
@@ -193,8 +193,8 @@ function drawPath(){
 
                 
                 // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
-                // console.log(poopers)
-                // let oldPathDatas = poopers
+                // console.log(CHANGELATERVAR)
+                // let oldPathDatas = CHANGELATERVAR
                 // let pathdatasssss = pathDatas[thisCount]
                 // let dragedPathDataIndex = pathDatas[thisCount].length - 1
                 // for (let i = 0; i < pathdatasssss.length; i++) {
