@@ -121,10 +121,12 @@ function drawPath(){
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
+            let poopers = pathDatas[thisCount]
+            let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, dragDivLeftPos, dragDivTopPos, svgDimensions)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers)})
 
         } else {
             console.log("second click")
@@ -135,15 +137,18 @@ function drawPath(){
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
+
+            let poopers = pathDatas[thisCount]
+            let pathDatasPositions = pathDatas[thisCount]
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, dragDivLeftPos, dragDivTopPos, svgDimensions)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers)})
             
         }
     }
 
-    function mousemove(event, m1Origin, dragDivLeftPos, dragDivTopPos, svgDimensions) {
+    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, poopers) {
         m2 = d3.pointer(event)
         // let m2_dx = event.movementX
         // let m2_dy = event.movementY
@@ -159,7 +164,7 @@ function drawPath(){
         let svgHeight = svgDimensions.height
 
         // Set parameters to expand SVG only if element extends into buffer bubble
-        let bubble = 50
+        let bubble = 100
 
         let distanceToTravel_x_left = m1Origin[0]
         let distanceToBubble_x_left = distanceToTravel_x_left - bubble
@@ -185,6 +190,21 @@ function drawPath(){
                 dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x_left) + "px"
                 // Reposition SVG Elements
                 pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x_left
+
+                
+                // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
+                // console.log(poopers)
+                // let oldPathDatas = poopers
+                // let pathdatasssss = pathDatas[thisCount]
+                // let dragedPathDataIndex = pathDatas[thisCount].length - 1
+                // for (let i = 0; i < pathdatasssss.length; i++) {
+                //     if(i !== dragedPathDataIndex) {
+                //         // pathdatasssss[i].coords.x= oldPathDatas[i].coords.x + moveShitThisAmount_x_left
+                //         console.log(i, pathdatasssss[i].coords.x, oldPathDatas[i].coords.x)
+                //     }
+                // }
+
+                
             }
         } else {
             if((p1m2Dif_x * -1) >= distanceToBubble_x_right) {
@@ -201,6 +221,7 @@ function drawPath(){
                 // Reposition dragDiv
                 dragDiv.style.top = (dragDivTopPos - moveShitThisAmount_y_up) + "px"
                 // Reposition SVG Elements
+                // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
                 pathDatas[thisCount].at(-2).coords.y = m1Origin[1] + moveShitThisAmount_y_up
             }
         } else {
