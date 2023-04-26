@@ -38,6 +38,7 @@ function setSvg(dragDivId, svgId, canvasId){
 let groupCounter = -1
 
 let pathDatas = []
+// let pathDatasMOVEMENT = []
 let mainPaths = []
 let secondaryPathGroups = []
 let endPointsGroups = []
@@ -121,12 +122,15 @@ function drawPath(){
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
-            let CHANGELATERVAR = pathDatas[thisCount]
+            // Passing the final varaible seems to work, if i pass the array it will just always refence the current pathdatas numbers
+            let pathCurrentPathData = [pathDatas[thisCount][0].coords.x]
+            // let pathCurrentPathData = pathDatas[thisCount][0].coords
+
             let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData)})
 
         } else {
             console.log("second click")
@@ -138,17 +142,21 @@ function drawPath(){
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
 
-            let CHANGELATERVAR = pathDatas[thisCount]
+            // Passing the final varaible seems to work, if i pass the array it will just always refence the current pathdatas numbers
+            // build a for each loop that puts each pathdata into a new array and pass that to mousemove
+            let pathCurrentPathData = [pathDatas[thisCount][0].coords.x, pathDatas[thisCount][1].coords.x, 'filler']
+            // let pathCurrentPathData = pathDatas[thisCount][0].coords
+
             let pathDatasPositions = pathDatas[thisCount]
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData)})
             
         }
     }
 
-    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, CHANGELATERVAR) {
+    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData) {
         m2 = d3.pointer(event)
         // let m2_dx = event.movementX
         // let m2_dy = event.movementY
@@ -189,20 +197,21 @@ function drawPath(){
                 // Reposition dragDiv
                 dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x_left) + "px"
                 // Reposition SVG Elements
-                pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x_left
+                // Hardcoded for one click
+                // pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x_left
 
                 
                 // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
-                // console.log(CHANGELATERVAR)
-                // let oldPathDatas = CHANGELATERVAR
-                // let pathdatasssss = pathDatas[thisCount]
-                // let dragedPathDataIndex = pathDatas[thisCount].length - 1
-                // for (let i = 0; i < pathdatasssss.length; i++) {
-                //     if(i !== dragedPathDataIndex) {
-                //         // pathdatasssss[i].coords.x= oldPathDatas[i].coords.x + moveShitThisAmount_x_left
-                //         console.log(i, pathdatasssss[i].coords.x, oldPathDatas[i].coords.x)
-                //     }
-                // }
+                // console.log(pathCurrentPathData)
+                let thisCountPathData = pathDatas[thisCount]
+                let dragedPathDataIndex = pathDatas[thisCount].length - 1
+                for (let i = 0; i < thisCountPathData.length; i++) {
+                    if(i !== dragedPathDataIndex) {
+                        // Hardcoded for two clicks
+                        thisCountPathData[i].coords.x = pathCurrentPathData[i] + moveShitThisAmount_x_left
+                        // console.log(i, thisCountPathData[0].coords.x, pathCurrentPathData)
+                    }
+                }
 
                 
             }
