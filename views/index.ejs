@@ -35,7 +35,11 @@
         // MODULE
             // MODULE_bHeader_first: '',
         // CONTENT
-            // CONTENT_bHeader_content: ''
+            // LOGO CONTAINER
+                CONTENT_bHeader_logo_cont: {
+                    icon: "®",
+                    text: "NOTCHER",
+                },
         // ACTIONS
              // BTN CONTAINER
                 ACTIONS_bHeader_btn_cont: {
@@ -50,7 +54,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Notcher",
-                        btnHref: "window.location.href='/'",
+                        btnOnClick: "window.location.href='/'",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -62,7 +66,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Settings",
-                        btnHref: "window.location.href='/'",
+                        btnOnClick: "window.location.href='/'",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -74,7 +78,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Profile",
-                        btnHref: "window.location.href='/'",
+                        btnOnClick: "window.location.href='/'",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -86,7 +90,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Profile",
-                        btnHref: "window.location.href='/'",
+                        btnOnClick: "window.location.href='/'",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -96,7 +100,7 @@
                     },
                 },
         // THEME
-            THEME_bHeaderContainerFill: colorVars.FILLS.mainFill,
+            THEME_bHeaderContainerFill: colorVars.FILLS.mainMuted,
             THEME_bHeaderLogoIconColor: colorVars.COLORS.hl50,
             THEME_bHeaderLogoTextColor: colorVars.COLORS.hl10,
     // ------------------------------------------------------------------------------------------
@@ -104,14 +108,85 @@
     // ------------------------------------------------------------------------------------------
     // MODULE: a-Canvas
         // MODULE
-            // MODULE_aCanvas_first: '',
+            MODULE_aCanvas_first: moduleLocationVARS.A_DOCUMENT,
         // CONTENT
             // CONTENT_aCanvas_content: ''
         // ACTIONS
             // ACTIONS_aCanvas_footerBtnExist: false,
         // THEME
             THEME_aCanvasContainerFill: colorVars.FILLS.mainFill,
-            dragshit: colorVars.COLORS.hl10,
+            THEME_aCanvasPanLayerFill: colorVars.FILLS.mainFill,
+    // ------------------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------------
+    // MODULE: a-Document
+        // MODULE
+            MODULE_aDocument_first: '',
+        // CONTENT
+            // CONTENT_aDocument_content: ''
+        // ACTIONS
+            // ELEMENT BTN
+                ACTIONS_aDocument_element_btn: {
+                    element_01: {
+                        elementBtnExist: true,
+                        elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[2].id), 'aCanvasZoomLayer'",
+                        elementId: "",
+                    },
+                },
+            // BTN CONTAINER
+                ACTIONS_aDocument_btn_cont: {
+                    btn_cont_01: {
+                        btnDirection: "btn-container--row",
+                        btnAlign: "btn-align--center",
+                    },
+                },
+            // BTN
+                ACTIONS_aDocument_btn: {
+                    btn_01: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Path",
+                        btnOnClick: "drawPath()",
+                        btnId: "pathBtn",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_02: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Curve",
+                        btnOnClick: "addCurvePoint()",
+                        btnId: "curveBtn",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                    btn_03: {
+                        btnExist: true,
+                        btnType: "button",
+                        btnText: "Parallel",
+                        btnOnClick: "addParallelPath()",
+                        btnId: "parallelBtn",
+                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                        btnTheme_type: btnVars.BTNTYPES.default,
+                        btnTheme_size: btnVars.BTNSIZES.small,
+                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                    },
+                },
+        // THEME
+            THEME_aDocumentContainerFill: colorVars.FILLS.mainFill,
+            THEME_aDocumentContainerColor: colorVars.COLORS.main,
+            THEME_aDocumentContainerBorderColor: colorVars.BORDERS.mainMutedBorderColor,
+            THEME_aDocumentSvgFill: colorVars.FILLS.mainMuted,
+
+            
+            
     // ------------------------------------------------------------------------------------------
 
     // ------------------------------------------------------------------------------------------
@@ -134,7 +209,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "About",
-                        btnHref: "",
+                        btnOnClick: "",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -146,7 +221,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "New Svg",
-                        btnHref: "cloneDragDivs()",
+                        btnOnClick: "cloneDragDivs()",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -158,7 +233,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Footer",
-                        btnHref: "window.location.href='/'",
+                        btnOnClick: "window.location.href='/'",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -170,7 +245,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Zoom_In",
-                        btnHref: "increaseScale()",
+                        btnOnClick: "increaseScale()",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -182,7 +257,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Zoom_100%", 
-                        btnHref: "resetScale()",
+                        btnOnClick: "resetScale()",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -194,7 +269,7 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Zoom_Out",
-                        btnHref: "decreaseScale()",
+                        btnOnClick: "decreaseScale()",
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -204,389 +279,7 @@
                     },
                 },
         // THEME
-            THEME_bFooterContainerFill: colorVars.FILLS.mainFill,
-    // ------------------------------------------------------------------------------------------
-    })
-%>
-
-<%#- include(moduleLocationVARS.A_PANE, {
-    // GLOBAL Mode Class
-        THEME_globalMode: globalModeClass,
-    // MODULE Theme Class
-        THEME_moduleTheme: colorVars.THEMECLASS.defaultThemeClass,
-
-    // ALL Modules
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Pane
-        // MODULE
-            MODULE_aPane_first: moduleLocationVARS.A_WINDOW,
-        // THEME
-            THEME_aPaneContainerFill: colorVars.FILLS.mainFill,
-            THEME_aPaneMaxWidth: widthVars.MAXWIDTHS.maxWidthNarrow,
-    // ------------------------------------------------------------------------------------------
-
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Window
-        // MODULE
-            MODULE_aWindow_first: moduleLocationVARS.A_TESTER,
-            MODULE_aWindow_second: '',
-        // CONTENT
-            CONTENT_aWindow_content: {
-                HEADER: {
-                    heading: "Welcome to Notcher",
-                    paragraph: "Notcher is a web-based 2dcad application.",
-                },
-                BODY: {
-                    paragraphFirst: "Accent Primary",
-                    paragraphSecond: "Accent Secondary",
-                }
-            },
-        // ACTIONS
-            // BTN CONTAINER
-                ACTIONS_aWindow_btn_cont: {
-                        btn_cont_01: {
-                            btnDirection: "btn-container--row",
-                            btnAlign: "btn-align--center",
-                        },
-                    },
-            // BTN
-                ACTIONS_aWindow_btn: {
-                    btn_01: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "Get Started",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.primary,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                },
-        // THEME
-            THEME_windowContainerFill: colorVars.FILLS.mainFill,
-            THEME_windowTitleColor: colorVars.COLORS.main,
-            THEME_windowCopyColor: colorVars.COLORS.mainMuted,
-            THEME_windowBodyFirstFill: colorVars.FILLS.accentPrimaryFill,
-            THEME_windowBodyFirstColor: colorVars.COLORS.accentPrimary,
-            THEME_windowBodySecondFill: colorVars.FILLS.accentSecondaryFill,
-            THEME_windowBodySecondColor: colorVars.COLORS.accentSecondary,
-            THEME_windowFooterFill: colorVars.FILLS.accentPrimaryFill,
-            THEME_windowFooterColor: colorVars.COLORS.accentSecondary,
-    // ------------------------------------------------------------------------------------------
-    
-    // ------------------------------------------------------------------------------------------
-    // MODULE: a-Tester
-        // MODULE
-            MODULE_aTester_first: '',
-        // CONTENT
-            CONTENT_aTester_testElem__hl1: "HIGHLIGHT 1",
-            CONTENT_aTester_testElem__hl2: "HIGHLIGHT 2",
-            CONTENT_aTester_testElem__hl3: "HIGHLIGHT 3",
-            CONTENT_aTester_testElem__hl4: "HIGHLIGHT 4",
-            CONTENT_aTester_testElem__hl5: "HIGHLIGHT 5",
-            CONTENT_aTester_testElem__hl6: "HIGHLIGHT 6",
-            CONTENT_aTester_testElem__hl7: "HIGHLIGHT 7",
-            CONTENT_aTester_testElem__hl8: "HIGHLIGHT 8",
-            CONTENT_aTester_testElem__hl9: "HIGHLIGHT 9",
-        // ACTIONS
-            // BTN CONTAINER
-                ACTIONS_aTester_btn_cont: {
-                    btn_cont_01: {
-                        btnDirection: "btn-container--row",
-                        btnAlign: "btn-align--center",
-                    },
-                },
-            // BTN
-                ACTIONS_aTester_btn: {
-                    btn_01: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.primary,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_02: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.primary,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_03: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.primary,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-
-                    btn_04: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SECONDARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.secondary,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_05: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SECONDARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.secondary,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_06: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SECONDARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.secondary,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-
-                    btn_07: {
-                        btnExist: true,
-                        btnType: "DISABLED",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.disabled,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_08: {
-                        btnExist: true,
-                        btnType: "DISABLED",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.disabled,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_09: {
-                        btnExist: true,
-                        btnType: "DISABLED",
-                        btnText: "PRIMARY",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.disabled,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-
-                    btn_10: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SUCCESS",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.success,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_11: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SUCCESS",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.success,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_12: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "SUCCESS",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.success,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-
-                    btn_13: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "DANGER",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.danger,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_14: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "DANGER",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.danger,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_15: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "DANGER",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.danger,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-
-                    btn_16: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "WARNING",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.warning,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_17: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "WARNING",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.warning,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_18: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "WARNING",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.warning,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-
-                    
-                    btn_19: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "INFO",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.info,
-                        btnTheme_style: btnVars.BTNSTYLE.contained,
-                    },
-                    btn_20: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "INFO",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.info,
-                        btnTheme_style: btnVars.BTNSTYLE.outlined,
-                    },
-                    btn_21: {
-                        btnExist: true,
-                        btnType: "button",
-                        btnText: "INFO",
-                        btnHref: "window.location.href='/pages/home'",
-                        btnId: "",
-                        btnTheme_class: btnVars.BTNCLASS.aButton,
-                        btnTheme_type: btnVars.BTNTYPES.default,
-                        btnTheme_size: btnVars.BTNSIZES.small,
-                        btnTheme_status: btnVars.BTNSTATUS.info,
-                        btnTheme_style: btnVars.BTNSTYLE.text,
-                    },
-                },
-
-        // THEME
-            // HIGHLIGHTS
-                THEME_aTester_testElemColor__hl1: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl1: colorVars.FILLS.hl10,
-                THEME_aTester_testElemColor__hl2: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl2: colorVars.FILLS.hl20,
-                THEME_aTester_testElemColor__hl3: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl3: colorVars.FILLS.hl30,
-                THEME_aTester_testElemColor__hl4: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl4: colorVars.FILLS.hl40,
-                THEME_aTester_testElemColor__hl5: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl5: colorVars.FILLS.hl50,
-                THEME_aTester_testElemColor__hl6: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl6: colorVars.FILLS.hl60,
-                THEME_aTester_testElemColor__hl7: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl7: colorVars.FILLS.hl70,
-                THEME_aTester_testElemColor__hl8: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl8: colorVars.FILLS.hl80,
-                THEME_aTester_testElemColor__hl9: colorVars.COLORS.accentPrimary,
-                THEME_aTester_testElemFill__hl9: colorVars.FILLS.hl90,
-
+            THEME_bFooterContainerFill: colorVars.FILLS.mainMuted,
     // ------------------------------------------------------------------------------------------
     })
 %>

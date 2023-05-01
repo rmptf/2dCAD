@@ -1,7 +1,7 @@
 .b-footer {
     overflow: auto;
     /* outline: solid 1pt black; */
-    /* background-color: red; */
+    /* background-color: blue; */
 }
   
 .b-footer__container {
@@ -15,10 +15,7 @@
     width: 100%;
     padding: 1rem;
     pointer-events: none;
-    
-  
     /* background-color: #00000050; */
-    color: hotpink;
 }
   
 .b-footer__sidebar {
@@ -26,6 +23,7 @@
     flex-direction: row;
     pointer-events: all;
 }
+
 .b-footer__sidebar--left {
     /* background-color: #00000050; */
 }

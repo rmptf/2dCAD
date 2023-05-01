@@ -673,6 +673,7 @@ Fills using Colors
 /* Psudo Classes */
 /* HOVERS */
 /* hover color*/
+
 .theme-color__accent-primary--hover:hover{
     color: var(--accent-primary);
 }
@@ -688,6 +689,9 @@ Fills using Colors
 /* border color */
 .theme-color__main--border-color {
     border-color: var(--main);
+}
+.theme-color__main-muted--border-color {
+    border-color: var(--main--muted);
 }
 .theme-color__translucent-overlay--border-color {
     border-color: var(--translucent-overlay);

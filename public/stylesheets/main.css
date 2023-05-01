@@ -26,6 +26,7 @@
     /* 3rd Level Modules */
       @import "shared/modules/html/third_level_modules/headers/b-header/b-header.css";
       @import "shared/modules/html/third_level_modules/canvases/a-canvas/a-canvas.css";
+      @import "shared/modules/html/third_level_modules/documents/a-document/a-document.css";
       @import "shared/modules/html/third_level_modules/footers/b-footer/b-footer.css";
       @import "shared/modules/html/third_level_modules/testers/a-tester/a-tester.css";
       /* @import "shared/modules/headers/a-header/a-header.css"; */

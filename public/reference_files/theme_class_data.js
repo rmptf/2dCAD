@@ -83,6 +83,7 @@ const COLORVARS = {
     },
     BORDERS: {
         mainBorderColor: "theme-color__main--border-color",
+        mainMutedBorderColor: "theme-color__main-muted--border-color",
         translucentOverlayBorderColor: "theme-color__translucent-overlay--border-color",
     },
 }

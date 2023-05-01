@@ -2,15 +2,32 @@ let svg
 let canvas
 let dragDiv
 let svgHTML
+
 function setSvg(dragDivId, svgId, canvasId){
     svg = d3.select('#' + svgId)
     canvas = d3.select('#' + canvasId)
     dragDiv = document.getElementById(dragDivId)
     svgHTML = document.getElementById(svgId)
+
+    // var zoom = d3.zoom()
+    // .scaleExtent([0.1, 50])
+    // .on('zoom', zoomed);
+
+    // var root = d3.select('#aCanvasZoomLayer').call(zoom);
+    // var canvasASS = d3.select('#aCanvasPanLayer');
+    // var d3Paths = d3.select('.mainPath');
+
+    // function zoomed(event, d) {
+    //     var transform = event.transform;
+    //     canvasASS.style("transform", "translate(" + transform.x + "px," + transform.y + "px) scale(" + transform.k + ")");
+    //     d3Paths.style("stroke-width", 20/transform.k);
+    // }
 }
 
+
+
 // let svg = d3.select('"#' + svgId + '"')
-// let svg = d3.select("#newSvg1")
+// let svg = d3.select("#a-document__svg1")
 
 
 // const width = '100%'
@@ -122,15 +139,13 @@ function drawPath(){
             isDown = true
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
-            // Passing the final varaible seems to work, if i pass the array it will just always refence the current pathdatas numbers
-            let pathCurrentPathData = [pathDatas[thisCount][0].coords.x]
-            // let pathCurrentPathData = pathDatas[thisCount][0].coords
-
+            let thisCountCurrentPathDatas_x = [pathDatas[thisCount][0].coords.x]
+            let thisCountCurrentPathDatas_y = [pathDatas[thisCount][0].coords.y]
             let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y)})
 
         } else {
             console.log("second click")
@@ -141,103 +156,94 @@ function drawPath(){
             secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
             updateSVG(mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
 
-
-            // Passing the final varaible seems to work, if i pass the array it will just always refence the current pathdatas numbers
-            // build a for each loop that puts each pathdata into a new array and pass that to mousemove
-            let pathCurrentPathData = [pathDatas[thisCount][0].coords.x, pathDatas[thisCount][1].coords.x, 'filler']
-            // let pathCurrentPathData = pathDatas[thisCount][0].coords
-
+            let thisCountCurrentPathDatas_x = []
+            pathDatas[thisCount].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x));
+            let thisCountCurrentPathDatas_y = []
+            pathDatas[thisCount].forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y));
             let pathDatasPositions = pathDatas[thisCount]
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
-            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData)})
+            svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y)})
             
         }
     }
 
-    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, pathCurrentPathData) {
+    function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y) {
         m2 = d3.pointer(event)
-        // let m2_dx = event.movementX
-        // let m2_dy = event.movementY
         let p1_x = pathDatas[thisCount].at(-2).coords.x
         let p1_y = pathDatas[thisCount].at(-2).coords.y
         let p1m2Dif_x = p1_x - m2[0]
         let p1m2Dif_y = p1_y - m2[1]
-        let m2m1dif_x = m2[0] - m1Origin[0]
-        let m2m1dif_y = m2[1] - m1Origin[1]
 
         // Svg Dimenstions
         let svgWidth = svgDimensions.width
         let svgHeight = svgDimensions.height
 
-        // Set parameters to expand SVG only if element extends into buffer bubble
-        let bubble = 100
+        // Set parameters to expand SVG only if element extends into buffer svgGrowBubble
+        let svgGrowBubble = 100
 
         let distanceToTravel_x_left = m1Origin[0]
-        let distanceToBubble_x_left = distanceToTravel_x_left - bubble
-        let moveShitThisAmount_x_left = p1m2Dif_x - distanceToBubble_x_left
+        let distanceToBubble_x_left = distanceToTravel_x_left - svgGrowBubble
+        let movePathDatasThisAmount_x_left = p1m2Dif_x - distanceToBubble_x_left
 
         let distanceToTravel_x_right = svgWidth - m1Origin[0]
-        let distanceToBubble_x_right = distanceToTravel_x_right - bubble
-        let moveShitThisAmount_x_right = (p1m2Dif_x * -1) - distanceToBubble_x_right
+        let distanceToBubble_x_right = distanceToTravel_x_right - svgGrowBubble
+        let movePathDatasThisAmount_x_right = (p1m2Dif_x * -1) - distanceToBubble_x_right
 
         let distanceToTravel_y_up = m1Origin[1]
-        let distanceToBubble_y_up = distanceToTravel_y_up - bubble
-        let moveShitThisAmount_y_up = p1m2Dif_y - distanceToBubble_y_up
+        let distanceToBubble_y_up = distanceToTravel_y_up - svgGrowBubble
+        let movePathDatasThisAmount_y_up = p1m2Dif_y - distanceToBubble_y_up
 
         let distanceToTravel_y_down = svgHeight - m1Origin[1]
-        let distanceToBubble_y_down = distanceToTravel_y_down - bubble
-        let moveShitThisAmount_y_down = (p1m2Dif_y * -1) - distanceToBubble_y_down
+        let distanceToBubble_y_down = distanceToTravel_y_down - svgGrowBubble
+        let movePathDatasThisAmount_y_down = (p1m2Dif_y * -1) - distanceToBubble_y_down
 
         if(m2[0] < p1_x){
             if(p1m2Dif_x >= distanceToBubble_x_left) {
                 // Resize SVG
-                svg.attr('width', (svgWidth + moveShitThisAmount_x_left) + 'px')
+                svgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_left) + 'px';
+                // svg.attr('width', (svgWidth + movePathDatasThisAmount_x_left) + 'px')
                 // Reposition dragDiv
-                dragDiv.style.left = (dragDivLeftPos - moveShitThisAmount_x_left) + "px"
+                dragDiv.style.left = (dragDivLeftPos - movePathDatasThisAmount_x_left) + "px"
                 // Reposition SVG Elements
-                // Hardcoded for one click
-                // pathDatas[thisCount].at(-2).coords.x = m1Origin[0] + moveShitThisAmount_x_left
-
-                
-                // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
-                // console.log(pathCurrentPathData)
-                let thisCountPathData = pathDatas[thisCount]
+                // Repositions all path datas except for dragged
                 let dragedPathDataIndex = pathDatas[thisCount].length - 1
-                for (let i = 0; i < thisCountPathData.length; i++) {
+                for (let i = 0; i < pathDatas[thisCount].length; i++) {
                     if(i !== dragedPathDataIndex) {
-                        // Hardcoded for two clicks
-                        thisCountPathData[i].coords.x = pathCurrentPathData[i] + moveShitThisAmount_x_left
-                        // console.log(i, thisCountPathData[0].coords.x, pathCurrentPathData)
+                        pathDatas[thisCount][i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
                     }
                 }
-
-                
             }
         } else {
             if((p1m2Dif_x * -1) >= distanceToBubble_x_right) {
                 // Resize SVG
-                svg.attr('width', (svgWidth + moveShitThisAmount_x_right) + 'px')
+                svgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_right) + 'px';
+                // svg.attr('width', (svgWidth + movePathDatasThisAmount_x_right) + 'px')
             }
         }
     
         if(m2[1] < p1_y){
             if(p1m2Dif_y >= distanceToBubble_y_up) {
                 // Resize SVG
-                // p1m2Dif_y
-                svg.attr('height', (svgHeight + moveShitThisAmount_y_up)+'px')
+                svgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_up) + 'px';
+                // svg.attr('height', (svgHeight + movePathDatasThisAmount_y_up)+'px')
                 // Reposition dragDiv
-                dragDiv.style.top = (dragDivTopPos - moveShitThisAmount_y_up) + "px"
+                dragDiv.style.top = (dragDivTopPos - movePathDatasThisAmount_y_up) + "px"
                 // Reposition SVG Elements
-                // CHANGE TO ALL ELEMENTS EXCEPT DRAGGED
-                pathDatas[thisCount].at(-2).coords.y = m1Origin[1] + moveShitThisAmount_y_up
+                // Repositions all path datas except for dragged
+                let dragedPathDataIndex = pathDatas[thisCount].length - 1
+                for (let i = 0; i < pathDatas[thisCount].length; i++) {
+                    if(i !== dragedPathDataIndex) {
+                        pathDatas[thisCount][i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
+                    }
+                }
             }
         } else {
             if((p1m2Dif_y * -1) >= distanceToBubble_y_down) {
                 // Resize SVG
-                svg.attr('height', (svgHeight + moveShitThisAmount_y_down)+'px')
-                // svg.attr('height', (svgHeight + m2m1dif_y)+'px')
+                svgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_down) + 'px';
+                // svg.attr('height', (svgHeight + movePathDatasThisAmount_y_down)+'px')
             }
         }
 

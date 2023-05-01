@@ -1,22 +1,61 @@
-<div class="a-canvas <%= THEME_moduleTheme %> <%= THEME_aCanvasContainerFill %>">
-    <div class="a-canvas__container">
-        <div class="a-canvas__canvas" id="CHANGELATER_canvasId">
-            <div class="drag_cont" id="dragCont"></div>
+<div class="a-canvas <%= THEME_moduleTheme %>">
+    <div class="a-canvas__container <%= THEME_aCanvasContainerFill %>">
+        <div class="a-canvas__zoomLayer" id="aCanvasZoomLayer">
+            <div class="a-canvas__panLayer <%= THEME_aCanvasPanLayerFill %>" id="aCanvasPanLayer"></div>
         </div>
     </div>
 </div>
-<template id="dragDivTemp">
-    <div class="drag_div" id="tamplateClone" onclick="svgElementClick(this), setSvg(this.id, this.children[3].id), 'CHANGELATER_canvasId'">
-        <div class="drag_div_header body_1" id="dragDiv1Header"></div>
-        <div class="btn-container--row btn-align--center">
-            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="pathBtn" type="button" onclick="drawPath()">Path</button>
-            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="curveBtn" type="button" onclick="addCurvePoint()">Curve</button>
-            <button class="a-button a-button__a-btn--default a-btn__default--small button--disabled button--contained" id="parallelBtn" type="button" onclick="addParallelPath()">Parallel</button>
-        </div>
-        <br>
-        <svg class="newSvg" id="newSvg00"></svg>
+
+<template id="aCanvasTemplate">
+    <div class="a-canvas__slot">
+        <% if (MODULE_aCanvas_first) { %>
+            <%- include(MODULE_aCanvas_first, {}) %>
+        <% } %>
     </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,29 +68,37 @@
     let scale = 1
     let dragScaler
 
-    let parentElem = document.getElementById("dragCont")
+    let parentElem = document.getElementById("aCanvasPanLayer")
     dragElement(parentElem);
-    let canvasElement = document.getElementById("CHANGELATER_canvasId");
-    
+    let canvasElement = document.getElementById("aCanvasZoomLayer");
 
     function cloneDragDivs() {
-        let content = document.getElementById("dragDivTemp").content;
-        var targetContainer = document.getElementById('dragCont');
+        console.log("sdfsdfs")
+        let content = document.getElementById("aCanvasTemplate").content;
+        var targetContainer = document.getElementById('aCanvasPanLayer');
         targetContainer.appendChild(document.importNode(content, true));
 
-        templateContent = document.getElementById("tamplateClone")
+        templateContent = document.getElementById("aDocumentTemplate")
         templateHeader = templateContent.children[0]
-        templateSvg = templateContent.children[3]
-        
-        let newTemplateId = increaseCountDrgId("dragDiv")
+        templateSvg = templateContent.children[2]
+
+        let newTemplateId = increaseCountDrgId("aDocument")
 
         templateContent.id = newTemplateId
         templateHeader.innerText = increaseCountInnerText("Pattern_Pc_")
-        templateSvg.id = increaseCountSvgId("newSvg")
+        templateSvg.id = increaseCountSvgId("aDocumentSvg")
 
         let dragElem = document.getElementById(newTemplateId)
-        dragElement(dragElem);
-        
+        dragElement(dragElem)
+        svgElementClick(templateContent)
+        setSvg(templateContent.id, templateContent.children[2].id)
+
+        dragElem.style.top = 'calc(50% - 250px)'
+        dragElem.style.left = 'calc(50% - 250px)'
+        let toPixelWidth = dragElem.offsetTop
+        let toPixelHeight = dragElem.offsetTop
+        dragElem.style.top = toPixelWidth + 'px'
+        dragElem.style.left = toPixelHeight + 'px'
 
         function increaseCountDrgId(rootName) {
             counter1 = counter1 + 1
@@ -71,8 +118,8 @@
     }
     
     function svgElementClick(element, svgId123) {
-        let svgContainers = document.querySelectorAll(".drag_div")
-        let activeClass = "drag_div--active"
+        let svgContainers = document.querySelectorAll(".a-document__container")
+        let activeClass = "a-document__container--active"
         svgContainers.forEach(element => element.classList.remove(activeClass));
         element.classList.add(activeClass)
     }
@@ -121,17 +168,40 @@
         console.log("Zoom in: 10%. Scale: " + scale)
         scale = scale + (scale * .1)
         canvasElement.style["transform"] = "scale("+scale+")";
+
+        // Change later
+        var d3Circles = d3.selectAll('.mainEndPoint');
+        d3Circles.style("r", 7/scale);
+        var d3Paths = d3.select('.mainPath');
+        d3Paths.style("stroke-width", 2/scale);
     }
 
     function resetScale(){
         console.log("Zoom 100%. Scale: " + scale)
         scale = 1
         canvasElement.style["transform"] = "scale("+scale+")";
+
+        // Change later
+        var d3Circles = d3.selectAll('.mainEndPoint');
+        d3Circles.style("r", 7);
+        var d3Paths = d3.select('.mainPath');
+        d3Paths.style("stroke-width", 2);
     }
+
     function decreaseScale(){
         console.log("Zoom out: 10%. Scale: " + scale)
         scale = scale - (scale * .1)
         canvasElement.style["transform"] = "scale("+scale+")";
+
+        // Change later
+        var d3Circles = d3.selectAll('.mainEndPoint');
+        if (scale > .2) {
+            d3Circles.style("r", 7/scale);
+        } else {
+            d3Circles.style("r", 0);
+        }
+        var d3Paths = d3.select('.mainPath');
+        d3Paths.style("stroke-width", 2/scale);
     }
 </script>
-<script type="text/javascript" var_1="dickass" src="/javascripts/addCurvePointToLineAndDrawParallel.js"></script>
+<script type="text/javascript" var_1="testVar" src="/javascripts/addCurvePointToLineAndDrawParallel.js"></script>
