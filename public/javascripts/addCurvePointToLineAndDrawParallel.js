@@ -8,49 +8,7 @@ function setSvg(dragDivId, svgId, canvasId){
     canvas = d3.select('#' + canvasId)
     dragDiv = document.getElementById(dragDivId)
     svgHTML = document.getElementById(svgId)
-
-    // var zoom = d3.zoom()
-    // .scaleExtent([0.1, 50])
-    // .on('zoom', zoomed);
-
-    // var root = d3.select('#aCanvasZoomLayer').call(zoom);
-    // var canvasASS = d3.select('#aCanvasPanLayer');
-    // var d3Paths = d3.select('.mainPath');
-
-    // function zoomed(event, d) {
-    //     var transform = event.transform;
-    //     canvasASS.style("transform", "translate(" + transform.x + "px," + transform.y + "px) scale(" + transform.k + ")");
-    //     d3Paths.style("stroke-width", 20/transform.k);
-    // }
 }
-
-
-
-// let svg = d3.select('"#' + svgId + '"')
-// let svg = d3.select("#a-document__svg1")
-
-
-// const width = '100%'
-// const height = '600px'
-// let svg = d3.select('body').append('svg')
-//     .attr('width', width)
-//     .attr('height', height)
-//     .attr('fill', 'red')
-
-// d3.select("body").insert("div")
-//     .append("button")
-//     .text("Draw Path")
-//     .on("click", drawPath)
-
-// d3.select("body").insert("div")
-//     .append("button")
-//     .text("Add Curve Point")
-//     .on("click", addCurvePoint)
-
-// d3.select("body").insert("div")
-//     .append("button")
-//     .text("Add Parallel")
-//     .on("click", addParallelPath)
 
 let groupCounter = -1
 
@@ -89,11 +47,6 @@ function drawPath(){
 
     function mouseDown(event) {
         m1 = d3.pointer(event)
-
-        // const height = '600px'
-        // let svg = d3.select('body').append('svg')
-        //     .attr('width', width)
-        //     .attr('height', height)
 
         if (isDown === false) {
             console.log("first click")
@@ -258,9 +211,7 @@ function drawPath(){
         svg.on("click", null)
         svg.on("dblclick", null)
         svg.on("mousemove", null)
-        // canvas.on("click", null)
-        // canvas.on("dblclick", null)
-        // canvas.on("mousemove", null)
+
         secondaryPathCount = secondaryPathCount - 1
         for (let i = 0; i < 2; i++) {
             pathDatas[thisCount].pop()
@@ -316,15 +267,9 @@ function drawPath(){
     }
 }
 
-
-
 function mainPathClick(this1, event, thisCount, isDown2, self){
     console.log('Main Path Click')
 }
-
-
-
-
 
 
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
@@ -1216,17 +1161,3 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     }
     return solveTriangleData
 }
-
-// function checker() {
-//     mainPaths.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, mainPaths[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, isDown2, self)}))
-//     secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-//     secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-//     secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
-//     let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
-
-//     let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint'))
-//     endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
-//     endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
-//     let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-//     let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-// }

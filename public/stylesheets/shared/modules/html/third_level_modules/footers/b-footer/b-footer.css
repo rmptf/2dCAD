@@ -8,7 +8,6 @@
     z-index: 3;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     position: absolute;
     bottom: 0;
     height: unset;
@@ -21,21 +20,28 @@
 .b-footer__sidebar {
     display: flex;
     flex-direction: row;
-    pointer-events: all;
+    overflow: hidden;
+    /* background-color: #00000050; */
 }
 
 .b-footer__sidebar--left {
+    width: 40vw;
+    justify-content: start;
     /* background-color: #00000050; */
+}
+
+.b-footer__sidebar--mid {
+    width: 20vw;
+    justify-content: center;
+    /* background-color: #00000020; */
 }
 
 .b-footer__sidebar--right {
+    width: 40vw;
+    justify-content: end;
     /* background-color: #00000050; */
 }
 
-.b-footer__logo-container {
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    /* background-color: #00000050; */
+.b-footer__button-cont {
+    pointer-events: all;
 }

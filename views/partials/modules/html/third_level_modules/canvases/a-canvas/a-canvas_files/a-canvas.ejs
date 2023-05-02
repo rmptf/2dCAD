@@ -5,7 +5,6 @@
         </div>
     </div>
 </div>
-
 <template id="aCanvasTemplate">
     <div class="a-canvas__slot">
         <% if (MODULE_aCanvas_first) { %>
@@ -73,12 +72,11 @@
     let canvasElement = document.getElementById("aCanvasZoomLayer");
 
     function cloneDragDivs() {
-        console.log("sdfsdfs")
         let content = document.getElementById("aCanvasTemplate").content;
         var targetContainer = document.getElementById('aCanvasPanLayer');
         targetContainer.appendChild(document.importNode(content, true));
 
-        templateContent = document.getElementById("aDocumentTemplate")
+        templateContent = document.getElementById("aDocumentContainer")
         templateHeader = templateContent.children[0]
         templateSvg = templateContent.children[2]
 
