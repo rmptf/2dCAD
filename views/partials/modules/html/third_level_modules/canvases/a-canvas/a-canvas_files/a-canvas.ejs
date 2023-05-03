@@ -163,7 +163,7 @@
     }
 
     function increaseScale(){
-        console.log("Zoom in: 10%. Scale: " + scale)
+        // console.log("Zoom in: 10%. Scale: " + scale)
         scale = scale + (scale * .1)
         canvasElement.style["transform"] = "scale("+scale+")";
 
@@ -175,7 +175,7 @@
     }
 
     function resetScale(){
-        console.log("Zoom 100%. Scale: " + scale)
+        // console.log("Zoom 100%. Scale: " + scale)
         scale = 1
         canvasElement.style["transform"] = "scale("+scale+")";
 
@@ -187,7 +187,7 @@
     }
 
     function decreaseScale(){
-        console.log("Zoom out: 10%. Scale: " + scale)
+        // console.log("Zoom out: 10%. Scale: " + scale)
         scale = scale - (scale * .1)
         canvasElement.style["transform"] = "scale("+scale+")";
 

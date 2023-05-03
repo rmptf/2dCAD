@@ -19,6 +19,7 @@ let secondaryPathGroups = []
 let endPointsGroups = []
 let pressAddCurveButton = false
 let pressAddParallelButton = false
+let pressMeasurePathButton = false
 
 let GLOBALparallelGroupCountArray = []
 let GLOBALparallelGroupCount = 0
@@ -36,9 +37,14 @@ function addParallelPath() {
     pressAddParallelButton = true
 }
 
+function measurePath() {
+    pressMeasurePathButton = true
+}
+
 function drawPath(){
     pressAddCurveButton = false
     pressAddParallelButton = false
+    pressMeasurePathButton = false
     let self = this, m1, isDown = false, isDown2 = false, thisCount
     let secondaryPathCount = 0
 
@@ -231,7 +237,7 @@ function drawPath(){
     function secondaryPathClick(this1, event, thisCount, pathCount){
         m1 = d3.pointer(event)
         console.log('path Clicked')
-        if (pressAddCurveButton === false && pressAddParallelButton === false) {
+        if (pressAddCurveButton === false && pressAddParallelButton === false && pressMeasurePathButton == false) {
             console.log('path Clicked, All other path click functions off')
         } else if (pressAddCurveButton === true) {
             console.log('Add Path Arc = true')
@@ -263,6 +269,10 @@ function drawPath(){
             console.log('Add Parallel = true')
             drawParallel(event, thisCount, isDown2, self, pathCount)
             pressAddParallelButton = false
+        } else if (pressMeasurePathButton === true) {
+            console.log('Measure Path = true')
+            measurePathFunction(event, thisCount, isDown2, self, pathCount)
+            pressMeasurePathButton = false
         }
     }
 }
@@ -272,7 +282,62 @@ function mainPathClick(this1, event, thisCount, isDown2, self){
 }
 
 
+
+
+
+
+
+function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
+    // console.log(thisCount, pathCount)
+    // secondaryPathGroups
+    // pathDatas
+    console.log(pathDatas[thisCount])
+
+    let numberOfSegments = pathDatas[thisCount].length - 1
+    let arrayOfLengths = []
+    // for (let i = 0; i < numberOfSegments; i++) {
+    //     if (pathData[i + 1].arc === false) {
+    //         // find distance between two points, add length to array
+    //         let segmentILength = getDistand(x1,y1,x2,y2)
+    //         arrayOfLengths.push(segmentILength)
+    //     } else {
+    //         // // find length of arc, add lenth to array
+    //         let segmentILength = getArcLength(x1,y1,x2,y2)
+    //         arrayOfLengths.push(segmentILength)
+    //     }
+    // }
+    // add sum of numbers in array - arrayOfLengths
+    // const sum = [1, 2, 3].reduce((partialSum, a) => partialSum + a, 0)
+    // console.log(sum)
+}
+
+// Find the length of a line segment between two coordinates
+function getDistance(x1, y1, x2, y2) {
+    let y = x2 - x1;
+    let x = y2 - y1;
+
+    return Math.sqrt(x * x + y * y);
+}
+
+// Find the length of an arc between two coordinates
+function getArcLength() {
+    // write length of arc formular here
+    let length = "yuge"
+    return length
+}
+
+
+
+
+
+
+
+
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
+
+    console.log(thisCount, pathCount)
+
+
     let clickSpot = [event.x, event.y]
     let secondaryPathId = pathCount
     
@@ -652,7 +717,7 @@ function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pa
 
 // DYNAMIC END POINTS
 function dragEndPoint(event, selector, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
-    console.log(event)
+    // console.log(event)
     d3.select(endPointsArray[selector]._groups[0][0])
         .attr('cx', pathData[selector].coords.x += event.dx )
         .attr('cy', pathData[selector].coords.y += event.dy )   
@@ -708,13 +773,27 @@ function isOdd(num) {
     return num % 2
 }
 
-// Find the length of a line segment between two coordinates
-function getDistance(x1, y1, x2, y2) {
-    let y = x2 - x1;
-    let x = y2 - y1;
 
-    return Math.sqrt(x * x + y * y);
-}
+
+
+
+
+
+// // Find the length of a line segment between two coordinates
+// function getDistance(x1, y1, x2, y2) {
+//     let y = x2 - x1;
+//     let x = y2 - y1;
+
+//     return Math.sqrt(x * x + y * y);
+// }
+
+
+
+
+
+
+
+
 
 // Find the midpoint of a line segment between two coordinates
 function findLineMidpoint(x1, y1, x2, y2) {
