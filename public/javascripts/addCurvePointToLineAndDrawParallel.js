@@ -287,44 +287,52 @@ function mainPathClick(this1, event, thisCount, isDown2, self){
 
 
 
-function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
-    // console.log(thisCount, pathCount)
-    // secondaryPathGroups
-    // pathDatas
-    console.log(pathDatas[thisCount])
 
+
+
+function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
     let numberOfSegments = pathDatas[thisCount].length - 1
     let arrayOfLengths = []
-    // for (let i = 0; i < numberOfSegments; i++) {
-    //     if (pathData[i + 1].arc === false) {
-    //         // find distance between two points, add length to array
-    //         let segmentILength = getDistand(x1,y1,x2,y2)
-    //         arrayOfLengths.push(segmentILength)
-    //     } else {
-    //         // // find length of arc, add lenth to array
-    //         let segmentILength = getArcLength(x1,y1,x2,y2)
-    //         arrayOfLengths.push(segmentILength)
-    //     }
-    // }
+    // loop through total number of pathDatas - 1
+    for (let i = 0; i < numberOfSegments; i++) {
+        let point1 = pathDatas[thisCount][i]
+        let point2 = pathDatas[thisCount][i + 1]
+        // check points, starting with second point, if it is an path or an arc
+        if (point2.arc.exist === false) {
+            // if its a path, find distance between two points, add length to array
+            let segmentLength = getDistance(point1.coords.x, point1.coords.y, point2.coords.x, point2.coords.y)
+            arrayOfLengths.push(segmentLength)
+            console.log('Path: ' + segmentLength)
+        } else {
+            // if its an arc, find length of arc, add length to array
+            let segmentLength = getArcLength(point1.coords.x, point1.coords.y, point2.coords.x, point2.coords.y, point2.arc.radius)
+            arrayOfLengths.push(segmentLength)
+            console.log('Arc: ' + segmentLength)
+        }
+    }
     // add sum of numbers in array - arrayOfLengths
-    // const sum = [1, 2, 3].reduce((partialSum, a) => partialSum + a, 0)
-    // console.log(sum)
+    let totalLength = arrayOfLengths.reduce((partialSum, a) => partialSum + a, 0)
+    console.log(totalLength + 'px', (Math.round(((totalLength/96) + Number.EPSILON) * 100) / 100) + '"')
 }
 
 // Find the length of a line segment between two coordinates
 function getDistance(x1, y1, x2, y2) {
     let y = x2 - x1;
     let x = y2 - y1;
-
     return Math.sqrt(x * x + y * y);
 }
 
 // Find the length of an arc between two coordinates
-function getArcLength() {
-    // write length of arc formular here
-    let length = "yuge"
-    return length
+function getArcLength(x1, y1, x2, y2, r) {
+    // use arc length formula to return arclength
+    let arclength = 1000
+    return arclength
 }
+
+
+
+
+
 
 
 
