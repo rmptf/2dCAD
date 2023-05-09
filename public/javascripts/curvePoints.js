@@ -263,6 +263,7 @@ function drawLine() {
             let βDeg = βRad * (180/Math.PI)
 
             console.log(αDeg, βDeg)
+            // test
         }
         
         // ----------------------------------------------------------------//
