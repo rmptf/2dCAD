@@ -167,6 +167,111 @@ function drawLine() {
         let intersectingPointB = findIntersectingPoint(self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1], solveTriangleDataB.coords.coord_A[0], solveTriangleDataB.coords.coord_A[1], solveTriangleDataB.coords.coord_B[0], solveTriangleDataB.coords.coord_B[1])
         let circRadiusB = getDistance(self.curvePointData[0].x, self.curvePointData[0].y, intersectingPointB.x, intersectingPointB.y)
 
+
+
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+
+        // ----------------------------------------------------------------//
+        // Working on finding start angle
+        // These are the elemenets I need to find Start angle.
+            // They have been commented out at original pos. in code.
+        // ----------------------------------------------------------------//
+
+        // POINTS
+        // CURVE POINT
+        let pointCP = d3.select(self.pointElementCP[0][0]).data(self.curvePointData);
+        // let lineMidPointCoords = findLineMidpoint(self.lineData[0].x, self.lineData[0].y, self.lineData[1].x,self.lineData[1].y)
+        pointCP.attr('r', 10)
+                .attr('cx', self.curvePointData[0].x)
+                .attr('cy', self.curvePointData[0].y)
+                .attr('fill', 'pink');
+        // CURVE POINT
+
+        // SOLVE TRIANGLE 1 Points A
+        let point_solveTriangle_1_pointA = d3.select(self.pointElement_solveTriangle_1_pointA[0][0]).data(self.lineData);
+        point_solveTriangle_1_pointA.attr('r', 10)
+                .attr('cx', solveTriangleDataA.coords.coord_A[0])
+                .attr('cy', solveTriangleDataA.coords.coord_A[1])
+                .attr('fill', 'red');
+        // SOLVE TRIANGLE 1 Points A
+
+        // INTERSECTING POINT IPa
+        let pointIPa = d3.select(self.pointElementIPa[0][0]);
+        pointIPa.attr('r', 10)
+                .attr('cx', intersectingPointA.x)
+                .attr('cy', intersectingPointA.y)
+                .attr('fill', 'green');
+        // INTERSECTING POINT IPa
+        // POINTS
+
+        // LINES
+        // CP PERPENDICULAR LINE
+        let lineCPPL = d3.select(self.lineElementCPPL[0][0]);
+        lineCPPL.attr({
+            x1:self.curvePointData[0].x,
+            y1:self.curvePointData[0].y,
+            x2:curvePointAnchor[0],
+            y2:curvePointAnchor[1],
+        });
+        lineCPPL.style('stroke', 'blue')
+        lineCPPL.style('stroke-width', 5)
+        // CP PERPENDICULAR LINE
+
+        // SOLVE TRIANGLE 1 Sides sideC
+        let line_solveTriangle_1_sideC = d3.select(self.lineElement_solveTriangle_1_sideC[0][0]);
+        line_solveTriangle_1_sideC.attr({
+            x1:solveTriangleDataA.coords.coord_A[0],
+            y1:solveTriangleDataA.coords.coord_A[1],
+            x2:solveTriangleDataA.coords.coord_B[0],
+            y2:solveTriangleDataA.coords.coord_B[1],
+        });
+        line_solveTriangle_1_sideC.style('stroke', 'red')
+        line_solveTriangle_1_sideC.style('stroke-width', 5)
+        // SOLVE TRIANGLE 1 Sides sideC
+        // LINES
+
+        // triangle
+        // intersectingPointA.x
+        // intersectingPointA.y
+        // solveTriangleDataA.coords.coord_A[0]
+        // solveTriangleDataA.coords.coord_A[1]
+        // self.curvePointData[0].x
+        // self.curvePointData[0].y
+
+        findAnglesofRightTrianlge([intersectingPointA.x,intersectingPointA.y],[solveTriangleDataA.coords.coord_A[0],solveTriangleDataA.coords.coord_A[1]],[self.curvePointData[0].x,self.curvePointData[0].y])
+        function findAnglesofRightTrianlge(Acoords, Bcoords, Ccoords) {
+            // figure out how to name these things:
+            // https://www.omnicalculator.com/math/right-triangle-side-angle
+            // Search on the page for this to find section:
+            // How to find the angle of a right triangle
+
+            let oppositeLength = getDistance(Acoords[0], Acoords[1], Bcoords[0], Bcoords[1])
+            let adjacentLength = getDistance(Bcoords[0], Bcoords[1], Ccoords[0], Ccoords[1])
+            let hypotenuseLength = getDistance(Ccoords[0], Ccoords[1], Acoords[0], Acoords[1])
+
+            let cos_α = adjacentLength / hypotenuseLength
+            let sin_α = oppositeLength / hypotenuseLength
+            // let tanθ = oppositeLength / adjacentLength
+
+            let αRad = Math.asin(sin_α)
+            let αDeg = αRad * (180/Math.PI)
+
+            let βRad = Math.asin(cos_α)
+            let βDeg = βRad * (180/Math.PI)
+
+            console.log(αDeg, βDeg)
+        }
+        
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+        // ----------------------------------------------------------------//
+
+
+
         // LINE
         line = d3.select(self.lineElement[0][0]);
         line.attr({
@@ -249,17 +354,23 @@ function drawLine() {
         lineCPLB.style('stroke-width', 2)
         // CURVE POINT LEG
 
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
         // CP PERPENDICULAR LINE
-        let lineCPPL = d3.select(self.lineElementCPPL[0][0]);
-        lineCPPL.attr({
-            x1:self.curvePointData[0].x,
-            y1:self.curvePointData[0].y,
-            x2:curvePointAnchor[0],
-            y2:curvePointAnchor[1],
-        });
-        lineCPPL.style('stroke', 'grey')
-        lineCPPL.style('stroke-width', 1)
+        // let lineCPPL = d3.select(self.lineElementCPPL[0][0]);
+        // lineCPPL.attr({
+        //     x1:self.curvePointData[0].x,
+        //     y1:self.curvePointData[0].y,
+        //     x2:curvePointAnchor[0],
+        //     y2:curvePointAnchor[1],
+        // });
+        // lineCPPL.style('stroke', 'grey')
+        // lineCPPL.style('stroke-width', 1)
         // CP PERPENDICULAR LINE
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
 
         // END POINTS
         let point1 = d3.select(self.pointElement1[0][0]).data(self.lineData);
@@ -275,21 +386,33 @@ function drawLine() {
                 .attr('fill', '#97b9e9');
         // END POINTS
 
-        // CURVE POINT
-        let pointCP = d3.select(self.pointElementCP[0][0]).data(self.curvePointData);
-        // let lineMidPointCoords = findLineMidpoint(self.lineData[0].x, self.lineData[0].y, self.lineData[1].x,self.lineData[1].y)
-        pointCP.attr('r', 10)
-                .attr('cx', self.curvePointData[0].x)
-                .attr('cy', self.curvePointData[0].y)
-                .attr('fill', 'pink');
-        // CURVE POINT
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
+        // // CURVE POINT
+        // let pointCP = d3.select(self.pointElementCP[0][0]).data(self.curvePointData);
+        // // let lineMidPointCoords = findLineMidpoint(self.lineData[0].x, self.lineData[0].y, self.lineData[1].x,self.lineData[1].y)
+        // pointCP.attr('r', 10)
+        //         .attr('cx', self.curvePointData[0].x)
+        //         .attr('cy', self.curvePointData[0].y)
+        //         .attr('fill', 'pink');
+        // // CURVE POINT
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
 
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
         // INTERSECTING POINT
-        let pointIPa = d3.select(self.pointElementIPa[0][0]);
-        pointIPa.attr('r', 5)
-                .attr('cx', intersectingPointA.x)
-                .attr('cy', intersectingPointA.y)
-                .attr('fill', 'red');
+        // let pointIPa = d3.select(self.pointElementIPa[0][0]);
+        // pointIPa.attr('r', 5)
+        //         .attr('cx', intersectingPointA.x)
+        //         .attr('cy', intersectingPointA.y)
+        //         .attr('fill', 'red');
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
 
         let pointIPb = d3.select(self.pointElementIPb[0][0]);
         pointIPb.attr('r', 5)
@@ -297,6 +420,7 @@ function drawLine() {
                 .attr('cy', intersectingPointB.y)
                 .attr('fill', 'blue');
         // INTERSECTING POINT
+
 
         // SOLVE TRIANGLE 1 Sides
         let line_solveTriangle_1_sideA = d3.select(self.lineElement_solveTriangle_1_sideA[0][0]);
@@ -319,23 +443,35 @@ function drawLine() {
         line_solveTriangle_1_sideB.style('stroke', 'green')
         line_solveTriangle_1_sideB.style('stroke-width', 0.5)
 
-        let line_solveTriangle_1_sideC = d3.select(self.lineElement_solveTriangle_1_sideC[0][0]);
-        line_solveTriangle_1_sideC.attr({
-            x1:solveTriangleDataA.coords.coord_A[0],
-            y1:solveTriangleDataA.coords.coord_A[1],
-            x2:solveTriangleDataA.coords.coord_B[0],
-            y2:solveTriangleDataA.coords.coord_B[1],
-        });
-        line_solveTriangle_1_sideC.style('stroke', 'blue')
-        line_solveTriangle_1_sideC.style('stroke-width', 0.5)
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
+        // let line_solveTriangle_1_sideC = d3.select(self.lineElement_solveTriangle_1_sideC[0][0]);
+        // line_solveTriangle_1_sideC.attr({
+        //     x1:solveTriangleDataA.coords.coord_A[0],
+        //     y1:solveTriangleDataA.coords.coord_A[1],
+        //     x2:solveTriangleDataA.coords.coord_B[0],
+        //     y2:solveTriangleDataA.coords.coord_B[1],
+        // });
+        // line_solveTriangle_1_sideC.style('stroke', 'blue')
+        // line_solveTriangle_1_sideC.style('stroke-width', 0.5)
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
         // SOLVE TRIANGLE 1 Sides
 
         // SOLVE TRIANGLE 1 Points
-        let point_solveTriangle_1_pointA = d3.select(self.pointElement_solveTriangle_1_pointA[0][0]).data(self.lineData);
-        point_solveTriangle_1_pointA.attr('r', 2.5)
-                .attr('cx', solveTriangleDataA.coords.coord_A[0])
-                .attr('cy', solveTriangleDataA.coords.coord_A[1])
-                .attr('fill', 'red');
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
+        // let point_solveTriangle_1_pointA = d3.select(self.pointElement_solveTriangle_1_pointA[0][0]).data(self.lineData);
+        // point_solveTriangle_1_pointA.attr('r', 2.5)
+        //         .attr('cx', solveTriangleDataA.coords.coord_A[0])
+        //         .attr('cy', solveTriangleDataA.coords.coord_A[1])
+        //         .attr('fill', 'red');
+        // ----------------------------------------------------------------//
+        // Turned off here for now.
+        // ----------------------------------------------------------------//
         
         let point_solveTriangle_1_pointB = d3.select(self.pointElement_solveTriangle_1_pointB[0][0]).data(self.lineData);
         point_solveTriangle_1_pointB.attr('r', 2.5)
@@ -476,6 +612,7 @@ function drawLine() {
         return rightTriangleDataA
     }
 
+    // let solveTriangleDataA = solvTriangleALL(rightTriangleDataA.sides, self.lineData[0].x, self.lineData[0].y, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, curvePointAnchor[0], curvePointAnchor[1])
     function solvTriangleALL(triangleA_sides, ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY) {
         let sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
         let base_angle_A = Math.asin(sinOfAngle_A) * (180/Math.PI)

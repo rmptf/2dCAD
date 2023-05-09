@@ -307,12 +307,27 @@ function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
             // if its an arc, find length of arc, add length to array
             let segmentLength = getArcLength(point1.coords.x, point1.coords.y, point2.coords.x, point2.coords.y, point2.arc.radius)
             arrayOfLengths.push(segmentLength)
-            console.log('Arc: ' + segmentLength)
+            // console.log('Arc: ' + segmentLength)
+            // console.log(secondaryPathGroups[thisCount][i]._groups[0][0])
+            // console.log(secondaryPathGroups[thisCount][i]._groups)
+
+            // let arcAss = secondaryPathGroups[thisCount][i]._groups[0][0]
+
+            // var startAngle = arcAss.startAngle()(d);
+
+            // console.log(startAngle)
+
+
+            // NEED:
+            // radius
+            // central angle
+                // central angle is the angle at the center of the circle of the arc
+
         }
     }
     // add sum of numbers in array - arrayOfLengths
     let totalLength = arrayOfLengths.reduce((partialSum, a) => partialSum + a, 0)
-    console.log(totalLength + 'px', (Math.round(((totalLength/96) + Number.EPSILON) * 100) / 100) + '"')
+    // console.log(totalLength + 'px', (Math.round(((totalLength/96) + Number.EPSILON) * 100) / 100) + '"')
 }
 
 // Find the length of a line segment between two coordinates
