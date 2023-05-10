@@ -262,8 +262,35 @@ function drawLine() {
             let βRad = Math.asin(cos_α)
             let βDeg = βRad * (180/Math.PI)
 
-            console.log(αDeg, βDeg)
-            // test
+            console.log(αRad, βRad, αDeg)
+
+            findArcLength(hypotenuseLength, βRad)
+        }
+
+        function findArcLength(radius, βRad) {
+            // I think this is wrong
+            let θ = βRad * 2
+            // This is prob right if I fix above
+            let oppositeθ = (θ + Math.PI) % (2 * Math.PI)
+
+            let arcLength = θ * radius
+            let oppositeArcLength = oppositeθ * radius
+
+            // This is correct
+            let circ = (2 * radius) * Math.PI
+            // This is wrong: might be because of oppositeθ? or the whole thing is wrong
+            let θplusOpθ = arcLength + oppositeArcLength
+            
+            console.log(arcLength, oppositeArcLength, circ, θplusOpθ, radius, βRad)
+
+            // The arc length formula can be expressed as:
+            // arc length, L = θ × r, when θ is in radian;
+            // arc length, L = θ × (π/180) × r, where θ is in degrees,
+
+            // where,
+            // L = Length of an Arc
+            // θ = Central angle of Arc
+            // r = Radius of the circle
         }
         
         // ----------------------------------------------------------------//
