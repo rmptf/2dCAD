@@ -247,50 +247,31 @@ function drawLine() {
             // https://www.omnicalculator.com/math/right-triangle-side-angle
             // Search on the page for this to find section:
             // How to find the angle of a right triangle
-
             let oppositeLength = getDistance(Acoords[0], Acoords[1], Bcoords[0], Bcoords[1])
             let adjacentLength = getDistance(Bcoords[0], Bcoords[1], Ccoords[0], Ccoords[1])
             let hypotenuseLength = getDistance(Ccoords[0], Ccoords[1], Acoords[0], Acoords[1])
-
             let cos_α = adjacentLength / hypotenuseLength
             let sin_α = oppositeLength / hypotenuseLength
             // let tanθ = oppositeLength / adjacentLength
-
             let αRad = Math.asin(sin_α)
-            let αDeg = αRad * (180/Math.PI)
-
+            // let αDeg = αRad * (180/Math.PI)
             let βRad = Math.asin(cos_α)
-            let βDeg = βRad * (180/Math.PI)
-
-            console.log(αRad, βRad, αDeg)
-
+            // let βDeg = βRad * (180/Math.PI)
+            // console.log(αRad, βRad, αDeg)
             findArcLength(hypotenuseLength, βRad)
         }
 
-        function findArcLength(radius, βRad) {
-            // I think this is wrong
-            let θ = βRad * 2
-            // This is prob right if I fix above
-            let oppositeθ = (θ + Math.PI) % (2 * Math.PI)
-
-            let arcLength = θ * radius
-            let oppositeArcLength = oppositeθ * radius
-
-            // This is correct
-            let circ = (2 * radius) * Math.PI
-            // This is wrong: might be because of oppositeθ? or the whole thing is wrong
-            let θplusOpθ = arcLength + oppositeArcLength
+        function findArcLength(radius, half_θRad) {
+            let θRad = half_θRad * 2
+            let θRadReflex = (Math.PI * 2) - θRad
+            let arcLength = θRad * radius
+            let reflexArcLength = θRadReflex * radius
+            console.log(arcLength, reflexArcLength)
             
-            console.log(arcLength, oppositeArcLength, circ, θplusOpθ, radius, βRad)
-
-            // The arc length formula can be expressed as:
-            // arc length, L = θ × r, when θ is in radian;
-            // arc length, L = θ × (π/180) × r, where θ is in degrees,
-
-            // where,
-            // L = Length of an Arc
-            // θ = Central angle of Arc
-            // r = Radius of the circle
+            // Use to double check calculations:
+            // let mathCircumference = (2 * radius) * Math.PI
+            // let addArcsCircumference = arcLength + reflexArcLength
+            // console.log(arcLength, reflexArcLength, mathCircumference, addArcsCircumference, radius, θRad, θRadReflex)
         }
         
         // ----------------------------------------------------------------//
@@ -346,7 +327,7 @@ function drawLine() {
         path2.style('stroke-width', 3)
 
         if(inRange(self.curvePointData[0].x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(self.curvePointData[0].y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
-            console.log('straight')
+            // console.log('straight')
             path.attr({d: describeStraightPath(self.lineData[0].x, self.lineData[0].y, self.curvePointData[0].x, self.curvePointData[0].y)})
             path2.attr({d: describeStraightPath(self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[1].x, self.lineData[1].y)})
             path.style('stroke', 'red')
@@ -354,7 +335,7 @@ function drawLine() {
             path.style('stroke-width', 10)
             path2.style('stroke-width', 10)
         } else {
-            console.log('arc')
+            // console.log('arc')
             path.attr({d: describeArcPath(circRadiusA, self.curvePointData[0].x, self.curvePointData[0].y, self.lineData[0].x, self.lineData[0].y, solveTriangleDataA.arcFlag, solveTriangleDataA.sweepFlagWest)})
             path2.attr({d: describeArcPath(circRadiusB, self.lineData[1].x, self.lineData[1].y, self.curvePointData[0].x, self.curvePointData[0].y, solveTriangleDataB.arcFlag, solveTriangleDataB.sweepFlagEast)})
         }
