@@ -290,6 +290,16 @@ function mainPathClick(this1, event, thisCount, isDown2, self){
 
 
 
+
+
+
+
+
+
+
+
+
+
 function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
     let numberOfSegments = pathDatas[thisCount].length - 1
     let arrayOfLengths = []
@@ -305,44 +315,40 @@ function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
             console.log('Path: ' + segmentLength)
         } else {
             // if its an arc, find length of arc, add length to array
-            let segmentLength = getArcLength(point1.coords.x, point1.coords.y, point2.coords.x, point2.coords.y, point2.arc.radius)
+            let segmentLength = findArcLength(point2.arc.radius, point2.arc.startAngle, point2.arc.arcFlag)
             arrayOfLengths.push(segmentLength)
-            // console.log('Arc: ' + segmentLength)
-            // console.log(secondaryPathGroups[thisCount][i]._groups[0][0])
-            // console.log(secondaryPathGroups[thisCount][i]._groups)
-
-            // let arcAss = secondaryPathGroups[thisCount][i]._groups[0][0]
-
-            // var startAngle = arcAss.startAngle()(d);
-
-            // console.log(startAngle)
-
-
-            // NEED:
-            // radius
-            // central angle
-                // central angle is the angle at the center of the circle of the arc
-
+            console.log('Arc: ' + segmentLength)
         }
     }
     // add sum of numbers in array - arrayOfLengths
     let totalLength = arrayOfLengths.reduce((partialSum, a) => partialSum + a, 0)
-    // console.log(totalLength + 'px', (Math.round(((totalLength/96) + Number.EPSILON) * 100) / 100) + '"')
+    console.log(totalLength + 'px', (Math.round(((totalLength/96) + Number.EPSILON) * 100) / 100) + '"')
 }
 
-// Find the length of a line segment between two coordinates
-function getDistance(x1, y1, x2, y2) {
-    let y = x2 - x1;
-    let x = y2 - y1;
-    return Math.sqrt(x * x + y * y);
-}
 
-// Find the length of an arc between two coordinates
-function getArcLength(x1, y1, x2, y2, r) {
-    // use arc length formula to return arclength
-    let arclength = 1000
-    return arclength
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -666,6 +672,33 @@ function describeComplexPath(pathDataPass) {
     return d
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function calculateArcAndDescribePath(pathDataPass) {
     let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
     let arcsAndLines = []
@@ -702,18 +735,20 @@ function calculateArcAndDescribePath(pathDataPass) {
         let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
         let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
         let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
+        let startAngle = findStartAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]],[curvePoint.coords.x,curvePoint.coords.y])
         if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
             // console.log('str1')
             arcsAndLines.push(['L', thisPoint.coords.x, thisPoint.coords.y].join(' '))
         } else {
             // console.log('arc1')
-            if(side === 'east'){
+            if(side === 'east'){                
                 arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagEast, thisPoint.coords.x, thisPoint.coords.y].join(' '))
                 thisPoint.arc.radius = circRadius,
                 thisPoint.arc.arcFlag = solveTriangleData.arcFlag,
                 thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagEast,
                 thisPoint.arc.center.x = intersectingPoint.x,
                 thisPoint.arc.center.y = intersectingPoint.y
+                thisPoint.arc.startAngle = startAngle
             } else if(side === 'west'){
                 arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagWest, thisPoint.coords.x, thisPoint.coords.y].join(' '))
                 thisPoint.arc.radius = circRadius,
@@ -721,10 +756,90 @@ function calculateArcAndDescribePath(pathDataPass) {
                 thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagWest,
                 thisPoint.arc.center.x = intersectingPoint.x,
                 thisPoint.arc.center.y = intersectingPoint.y
+                thisPoint.arc.startAngle = startAngle
             }
         }
     }
 }
+
+
+// works but needs oganizeing.
+// function findStartAngleOfRightTriangle(Acoords, Bcoords, Ccoords) {
+function findStartAngleOfRightTriangle(rightAngleCoords, startAngleCoords, adjacentAngleCoords) {
+    // figure out how to name these things:
+    // https://www.omnicalculator.com/math/right-triangle-side-angle
+    // Search on the page for this to find section:
+    // How to find the angle of a right triangle
+
+    // What I have
+    // findStartAngleOfRightTriangle(startAngleCoords, rightAngleCoords, adjacentAngleCoords)    
+
+    // What I want
+    // findStartAngleOfRightTriangle(rightAngleCoords, startAngleCoords, adjacentAngleCoords)    
+    let oppositeLength = getDistance(rightAngleCoords[0], rightAngleCoords[1], startAngleCoords[0], startAngleCoords[1])
+    let adjacentLength = getDistance(rightAngleCoords[0], rightAngleCoords[1], adjacentAngleCoords[0], adjacentAngleCoords[1])
+    let hypotenuseLength = getDistance(startAngleCoords[0], startAngleCoords[1], adjacentAngleCoords[0], adjacentAngleCoords[1])
+
+
+    // let oppositeLength = getDistance(Acoords[0], Acoords[1], Bcoords[0], Bcoords[1])
+    // let adjacentLength = getDistance(Bcoords[0], Bcoords[1], Ccoords[0], Ccoords[1])
+    // let hypotenuseLength = getDistance(Ccoords[0], Ccoords[1], Acoords[0], Acoords[1])
+    let cos_α = adjacentLength / hypotenuseLength
+    let sin_α = oppositeLength / hypotenuseLength
+    let αRad = Math.asin(sin_α)
+    let βRad = Math.asin(cos_α)
+    let startAngle = βRad * 2
+
+    return startAngle
+}
+
+// Find the length of a line segment between two coordinates
+function getDistance(x1, y1, x2, y2) {
+    let y = x2 - x1;
+    let x = y2 - y1;
+    return Math.sqrt(x * x + y * y);
+}
+
+// Find the length of an arc segment from radius and start angle
+function findArcLength(radius, startAngle, arcFlag) {
+    let θRad = startAngle
+    let θRadReflex = (Math.PI * 2) - θRad
+    let arcLength = θRad * radius
+    let arcLengthReflex = θRadReflex * radius
+
+    if (arcFlag === 0){
+        return arcLength
+    } else {
+        return arcLengthReflex
+    }
+    
+    // // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+    // let radiusCircumference = (2 * radius) * Math.PI
+    // let addArcsCircumference = arcLength + arcLengthReflex
+    // console.log(arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // PATH
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
