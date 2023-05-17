@@ -735,8 +735,6 @@ function calculateArcAndDescribePath(pathDataPass) {
         let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
         let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
         let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
-        // let startAngle = solveStartAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]],[curvePoint.coords.x,curvePoint.coords.y])
-        // let startAngle = solveStartAngleOfRightTriangle([solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [intersectingPoint.x,intersectingPoint.y],[curvePoint.coords.x,curvePoint.coords.y])
         let startAngle = solveStartAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[curvePoint.coords.x,curvePoint.coords.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]])
         if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
             // console.log('str1')
@@ -788,16 +786,15 @@ function findArcLength(radius, startAngle, arcFlag) {
     let θRadReflex = (Math.PI * 2) - θRad
     let arcLength = θRad * radius
     let arcLengthReflex = θRadReflex * radius
-
     if (arcFlag === 0){
-        // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
-        let radiusCircumference = (2 * radius) * Math.PI
-        let addArcsCircumference = arcLength + arcLengthReflex
-        console.log(arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference)
         return arcLength
     } else {
         return arcLengthReflex
     }
+    // // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+    // let radiusCircumference = (2 * radius) * Math.PI
+    // let addArcsCircumference = arcLength + arcLengthReflex
+    // console.log(arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference)
 }
 
 // Find the length of a line segment between two coordinates
