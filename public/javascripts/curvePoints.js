@@ -260,19 +260,83 @@ function drawLine() {
             // console.log(αRad, βRad, αDeg)
             findArcLength(hypotenuseLength, βRad)
         }
-
         function findArcLength(radius, half_θRad) {
             let θRad = half_θRad * 2
             let θRadReflex = (Math.PI * 2) - θRad
             let arcLength = θRad * radius
             let reflexArcLength = θRadReflex * radius
-            console.log(arcLength, reflexArcLength)
+            let addBoth = arcLength + reflexArcLength
+            console.log(arcLength, reflexArcLength, addBoth)
             
             // Use to double check calculations:
             // let mathCircumference = (2 * radius) * Math.PI
             // let addArcsCircumference = arcLength + reflexArcLength
             // console.log(arcLength, reflexArcLength, mathCircumference, addArcsCircumference, radius, θRad, θRadReflex)
         }
+
+        // TESTING
+        // TESTING
+        // TESTING
+        // TESTING
+        // TESTING
+        // Find the angle in radians of a speficied angle of a solved right traingle then use that to return StartAngle
+        findAnglesofRightTrianlgeTEST([intersectingPointA.x,intersectingPointA.y],[self.curvePointData[0].x,self.curvePointData[0].y],[solveTriangleDataA.coords.coord_A[0],solveTriangleDataA.coords.coord_A[1]])
+        function findAnglesofRightTrianlgeTEST(theta_AngleCoords, oppositeAngleCoords, rightAngleCoords) {
+
+            // NOT WORKING CORRECTLY RN
+
+            // θ / theta: angle we are solving for
+            let oppositeLength = getDistance(oppositeAngleCoords[0], oppositeAngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
+            let hypotenuseLength = getDistance(theta_AngleCoords[0], theta_AngleCoords[1], oppositeAngleCoords[0], oppositeAngleCoords[1])
+            let sin_theta = oppositeLength / hypotenuseLength
+            let theta_AngleRad = Math.asin(sin_theta)
+            
+            let startAngle = theta_AngleRad * 2
+
+            // return startAngle
+            findArcLengthTEST(hypotenuseLength, startAngle, 'filler')
+
+            // let adjacentLength = getDistance(oppositeAngleCoords[0], oppositeAngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
+            // let hypotenuseLength = getDistance(theta_AngleCoords[0], theta_AngleCoords[1], oppositeAngleCoords[0], oppositeAngleCoords[1])
+            // let sin_opposite = adjacentLength / hypotenuseLength
+            // let opposite_AngleRad = Math.asin(sin_opposite)
+            // return opposite_AngleRad
+        }
+        //TESTING
+        //TESTING
+        //TESTING
+        //TESTING
+        //TESTING
+        function findArcLengthTEST(radius, startAngle, arcFlag) {
+
+            // NOT WORKING CORRECTLY RN
+        
+            let θRad = startAngle
+            let θRadReflex = (Math.PI * 2) - θRad
+            let arcLength = θRad * radius
+            let arcLengthReflex = θRadReflex * radius
+            let addBoth = arcLength + arcLengthReflex
+            console.log(arcLength, arcLengthReflex, addBoth)
+            // if (arcFlag === 0){
+        
+            //         // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+            //         let radiusCircumference = (2 * radius) * Math.PI
+            //         let addArcsCircumference = arcLength + arcLengthReflex
+            //         console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
+            //     return arcLength
+            // } else {
+            //     // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+            //     let radiusCircumference = (2 * radius) * Math.PI
+            //     let addArcsCircumference = arcLength + arcLengthReflex
+            //     console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
+            //     return arcLengthReflex
+            // }
+            // // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+            // let radiusCircumference = (2 * radius) * Math.PI
+            // let addArcsCircumference = arcLength + arcLengthReflex
+            // console.log(arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference)
+        }
+
         
         // ----------------------------------------------------------------//
         // ----------------------------------------------------------------//

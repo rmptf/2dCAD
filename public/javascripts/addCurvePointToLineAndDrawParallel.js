@@ -735,7 +735,7 @@ function calculateArcAndDescribePath(pathDataPass) {
         let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
         let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
         let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
-        let startAngle = solveStartAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[curvePoint.coords.x,curvePoint.coords.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]])
+        let rightTriangleTheta = solveForAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[curvePoint.coords.x,curvePoint.coords.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]])
         if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
             // console.log('str1')
             arcsAndLines.push(['L', thisPoint.coords.x, thisPoint.coords.y].join(' '))
@@ -748,7 +748,7 @@ function calculateArcAndDescribePath(pathDataPass) {
                 thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagEast,
                 thisPoint.arc.center.x = intersectingPoint.x,
                 thisPoint.arc.center.y = intersectingPoint.y
-                thisPoint.arc.startAngle = startAngle
+                thisPoint.arc.startAngle = rightTriangleTheta
             } else if(side === 'west'){
                 arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagWest, thisPoint.coords.x, thisPoint.coords.y].join(' '))
                 thisPoint.arc.radius = circRadius,
@@ -756,7 +756,7 @@ function calculateArcAndDescribePath(pathDataPass) {
                 thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagWest,
                 thisPoint.arc.center.x = intersectingPoint.x,
                 thisPoint.arc.center.y = intersectingPoint.y
-                thisPoint.arc.startAngle = startAngle
+                thisPoint.arc.startAngle = rightTriangleTheta
             }
         }
     }
@@ -764,31 +764,48 @@ function calculateArcAndDescribePath(pathDataPass) {
 
 
 // Find the angle in radians of a speficied angle of a solved right traingle then use that to return StartAngle
-function solveStartAngleOfRightTriangle(theta_AngleCoords, oppositeAngleCoords, rightAngleCoords) {
+function solveForAngleOfRightTriangle(theta_AngleCoords, oppositeAngleCoords, rightAngleCoords) {
+
+    // NOT WORKING CORRECTLY RN
+
     // θ / theta: angle we are solving for
-    let adjacentLength = getDistance(theta_AngleCoords[0], theta_AngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
+    let oppositeLength = getDistance(oppositeAngleCoords[0], oppositeAngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
     let hypotenuseLength = getDistance(theta_AngleCoords[0], theta_AngleCoords[1], oppositeAngleCoords[0], oppositeAngleCoords[1])
-    let sin_theta = adjacentLength / hypotenuseLength
+    let sin_theta = oppositeLength / hypotenuseLength
     let theta_AngleRad = Math.asin(sin_theta)
+    
     let startAngle = theta_AngleRad * 2
+
     return startAngle
-    // let oppositeLength = getDistance(oppositeAngleCoords[0], oppositeAngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
+
+    // let adjacentLength = getDistance(oppositeAngleCoords[0], oppositeAngleCoords[1], rightAngleCoords[0], rightAngleCoords[1])
     // let hypotenuseLength = getDistance(theta_AngleCoords[0], theta_AngleCoords[1], oppositeAngleCoords[0], oppositeAngleCoords[1])
-    // let sin_opposite = oppositeLength / hypotenuseLength
+    // let sin_opposite = adjacentLength / hypotenuseLength
     // let opposite_AngleRad = Math.asin(sin_opposite)
-    // let oppositeAngle = opposite_AngleRad * 2
-    // return oppositeAngle
+    // return opposite_AngleRad
 }
 
 // Find the length of an arc segment from radius and start angle
 function findArcLength(radius, startAngle, arcFlag) {
+
+    // NOT WORKING CORRECTLY RN
+
     let θRad = startAngle
     let θRadReflex = (Math.PI * 2) - θRad
     let arcLength = θRad * radius
     let arcLengthReflex = θRadReflex * radius
     if (arcFlag === 0){
+
+            // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+            let radiusCircumference = (2 * radius) * Math.PI
+            let addArcsCircumference = arcLength + arcLengthReflex
+            console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
         return arcLength
     } else {
+        // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+        let radiusCircumference = (2 * radius) * Math.PI
+        let addArcsCircumference = arcLength + arcLengthReflex
+        console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
         return arcLengthReflex
     }
     // // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
