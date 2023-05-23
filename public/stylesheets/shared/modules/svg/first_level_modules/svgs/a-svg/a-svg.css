@@ -9,7 +9,7 @@ svg{
 }
 
 .mainPath {
-  stroke-width: 2;
+  stroke-width: 4;
   fill: none;
   stroke: var(--highlight-10);
   opacity: 1;
@@ -52,8 +52,17 @@ svg{
 
 .parallelEndPoint {
   r: 5;
-  fill: var(--dusk-500);
+  /* fill: var(--dusk-500); */
+  fill: beige;
   opacity: 1;
   /* stroke-width: 0; */
   /* stroke: black; */
 }
+.parallelEndPoint:nth-child(even) {
+  fill: hotpink;
+}
+
+/* 
+.item:nth-child(odd) .description {
+  background-color: red;
+} */
