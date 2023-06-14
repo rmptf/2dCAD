@@ -742,7 +742,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 //   // ChatGPT optimized (Not tested yet)
-//   function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
+// function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
 //     const dx = x2 - x1;
 //     const dy = y2 - y1;
 //     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -758,15 +758,15 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 //     const intersectionX2 = x1 + r1 * Math.cos(angle + intersectionAngle);
 //     const intersectionY2 = y1 + r1 * Math.sin(angle + intersectionAngle);
   
-//     const distance1 = getDistance(xys[0].x, xys[0].y, intersectionX1, intersectionY1);
-//     const distance2 = getDistance(xys[0].x, xys[0].y, intersectionX2, intersectionY2);
+//     const distanceToIntersection1 = getDistance(xys[0].x, xys[0].y, intersectionX1, intersectionY1);
+//     const distanceToIntersection2 = getDistance(xys[0].x, xys[0].y, intersectionX2, intersectionY2);
   
 //     const intersections = [
 //       { x: intersectionX1, y: intersectionY1 },
 //       { x: intersectionX2, y: intersectionY2 }
 //     ];
   
-//     const sortedIntersections = distance1 < distance2 ? intersections : intersections.reverse();
+//     const sortedIntersections = distanceToIntersection1 < distanceToIntersection2 ? intersections : intersections.reverse();
   
 //     return isNaN(intersectionX1) ? NaN : sortedIntersections;
 //   }
