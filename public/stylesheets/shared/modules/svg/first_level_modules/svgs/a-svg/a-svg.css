@@ -66,3 +66,32 @@ svg{
 .item:nth-child(odd) .description {
   background-color: red;
 } */
+
+
+.mainEndPoint--TESTER--intArc {
+  r: 10;
+  fill: salmon;
+}
+.mainEndPoint--TESTER--intArc2 {
+  r: 10;
+  fill: blueviolet;
+}
+.mainEndPoint--TESTER--circCent {
+  r: 3;
+  fill: green;
+}
+
+
+.testCirc {
+  r: 100;
+  stroke-width: 1;
+  fill: none;
+}
+
+.testCirc--TESTER--circ1 {
+  stroke: blue;
+}
+
+.testCirc--TESTER--circ2 {
+  stroke: red;
+}
