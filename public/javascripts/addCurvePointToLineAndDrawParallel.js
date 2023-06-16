@@ -375,6 +375,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
     let secondaryPathId = pathCount
     let isDown3 = false
 
+    // First step in drawing parallel line
+    // Creates the parallel paths, endPoints, and data
+    // Sets all elements to same as secondaryPath data
     if (isDown2 === false) {
         isDown2 = true
         svg.on("mousemove", mousemove2)
@@ -537,6 +540,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
                     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
 
+                    updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
+
+                    // let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+
 
                     for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL[i].length; j++) {
                         let thisPathData = pathDatas[thisCount][i + j]
@@ -545,6 +552,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
 
+                        // thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        // thisParallelPathData.coords.y = parallelAnchorPoints[1]
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
                     }
@@ -652,38 +661,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     }
                 }
 
-                function runshit(){
-                    // let firstParallelPathData1FIRST = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
-                    let firstParallelPathData1 = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
-                    // let secondParallelPathData1FIRST = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
-                    let secondParallelPathData1 = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
-                    
-                    let x1 = firstParallelPathData1.arc.center.x
-                    let y1 = firstParallelPathData1.arc.center.y
-                    let startAngle1 = firstParallelPathData1.arc.startAngle
-                    let radius1 = firstParallelPathData1.arc.radius
-                    let arcFlag1 = firstParallelPathData1.arc.arcFlag
-                    let sweepFlag1 = firstParallelPathData1.arc.sweepFlag
-                    let xy1 = firstParallelPathData1.coords // change this to main path datas
-
-
-    
-                    let x2 = secondParallelPathData1.arc.center.x
-                    let y2 = secondParallelPathData1.arc.center.y
-                    let startAngle2 = secondParallelPathData1.arc.startAngle
-                    let radius2 = secondParallelPathData1.arc.radius
-                    let arcFlag2 = secondParallelPathData1.arc.arcFlag
-                    let sweepFlag2 = secondParallelPathData1.arc.sweepFlag
-                    let xy2 = secondParallelPathData1.coords // change this to main path datas
-
-                    let circIntCoords  = getCircleIntersections2(x1, y1, radius1, x2, y2, radius2, [xy1, xy2])
-
-
-                    return [circIntCoords, [x1,y1], [x2,y2], [radius1,radius2], [arcFlag1, arcFlag2], [sweepFlag1, sweepFlag2], [xy1,xy2]]
-                }
-
-                // runshit()
-                updateSVG3(runshit())
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
                 // tests the first array of parallelpathdatas (global and local)
@@ -697,17 +674,39 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 }
 
 
-  function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
+function defineVarsAndRunGetCircInts(firstParallelPathData1, secondParallelPathData1){
+    let x1 = firstParallelPathData1.arc.center.x
+    let y1 = firstParallelPathData1.arc.center.y
+    let startAngle1 = firstParallelPathData1.arc.startAngle
+    let radius1 = firstParallelPathData1.arc.radius
+    let arcFlag1 = firstParallelPathData1.arc.arcFlag
+    let sweepFlag1 = firstParallelPathData1.arc.sweepFlag
+    let xy1 = firstParallelPathData1.coords // change this to main path datas
+
+    let x2 = secondParallelPathData1.arc.center.x
+    let y2 = secondParallelPathData1.arc.center.y
+    let startAngle2 = secondParallelPathData1.arc.startAngle
+    let radius2 = secondParallelPathData1.arc.radius
+    let arcFlag2 = secondParallelPathData1.arc.arcFlag
+    let sweepFlag2 = secondParallelPathData1.arc.sweepFlag
+    let xy2 = secondParallelPathData1.coords // change this to main path datas
+
+    let circIntCoords  = getCircleIntersections2(x1, y1, radius1, x2, y2, radius2, [xy1, xy2])
+
+    return [circIntCoords, [x1,y1], [x2,y2], [radius1,radius2], [arcFlag1, arcFlag2], [sweepFlag1, sweepFlag2], [xy1,xy2]]
+}
+
+function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
     // Calculate the distance between the centers of the circles
     const dx = x2 - x1;
     const dy = y2 - y1;
     const distance = Math.sqrt(dx * dx + dy * dy);
-  
+
     // Check if the circles are disjoint or identical
     if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
-      return []; // No intersection
+        return []; // No intersection
     }
-  
+
     // Calculate the intersection points
     const angle = Math.atan2(dy, dx);
     const intersectionAngle = Math.acos((r1 * r1 + distance * distance - r2 * r2) / (2 * r1 * distance));
@@ -723,22 +722,22 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
     // Determine which intersection point is closest to Xys
     let intersectionClosestToXys
     if(!isNaN(intersectionX1)) {    // ***This doesn't work whent circles overlap***
-        if (distance1 < distance2){
-            intersectionClosestToXys = [
-                { x: intersectionX1, y: intersectionY1 },
-                { x: intersectionX2, y: intersectionY2 }
-            ]
-        } else if (distance2 < distance1) {
-            intersectionClosestToXys = [
-                { x: intersectionX2, y: intersectionY2 },
-                { x: intersectionX1, y: intersectionY1 }
-            ]
-        }
+    if (distance1 < distance2){
+        intersectionClosestToXys = [
+            { x: intersectionX1, y: intersectionY1 },
+            { x: intersectionX2, y: intersectionY2 }
+        ]
+    } else if (distance2 < distance1) {
+        intersectionClosestToXys = [
+            { x: intersectionX2, y: intersectionY2 },
+            { x: intersectionX1, y: intersectionY1 }
+        ]
+    }
     } else {
         intersectionClosestToXys = NaN
     }
     return intersectionClosestToXys
-  }
+}
 
 
 //   // ChatGPT optimized (Not tested yet)
@@ -1024,6 +1023,7 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
     return newPoint
 }
 
+// Not in use
 function findPointAlongSlopeAtDistanceNegative(startingPoint, endPoint, distanceAwayArcArc1){
     let newPoint = [0,0]
     let startPtX = startingPoint[0]
