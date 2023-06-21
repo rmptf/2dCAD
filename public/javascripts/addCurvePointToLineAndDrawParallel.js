@@ -481,6 +481,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let parallelPathDatas_stopAtIntersect_fromGLOBAL = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
 
             let parallelPathDatas_stopAtPerpendicular_fromLOCAL = []
+
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 parallelPathDatas_stopAtPerpendicular_fromLOCAL.push([{x: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x, y: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y}, {x: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x, y: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y}])
             }
@@ -513,13 +514,20 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 console.log('No arc data.')
             }
 
+
+
+
+
+
+
+
+
+            // Loop through each parallelPathData
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
-
-                // find intersecting point of two arcs
-                // const intersectionPoint = findArcIntersection(0, 0, 0, 2, 3, 0, 180, 3);
-
+                // Determine if this parallelPathData is an Arc
 
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
+                    arcFormationStartPosition = i
                     let thisPathSegmentArcToCursorDistance
                     let thisPathDataForSegment = pathDatas[thisCount][i + 1]
                     // Set direction of parallelDistance for all remaining arc based on their sweepFlags
@@ -528,11 +536,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     } else {
                         thisPathSegmentArcToCursorDistance = parallelDistance * -1
                     }
+
                     let thisParallelPathData1 = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-                    
                     let nextPathSegmentArcToCenterTotalDistance = getDistance(thisPathDataForSegment.coords.x, thisPathDataForSegment.coords.y, thisPathDataForSegment.arc.center.x, thisPathDataForSegment.arc.center.y)
                     let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
 
+                    // These are only used for intersecting arcs, maybe find better way
                     thisParallelPathData1.arc.center.x = thisPathDataForSegment.arc.center.x
                     thisParallelPathData1.arc.center.y = thisPathDataForSegment.arc.center.y
                     thisParallelPathData1.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
@@ -540,11 +549,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
                     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
 
-                    updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
-
+                    // stuff for arc intersecting point
                     // let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                    // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
 
-
+                    // Old way, probably need to get rid of it for a new way or put in its own place
+                    // Find a point at the correct distance awar from arc along the line going through the center of the arc through the end of path data
                     for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL[i].length; j++) {
                         let thisPathData = pathDatas[thisCount][i + j]
                         let nextPathData = pathDatas[thisCount][i + 1]
@@ -557,27 +567,22 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
                     }
-                    
-
-                    // console.log(thisParallelPathData1)
 
 
 
-                    
+                    // Determine which type of arc intersection is needed:
+                    // If arc instersects with straight path
+                    // If arc intersects with another arc
 
 
 
-
-
-
-                    
+                // Determine if this parallelPathData is a straight path
                 } else {
                     // THIS IS WORKING BETTER BUT WE NEED TO FIX FOR CASES OF POINTS ON STRAIGHT LINE
                     // when there is no intersect point
                     // has hard time with points on straight-ish line
                     let thisPathDataOutside = pathDatas[thisCount][i]
                     let nextPathDataOutside = pathDatas[thisCount][i + 1]
-
                     let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     // check if this is using the correct vars in formula: (thisPathDataOutside, nextPathDataOutside)
@@ -590,21 +595,16 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y = next_parallel_perp_AnchorPointY
 
                     findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
+
                     // findParallelPathIntersectingPoint_original()
                     function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke(){
                         // put all the calc up here
                         // console.log("start")
                         // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
-
-
-
                         if (i === 0) {
                             // console.log('break')
                             // console.log('1')
                             // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
-
-
-
 
                             // set first point
                             parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallel_perp_AnchorPointX
@@ -621,8 +621,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
                             // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0])
                             // console.log(thisPathDataOutside.coords.y)
-
-
 
                             // set previous point
                             let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
@@ -660,15 +658,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         // console.log("end")
                     }
                 }
-
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
-                // tests the first array of parallelpathdatas (global and local)
-                // console.log('--break--')
-                // console.log('Global')
-                // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0].coords.x,parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0].coords.y,parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1].coords.x,parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1].coords.y)
-                // console.log('Local')
-                // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][0].x,parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][0].y,parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][1].x,parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][1].y)
         }
     }
 }
