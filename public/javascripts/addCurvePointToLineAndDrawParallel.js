@@ -523,6 +523,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
             // Loop through each parallelPathData
+            let counter = -1
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 // Determine if this parallelPathData is an Arc
 
@@ -555,18 +556,70 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                     // Old way, probably need to get rid of it for a new way or put in its own place
                     // Find a point at the correct distance awar from arc along the line going through the center of the arc through the end of path data
-                    for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL[i].length; j++) {
-                        let thisPathData = pathDatas[thisCount][i + j]
+                    // for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL[i].length; j++) {
+                    //     let thisPathData = pathDatas[thisCount][i + j]
+                    //     let nextPathData = pathDatas[thisCount][i + 1]
+                    //     let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][j]
+
+                    //     let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                    //     // thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                    //     // thisParallelPathData.coords.y = parallelAnchorPoints[1]
+                    //     thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                    //     thisParallelPathData.coords.y = parallelAnchorPoints[1]
+                    // }
+
+                    counter = counter + 1
+                    if( counter === 0) {
+                        // handle first point
+                        let thisPathData = pathDatas[thisCount][i]
                         let nextPathData = pathDatas[thisCount][i + 1]
-                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][j]
+                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
 
                         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
 
-                        // thisParallelPathData.coords.x = parallelAnchorPoints[0]
-                        // thisParallelPathData.coords.y = parallelAnchorPoints[1]
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
                     }
+                    if( counter === 1) {
+                        // handle second point
+                        let thisPathData = pathDatas[thisCount][i + 1]
+                        let nextPathData = pathDatas[thisCount][i + 1]
+                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
+                    }
+                    if( counter === 2) {
+                        // handle third point
+                        let thisPathData = pathDatas[thisCount][i]
+                        let nextPathData = pathDatas[thisCount][i + 1]
+                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
+
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
+                    }
+                    if(counter = 3) {
+                        // handle fourth point
+                        let thisPathData = pathDatas[thisCount][i + 1]
+                        let nextPathData = pathDatas[thisCount][i + 1]
+                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
+
+                        // Reset counter
+                        counter = 0
+                    }
+
+                    // // Reset counter
+                    // counter = 0
 
 
 
