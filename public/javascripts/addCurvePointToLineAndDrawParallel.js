@@ -66,12 +66,12 @@ function drawPath(){
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
             self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
 
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
 
             // MAIN PATH
             pathDatas.push([
@@ -523,11 +523,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
             // Loop through each parallelPathData
-            let counter = -1
+            let counter123123 = -1
+            console.log("START")
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
+                
                 // Determine if this parallelPathData is an Arc
 
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
+
                     arcFormationStartPosition = i
                     let thisPathSegmentArcToCursorDistance
                     let thisPathDataForSegment = pathDatas[thisCount][i + 1]
@@ -569,63 +572,155 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     //     thisParallelPathData.coords.y = parallelAnchorPoints[1]
                     // }
 
-                    counter = counter + 1
-                    if( counter === 0) {
-                        // handle first point
+
+
+
+                    counter123123 = counter123123 + 1
+                    // Applies to first Arc Half
+                    if(counter123123 === 0) {
+                        // Check if this is the first point of Entire Shape
+                        if(i !== 0){
+                            // Check if the previous point is an arc
+                            if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === true){
+                                // First point
+                                // handle first point of first arc
+                                // handle arc / arc intersection
+                                // ARC - ARC INTERSECTION FORMULA
+
+                                // Currently calculateing pooper twice, try to find a way to calculate it once
+                                let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
+                                let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1])
+                                let theRealPooper = pooper[0][0]
+                                if(theRealPooper) {
+                                    thisParallelPathData.coords.x = theRealPooper.x
+                                    thisParallelPathData.coords.y = theRealPooper.y
+                                }
+
+                                console.log("First Point: Arc Previous. i: " + i)
+                            // Check if the previous point is a path
+                            } else {
+                                // First point
+                                // handle first point of first arc
+                                // handle path / arc intersection
+
+                                // PATH - ARC INTERSECTION FORMULA
+
+                                console.log("First Point: Path Previous")
+                            }
+                        // Check if this is the first point of entire shape
+                        } else {
+                            // First Point
+                            // handle first point of first arc
+                            // handle if there is no previous point
+                            // handle arc findPointAlongSopeAtDistance
+
+                            // findPointAlongSopeAtDistance INTERSECTION FORMULA
+
+                            let thisPathData = pathDatas[thisCount][i]
+                            let nextPathData = pathDatas[thisCount][i + 1]
+                            let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
+                            let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+                            thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                            thisParallelPathData.coords.y = parallelAnchorPoints[1]
+
+                            console.log("First Point: Nothing Previous")
+                        }
+                        // Second Point
+                        // handle second point of first arc
+                        // handle arc findPointAlongSopeAtDistance
+                        
+                        // findPointAlongSopeAtDistance INTERSECTION FORMULA
+
+                        let thisPathData = pathDatas[thisCount][i + 1]
+                        let nextPathData = pathDatas[thisCount][i + 2]
+                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
+
+                        console.log("Second Point: findPointAlongSopeAtDistance")
+                    }
+
+
+
+                    // Applies to second Arc Half
+                    if(counter123123 === 1) {
+                        // Third Point
+                        // handle first point of second arc
+                        // handle arc findPointAlongSopeAtDistance
+                        
+                        // findPointAlongSopeAtDistance INTERSECTION FORMULA
+
                         let thisPathData = pathDatas[thisCount][i]
                         let nextPathData = pathDatas[thisCount][i + 1]
                         let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
-
                         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
-                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
-                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
-                    }
-                    if( counter === 1) {
-                        // handle second point
-                        let thisPathData = pathDatas[thisCount][i + 1]
-                        let nextPathData = pathDatas[thisCount][i + 1]
-                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-
-                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
-                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
-                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
-                    }
-                    if( counter === 2) {
-                        // handle third point
-                        let thisPathData = pathDatas[thisCount][i]
-                        let nextPathData = pathDatas[thisCount][i + 1]
-                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
-
-                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
-                        thisParallelPathData.coords.x = parallelAnchorPoints[0]
-                        thisParallelPathData.coords.y = parallelAnchorPoints[1]
-                    }
-                    if(counter = 3) {
-                        // handle fourth point
-                        let thisPathData = pathDatas[thisCount][i + 1]
-                        let nextPathData = pathDatas[thisCount][i + 1]
-                        let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-
-                        let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
-
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-                        // Reset counter
-                        counter = 0
+                        console.log("Third Point: findPointAlongSopeAtDistance")
+
+                        // Check if this is the last point of Entire Shape
+                        if(i !== parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1){
+                            // Check if the following point is an arc
+                            if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true){
+                                // Fourth point
+                                // handle second point of second arc
+                                // handle arc / arc intersection
+                                // ARC - ARC INTERSECTION FORMULA
+
+                                // Currently calculateing pooper twice, try to find a way to calculate it once
+                                let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+                                let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i+1][1])
+                                let theRealPooper = pooper[0][0]
+                                if(theRealPooper) {
+                                    thisParallelPathData.coords.x = theRealPooper.x
+                                    thisParallelPathData.coords.y = theRealPooper.y
+                                }
+
+                                console.log("Fourth Point: Arc Following. i: " + i)
+                            // Check if the following point is a path
+                            } else {
+                                // Fourth point
+                                // handle second point of secon arc
+                                // handle path / arc intersection
+
+                                // PATH - ARC INTERSECTION FORMULA
+                                console.log("Fourth Point: Path Following")
+                            }
+                        // Check if this is the last point of entire shape
+                        } else {
+                            // Fourth Point
+                            // handle second point of second arc
+                            // handle if there is no following point
+                            // handle arc findPointAlongSopeAtDistance
+
+                            // findPointAlongSopeAtDistance INTERSECTION FORMULA
+
+                            let thisPathData = pathDatas[thisCount][i + 1]
+                            let nextPathData = pathDatas[thisCount][i + 1] // Double check this is ok???????
+                            let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+                            let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+                            thisParallelPathData.coords.x = parallelAnchorPoints[0]
+                            thisParallelPathData.coords.y = parallelAnchorPoints[1]
+
+                            console.log("Fourth Point: Nothing Following")
+                        }
+                        console.log("Reset counter123123")
+                        counter123123 = -1
                     }
 
-                    // // Reset counter
-                    // counter = 0
 
 
 
-                    // Determine which type of arc intersection is needed:
-                    // If arc instersects with straight path
-                    // If arc intersects with another arc
+
+
+
+
+
+
+
+
 
 
 
@@ -713,6 +808,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 }
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
+            
         }
     }
 }
