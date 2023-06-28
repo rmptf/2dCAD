@@ -524,6 +524,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
             // Loop through each parallelPathData
             let counter123123 = -1
+            let thePooperForAll
             console.log("START")
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 
@@ -591,9 +592,13 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
                                 let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1])
                                 let theRealPooper = pooper[0][0]
+                                // thePooperForAll = pooper[0][0]
                                 if(theRealPooper) {
+                                // if(thePooperForAll) {
                                     thisParallelPathData.coords.x = theRealPooper.x
                                     thisParallelPathData.coords.y = theRealPooper.y
+                                    // thisParallelPathData.coords.x = thePooperForAll.x
+                                    // thisParallelPathData.coords.y = thePooperForAll.y
                                 }
 
                                 console.log("First Point: Arc Previous. i: " + i)
@@ -605,7 +610,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                                 // PATH - ARC INTERSECTION FORMULA
 
-                                console.log("First Point: Path Previous")
+                                // console.log("First Point: Path Previous")
                             }
                         // Check if this is the first point of entire shape
                         } else {
@@ -623,7 +628,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
                             thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-                            console.log("First Point: Nothing Previous")
+                            // console.log("First Point: Nothing Previous")
                         }
                         // Second Point
                         // handle second point of first arc
@@ -638,7 +643,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-                        console.log("Second Point: findPointAlongSopeAtDistance")
+                        // console.log("Second Point: findPointAlongSopeAtDistance")
                     }
                     // Applies to second Arc Half
                     if(counter123123 === 1) {
@@ -655,7 +660,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         thisParallelPathData.coords.x = parallelAnchorPoints[0]
                         thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-                        console.log("Third Point: findPointAlongSopeAtDistance")
+                        // console.log("Third Point: findPointAlongSopeAtDistance")
 
                         // Check if this is not the last point of Entire Shape
                         if(i !== parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1){
@@ -670,12 +675,16 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
                                 let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i+1][1])
                                 let theRealPooper = pooper[0][0]
+                                // thePooperForAll = pooper[0][0]
                                 if(theRealPooper) {
+                                // if(thePooperForAll) {
                                     thisParallelPathData.coords.x = theRealPooper.x
                                     thisParallelPathData.coords.y = theRealPooper.y
+                                    // thisParallelPathData.coords.x = thePooperForAll.x
+                                    // thisParallelPathData.coords.y = thePooperForAll.y
                                 }
 
-                                console.log("Fourth Point: Arc Following. i: " + i)
+                                // console.log("Fourth Point: Arc Following. i: " + i)
                             // If not the last point, check if the following point is a path
                             } else {
                                 // Fourth point
@@ -683,7 +692,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // handle path / arc intersection
 
                                 // PATH - ARC INTERSECTION FORMULA
-                                console.log("Fourth Point: Path Following")
+                                // console.log("Fourth Point: Path Following")
                             }
                         // Check if this is the last point of entire shape
                         } else {
@@ -701,11 +710,11 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
                             thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-                            console.log("Fourth Point: Nothing Following")
+                            // console.log("Fourth Point: Nothing Following")
                         }
                         // Reset counte123123 after both arc halfs have been handled.
                         counter123123 = -1
-                        console.log("Reset counter123123")
+                        // console.log("Reset counter123123")
                     }
 
 
@@ -815,11 +824,11 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
-    fuknelmayt('bloke')
+    // fuknelmayt('bloke')
     
-    function fuknelmayt(yar) {
-        console.log('figured it all out. easy.' + yar)
-    }
+    // function fuknelmayt(yar) {
+    //     console.log('figured it all out. easy.' + yar)
+    // }
 
 
 
