@@ -553,11 +553,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
                     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
 
-                    // stuff for arc intersecting point
-                    // let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
-                    // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
 
-                    // Old way, probably need to get rid of it for a new way or put in its own place
+                    // Old way
                     // Find a point at the correct distance awar from arc along the line going through the center of the arc through the end of path data
                     // for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL[i].length; j++) {
                     //     let thisPathData = pathDatas[thisCount][i + j]
@@ -574,16 +571,19 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
+                    // Stuff to visuallize arc intersecting point
+                    // let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                    // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
 
                     counter123123 = counter123123 + 1
                     // Applies to first Arc Half
                     if(counter123123 === 0) {
-                        // Check if this is the first point of Entire Shape
+                        // Check if this is not the first point of Entire Shape
                         if(i !== 0){
-                            // Check if the previous point is an arc
+                            // If not first point of entire shape, check if the previous point is an arc
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === true){
                                 // First point
-                                // handle first point of first arc
+                                // handle first point of first arc (prev point is arc)
                                 // handle arc / arc intersection
                                 // ARC - ARC INTERSECTION FORMULA
 
@@ -597,10 +597,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 }
 
                                 console.log("First Point: Arc Previous. i: " + i)
-                            // Check if the previous point is a path
+                            // If not first point of entire shape, check if the previous point is a path
                             } else {
                                 // First point
-                                // handle first point of first arc
+                                // handle first point of first arc (prev point is path)
                                 // handle path / arc intersection
 
                                 // PATH - ARC INTERSECTION FORMULA
@@ -640,9 +640,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                         console.log("Second Point: findPointAlongSopeAtDistance")
                     }
-
-
-
                     // Applies to second Arc Half
                     if(counter123123 === 1) {
                         // Third Point
@@ -660,12 +657,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                         console.log("Third Point: findPointAlongSopeAtDistance")
 
-                        // Check if this is the last point of Entire Shape
+                        // Check if this is not the last point of Entire Shape
                         if(i !== parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1){
-                            // Check if the following point is an arc
+                            // If not the last point, check if the following point is an arc
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true){
                                 // Fourth point
-                                // handle second point of second arc
+                                // handle second point of second arc (next point is arc)
                                 // handle arc / arc intersection
                                 // ARC - ARC INTERSECTION FORMULA
 
@@ -679,10 +676,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 }
 
                                 console.log("Fourth Point: Arc Following. i: " + i)
-                            // Check if the following point is a path
+                            // If not the last point, check if the following point is a path
                             } else {
                                 // Fourth point
-                                // handle second point of secon arc
+                                // handle second point of second arc (following point is path)
                                 // handle path / arc intersection
 
                                 // PATH - ARC INTERSECTION FORMULA
@@ -706,21 +703,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                             console.log("Fourth Point: Nothing Following")
                         }
-                        console.log("Reset counter123123")
+                        // Reset counte123123 after both arc halfs have been handled.
                         counter123123 = -1
+                        console.log("Reset counter123123")
                     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -812,6 +798,39 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         }
     }
 }
+
+
+
+
+
+
+
+//
+//
+// Intersection between line segmenet and arc
+//
+//
+
+
+
+
+
+    fuknelmayt('bloke')
+    
+    function fuknelmayt(yar) {
+        console.log('figured it all out. easy.' + yar)
+    }
+
+
+
+
+
+//
+//
+// Intersection between line segmenet and arc
+//
+//
+
 
 
 function defineVarsAndRunGetCircInts(firstParallelPathData1, secondParallelPathData1){
