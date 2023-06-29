@@ -66,12 +66,12 @@ function drawPath(){
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
             self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
 
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
 
             // MAIN PATH
             pathDatas.push([
@@ -524,6 +524,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
             // Loop through each parallelPathData
             let counter123123 = -1
+            let newCounterabcabc = -1
             let thePooperForAll
             console.log("START")
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
@@ -572,10 +573,43 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
+
+
+
+
+
+
                     // Stuff to visuallize arc intersecting point
                     // let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                    // console.log(pooper[0][0], "poop")
                     // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
 
+                    let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                    console.log(assPooper[0][0], "thePoop", i, counter123123)
+                    updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
+                    // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1])
+                        // console.log(assPooper[0][0], "thePoop", i, counter123123)
+                        // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1]))
+
+
+                    newCounterabcabc = newCounterabcabc + 1
+                    console.log("herherherehreh")
+                    if (newCounterabcabc === 1) {
+                        console.log(i, newCounterabcabc)
+                        // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                        // console.log(assPooper[0][0], "thePoop", i, counter123123)
+                        // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
+                        // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1])
+                        // console.log(assPooper[0][0], "thePoop", i, counter123123)
+                        // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1]))
+                    }
+                    
+
+
+
+
+
+                    
                     counter123123 = counter123123 + 1
                     // Applies to first Arc Half
                     if(counter123123 === 0) {
@@ -595,13 +629,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // thePooperForAll = pooper[0][0]
                                 if(theRealPooper) {
                                 // if(thePooperForAll) {
-                                    thisParallelPathData.coords.x = theRealPooper.x
-                                    thisParallelPathData.coords.y = theRealPooper.y
+                                    // thisParallelPathData.coords.x = theRealPooper.x
+                                    // thisParallelPathData.coords.y = theRealPooper.y
+
                                     // thisParallelPathData.coords.x = thePooperForAll.x
                                     // thisParallelPathData.coords.y = thePooperForAll.y
                                 }
 
-                                console.log("First Point: Arc Previous. i: " + i)
+                                // console.log("First Point: Arc Previous. i: " + i)
                             // If not first point of entire shape, check if the previous point is a path
                             } else {
                                 // First point
@@ -647,6 +682,11 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     }
                     // Applies to second Arc Half
                     if(counter123123 === 1) {
+                        // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                        // console.log(assPooper[0][0], "thePoop")
+                        // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
+
+
                         // Third Point
                         // handle first point of second arc
                         // handle arc findPointAlongSopeAtDistance
@@ -671,8 +711,18 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // handle arc / arc intersection
                                 // ARC - ARC INTERSECTION FORMULA
 
+
+                                // // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1])
+                                // // console.log(assPooper[0][0], "thePoop", i, counter123123)
+                                // // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
+                                // let assPooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1])
+                                // console.log(assPooper[0][0], "thePoop", i, counter123123)
+                                // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1]))
+
+
                                 // Currently calculateing pooper twice, try to find a way to calculate it once
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+                                let thisParallelPathData2 = parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0]
                                 let pooper = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[i+1][1])
                                 let theRealPooper = pooper[0][0]
                                 // thePooperForAll = pooper[0][0]
@@ -680,11 +730,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // if(thePooperForAll) {
                                     thisParallelPathData.coords.x = theRealPooper.x
                                     thisParallelPathData.coords.y = theRealPooper.y
+                                    thisParallelPathData2.coords.x = theRealPooper.x
+                                    thisParallelPathData2.coords.y = theRealPooper.y
                                     // thisParallelPathData.coords.x = thePooperForAll.x
                                     // thisParallelPathData.coords.y = thePooperForAll.y
                                 }
 
-                                // console.log("Fourth Point: Arc Following. i: " + i)
+                                console.log("Fourth Point: Arc Following. i: " + i)
+                                console.log(theRealPooper, newCounterabcabc)
                             // If not the last point, check if the following point is a path
                             } else {
                                 // Fourth point
@@ -714,6 +767,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                         // Reset counte123123 after both arc halfs have been handled.
                         counter123123 = -1
+                        
                         // console.log("Reset counter123123")
                     }
 
@@ -803,7 +857,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 }
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
-            
+            newCounterabcabc = -1
         }
     }
 }
