@@ -98,4 +98,15 @@ svg{
 
 
 
-testCirc mainPath testPath--TESTER--path1
+.testPath {
+
+}
+.mainPath {
+
+}
+.testPath--TESTER--path1 {
+  stroke-width: 1;
+  fill: none;
+  stroke: blue;
+  opacity: 1;
+}
