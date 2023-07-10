@@ -85,6 +85,7 @@ svg{
 .testCirc {
   r: 100;
   stroke-width: 1;
+  stroke-dasharray: 10;
   fill: none;
 }
 
@@ -106,6 +107,7 @@ svg{
 }
 .testPath--TESTER--path1 {
   stroke-width: 1;
+  stroke-dasharray: 10;
   fill: none;
   stroke: blue;
   opacity: 1;
