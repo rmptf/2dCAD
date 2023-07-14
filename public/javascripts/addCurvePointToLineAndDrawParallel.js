@@ -469,6 +469,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         }
     }
 
+    let setCurrentParallelDist = true
+    let currentParallelDistance
+
     function mousemove2(event) {
         let m1P = d3.pointer(event)
         let parallelDistance 
@@ -591,6 +594,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                         let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1])
 
+                        let previousParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0]
                         let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
                         let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
 
@@ -599,9 +603,28 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         if(pathToArcIntPoint) {
                             if(pathToArcIntPoint === "DOES NOT INTERSECT") {
                                 console.log('No Path - Arc Intersection avail.')
+                                
                                 // Keep thisParallelPathData where it is but move away from path in perpendicular direction
                                 // Add curve point between thisParallelPathData & nextParallelPathData and always keep at (90degree angle bettwen both? :might be incorrect, just keep perfect curve)
                                 // Haven't figured out what to do with nextParallelPathData but its possible it might need to just be left as is (probably not)
+                                
+                                // The following technique works currectly but can be inacurate because the speed at which the parallal line is drawn
+                                // can determine how accurately the Path to Arc intersection point stops intersecting. 
+
+                                // Determine how far parallel line currently is so that you can subtract that from the distance to place new parallel line after Arc and Path stop intersecting.
+                                if (setCurrentParallelDist === true) {
+                                    currentParallelDistance = parallelDistance
+                                    setCurrentParallelDist = false
+                                }
+
+                                // Find new parallel perpendicular point of thisParallelPathData
+                                let this_parallel_perp_AnchorPointX = nextParallelPathData.coords.x - ((parallelDistance - currentParallelDistance) * Math.sin(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
+                                let this_parallel_perp_AnchorPointY = nextParallelPathData.coords.y + ((parallelDistance - currentParallelDistance) * Math.cos(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
+                                
+                                thisParallelPathData.coords.x = this_parallel_perp_AnchorPointX
+                                thisParallelPathData.coords.y = this_parallel_perp_AnchorPointY
+
+                                // Have to figure out what to do with nextParallelPathData (arc point [0]): it also has to move but current doesnt.
 
                             } else {
                                 // Find dinstance between pathData and each pathToCircle intersection point
