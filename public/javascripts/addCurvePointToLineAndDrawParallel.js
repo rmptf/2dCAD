@@ -66,13 +66,13 @@ function drawPath(){
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
             self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
 
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
-            // // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
-            // // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
-            // self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
+            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
+            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
+            self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG')
 
             // MAIN PATH
             pathDatas.push([
@@ -533,6 +533,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countTheArcToPathInt = []
             console.log("START")
 
+            // THERE ARE SITUATIONS WHERE THE ARCFLAG NEEDS TO BE CHANGED WHILE DRAWING PARALLEL LINES
+            // Need to run trhough arc flag picker
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
 
                 // Determine if this parallelPathData is an Arc
@@ -597,34 +599,73 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         let previousParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0]
                         let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
                         let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
+                        let nextNextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1]
 
                         let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
 
                         if(pathToArcIntPoint) {
-                            if(pathToArcIntPoint === "DOES NOT INTERSECT") {
+                            // console.log(pathToArcIntPoint[0].doesIntersect)
+                            // if(pathToArcIntPoint === "DOES NOT INTERSECT") {
+                            if(pathToArcIntPoint[0].doesIntersect === false) {
                                 console.log('No Path - Arc Intersection avail.')
-                                
+                                // Basic Goal:
                                 // Keep thisParallelPathData where it is but move away from path in perpendicular direction
                                 // Add curve point between thisParallelPathData & nextParallelPathData and always keep at (90degree angle bettwen both? :might be incorrect, just keep perfect curve)
                                 // Haven't figured out what to do with nextParallelPathData but its possible it might need to just be left as is (probably not)
+
                                 
+                                // *** EQUATION A ***
+                                // *** EQUATION A ***
+                                // *** EQUATION A ***
+
+                                // PROBLEM (With Current Equation):
                                 // The following technique works currectly but can be inacurate because the speed at which the parallal line is drawn
                                 // can determine how accurately the Path to Arc intersection point stops intersecting. 
+                                    // POSSIBLE SOLUTION:
+                                    // 1)
+                                        // Can set this programatically by using the path - arc formula to find out exact last point where the arc stops
+                                        // meeting the circle and can use that to place the point once the if statement fires.
+                                    // 2)
+                                        // can then use a parallel distance formular (might need new one) to determine how far that last point is from
+                                        // the original line from a perpendicular distance then set the currentParallelDistance var with that once
+                                        // the if statemnet fires.
 
                                 // Determine how far parallel line currently is so that you can subtract that from the distance to place new parallel line after Arc and Path stop intersecting.
-                                if (setCurrentParallelDist === true) {
-                                    currentParallelDistance = parallelDistance
-                                    setCurrentParallelDist = false
-                                }
+                                // if (setCurrentParallelDist === true) {
+                                //     currentParallelDistance = parallelDistance
+                                //     setCurrentParallelDist = false
+                                // }
 
-                                // Find new parallel perpendicular point of thisParallelPathData
-                                let this_parallel_perp_AnchorPointX = nextParallelPathData.coords.x - ((parallelDistance - currentParallelDistance) * Math.sin(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
-                                let this_parallel_perp_AnchorPointY = nextParallelPathData.coords.y + ((parallelDistance - currentParallelDistance) * Math.cos(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
+                                // // Find new parallel perpendicular point of thisParallelPathData
+                                // let this_parallel_perp_AnchorPointX = nextParallelPathData.coords.x - ((parallelDistance - currentParallelDistance) * Math.sin(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
+                                // let this_parallel_perp_AnchorPointY = nextParallelPathData.coords.y + ((parallelDistance - currentParallelDistance) * Math.cos(Math.atan2(previousParallelPathData.coords.y - thisParallelPathData.coords.y, previousParallelPathData.coords.x - thisParallelPathData.coords.x)))
                                 
-                                thisParallelPathData.coords.x = this_parallel_perp_AnchorPointX
-                                thisParallelPathData.coords.y = this_parallel_perp_AnchorPointY
+                                // thisParallelPathData.coords.x = this_parallel_perp_AnchorPointX
+                                // thisParallelPathData.coords.y = this_parallel_perp_AnchorPointY
 
                                 // Have to figure out what to do with nextParallelPathData (arc point [0]): it also has to move but current doesnt.
+
+                                // *** EQUATION A ***
+                                // *** EQUATION A ***
+                                // *** EQUATION A ***
+
+
+                                // *** EQUATION B ***
+                                // *** EQUATION B ***
+                                // *** EQUATION B ***
+
+                                let circleRadiusPoint = findPointAlongSlopeAtDistance([nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], nextNextParallelPathData.arc.radius)
+
+                                thisParallelPathData.coords.x = pathToArcIntPoint[0].x
+                                thisParallelPathData.coords.y = pathToArcIntPoint[0].y
+                                nextParallelPathData.coords.x = circleRadiusPoint[0]
+                                nextParallelPathData.coords.y = circleRadiusPoint[1]
+
+                                updateSVG5([pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], [circleRadiusPoint[0],circleRadiusPoint[1]], nextNextParallelPathData)
+
+                                // *** EQUATION B ***
+                                // *** EQUATION B ***
+                                // *** EQUATION B ***
 
                             } else {
                                 // Find dinstance between pathData and each pathToCircle intersection point
@@ -634,12 +675,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // Determine which pathToCircle intersection is closest to pathData
                                 if(length1 < length2) {
                                     // pathToArcIntPoint[0] is closest
+                                    // console.log("first")
                                     thisParallelPathData.coords.x = pathToArcIntPoint[0].x
                                     thisParallelPathData.coords.y = pathToArcIntPoint[0].y
                                     nextParallelPathData.coords.x = pathToArcIntPoint[0].x
                                     nextParallelPathData.coords.y = pathToArcIntPoint[0].y
                                 } else {
                                     // pathToArcIntPoint[1] is closest
+                                    // console.log("second")
                                     thisParallelPathData.coords.x = pathToArcIntPoint[1].x
                                     thisParallelPathData.coords.y = pathToArcIntPoint[1].y
                                     nextParallelPathData.coords.x = pathToArcIntPoint[1].x
@@ -1118,14 +1161,26 @@ function updateSVG4(linePt1, linePt2, circ) {
     // if(typeof pathCircIntersection !== 'undefined') {
     if(pathCircIntersection.length > 0) {
         pathCircIntPoint1.attr('cx', pathCircIntersection[0].x).attr('cy', pathCircIntersection[0].y)
-        pathCircIntPoint2.attr('cx', pathCircIntersection[1].x).attr('cy', pathCircIntersection[1].y)
+        // pathCircIntPoint2.attr('cx', pathCircIntersection[1].x).attr('cy', pathCircIntersection[1].y)
         circCent1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1])
         circ1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1]).style("r", circRadius)
         // path1.attr("x1", pathCoordsPt1[0]).attr("y1", pathCoordsPt1[1]).attr("x2", pathCoordsPt2[0]).attr("y2", pathCoordsPt2[1])
-        path1.attr("x1", pathCircIntersection[0].x).attr("y1", pathCircIntersection[0].y).attr("x2", pathCircIntersection[1].x).attr("y2", pathCircIntersection[1].y)
+        // path1.attr("x1", pathCircIntersection[0].x).attr("y1", pathCircIntersection[0].y).attr("x2", pathCircIntersection[1].x).attr("y2", pathCircIntersection[1].y)
     } else {
         console.log('SVG3 returning null.')
     }
+}
+
+function updateSVG5(linePt1, linePt2, circ) {
+    let point1 = d3.select("#intCircTEST--incCirc1--IDTAG")
+    let point2 = d3.select("#intCircTEST--incCirc2--IDTAG")
+    let circCent1 = d3.select("#intArcTEST--circCent1--IDTAG")
+    let circ1 = d3.select("#intArcTEST--circ1--IDTAG")
+
+    // point1.attr('cx', linePt1[0]).attr('cy', linePt1[1])
+    // point2.attr('cx', linePt2[0]).attr('cy', linePt2[1])
+    circCent1.attr('cx', circ.arc.center.x).attr('cy', circ.arc.center.y)
+    circ1.attr('cx', circ.arc.center.x).attr('cy', circ.arc.center.y).style("r", circ.arc.radius)
 }
 
 
@@ -1147,23 +1202,30 @@ function getLineCircleIntersections(linePt1, linePt2, circ) {
     // Calculate coefficients for the quadratic equation
     const A = dx * dx + dy * dy;
     const B = 2 * (dx * (lineStart.x - circleCenter.x) + dy * (lineStart.y - circleCenter.y));
-    const C = (lineStart.x - circleCenter.x) * (lineStart.x - circleCenter.x) +
-                (lineStart.y - circleCenter.y) * (lineStart.y - circleCenter.y) - circleRadius * circleRadius;
+    const C = (lineStart.x - circleCenter.x) * (lineStart.x - circleCenter.x) + (lineStart.y - circleCenter.y) * (lineStart.y - circleCenter.y) - circleRadius * circleRadius;
 
     // Calculate the discriminant of the quadratic equation
     const discriminant = B * B - 4 * A * C;
 
+
     // Check if the line intersects the circle
     if (discriminant < 0) {
-        // return []; // No intersection points
-        let noIntersection = "DOES NOT INTERSECT"
-        return noIntersection; // No intersection points
+        // // return []; // No intersection points
+        // let noIntersection = "DOES NOT INTERSECT"
+        // return noIntersection; // No intersection points
+
+        // Line is tangent to the circle
+        const t = -B / (2 * A);
+        const intersectionX = lineStart.x + t * dx;
+        const intersectionY = lineStart.y + t * dy;
+        return [{ x: intersectionX, y: intersectionY, doesIntersect: false }];
+
     } else if (discriminant === 0) {
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
-        return [{ x: intersectionX, y: intersectionY }];
+        return [{ x: intersectionX, y: intersectionY, doesIntersect: true }];
     } else {
         // Line intersects the circle at two points
         const t1 = (-B + Math.sqrt(discriminant)) / (2 * A);
@@ -1173,8 +1235,8 @@ function getLineCircleIntersections(linePt1, linePt2, circ) {
         const intersection2X = lineStart.x + t2 * dx;
         const intersection2Y = lineStart.y + t2 * dy;
         return [
-        { x: intersection1X, y: intersection1Y },
-        { x: intersection2X, y: intersection2Y }
+        { x: intersection1X, y: intersection1Y, doesIntersect: true },
+        { x: intersection2X, y: intersection2Y, doesIntersect: true }
         ];
     }
 }
