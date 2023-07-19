@@ -605,6 +605,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // Find point along distance between center of circle and new thisParallelPathData and place point at distance of the circle radius
                                 // Add curve point between thisParallelPathData & nextParallelPathData and always keep at (90degree angle bettwen both? :might be incorrect, just keep perfect curve)
 
+                                // First part: FIND POINT LOCATIONS
+                                // First part: FIND POINT LOCATIONS
+
                                 // Find point along path between tangent and center of circle at a distance equal to the radius of the circle
                                 let circleRadiusPoint = findPointAlongSlopeAtDistance([nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], nextNextParallelPathData.arc.radius)
 
@@ -614,6 +617,88 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 nextParallelPathData.coords.y = circleRadiusPoint[1]
 
                                 // updateSVG5([pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], [circleRadiusPoint[0],circleRadiusPoint[1]], nextNextParallelPathData)
+
+                                // First part: FIND POINT LOCATIONS
+                                // First part: FIND POINT LOCATIONS
+
+                                // Second part: ADD  CONNECTION PATH AND POINTS
+                                // Second part: ADD  CONNECTION PATH AND POINTS
+
+                                // self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
+                                // self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
+                        
+                                // let parallelEndPoints = []
+                                // let parallelPathGroup = []
+                                // let parallelPathData = []
+                        
+                                // let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                                // let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                                // parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
+                    
+                                // let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+                                // parallelPathGroup.push(parallelPath)
+                    
+                                // let thisPathData = pathDatas[thisCount][i].coords
+                                // let nextPathData = pathDatas[thisCount][i + 1].coords
+                    
+                                // let parallelAnchorPointX1 = thisPathData.x
+                                // let parallelAnchorPointY1 = thisPathData.y
+                    
+                                // let parallelAnchorPointX2 = nextPathData.x
+                                // let parallelAnchorPointY2 = nextPathData.y
+
+                                // parallelPathData.push([
+                                //     {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
+                                //     {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                                // ])
+
+
+                                // GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
+                                // GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
+                                // GLOBALparallelPathDatas[thisCount].push(parallelPathData)
+
+
+
+
+
+
+                                // console.log('GLOBALparallelEndPointsGroups')
+                                // console.log(GLOBALparallelEndPointsGroups[thisCount])
+                                // console.log('GLOBALparallelPathsGroups')
+                                // console.log(GLOBALparallelPathsGroups[thisCount])
+                                // console.log('GLOBALparallelPathDatas')
+                                // console.log(GLOBALparallelPathDatas[thisCount])
+
+                                let parallelEndPoints2 = []
+                                let parallelPathGroup2 = []
+                                let parallelPathData2 = []
+
+                                let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                                let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                                let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+
+
+                                parallelEndPoints2.push(newParallelPoint1, newParallelPoint2)
+                                parallelPathGroup2.push(parallelPath)
+                                parallelPathData2.push([
+                                    {coords: {x: pathToArcIntPoint[0].x, y: pathToArcIntPoint[0].y}, arc: {exist: false}},
+                                    {coords: {x: circleRadiusPoint[0], y: circleRadiusPoint[1]}, arc: {exist: false}},
+                                ])
+
+
+                                GLOBALparallelEndPointsGroups[thisCount][0].push(parallelEndPoints2)
+                                GLOBALparallelPathsGroups[thisCount][0].push(parallelPathGroup2)
+                                GLOBALparallelPathDatas[thisCount][0].push(parallelPathData2)
+
+                                console.log("REDRAW???????????")
+                                // thisParallelPathData.coords.x = pathToArcIntPoint[0].x
+                                // thisParallelPathData.coords.y = pathToArcIntPoint[0].y
+                                // nextParallelPathData.coords.x = circleRadiusPoint[0]
+                                // nextParallelPathData.coords.y = circleRadiusPoint[1]
+                                
+                                // Second part: ADD  CONNECTION PATH AND POINTS
+                                // Second part: ADD  CONNECTION PATH AND POINTS
+
                             } else {
                                 // Find dinstance between pathData and each pathToCircle intersection point
                                 let length1 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
@@ -946,6 +1031,13 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                     }
                 }
+                console.log('GLOBALparallelEndPointsGroups')
+                console.log(GLOBALparallelEndPointsGroups[thisCount])
+                console.log('GLOBALparallelPathsGroups')
+                console.log(GLOBALparallelPathsGroups[thisCount])
+                console.log('GLOBALparallelPathDatas')
+                console.log(GLOBALparallelPathDatas[thisCount])
+                console.log("REDRAW")
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
         }
