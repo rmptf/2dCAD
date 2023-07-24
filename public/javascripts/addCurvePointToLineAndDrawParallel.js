@@ -533,11 +533,13 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countTheArcToPathInt = []
             let countAddPathAndPoints = false
             console.log("START")
+            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
 
             // THERE ARE SITUATIONS WHERE THE ARCFLAG NEEDS TO BE CHANGED WHILE DRAWING PARALLEL LINES
             // Need to run trhough arc flag picker
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
-
+                console.log("i: " + i)
+                console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL[i])
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
 
@@ -1116,15 +1118,20 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                     }
                 }
-                console.log('GLOBALparallelEndPointsGroups')
-                console.log(GLOBALparallelEndPointsGroups[thisCount])
-                console.log('GLOBALparallelPathsGroups')
-                console.log(GLOBALparallelPathsGroups[thisCount])
-                console.log('GLOBALparallelPathDatas')
-                console.log(GLOBALparallelPathDatas[thisCount])
                 console.log("REDRAW")
                 updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
             }
+            console.log('GLOBALparallelEndPointsGroups')
+            console.log(GLOBALparallelEndPointsGroups[thisCount])
+            console.log('GLOBALparallelPathsGroups')
+            console.log(GLOBALparallelPathsGroups[thisCount])
+            console.log('GLOBALparallelPathDatas')
+            console.log(GLOBALparallelPathDatas[thisCount])
+
+            console.log("FINISH")
+            console.log(" ")
+            console.log(" ")
+            console.log(" ")
         }
     }
 }
