@@ -587,7 +587,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
 
 
-                    // NEW STUFF
+                    // NEW STUFF (not working)
                     // let thisPathDataForSegment = FAKEpathDatas[i + 1]
                     // if(thisPathDataForSegment !== "filler") {
                     //     // Set direction of parallelDistance for all remaining arc based on their sweepFlags
