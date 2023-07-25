@@ -372,6 +372,15 @@ function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
 
 
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
+    // NEW STUFF
+    let countADDEDparellelPathDatas = 0
+    let trackADDEDparallelPathDatasINDEX = []
+    let FAKEpathDatas = pathDatas[thisCount].slice()
+
+
+
+
+
     console.log(thisCount, pathCount)
     let secondaryPathId = pathCount
     let isDown3 = false
@@ -472,6 +481,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
     let setCurrentParallelDist = true
     let currentParallelDistance
 
+
     function mousemove2(event) {
         let m1P = d3.pointer(event)
         let parallelDistance 
@@ -532,8 +542,17 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countThePathToArcInt = []
             let countTheArcToPathInt = []
             let countAddPathAndPoints = false
+            
             console.log("START")
+            
+
+            // NEW STUFF
+            console.log("WOWOWWOWOWOWOW")
             console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
+            console.log(countADDEDparellelPathDatas)
+            console.log(trackADDEDparallelPathDatasINDEX)
+            console.log(FAKEpathDatas)
+            console.log(pathDatas[thisCount])
 
             // THERE ARE SITUATIONS WHERE THE ARCFLAG NEEDS TO BE CHANGED WHILE DRAWING PARALLEL LINES
             // Need to run trhough arc flag picker
@@ -545,6 +564,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                     arcFormationStartPosition = i
                     let thisPathSegmentArcToCursorDistance
+                    
+                    // OLD
                     let thisPathDataForSegment = pathDatas[thisCount][i + 1]
                     // Set direction of parallelDistance for all remaining arc based on their sweepFlags
                     if (thisPathDataForSegment.arc.sweepFlag === 0) {
@@ -564,6 +585,36 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     thisParallelPathData1.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
                     thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
                     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
+
+
+                    // NEW STUFF
+                    // let thisPathDataForSegment = FAKEpathDatas[i + 1]
+                    // if(thisPathDataForSegment !== "filler") {
+                    //     // Set direction of parallelDistance for all remaining arc based on their sweepFlags
+                    //     if (thisPathDataForSegment.arc.sweepFlag === 0) {
+                    //         thisPathSegmentArcToCursorDistance = parallelDistance
+                    //     } else {
+                    //         thisPathSegmentArcToCursorDistance = parallelDistance * -1
+                    //     }
+
+                    //     let thisParallelPathData1 = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+                    //     let nextPathSegmentArcToCenterTotalDistance = getDistance(thisPathDataForSegment.coords.x, thisPathDataForSegment.coords.y, thisPathDataForSegment.arc.center.x, thisPathDataForSegment.arc.center.y)
+                    //     let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
+    
+                    //     // These are only used for intersecting arcs, maybe find better way
+                    //     thisParallelPathData1.arc.center.x = thisPathDataForSegment.arc.center.x
+                    //     thisParallelPathData1.arc.center.y = thisPathDataForSegment.arc.center.y
+                    //     thisParallelPathData1.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    //     thisParallelPathData1.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
+                    //     thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
+                    //     thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
+
+                    // } else {
+                    //     console.log("FILLLELRELRELRELRERLERLE")
+                    // }
+                    
+
+
 
                     // Handle all Arc to Arc Intersections
                     for (let j = 0; j < countTheArcToArcInt.length; j++) {
@@ -715,6 +766,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // Second part: ADD  CONNECTION PATH AND POINTS
                                 // Second part: ADD  CONNECTION PATH AND POINTS
 
+
+                                // not set dynamically
                                 if(GLOBALparallelPathsGroups[thisCount][0].length < 4) {
                                     console.log("ADD")
                                     countAddPathAndPoints = true
@@ -742,8 +795,15 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                         {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
                                         // {coords: {x: 200, y: 200}, arc: {exist: false}},
                                     ]);
-
                                     countAddPathAndPoints = false
+
+                                    //NEW STUFF
+                                    countADDEDparellelPathDatas = countADDEDparellelPathDatas + 1
+                                    trackADDEDparallelPathDatasINDEX.push(index)
+                                    for (let i = 0; i < trackADDEDparallelPathDatasINDEX.length; i++) {
+                                        FAKEpathDatas.splice(trackADDEDparallelPathDatasINDEX, 0, "filler");
+                                    }
+                                    //NEW STUFF
 
                                     console.log("Added Points and Paths")
                                 }
