@@ -559,6 +559,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 console.log("i: " + i)
                 console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL[i])
+                console.log(counter123123)
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
 
@@ -873,8 +874,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // updateSVG4(parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], pathDatas[thisCount][1])
                     // updateSVG4(parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1])
 
-                    if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true){
+                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true){
+                    if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true || parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true){
                         console.log("JOINER: do nothin")
+
+                        // This is HARDCODED: make dynamic
+                        counter123123 = 0
                     } else {
                         counter123123 = counter123123 + 1
                         // Applies to first Arc Half
@@ -949,8 +954,18 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             
                             // findPointAlongSopeAtDistance INTERSECTION FORMULA
 
-                            let thisPathData = pathDatas[thisCount][i]
-                            let nextPathData = pathDatas[thisCount][i + 1]
+
+
+                            // OLD STUFF
+                            // let thisPathData = pathDatas[thisCount][i]
+                            // let nextPathData = pathDatas[thisCount][i + 1]
+
+                            // NEW STUFF ADDING FAKE PATHDATA
+                            let thisPathData = FAKEpathDatas[i]
+                            let nextPathData = FAKEpathDatas[i + 1]
+
+
+
                             let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
                             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
@@ -996,8 +1011,18 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                                 // findPointAlongSopeAtDistance INTERSECTION FORMULA
 
-                                let thisPathData = pathDatas[thisCount][i + 1]
-                                let nextPathData = pathDatas[thisCount][i + 1] // Double check this is ok???????
+
+
+                                // OLD STUFF
+                                // let thisPathData = pathDatas[thisCount][i + 1]
+                                // let nextPathData = pathDatas[thisCount][i + 1] // Double check this is ok???????
+
+                                // NEW STUFF ADDING FAKE PATHDATA
+                                let thisPathData = FAKEpathDatas[i + 1]
+                                let nextPathData = FAKEpathDatas[i + 1]
+
+
+
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
                                 let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                                 thisParallelPathData.coords.x = parallelAnchorPoints[0]
