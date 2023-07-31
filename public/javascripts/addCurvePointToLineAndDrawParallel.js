@@ -541,18 +541,19 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countTheArcToArcInt = []
             let countThePathToArcInt = []
             let countTheArcToPathInt = []
+            let countThePathToArcIntNoINTERSECT = []
             let countAddPathAndPoints = false
             
             console.log("START")
             
 
             // NEW STUFF
-            console.log("WOWOWWOWOWOWOW")
-            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
-            console.log(countADDEDparellelPathDatas)
-            console.log(trackADDEDparallelPathDatasINDEX)
-            console.log(FAKEpathDatas)
-            console.log(pathDatas[thisCount])
+            // console.log("WOWOWWOWOWOWOW")
+            // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
+            // console.log(countADDEDparellelPathDatas)
+            // console.log(trackADDEDparallelPathDatasINDEX)
+            // console.log(FAKEpathDatas)
+            // console.log(pathDatas[thisCount])
 
             // THERE ARE SITUATIONS WHERE THE ARCFLAG NEEDS TO BE CHANGED WHILE DRAWING PARALLEL LINES
             // Need to run trhough arc flag picker
@@ -741,18 +742,13 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // Handle all Path to Arc Intersections
                     for (let j = 0; j < countThePathToArcInt.length; j++) {
                         console.log("Path to Arc Intersecting")
-
                         let thisPathToArcInt = countThePathToArcInt[j] - 1
                         let nextPathToArcInt = countThePathToArcInt[j]
-                        let nextNextPathToArcInt = countThePathToArcInt[j] + 1
 
                         let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1])
 
                         let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
                         let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
-                        
-                        let nextNextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1]
-                        let nextNextNextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
 
                         let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
 
@@ -765,17 +761,11 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 // Find point along distance between center of circle and new thisParallelPathData and place point at distance of the circle radius
                                 // Add curve point between thisParallelPathData & nextParallelPathData and always keep at (90degree angle bettwen both? :might be incorrect, just keep perfect curve)
 
-
-                                // Second part: ADD  CONNECTION PATH AND POINTS
-                                // Second part: ADD  CONNECTION PATH AND POINTS
-
-
                                 // not set dynamically
                                 if(GLOBALparallelPathsGroups[thisCount][0].length < 4) {
                                     console.log("ADD")
                                     countAddPathAndPoints = true
                                 }
-                                
 
                                 if(countAddPathAndPoints === true){
                                     console.log("Adding Points and Paths")
@@ -787,16 +777,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                     let index = nextPathToArcInt
                                     GLOBALparallelEndPointsGroups[thisCount][0].splice(index + 1, 0, newParallelPoint1, newParallelPoint2);
                                     GLOBALparallelPathsGroups[thisCount][0].splice(index, 0, parallelPath);
-                                    // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [{coords: {x: pathToArcIntPoint[0].x, y: pathToArcIntPoint[0].y}, arc: {exist: false}}, {coords: {x: circleRadiusPoint[0], y: circleRadiusPoint[1]}, arc: {exist: false}},]);
 
-                                    // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
-                                    //     {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                                    //     {coords: {x: circleRadiusPoint[0], y: circleRadiusPoint[1]}, arc: {exist: false}},
-                                    // ]);
                                     GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
                                         {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
                                         {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                                        // {coords: {x: 200, y: 200}, arc: {exist: false}},
                                     ]);
                                     countAddPathAndPoints = false
 
@@ -810,41 +794,48 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                                     console.log("Added Points and Paths")
                                 }
-
-                                console.log("placing all?")
-                                // Second part: ADD  CONNECTION PATH AND POINTS
-                                // Second part: ADD  CONNECTION PATH AND POINTS
-
-
-                                // First part: FIND POINT LOCATIONS
-                                // First part: FIND POINT LOCATIONS
-
                                 // Find point along path between tangent and center of circle at a distance equal to the radius of the circle
                                 // let circleRadiusPoint = findPointAlongSlopeAtDistance([nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], nextNextParallelPathData.arc.radius)
+                                // let circleRadiusPoint = findPointAlongSlopeAtDistance([nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], nextNextParallelPathData.arc.radius)
 
+                                // OLD WAY (WORKED BEFORE)
                                 // thisParallelPathData.coords.x = pathToArcIntPoint[0].x
                                 // thisParallelPathData.coords.y = pathToArcIntPoint[0].y
                                 // nextParallelPathData.coords.x = circleRadiusPoint[0]
                                 // nextParallelPathData.coords.y = circleRadiusPoint[1]
 
-                                thisParallelPathData.coords.x = 50
-                                thisParallelPathData.coords.y = 100
-                                nextParallelPathData.coords.x = 100
-                                nextParallelPathData.coords.y = 100
+                                // NEW, NOT DYNAMIC
+                                // not part of shape
+                                // firstParPath.coords.x = 10
+                                // firstParPath.coords.y = 10
 
-                                nextNextParallelPathData.coords.x = 200
-                                nextNextParallelPathData.coords.y = 100
-                                nextNextNextParallelPathData.coords.x = 300
-                                nextNextNextParallelPathData.coords.y = 100
+                                // // first
+                                // secondParPath.coords.x = 10
+                                // secondParPath.coords.y = 100
 
-                                console.log("placed all?")
+                                // // second
+                                // thirdParPath.coords.x = 10
+                                // thirdParPath.coords.y = 200
+                                // // thirdParPath.coords.x = pathToArcIntPoint[0].x
+                                // // thirdParPath.coords.y = pathToArcIntPoint[0].y
+
+                                // // third
+                                // fourthPath.coords.x = 10
+                                // fourthPath.coords.y = 300
+                                // // fourthPath.coords.x = circleRadiusPoint[0]
+                                // // fourthPath.coords.y = circleRadiusPoint[1]
+                                
+                                // // fourth
+                                // fifthParPath.coords.x = 10
+                                // fifthParPath.coords.y = 400
+
+                                // // fifth
+                                // // not part of shape
+                                // // should be set outside (oldway)
+                                // sixthParPath.coords.x = 10
+                                // sixthParPath.coords.y = 500
 
                                 // updateSVG5([pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], [circleRadiusPoint[0],circleRadiusPoint[1]], nextNextParallelPathData)
-
-                                // First part: FIND POINT LOCATIONS
-                                // First part: FIND POINT LOCATIONS
-
-
                             } else {
                                 // Find dinstance between pathData and each pathToCircle intersection point
                                 let length1 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
@@ -870,13 +861,115 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                     }
 
+
+
+
+
+
+                    for (let j = 0; j < countThePathToArcIntNoINTERSECT.length; j++) {
+                        console.log('INSIDE NEW THING NON INTERSECT')
+                        // let thisPathToArcInt = countThePathToArcInt[j] - 1
+                        // let nextPathToArcInt = countThePathToArcInt[j]
+
+                        // let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1])
+
+                        // let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
+                        // let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
+                        // let nextNextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1]
+
+                        // let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
+
+                        // let pathToArcIntPoint = getLineCircleIntersections(
+                        //     parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0],  //[0][0]
+                        //     parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1],  //[0][1]
+                        //     parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1]   //[1][1]
+                        // )
+                        // let circleRadiusPoint = findPointAlongSlopeAtDistance(
+                        //     [nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y],  // [1][0]
+                        //     [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y],
+                        //     nextNextParallelPathData.arc.radius                                             // [1][0]
+                        // )
+
+                        // Not set dynamically
+                        let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
+                        let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
+
+                        // New Points (Fillers)
+                        let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
+                        let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
+
+                        let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
+                        let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
+
+                        let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[3][0]
+
+
+                        let pathToArcIntPoint = getLineCircleIntersections(
+                            firstParPath,  //[0][0]
+                            secondParPath,  //[0][1]
+                            sixthParPath   //[2][1]
+                        )
+                        let circleRadiusPoint = findPointAlongSlopeAtDistance(
+                            [sixthParPath.arc.center.x,sixthParPath.arc.center.y],  // [2][0]
+                            [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y],        // pathToArcIntPoint
+                            sixthParPath.arc.radius                                 // [2][0]
+                        )
+
+                        if(pathToArcIntPoint) {
+                            // first
+                            secondParPath.coords.x = pathToArcIntPoint[0].x
+                            secondParPath.coords.y = pathToArcIntPoint[0].y
+
+                            // New Point (Filler)
+                            // second
+                            thirdParPath.coords.x = pathToArcIntPoint[0].x
+                            thirdParPath.coords.y = pathToArcIntPoint[0].y
+
+                            // New Point (Filler)
+                            // third
+                            fourthPath.coords.x = circleRadiusPoint[0]
+                            fourthPath.coords.y = circleRadiusPoint[1]
+                            // Set arc radius
+                            fourthPath.arc.radius = 1
+                            // {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
+                            
+                            // fourth
+                            fifthParPath.coords.x = circleRadiusPoint[0]
+                            fifthParPath.coords.y = circleRadiusPoint[1]
+
+                            // fifth
+                            // not part of shape
+                            // should be set outside (oldway)
+                            sixthParPath.coords.x = seventhParPath.coords.x
+                            sixthParPath.coords.y = seventhParPath.coords.y
+                        }
+                    }
+
+
+
+
+
+
+
                     // updateSVG3(defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]))
                     // updateSVG4(parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1], pathDatas[thisCount][1])
                     // updateSVG4(parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1])
 
-                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true){
-                    if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true || parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true){
-                        console.log("JOINER: do nothin")
+                    if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true){
+                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true || parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true){
+                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.joiner === true){
+                        console.log("JOINER 1111111: do nothin")
+
+                        // SENDS i's TO COUNTER, THEN HANDLES BEFORE IF STATEMENTS
+                        if(countThePathToArcIntNoINTERSECT.includes(i) === false){
+                            countThePathToArcIntNoINTERSECT.push(i)
+                        }
+
+                        // This is HARDCODED: make dynamic
+                        counter123123 = 0
+                    } else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true) {
+                    // } else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 2][1].arc.joiner === true) {
+                        console.log("JOINER 2222222: do nothin")
 
                         // This is HARDCODED: make dynamic
                         counter123123 = 0
