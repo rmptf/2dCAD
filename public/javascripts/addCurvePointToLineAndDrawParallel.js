@@ -548,12 +548,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             
 
             // NEW STUFF
-            // console.log("WOWOWWOWOWOWOW")
-            // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
-            // console.log(countADDEDparellelPathDatas)
-            // console.log(trackADDEDparallelPathDatasINDEX)
-            // console.log(FAKEpathDatas)
-            // console.log(pathDatas[thisCount])
+            console.log("WOWOWWOWOWOWOW")
+            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
+            console.log(countADDEDparellelPathDatas)
+            console.log(trackADDEDparallelPathDatasINDEX)
+            console.log(FAKEpathDatas)
+            console.log(pathDatas[thisCount])
 
             // THERE ARE SITUATIONS WHERE THE ARCFLAG NEEDS TO BE CHANGED WHILE DRAWING PARALLEL LINES
             // Need to run trhough arc flag picker
@@ -890,6 +890,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         //     nextNextParallelPathData.arc.radius                                             // [1][0]
                         // )
 
+                        // For hardcoded parallelPaths:
+                        // THIS countThePathToArcIntNoINTERSECT = [1]
+
                         // Not set dynamically
                         let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
                         let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
@@ -915,7 +918,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             sixthParPath.arc.radius                                 // [2][0]
                         )
 
-                        if(pathToArcIntPoint) {
+
+
+                        if(pathToArcIntPoint[0].doesIntersect === false) {
                             // first
                             secondParPath.coords.x = pathToArcIntPoint[0].x
                             secondParPath.coords.y = pathToArcIntPoint[0].y
@@ -942,6 +947,72 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             // should be set outside (oldway)
                             sixthParPath.coords.x = seventhParPath.coords.x
                             sixthParPath.coords.y = seventhParPath.coords.y
+
+
+
+                        } else if(pathToArcIntPoint[0].doesIntersect === true) {
+                            console.log("REMOVE LINES AND POINTS")
+                            console.log(GLOBALparallelEndPointsGroups[thisCount][0])
+                            console.log(GLOBALparallelPathsGroups[thisCount][0])
+                            console.log(self.parallelEndPointGroup._groups[0][0])
+                            console.log(self.parallelPathGroup._groups[0][0])
+
+                            // selection.splice(3, 1);
+                            // selection.remove();
+
+                            // Remove data from data groups
+                            // let index = nextPathToArcInt
+                            GLOBALparallelEndPointsGroups[thisCount][0].splice(2, 2);
+                            GLOBALparallelPathsGroups[thisCount][0].splice(1, 1);
+
+                            // Do i have to do something with this?
+                            // let FAKEpathDatas = pathDatas[thisCount].slice()
+
+                            // Remove svg element from element group
+                            let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[7]
+                            let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[6]
+                            let addedPath = self.parallelPathGroup._groups[0][0].childNodes[3]
+
+                            lastSvgPoint.remove()
+                            secondToLastSvgPoint.remove()
+                            addedPath.remove()
+
+                            console.log(GLOBALparallelEndPointsGroups[thisCount][0])
+                            console.log(GLOBALparallelPathsGroups[thisCount][0])
+                            console.log(self.parallelEndPointGroup._groups[0][0])
+                            console.log(self.parallelPathGroup._groups[0][0])
+
+
+
+                            // What it looks like to Add Points and Paths
+                            // console.log("Adding Points and Paths")
+    
+                            // let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                            // let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+                            // let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+
+                            // let index = nextPathToArcInt
+                            // GLOBALparallelEndPointsGroups[thisCount][0].splice(index + 1, 0, newParallelPoint1, newParallelPoint2);
+                            // GLOBALparallelPathsGroups[thisCount][0].splice(index, 0, parallelPath);
+
+                            // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
+                            //     {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
+                            //     {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
+                            // ]);
+                            // countAddPathAndPoints = false
+
+                            // NEW STUFF
+                            // countADDEDparellelPathDatas = countADDEDparellelPathDatas + 1
+                            // trackADDEDparallelPathDatasINDEX.push(index)
+                            // for (let i = 0; i < trackADDEDparallelPathDatasINDEX.length; i++) {
+                            //     FAKEpathDatas.splice(trackADDEDparallelPathDatasINDEX, 0, "filler");
+                            // }
+                            // NEW STUFF
+
+                            // console.log("Added Points and Paths")
+
+
+
                         }
                     }
 
