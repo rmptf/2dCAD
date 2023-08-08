@@ -543,12 +543,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countTheArcToPathInt = []
             let countThePathToArcIntNoINTERSECT = []
             let countAddPathAndPoints = false
+            let countRemovePathAndPoints = false
             
             console.log("START")
             
 
             // NEW STUFF
             console.log("WOWOWWOWOWOWOW")
+            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
             console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL.length)
             console.log(countADDEDparellelPathDatas)
             console.log(trackADDEDparallelPathDatasINDEX)
@@ -638,105 +640,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             nextParallelPathData.coords.y = arcToArcIntPoint.y
                         }
                     }
-
-                    // // OLD WAY (WORKS WITHOUT ADDING POINTS)
-                    // // Handle all Path to Arc Intersections
-                    // for (let j = 0; j < countThePathToArcInt.length; j++) {
-                    //     // console.log("Path to Arc Intersecting")
-
-                    //     let thisPathToArcInt = countThePathToArcInt[j] - 1
-                    //     let nextPathToArcInt = countThePathToArcInt[j]
-
-                    //     let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1])
-
-                    //     let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
-                    //     let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
-                    //     let nextNextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1]
-
-                    //     let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
-
-                    //     if(pathToArcIntPoint) {
-                    //         // Check if path and arc intersect
-                    //         if(pathToArcIntPoint[0].doesIntersect === false) {
-                    //             console.log('No Path - Arc Intersection avail.')
-                    //             // Basic Goal:
-                    //             // Find the tangent of the path and the circle, place thisParallelPathData at tangent and at parallel distance away from pth
-                    //             // Find point along distance between center of circle and new thisParallelPathData and place point at distance of the circle radius
-                    //             // Add curve point between thisParallelPathData & nextParallelPathData and always keep at (90degree angle bettwen both? :might be incorrect, just keep perfect curve)
-
-
-                    //             // Second part: ADD  CONNECTION PATH AND POINTS
-                    //             // Second part: ADD  CONNECTION PATH AND POINTS
-
-                    //             countAddPathAndPoints = true
-
-                    //             if(countAddPathAndPoints === true){
-                    //                 console.log("Adding Points and Paths")
-    
-                    //                 // let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-                    //                 // let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-                    //                 // let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
-
-                    //                 // let index = nextPathToArcInt
-                    //                 // GLOBALparallelEndPointsGroups[thisCount][0].splice(index + 1, 0, newParallelPoint1, newParallelPoint2);
-                    //                 // GLOBALparallelPathsGroups[thisCount][0].splice(index, 0, parallelPath);
-                    //                 // // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [{coords: {x: pathToArcIntPoint[0].x, y: pathToArcIntPoint[0].y}, arc: {exist: false}}, {coords: {x: circleRadiusPoint[0], y: circleRadiusPoint[1]}, arc: {exist: false}},]);
-
-                    //                 // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
-                    //                 //     {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                    //                 //     {coords: {x: circleRadiusPoint[0], y: circleRadiusPoint[1]}, arc: {exist: false}},
-                    //                 // ]);
-
-                    //                 // countAddPathAndPoints = false
-
-                    //                 console.log("Added Points and Paths")
-                    //             }
-
-                    //             // Second part: ADD  CONNECTION PATH AND POINTS
-                    //             // Second part: ADD  CONNECTION PATH AND POINTS
-
-
-                    //             // First part: FIND POINT LOCATIONS
-                    //             // First part: FIND POINT LOCATIONS
-
-                    //             // Find point along path between tangent and center of circle at a distance equal to the radius of the circle
-                    //             let circleRadiusPoint = findPointAlongSlopeAtDistance([nextNextParallelPathData.arc.center.x,nextNextParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], nextNextParallelPathData.arc.radius)
-
-                    //             thisParallelPathData.coords.x = pathToArcIntPoint[0].x
-                    //             thisParallelPathData.coords.y = pathToArcIntPoint[0].y
-                    //             nextParallelPathData.coords.x = circleRadiusPoint[0]
-                    //             nextParallelPathData.coords.y = circleRadiusPoint[1]
-
-                    //             // updateSVG5([pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], [circleRadiusPoint[0],circleRadiusPoint[1]], nextNextParallelPathData)
-
-                    //             // First part: FIND POINT LOCATIONS
-                    //             // First part: FIND POINT LOCATIONS
-
-
-                    //         } else {
-                    //             // Find dinstance between pathData and each pathToCircle intersection point
-                    //             let length1 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
-                    //             let length2 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[1].x, pathToArcIntPoint[1].y)
-
-                    //             // Determine which pathToCircle intersection is closest to pathData
-                    //             if(length1 < length2) {
-                    //                 // pathToArcIntPoint[0] is closest
-                    //                 // console.log("first")
-                    //                 thisParallelPathData.coords.x = pathToArcIntPoint[0].x
-                    //                 thisParallelPathData.coords.y = pathToArcIntPoint[0].y
-                    //                 nextParallelPathData.coords.x = pathToArcIntPoint[0].x
-                    //                 nextParallelPathData.coords.y = pathToArcIntPoint[0].y
-                    //             } else {
-                    //                 // pathToArcIntPoint[1] is closest
-                    //                 // console.log("second")
-                    //                 thisParallelPathData.coords.x = pathToArcIntPoint[1].x
-                    //                 thisParallelPathData.coords.y = pathToArcIntPoint[1].y
-                    //                 nextParallelPathData.coords.x = pathToArcIntPoint[1].x
-                    //                 nextParallelPathData.coords.y = pathToArcIntPoint[1].y
-                    //             }
-                    //         }
-                    //     }
-                    // }
 
                     // NEW WAY TRYING TO ADD POINTS
                     // Handle all Path to Arc Intersections
@@ -951,68 +854,69 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
                         } else if(pathToArcIntPoint[0].doesIntersect === true) {
-                            console.log("REMOVE LINES AND POINTS")
-                            console.log(GLOBALparallelEndPointsGroups[thisCount][0])
-                            console.log(GLOBALparallelPathsGroups[thisCount][0])
-                            console.log(self.parallelEndPointGroup._groups[0][0])
-                            console.log(self.parallelPathGroup._groups[0][0])
-
-                            // selection.splice(3, 1);
-                            // selection.remove();
-
-                            // Remove data from data groups
-                            // let index = nextPathToArcInt
-                            GLOBALparallelEndPointsGroups[thisCount][0].splice(2, 2);
-                            GLOBALparallelPathsGroups[thisCount][0].splice(1, 1);
-
-                            // Do i have to do something with this?
-                            // let FAKEpathDatas = pathDatas[thisCount].slice()
-
-                            // Remove svg element from element group
-                            let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[7]
-                            let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[6]
-                            let addedPath = self.parallelPathGroup._groups[0][0].childNodes[3]
-
-                            lastSvgPoint.remove()
-                            secondToLastSvgPoint.remove()
-                            addedPath.remove()
-
-                            console.log(GLOBALparallelEndPointsGroups[thisCount][0])
-                            console.log(GLOBALparallelPathsGroups[thisCount][0])
-                            console.log(self.parallelEndPointGroup._groups[0][0])
-                            console.log(self.parallelPathGroup._groups[0][0])
 
 
+                            // hardcoded!!!!
+                            // not set dynamically
+                            if(GLOBALparallelPathsGroups[thisCount][0].length > 3) {
+                                console.log("REMOVE123123")
+                                countRemovePathAndPoints = true
+                            }
 
-                            // What it looks like to Add Points and Paths
-                            // console.log("Adding Points and Paths")
+                            
+
+                            if(countRemovePathAndPoints === true) {
+                                // console.log("REMOVE LINES AND POINTS")
+                                // console.log(GLOBALparallelEndPointsGroups[thisCount][0])
+                                // console.log(GLOBALparallelPathsGroups[thisCount][0])
+                                // console.log(self.parallelEndPointGroup._groups[0][0])
+                                // console.log(self.parallelPathGroup._groups[0][0])
+                                // console.log(pathDatas[thisCount])
+                                // console.log(FAKEpathDatas)
+                                // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+                                // console.log(GLOBALparallelPathDatas[thisCount])
     
-                            // let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-                            // let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-                            // let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+                                // selection.splice(3, 1);
+                                // selection.remove();
+    
+                                // hardcoded!!!!
+                                // Remove data from data groups
+                                // let index = nextPathToArcInt
+                                GLOBALparallelEndPointsGroups[thisCount][0].splice(2, 2)
+                                GLOBALparallelPathsGroups[thisCount][0].splice(1, 1)
+                                GLOBALparallelPathDatas[thisCount][0].splice(1, 1)
+                                
+                                // hardcoded!!!!
+                                // Do i have to do something with this?
+                                FAKEpathDatas = pathDatas[thisCount].slice()
+                                // FAKEpathDatas = GLOBALparallelPathsGroups[thisCount][0].slice()
+    
+                                // hardcoded!!!!
+                                // Remove svg element from element group
+                                let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[7]
+                                let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[6]
+                                let addedPath = self.parallelPathGroup._groups[0][0].childNodes[3]
+    
+                                lastSvgPoint.remove()
+                                secondToLastSvgPoint.remove()
+                                addedPath.remove()
 
-                            // let index = nextPathToArcInt
-                            // GLOBALparallelEndPointsGroups[thisCount][0].splice(index + 1, 0, newParallelPoint1, newParallelPoint2);
-                            // GLOBALparallelPathsGroups[thisCount][0].splice(index, 0, parallelPath);
+                                // hardcoded!!!!
+                                countADDEDparellelPathDatas = 0
+                                trackADDEDparallelPathDatasINDEX = []
+    
+                                // console.log("REMOVED LINES AND POINTS")
+                                // console.log(GLOBALparallelEndPointsGroups[thisCount][0])
+                                // console.log(GLOBALparallelPathsGroups[thisCount][0])
+                                // console.log(self.parallelEndPointGroup._groups[0][0])
+                                // console.log(self.parallelPathGroup._groups[0][0])
+                                // console.log(pathDatas[thisCount])
+                                // console.log(FAKEpathDatas)
+                                // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+                                // console.log(GLOBALparallelPathDatas[thisCount])
 
-                            // GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
-                            //     {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                            //     {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                            // ]);
-                            // countAddPathAndPoints = false
-
-                            // NEW STUFF
-                            // countADDEDparellelPathDatas = countADDEDparellelPathDatas + 1
-                            // trackADDEDparallelPathDatasINDEX.push(index)
-                            // for (let i = 0; i < trackADDEDparallelPathDatasINDEX.length; i++) {
-                            //     FAKEpathDatas.splice(trackADDEDparallelPathDatasINDEX, 0, "filler");
-                            // }
-                            // NEW STUFF
-
-                            // console.log("Added Points and Paths")
-
-
-
+                                countRemovePathAndPoints = false
+                            }
                         }
                     }
 
