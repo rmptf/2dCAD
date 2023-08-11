@@ -745,39 +745,40 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // Handle all Path to Arc Intersections (Does NOT Intersect)
                     for (let j = 0; j < countThePathToArcIntNonInt.length; j++) {
                         console.log("Path to Arc Non Intersecting")
-                        console.log(j)
+                        // console.log(countThePathToArcIntNonInt[j])
+                        // let counter12313123123 = countThePathToArcIntNonInt[j]
 
-                        // // Old Way
-                        // // Not set dynamically
-                        // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
-                        // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
-
-                        // // New Points (Fillers)
-                        // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
-                        // let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
-
-                        // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
-                        // let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
-
-                        // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[3][0]
-                        // // Old Way
-
-
-                        // New Way
-                        // Will this be affect by other "filler" points in frnt of it? because using (parallelPathDatas_stopAtIntersect_fromGLOBAL)?
-                        // Untested
-                        let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0]
-                        let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1]
+                        // Old Way
+                        // Not set dynamically
+                        let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
+                        let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
 
                         // New Points (Fillers)
-                        let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j + 1][0]
-                        let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j + 1][1]
+                        let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
+                        let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
 
-                        let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j + 2][0]
-                        let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j + 2][1]
+                        let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
+                        let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
 
-                        let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[j + 3][0]
-                        // New Way
+                        let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[3][0]
+                        // Old Way
+
+
+                        // // New Way
+                        // // Will this be affect by other "filler" points in frnt of it? because using (parallelPathDatas_stopAtIntersect_fromGLOBAL)?
+                        // // Untested
+                        // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123][0]
+                        // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123][1]
+
+                        // // New Points (Fillers)
+                        // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 1][0]
+                        // let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 1][1]
+
+                        // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 2][0]
+                        // let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 2][1]
+
+                        // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 3][0]
+                        // // New Way
 
 
                         let pathToArcIntPoint = getLineCircleIntersections(
