@@ -745,40 +745,41 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // Handle all Path to Arc Intersections (Does NOT Intersect)
                     for (let j = 0; j < countThePathToArcIntNonInt.length; j++) {
                         console.log("Path to Arc Non Intersecting")
-                        // console.log(countThePathToArcIntNonInt[j])
-                        // let counter12313123123 = countThePathToArcIntNonInt[j]
 
-                        // Old Way
-                        // Not set dynamically
-                        let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
-                        let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
-
-                        // New Points (Fillers)
-                        let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
-                        let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
-
-                        let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
-                        let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
-
-                        let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[3][0]
-                        // Old Way
-
-
-                        // // New Way
-                        // // Will this be affect by other "filler" points in frnt of it? because using (parallelPathDatas_stopAtIntersect_fromGLOBAL)?
-                        // // Untested
-                        // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123][0]
-                        // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123][1]
+                        // // Old Way
+                        // // Not set dynamically
+                        // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0]
+                        // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1]
 
                         // // New Points (Fillers)
-                        // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 1][0]
-                        // let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 1][1]
+                        // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0]
+                        // let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1]
 
-                        // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 2][0]
-                        // let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 2][1]
+                        // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0]
+                        // let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1]
 
-                        // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[counter12313123123 + 3][0]
-                        // // New Way
+                        // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[3][0]
+                        // // Old Way
+
+
+                        // New Way
+                        // Will this be affect by other "filler" points in frnt of it? because using (parallelPathDatas_stopAtIntersect_fromGLOBAL)?
+                        // Untested
+                        // console.log(countThePathToArcIntNonInt[j]-1)
+                        let nonIntersectingPathToArcIndex = countThePathToArcIntNonInt[j] - 1
+
+                        let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex][0]
+                        let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex][1]
+
+                        // New Points (Fillers)
+                        let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex + 1][0]
+                        let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex + 1][1]
+
+                        let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex + 2][0]
+                        let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex + 2][1]
+
+                        let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[nonIntersectingPathToArcIndex + 3][0]
+                        // New Way
 
 
                         let pathToArcIntPoint = getLineCircleIntersections(
@@ -823,49 +824,80 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             sixthParPath.coords.y = seventhParPath.coords.y
 
                         } else if(pathToArcIntPoint[0].doesIntersect === true) {
+                            console.log("Removing Points and Paths")
+                            let addedPathIndex = countThePathToArcIntNonInt[j]
+                            let doubleAddedPathIndex = addedPathIndex * 2
 
+                            // // hardcoded!!!!
+                            // // not set dynamically
+                            // if(GLOBALparallelPathsGroups[thisCount][0].length > 3) {
+                            //     console.log("Run function to remove Points and Path")
+                            //     removePathAndPointsChecker = true
+                            // }
 
-
-
-
-                            // WORKING HERE (make dynamic)
-                            // hardcoded!!!!
-                            // not set dynamically
-                            if(GLOBALparallelPathsGroups[thisCount][0].length > 3) {
+                            // New Way
+                            // Making above dynamic
+                            // This should be dynamic
+                            // If arc and path start to intersect again, check if new points and paths have been removed.
+                            // If not: set run function to be true, if they have: dont set
+                            if(FAKEpathDatas[addedPathIndex] === "filler") {
                                 console.log("Run function to remove Points and Path")
                                 removePathAndPointsChecker = true
                             }
-                            // WORKING HERE
-
-
-
-
-
-
+                            // New Way
 
                             if(removePathAndPointsChecker === true) {    
-                                // hardcoded!!!!
-                                // Remove data from data groups
-                                // let index = nextPathToArcInt
-                                GLOBALparallelEndPointsGroups[thisCount][0].splice(2, 2)
-                                GLOBALparallelPathsGroups[thisCount][0].splice(1, 1)
-                                GLOBALparallelPathDatas[thisCount][0].splice(1, 1)
+                                // // Old Way
+                                // // hardcoded!!!!
+                                // // Remove data from data groups
+                                // // let index = nextPathToArcInt
+                                // GLOBALparallelEndPointsGroups[thisCount][0].splice(2, 2)
+                                // GLOBALparallelPathsGroups[thisCount][0].splice(1, 1)
+                                // GLOBALparallelPathDatas[thisCount][0].splice(1, 1)
+                                // // Old Way
+
+                                // New Way
+                                GLOBALparallelEndPointsGroups[thisCount][0].splice(doubleAddedPathIndex, 2)
+                                GLOBALparallelPathsGroups[thisCount][0].splice(addedPathIndex, 1)
+                                GLOBALparallelPathDatas[thisCount][0].splice(addedPathIndex, 1)
+                                // New Way
                                 
                                 // hardcoded!!!!
                                 // Do i have to do something with this?
                                 FAKEpathDatas = pathDatas[thisCount].slice()
                                 // FAKEpathDatas = GLOBALparallelPathsGroups[thisCount][0].slice()
     
-                                // hardcoded!!!!
+                                // // Old Way
+                                // // hardcoded!!!!
+                                // // Remove svg element from element group
+                                // // remove from correct index once changed added point to added to correct index
+                                // let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[7]
+                                // let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[6]
+                                // let addedPath = self.parallelPathGroup._groups[0][0].childNodes[3]
+    
+                                // lastSvgPoint.remove()
+                                // secondToLastSvgPoint.remove()
+                                // addedPath.remove()
+                                // // Old Way
+
+                                // New Way
                                 // Remove svg element from element group
                                 // remove from correct index once changed added point to added to correct index
-                                let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[7]
-                                let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[6]
-                                let addedPath = self.parallelPathGroup._groups[0][0].childNodes[3]
+                                let lastSvgCounter = self.parallelEndPointGroup._groups[0][0].childNodes.length - 1
+                                let secondToLastSvgCounter = lastSvgCounter - 1
+                                let addedPathCounter = self.parallelPathGroup._groups[0][0].childNodes.length - 1
+
+                                let lastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[lastSvgCounter]
+                                let secondToLastSvgPoint = self.parallelEndPointGroup._groups[0][0].childNodes[secondToLastSvgCounter]
+                                let addedPath = self.parallelPathGroup._groups[0][0].childNodes[addedPathCounter]
     
                                 lastSvgPoint.remove()
                                 secondToLastSvgPoint.remove()
                                 addedPath.remove()
+
+                                // console.log("FIDNMEEOKSODFK")
+                                // console.log(lastSvgCounter, secondToLastSvgCounter, addedPathCounter)
+                                // New Way
 
                                 // hardcoded!!!!
                                 countADDEDparellelPathDatas = 0
@@ -1065,11 +1097,35 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                 // Determine if this parallelPathData is a straight path
                 } else {
+                    console.log("DOWN_HUR")
                     // THIS IS WORKING BETTER BUT WE NEED TO FIX FOR CASES OF POINTS ON STRAIGHT LINE
                     // when there is no intersect point
                     // has hard time with points on straight-ish line
-                    let thisPathDataOutside = pathDatas[thisCount][i]
-                    let nextPathDataOutside = pathDatas[thisCount][i + 1]
+
+                    // Old Way (Not "Fake"PathData)
+                    // let thisPathDataOutside = pathDatas[thisCount][i]
+                    // let nextPathDataOutside = pathDatas[thisCount][i + 1]
+
+                    // let thisFakePathDataAdder
+
+                    // if(FAKEpathDatas[i] === "filler"){
+                    //     thisFakePathDataAdder === 1
+                    // }
+
+                    // check if current fakepathdata === filler
+                    // fheck if any previous fakepathdata === filler
+
+
+                    // New Way (with "Fake"PathData)
+                    let thisPathDataOutside = FAKEpathDatas[i]
+                    let nextPathDataOutside = FAKEpathDatas[i + 1]
+
+                    console.log(i, i + 1)
+                    console.log(pathDatas[thisCount])
+                    console.log(FAKEpathDatas)
+                    console.log(FAKEpathDatas[i], FAKEpathDatas[i + 1])
+
+
                     let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     // check if this is using the correct vars in formula: (thisPathDataOutside, nextPathDataOutside)
