@@ -540,6 +540,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let countThePathToArcIntNonInt = []
             let addPathAndPointsChecker = false
             let removePathAndPointsChecker = false
+            let fillerAdder = 0
+            let nextFillerAdder = 0
             
             console.log("SHAPE START")
             console.log("BEFORE LOOP")
@@ -1102,7 +1104,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // when there is no intersect point
                     // has hard time with points on straight-ish line
 
-                    // Old Way (Not "Fake"PathData)
+                    // // Old Way (Not "Fake"PathData)
                     // let thisPathDataOutside = pathDatas[thisCount][i]
                     // let nextPathDataOutside = pathDatas[thisCount][i + 1]
 
@@ -1113,17 +1115,54 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     // }
 
                     // check if current fakepathdata === filler
-                    // fheck if any previous fakepathdata === filler
+                        // if no: thisCounter = i
+                        // if yes: thisCounter = i + 1
+                    // check if next fakepathdata === filler
+                        // if no: nextCounter = i
+                        // if yes: nextCounter = i + 1
+
+
+
+
+
+
 
 
                     // New Way (with "Fake"PathData)
-                    let thisPathDataOutside = FAKEpathDatas[i]
-                    let nextPathDataOutside = FAKEpathDatas[i + 1]
+                    // let fillerAdder = 0
+                    // let nextFillerAdder = 0
+                    if(FAKEpathDatas[i] === "filler"){
+                        fillerAdder = fillerAdder + 1
+                    }
+                    if(FAKEpathDatas[i + 1] === "filler"){
+                        nextFillerAdder = nextFillerAdder + 1
+                    }
 
+                    // let thisPathDataOutside = FAKEpathDatas[i]
+                    // let nextPathDataOutside = FAKEpathDatas[i + 1]
+                    let thisPathDataOutside = FAKEpathDatas[i + fillerAdder]
+                    let nextPathDataOutside = FAKEpathDatas[i + 1 + nextFillerAdder]
+                    // New Way (with "Fake"PathData)
+
+                    // ALMOST WORKING BUT LAST TWO ARE BOTH UP BY 1 PROBABLY GOT THE MATH WRONG.
+                    
+                    console.log("i, i + 1")
                     console.log(i, i + 1)
+                    console.log("pathDatas")
                     console.log(pathDatas[thisCount])
+                    console.log("FAKEpathDatas")
                     console.log(FAKEpathDatas)
+                    console.log("FAKEpathDatas[i], FAKEpathDatas[i + 1]")
                     console.log(FAKEpathDatas[i], FAKEpathDatas[i + 1])
+                    console.log("i + fillerAdder, i + 1 + nextFillerAdder")
+                    console.log(i + fillerAdder, i + 1 + nextFillerAdder)
+                    console.log("FAKEpathDatas[i + fillerAdder], FAKEpathDatas[i + 1 + nextFillerAdder]")
+                    console.log(FAKEpathDatas[i + fillerAdder], FAKEpathDatas[i + 1 + nextFillerAdder])
+
+
+
+
+
 
 
                     let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
@@ -1136,6 +1175,9 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y = this_parallel_perp_AnchorPointY
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x = next_parallel_perp_AnchorPointX
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y = next_parallel_perp_AnchorPointY
+
+
+                    fillerAdder = nextFillerAdder
 
                     findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
 
