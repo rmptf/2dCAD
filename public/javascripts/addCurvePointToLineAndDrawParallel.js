@@ -1411,9 +1411,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             } else {
                                 console.log("in 1300s")
                                 console.log(pathDatas[thisCount])
+                                console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
                                 console.log(thisPathData)
                                 console.log(countTheArcToPathInt[j])
                                 console.log(countTheArcToPathInt[j] + 1)
+
+                                // THIS ISNT WORKING
                                 // Find dinstance between pathData and each pathToCircle intersection point
                                 let length1 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
                                 let length2 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[1].x, pathToArcIntPoint[1].y)
