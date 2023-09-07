@@ -371,6 +371,13 @@ function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
 
 
 
+
+
+
+
+
+
+
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
     // NEW STUFF
         // // not using
@@ -1510,6 +1517,55 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
