@@ -923,6 +923,18 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 fifthParPath.coords.x = circleRadiusPoint[0]
                                 fifthParPath.coords.y = circleRadiusPoint[1]
 
+
+
+
+                                // PROBLEM
+                                // small problem here
+                                // this point lags slightly behind the next point. it catches up but it doesnt match exactly perfect.
+                                // problem doesnt exist until this code runs (after the added 'filler' line is added)
+                                // SOLUTION (Possibly)
+                                // pass the next value down from the original computation rather than recompute when it gets to this point
+
+
+
                                 // fifth
                                 // not part of shape
                                 // should be set outside (oldway)
@@ -1278,7 +1290,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                     findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
 
-                    // findParallelPathIntersectingPoint_original()
                     function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke(){
                         // put all the calc up here
                         // console.log("start")
@@ -1293,7 +1304,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallel_perp_AnchorPointY
 
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true){
-                                // console.log('First Line: Is Path w/ arc follow')
+                                console.log('First Line: Is Path w/ arc follow')
                                 // set next point
 
                                 // PATH - ARC INTERSECTION FORMULA
@@ -1310,7 +1321,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             // console.log(thisPathDataOutside.coords.y)
 
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === false){
-                                // console.log('A Middle Line: Is Path w/ no arc prev')
+                                console.log('A Middle Line: Is Path w/ no arc prev')
                                 // set previous point
                                 let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
                                 parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
@@ -1324,7 +1335,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true){
-                                // console.log('A Middle Line: Is Path w/ arc follow')
+                                console.log('A Middle Line: Is Path w/ arc follow')
                                 // set next point
                                 // let parallelPathDatasIntersectingPoint = findIntersectingPoint([parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y], [parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y], [parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][0].y], [parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[+1][1].y])
                                 let next_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i+1][1].y)
@@ -1336,7 +1347,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         } 
                         if (i != 0 && i === parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1) {
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === false){
-                                // console.log('Last Line: Is Path w/ no arc prev')
+                                console.log('Last Line: Is Path w/ no arc prev')
                                 // set previous point
                                 let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
                                 parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
@@ -1350,14 +1361,32 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             }
                             
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === true){
-                                // console.log('Last Line: Is Path w/ arc prev')
+                                console.log('Last Line: Is Path w/ arc prev')
                                 // set this point
 
                                 // PATH - ARC INTERSECTION FORMULA
 
                                 // PLACEHOLDER
                                 // DO NOTHING HERE: HANDE IN ARC
-                                
+
+
+
+
+
+                                // PROBLEM
+                                // this is where the problem is
+                                // right now the straight line is set to go perp from orig point
+                                // the arc is set to stop when it intersects with the above line
+                                // SOLUTION
+                                // - to fix we have to use a placeholder for the straight line to do the math for the curved line
+                                // then set the real straight line based on the int section point used to set the curved line
+
+
+
+
+
+
+
                                 // might need this for stuff
                                 // Places point perpendicular from original
                                 parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallel_perp_AnchorPointX
@@ -1416,6 +1445,28 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 console.log(countTheArcToPathInt[j])
                                 console.log(countTheArcToPathInt[j] + 1)
 
+
+
+
+
+
+                                // PROBLEM
+                                // the point used to calculate the distance doesnt match up to the point needed after
+                                // 'fillers' are added
+                                // uses corrosponding parallel points to grab original path points (when one filler is added the parallel point is 4
+                                // but the original path point should be 3, if 2 fillers: point is 5 when should be 3)
+                                // SOLUTION
+                                // build a function to calculate what the original path should be by adding up how many 'fillers' were added and when
+                                // then subtracting the correct amount of fillers from the pointer
+                                // (would rather not add another function if a simpler solution is possile.)
+
+
+
+
+
+
+
+                                
                                 // THIS ISNT WORKING
                                 // Find dinstance between pathData and each pathToCircle intersection point
                                 let length1 = getDistance(thisPathData.coords.x, thisPathData.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
@@ -1450,7 +1501,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             // console.log('GLOBALparallelPathsGroups')
             // console.log(GLOBALparallelPathsGroups[thisCount])
             // console.log('GLOBALparallelPathDatas')
-            // console.log(GLOBALparallelPathDatas[thisCount])
+
 
             console.log("SHAPE FINISHED")
             console.log(" ")
