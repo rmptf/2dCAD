@@ -1,11 +1,10 @@
+/*
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
     // NEW STUFF
         // // not using
         // let countADDEDparellelPathDatas = 0
     let trackADDEDparallelPathDatasINDEX = []
     let FAKEpathDatas = pathDatas[thisCount].slice()
-
-
 
 
 
@@ -1137,3 +1136,4 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         }
     }
 }
+*/

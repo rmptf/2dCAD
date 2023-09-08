@@ -509,15 +509,12 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
                 // Determine if this parallelPathData is a straight path
                 } else {
-                    console.log("DOWN_HUR")
                     let fillerAdder = 0
                     let nextFillerAdder = 0
                     if(FAKEpathDatas[i] === "filler"){
-                        // console.log("Added to fillerAdder")
                         fillerAdder = fillerAdder + 1
                     }
                     if(FAKEpathDatas[i + 1] === "filler"){
-                        // console.log("Added to nextFillerAdder")
                         nextFillerAdder = nextFillerAdder + 1
                     }
                     let thisPathDataOutside = FAKEpathDatas[i + fillerAdder]
