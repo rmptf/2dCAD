@@ -17,6 +17,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         isDown2 = true
         svg.on("mousemove", mousemove2)
         svg.on('click', mouseDown2)
+        
         if(thisCount != GLOBALcurrentParallelGroupCount) {
             GLOBALcurrentParallelGroupCount = thisCount
             GLOBALparallelGroupCount = GLOBALparallelGroupCountArray[thisCount] + 1
