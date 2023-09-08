@@ -2941,7 +2941,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         svg.on("mousemove", mousemove2)
         svg.on('click', mouseDown2)
         
-        // Sets thisCount to clicked figure
         if(thisCount != GLOBALcurrentParallelGroupCount) {
             GLOBALcurrentParallelGroupCount = thisCount
             GLOBALparallelGroupCount = GLOBALparallelGroupCountArray[thisCount] + 1
@@ -2951,23 +2950,19 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             GLOBALparallelGroupCountArray[thisCount] = GLOBALparallelGroupCount
         }
 
-        // Adds 1 new parallelEndPointGroup and parallelPathGroup to SVG element
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
 
-        // Creates empty arrays to hold data
         let parallelEndPoints = []
         let parallelPathGroup = []
         let parallelPathData = []
 
-        // Creats and adds SVG elements to groups
         for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
             let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
             let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
             parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
+            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
             parallelPathGroup.push(parallelPath)
-
             let thisPathData = pathDatas[thisCount][i].coords
             let nextPathData = pathDatas[thisCount][i + 1].coords
             let parallelAnchorPointX1 = thisPathData.x
@@ -3001,11 +2996,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 }
             }
         }
-
-        
-
-
-
         GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
         GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
         GLOBALparallelPathDatas[thisCount].push(parallelPathData)
@@ -3058,7 +3048,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
     function mousemove2(event) {
         let m1P = d3.pointer(event)
-        let parallelDistance 
+        let parallelDistance
         if(isDown2 === true) {
             let selectedPathData0 = pathDatas[thisCount][secondaryPathId]
             let selectedPathData1 = pathDatas[thisCount][secondaryPathId + 1]
@@ -3066,10 +3056,19 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
             let parallelDistanceFromArc
             let parallelPathDatas_stopAtIntersect_fromGLOBAL = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
             let parallelPathDatas_stopAtPerpendicular_fromLOCAL = []
+            let parallelPathSegmentCounter = -1
+            let countTheArcToArcInt = []
+            let countThePathToArcInt = []
+            let countTheArcToPathInt = []
+            let countThePathToArcIntNonInt = []
+            let addPathAndPointsChecker = false
+            let removePathAndPointsChecker = false
+
 
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 parallelPathDatas_stopAtPerpendicular_fromLOCAL.push([{x: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x, y: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y}, {x: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x, y: parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y}])
             }
+
 
             if(selectedPathData1.arc.exist === true) {
                 let selectedPathSegmentArcToCenterTotalDistance = getDistance(selectedPathData1.coords.x, selectedPathData1.coords.y, selectedPathData1.arc.center.x, selectedPathData1.arc.center.y)
@@ -3099,15 +3098,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 console.log('No arc data.')
             }
 
+            
             // Loop through each parallelPathData
-            let parallelPathSegmentCounter = -1
-            let countTheArcToArcInt = []
-            let countThePathToArcInt = []
-            let countTheArcToPathInt = []
-            let countThePathToArcIntNonInt = []
-            let addPathAndPointsChecker = false
-            let removePathAndPointsChecker = false
-
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
