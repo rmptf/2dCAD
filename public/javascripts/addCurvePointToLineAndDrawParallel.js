@@ -1249,37 +1249,64 @@ function inRange(x, min, max) {
     return ((x-min)*(x-max) <= 0);
 }
 
+// function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
+//     let thisDirection
+//     if(b[0] < c[0]) {
+//         if(perpendicularPoint[0] < a[0]) {
+//             thisDirection = 'positive'
+//         } else {
+//             thisDirection = 'negative'
+//         }
+//         if(b[1] > c[1]) {
+//             if(perpendicularPoint[0] > a[0]) {
+//                 thisDirection = 'positive'
+//             } else {
+//                 thisDirection = 'negative'
+//             }
+//         }
+//     } else {
+//         if(perpendicularPoint[0] < a[0]) {
+//             thisDirection = 'positive'
+//         } else {
+//             thisDirection = 'negative'
+//         }
+//         if(b[1] > c[1]) {
+//             if(perpendicularPoint[0] > a[0]) {
+//                 thisDirection = 'positive'
+//             } else {
+//                 thisDirection = 'negative'
+//             }
+//         }
+//     }
+//     return thisDirection
+// }
+
+// ChatGPT refactored above code. Dobule check if correct and to understand.
 function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
     let thisDirection
-    if(b[0] < c[0]) {
-        if(perpendicularPoint[0] < a[0]) {
-            thisDirection = 'positive'
-        } else {
-            thisDirection = 'negative'
-        }
-        if(b[1] > c[1]) {
-            if(perpendicularPoint[0] > a[0]) {
-                thisDirection = 'positive'
-            } else {
-                thisDirection = 'negative'
-            }
-        }
+
+    // Check the x-axis direction
+    if (perpendicularPoint[0] < a[0]) {
+        thisDirection = 'positive' // X-axis direction is positive
     } else {
-        if(perpendicularPoint[0] < a[0]) {
-            thisDirection = 'positive'
-        } else {
-            thisDirection = 'negative'
-        }
-        if(b[1] > c[1]) {
-            if(perpendicularPoint[0] > a[0]) {
-                thisDirection = 'positive'
+        thisDirection = 'negative' // X-axis direction is negative
+    }
+
+    // Check the y-axis direction only if b[0] < c[0]
+    if (b[0] < c[0]) {
+        if (b[1] > c[1]) {
+            // Override the direction if necessary based on y-axis
+            if (perpendicularPoint[0] > a[0]) {
+                thisDirection = 'positive' // Y-axis direction is positive
             } else {
-                thisDirection = 'negative'
+                thisDirection = 'negative' // Y-axis direction is negative
             }
         }
     }
+
     return thisDirection
 }
+
 
 function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     let ap1x = apStart.x
@@ -1547,6 +1574,56 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
         }
     }
 
+    // chat gpt
+    // no way this works
+    
+    // function findPoints(anchorPoint1x, anchorPoint1y, anchorPoint2x, anchorPoint2y, curvePointX, curvePointY, curvePointAnchorX, curvePointAnchorY) {
+    //     let sweepFlagWestVar, sweepFlagEastVar, arcFlagVar;
+    //     const coord_A = [anchorPoint1x, anchorPoint1y];
+    //     let coord_B, coord_C;
+    
+    //     // Determine sweep and arc flags
+    //     if (anchorPoint1x < curvePointAnchorX) {
+    //         sweepFlagWestVar = 1;
+    //         sweepFlagEastVar = 0;
+    //     } else {
+    //         sweepFlagWestVar = 0;
+    //         sweepFlagEastVar = 1;
+    //     }
+    
+    //     if (anchorPoint1y < curvePointY) {
+    //         arcFlagVar = 1;
+    //     } else {
+    //         arcFlagVar = 0;
+    //     }
+    
+    //     // Determine XY coordinates
+    //     if (anchorPoint1x < anchorPoint2x) {
+    //         coord_C = [coord_A[0] - side_A_length, coord_A[1]];
+    //     } else {
+    //         coord_C = [coord_A[0] + side_A_length, coord_A[1]];
+    //     }
+    
+    //     if (arcFlagVar) {
+    //         if (anchorPoint1x < curvePointX) {
+    //             coord_B = [coord_C[0], coord_C[1] - side_B_length];
+    //         } else {
+    //             coord_B = [coord_C[0], coord_C[1] + side_B_length];
+    //         }
+    //     } else {
+    //         if (anchorPoint1x < curvePointX) {
+    //             coord_B = [coord_C[0], coord_C[1] + side_B_length];
+    //         } else {
+    //             coord_B = [coord_C[0], coord_C[1] - side_B_length];
+    //         }
+    //     }
+    
+    //     return [coord_B, coord_C];
+    // }
+
+
+    
+
     let solveTriangleData = {
         coords: {
             coord_A: coord_A,
@@ -1684,7 +1761,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-    // Below is the above function refactored with comments added by ChatGPT: Double check that it didnt change variable names and still works.
     // Check if drawing parallel is not initiated
     if (!isDownDrawParellelInitiated) {
         // Set the flag to indicate drawing parallel is initiated
@@ -1731,39 +1807,33 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].coords;
             let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].coords;
         
-            // Extract coordinates for readability
-            let firstParallelFigurePathDataX = thisOriginalFigurePathData.x;
-            let firstParallelFigurePathDataY = thisOriginalFigurePathData.y;
-            let secondParallelFigurePathDataX = nextOriginalFigurePathData.x;
-            let secondParallelFigurePathDataY = nextOriginalFigurePathData.y;
-        
             // Check if arcs exist in the path data
             if (!originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist) {
                 if (!originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist && originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist) {
                     // Add path data for arcs in opposite directions
                     parallelFigurePathDatasGroup.push([
-                        { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
-                        { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } }
+                        { coords: { x: thisOriginalFigurePathData.x, y: thisOriginalFigurePathData.y }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+                        { coords: { x: nextOriginalFigurePathData.x, y: nextOriginalFigurePathData.y }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } }
                     ]);
                 } else {
                     // Add path data for straight lines
                     parallelFigurePathDatasGroup.push([
-                        { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: false } },
-                        { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: false } },
+                        { coords: { x: thisOriginalFigurePathData.x, y: thisOriginalFigurePathData.y }, arc: { exist: false } },
+                        { coords: { x: nextOriginalFigurePathData.x, y: nextOriginalFigurePathData.y }, arc: { exist: false } },
                     ]);
                 }
             } else if (originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist) {
                 if (originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist && !originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist) {
                     // Add path data for arcs followed by straight lines
                     parallelFigurePathDatasGroup.push([
-                        { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
-                        { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: false } },
+                        { coords: { x: thisOriginalFigurePathData.x, y: thisOriginalFigurePathData.y }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+                        { coords: { x: nextOriginalFigurePathData.x, y: nextOriginalFigurePathData.y }, arc: { exist: false } },
                     ]);
                 } else {
                     // Add path data for arcs in both directions
                     parallelFigurePathDatasGroup.push([
-                        { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
-                        { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } },
+                        { coords: { x: thisOriginalFigurePathData.x, y: thisOriginalFigurePathData.y }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+                        { coords: { x: nextOriginalFigurePathData.x, y: nextOriginalFigurePathData.y }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } },
                     ]);
                 }
             }
@@ -1860,8 +1930,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
     function mouseMoveDrawParallel(event) {
-        let m1P = d3.pointer(event)
-        let parallelDistance
         if(isDownDrawParellelInitiated === true) {
             // Retrieve the array from the global variable
             let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]
@@ -1911,18 +1979,31 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+            //
+            // Find dinstance of MOUSE away from ORIGINAL FIGURE
+            // /
+            // Find distance of parallel figure away from original figure
+            //
+
+            // Can be its own function
+
+            // define this variable with the function
+            let parallelDistance
+
 
 
             // Retrieve the array from the global variable
             let thisSelectedOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathIndex];
             let nextSelectedOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathIndex + 1];
+            // Get the mouse pointer coordinates relative to the current event
+            let m1P = d3.pointer(event)
 
             if (nextSelectedOriginalFigurePathData.arc.exist) {
                 // Calculate parallel distance from an arc
                 parallelDistance = calculateParallelDistanceFromArc(nextSelectedOriginalFigurePathData, m1P);
             } else if (!nextSelectedOriginalFigurePathData.arc.exist) {
                 // Calculate parallel distance from a line segment
-                parallelDistance = calculateParallelDistanceFromLine(thisSelectedOriginalFigurePathData, nextSelectedOriginalFigurePathData, m1P);
+                parallelDistance = calculateParallelDistanceFromPath(thisSelectedOriginalFigurePathData, nextSelectedOriginalFigurePathData, m1P);
             }
 
             // Function to calculate parallel distance from an arc
@@ -1945,7 +2026,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             }
 
             // Function to calculate parallel distance from a line segment
-            function calculateParallelDistanceFromLine(thisPathData, nextPathData, m1P) {
+            function calculateParallelDistanceFromPath(thisPathData, nextPathData, m1P) {
                 // Place the m1P variable into a form that fits the function
                 let m1PInForm = {coords: {x: m1P[0], y: m1P[1]}}
                 // Find the perpendicular point on the line from the cursor point
