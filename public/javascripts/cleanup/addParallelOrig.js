@@ -1,3 +1,31 @@
+let svg
+let canvas
+let dragDiv
+let svgHTML
+
+// ORIGINAL FIGURE
+let pathDatas = []                          // Data                         originalFigure_data_pathDatas_array_GLOBAL
+let mainPathsGroups = []                    // SVG Elements                 originalFigure_svgElements_paths_array_GLOBAL
+let endPointsGroups = []                    // SVG Elements                 originalFigure_svgElements_endPoints_array_GLOBAL
+let thisCount = -1                          // Counter                      originalFigure_counter_groupCount_GLOBAL
+
+// ORIGINAL FIGURE SecondaryPaths
+let secondaryPathGroups = []                // SVG Elements                 secondaryFigure_svgElements_paths_array_GLOBAL
+
+// PARALLEL FIGURE
+let GLOBALparallelPathDatas = []            // Data                         parallelFigure_data_pathDatas_array_GLOBAL
+let GLOBALparallelPathsGroups = []          // SVG Elements                 parallelFigure_svgElements_paths_array_GLOBAL
+let GLOBALparallelEndPointsGroups = []      // SVG Elements                 parallelFigure_svgElements_endPoints_array_GLOBAL
+let GLOBALparallelGroupCount = 0            // Counter                      parallelFigure_counter_groupCount_GLOBAL
+let GLOBALcurrentParallelGroupCount = 0     // Counter                      parallelFigure_counter_currentCount_GLOBAL
+let GLOBALparallelGroupCountArray = []      // Array of Counters            parallelFigure_counter_groups_array_GLOBAL
+
+
+let pressAddCurveButton = false
+let pressAddParallelButton = false
+let pressMeasurePathButton = false
+
+
 /*
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
     // NEW STUFF

@@ -3,36 +3,48 @@ let canvas
 let dragDiv
 let svgHTML
 
+// ORIGINAL FIGURE
+let originalFigure_data_pathDatas_array_GLOBAL = []                    // Data                         originalFigure_data_pathDatas_array_GLOBAL
+let originalFigure_svgElements_paths_array_GLOBAL = []                 // SVG Elements                 originalFigure_svgElements_paths_array_GLOBAL
+let originalFigure_svgElements_endPoints_array_GLOBAL = []             // SVG Elements                 originalFigure_svgElements_endPoints_array_GLOBAL
+let originalFigure_counter_groupCount_GLOBAL = -1                      // Counter                      originalFigure_counter_groupCount_GLOBAL
+
+// ORIGINAL FIGURE SecondaryPaths
+let secondaryFigure_svgElements_paths_array_GLOBAL = []                // SVG Elements                 secondaryFigure_svgElements_paths_array_GLOBAL
+
+// PARALLEL FIGURE
+let parallelFigure_data_pathDatas_array_GLOBAL = []                    // Data                         parallelFigure_data_pathDatas_array_GLOBAL
+let parallelFigure_svgElements_paths_array_GLOBAL = []                 // SVG Elements                 parallelFigure_svgElements_paths_array_GLOBAL
+let parallelFigure_svgElements_endPoints_array_GLOBAL = []             // SVG Elements                 parallelFigure_svgElements_endPoints_array_GLOBAL
+let parallelFigure_counter_groupCount_GLOBAL = 0                       // Counter                      parallelFigure_counter_groupCount_GLOBAL
+let parallelFigure_counter_currentCount_GLOBAL = 0                     // Counter                      parallelFigure_counter_currentCount_GLOBAL
+let parallelFigure_counter_groups_array_GLOBAL = []                    // Array of Counters            parallelFigure_counter_groups_array_GLOBAL
+
+
+let pressAddCurveButton = false
+let pressAddParallelButton = false
+let pressMeasurePathButton = false
+
+
+// originalFigure_counter_groupCount_GLOBAL
+// thisPathCount
+// pathCount                                // Counter                      counts the secondaryPath clicked
+// newPathCounter
+// secondaryPathCount
+// secondaryPathId
+// parallelPathSegmentCounter
+
+
+
+
+
+
 function setSvg(dragDivId, svgId, canvasId){
     svg = d3.select('#' + svgId)
     canvas = d3.select('#' + canvasId)
     dragDiv = document.getElementById(dragDivId)
     svgHTML = document.getElementById(svgId)
 }
-
-
-
-// ORIGINAL FIGURE
-let pathDatas = []                          // Data                         originalFigure_data_pathDatas_array
-let mainPathsGroups = []                    // SVG Elements                 originalFigure_svgElements_paths_array
-let endPointsGroups = []                    // SVG Elements                 originalFigure_svgElements_endPoints_array
-let thisCount = -1                       // Counter                      originalFigure_counter_groupCount
-
-// ORIGINAL FIGURE SecondaryPaths
-let secondaryPathGroups = []                // SVG Elements
-
-// PARALLEL FIGURE
-let GLOBALparallelPathDatas = []            // Data                         parallelFigure_data_pathDatas_array
-let GLOBALparallelPathsGroups = []          // SVG Elements                 parallelFigure_svgElements_paths_array
-let GLOBALparallelEndPointsGroups = []      // SVG Elements                 parallelFigure_svgElements_endPoints_array
-let GLOBALparallelGroupCount = 0            // Counter                      parallelFigure_counter_groupCount
-let GLOBALcurrentParallelGroupCount = 0     // Counter                      parallelFigure_counter_currentCount
-let GLOBALparallelGroupCountArray = []      // Array of Counters            parallelFigure_counter_groups_array
-
-
-let pressAddCurveButton = false
-let pressAddParallelButton = false
-let pressMeasurePathButton = false
 
 function addCurvePoint() {
     pressAddCurveButton = true
@@ -46,7 +58,7 @@ function measurePath() {
     pressMeasurePathButton = true
 }
 
-function drawPath(){
+function drawPath() {
     pressAddCurveButton = false
     pressAddParallelButton = false
     pressMeasurePathButton = false
@@ -61,8 +73,8 @@ function drawPath(){
 
         if (isDown === false) {
             console.log("first click")
-            thisCount = thisCount + 1
-            // thisCount = groupCounter
+            originalFigure_counter_groupCount_GLOBAL = originalFigure_counter_groupCount_GLOBAL + 1
+            // originalFigure_counter_groupCount_GLOBAL = groupCounter
             let thisPathCount = 0
             
             self.group = svg.append('g').attr('class', 'figureGroup').attr('id', 'figureGroup123')
@@ -80,40 +92,40 @@ function drawPath(){
             // self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG')
 
             // MAIN PATH
-            pathDatas.push([
+            originalFigure_data_pathDatas_array_GLOBAL.push([
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
                 {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
             ])
-            mainPathsGroups.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])})).on("click", function() {mainPathClick(this, event, thisCount, isDown2, self)}))
+            originalFigure_svgElements_paths_array_GLOBAL.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])})).on("click", function() {mainPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self)}))
             // MAIN PATH
 
             // SECONDARY PATH
             let secondaryPathGroup = []
-            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-            secondaryPathGroups.push(secondaryPathGroup)
+            secondaryPathGroup.push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, thisPathCount)}))
+            secondaryFigure_svgElements_paths_array_GLOBAL.push(secondaryPathGroup)
             // SECONDARY PATH
 
             // DYNAMIC END POINTS
             let endPoints = []
-            for (let i = 0; i < pathDatas[thisCount].length; i++) {
+            for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
                 let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint'))
                 endPoints.push(newPoint)
             }
-            endPointsGroups.push(endPoints)
+            originalFigure_svgElements_endPoints_array_GLOBAL.push(endPoints)
             // DYNAMIC END POINTS
 
              // PARALLEL GROUPS
-             GLOBALparallelGroupCountArray.push(0)
-             GLOBALparallelPathDatas.push([])
-             GLOBALparallelPathsGroups.push([])
-             GLOBALparallelEndPointsGroups.push([])
+             parallelFigure_counter_groups_array_GLOBAL.push(0)
+             parallelFigure_data_pathDatas_array_GLOBAL.push([])
+             parallelFigure_svgElements_paths_array_GLOBAL.push([])
+             parallelFigure_svgElements_endPoints_array_GLOBAL.push([])
              // PARALLEL GROUPS
 
             isDown = true
-            updateSVG(mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
-            let thisCountCurrentPathDatas_x = [pathDatas[thisCount][0].coords.x]
-            let thisCountCurrentPathDatas_y = [pathDatas[thisCount][0].coords.y]
+            let thisCountCurrentPathDatas_x = [originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.x]
+            let thisCountCurrentPathDatas_y = [originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.y]
             let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
@@ -124,16 +136,16 @@ function drawPath(){
             console.log("second click")
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
-            pathDatas[thisCount].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
-            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
-            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)}))
-            updateSVG(mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
+            originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+            secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, thisPathCount)}))
+            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
             let thisCountCurrentPathDatas_x = []
-            pathDatas[thisCount].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x));
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x));
             let thisCountCurrentPathDatas_y = []
-            pathDatas[thisCount].forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y));
-            let pathDatasPositions = pathDatas[thisCount]
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y));
+            let pathDatasPositions = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL]
             let dragDivLeftPos = parseInt(dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(dragDiv.style.top.replace('px', ''))
             let svgDimensions = svgHTML.getBoundingClientRect()
@@ -144,8 +156,8 @@ function drawPath(){
 
     function mousemove(event, m1Origin, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y) {
         m2 = d3.pointer(event)
-        let p1_x = pathDatas[thisCount].at(-2).coords.x
-        let p1_y = pathDatas[thisCount].at(-2).coords.y
+        let p1_x = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-2).coords.x
+        let p1_y = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-2).coords.y
         let p1m2Dif_x = p1_x - m2[0]
         let p1m2Dif_y = p1_y - m2[1]
 
@@ -181,10 +193,10 @@ function drawPath(){
                 dragDiv.style.left = (dragDivLeftPos - movePathDatasThisAmount_x_left) + "px"
                 // Reposition SVG Elements
                 // Repositions all path datas except for dragged
-                let dragedPathDataIndex = pathDatas[thisCount].length - 1
-                for (let i = 0; i < pathDatas[thisCount].length; i++) {
+                let dragedPathDataIndex = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1
+                for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
                     if(i !== dragedPathDataIndex) {
-                        pathDatas[thisCount][i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
+                        originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
                     }
                 }
             }
@@ -205,10 +217,10 @@ function drawPath(){
                 dragDiv.style.top = (dragDivTopPos - movePathDatasThisAmount_y_up) + "px"
                 // Reposition SVG Elements
                 // Repositions all path datas except for dragged
-                let dragedPathDataIndex = pathDatas[thisCount].length - 1
-                for (let i = 0; i < pathDatas[thisCount].length; i++) {
+                let dragedPathDataIndex = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1
+                for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
                     if(i !== dragedPathDataIndex) {
-                        pathDatas[thisCount][i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
+                        originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
                     }
                 }
             }
@@ -221,9 +233,9 @@ function drawPath(){
         }
 
         if(isDown === true) {
-            pathDatas[thisCount].at(-1).coords.x = m2[0]
-            pathDatas[thisCount].at(-1).coords.y = m2[1]
-            updateSVG(mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).coords.x = m2[0]
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).coords.y = m2[1]
+            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         }
     }
 
@@ -234,21 +246,21 @@ function drawPath(){
 
         secondaryPathCount = secondaryPathCount - 1
         for (let i = 0; i < 2; i++) {
-            pathDatas[thisCount].pop()
-            endPointsGroups[thisCount].at(-1).remove()
-            endPointsGroups[thisCount].pop()
-            secondaryPathGroups[thisCount].at(-1).remove()
-            secondaryPathGroups[thisCount].pop()
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].pop()
+            originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).remove()
+            originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].pop()
+            secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).remove()
+            secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].pop()
         }
-        updateSVG(mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+        updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         
-        for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
-            let currentEndPoint = endPointsGroups[thisCount][i]
-            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+        for (let i = 0; i < originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
+            let currentEndPoint = originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
         }
     }
 
-    function secondaryPathClick(this1, event, thisCount, pathCount){
+    function secondaryPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, pathCount){
         m1 = d3.pointer(event)
         console.log('path Clicked')
         if (pressAddCurveButton === false && pressAddParallelButton === false && pressMeasurePathButton == false) {
@@ -256,42 +268,42 @@ function drawPath(){
         } else if (pressAddCurveButton === true) {
             console.log('Add Path Arc = true')
 
-            endPointsGroups[thisCount].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
-            secondaryPathGroups[thisCount].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
+            originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+            secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
     
             let newPathCounter = -1
-            for (let i = 0; i < secondaryPathGroups[thisCount].length; i++) {
+            for (let i = 0; i < secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
                 newPathCounter = newPathCounter + 1
                 let thisPathCount = newPathCounter
-                secondaryPathGroups[thisCount][i].on("click", function(event) {secondaryPathClick(this, event, thisCount, thisPathCount)})
+                secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, thisPathCount)})
             }
     
             let index = pathCount + 1
             let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
-            pathDatas[thisCount][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}
-            pathDatas[thisCount].splice(index, 0, data);
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}
+            originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].splice(index, 0, data);
 
-            for (let i = 0; i < endPointsGroups[thisCount].length; i++) {
-                let currentEndPoint = endPointsGroups[thisCount][i]
-                currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])}))
+            for (let i = 0; i < originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
+                let currentEndPoint = originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+                currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
             }
 
-            updateSVG(mainPathsGroups[thisCount], secondaryPathGroups[thisCount], endPointsGroups[thisCount], pathDatas[thisCount])
+            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
             pressAddCurveButton = false
         } else if (pressAddParallelButton === true) {
             console.log('Add Parallel = true')
-            drawParallel(event, thisCount, isDown2, self, pathCount)
+            drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
             pressAddParallelButton = false
         } else if (pressMeasurePathButton === true) {
             console.log('Measure Path = true')
-            measurePathFunction(event, thisCount, isDown2, self, pathCount)
+            measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
             pressMeasurePathButton = false
         }
     }
 }
 
-function mainPathClick(this1, event, thisCount, isDown2, self){
+function mainPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self){
     console.log('Main Path Click')
 }
 
@@ -314,13 +326,13 @@ function mainPathClick(this1, event, thisCount, isDown2, self){
 
 
 
-function measurePathFunction(event, thisCount, isDown2, self, pathCount) {
-    let numberOfSegments = pathDatas[thisCount].length - 1
+function measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount) {
+    let numberOfSegments = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1
     let arrayOfLengths = []
-    // loop through total number of pathDatas - 1
+    // loop through total number of originalFigure_data_pathDatas_array_GLOBAL - 1
     for (let i = 0; i < numberOfSegments; i++) {
-        let point1 = pathDatas[thisCount][i]
-        let point2 = pathDatas[thisCount][i + 1]
+        let point1 = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+        let point2 = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1]
         // check points, starting with second point, if it is an path or an arc
         if (point2.arc.exist === false) {
             // if its a path, find distance between two points, add length to array
@@ -1628,11 +1640,11 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
 
 
 
-function drawParallel(event, thisCount, isDown2, self, pathCount) {
-    let trackADDEDparallelPathDatasINDEX = []
-    let FAKEpathDatas = pathDatas[thisCount].slice()
+function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, pathCount) {
+    let parallelFigure_data_pathDatasAndFillers_array_drawParallel = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].slice()
     let secondaryPathId = pathCount
-    let isDown3 = false
+    let isDownDrawParallelActive = false
+
 
 
 
@@ -1643,73 +1655,169 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
     // Sets all elements to same as secondaryPath data
-    if (isDown2 === false) {
-        isDown2 = true
-        svg.on("mousemove", mousemove2)
-        svg.on('click', mouseDown2)
-        
-        if(thisCount != GLOBALcurrentParallelGroupCount) {
-            GLOBALcurrentParallelGroupCount = thisCount
-            GLOBALparallelGroupCount = GLOBALparallelGroupCountArray[thisCount] + 1
-            GLOBALparallelGroupCountArray[thisCount] = GLOBALparallelGroupCount
+    if (isDownDrawParellelInitiated === false) {
+        isDownDrawParellelInitiated = true
+
+        svg.on("mousemove", mouseMoveDrawParallel)
+        svg.on('click', mouseDownDrawParallel)
+    
+        if(originalFigure_counter_groupCount_GLOBAL != parallelFigure_counter_currentCount_GLOBAL) {
+            parallelFigure_counter_currentCount_GLOBAL = originalFigure_counter_groupCount_GLOBAL
+            parallelFigure_counter_groupCount_GLOBAL = parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] + 1
+            parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] = parallelFigure_counter_groupCount_GLOBAL
         } else {
-            GLOBALparallelGroupCount = GLOBALparallelGroupCount + 1
-            GLOBALparallelGroupCountArray[thisCount] = GLOBALparallelGroupCount
+            parallelFigure_counter_groupCount_GLOBAL = parallelFigure_counter_groupCount_GLOBAL + 1
+            parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] = parallelFigure_counter_groupCount_GLOBAL
         }
 
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup')
         self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup')
 
-        let parallelEndPoints = []
-        let parallelPathGroup = []
-        let parallelPathData = []
+        let parallelFigureEndPointsGroup = []
+        let parallelFigurePathsGroup = []
+        let parallelFigurePathDatasGroup = []
 
-        for (let i = 0; i < pathDatas[thisCount].length - 1; i++) {
-            let newParallelPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-            let newParallelPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
-            parallelEndPoints.push(newParallelPoint1, newParallelPoint2)
-            let parallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
-            parallelPathGroup.push(parallelPath)
-            let thisPathData = pathDatas[thisCount][i].coords
-            let nextPathData = pathDatas[thisCount][i + 1].coords
-            let parallelAnchorPointX1 = thisPathData.x
-            let parallelAnchorPointY1 = thisPathData.y
-            let parallelAnchorPointX2 = nextPathData.x
-            let parallelAnchorPointY2 = nextPathData.y
+        for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1; i++) {
+            let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+            let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint'))
+            let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath'))
+            parallelFigureEndPointsGroup.push(newParallelEndPoint1, newParallelEndPoint2)
+            parallelFigurePathsGroup.push(newParallelPath)
 
-            if (pathDatas[thisCount][i].arc.exist === false){
-                if(pathDatas[thisCount][i].arc.exist === false && pathDatas[thisCount][i + 1].arc.exist === true){
-                    parallelPathData.push([
-                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
-                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
+            let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].coords
+            let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].coords
+
+            let firstParallelFigurePathDataX = thisOriginalFigurePathData.x
+            let firstParallelFigurePathDataY = thisOriginalFigurePathData.y
+            let secondParallelFigurePathDataX = nextOriginalFigurePathData.x
+            let secondParallelFigurePathDataY = nextOriginalFigurePathData.y
+
+            if (originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist === false){
+                if(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist === false && originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist === true){
+                    parallelFigurePathDatasGroup.push([
+                        {coords: {x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
                     ])
                 } else {
-                    parallelPathData.push([
-                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: false}},
-                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+                    parallelFigurePathDatasGroup.push([
+                        {coords: {x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY}, arc: {exist: false}},
+                        {coords: {x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY}, arc: {exist: false}},
                     ])
                 }
-            } else if(pathDatas[thisCount][i].arc.exist === true) {
-                if(pathDatas[thisCount][i].arc.exist === true && pathDatas[thisCount][i + 1].arc.exist === false){
-                    parallelPathData.push([
-                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
-                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: false}},
+            } else if(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist === true) {
+                if(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist === true && originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist === false){
+                    parallelFigurePathDatasGroup.push([
+                        {coords: {x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY}, arc: {exist: false}},
                     ])
                 } else {
-                    parallelPathData.push([
-                        {coords: {x: parallelAnchorPointX1, y: parallelAnchorPointY1}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
-                        {coords: {x: parallelAnchorPointX2, y: parallelAnchorPointY2}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
+                    parallelFigurePathDatasGroup.push([
+                        {coords: {x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}},
+                        {coords: {x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}},
                     ])
                 }
             }
         }
-        GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
-        GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
-        GLOBALparallelPathDatas[thisCount].push(parallelPathData)
-        updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+        parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigureEndPointsGroup)
+        parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathsGroup)
+        parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathDatasGroup)
+        updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1])
     }
 
 
+    // // Below is the above function refactored with comments added by ChatGPT: Double check that it didnt change variable names and still works.
+    // // Check if drawing parallel is not initiated
+    // if (!isDownDrawParellelInitiated) {
+    //     // Set the flag to indicate drawing parallel is initiated
+    //     isDownDrawParellelInitiated = true;
+    
+    //     // Attach event listeners for mousemove and click events
+    //     svg.on("mousemove", mouseMoveDrawParallel);
+    //     svg.on('click', mouseDownDrawParallel);
+    
+    //     // Check if the global counters don't match
+    //     if (originalFigure_counter_groupCount_GLOBAL != parallelFigure_counter_currentCount_GLOBAL) {
+    //     // Update counters to match
+    //     parallelFigure_counter_currentCount_GLOBAL = originalFigure_counter_groupCount_GLOBAL;
+    //     // Increment the counter
+    //     parallelFigure_counter_groupCount_GLOBAL = parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] + 1;
+    //     parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] = parallelFigure_counter_groupCount_GLOBAL;
+    //     } else {
+    //     // Increment the counter
+    //     parallelFigure_counter_groupCount_GLOBAL++;
+    //     parallelFigure_counter_groups_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL] = parallelFigure_counter_groupCount_GLOBAL;
+    //     }
+    
+    //     // Create SVG groups for parallel endpoints and paths
+    //     self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup');
+    //     self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup');
+    
+    //     // Initialize arrays to store endpoint circles, paths, and path data
+    //     let parallelFigureEndPointsGroup = [];
+    //     let parallelFigurePathsGroup = [];
+    //     let parallelFigurePathDatasGroup = [];
+    
+    //     // Iterate through originalFigure_data_pathDatas_array_GLOBAL
+    //     for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1; i++) {
+    //     // Create new SVG endpoint circles and paths
+    //     let newParallelEndPoint1 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint');
+    //     let newParallelEndPoint2 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint');
+    //     let newParallelPath = self.parallelPathGroup.append('path').attr('class', 'path parallelPath');
+    
+    //     // Add SVG elements to corresponding arrays
+    //     parallelFigureEndPointsGroup.push(newParallelEndPoint1, newParallelEndPoint2);
+    //     parallelFigurePathsGroup.push(newParallelPath);
+    
+    //     // Retrieve coordinates for the current and next path data
+    //     let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].coords;
+    //     let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].coords;
+    
+    //     // Extract coordinates for readability
+    //     let firstParallelFigurePathDataX = thisOriginalFigurePathData.x;
+    //     let firstParallelFigurePathDataY = thisOriginalFigurePathData.y;
+    //     let secondParallelFigurePathDataX = nextOriginalFigurePathData.x;
+    //     let secondParallelFigurePathDataY = nextOriginalFigurePathData.y;
+    
+    //     // Check if arcs exist in the path data
+    //     if (!originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist) {
+    //         if (!originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist && originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist) {
+    //         // Add path data for arcs in opposite directions
+    //         parallelFigurePathDatasGroup.push([
+    //             { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+    //             { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } }
+    //         ]);
+    //         } else {
+    //         // Add path data for straight lines
+    //         parallelFigurePathDatasGroup.push([
+    //             { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: false } },
+    //             { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: false } },
+    //         ]);
+    //         }
+    //     } else if (originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist) {
+    //         if (originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].arc.exist && !originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1].arc.exist) {
+    //         // Add path data for arcs followed by straight lines
+    //         parallelFigurePathDatasGroup.push([
+    //             { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+    //             { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: false } },
+    //         ]);
+    //         } else {
+    //         // Add path data for arcs in both directions
+    //         parallelFigurePathDatasGroup.push([
+    //             { coords: { x: firstParallelFigurePathDataX, y: firstParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: { x: 0, y: 0 } } },
+    //             { coords: { x: secondParallelFigurePathDataX, y: secondParallelFigurePathDataY }, arc: { exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: { x: 0, y: 0 } } },
+    //         ]);
+    //         }
+    //     }
+    //     }
+    
+    //     // Push endpoint groups, path groups, and path data to respective arrays
+    //     parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigureEndPointsGroup);
+    //     parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathsGroup);
+    //     parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathDatasGroup);
+    
+    //     // Update the SVG using the updated data
+    //     updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]);
+    // }
 
 
 
@@ -1727,11 +1835,13 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
-    function mouseDown2() {
-        if (isDown3 === false) {
-            isDown3 = true
+
+
+    function mouseDownDrawParallel() {
+        if (isDownDrawParallelActive === false) {
+            isDownDrawParallelActive = true
         } else {
-            isDown2 = false
+            isDownDrawParellelInitiated = false
             svg.on("mousemove", null)
             svg.on('click', null)
         }
@@ -1755,15 +1865,15 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
-    function mousemove2(event) {
+    function mouseMoveDrawParallel(event) {
         let m1P = d3.pointer(event)
         let parallelDistance
-        if(isDown2 === true) {
-            let selectedPathData0 = pathDatas[thisCount][secondaryPathId]
-            let selectedPathData1 = pathDatas[thisCount][secondaryPathId + 1]
+        if(isDownDrawParellelInitiated === true) {
+            let selectedPathData0 = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathId]
+            let selectedPathData1 = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathId + 1]
             let parallelDistanceFromLine
             let parallelDistanceFromArc
-            let parallelPathDatas_stopAtIntersect_fromGLOBAL = GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1]
+            let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]
             let parallelPathDatas_stopAtPerpendicular_fromLOCAL = []
             let parallelPathSegmentCounter = -1
             let countTheArcToArcInt = []
@@ -1813,10 +1923,10 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
                     let thisPathSegmentArcToCursorDistance
-                    let thisTHISPathDataForSegment = FAKEpathDatas[i]
-                    let thisPathDataForSegment = FAKEpathDatas[i + 1]
+                    let thisTHISPathDataForSegment = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
+                    let thisPathDataForSegment = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
 
-                    // Check if FAKEpathDatas is tagged with filler
+                    // Check if parallelFigure_data_pathDatasAndFillers_array_drawParallel is tagged with filler
                     if(thisTHISPathDataForSegment !== "filler") {
                         console.log('Set Parallel PathDatas: Set')
                         // If true: Set direction of parallelDistance for all remaining arc based on their sweepFlags
@@ -1902,14 +2012,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                             let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1])
                             let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
                             let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
-                            let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
+                            let thisPathData =  originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][nextPathToArcInt]
 
                             if(pathToArcIntPoint) {
                                 // Check if path and arc intersect
                                 if(pathToArcIntPoint[0].doesIntersect === false) {
                                     console.log('No Path - Arc Intersection avail.')
 
-                                    if(FAKEpathDatas[nextPathToArcInt] != "filler") {
+                                    if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextPathToArcInt] != "filler") {
                                         console.log("Run function to add Points and Path")
                                         addPathAndPointsChecker = true
                                     }
@@ -1923,20 +2033,18 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                         let index = nextPathToArcInt
                                         let doubleIndex = nextPathToArcInt * 2
 
-                                        GLOBALparallelEndPointsGroups[thisCount][0].splice(doubleIndex, 0, newParallelPoint1, newParallelPoint2);
-                                        GLOBALparallelPathsGroups[thisCount][0].splice(index, 0, parallelPath);
-                                        GLOBALparallelPathDatas[thisCount][0].splice(index, 0, [
+                                        parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(doubleIndex, 0, newParallelPoint1, newParallelPoint2);
+                                        parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(index, 0, parallelPath);
+                                        parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(index, 0, [
                                             {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
                                             {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
                                         ]);
                                         parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, [
-                                            {x: GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][index][0].coords.x, y: GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][index][0].coords.y},
-                                            {x: GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][index][1].coords.x, y: GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1][index][1].coords.y}
+                                            {x: parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1][index][0].coords.x, y: parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1][index][0].coords.y},
+                                            {x: parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1][index][1].coords.x, y: parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1][index][1].coords.y}
                                         ]);
 
-                                        trackADDEDparallelPathDatasINDEX.push(index)
-                                        FAKEpathDatas.splice(trackADDEDparallelPathDatasINDEX[0], 0, "filler");
-                                        trackADDEDparallelPathDatasINDEX = []
+                                        parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(index, 0, "filler");
                                         addPathAndPointsChecker = false
 
                                         console.log("Added Points and Paths")
@@ -2008,15 +2116,15 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 console.log("Removing Points and Paths")
                                 let addedPathIndex = countThePathToArcIntNonInt[j]
                                 let doubleAddedPathIndex = addedPathIndex * 2
-                                if(FAKEpathDatas[addedPathIndex] === "filler") {
+                                if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[addedPathIndex] === "filler") {
                                     console.log("Run function to remove Points and Path")
                                     removePathAndPointsChecker = true
                                 }
                                 if(removePathAndPointsChecker === true) {    
-                                    GLOBALparallelEndPointsGroups[thisCount][0].splice(doubleAddedPathIndex, 2)
-                                    GLOBALparallelPathsGroups[thisCount][0].splice(addedPathIndex, 1)
-                                    GLOBALparallelPathDatas[thisCount][0].splice(addedPathIndex, 1)
-                                    FAKEpathDatas = pathDatas[thisCount].slice()
+                                    parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(doubleAddedPathIndex, 2)
+                                    parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(addedPathIndex, 1)
+                                    parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(addedPathIndex, 1)
+                                    parallelFigure_data_pathDatasAndFillers_array_drawParallel = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].slice()
                                     let lastSvgCounter = self.parallelEndPointGroup._groups[0][0].childNodes.length - 1
                                     let secondToLastSvgCounter = lastSvgCounter - 1
                                     let addedPathCounter = self.parallelPathGroup._groups[0][0].childNodes.length - 1
@@ -2027,7 +2135,6 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                     secondToLastSvgPoint.remove()
                                     addedPath.remove()
                                     countADDEDparellelPathDatas = 0
-                                    trackADDEDparallelPathDatasINDEX = []
                                     removePathAndPointsChecker = false
                                 }
                             }
@@ -2071,15 +2178,15 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 }
                             // Check if this is the first point of entire shape
                             } else {
-                                let thisPathData = FAKEpathDatas[i]
-                                let nextPathData = FAKEpathDatas[i + 1]
+                                let thisPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
+                                let nextPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
                                 let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                                 thisParallelPathData.coords.x = parallelAnchorPoints[0]
                                 thisParallelPathData.coords.y = parallelAnchorPoints[1]
                             }
-                            let thisPathData = FAKEpathDatas[i + 1]
-                            let nextPathData = FAKEpathDatas[i + 2]
+                            let thisPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
+                            let nextPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
                             let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
                             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
@@ -2087,8 +2194,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         }
                         // Applies to second Arc Half
                         if(parallelPathSegmentCounter === 1) {
-                            let thisPathData = FAKEpathDatas[i]
-                            let nextPathData = FAKEpathDatas[i + 1]
+                            let thisPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
+                            let nextPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
                             let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0]
                             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
@@ -2108,8 +2215,8 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                                 }
                             // Check if this is the last point of entire shape
                             } else {
-                                let thisPathData = FAKEpathDatas[i + 1]
-                                let nextPathData = FAKEpathDatas[i + 1]
+                                let thisPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
+                                let nextPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
                                 let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
                                 let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
                                 thisParallelPathData.coords.x = parallelAnchorPoints[0]
@@ -2141,14 +2248,14 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 } else {
                     let fillerAdder = 0
                     let nextFillerAdder = 0
-                    if(FAKEpathDatas[i] === "filler"){
+                    if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[i] === "filler"){
                         fillerAdder = fillerAdder + 1
                     }
-                    if(FAKEpathDatas[i + 1] === "filler"){
+                    if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1] === "filler"){
                         nextFillerAdder = nextFillerAdder + 1
                     }
-                    let thisPathDataOutside = FAKEpathDatas[i + fillerAdder]
-                    let nextPathDataOutside = FAKEpathDatas[i + 1 + nextFillerAdder]
+                    let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                    let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
                     let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                     let next_parallel_perp_AnchorPointX = nextPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
@@ -2232,7 +2339,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                         let pathToArcIntPoint = getLineCircleIntersections(parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1])
                         let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisPathToArcInt][1]
                         let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextPathToArcInt][0]
-                        let thisPathData =  pathDatas[thisCount][nextPathToArcInt]
+                        let thisPathData =  originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][nextPathToArcInt]
                         if(pathToArcIntPoint) {
                             // Check if path and arc intersect
                             if(pathToArcIntPoint[0].doesIntersect === false) {
@@ -2284,7 +2391,7 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
 
 
 
-                updateSVG2(GLOBALparallelEndPointsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathsGroups[thisCount][GLOBALparallelGroupCount - 1], GLOBALparallelPathDatas[thisCount][GLOBALparallelGroupCount - 1])
+                updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1])
             }
         }
     }
