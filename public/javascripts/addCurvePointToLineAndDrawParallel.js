@@ -1934,13 +1934,23 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             // Retrieve the array from the global variable
             let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]
             // Initialize an empty array to store the transformed data
-            let parallelPathDatas_stopAtPerpendicular_fromLOCAL = parallelPathDatas_stopAtIntersect_fromGLOBAL.map(([point1, point2]) => (
-                [
-                    // Create an object for the first and second points with x and y coordinates
-                    { x: point1.coords.x, y: point1.coords.y },
-                    { x: point2.coords.x, y: point2.coords.y }
-                ]
-            ))
+            let parallelPathDatas_stopAtPerpendicular_fromLOCAL = transformData(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+            
+            // Define a function to transform data from one array to a new one
+            function transformData(oldArrayWithOriginalData) {
+                // Initialize a new array to store the transformed data
+                let newArrayWithTransformedData
+                // Map through the oldArrayWithOriginalData and transform each element
+                newArrayWithTransformedData = oldArrayWithOriginalData.map(([point1, point2]) => (
+                    [
+                        // Create an object for the first and second points with x and y coordinates
+                        { x: point1.coords.x, y: point1.coords.y },
+                        { x: point2.coords.x, y: point2.coords.y }
+                    ]
+                ))
+                return newArrayWithTransformedData
+            }
+
 
 
 
@@ -1985,61 +1995,63 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             // Find distance of parallel figure away from original figure
             //
 
-            // Can be its own function
+            // Calculate the parallelDistance with the findParallelDistance() function
+            let parallelDistance = findParallelDistance(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathIndex)
 
-            // define this variable with the function
-            let parallelDistance
+            function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex) {
+                let parallelDistance
+                // Retrieve the array from the global variable
+                let thisSelectedOriginalFigurePathData = thisOriginalFigurePathDataFromGlobal[thisSecondaryPathIndex];
+                let nextSelectedOriginalFigurePathData = thisOriginalFigurePathDataFromGlobal[thisSecondaryPathIndex + 1];
+                // Get the mouse pointer coordinates relative to the current event
+                let m1P = d3.pointer(event)
 
+                if (nextSelectedOriginalFigurePathData.arc.exist) {
+                    // Calculate parallel distance from an arc
+                    parallelDistance = calculateParallelDistanceFromArc(nextSelectedOriginalFigurePathData, m1P);
+                    return parallelDistance
+                } else if (!nextSelectedOriginalFigurePathData.arc.exist) {
+                    // Calculate parallel distance from a line segment
+                    parallelDistance = calculateParallelDistanceFromPath(thisSelectedOriginalFigurePathData, nextSelectedOriginalFigurePathData, m1P);
+                    return parallelDistance
+                }
 
+                // Function to calculate parallel distance from an arc
+                function calculateParallelDistanceFromArc(nextSelectedPathData, m1P) {
+                    let arc = nextSelectedPathData.arc;
+                    if (arc.exist) {
+                        // Calculate the distance from the arc's center to the cursor point
+                        let arcToCenterDistance = getDistance(nextSelectedPathData.coords.x, nextSelectedPathData.coords.y, arc.center.x, arc.center.y);
+                        let cursorToCenterDistance = getDistance(arc.center.x, arc.center.y, m1P[0], m1P[1]);
+                        let direction = arc.sweepFlag;
+                        // Calculate parallel distance based on the direction of the arc
+                        let parallelDistance = arcToCenterDistance - cursorToCenterDistance;
+                        if (direction === 1) {
+                            parallelDistance *= -1;
+                        }
+                        return parallelDistance;
+                    }
+                    // Return null if no arc exists
+                    return null;
+                }
 
-            // Retrieve the array from the global variable
-            let thisSelectedOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathIndex];
-            let nextSelectedOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][secondaryPathIndex + 1];
-            // Get the mouse pointer coordinates relative to the current event
-            let m1P = d3.pointer(event)
-
-            if (nextSelectedOriginalFigurePathData.arc.exist) {
-                // Calculate parallel distance from an arc
-                parallelDistance = calculateParallelDistanceFromArc(nextSelectedOriginalFigurePathData, m1P);
-            } else if (!nextSelectedOriginalFigurePathData.arc.exist) {
-                // Calculate parallel distance from a line segment
-                parallelDistance = calculateParallelDistanceFromPath(thisSelectedOriginalFigurePathData, nextSelectedOriginalFigurePathData, m1P);
-            }
-
-            // Function to calculate parallel distance from an arc
-            function calculateParallelDistanceFromArc(nextSelectedPathData, m1P) {
-                let arc = nextSelectedPathData.arc;
-                if (arc.exist) {
-                    // Calculate the distance from the arc's center to the cursor point
-                    let arcToCenterDistance = getDistance(nextSelectedPathData.coords.x, nextSelectedPathData.coords.y, arc.center.x, arc.center.y);
-                    let cursorToCenterDistance = getDistance(arc.center.x, arc.center.y, m1P[0], m1P[1]);
-                    let direction = arc.sweepFlag;
-                    // Calculate parallel distance based on the direction of the arc
-                    let parallelDistance = arcToCenterDistance - cursorToCenterDistance;
-                    if (direction === 1) {
+                // Function to calculate parallel distance from a line segment
+                function calculateParallelDistanceFromPath(thisPathData, nextPathData, m1P) {
+                    // Place the m1P variable into a form that fits the function
+                    let m1PInForm = {coords: {x: m1P[0], y: m1P[1]}}
+                    // Find the perpendicular point on the line from the cursor point
+                    let perpendicularPoint = findPerpendicularFromPoint(m1PInForm, thisPathData, nextPathData);
+                    // Determine the direction of the line segment
+                    let direction = directionOfARelatedToPathBetweenBandC(m1P, [thisPathData.coords.x, thisPathData.coords.y], [nextPathData.coords.x, nextPathData.coords.y], perpendicularPoint);
+                    // Calculate parallel distance
+                    let parallelDistance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m1P[0], m1P[1]);
+                    if (direction === 'negative') {
                         parallelDistance *= -1;
                     }
                     return parallelDistance;
                 }
-                // Return null if no arc exists
-                return null;
             }
 
-            // Function to calculate parallel distance from a line segment
-            function calculateParallelDistanceFromPath(thisPathData, nextPathData, m1P) {
-                // Place the m1P variable into a form that fits the function
-                let m1PInForm = {coords: {x: m1P[0], y: m1P[1]}}
-                // Find the perpendicular point on the line from the cursor point
-                let perpendicularPoint = findPerpendicularFromPoint(m1PInForm, thisPathData, nextPathData);
-                // Determine the direction of the line segment
-                let direction = directionOfARelatedToPathBetweenBandC(m1P, [thisPathData.coords.x, thisPathData.coords.y], [nextPathData.coords.x, nextPathData.coords.y], perpendicularPoint);
-                // Calculate parallel distance
-                let parallelDistance = getDistance(perpendicularPoint[0], perpendicularPoint[1], m1P[0], m1P[1]);
-                if (direction === 'negative') {
-                    parallelDistance *= -1;
-                }
-                return parallelDistance;
-            }
 
 
 
@@ -2086,33 +2098,30 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
                     let thisPathSegmentArcToCursorDistance
-                    let thisTHISPathDataForSegment = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
-                    let thisPathDataForSegment = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
+                    let thisPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]               // clone
+                    let nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]           // clone
+                    let thisOriginalParallelPathDataGlobal = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]                 // ??
 
                     // Check if parallelFigure_data_pathDatasAndFillers_array_drawParallel is tagged with filler
-                    if(thisTHISPathDataForSegment !== "filler") {
-                        console.log('Set Parallel PathDatas: Set')
-                        // If true: Set direction of parallelDistance for all remaining arc based on their sweepFlags
-                        if (thisPathDataForSegment.arc.sweepFlag === 0) {
-                            thisPathSegmentArcToCursorDistance = parallelDistance
-                        } else {
-                            thisPathSegmentArcToCursorDistance = parallelDistance * -1
-                        }
-                        let thisParallelPathData1 = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-                        let nextPathSegmentArcToCenterTotalDistance = getDistance(thisPathDataForSegment.coords.x, thisPathDataForSegment.coords.y, thisPathDataForSegment.arc.center.x, thisPathDataForSegment.arc.center.y)
+                    if(thisPathDataOrFillerLocal !== "filler") {
+                        // Set direction of parallelDistance and assign to thisPathSegmentArcToCursorDistance based on sweepFlag
+                        thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
+
+                        let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
                         let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
     
-                        // These are only used for intersecting arcs, maybe find better way
-                        thisParallelPathData1.arc.center.x = thisPathDataForSegment.arc.center.x
-                        thisParallelPathData1.arc.center.y = thisPathDataForSegment.arc.center.y
-                        thisParallelPathData1.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-                        thisParallelPathData1.arc.arcFlag = thisPathDataForSegment.arc.arcFlag
-                        thisParallelPathData1.arc.sweepFlag = thisPathDataForSegment.arc.sweepFlag
-                        thisParallelPathData1.arc.startAngle = thisPathDataForSegment.arc.startAngle
-                    } else {
-                        // If false: Do nothing
+                        // These are only used for intersecting arcs, maybe find better way (Not useful comment, keep just incase)
+                        // The only thing that needs to be in this function (do the rest somewhere else prob.)
+                        thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                        // These can all be done somewhere else i think
+                        thisOriginalParallelPathDataGlobal.arc.center.x = nextPathDataOrFillerLocal.arc.center.x
+                        thisOriginalParallelPathDataGlobal.arc.center.y = nextPathDataOrFillerLocal.arc.center.y
+                        thisOriginalParallelPathDataGlobal.arc.arcFlag = nextPathDataOrFillerLocal.arc.arcFlag
+                        thisOriginalParallelPathDataGlobal.arc.sweepFlag = nextPathDataOrFillerLocal.arc.sweepFlag
+                        thisOriginalParallelPathDataGlobal.arc.startAngle = nextPathDataOrFillerLocal.arc.startAngle
                     }
-                    
+
+
 
 
 
@@ -2170,7 +2179,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                    if(thisTHISPathDataForSegment !== "filler") {
+                    if(thisPathDataOrFillerLocal !== "filler") {
                         // Handle all Path to Arc Intersections (Does Intersect)
                         for (let j = 0; j < countThePathToArcInt.length; j++) {
                             console.log("Path to Arc Intersecting")
@@ -2253,7 +2262,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                    if(thisTHISPathDataForSegment !== "filler") {
+                    if(thisPathDataOrFillerLocal !== "filler") {
                         // Handle all Path to Arc Intersections (Does NOT Intersect)
                         for (let j = 0; j < countThePathToArcIntNonInt.length; j++) {
                             console.log("Path to Arc Non Intersecting")
@@ -2497,7 +2506,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                // if(thisTHISPathDataForSegment !== "filler") {
+                // if(thisPathDataOrFillerLocal !== "filler") {
                     // Handle all Arc to Path Intersections
                     for (let j = 0; j < countTheArcToPathInt.length; j++) {
                         console.log("Arc to Path Intersecting")
