@@ -4,7 +4,7 @@ let dragDiv
 let svgHTML
 
 // ORIGINAL FIGURE
-let pathDatas = []                          // Data                         originalFigure_data_pathDatas_array_GLOBAL
+let pathDatas = []                          // Data                         s
 let mainPathsGroups = []                    // SVG Elements                 originalFigure_svgElements_paths_array_GLOBAL
 let endPointsGroups = []                    // SVG Elements                 originalFigure_svgElements_endPoints_array_GLOBAL
 let thisCount = -1                          // Counter                      originalFigure_counter_groupCount_GLOBAL
@@ -26,7 +26,6 @@ let pressAddParallelButton = false
 let pressMeasurePathButton = false
 
 
-/*
 function drawParallel(event, thisCount, isDown2, self, pathCount) {
     // NEW STUFF
         // // not using
@@ -113,6 +112,67 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
                 }
             }
         }
+
+        // new tries:
+        // new new but before untested refactoring
+        // // Retrieve coordinates for the current and next path data
+        // let thisOriginalFigurePathData = copyOfOrigFigData[i]
+        // let nextOriginalFigurePathData = copyOfOrigFigData[i + 1]
+        // let thisOrigFigureArcExist = copyOfOrigFigData[i].arc.exist
+        // let nextOrigFigureArcExist = copyOfOrigFigData[i + 1].arc.exist
+
+        // // new new
+        // if (thisOrigFigureArcExist === false) {
+        //     if(thisOrigFigureArcExist === false && nextOrigFigureArcExist === true){
+        //         nextOriginalFigurePathData.arc.side = "east"
+        //         parallelFigurePathDatasGroup.push([
+        //             {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+        //             {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+        //         ])
+        //     } else {
+        //         parallelFigurePathDatasGroup.push([
+        //             {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+        //             {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+        //         ])
+        //     }
+        // } else if(thisOrigFigureArcExist === true) {
+        //     if(thisOrigFigureArcExist === true && nextOrigFigureArcExist === false){
+        //         thisOriginalFigurePathData.arc.side = "west"
+        //         parallelFigurePathDatasGroup.push([
+        //             {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+        //             {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+        //         ])
+        //     } else {
+        //         thisOriginalFigurePathData.arc.side = "west"
+        //         nextOriginalFigurePathData.arc.side = "east"
+        //         parallelFigurePathDatasGroup.push([
+        //             {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+        //             {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+        //         ])
+        //     }
+        // }
+
+
+
+        // old new
+        // // Retrieve coordinates for the current and next path data
+        // let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+        // let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1]
+
+        // // Define a function to create a simplified path data object
+        // function createParallelPathData(coords, arc) {
+        //     // console.log("herererer")
+        //     // console.log({ coords: { x: coords.x, y: coords.y }, arc: { ...arc } })
+        //     return { coords: { x: coords.x, y: coords.y }, arc: { ...arc } }
+
+        // }
+
+        // // Push two path data objects into the parallelFigurePathDatasGroup array
+        // parallelFigurePathDatasGroup.push([
+        //     // Create a path data object
+        //     createParallelPathData(thisOriginalFigurePathData.coords, thisOriginalFigurePathData.arc),
+        //     createParallelPathData(nextOriginalFigurePathData.coords, nextOriginalFigurePathData.arc)
+        // ])
 
         GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
         GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
@@ -1164,4 +1224,3 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         }
     }
 }
-*/

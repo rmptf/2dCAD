@@ -1838,6 +1838,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+        let copyOfOrigFigData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].slice()
 
         // Create SVG groups for parallel endpoints and paths
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup');
@@ -1854,42 +1855,32 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             let newParallelEndPoint1 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint');
             let newParallelEndPoint2 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint');
             let newParallelPath = self.parallelPathGroup.append('path').attr('class', 'path parallelPath');
-        
             // Add SVG elements to corresponding arrays
             parallelFigureEndPointsGroup.push(newParallelEndPoint1, newParallelEndPoint2);
             parallelFigurePathsGroup.push(newParallelPath);
-        
+
             // Retrieve coordinates for the current and next path data
-            let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
-            let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1]
-
-
-
-
-
-
-
-            // I think we are not converting originalPath to parallelPath correctly.
-            // I think we are not converting originalPath to parallelPath correctly.
-            // I think we are not converting originalPath to parallelPath correctly.
-            // I think we are not converting originalPath to parallelPath correctly.
-            // I think we are not converting originalPath to parallelPath correctly.
-
-
-
-
-
-
-            // Define a function to create a simplified path data object
-            function createParallelPathData(coords, arc) {
-                return { coords: { x: coords.x, y: coords.y }, arc: { ...arc } }
+            let thisOriginalFigurePathData = copyOfOrigFigData[i]
+            let nextOriginalFigurePathData = copyOfOrigFigData[i + 1]
+            let thisOrigFigureArcExist = thisOriginalFigurePathData.arc.exist
+            let nextOrigFigureArcExist = nextOriginalFigurePathData.arc.exist
+            // Assign correct direction to pathData
+            if (!thisOrigFigureArcExist) {
+                if (nextOrigFigureArcExist) {
+                    nextOriginalFigurePathData.arc.side = "east";
+                }
+            } else {
+                if (!nextOrigFigureArcExist) {
+                    thisOriginalFigurePathData.arc.side = "west";
+                } else {
+                    thisOriginalFigurePathData.arc.side = "west";
+                    nextOriginalFigurePathData.arc.side = "east";
+                }
             }
-
-            // Push two path data objects into the parallelFigurePathDatasGroup array
+            // Push to the array
             parallelFigurePathDatasGroup.push([
-                // Create a path data object
-                createParallelPathData(thisOriginalFigurePathData.coords, thisOriginalFigurePathData.arc),
-                createParallelPathData(nextOriginalFigurePathData.coords, nextOriginalFigurePathData.arc)
+                {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+                {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
             ])
         }
     
@@ -1897,7 +1888,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
         parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigureEndPointsGroup)
         parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathsGroup)
         parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathDatasGroup)
-    
+
+        console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        
         // Update the SVG using the updated data
         updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]);
     }
@@ -2425,8 +2418,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
                                 parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(thisIndex, 0, [
                                     // can set to current locations of: ????
-                                    {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
-                                    {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
                                 ]);
 
                                 console.log("After")
