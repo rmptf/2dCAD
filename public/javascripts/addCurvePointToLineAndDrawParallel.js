@@ -2223,6 +2223,10 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             let nextPathData = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
                             let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
                             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], thisPathSegmentArcToCursorDistance)
+
+                            // This is causing the visual bug at the 2nd "joiner" parallelPath data
+                            // Here
+                            // This is causing the visual bug at the 2nd "joiner" parallelPath data
                             thisParallelPathData.coords.x = parallelAnchorPoints[0]
                             thisParallelPathData.coords.y = parallelAnchorPoints[1]
                         }
@@ -2412,26 +2416,21 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                                // let prevParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex]
-                                let thisParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][0]
-                                // let nextParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex + 1]
+                                // Possible pathDatas to use to set the joiners
+                                let prevParPathData1 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex][0]
+                                let prevParPathData2 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex][1]
+                                let thisParPathData1 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][0]
+                                let thisParPathData2 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][1]
 
                                 parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(thisIndex, 0, [
-                                    // can set to current locations of: ????
                                     // Orig
                                     // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
                                     // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
 
                                     // New
-                                    // This is getting better but double to check we are using the correct pathData
-                                    {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
-                                    {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
                                 ]);
-
-                                // console.log("Here111")
-                                // console.log(thisParPathData)
-                                // console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0])
-                                // console.log(thisParPathData)
 
 
 
