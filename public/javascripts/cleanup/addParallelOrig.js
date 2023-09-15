@@ -174,6 +174,58 @@ function drawParallel(event, thisCount, isDown2, self, pathCount) {
         //     createParallelPathData(nextOriginalFigurePathData.coords, nextOriginalFigurePathData.arc)
         // ])
 
+
+
+
+
+        // cleaned up after fixing keeping for history
+        // // old
+        // // Assign correct direction to pathData
+        // if (!thisOriginalFigurePathData.arc.exist) {
+        //     if (nextOriginalFigurePathData.arc.exist) {
+        //         nextOriginalFigurePathData.arc.side = "east";
+        //     }
+        // } else {
+        //     if (!nextOriginalFigurePathData.arc.exist) {
+        //         thisOriginalFigurePathData.arc.side = "west";
+        //     } else {
+        //         thisOriginalFigurePathData.arc.side = "west";
+        //         nextOriginalFigurePathData.arc.side = "east";
+        //     }
+        // }
+        // // Push to the array
+        // parallelFigurePathDatasGroup.push([
+        //     {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
+        //     {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+        // ])
+
+        // This is ChatGPT's simplified version of the above code. It is very close to working except:
+        // it adds arc sides to places that have arc exist = false
+        // it doesnt add the arc data info the new way i want
+
+        // // Retrieve coordinates for the current and next path data
+        // let thisOriginalFigurePathData = copyOfOrigFigData[i];
+        // let nextOriginalFigurePathData = copyOfOrigFigData[i + 1];
+
+        // // Assign correct direction to pathData
+        // const thisArcExists = thisOriginalFigurePathData.arc.exist;
+        // const nextArcExists = nextOriginalFigurePathData.arc.exist;
+
+        // const thisArcSide = thisArcExists ? "west" : "east";
+        // const nextArcSide = nextArcExists ? "east" : "west";
+
+        // const thisPlugItIn = {
+        // coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y },
+        // arc: { ...thisOriginalFigurePathData.arc, side: thisArcSide },
+        // };
+
+        // const nextPlugItIn = {
+        // coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y },
+        // arc: { ...nextOriginalFigurePathData.arc, side: nextArcSide },
+        // };
+
+        // parallelFigurePathDatasGroup.push([thisPlugItIn, nextPlugItIn]);
+
         GLOBALparallelEndPointsGroups[thisCount].push(parallelEndPoints)
         GLOBALparallelPathsGroups[thisCount].push(parallelPathGroup)
         GLOBALparallelPathDatas[thisCount].push(parallelPathData)

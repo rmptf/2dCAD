@@ -1838,7 +1838,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-        let copyOfOrigFigData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].slice()
 
         // Create SVG groups for parallel endpoints and paths
         self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup');
@@ -1860,36 +1859,40 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             parallelFigurePathsGroup.push(newParallelPath);
 
             // Retrieve coordinates for the current and next path data
-            let thisOriginalFigurePathData = copyOfOrigFigData[i]
-            let nextOriginalFigurePathData = copyOfOrigFigData[i + 1]
-            let thisOrigFigureArcExist = thisOriginalFigurePathData.arc.exist
-            let nextOrigFigureArcExist = nextOriginalFigurePathData.arc.exist
+            let thisOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+            let nextOriginalFigurePathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1]
+            let thisPlugItIn = {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }}
+            let nextPlugItIn = {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }}
+
             // Assign correct direction to pathData
-            if (!thisOrigFigureArcExist) {
-                if (nextOrigFigureArcExist) {
-                    nextOriginalFigurePathData.arc.side = "east";
+            // This currently works perfectly but its possible the originalFigure_data_pathData...'s arc.side is calculated incorrectly. (Might need to change this if I fix that)
+            // It might be correct above because it calculates correctly. Maybe I forgot how west and east works, might need to figure that out and set the below accordingly
+            if (!thisOriginalFigurePathData.arc.exist) {
+                if (nextOriginalFigurePathData.arc.exist) {
+                    nextPlugItIn.arc.side = "west";
+                    thisPlugItIn.arc = { ...nextPlugItIn.arc }
+                    nextPlugItIn.arc.side = "east";
                 }
             } else {
-                if (!nextOrigFigureArcExist) {
-                    thisOriginalFigurePathData.arc.side = "west";
+                if (!nextOriginalFigurePathData.arc.exist) {
+                    thisPlugItIn.arc = { ...nextPlugItIn.arc }
                 } else {
-                    thisOriginalFigurePathData.arc.side = "west";
-                    nextOriginalFigurePathData.arc.side = "east";
+                    thisPlugItIn.arc.side = "west";
+                    nextPlugItIn.arc.side = "east";
                 }
             }
-            // Push to the array
             parallelFigurePathDatasGroup.push([
-                {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }},
-                {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }},
+                thisPlugItIn,
+                nextPlugItIn,
             ])
         }
-    
         // Push endpoint groups, path groups, and path data to respective arrays
         parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigureEndPointsGroup)
         parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathsGroup)
         parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigurePathDatasGroup)
 
-        console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        // console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        // console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         
         // Update the SVG using the updated data
         updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1]);
@@ -2403,27 +2406,32 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 let doubleIndex = thisIndex * 2
                                 let thisParallelPathDataGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL - 1][thisIndex]
                                 // The [0]'s in the next 3 vars could be part of why counters are working
-
                                 parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2);
                                 parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(thisIndex, 0, newParallelPath);
 
 
-                                console.log("Here111")
-                                console.log("Before")
-                                console.log(thisIndex)
-                                console.log(parallelFigure_data_pathDatas_array_GLOBAL)
-                                console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-                                console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0])
-                                console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+
+
+                                // let prevParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex]
+                                let thisParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][0]
+                                // let nextParPathData = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex + 1]
 
                                 parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(thisIndex, 0, [
                                     // can set to current locations of: ????
-                                    {coords: {x: 100, y: 100}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
-                                    {coords: {x: 200, y: 200}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
+                                    // Orig
+                                    // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
+                                    // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
+
+                                    // New
+                                    // This is getting better but double to check we are using the correct pathData
+                                    {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
                                 ]);
 
-                                console.log("After")
-                                console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0])
+                                // console.log("Here111")
+                                // console.log(thisParPathData)
+                                // console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0])
+                                // console.log(thisParPathData)
 
 
 
@@ -2432,6 +2440,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     {x: thisParallelPathDataGLOBAL[0].coords.x, y: thisParallelPathDataGLOBAL[0].coords.y},
                                     {x: thisParallelPathDataGLOBAL[1].coords.x, y: thisParallelPathDataGLOBAL[1].coords.y}
                                 ]);
+
                                 parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 0, "filler");
                             } else {
                                 let thisOriginalPathDataGLOBAL = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][thisIndex]
