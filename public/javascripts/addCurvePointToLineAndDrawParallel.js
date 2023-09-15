@@ -2417,19 +2417,13 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
                                 // Possible pathDatas to use to set the joiners
-                                let prevParPathData1 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex][0]
                                 let prevParPathData2 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][prevIndex][1]
                                 let thisParPathData1 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][0]
                                 let thisParPathData2 = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0][thisIndex][1]
 
                                 parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].splice(thisIndex, 0, [
-                                    // Orig
-                                    // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
-                                    // {coords: {x: 0, y: 0}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
-
-                                    // New
-                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west1111', center: {x: 0, y: 0}, joiner: true}},
-                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east2222', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true}},
+                                    {coords: {x: thisParPathData1.coords.x, y: thisParPathData1.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'east', center: {x: 0, y: 0}, joiner: true}},
                                 ]);
 
 
