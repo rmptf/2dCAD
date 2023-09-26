@@ -2349,13 +2349,13 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     // potentialy doing nothing and handling it in the straight path section
                                     // handleArcToPathIntersection(i)
 
-                                    // this works with more than 1 path after last arc
-                                    console.log("Set Path Point (Shape 2: Part 1)")
-                                    let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].y)
-                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.x = 100
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.y = 100
+                                    // // this works with more than 1 path after last arc
+                                    // console.log("Set Path Point (Shape 2: Part 1)")
+                                    // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].y)
+                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                    // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.x = 100
+                                    // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.y = 100
 
                                     // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
                                     // handleArcToPathIntersection(i)
@@ -2363,8 +2363,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
                                     // switch
-                                    // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 1)")
-                                    // handleArcToPathIntersection(i)
+                                    console.log("run function: handleArcToPathIntersection() (Shape 2: Part 1)")
+                                    handleArcToPathIntersection(i)
 
                                     // console.log("Set Path Point (Shape 2: Part 2)")
                                     // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i + 1][1].y)
@@ -2462,9 +2462,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
                             // handleArcToPathIntersection(i - 1)
 
-                            let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                            // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                            // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                            // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
                             if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === false){
                                 console.log("D")
@@ -2476,12 +2476,12 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 // set prev point
                                 console.log("E")
 
-                                // console.log("Set Path Point (Shape 2: Part 2)")
-                                // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.x = 100
-                                // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][0].coords.y = 100
+                                console.log("Set Path Point (Shape 2: Part 1)")
+                                let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i - 1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = 100
+                                // // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = 100
 
                                 // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
                                 // handleArcToPathIntersection(i - 1)
