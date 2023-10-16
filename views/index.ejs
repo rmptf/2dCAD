@@ -105,19 +105,25 @@
                 ACTIONS_aDocument_element_btn: {
                     element_01: {
                         elementBtnExist: true,
-                        elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[2].id), 'aCanvasZoomLayer'",
+                        elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
                         elementId: "",
                     },
                 },
-            // BTN CONTAINER
+            // BTN CONTAINER 01
                 ACTIONS_aDocument_btn_cont: {
                     btn_cont_01: {
+                        headerText: "",
+                        btnDirection: "btn-container--row",
+                        btnAlign: "btn-align--center",
+                    },
+                    btn_cont_02: {
+                        headerText: "DRAW FIGURE",
                         btnDirection: "btn-container--row",
                         btnAlign: "btn-align--center",
                     },
                 },
             // BTN
-                ACTIONS_aDocument_btn: {
+                ACTIONS_aDocument_btnCont_01: {
                     btn_01: {
                         btnExist: true,
                         btnType: "button",
@@ -167,6 +173,56 @@
                         btnTheme_style: btnVars.BTNSTYLE.contained,
                     },
                 },
+                ACTIONS_aDocument_btnCont_02: [
+                // {
+                //     btnExist: true,
+                //     btnType: "button",
+                //     btnText: "01",
+                //     btnOnClick: "drawSavedFigure(0)",
+                //     btnId: "drawSavedFigureBtn_01",
+                //     btnTheme_class: btnVars.BTNCLASS.aButton,
+                //     btnTheme_type: btnVars.BTNTYPES.default,
+                //     btnTheme_size: btnVars.BTNSIZES.small,
+                //     btnTheme_status: btnVars.BTNSTATUS.disabled,
+                //     btnTheme_style: btnVars.BTNSTYLE.contained,
+                // },
+                // {
+                //     btnExist: true,
+                //     btnType: "button",
+                //     btnText: "02",
+                //     btnOnClick: "drawSavedFigure(1)",
+                //     btnId: "drawSavedFigureBtn_02",
+                //     btnTheme_class: btnVars.BTNCLASS.aButton,
+                //     btnTheme_type: btnVars.BTNTYPES.default,
+                //     btnTheme_size: btnVars.BTNSIZES.small,
+                //     btnTheme_status: btnVars.BTNSTATUS.disabled,
+                //     btnTheme_style: btnVars.BTNSTYLE.contained,
+                // },
+                // {
+                //     btnExist: true,
+                //     btnType: "button",
+                //     btnText: "03",
+                //     btnOnClick: "drawSavedFigure(2)",
+                //     btnId: "drawSavedFigureBtn_03",
+                //     btnTheme_class: btnVars.BTNCLASS.aButton,
+                //     btnTheme_type: btnVars.BTNTYPES.default,
+                //     btnTheme_size: btnVars.BTNSIZES.small,
+                //     btnTheme_status: btnVars.BTNSTATUS.disabled,
+                //     btnTheme_style: btnVars.BTNSTYLE.contained,
+                // },
+                {
+                    btnExist: true,
+                    btnType: "button",
+                    btnText: "Save",
+                    btnOnClick: "printFigureData()",
+                    btnId: "printFigureDataBtn",
+                    btnTheme_class: btnVars.BTNCLASS.aButton,
+                    btnTheme_type: btnVars.BTNTYPES.default,
+                    btnTheme_size: btnVars.BTNSIZES.small,
+                    btnTheme_status: btnVars.BTNSTATUS.disabled,
+                    btnTheme_style: btnVars.BTNSTYLE.contained,
+                },
+            ],
         // THEME
             THEME_aDocumentContainerFill: colorVars.FILLS.mainFill,
             THEME_aDocumentContainerColor: colorVars.COLORS.main,

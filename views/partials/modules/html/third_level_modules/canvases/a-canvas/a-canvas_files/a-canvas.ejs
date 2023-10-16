@@ -78,7 +78,7 @@
 
         templateContent = document.getElementById("aDocumentContainer")
         templateHeader = templateContent.children[0]
-        templateSvg = templateContent.children[2]
+        templateSvg = templateContent.children[4]
 
         let newTemplateId = increaseCountDrgId("aDocument")
 
@@ -89,7 +89,7 @@
         let dragElem = document.getElementById(newTemplateId)
         dragElement(dragElem)
         svgElementClick(templateContent)
-        setSvg(templateContent.id, templateContent.children[2].id)
+        setSvg(templateContent.id, templateContent.children[4].id)
 
         dragElem.style.top = 'calc(50% - 250px)'
         dragElem.style.left = 'calc(50% - 250px)'

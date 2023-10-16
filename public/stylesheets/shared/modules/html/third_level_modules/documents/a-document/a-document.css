@@ -25,6 +25,13 @@
     cursor: default;
 }
 
+.a-document__subHeader {
+    z-index: 1;
+    padding: 2px;
+    text-align: center;
+    cursor: default;
+}
+
 .a-document__svg {
     z-index: 1;
     display: flex;
