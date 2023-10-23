@@ -3004,7 +3004,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         if(arcToPathIntPoint[0].doesIntersect === false) {
                             createAndAddSvgElementAndUpdateDataArrays(nextIndex, shape)
                         } else {
-                            // updateSVG_arcToPathIntersect_2(secondParallelPathData[1], secondParallelPathData[0], firstParallelPathData[1], thisOriginalPathDataGLOBAL)
                             updateSVG_PathToArcIntersect_02(thisParallelPathData, arcToPathIntPoint, thisOriginalPathData)
                             placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToPathIntPoint)
                         }
