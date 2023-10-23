@@ -50,6 +50,8 @@ function setSvg(dragDivId, svgId, canvasId){
     svgHTML = document.getElementById(svgId)
 }
 
+
+
 function addCurvePoint() {
     pressAddCurveButton = true
 }
@@ -154,17 +156,6 @@ function drawSavedFigure(index) {
     self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
     // ADD SVG GROUPS
 
-    // ADD SVG TESTING GROUPS
-    self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
-    self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
-    self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc3--IDTAG')
-    self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
-    // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-    self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
-    // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
-    self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG')
-    // ADD SVG TESTING GROUPS
-
     // MAIN PATH
     originalFigure_data_pathDatas_array_GLOBAL.push(mainPathData)
     originalFigure_svgElements_paths_array_GLOBAL.push(self.mainPathGroup.append('path').attr('class', 'path mainPath').call(d3.drag().on("drag", function(event) {dragPath(event, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])})).on("click", function() {mainPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self)}))
@@ -199,7 +190,7 @@ function drawSavedFigure(index) {
     // PARALLEL GROUPS
 
     // Update SVG
-    updateSVG(
+    updateSVG_mainPathAndPoints(
         originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL],
         secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL],
         originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL],
@@ -257,21 +248,6 @@ function drawPath() {
             self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
             self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
 
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-            self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
-            self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG')
-
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc').attr('id', 'intCircTEST--incCirc1--IDTAG22')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--intArc2').attr('id', 'intCircTEST--incCirc2--IDTAG22')
-            // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent1--IDTAG22')
-            // // self.testEndPointGroup.append('circle').attr('class', 'endPoint mainEndPoint mainEndPoint--TESTER--circCent').attr('id', 'intArcTEST--circCent2--IDTAG')
-            // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ1').attr('id', 'intArcTEST--circ1--IDTAG22')
-            // // self.testEndPointGroup.append('circle').attr('class', 'testCirc testCirc--TESTER--circ2').attr('id', 'intArcTEST--circ2--IDTAG')
-            // self.testEndPointGroup.append('line').attr('class', 'testPath mainPath testPath--TESTER--path1').attr('id', 'intArcTEST--path1--IDTAG22')
 
             // MAIN PATH
             originalFigure_data_pathDatas_array_GLOBAL.push([
@@ -312,7 +288,7 @@ function drawPath() {
              // PARALLEL GROUPS
 
             isDown = true
-            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+            updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
             let thisCountCurrentPathDatas_x = [originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.x]
             let thisCountCurrentPathDatas_y = [originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.y]
@@ -345,7 +321,7 @@ function drawPath() {
             // secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, new_FAKE_secondryPathCounter_GLOBAL, isDown2)}))
 
 
-            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+            updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
             let thisCountCurrentPathDatas_x = []
             originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x));
@@ -441,7 +417,7 @@ function drawPath() {
         if(isDown === true) {
             originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).coords.x = m2[0]
             originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).coords.y = m2[1]
-            updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+            updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         }
     }
 
@@ -465,7 +441,7 @@ function drawPath() {
             secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].at(-1).remove()
             secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].pop()
         }
-        updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         
         for (let i = 0; i < originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
             let currentEndPoint = originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
@@ -504,7 +480,7 @@ function drawPath() {
     //             currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
     //         }
 
-    //         updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    //         updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
     //         pressAddCurveButton = false
     //     } else if (pressAddParallelButton === true) {
@@ -571,7 +547,7 @@ function secondaryPathClick(this1, event, originalFigure_counter_groupCount_GLOB
             currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
         }
 
-        updateSVG(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
         pressAddCurveButton = false
     } else if (pressAddParallelButton === true) {
@@ -1086,7 +1062,7 @@ function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pa
     }
     d3.select(mainPathsArray._groups[0][0])
         .attr({d: describeComplexPath(pathData)})
-    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
+    updateSVG_mainPathAndPoints(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // PATH
 
@@ -1096,11 +1072,11 @@ function dragEndPoint(event, selector, mainPathsArray, secondaryPathsArray, endP
     d3.select(endPointsArray[selector]._groups[0][0])
         .attr('cx', pathData[selector].coords.x += event.dx )
         .attr('cy', pathData[selector].coords.y += event.dy )   
-    updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
+    updateSVG_mainPathAndPoints(mainPathsArray, secondaryPathsArray, endPointsArray, pathData)
 }
 // DYNAMIC END POINTS
 
-function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
+function updateSVG_mainPathAndPoints(mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     // PATH
     let path = d3.select(mainPathsArray._groups[0][0])
         path.attr('d', calculateArcAndDescribePath(pathData))
@@ -1122,7 +1098,7 @@ function updateSVG(mainPathsArray, secondaryPathsArray, endPointsArray, pathData
     // DYNAMIC END POINTS
 }
 
-function updateSVG2(parallelEndPointsArray, parallelPathsArray, parallelPathData) {
+function updateSVG_parallelPathAndPoints(parallelEndPointsArray, parallelPathsArray, parallelPathData) {
     // PARALLEL END POINTS
     let k = -1
     for (let i = 0; i < parallelPathsArray.length; i++) {
@@ -1782,105 +1758,6 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
 
 
 
-function updateSVG5(linePt1, linePt2, circ) {
-    let point1 = d3.select("#intCircTEST--incCirc1--IDTAG")
-    let point2 = d3.select("#intCircTEST--incCirc2--IDTAG")
-    let circCent1 = d3.select("#intArcTEST--circCent1--IDTAG")
-    let circ1 = d3.select("#intArcTEST--circ1--IDTAG")
-
-    // point1.attr('cx', linePt1[0]).attr('cy', linePt1[1])
-    // point2.attr('cx', linePt2[0]).attr('cy', linePt2[1])
-    circCent1.attr('cx', circ.arc.center.x).attr('cy', circ.arc.center.y)
-    circ1.attr('cx', circ.arc.center.x).attr('cy', circ.arc.center.y).style("r", circ.arc.radius)
-}
-
-
-function updateSVG4(linePt1, linePt2, circ) {
-    let circCent1Coords = [circ.arc.center.x, circ.arc.center.y]
-    let circRadius = circ.arc.radius
-    let pathCoordsPt1 = [linePt1.coords.x, linePt1.coords.y]
-    let pathCoordsPt2 = [linePt2.coords.x, linePt2.coords.y]
-    let log = false
-
-    let pathCircIntersection = getPathToArcIntersections(linePt1, linePt2, circ, log)
-
-    let pathCircIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG")
-    let pathCircIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG")
-    let circCent1 = d3.select("#intArcTEST--circCent1--IDTAG")
-    let circ1 = d3.select("#intArcTEST--circ1--IDTAG")
-    let path1 = d3.select("#intArcTEST--path1--IDTAG")
-
-
-    if(pathCircIntersection[0].doesIntersect == true) {
-        pathCircIntPoint1.attr('cx', pathCircIntersection[0].x).attr('cy', pathCircIntersection[0].y) // orange
-        pathCircIntPoint2.attr('cx', pathCircIntersection[1].x).attr('cy', pathCircIntersection[1].y) // purple
-        circCent1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1])
-        circ1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1]).style("r", circRadius)
-        path1.attr("x1", pathCoordsPt1[0]).attr("y1", pathCoordsPt1[1]).attr("x2", pathCoordsPt2[0]).attr("y2", pathCoordsPt2[1])
-        path1.attr("x1", pathCircIntersection[0].x).attr("y1", pathCircIntersection[0].y).attr("x2", pathCircIntersection[1].x).attr("y2", pathCircIntersection[1].y)
-    } else {
-        console.log('SVG3 returning null.')
-    }
-}
-
-function updateSVG444(linePt1, linePt2, circ, orig) {
-    let circCent1Coords = [circ.arc.center.x, circ.arc.center.y]
-    let circRadius = circ.arc.radius
-    let pathCoordsPt1 = [linePt1.coords.x, linePt1.coords.y]
-    let pathCoordsPt2 = [linePt2.coords.x, linePt2.coords.y]
-    let origPoint = [orig.coords.x, orig.coords.y]
-    let log = false
-
-    let pathCircIntersection = getPathToArcIntersections(linePt1, linePt2, circ, log)
-
-    let pathCircIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG")
-    let pathCircIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG")
-    let pathCircIntPoint3 = d3.select("#intCircTEST--incCirc3--IDTAG")
-    let circCent1 = d3.select("#intArcTEST--circCent1--IDTAG")
-    let circ1 = d3.select("#intArcTEST--circ1--IDTAG")
-    let path1 = d3.select("#intArcTEST--path1--IDTAG")
-
-
-    if(pathCircIntersection[0].doesIntersect == true) {
-        pathCircIntPoint1.attr('cx', pathCircIntersection[0].x).attr('cy', pathCircIntersection[0].y) // orange
-        pathCircIntPoint2.attr('cx', pathCircIntersection[1].x).attr('cy', pathCircIntersection[1].y) // purple
-        pathCircIntPoint3.attr('cx', origPoint[0]).attr('cy', origPoint[1]) // purple
-        circCent1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1])
-        circ1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1]).style("r", circRadius)
-        path1.attr("x1", pathCoordsPt1[0]).attr("y1", pathCoordsPt1[1]).attr("x2", pathCoordsPt2[0]).attr("y2", pathCoordsPt2[1])
-        path1.attr("x1", pathCircIntersection[0].x).attr("y1", pathCircIntersection[0].y).attr("x2", pathCircIntersection[1].x).attr("y2", pathCircIntersection[1].y)
-    } else {
-        console.log('SVG3 returning null.')
-    }
-}
-
-function updateSVG44(linePt1, linePt2, circ) {
-    let circCent1Coords = [circ.arc.center.x, circ.arc.center.y]
-    let circRadius = circ.arc.radius
-    let pathCoordsPt1 = [linePt1.coords.x, linePt1.coords.y]
-    let pathCoordsPt2 = [linePt2.coords.x, linePt2.coords.y]
-    let log = false
-
-    let pathCircIntersection = getPathToArcIntersections(linePt1, linePt2, circ, log)
-
-    let pathCircIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG22")
-    let pathCircIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG22")
-    let circCent1 = d3.select("#intArcTEST--circCent1--IDTAG22")
-    let circ1 = d3.select("#intArcTEST--circ1--IDTAG22")
-    let path1 = d3.select("#intArcTEST--path1--IDTAG22")
-
-
-    if(pathCircIntersection[0].doesIntersect == true) {
-        pathCircIntPoint1.attr('cx', pathCircIntersection[0].x).attr('cy', pathCircIntersection[0].y) // orange
-        pathCircIntPoint2.attr('cx', pathCircIntersection[1].x).attr('cy', pathCircIntersection[1].y) // purple
-        circCent1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1])
-        circ1.attr('cx', circCent1Coords[0]).attr('cy', circCent1Coords[1]).style("r", circRadius)
-        path1.attr("x1", pathCoordsPt1[0]).attr("y1", pathCoordsPt1[1]).attr("x2", pathCoordsPt2[0]).attr("y2", pathCoordsPt2[1])
-        path1.attr("x1", pathCircIntersection[0].x).attr("y1", pathCircIntersection[0].y).attr("x2", pathCircIntersection[1].x).attr("y2", pathCircIntersection[1].y)
-    } else {
-        console.log('SVG3 returning null.')
-    }
-}
 
 
 
@@ -1895,23 +1772,14 @@ function updateSVG44(linePt1, linePt2, circ) {
 
 
 
-
-
-
-
-
-
-
-// function findPointAlongSlopeAtDistance(startingPoint, endPoint, midPoint, distanceRatioArc1, distanceAwayCenterArc1, distanceAwayArcArc1){
+    // function findPointAlongSlopeAtDistance(startingPoint, endPoint, midPoint, distanceRatioArc1, distanceAwayCenterArc1, distanceAwayArcArc1){
     function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcArc1){
         let newPoint = [0,0]
         let startPtX = startingPoint[0]
         let startPtY = startingPoint[1]
         let endPtX = endPoint[0]
         let endPtY = endPoint[1]
-    
         let totalDistance = getDistance(startPtX,startPtY,endPtX,endPtY)
-    
         let distanceRatioUsingArc1DistanceFromCenter = distanceAwayArcArc1 / totalDistance
     
         newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
@@ -1924,14 +1792,48 @@ function updateSVG44(linePt1, linePt2, circ) {
 
 
 
-// let circIntCoords  = getCircleIntersections2(x1, y1, radius1, x2, y2, radius2, [xy1, xy2])
-function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
+
+
+
+function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData) {
+    let x1 = firstParallelPathData.arc.center.x
+    let y1 = firstParallelPathData.arc.center.y
+    let r1 = firstParallelPathData.arc.radius
+    let x2 = secondParallelPathData.arc.center.x
+    let y2 = secondParallelPathData.arc.center.y
+    let r2 = secondParallelPathData.arc.radius
+    let opd = originalPathData.coords
+    // updateSVG_arcToArcIntersect_highlightOPD(opd) // test tracking opd (Fails)
+    
+
     // Calculate the distance between the centers of the circles
     const dx = x2 - x1;
     const dy = y2 - y1;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx * dx + dy * dy)
 
+    // Circles are identical; return one of the two circles
+    // Maybe need? (not finished need to return correct data)
+    // if (distance === 0 && r1 === r2) {
+    //     // return [center1]
+    // }
 
+    // Determine which intersection point is closest to Xys
+    let intersectionClosestToXys
+
+    // Check for no intersection, one circle contained within the other, or identical circles
+    if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
+        // Circles don't intersect; return the closest points on each circle
+        let closestPointToOtherCircleX1 = x1 + (dx * r1) / distance
+        let closestPointToOtherCircleY1 = y1 + (dy * r1) / distance
+        let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
+        let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
+        intersectionClosestToXys = [
+            // getting visual errors when shape has curves going in same direction
+            { x: closestPointToOtherCircleX1, y: closestPointToOtherCircleY1, doesIntersect: false },
+            { x: closestPointToOtherCircleX2, y: closestPointToOtherCircleY2, doesIntersect: false },
+        ]
+        return intersectionClosestToXys
+    }
 
     // Calculate the intersection points
     const angle = Math.atan2(dy, dx);
@@ -1941,99 +1843,35 @@ function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
     const intersectionX2 = x1 + r1 * Math.cos(angle + intersectionAngle)
     const intersectionY2 = y1 + r1 * Math.sin(angle + intersectionAngle)
 
-
-
     // Determine the distance of each intersection point to Xys
-    let distance1 = getDistance(xys[0].x, xys[0].y, intersectionX1, intersectionY1)
-    let distance2 = getDistance(xys[0].x, xys[0].y, intersectionX2, intersectionY2)
-
-    // Determine which intersection point is closest to Xys
-    let intersectionClosestToXys
-
-
-    // Check if the circles are disjoint or identical
-    if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
-        console.log("okokookok-3333")
-        return [] // No intersection
-        // intersectionClosestToXys = [
-        //     { x: intersectionX1, y: intersectionY1 },
-        //     { x: intersectionX2, y: intersectionY2 }
-        // ]
-        // return intersectionClosestToXys
-    }
-
+    let distance1 = getDistance(opd.x, opd.y, intersectionX1, intersectionY1)
+    let distance2 = getDistance(opd.x, opd.y, intersectionX2, intersectionY2)
 
     if(!isNaN(intersectionX1)) {    // ***This doesn't work whent circles overlap***
-        console.log("okokookok-1111")
-        if (distance1 < distance2){
-            intersectionClosestToXys = [
-                { x: intersectionX1, y: intersectionY1 },
-                { x: intersectionX2, y: intersectionY2 }
-            ]
-        } else if (distance2 < distance1) {
-            intersectionClosestToXys = [
-                { x: intersectionX2, y: intersectionY2 },
-                { x: intersectionX1, y: intersectionY1 }
-            ]
+        if(distance1 < distance2) {
+            intersectionClosestToXys = [{ x: intersectionX1, y: intersectionY1, doesIntersect: true }]
+        } else if(distance2 < distance1) {
+            intersectionClosestToXys = [{ x: intersectionX2, y: intersectionY2, doesIntersect: true }]
         }
+        // intersectionClosestToXys = [
+        //     { x: intersectionX1, y: intersectionY1, doesIntersect: true },
+        //     { x: intersectionX2, y: intersectionY2, doesIntersect: true }
+        // ]
     } else {
-        console.log("okokookok-2222")
         intersectionClosestToXys = NaN
     }
     return intersectionClosestToXys
-
-    // return [
-    //     { x: intersection1X, y: intersection1Y, doesIntersect: true },
-    //     { x: intersection2X, y: intersection2Y, doesIntersect: true }
-    // ]
 }
 
 
-//   // ChatGPT optimized (Not tested yet)
-// function getCircleIntersections2(x1, y1, r1, x2, y2, r2, xys) {
-//     const dx = x2 - x1;
-//     const dy = y2 - y1;
-//     const distance = Math.sqrt(dx * dx + dy * dy);
-  
-//     if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
-//       return []; // No intersection
-//     }
-  
-//     const angle = Math.atan2(dy, dx);
-//     const intersectionAngle = Math.acos((r1 * r1 + distance * distance - r2 * r2) / (2 * r1 * distance));
-//     const intersectionX1 = x1 + r1 * Math.cos(angle - intersectionAngle);
-//     const intersectionY1 = y1 + r1 * Math.sin(angle - intersectionAngle);
-//     const intersectionX2 = x1 + r1 * Math.cos(angle + intersectionAngle);
-//     const intersectionY2 = y1 + r1 * Math.sin(angle + intersectionAngle);
-  
-//     const distanceToIntersection1 = getDistance(xys[0].x, xys[0].y, intersectionX1, intersectionY1);
-//     const distanceToIntersection2 = getDistance(xys[0].x, xys[0].y, intersectionX2, intersectionY2);
-  
-//     const intersections = [
-//       { x: intersectionX1, y: intersectionY1 },
-//       { x: intersectionX2, y: intersectionY2 }
-//     ];
-  
-//     const sortedIntersections = distanceToIntersection1 < distanceToIntersection2 ? intersections : intersections.reverse();
-  
-//     return isNaN(intersectionX1) ? NaN : sortedIntersections;
-//   }
 
 
-
-
-
-
-// In use (for line and circle)
-// function getPathToArcIntersections(lineStart, lineEnd, circleCenter, circleRadius) {
-function getPathToArcIntersections(linePt1, linePt2, circ, log) {
-
-
+function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}
     let circleCenter = {x: circ.arc.center.x, y: circ.arc.center.y}
     let circleRadius = circ.arc.radius
-
+    let originalPathDataCoords = originalPathData.coords
 
     // Calculate the direction vector of the line
     const dx = lineEnd.x - lineStart.x;
@@ -2048,21 +1886,13 @@ function getPathToArcIntersections(linePt1, linePt2, circ, log) {
     const discriminant = B * B - 4 * A * C;
 
 
+
     // Check if the line intersects the circle
     if (discriminant < 0) {
-        // // return []; // No intersection points
-        // let noIntersection = "DOES NOT INTERSECT"
-        // return noIntersection; // No intersection points
-
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
-        // if(log === true){
-        //     console.log("1_0000")
-        //     console.log(discriminant)
-        //     console.log({ x: intersectionX, y: intersectionY, doesIntersect: false })
-        // }
         return [{ x: intersectionX, y: intersectionY, doesIntersect: false }];
 
     } else if (discriminant === 0) {
@@ -2070,10 +1900,6 @@ function getPathToArcIntersections(linePt1, linePt2, circ, log) {
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
-        // if(log === true){
-        //     console.log("2_0000")
-        //     console.log({ x: intersectionX, y: intersectionY, doesIntersect: true })
-        // }
         return [{ x: intersectionX, y: intersectionY, doesIntersect: true }];
     } else {
         // Line intersects the circle at two points
@@ -2083,20 +1909,34 @@ function getPathToArcIntersections(linePt1, linePt2, circ, log) {
         const intersection1Y = lineStart.y + t1 * dy;
         const intersection2X = lineStart.x + t2 * dx;
         const intersection2Y = lineStart.y + t2 * dy;
-        // if(log === true){
-        //     console.log("3_000")
-        //     console.log(discriminant)
-        //     console.log(
-        //         { x: intersection1X, y: intersection1Y, doesIntersect: true },
-        //         { x: intersection2X, y: intersection2Y, doesIntersect: true }
-        //     )
-        // }
-        return [
-            { x: intersection1X, y: intersection1Y, doesIntersect: true },
-            { x: intersection2X, y: intersection2Y, doesIntersect: true }
-        ]
+
+        // old
+        // return [
+        //     { x: intersection1X, y: intersection1Y, doesIntersect: true },
+        //     { x: intersection2X, y: intersection2Y, doesIntersect: true }
+        // ]
+
+        // new
+        // Determine the distance of each intersection point to OPD
+        let length0 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection1X, intersection1Y)
+        let length1 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection2X, intersection2Y)
+
+        // Choose the closest int point to OPD
+        if(length0 < length1) {
+            return [
+                { x: intersection1X, y: intersection1Y, doesIntersect: true },
+                { x: intersection2X, y: intersection2Y, doesIntersect: true }
+            ]
+        } else {
+            return [
+                { x: intersection2X, y: intersection2Y, doesIntersect: true },
+                { x: intersection1X, y: intersection1Y, doesIntersect: true }
+            ]
+        }
     }
 }
+
+
 
 
 
@@ -2110,6 +1950,8 @@ let pathToArcCounter = -1
 let pathToArchIndexArray = []
 let arcToPathCounter = -1
 let arcToPathIndexArray = []
+let arcToArcCounter = -1
+let arcToArcIndexArray = []
 // I like the names and the idea of an object here but didnt save lines
 // let trackOrigPDAtIntersectObject = {collectIndices: true, intersectionCounter: [-1, -1], indexArrays: [[],[]]}
 // NEW_ArcIntersectPICKER
@@ -2295,7 +2137,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
         // console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
         
         // Update the SVG using the updated data
-        updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]);
+        updateSVG_parallelPathAndPoints(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]);
     }
 
 
@@ -2631,9 +2473,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                    // HANDLE FIRST WAY
-                    // NOTE FOR FUTURE:
-                    // I dont have handle arcToArcInt that doesnt intersect.
+                    // HANDLE PATH TO ARC
                     if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "AAA") {
                     // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true) {
                         console.log(1 + " - Joiner")
@@ -2649,37 +2489,40 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         console.log(2 + " - Joiner")
                         parallelPathSegmentCounter_FIRST = 0
                     }
-                    // HANDLE FIRST WAY
+                    // HANDLE PATH TO ARC
 
+                    // // HANDLE ARC TO ARC
+                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "CCC") {
+                    //     // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true) {
+                    //     console.log(1 + " - Joiner")
+
+                    //     // NEW_ArcIntersectPICKER
+                    //     pathToArcCounter += 1
+                    //     handlePathToArcIntersectionNoContact(i)
+
+                    //     parallelPathSegmentCounter_FIRST = 0
+                    // } 
+                    // else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joinerSide === "CCC") {
+                    // // } else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true) {
+                    //     console.log(2 + " - Joiner")
+                    //     parallelPathSegmentCounter_FIRST = 0
+                    // }
+                    // // HANDLE ARC TO ARC
                     
-                    // HANDLE OTHER WAY
+                    // HANDLE ARC TO PATH
                     else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "BBB") {
                         console.log(4 + " - Joiner")
-
                         console.log("Set Path Point (Shape 2: Part 1)")
                         let fillerAdder = 0
                         let nextFillerAdder = 0
-                        // old (didnt use)
-                        // if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[i] === "filler"){
-                        //     fillerAdder = fillerAdder + 1
-                        // }
-                        // if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1] === "filler"){
-                        //     nextFillerAdder = nextFillerAdder + 1
-                        // }
-                        // let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 0]
-                        // let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
 
-                        // new
                         if(parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2] === "filler"){
                             fillerAdder = fillerAdder + 0
                             nextFillerAdder = nextFillerAdder + 1
                         }
+
                         let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 0 + fillerAdder]
                         let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2 + nextFillerAdder]
-
-
-
-
                         let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                         let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                         let next_parallel_perp_AnchorPointX = nextPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
@@ -2689,17 +2532,15 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].coords.x = next_parallel_perp_AnchorPointX
                         parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].coords.y = next_parallel_perp_AnchorPointY
 
-                        console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
                         // NEW_ArcIntersectPICKER
-                        console.log("FINDMEEEEEOKOKOK_aaaaaaaaaa")
                         arcToPathCounter += 1
 
+                        console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
                         handleArcToPathIntersectionNoContact(i-1)
 
                         parallelPathSegmentCounter_SECOND = 1
                     }
-                    // HANDLE OTHER WAY
+                    // HANDLE ARC TO PATH
                     else {
                         parallelPathSegmentCounter_FIRST = parallelPathSegmentCounter_FIRST + 1
                         // Applies to first Arc Half
@@ -2709,7 +2550,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 // If not first point of entire shape, check if the previous point is an arc
                                 if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === true){
                                     console.log(3)
-                                    console.log('arc_arc: 3333')
+                                    console.log('arc_arc: 1111')
                                     // handleArcToArcIntersection(i)
                                 // If not first point of entire shape, check if the previous point is a path
                                 } else {
@@ -2721,7 +2562,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     if (collectIndicesOfIntersections === true) {
                                         pathToArchIndexArray.push(i)
                                     }
-                                    handlePathToArcIntersection(i, pathToArchIndexArray,pathToArcCounter)
+                                    handlePathToArcIntersection(i, pathToArchIndexArray, pathToArcCounter)
                                     // old
                                     // handlePathToArcIntersection(i)
 
@@ -2761,15 +2602,21 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             // Check if this is not the last point of Entire Shape
                             if(i !== parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1){
                                 // If not the last point, check if the following point is an arc
+                                // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.joinerSide != "AAA" && parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.joinerSide != "BBB"){
                                 if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.exist === true){
                                     console.log(8)
-                                    // this does get called when it should (no arc - arc) sometimes:
-                                    // but only when the par line gets to far and the curves loop onto themselves
-                                    console.log('arc_arc: 8888')
-                                    handleArcToArcIntersection(i)
+                                    if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.joinerSide != "AAA" && parallelPathDatas_stopAtIntersect_fromGLOBAL[i + 1][1].arc.joinerSide != "BBB") {
+                                        console.log('arc_arc: 22222')
+                                        // NEW_ArcIntersectPICKER
+                                        arcToArcCounter += 1
+                                        if (collectIndicesOfIntersections === true) {
+                                            arcToArcIndexArray.push(i + 1)
+                                        }
+                                        // this does get called when it should (no arc - arc) sometimes:
+                                        // but only when the par line gets to far and the curves loop onto themselves
+                                        handleArcToArcIntersection(i, arcToArcIndexArray, arcToArcCounter)
+                                    }
 
-                                    // handlePathToArcIntersection(i, pathToArchIndexArray,pathToArcCounter)
-                                    // handlePathToArcIntersectionNoContact(i)
 
                                 // If not the last point, check if the following point is a path
                                 } else {
@@ -2826,7 +2673,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
 
                                     // NEW_ArcIntersectPICKER
-                                    console.log("FINDMEEEEEOKOKOK_kkkkkkkkkkk")
                                     arcToPathCounter += 1
                                     if (collectIndicesOfIntersections === true) {
                                         arcToPathIndexArray.push(i + 1)
@@ -3097,152 +2943,150 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                function defineVarsAndRunGetCircInts(firstParallelPathData1, secondParallelPathData1){
-                    let x1 = firstParallelPathData1.arc.center.x
-                    let y1 = firstParallelPathData1.arc.center.y
-                    let startAngle1 = firstParallelPathData1.arc.startAngle
-                    let radius1 = firstParallelPathData1.arc.radius
-                    let arcFlag1 = firstParallelPathData1.arc.arcFlag
-                    let sweepFlag1 = firstParallelPathData1.arc.sweepFlag
-                    let xy1 = firstParallelPathData1.coords // change this to main path datas
-                
-                    let x2 = secondParallelPathData1.arc.center.x
-                    let y2 = secondParallelPathData1.arc.center.y
-                    let startAngle2 = secondParallelPathData1.arc.startAngle
-                    let radius2 = secondParallelPathData1.arc.radius
-                    let arcFlag2 = secondParallelPathData1.arc.arcFlag
-                    let sweepFlag2 = secondParallelPathData1.arc.sweepFlag
-                    let xy2 = secondParallelPathData1.coords // change this to main path datas
-                    let circIntCoords  = getCircleIntersections2(x1, y1, radius1, x2, y2, radius2, [xy1, xy2])
-                    let returnData = [circIntCoords, [x1,y1], [x2,y2], [radius1,radius2], [arcFlag1, arcFlag2], [sweepFlag1, sweepFlag2], [xy1,xy2]]
 
-                    return returnData
-                }
 
-                function handleArcToArcIntersection(arcToArcIntersectIndex) {
-                    let thisArcToArcIntIndex = arcToArcIntersectIndex
-                    let nextArcToArcIntIndex = arcToArcIntersectIndex + 1
-
-                    let circIntData = defineVarsAndRunGetCircInts(parallelPathDatas_stopAtIntersect_fromGLOBAL[thisArcToArcIntIndex][1], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextArcToArcIntIndex][1])
-                    let arcToArcIntPoint = circIntData[0][0]
-
-                    // console.log("findmokokokokok")
-                    // console.log(arcToArcIntPoint)
-
-                    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisArcToArcIntIndex][1]
-                    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextArcToArcIntIndex][0]
-                
+                function handleArcToArcIntersection(arcToArcIntersectIndex, origPathDataIndexArray, a2aCount) {
+                    let shape = 'a2a'
+                    let thisIndex = arcToArcIntersectIndex
+                    let nextIndex = arcToArcIntersectIndex + 1
+                    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
+                    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex]
+                    let origPathDataIndex = origPathDataIndexArray[a2aCount]
+                    let thisOriginalPathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
+                    let arcToArcIntPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData)
                     if(arcToArcIntPoint) {
-                        thisParallelPathData.coords.x = arcToArcIntPoint.x
-                        thisParallelPathData.coords.y = arcToArcIntPoint.y
-                        nextParallelPathData.coords.x = arcToArcIntPoint.x
-                        nextParallelPathData.coords.y = arcToArcIntPoint.y
+                        if(arcToArcIntPoint[0].doesIntersect === false) {
+                            // Use as temporary.
+                            thisParallelPathData[1].coords.x = arcToArcIntPoint[0].x
+                            thisParallelPathData[1].coords.y = arcToArcIntPoint[0].y
+                            nextParallelPathData[0].coords.x = arcToArcIntPoint[1].x
+                            nextParallelPathData[0].coords.y = arcToArcIntPoint[1].y
+                            // Later change to this
+                            // createAndAddSvgElementAndUpdateDataArrays(thisIndex, shape)
+                        } else {
+                            updateSVG_highlightOirginalPathData(thisOriginalPathData)
+                            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToArcIntPoint)
+                        }
                     }
-
-
-                    // if(pathToArcIntPoint[0].doesIntersect === false) {
-                    //     let circleRadiusPoint = findPointAlongSlopeAtDistance([thisParallelPathData.arc.center.x,thisParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], thisParallelPathData.arc.radius)
-                    //     thisParallelPathData.coords.x = circleRadiusPoint[0]
-                    //     thisParallelPathData.coords.y = circleRadiusPoint[1]
-                    //     nextParallelPathData.coords.x = pathToArcIntPoint[0].x
-                    //     nextParallelPathData.coords.y = pathToArcIntPoint[0].y
-                    // }
-
-
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 // NEW_ArcIntersectPICKER
                 function handlePathToArcIntersection(pathToArcIntersectIndex, origPathDataIndexArray, p2aCount){
-                // old
-                // function handlePathToArcIntersection(pathToArcIntersectIndex){
+                    let shape = 'p2a'
                     let prevIndex = pathToArcIntersectIndex - 1
                     let thisIndex = pathToArcIntersectIndex
                     let prevParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex]
                     let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
-                    let pathToArcIntPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], false)
-                    // updateSVG44(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1])
-
+                    let origPathDataIndex = origPathDataIndexArray[p2aCount]
+                    let thisOriginalPathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
+                    let pathToArcIntPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
                     if(pathToArcIntPoint) {
-                        // Check if path and arc intersect
                         if(pathToArcIntPoint[0].doesIntersect === false) {
-                            console.log("NOT_INTERSECTING_111")
-                            // Path to Arc Intersection does not intersect: Add Points and Paths'
-                            let thisSvgEndPointIndex = (thisIndex * 2) + 1
-                            let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-                            let thisSvgPathIndex = thisIndex + 1
-
-                            let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + thisIndex + '_'))
-                            let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + thisIndex + '_'))
-                            let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + thisIndex + '_'))
-
-                            self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')');
-                            self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')');
-                            self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')');
-
-                            let doubleIndex = thisIndex * 2
-                            parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2);
-                            parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 0, newParallelPath);
-
-                            let parallelPathDataGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
-                            let thisParPathData = parallelPathDataGLOBAL[thisIndex][0]
-                            // Add function here to determine things like arcFlags, sweepFlags and ?center?
-                            parallelPathDataGLOBAL.splice(thisIndex, 0, [
-                                {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: "AAA"}},
-                                {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: "AAA"}},
-                            ]);
-                            parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 0, [
-                                {x: parallelPathDataGLOBAL[thisIndex][0].coords.x, y: parallelPathDataGLOBAL[thisIndex][0].coords.y},
-                                {x: parallelPathDataGLOBAL[thisIndex][1].coords.x, y: parallelPathDataGLOBAL[thisIndex][1].coords.y}
-                            ]);
-
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 0, "filler");
+                            createAndAddSvgElementAndUpdateDataArrays(thisIndex, shape)
                         } else {
-
-                            // NEW_ArcIntersectPICKER
-                            let origPathDataIndex = origPathDataIndexArray[p2aCount]
-                            let thisOriginalPathDataGLOBAL = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-                            // old
-                            // let thisOriginalPathDataGLOBAL = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][thisIndex]
-
-                            // updateSVG444(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathDataGLOBAL)
-
-
-                            // Find dinstance between pathData and each pathToCircle intersection point
-                            let length0 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
-                            let length1 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, pathToArcIntPoint[1].x, pathToArcIntPoint[1].y)
-
-                            // Determine which pathToCircle intersection is closest to pathData
-                            if(length0 < length1) {
-                                prevParallelPathData[1].coords.x = pathToArcIntPoint[0].x
-                                prevParallelPathData[1].coords.y = pathToArcIntPoint[0].y
-                                thisParallelPathData[0].coords.x = pathToArcIntPoint[0].x
-                                thisParallelPathData[0].coords.y = pathToArcIntPoint[0].y
-                            } else {
-                                prevParallelPathData[1].coords.x = pathToArcIntPoint[1].x
-                                prevParallelPathData[1].coords.y = pathToArcIntPoint[1].y
-                                thisParallelPathData[0].coords.x = pathToArcIntPoint[1].x
-                                thisParallelPathData[0].coords.y = pathToArcIntPoint[1].y
-                            }
+                            updateSVG_PathToArcIntersect_01(thisParallelPathData, pathToArcIntPoint, thisOriginalPathData)
+                            placeIntersectionPoints(prevParallelPathData, thisParallelPathData, pathToArcIntPoint)
                         }
                     }
+                }
+
+                // NEW_ArcIntersectPICKER
+                function handleArcToPathIntersection(arcToPathIntersectIndex, origPathDataIndexArray, a2pCount) {
+                    let shape = 'a2p'
+                    let thisIndex = arcToPathIntersectIndex
+                    let nextIndex = arcToPathIntersectIndex + 1
+                    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
+                    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex]
+                    let origPathDataIndex = origPathDataIndexArray[a2pCount]
+                    let thisOriginalPathData = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
+                    let arcToPathIntPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
+                    if(arcToPathIntPoint) {
+                        if(arcToPathIntPoint[0].doesIntersect === false) {
+                            createAndAddSvgElementAndUpdateDataArrays(nextIndex, shape)
+                        } else {
+                            // updateSVG_arcToPathIntersect_2(secondParallelPathData[1], secondParallelPathData[0], firstParallelPathData[1], thisOriginalPathDataGLOBAL)
+                            updateSVG_PathToArcIntersect_02(thisParallelPathData, arcToPathIntPoint, thisOriginalPathData)
+                            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToPathIntPoint)
+                        }
+                    }
+                }
+
+                function createAndAddSvgElementAndUpdateDataArrays(index, shape) {
+                    let thisSvgEndPointIndex = (index * 2) + 1
+                    let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
+                    let thisSvgPathIndex = index + 1
+                    let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
+                    let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
+                    let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + index + '_'))
+                    let parPathData = []
+                    let indexer
+
+                    if(shape === 'p2a'){
+                        parPathData[0] = 0
+                        parPathData[1] = "AAA"
+                        indexer = index
+                    }else if(shape === 'a2p'){
+                        parPathData[0] = 1
+                        parPathData[1] = "BBB"
+                        indexer = index + 1
+                    }
+
+                    self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
+                    self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
+                    self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')')
+
+                    let doubleIndex = index * 2
+                    parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2)
+                    parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(index, 0, newParallelPath)
+
+                    let parallelPathDataGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
+                    let thisParPathData = parallelPathDataGLOBAL[index][0]
+                    // Add function here to determine things like arcFlags, sweepFlags and ?center?
+                    parallelPathDataGLOBAL.splice(index, 0, [
+                        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
+                        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
+                    ])
+
+                    parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, [
+                        {x: parallelPathDataGLOBAL[index][0].coords.x, y: parallelPathDataGLOBAL[index][0].coords.y},
+                        {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
+                    ])
+                    parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(indexer, 0, "filler")
+                }
+
+                // placeIntersectionPoints_OLDOLD(origPathDataIndexArray, a2aCount, thisParallelPathData, nextParallelPathData, arcToArcIntPoint, shape)
+                // function placeIntersectionPoints_OLDOLD(origPathDataIndexArray, intCount, firstParallelPathData, secondParallelPathData, interSectionPoint, shape) {
+                //     // NEW_ArcIntersectPICKER
+                //     let origPathDataIndex = origPathDataIndexArray[intCount]
+                //     let thisOriginalPathDataGLOBAL = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
+
+                //     if(shape === 'p2a') {
+                //     } else if(shape ==='a2p'){
+                //     } else if(shape ==='a2a'){
+                //         updateSVG_highlightOirginalPathData(thisOriginalPathDataGLOBAL)
+                //     }
+                //     // Find dinstance between pathData and each pathToCircle intersection point
+                //     let length0 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, interSectionPoint[0].x, interSectionPoint[0].y)
+                //     let length1 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, interSectionPoint[1].x, interSectionPoint[1].y)
+                //     // Determine which pathToCircle intersection is closest to pathData
+                //     if(length0 < length1) {
+                //         firstParallelPathData[1].coords.x = interSectionPoint[0].x
+                //         firstParallelPathData[1].coords.y = interSectionPoint[0].y
+                //         secondParallelPathData[0].coords.x = interSectionPoint[0].x
+                //         secondParallelPathData[0].coords.y = interSectionPoint[0].y
+                //     } else {
+                //         firstParallelPathData[1].coords.x = interSectionPoint[1].x
+                //         firstParallelPathData[1].coords.y = interSectionPoint[1].y
+                //         secondParallelPathData[0].coords.x = interSectionPoint[1].x
+                //         secondParallelPathData[0].coords.y = interSectionPoint[1].y
+                //     }
+                // }
+                
+                function placeIntersectionPoints(firstParallelPathData, secondParallelPathData, interSectionPoint) {
+                    firstParallelPathData[1].coords.x = interSectionPoint[0].x
+                    firstParallelPathData[1].coords.y = interSectionPoint[0].y
+                    secondParallelPathData[0].coords.x = interSectionPoint[0].x
+                    secondParallelPathData[0].coords.y = interSectionPoint[0].y
                 }
 
 
@@ -3261,26 +3105,32 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 0][0]
                     let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 0][1]
                     let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][0]
-                    let fourthPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][1]
+                    let fourthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][1]
                     let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 2][0]
                     let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 2][1]
                     // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][0]
 
-                    let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath, false)
-                    console.log("FINDMEESdfds")
-                    console.log(pathToArcIntPoint)
+                    // old
+                    // let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath)
+                    // new
+                    // fix later
+                    let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath, {coords: {x: 0, y: 0}})
                     let circleRadiusPoint = findPointAlongSlopeAtDistance([sixthParPath.arc.center.x,sixthParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], sixthParPath.arc.radius)
                     if(pathToArcIntPoint[0].doesIntersect === false) {
 
                         secondParPath.coords.x = pathToArcIntPoint[0].x
                         secondParPath.coords.y = pathToArcIntPoint[0].y
+
                         thirdParPath.coords.x = pathToArcIntPoint[0].x
                         thirdParPath.coords.y = pathToArcIntPoint[0].y
-                        fourthPath.coords.x = circleRadiusPoint[0]
-                        fourthPath.coords.y = circleRadiusPoint[1]
-                        fourthPath.arc.radius = 1
+
+                        fourthParPath.coords.x = circleRadiusPoint[0]
+                        fourthParPath.coords.y = circleRadiusPoint[1]
+                        fourthParPath.arc.radius = 1
+
                         fifthParPath.coords.x = circleRadiusPoint[0]
                         fifthParPath.coords.y = circleRadiusPoint[1]
+
                         // sixthParPath.coords.x = seventhParPath.coords.x
                         // sixthParPath.coords.y = seventhParPath.coords.y
 
@@ -3309,106 +3159,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-                // // NEW_ArcIntersectPICKER
-                function handleArcToPathIntersection(arcToPathIntersectIndex, origPathDataIndexArray, a2pCount) {
-                    console.log('findmeass')
-                    console.log(origPathDataIndexArray)
-                    console.log(a2pCount)
-                // old
-                // function handleArcToPathIntersection(arcToPathIntersectIndex) {
-                    let thisIndex = arcToPathIntersectIndex
-                    let nextIndex = arcToPathIntersectIndex + 1
-                    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
-                    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex]
-                    let pathToArcIntPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], true)
-                    // updateSVG4(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1])
-                    if(pathToArcIntPoint) {
-                        // Check if path and arc intersect
-                        if(pathToArcIntPoint[0].doesIntersect === false) {
-                        //     let circleRadiusPoint = findPointAlongSlopeAtDistance([thisParallelPathData.arc.center.x,thisParallelPathData.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], thisParallelPathData.arc.radius)
-                        //     thisParallelPathData.coords.x = circleRadiusPoint[0]
-                        //     thisParallelPathData.coords.y = circleRadiusPoint[1]
-                        //     nextParallelPathData.coords.x = pathToArcIntPoint[0].x
-                        //     nextParallelPathData.coords.y = pathToArcIntPoint[0].y
-
-                            console.log("NOT_INTERSECTING_222")
-                            let thisSvgEndPointIndex = (nextIndex * 2) + 1
-                            let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-                            let thisSvgPathIndex = nextIndex + 1
-
-                            let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + nextIndex + '_'))
-                            let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + nextIndex + '_'))
-                            let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + nextIndex + '_'))
-
-                            self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')');
-                            self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')');
-                            self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')');
-
-                            let doubleIndex = nextIndex * 2
-                            parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2);
-                            parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(nextIndex, 0, newParallelPath);
-
-                            let parallelPathDataGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
-                            let thisParPathData = parallelPathDataGLOBAL[nextIndex][0]
-                            // Add function here to determine things like arcFlags, sweepFlags and ?center?
-                            parallelPathDataGLOBAL.splice(nextIndex, 0, [
-                                {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 1, side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: "BBB"}},
-                                {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 1, side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: "BBB"}},
-                            ]);
-                            parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(nextIndex, 0, [
-                                {x: parallelPathDataGLOBAL[nextIndex][0].coords.x, y: parallelPathDataGLOBAL[nextIndex][0].coords.y},
-                                {x: parallelPathDataGLOBAL[nextIndex][1].coords.x, y: parallelPathDataGLOBAL[nextIndex][1].coords.y}
-                            ]);
-
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex + 1, 0, "filler")
-
-                            // console.log(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                            // console.log(parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                            // console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                            // console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
-
-                        } else {
-                            // NEW_ArcIntersectPICKER
-                            let origPathDataIndex = origPathDataIndexArray[a2pCount]
-                            let thisOriginalPathDataGLOBAL =  originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-                            // old
-                            // let thisOriginalPathDataGLOBAL =  originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][nextIndex]
-
-                            // updateSVG444(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathDataGLOBAL)
-
-                            // Find distance between pathData and each pathToCircle intersection point
-                            let length1 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, pathToArcIntPoint[0].x, pathToArcIntPoint[0].y)
-                            let length2 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, pathToArcIntPoint[1].x, pathToArcIntPoint[1].y)
-                            // Determine which pathToCircle intersection is closest to pathData
-                            if(length1 < length2) {
-                                thisParallelPathData[1].coords.x = pathToArcIntPoint[0].x
-                                thisParallelPathData[1].coords.y = pathToArcIntPoint[0].y
-                                nextParallelPathData[0].coords.x = pathToArcIntPoint[0].x
-                                nextParallelPathData[0].coords.y = pathToArcIntPoint[0].y
-                            } else {
-                                thisParallelPathData[1].coords.x = pathToArcIntPoint[1].x
-                                thisParallelPathData[1].coords.y = pathToArcIntPoint[1].y
-                                nextParallelPathData[0].coords.x = pathToArcIntPoint[1].x
-                                nextParallelPathData[0].coords.y = pathToArcIntPoint[1].y
-                            }
-                        }
-                    }
-                }
-
-
                 function handleArcToPathIntersectionNoContact(pathToArcIntersectNoContactIndex) {
-                    console.log("Moving Added Points and Paths")
                     let prevIndex = pathToArcIntersectNoContactIndex - 1
                     // let zeroParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][0]
                     let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][1]
@@ -3417,9 +3168,12 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let fourthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][0]
                     let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][1]
 
-                    let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, false)
+                    // old
+                    // let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath)
+                    // new
+                    // fix later
+                    let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
                     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
-
                     if(pathToArcIntPoint[0].doesIntersect === false) {
                         
                         // before first point
@@ -3445,25 +3199,14 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     } else if(pathToArcIntPoint[0].doesIntersect === true) {
                         console.log("Remove_Points_and_Paths")
                         // Remove Points and paths
-                        // not 100% tested but i think correct index
                         let thisIndex = pathToArcIntersectNoContactIndex + 1
-                        // possibly NOT DYNAMIC
                         let nextIndex = pathToArcIntersectNoContactIndex + 2
                         let doubleIndex = thisIndex * 2
-
-                        // console.log(thisIndex)
-                        // console.log(doubleIndex)
-                        // console.log(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                        // console.log(parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                        // console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                        // console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
-                        // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
 
                         // Remove elements from various arrays
                         parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
                         parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
                         parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                        // CHECK IF THIS ISNT BEING PLACED IN THE WRONG SPOT
                         parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
                         parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
 
@@ -3498,7 +3241,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-                updateSVG2(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
+                updateSVG_parallelPathAndPoints(parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL], parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
             }
         }
         // NEW_ArcIntersectPICKER
@@ -3506,6 +3249,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
         collectIndicesOfIntersections = false
         pathToArcCounter = -1
         arcToPathCounter = -1
+        arcToArcCounter = -1
 
         console.log("ENDSHAPE")
         console.log(" ")
@@ -3515,21 +3259,150 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let updateSVG_PathToArcIntersect_01_switches = [1,0]
+let updateSVG_PathToArcIntersect_02_switches = [1,0]
+let updateSVG_highlightOirginalPathData_switches = [0,0]
+
+
+
+function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
+    if(updateSVG_PathToArcIntersect_01_switches[0] === 1) {
+        if(updateSVG_PathToArcIntersect_01_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--2').attr('id', 'intCircTEST--incCirc2--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--3').attr('id', 'intCircTEST--incCirc3--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'intArcTEST--circCent1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'intArcTEST--circ1--IDTAG_01')
+            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'intArcTEST--path1--IDTAG_01')
+            updateSVG_PathToArcIntersect_01_switches[1] = 1
+        }
+        let path2ArcIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG_01")
+        let path2ArcIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG_01")
+        let originalPathPoint = d3.select("#intCircTEST--incCirc3--IDTAG_01")
+        let arcCenter = d3.select("#intArcTEST--circCent1--IDTAG_01")
+        let fullArc = d3.select("#intArcTEST--circ1--IDTAG_01")
+        let pathBetweenIntersectingPoints = d3.select("#intArcTEST--path1--IDTAG_01")
+
+        let originalPointCoords = [originalPathData.coords.x, originalPathData.coords.y]
+        let arcCenterCoords = [parallelPathData[1].arc.center.x, parallelPathData[1].arc.center.y]
+        let arcRadius = parallelPathData[1].arc.radius
+        
+        path2ArcIntPoint1.attr('cx', intersectionData[0].x).attr('cy', intersectionData[0].y)
+        path2ArcIntPoint2.attr('cx', intersectionData[1].x).attr('cy', intersectionData[1].y)
+        originalPathPoint.attr('cx', originalPointCoords[0]).attr('cy', originalPointCoords[1])
+        arcCenter.attr('cx', arcCenterCoords[0]).attr('cy', arcCenterCoords[1])
+        fullArc.attr('cx', arcCenterCoords[0]).attr('cy', arcCenterCoords[1]).style("r", arcRadius)
+        pathBetweenIntersectingPoints.attr("x1", intersectionData[0].x).attr("y1", intersectionData[0].y).attr("x2", intersectionData[1].x).attr("y2", intersectionData[1].y)
+    }
+}
+
+function updateSVG_PathToArcIntersect_02(parallelPathData, intersectionData, originalPathData) {
+    if(updateSVG_PathToArcIntersect_02_switches[0] === 1) {
+        if(updateSVG_PathToArcIntersect_02_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--2').attr('id', 'intCircTEST--incCirc2--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--3').attr('id', 'intCircTEST--incCirc3--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'intArcTEST--circCent1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'intArcTEST--circ1--IDTAG_02')
+            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--3 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'intArcTEST--path1--IDTAG_02')
+            updateSVG_PathToArcIntersect_02_switches[1] = 1
+        }
+        let path2ArcIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG_02")
+        let path2ArcIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG_02")
+        let originalPathPoint = d3.select("#intCircTEST--incCirc3--IDTAG_02")
+        let arcCenter = d3.select("#intArcTEST--circCent1--IDTAG_02")
+        let fullArc = d3.select("#intArcTEST--circ1--IDTAG_02")
+        let pathBetweenIntersectingPoints = d3.select("#intArcTEST--path1--IDTAG_02")
+
+        let originalPointCoords = [originalPathData.coords.x, originalPathData.coords.y]
+        let arcCenterCoords = [parallelPathData[1].arc.center.x, parallelPathData[1].arc.center.y]
+        let arcRadius = parallelPathData[1].arc.radius
+        
+        path2ArcIntPoint1.attr('cx', intersectionData[0].x).attr('cy', intersectionData[0].y)
+        path2ArcIntPoint2.attr('cx', intersectionData[1].x).attr('cy', intersectionData[1].y)
+        originalPathPoint.attr('cx', originalPointCoords[0]).attr('cy', originalPointCoords[1])
+        arcCenter.attr('cx', arcCenterCoords[0]).attr('cy', arcCenterCoords[1])
+        fullArc.attr('cx', arcCenterCoords[0]).attr('cy', arcCenterCoords[1]).style("r", arcRadius)
+        pathBetweenIntersectingPoints.attr("x1", intersectionData[0].x).attr("y1", intersectionData[0].y).attr("x2", intersectionData[1].x).attr("y2", intersectionData[1].y)
+    }
+}
+
+
+function updateSVG_highlightOirginalPathData(originalPathData) {
+    if(updateSVG_highlightOirginalPathData_switches[0] === 1) {
+        if(updateSVG_highlightOirginalPathData_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_06')
+            updateSVG_highlightOirginalPathData_switches[1] = 1
+        }
+        let pathCircIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG_06")
+
+        pathCircIntPoint1.attr('cx', originalPathData.coords.x).attr('cy', originalPathData.coords.y)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const SAVED_FIGURE_DATA = [
-    // path - path - ARC - PATH - ARC - path - path
-    // shape 1:
+    // // path - path - ARC - PATH - ARC - path - path
+    // // shape 1:
 
 
-    // problems:
-    // problem happened when i drew it the first time, but doesnt happen when i redraw it or load this in.
+    // // problems:
+    // // problem happened when i drew it the first time, but doesnt happen when i redraw it or load this in.
     // '{"shapeData":[{"coords":{"x":30.333332061767578,"y":114.40147399902344},"arc":{"exist":false}},{"coords":{"x":189.3333282470703,"y":118.40147399902344},"arc":{"exist":false}},{"coords":{"x":259.33331298828125,"y":293.40147399902344},"arc":{"exist":false}},{"coords":{"x":283.33331298828125,"y":212.19964599609375},"arc":{"exist":true,"radius":117.4580192335929,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":376.402730275505,"y":283.85486107563764},"startAngle":0.737489719476834}},{"coords":{"x":346.33331298828125,"y":180.40147399902344},"arc":{"exist":true,"radius":81.5867417226753,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":347.97964841976585,"y":261.9716033636969},"startAngle":0.8944928397863832}},{"coords":{"x":492.33331298828125,"y":177.40147399902344},"arc":{"exist":false}},{"coords":{"x":503.3350524902344,"y":250.8003387451172},"arc":{"exist":true,"radius":92.2015850103769,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":581.3056523624813,"y":201.58938636673165},"startAngle":0.8284513223513276}},{"coords":{"x":569.3333129882812,"y":299.40147399902344},"arc":{"exist":true,"radius":112.44499464074573,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":598.4245640619042,"y":190.78482734332536},"startAngle":0.7460964352095849}},{"coords":{"x":653.3333129882812,"y":119.4007568359375},"arc":{"exist":false}},{"coords":{"x":828.3333129882812,"y":100.19964599609375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2078px","dragDivLeft":"2016px"},"svgDimensions":{"x":17.664932250976562,"y":165.1996612548828,"width":928.32470703125,"height":567.6041870117188,"top":165.1996612548828,"right":945.9896392822266,"bottom":732.8038482666016,"left":17.664932250976562}}',
 
 
-    // path - ARC - ARC - path
-    // shape 1:
-    '{"shapeData":[{"coords":{"x":29.22393798828125,"y":181.00096130371094},"arc":{"exist":false}},{"coords":{"x":176.22393798828125,"y":180.00096130371094},"arc":{"exist":false}},{"coords":{"x":248.22393798828125,"y":99.99998474121094},"arc":{"exist":false}},{"coords":{"x":303.6736145019531,"y":162.79513549804688},"arc":{"exist":true,"radius":259.16630127022296,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":84.23486686359817,"y":300.6856998924185},"startAngle":0.3246639423950466}},{"coords":{"x":341.22393798828125,"y":247.99998474121094},"arc":{"exist":true,"radius":320.1734005956874,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":32.57953433226663,"y":333.14479398305264},"startAngle":0.2918529373848287}},{"coords":{"x":388.673583984375,"y":165.79513549804688},"arc":{"exist":true,"radius":281.77508096434326,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":605.5014694011747,"y":345.74753019770446},"startAngle":0.33846459998799006}},{"coords":{"x":463.22393798828125,"y":100.99998474121094},"arc":{"exist":true,"radius":305.1406719237675,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":623.4814542242009,"y":360.6696944725969},"startAngle":0.32512775865230137}},{"coords":{"x":534.2239379882812,"y":191.8003387451172},"arc":{"exist":false}},{"coords":{"x":712.2239379882812,"y":188.8003387451172},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2140px","dragDivLeft":"2098px"},"svgDimensions":{"x":387.99481201171875,"y":153.8715362548828,"width":760.217041015625,"height":581.1979370117188,"top":153.8715362548828,"right":1148.2118530273438,"bottom":735.0694732666016,"left":387.99481201171875}}',
-    // shape 2:
-    '{"shapeData":[{"coords":{"x":29.22393798828125,"y":181.00096130371094},"arc":{"exist":false}},{"coords":{"x":176.22393798828125,"y":180.00096130371094},"arc":{"exist":false}},{"coords":{"x":248.22393798828125,"y":99.99998474121094},"arc":{"exist":false}},{"coords":{"x":272.6736145019531,"y":200.79513549804688},"arc":{"exist":true,"radius":257.40355125701893,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":505.46882304966675,"y":90.9635413324732},"startAngle":0.40571667476518075}},{"coords":{"x":340.22393798828125,"y":294.9999694824219},"arc":{"exist":true,"radius":321.5339569490637,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":563.4682216376921,"y":63.59972037023155},"startAngle":0.3625054299603628}},{"coords":{"x":426.673583984375,"y":204.79513549804688},"arc":{"exist":true,"radius":315.8736292180265,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":159.90043258975538,"y":35.65544373307219},"startAngle":0.398168622783528}},{"coords":{"x":463.22393798828125,"y":100.99998474121094},"arc":{"exist":true,"radius":245.02991279471593,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":219.73195930991875,"y":73.58986829705918},"startAngle":0.45296080846281356}},{"coords":{"x":534.2239379882812,"y":191.8003387451172},"arc":{"exist":false}},{"coords":{"x":712.2239379882812,"y":188.8003387451172},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2130px","dragDivLeft":"2104px"},"svgDimensions":{"x":112.3263931274414,"y":217.20486450195312,"width":760.217041015625,"height":581.1979370117188,"top":217.20486450195312,"right":872.5434341430664,"bottom":798.4028015136719,"left":112.3263931274414}}',
-    // shape 3: (big shape lots of shapes shouldnt call arc - arc but does)
-    '{"shapeData":[{"coords":{"x":41.00694274902344,"y":101.99838256835938},"arc":{"exist":false}},{"coords":{"x":166.00694274902344,"y":100.00346374511719},"arc":{"exist":false}},{"coords":{"x":205.00694274902344,"y":236.1336669921875},"arc":{"exist":false}},{"coords":{"x":245.00694274902344,"y":167.1336669921875},"arc":{"exist":true,"radius":142.1179089327972,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":343.0193012060173,"y":270.0466284165318},"startAngle":0.5688332523606834}},{"coords":{"x":310.0069274902344,"y":136.1336669921875},"arc":{"exist":true,"radius":115.86593205696872,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":324.9144881878698,"y":251.03657751005213},"startAngle":0.6319930216645054}},{"coords":{"x":444.0069274902344,"y":143.1336669921875},"arc":{"exist":false}},{"coords":{"x":525.0069580078125,"y":384.1336669921875},"arc":{"exist":false}},{"coords":{"x":609.0069580078125,"y":309.1336669921875},"arc":{"exist":true,"radius":155.1835744894042,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":470.69524733043005,"y":238.76455103351915},"startAngle":0.7426021966722516}},{"coords":{"x":612.0069580078125,"y":213.1336669921875},"arc":{"exist":true,"radius":112.89081891528672,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":508.3898512339894,"y":257.9425074055055},"startAngle":0.8788013371517431}},{"coords":{"x":753.0068969726562,"y":223.1336669921875},"arc":{"exist":false}},{"coords":{"x":838.0068969726562,"y":374.1336669921875},"arc":{"exist":false}},{"coords":{"x":912.0068969726562,"y":288.1319274902344},"arc":{"exist":true,"radius":265.92374036810384,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":678.0720504563085,"y":161.68065910301925},"startAngle":0.4299532841455623}},{"coords":{"x":938.0068969726562,"y":189.1336669921875},"arc":{"exist":true,"radius":216.4330859702853,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":721.6093014912144,"y":185.2143083110766},"startAngle":0.4774418133021221}},{"coords":{"x":1067.0069580078125,"y":188.1336669921875},"arc":{"exist":false}},{"coords":{"x":1091.0069580078125,"y":279.1319274902344},"arc":{"exist":true,"radius":250.2631102491302,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":1316.6793507001807,"y":170.9487701686354},"startAngle":0.37829572853746773}},{"coords":{"x":1160.0069580078125,"y":382.1336669921875},"arc":{"exist":true,"radius":434.3198807334411,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":1482.6508026855572,"y":91.38513596946015},"startAngle":0.2864296031355087}},{"coords":{"x":1257.0069580078125,"y":219.1336669921875},"arc":{"exist":false}},{"coords":{"x":1357.0069580078125,"y":224.1336669921875},"arc":{"exist":false}},{"coords":{"x":1443.0069580078125,"y":223.1336669921875},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2152px","dragDivLeft":"1799px"},"svgDimensions":{"x":88.99305725097656,"y":165.86805725097656,"width":1543.0035400390625,"height":555.859375,"top":165.86805725097656,"right":1631.996597290039,"bottom":721.7274322509766,"left":88.99305725097656}}',
+    // // path - ARC - ARC - path
+    // // shape 1:
+    // '{"shapeData":[{"coords":{"x":29.22393798828125,"y":181.00096130371094},"arc":{"exist":false}},{"coords":{"x":176.22393798828125,"y":180.00096130371094},"arc":{"exist":false}},{"coords":{"x":248.22393798828125,"y":99.99998474121094},"arc":{"exist":false}},{"coords":{"x":303.6736145019531,"y":162.79513549804688},"arc":{"exist":true,"radius":259.16630127022296,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":84.23486686359817,"y":300.6856998924185},"startAngle":0.3246639423950466}},{"coords":{"x":341.22393798828125,"y":247.99998474121094},"arc":{"exist":true,"radius":320.1734005956874,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":32.57953433226663,"y":333.14479398305264},"startAngle":0.2918529373848287}},{"coords":{"x":388.673583984375,"y":165.79513549804688},"arc":{"exist":true,"radius":281.77508096434326,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":605.5014694011747,"y":345.74753019770446},"startAngle":0.33846459998799006}},{"coords":{"x":463.22393798828125,"y":100.99998474121094},"arc":{"exist":true,"radius":305.1406719237675,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":623.4814542242009,"y":360.6696944725969},"startAngle":0.32512775865230137}},{"coords":{"x":534.2239379882812,"y":191.8003387451172},"arc":{"exist":false}},{"coords":{"x":712.2239379882812,"y":188.8003387451172},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2140px","dragDivLeft":"2098px"},"svgDimensions":{"x":387.99481201171875,"y":153.8715362548828,"width":760.217041015625,"height":581.1979370117188,"top":153.8715362548828,"right":1148.2118530273438,"bottom":735.0694732666016,"left":387.99481201171875}}',
+    // // shape 2:
+    // '{"shapeData":[{"coords":{"x":29.22393798828125,"y":181.00096130371094},"arc":{"exist":false}},{"coords":{"x":176.22393798828125,"y":180.00096130371094},"arc":{"exist":false}},{"coords":{"x":248.22393798828125,"y":99.99998474121094},"arc":{"exist":false}},{"coords":{"x":272.6736145019531,"y":200.79513549804688},"arc":{"exist":true,"radius":257.40355125701893,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":505.46882304966675,"y":90.9635413324732},"startAngle":0.40571667476518075}},{"coords":{"x":340.22393798828125,"y":294.9999694824219},"arc":{"exist":true,"radius":321.5339569490637,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":563.4682216376921,"y":63.59972037023155},"startAngle":0.3625054299603628}},{"coords":{"x":426.673583984375,"y":204.79513549804688},"arc":{"exist":true,"radius":315.8736292180265,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":159.90043258975538,"y":35.65544373307219},"startAngle":0.398168622783528}},{"coords":{"x":463.22393798828125,"y":100.99998474121094},"arc":{"exist":true,"radius":245.02991279471593,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":219.73195930991875,"y":73.58986829705918},"startAngle":0.45296080846281356}},{"coords":{"x":534.2239379882812,"y":191.8003387451172},"arc":{"exist":false}},{"coords":{"x":712.2239379882812,"y":188.8003387451172},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2130px","dragDivLeft":"2104px"},"svgDimensions":{"x":112.3263931274414,"y":217.20486450195312,"width":760.217041015625,"height":581.1979370117188,"top":217.20486450195312,"right":872.5434341430664,"bottom":798.4028015136719,"left":112.3263931274414}}',
+    // // shape 3: (big shape lots of shapes shouldnt call arc - arc but does)
+    // '{"shapeData":[{"coords":{"x":41.00694274902344,"y":101.99838256835938},"arc":{"exist":false}},{"coords":{"x":166.00694274902344,"y":100.00346374511719},"arc":{"exist":false}},{"coords":{"x":205.00694274902344,"y":236.1336669921875},"arc":{"exist":false}},{"coords":{"x":245.00694274902344,"y":167.1336669921875},"arc":{"exist":true,"radius":142.1179089327972,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":343.0193012060173,"y":270.0466284165318},"startAngle":0.5688332523606834}},{"coords":{"x":310.0069274902344,"y":136.1336669921875},"arc":{"exist":true,"radius":115.86593205696872,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":324.9144881878698,"y":251.03657751005213},"startAngle":0.6319930216645054}},{"coords":{"x":444.0069274902344,"y":143.1336669921875},"arc":{"exist":false}},{"coords":{"x":525.0069580078125,"y":384.1336669921875},"arc":{"exist":false}},{"coords":{"x":609.0069580078125,"y":309.1336669921875},"arc":{"exist":true,"radius":155.1835744894042,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":470.69524733043005,"y":238.76455103351915},"startAngle":0.7426021966722516}},{"coords":{"x":612.0069580078125,"y":213.1336669921875},"arc":{"exist":true,"radius":112.89081891528672,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":508.3898512339894,"y":257.9425074055055},"startAngle":0.8788013371517431}},{"coords":{"x":753.0068969726562,"y":223.1336669921875},"arc":{"exist":false}},{"coords":{"x":838.0068969726562,"y":374.1336669921875},"arc":{"exist":false}},{"coords":{"x":912.0068969726562,"y":288.1319274902344},"arc":{"exist":true,"radius":265.92374036810384,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":678.0720504563085,"y":161.68065910301925},"startAngle":0.4299532841455623}},{"coords":{"x":938.0068969726562,"y":189.1336669921875},"arc":{"exist":true,"radius":216.4330859702853,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":721.6093014912144,"y":185.2143083110766},"startAngle":0.4774418133021221}},{"coords":{"x":1067.0069580078125,"y":188.1336669921875},"arc":{"exist":false}},{"coords":{"x":1091.0069580078125,"y":279.1319274902344},"arc":{"exist":true,"radius":250.2631102491302,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":1316.6793507001807,"y":170.9487701686354},"startAngle":0.37829572853746773}},{"coords":{"x":1160.0069580078125,"y":382.1336669921875},"arc":{"exist":true,"radius":434.3198807334411,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":1482.6508026855572,"y":91.38513596946015},"startAngle":0.2864296031355087}},{"coords":{"x":1257.0069580078125,"y":219.1336669921875},"arc":{"exist":false}},{"coords":{"x":1357.0069580078125,"y":224.1336669921875},"arc":{"exist":false}},{"coords":{"x":1443.0069580078125,"y":223.1336669921875},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2152px","dragDivLeft":"1799px"},"svgDimensions":{"x":88.99305725097656,"y":165.86805725097656,"width":1543.0035400390625,"height":555.859375,"top":165.86805725097656,"right":1631.996597290039,"bottom":721.7274322509766,"left":88.99305725097656}}',
+    // // shape 4: (checking original pathData location after fillers are added: fails test)
+    // '{"shapeData":[{"coords":{"x":46.11283874511719,"y":55.415771484375},"arc":{"exist":false}},{"coords":{"x":151.1128387451172,"y":55.415771484375},"arc":{"exist":false}},{"coords":{"x":221.1128387451172,"y":254.415771484375},"arc":{"exist":false}},{"coords":{"x":246.1128387451172,"y":152.57810974121094},"arc":{"exist":true,"radius":146.8154911058081,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":366.7927981769748,"y":236.1911220070348},"startAngle":0.7303646638276546}},{"coords":{"x":327.1128234863281,"y":101.42434692382812},"arc":{"exist":true,"radius":122.53913894986707,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":346.8380292948473,"y":222.365476529874},"startAngle":0.8032116453056799}},{"coords":{"x":439.1128234863281,"y":99.00346374511719},"arc":{"exist":false}},{"coords":{"x":521.1128540039062,"y":308.0034484863281},"arc":{"exist":false}},{"coords":{"x":573.1128540039062,"y":214.57810974121094},"arc":{"exist":true,"radius":474.2973803484208,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":958.899447102785,"y":490.4888010718202},"startAngle":0.22591230763770173}},{"coords":{"x":634.1128540039062,"y":150.0034637451172},"arc":{"exist":true,"radius":327.37314712402605,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":839.3934120121717,"y":405.01928670852544},"startAngle":0.27218313891239126}},{"coords":{"x":735.11279296875,"y":154.0034637451172},"arc":{"exist":false}},{"coords":{"x":791.11279296875,"y":218.57810974121094},"arc":{"exist":true,"radius":160.74748920694392,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":646.0412344215999,"y":287.8168141415488},"startAngle":0.5382035446360723}},{"coords":{"x":819.11279296875,"y":330.0034484863281},"arc":{"exist":true,"radius":290.4238937322043,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":529.010740172004,"y":343.67228214866753},"startAngle":0.39821857041008707}},{"coords":{"x":860.11279296875,"y":221.57810974121094},"arc":{"exist":true,"radius":306.13664166685857,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":1120.7820148703638,"y":382.11221865352206},"startAngle":0.3809482336380858}},{"coords":{"x":920.11279296875,"y":166.0034637451172},"arc":{"exist":true,"radius":152.38515465349104,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":989.8657015934832,"y":301.4869206583433},"startAngle":0.5433486281688932}},{"coords":{"x":1035.11279296875,"y":163.0034637451172},"arc":{"exist":false}},{"coords":{"x":1094.11279296875,"y":100.00346374511719},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2158px","dragDivLeft":"1976px"},"svgDimensions":{"x":114.88716125488281,"y":237.42189025878906,"width":1194.10595703125,"height":506.8403015136719,"top":237.42189025878906,"right":1308.9931182861328,"bottom":744.2621917724609,"left":114.88716125488281}}',
+    // // shape 5: (causes visual error)
+    // '{"shapeData":[{"coords":{"x":35.5555419921875,"y":182.83578491210938},"arc":{"exist":false}},{"coords":{"x":159.5555419921875,"y":184.83578491210938},"arc":{"exist":false}},{"coords":{"x":222.5555419921875,"y":321.8357849121094},"arc":{"exist":false}},{"coords":{"x":383.5555419921875,"y":223.578125},"arc":{"exist":true,"radius":202.50986980576153,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":209.69709365164616,"y":119.73455365653261},"startAngle":0.9688351443646751}},{"coords":{"x":354.5555419921875,"y":100.83688354492188},"arc":{"exist":true,"radius":90.54544172540146,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":305.82061471290814,"y":177.14798287084838},"startAngle":1.5408752279192066}},{"coords":{"x":467.5555419921875,"y":163.578125},"arc":{"exist":true,"radius":127.53051540542208,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":357.68580294099957,"y":228.3289767349113},"startAngle":1.062798108630262}},{"coords":{"x":484.5555419921875,"y":321.421875},"arc":{"exist":true,"radius":192.4061803548093,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":301.7942984167543,"y":261.2681877855941},"startAngle":0.8505159734003701}},{"coords":{"x":555.5555419921875,"y":200.421875},"arc":{"exist":false}},{"coords":{"x":702.5555419921875,"y":199.578125},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2218px","dragDivLeft":"2249px"},"svgDimensions":{"x":708.4375610351562,"y":297.421875,"width":802.5521240234375,"height":547.248291015625,"top":297.421875,"right":1510.9896850585938,"bottom":844.670166015625,"left":708.4375610351562}}',
+    // // shape 6:
+    // '{"shapeData":[{"coords":{"x":39.5555419921875,"y":48.57810974121094},"arc":{"exist":false}},{"coords":{"x":139.5555419921875,"y":51.57810974121094},"arc":{"exist":false}},{"coords":{"x":218.5555419921875,"y":208.57810974121094},"arc":{"exist":false}},{"coords":{"x":256.5555419921875,"y":143.57810974121094},"arc":{"exist":true,"radius":158.16507957935113,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":370.1747403044237,"y":253.60933336990288},"startAngle":0.48065257534231215}},{"coords":{"x":310.5555419921875,"y":113.57810974121094},"arc":{"exist":true,"radius":106.46638625415497,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":333.0365546504154,"y":217.6439325260211},"startAngle":0.58868212730351}},{"coords":{"x":413.5555419921875,"y":112.57810974121094},"arc":{"exist":false}},{"coords":{"x":495.5555419921875,"y":176.57810974121094},"arc":{"exist":true,"radius":144.40087712798646,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":371.67279508043487,"y":250.77162922189393},"startAngle":0.7369113778729816}},{"coords":{"x":522.5555419921875,"y":294.5780944824219},"arc":{"exist":true,"radius":195.55503997764683,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":327.7872014758317,"y":277.05476166118257},"startAngle":0.6293396735959941}},{"coords":{"x":620.5555419921875,"y":179.57810974121094},"arc":{"exist":false}},{"coords":{"x":710.5555419921875,"y":178.57810974121094},"arc":{"exist":false}},{"coords":{"x":824.5555419921875,"y":254.57810974121094},"arc":{"exist":true,"radius":265.23142959722617,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":625.4237383231571,"y":429.7758152447565},"startAngle":0.5224944506710648}},{"coords":{"x":893.5555419921875,"y":386.5780944824219},"arc":{"exist":true,"radius":313.45398450763446,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":589.2189629259849,"y":461.62905747420086},"startAngle":0.47976554579779734}},{"coords":{"x":976.5555419921875,"y":263.5780944824219},"arc":{"exist":true,"radius":437.80490124819636,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":1292.7147668420707,"y":566.4253762916927},"startAngle":0.3405722402361169}},{"coords":{"x":1075.5555419921875,"y":196.57810974121094},"arc":{"exist":true,"radius":284.1416633512056,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":1181.7474157618824,"y":460.1303261941769},"startAngle":0.4238744859878059}},{"coords":{"x":1154.5555419921875,"y":198.57810974121094},"arc":{"exist":false}},{"coords":{"x":1264.5555419921875,"y":198.57810974121094},"arc":{"exist":false}},{"coords":{"x":1365.5555419921875,"y":200.57810974121094},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2158px","dragDivLeft":"1835px"},"svgDimensions":{"x":294.4444580078125,"y":150.75521850585938,"width":1465.5556640625,"height":500.0000305175781,"top":150.75521850585938,"right":1760.0001220703125,"bottom":650.7552490234375,"left":294.4444580078125}}',
+
+
+    // Refactoring updateSVG functions
+    // shape 1: (basic)
+    '{"shapeData":[{"coords":{"x":31.88885498046875,"y":104.9984130859375},"arc":{"exist":false}},{"coords":{"x":135.88885498046875,"y":104.001708984375},"arc":{"exist":false}},{"coords":{"x":286.88885498046875,"y":273.001708984375},"arc":{"exist":false}},{"coords":{"x":316.88885498046875,"y":185.001708984375},"arc":{"exist":true,"radius":123.42439192445963,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":410.1084628236061,"y":265.8947571127173},"startAngle":0.7723329175907827}},{"coords":{"x":391.88885498046875,"y":152.001708984375},"arc":{"exist":true,"radius":95.86665518056695,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":389.2947373334099,"y":247.83325978651396},"startAngle":0.8831396457265367}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2216.57px","dragDivLeft":"2250px"},"svgDimensions":{"x":471.11114501953125,"y":295.998291015625,"width":891.8837280273438,"height":533.420166015625,"top":295.998291015625,"right":1362.994873046875,"bottom":829.41845703125,"left":471.11114501953125}}',
+    // shape 2: (basic)
+    '{"shapeData":[{"coords":{"x":31.88885498046875,"y":104.9984130859375},"arc":{"exist":false}},{"coords":{"x":135.88885498046875,"y":104.001708984375},"arc":{"exist":false}},{"coords":{"x":286.88885498046875,"y":273.001708984375},"arc":{"exist":false}},{"coords":{"x":370.88885498046875,"y":240.001708984375},"arc":{"exist":true,"radius":97.39355313415557,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":297.3297416799761,"y":176.16942058312097},"startAngle":0.9634861628809389}},{"coords":{"x":391.88885498046875,"y":152.001708984375},"arc":{"exist":true,"radius":97.87185173763798,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":296.96849373252144,"y":175.85594095929667},"startAngle":0.9609288315051852}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2216.57px","dragDivLeft":"2250px"},"svgDimensions":{"x":471.11114501953125,"y":295.9895935058594,"width":891.8837280273438,"height":533.420166015625,"top":295.9895935058594,"right":1362.994873046875,"bottom":829.4097595214844,"left":471.11114501953125}}',
 ]

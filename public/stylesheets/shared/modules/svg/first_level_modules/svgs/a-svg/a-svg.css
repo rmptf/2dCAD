@@ -62,53 +62,219 @@ svg{
   fill: hotpink;
 }
 
-/* 
-.item:nth-child(odd) .description {
-  background-color: red;
-} */
 
+/* TESTER ELEMENTS */
+  /* ENDPOINTS */
+    /* default */
+      .testElement-endpoint {
+        r: 5;
+        fill: red;
+      }
 
-.mainEndPoint--TESTER--intArc {
-  r: 10;
-  fill: salmon;
-}
-.mainEndPoint--TESTER--intArc2 {
-  r: 10;
-  fill: blueviolet;
-}
-.mainEndPoint--TESTER--circCent {
-  r: 3;
-  fill: green;
-}
+  /* ARCS */
+    /* default */
+      .testElement-arc {
+        r: 100;
+        fill: none;
+        stroke: red;
+        stroke-width: 1;
+        stroke-dasharray: 10;
+      }
 
+  /* PATHS */
+    /* default */
+      .testElement-path {
+        fill: none;
+        stroke: red;
+        stroke-width: 1;
+        stroke-dasharray: none;
+        opacity: 1;
+      }
 
-.testCirc {
-  r: 100;
-  stroke-width: 1;
-  stroke-dasharray: 10;
-  fill: none;
-}
+  /* GENERAL */
+    /* radius */
+      .testElem-radius--unset{
+        r: unset;
+      }
+      .testElem-radius--1{
+        r: 1;
+      }
+      .testElem-radius--2{
+        r: 2;
+      }
+      .testElem-radius--3{
+        r: 3;
+      }
+      .testElem-radius--4{
+        r: 4;
+      }
+      .testElem-radius--5{
+        r: 5;
+      }
+      .testElem-radius--6{
+        r: 6;
+      }
+      .testElem-radius--7{
+        r: 7;
+      }
+      .testElem-radius--8{
+        r: 8;
+      }
+      .testElem-radius--9{
+        r: 9;
+      }
+      .testElem-radius--10{
+        r: 10;
+      }
+    /* radius */
 
-.testCirc--TESTER--circ1 {
-  stroke: blue;
-}
+    /* strokeWidth */
+      .testElem-strokeWidth--0{
+        stroke-width: 0;
+      }
+      .testElem-strokeWidth--1{
+        stroke-width: 1;
+      }
+      .testElem-strokeWidth--2{
+        stroke-width: 2;
+      }
+      .testElem-strokeWidth--3{
+        stroke-width: 3;
+      }
+      .testElem-strokeWidth--4{
+        stroke-width: 4;
+      }
+      .testElem-strokeWidth--5{
+        stroke-width: 5;
+      }
+      .testElem-strokeWidth--6{
+        stroke-width: 6;
+      }
+      .testElem-strokeWidth--7{
+        stroke-width: 7;
+      }
+      .testElem-strokeWidth--8{
+        stroke-width: 8;
+      }
+      .testElem-strokeWidth--9{
+        stroke-width: 9;
+      }
+      .testElem-strokeWidth--10{
+        stroke-width: 10;
+      }
+    /* strokeWidth */
 
-.testCirc--TESTER--circ2 {
-  stroke: red;
-}
+    /* dashArray */
+    .testElem-dashArray--none{
+      stroke-dasharray: none;
+    }
+    .testElem-dashArray--5{
+      stroke-dasharray: 5;
+    }
+    .testElem-dashArray--10{
+      stroke-dasharray: 10;
+    }
+  /* dashArray */
 
+    /* colorPalettes */
+      /* colorPallete 1 */
+      .testElement-palette--1{
+        --color-01: #22577aff;
+        --color-02: #38a3a5ff;
+        --color-03: #57cc99ff;
+        --color-04: #80ed99ff;
+        --color-05: #c7f9ccff;
+      }
+      .testElement-palette--2{
+        --color-01: #9c89b8ff;
+        --color-02: #f0a6caff;
+        --color-03: #efc3e6ff;
+        --color-04: #f0e6efff;
+        --color-05: #b8beddff;
+      }
+      .testElement-palette--3{
+        --color-01: #21295cff;
+        --color-02: #1b3b6fff;
+        --color-03: #065a82ff;
+        --color-04: #1c7293ff;
+        --color-05: #9eb3c2ff;
+      }
+      .testElement-palette--4{
+        --color-01: #cc5803ff;
+        --color-02: #e2711dff;
+        --color-03: #ff9505ff;
+        --color-04: #ffb627ff;
+        --color-05: #ffc971ff;
+      }
+      .testElement-palette--5{
+        --color-01: #ef6351ff;
+        --color-02: #f38375ff;
+        --color-03: #f7a399ff;
+        --color-04: #fbc3bcff;
+        --color-05: #ffe3e0ff;
+      }
+      .testElement-palette--6{
+        --color-01: #f3e9dcff;
+        --color-02: #c08552ff;
+        --color-03: #5e3023ff;
+        --color-04: #895737ff;
+        --color-05: #dab49dff;
+      }
+    /* colorPalettes */
 
+    /* fill */
+      .testElem-fill-color--none{
+        fill: none;
+      }
+      .testElem-fill-color--1{
+        fill: var(--color-01);
+      }
+      .testElem-fill-color--2{
+        fill: var(--color-02);
+      }
+      .testElem-fill-color--3{
+        fill: var(--color-03);
+      }
+      .testElem-fill-color--4{
+        fill: var(--color-04);
+      }
+      .testElem-fill-color--5{
+        fill: var(--color-05);
+      }
+    /* fill */
 
-.testPath {
+    /* strokeColor */
+      .testElem-stroke-color--none{
+        stroke: none;
+      }
+      .testElem-stroke-color--1{
+        stroke: var(--color-01);
+      }
+      .testElem-stroke-color--2{
+        stroke: var(--color-02);
+      }
+      .testElem-stroke-color--3{
+        stroke: var(--color-03);
+      }
+      .testElem-stroke-color--4{
+        stroke: var(--color-04);
+      }
+      .testElem-stroke-color--5{
+        stroke: var(--color-05);
+      }
+    /* strokeColor */
+/* TESTER ELEMENTS */
 
-}
-.mainPath {
+/*
+--pink: #ef476fff;      1
+--coral: #f78c6bff;     2
+--orange: #fbaf69ff;    3
+--yellow: #ffd166ff;    4
+--mint: #83d483ff;      5
+--emerald: #06d6a0ff;   6
+--green: #0cb0a9ff;     7
+--blue: #118ab2ff;      8
+--sea: #0c637fff;       9
+--navy: #073b4cff;      10
+*/
 
-}
-.testPath--TESTER--path1 {
-  stroke-width: 1;
-  stroke-dasharray: 10;
-  fill: none;
-  stroke: blue;
-  opacity: 1;
-}
