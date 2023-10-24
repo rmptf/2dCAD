@@ -2491,23 +2491,24 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }
                     // HANDLE PATH TO ARC
 
-                    // // HANDLE ARC TO ARC
-                    // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "CCC") {
+                    // HANDLE ARC TO ARC
+                    // else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "CCC") {
                     //     // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true) {
-                    //     console.log(1 + " - Joiner")
+                    //     console.log(555555 + " - Joiner")
 
                     //     // NEW_ArcIntersectPICKER
                     //     pathToArcCounter += 1
-                    //     handlePathToArcIntersectionNoContact(i)
+                    //     console.log('adddeddddddd')
+                    //     handleArcToArcIntersectionNoContact(i)
 
                     //     parallelPathSegmentCounter_FIRST = 0
                     // } 
                     // else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joinerSide === "CCC") {
                     // // } else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.joiner === true) {
-                    //     console.log(2 + " - Joiner")
+                    //     console.log(6666666 + " - Joiner")
                     //     parallelPathSegmentCounter_FIRST = 0
                     // }
-                    // // HANDLE ARC TO ARC
+                    // HANDLE ARC TO ARC
                     
                     // HANDLE ARC TO PATH
                     else if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "BBB") {
@@ -2956,13 +2957,14 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let arcToArcIntPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData)
                     if(arcToArcIntPoint) {
                         if(arcToArcIntPoint[0].doesIntersect === false) {
+                            console.log("startquestion")
                             // Use as temporary.
                             thisParallelPathData[1].coords.x = arcToArcIntPoint[0].x
                             thisParallelPathData[1].coords.y = arcToArcIntPoint[0].y
                             nextParallelPathData[0].coords.x = arcToArcIntPoint[1].x
                             nextParallelPathData[0].coords.y = arcToArcIntPoint[1].y
                             // Later change to this
-                            // createAndAddSvgElementAndUpdateDataArrays(thisIndex, shape)
+                            // createAndAddSvgElementAndUpdateDataArrays(nextIndex, shape)
                         } else {
                             updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, arcToArcIntPoint, thisOriginalPathData)
                             placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToArcIntPoint)
@@ -3027,6 +3029,10 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }else if(shape === 'a2p'){
                         parPathData[0] = 1
                         parPathData[1] = "BBB"
+                        indexer = index + 1
+                    } else if (shape = 'a2a') {
+                        parPathData[0] = 0
+                        parPathData[1] = "CCC"
                         indexer = index + 1
                     }
 
@@ -3221,6 +3227,69 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }
                 }
 
+                function handleArcToArcIntersectionNoContact(pathToArcIntersectNoContactIndex) {
+                    let prevIndex = pathToArcIntersectNoContactIndex - 1
+                    console.log('herhehrerhehrerhehre')
+                    // let zeroParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][0]
+                    // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1][1]
+                    // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 2][0]
+                    // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 2][1]
+                    // let fourthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][0]
+                    // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][1]
+
+                    // // new
+                    // // fix later
+                    // let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
+                    // let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
+                    // if(pathToArcIntPoint[0].doesIntersect === false) {
+                        
+                    //     // before first point
+                    //     // zeroParPath.coords.x = 100
+                    //     // zeroParPath.coords.y = 10
+                    //     // first point
+                    //     firstParPath.coords.x = circleRadiusPoint[0]
+                    //     firstParPath.coords.y = circleRadiusPoint[1]
+                    //     // joiner 
+                    //     secondParPath.coords.x = circleRadiusPoint[0]
+                    //     secondParPath.coords.y = circleRadiusPoint[1]
+                    //     // joiner
+                    //     thirdParPath.coords.x = pathToArcIntPoint[0].x
+                    //     thirdParPath.coords.y = pathToArcIntPoint[0].y
+                    //     thirdParPath.arc.radius = 1
+                    //     // last point
+                    //     fourthParPath.coords.x = pathToArcIntPoint[0].x
+                    //     fourthParPath.coords.y = pathToArcIntPoint[0].y
+                    //     // after last point
+                    //     // fifthParPath.coords.x = 100
+                    //     // fifthParPath.coords.y = 250
+
+                    // } else if(pathToArcIntPoint[0].doesIntersect === true) {
+                        // console.log("Remove_Points_and_Paths")
+                        // // Remove Points and paths
+                        // let thisIndex = pathToArcIntersectNoContactIndex + 1
+                        // let nextIndex = pathToArcIntersectNoContactIndex + 2
+                        // let doubleIndex = thisIndex * 2
+
+                        // // Remove elements from various arrays
+                        // parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+                        // parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        // parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+
+                        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+                        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
+                        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+                        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+                        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+
+                        // // Remove SVG elements from the DOM
+                        // firstAddedSvgEndPoint.remove()
+                        // secondAddedSvgEndPoint.remove()
+                        // addedSvgPath.remove()
+                    // }
+                }
+
 
 
 
@@ -3279,28 +3348,29 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-let updateSVG_PathToArcIntersect_01_switches = [1,0]
-let updateSVG_PathToArcIntersect_02_switches = [1,0]
-let updateSVG_arcToArcIntersect_01_switches = [1,0]
+let updateSVG_PathToArcIntersect_01_switches = [0,0]
+let updateSVG_PathToArcIntersect_02_switches = [0,0]
+let updateSVG_arcToArcIntersect_01_switches = [0,0]
 
 
 function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
     if(updateSVG_PathToArcIntersect_01_switches[0] === 1) {
         if(updateSVG_PathToArcIntersect_01_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_01')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--2').attr('id', 'intCircTEST--incCirc2--IDTAG_01')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--3').attr('id', 'intCircTEST--incCirc3--IDTAG_01')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'intArcTEST--circCent1--IDTAG_01')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'intArcTEST--circ1--IDTAG_01')
-            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'intArcTEST--path1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt2--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--3').attr('id', 'visualTest--origPathDataPt1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_01')
+            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'visualTest--path--IDTAG_01')
             updateSVG_PathToArcIntersect_01_switches[1] = 1
         }
-        let path2ArcIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG_01")
-        let path2ArcIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG_01")
-        let originalPathPoint = d3.select("#intCircTEST--incCirc3--IDTAG_01")
-        let arcCenter = d3.select("#intArcTEST--circCent1--IDTAG_01")
-        let fullArc = d3.select("#intArcTEST--circ1--IDTAG_01")
-        let pathBetweenIntersectingPoints = d3.select("#intArcTEST--path1--IDTAG_01")
+
+        let path2ArcIntPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_01")
+        let path2ArcIntPoint2 = d3.select("#visualTest--intersectPt2--IDTAG_01")
+        let originalPathPoint = d3.select("#visualTest--origPathDataPt1--IDTAG_01")
+        let arcCenter = d3.select("#visualTest--arcCent1--IDTAG_01")
+        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_01")
+        let pathBetweenIntersectingPoints = d3.select("#visualTest--path--IDTAG_01")
 
         let originalPointCoords = [originalPathData.coords.x, originalPathData.coords.y]
         let arcCenterCoords = [parallelPathData[1].arc.center.x, parallelPathData[1].arc.center.y]
@@ -3318,20 +3388,21 @@ function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, ori
 function updateSVG_PathToArcIntersect_02(parallelPathData, intersectionData, originalPathData) {
     if(updateSVG_PathToArcIntersect_02_switches[0] === 1) {
         if(updateSVG_PathToArcIntersect_02_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_02')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--2').attr('id', 'intCircTEST--incCirc2--IDTAG_02')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--3').attr('id', 'intCircTEST--incCirc3--IDTAG_02')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'intArcTEST--circCent1--IDTAG_02')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'intArcTEST--circ1--IDTAG_02')
-            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--3 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'intArcTEST--path1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt2--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--3').attr('id', 'visualTest--origPathDataPt1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_02')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_02')
+            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--3 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'visualTest--path--IDTAG_02')
             updateSVG_PathToArcIntersect_02_switches[1] = 1
         }
-        let path2ArcIntPoint1 = d3.select("#intCircTEST--incCirc1--IDTAG_02")
-        let path2ArcIntPoint2 = d3.select("#intCircTEST--incCirc2--IDTAG_02")
-        let originalPathPoint = d3.select("#intCircTEST--incCirc3--IDTAG_02")
-        let arcCenter = d3.select("#intArcTEST--circCent1--IDTAG_02")
-        let fullArc = d3.select("#intArcTEST--circ1--IDTAG_02")
-        let pathBetweenIntersectingPoints = d3.select("#intArcTEST--path1--IDTAG_02")
+
+        let path2ArcIntPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_02")
+        let path2ArcIntPoint2 = d3.select("#visualTest--intersectPt2--IDTAG_02")
+        let originalPathPoint = d3.select("#visualTest--origPathDataPt1--IDTAG_02")
+        let arcCenter = d3.select("#visualTest--arcCent1--IDTAG_02")
+        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_02")
+        let pathBetweenIntersectingPoints = d3.select("#visualTest--path--IDTAG_02")
 
         let originalPointCoords = [originalPathData.coords.x, originalPathData.coords.y]
         let arcCenterCoords = [parallelPathData[1].arc.center.x, parallelPathData[1].arc.center.y]
@@ -3359,6 +3430,7 @@ function updateSVG_arcToArcIntersect_01(firstParallelPathData, secondParallelPat
             self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--2 testElem-stroke-color--5 testElem-dashArray--5').attr('id', 'visualTest--path--IDTAG_01')
             updateSVG_arcToArcIntersect_01_switches[1] = 1
         }
+
         let path2ArcIntPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_01")
         let path2ArcIntPoint2 = d3.select("#visualTest--intersectPt2--IDTAG_01")
         let originalPathPoint = d3.select("#visualTest--origPathDataPt1--IDTAG_01")
