@@ -2404,6 +2404,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
                         // NEW USING FOR OTHER WAY, FIX LATER
                         if(nextPathDataOrFillerLocal === "filler"){
+                            console.log("findmeeee12312312")
                             nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
                         }
                         // console.log(nextPathDataOrFillerLocal)
@@ -2412,6 +2413,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
                         let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
                         
+                        console.log("huuuuuur")
+                        console.log(nextPathSegmentArcToCenterMinusPointerToArcFromArc1)
                         thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
                     }
 
@@ -2962,6 +2965,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     if(arcToArcIntPoint) {
                         if(arcToArcIntPoint[0].doesIntersect === false) {
                             // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, arcToArcIntPoint, thisOriginalPathData)
+                            // updateSVG_highlightOPD_01(thisParallelPathData[1])
+                            // updateSVG_highlightOPD_02(nextParallelPathData[1])
+
                             // thisParallelPathData[1].coords.x = arcToArcIntPoint[0].x
                             // thisParallelPathData[1].coords.y = arcToArcIntPoint[0].y
                             // nextParallelPathData[0].coords.x = arcToArcIntPoint[1].x
@@ -3033,7 +3039,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         parPathData[1] = "BBB"
                         indexer = index + 1
                     }else if(shape === 'a2a'){
-                        parPathData[0] = 1
+                        parPathData[0] = 0
                         parPathData[1] = "CCC"
                         indexer = index + 1
                     }
@@ -3245,16 +3251,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 4][1]
 
 
-                    // let thisIndex = pathToArcIntersectNoContactIndex
-                    // // let zeroParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 0][0]
-                    // let firstParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 0][1]
-                    // let secondParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 1][0]
-                    // let thirdParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 1][1]
-                    // let fourthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 2][0]
-                    // // let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 2][1]
-
-                    // // let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 3][0]
-                    // let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex + 3][1]
+                    // let firstParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1]
+                    // let fourthParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3]
 
                     updateSVG_highlightOPD_01(firstParPath)
                     updateSVG_highlightOPD_02(fifthParPath)
@@ -3262,6 +3260,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     // fifthParPath is correct but causing errors
                     // for whatever reason, fifthParPath radius doesnt decrease.
                     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
+                    // updateSVG_arcToArcIntersect_01(firstParPathOK, fourthParPathOK, arcToArcIntPoint, {coords: {x: 0, y: 0}})
 
                     // let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
                     // let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
@@ -3280,23 +3279,23 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // firstParPath.coords.x = 100
                         // firstParPath.coords.y = 100
 
-                        // // joiner 1
-                        // // secondParPath.coords.x = circleRadiusPoint[0]
-                        // // secondParPath.coords.y = circleRadiusPoint[1]
-                        // secondParPath.coords.x = arcToArcIntPoint[0].x
-                        // secondParPath.coords.y = arcToArcIntPoint[0].y
-                        // // secondParPath.coords.x = 100
-                        // // secondParPath.coords.y = 200
+                        // joiner 1
+                        // secondParPath.coords.x = circleRadiusPoint[0]
+                        // secondParPath.coords.y = circleRadiusPoint[1]
+                        secondParPath.coords.x = arcToArcIntPoint[0].x
+                        secondParPath.coords.y = arcToArcIntPoint[0].y
+                        // secondParPath.coords.x = 100
+                        // secondParPath.coords.y = 200
 
-                        // // joiner 2
-                        // // thirdParPath.coords.x = pathToArcIntPoint[0].x
-                        // // thirdParPath.coords.y = pathToArcIntPoint[0].y
-                        // thirdParPath.coords.x = arcToArcIntPoint[1].x
-                        // thirdParPath.coords.y = arcToArcIntPoint[1].y
+                        // joiner 2
+                        // thirdParPath.coords.x = pathToArcIntPoint[0].x
+                        // thirdParPath.coords.y = pathToArcIntPoint[0].y
+                        thirdParPath.coords.x = arcToArcIntPoint[1].x
+                        thirdParPath.coords.y = arcToArcIntPoint[1].y
+                        thirdParPath.arc.radius = 1
+                        // thirdParPath.coords.x = 100
+                        // thirdParPath.coords.y = 300
                         // thirdParPath.arc.radius = 1
-                        // // thirdParPath.coords.x = 100
-                        // // thirdParPath.coords.y = 300
-                        // // thirdParPath.arc.radius = 1
 
                         // last point  (joiner 2 parent)
                         // fourthParPath.coords.x = pathToArcIntPoint[0].x
@@ -3310,6 +3309,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // dont need?
                         // fifthParPath.coords.x = 100
                         // fifthParPath.coords.y = 500
+                        fifthParPath.coords.x = sixthParPath.coords.x
+                        fifthParPath.coords.y = sixthParPath.coords.y
 
                     }
                     else if(arcToArcIntPoint[0].doesIntersect === true) {
@@ -3399,7 +3400,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 let updateSVG_PathToArcIntersect_01_switches = [0,0]
 let updateSVG_PathToArcIntersect_02_switches = [0,0]
-let updateSVG_arcToArcIntersect_01_switches = [1,0]
+let updateSVG_arcToArcIntersect_01_switches = [0,0]
 let updateSVG_highlightOPD_01_switches = [1,0]
 let updateSVG_highlightOPD_02_switches = [1,0]
 
@@ -3509,35 +3510,41 @@ function updateSVG_highlightOPD_01(firstParallelPathData) {
     if(updateSVG_highlightOPD_01_switches[0] === 1) {
         if(updateSVG_highlightOPD_01_switches[1] < 1) {
             self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_04')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_04')
             self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_04')
             updateSVG_highlightOPD_01_switches[1] = 1
         }
-        let pathDataPoint = d3.select("#visualTest--intersectPt1--IDTAG_04")
+        let thisPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_04")
+        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_04")
         let fullArc = d3.select("#visualTest--fullArc1--IDTAG_04")
 
-        let highlightCoords = [firstParallelPathData.arc.center.x, firstParallelPathData.arc.center.y]
+        let arcCenterCoords1 = [firstParallelPathData.arc.center.x, firstParallelPathData.arc.center.y]
         let arcRadius = firstParallelPathData.arc.radius
 
-        pathDataPoint.attr('cx', highlightCoords[0]).attr('cy', highlightCoords[1])
-        fullArc.attr('cx', highlightCoords[0]).attr('cy', highlightCoords[1]).style("r", arcRadius)
+        thisPoint1.attr('cx', firstParallelPathData.coords.x).attr('cy', firstParallelPathData.coords.y)
+        arcCenter1.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1])
+        fullArc.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1]).style("r", arcRadius)
     }
 }
 
 function updateSVG_highlightOPD_02(firstParallelPathData) {
     if(updateSVG_highlightOPD_02_switches[0] === 1) {
         if(updateSVG_highlightOPD_02_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_05')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--3 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_05')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_05')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_05')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_05')
             updateSVG_highlightOPD_02_switches[1] = 1
         }
-        let pathDataPoint = d3.select("#visualTest--intersectPt1--IDTAG_05")
+        let thisPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_05")
+        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_05")
         let fullArc = d3.select("#visualTest--fullArc1--IDTAG_05")
 
-        let highlightCoords = [firstParallelPathData.arc.center.x, firstParallelPathData.arc.center.y]
+        let arcCenterCoords1 = [firstParallelPathData.arc.center.x, firstParallelPathData.arc.center.y]
         let arcRadius = firstParallelPathData.arc.radius
 
-        pathDataPoint.attr('cx', highlightCoords[0]).attr('cy', highlightCoords[1])
-        fullArc.attr('cx', highlightCoords[0]).attr('cy', highlightCoords[1]).style("r", arcRadius)
+        thisPoint1.attr('cx', firstParallelPathData.coords.x).attr('cy', firstParallelPathData.coords.y)
+        arcCenter1.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1])
+        fullArc.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1]).style("r", arcRadius)
     }
 }
 
