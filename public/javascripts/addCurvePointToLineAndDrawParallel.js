@@ -2419,15 +2419,13 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
 
 
-
-
                     if(thisPathDataOrFillerLocal !== "filler") {
                         // Set direction of parallelDistance and assign to thisPathSegmentArcToCursorDistance based on sweepFlag
                         console.log("Setting_Arc_Radius")
-                        console.log(thisPathDataOrFillerLocal)
-                        console.log(nextPathDataOrFillerLocal)
-                        console.log(thisOriginalParallelPathDataGlobal)
-                        console.log(i)
+                        // console.log(thisPathDataOrFillerLocal)
+                        // console.log(nextPathDataOrFillerLocal)
+                        // console.log(thisOriginalParallelPathDataGlobal)
+                        // console.log(i)
                         console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
                         console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
                         // console.log(thisOriginalParallelPathDataGlobal.arc.radius)
@@ -2444,6 +2442,29 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
                         }
                     }
+
+
+
+                    // let thisPathSegmentArcToCursorDistance
+                    // let lastPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
+                    // let thisPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
+                    // let nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
+                    // let nextNEXTPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
+                    // let thisOriginalParallelPathDataGlobal = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
+
+
+                    // if(thisPathDataOrFillerLocal !== "filler") {
+                    //     if(nextPathDataOrFillerLocal !== "filler"){
+                    //         thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
+                    //         let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
+                    //         let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
+
+                    //         thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                    //     }
+                    // }
+
+
+
 
 
 
