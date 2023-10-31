@@ -1803,13 +1803,10 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     let y2 = secondParallelPathData.arc.center.y
     let r2 = secondParallelPathData.arc.radius
     let opd = originalPathData.coords
-
-    console.log("findmeeee")
-    console.log(r2)
     
     // Calculate the distance between the centers of the circles
-    const dx = x2 - x1;
-    const dy = y2 - y1;
+    const dx = x2 - x1
+    const dy = y2 - y1
     const distance = Math.sqrt(dx * dx + dy * dy)
 
     // Circles are identical; return one of the two circles
@@ -1824,10 +1821,16 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     // Check for no intersection, one circle contained within the other, or identical circles
     if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
         // Circles don't intersect; return the closest points on each circle
+        
+        // let closestPointToOtherCircleX1 = x1 + (dx * r1) / (distance * -1)
+        // let closestPointToOtherCircleY1 = y1 + (dy * r1) / (distance * -1)
         let closestPointToOtherCircleX1 = x1 + (dx * r1) / distance
         let closestPointToOtherCircleY1 = y1 + (dy * r1) / distance
-        let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
-        let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
+        // let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
+        // let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
+        let closestPointToOtherCircleX2 = x2 - (dx * r2) / (distance * -1)
+        let closestPointToOtherCircleY2 = y2 - (dy * r2) / (distance * -1)
+
         intersectionClosestToXys = [
             // getting visual errors when shape has curves going in same direction
             { x: closestPointToOtherCircleX1, y: closestPointToOtherCircleY1, doesIntersect: false },
@@ -2391,50 +2394,21 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
                     let thisPathSegmentArcToCursorDistance
+                    let lastLASTPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 2]
                     let lastPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
                     let thisPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
                     let nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
-                    let nextNEXTPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
                     let thisOriginalParallelPathDataGlobal = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-                    // console.log("findmeee")
-                    // console.log(nextPathDataOrFillerLocal)
-
-                    // Check if parallelFigure_data_pathDatasAndFillers_array_drawParallel is tagged with filler
-                    // if(thisPathDataOrFillerLocal !== "filler") {
-                        // // Set direction of parallelDistance and assign to thisPathSegmentArcToCursorDistance based on sweepFlag
-                        // console.log("Setting_Arc_Radius")
-                        // console.log(thisOriginalParallelPathDataGlobal)
-                        // console.log(thisOriginalParallelPathDataGlobal.arc.radius)
-
-                        // // NEW USING FOR OTHER WAY, FIX LATER
-                        // if(nextPathDataOrFillerLocal === "filler"){
-                        //     console.log("if_triggered")
-                        //     nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
-                        // }
-
-                        // thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
-                        // let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
-                        // let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-
-                        // thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-
 
                     if(thisPathDataOrFillerLocal !== "filler") {
-                        // Set direction of parallelDistance and assign to thisPathSegmentArcToCursorDistance based on sweepFlag
-                        console.log("Setting_Arc_Radius")
-                        // console.log(thisPathDataOrFillerLocal)
-                        // console.log(nextPathDataOrFillerLocal)
-                        // console.log(thisOriginalParallelPathDataGlobal)
+                        // console.log("Setting_Arc_Radius_NO_FILLER_NO")
                         // console.log(i)
-                        console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
-                        console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
-                        // console.log(thisOriginalParallelPathDataGlobal.arc.radius)
+                        // console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+                        // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
 
                         // NEW USING FOR OTHER WAY, FIX LATER
                         if(nextPathDataOrFillerLocal !== "filler"){
-                            console.log("CHANGING1111")
-                            // console.log("if_triggered")
-                            // nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
+                            // console.log("CHANGING_111")
                             thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
                             let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
                             let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
@@ -2442,27 +2416,22 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
                         }
                     }
+                    if(thisPathDataOrFillerLocal === "filler" && lastPathDataOrFillerLocal.arc.exist === true && lastLASTPathDataOrFillerLocal.arc.exist === true) {
+                        // console.log("Setting_Arc_Radius_FILLER")
+                        // console.log(i)
+                        // console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+                        // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
 
+                        // // NEW USING FOR OTHER WAY, FIX LATER
+                        if(nextPathDataOrFillerLocal !== "filler"){
+                            // console.log("CHANGING_222")
+                            thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
+                            let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
+                            let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
 
-
-                    // let thisPathSegmentArcToCursorDistance
-                    // let lastPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i - 1]
-                    // let thisPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i]
-                    // let nextPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1]
-                    // let nextNEXTPathDataOrFillerLocal = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2]
-                    // let thisOriginalParallelPathDataGlobal = parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1]
-
-
-                    // if(thisPathDataOrFillerLocal !== "filler") {
-                    //     if(nextPathDataOrFillerLocal !== "filler"){
-                    //         thisPathSegmentArcToCursorDistance = (nextPathDataOrFillerLocal.arc.sweepFlag === 0) ? parallelDistance : parallelDistance * -1
-                    //         let nextPathSegmentArcToCenterTotalDistance = getDistance(nextPathDataOrFillerLocal.coords.x, nextPathDataOrFillerLocal.coords.y, nextPathDataOrFillerLocal.arc.center.x, nextPathDataOrFillerLocal.arc.center.y)
-                    //         let nextPathSegmentArcToCenterMinusPointerToArcFromArc1 = nextPathSegmentArcToCenterTotalDistance - thisPathSegmentArcToCursorDistance
-
-                    //         thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
-                    //     }
-                    // }
-
+                            thisOriginalParallelPathDataGlobal.arc.radius = nextPathSegmentArcToCenterMinusPointerToArcFromArc1
+                        }
+                    }
 
 
 
@@ -3015,11 +2984,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, arcToArcIntPoint, thisOriginalPathData)
                             // updateSVG_highlightOPD_01(thisParallelPathData[1])
                             // updateSVG_highlightOPD_02(nextParallelPathData[1])
-
                             // thisParallelPathData[1].coords.x = arcToArcIntPoint[0].x
                             // thisParallelPathData[1].coords.y = arcToArcIntPoint[0].y
                             // nextParallelPathData[0].coords.x = arcToArcIntPoint[1].x
                             // nextParallelPathData[0].coords.y = arcToArcIntPoint[1].y
+                            
                             createAndAddSvgElementAndUpdateDataArrays(nextIndex, shape)
                         } else {
                             updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, arcToArcIntPoint, thisOriginalPathData)
@@ -3106,6 +3075,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     parallelPathDataGLOBAL.splice(index, 0, [
                         {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
                         {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
+                        // {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
+                        // {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
                     ])
 
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, [
@@ -3295,23 +3266,14 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let fourthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][0]
                     let fifthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3][1]
 
-                    let sixthParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 4][0]
-                    let seventhParPath = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 4][1]
-
-
-                    // let firstParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1]
-                    // let fourthParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3]
+                    let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
                     updateSVG_highlightOPD_01(firstParPath)
                     updateSVG_highlightOPD_02(fifthParPath)
+                    let firstParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 1]
+                    let fourthParPathOK = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex + 3]
+                    updateSVG_arcToArcIntersect_01(firstParPathOK, fourthParPathOK, arcToArcIntPoint, {coords: {x: 0, y: 0}})
 
-                    // fifthParPath is correct but causing errors
-                    // for whatever reason, fifthParPath radius doesnt decrease.
-                    let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
-                    // updateSVG_arcToArcIntersect_01(firstParPathOK, fourthParPathOK, arcToArcIntPoint, {coords: {x: 0, y: 0}})
-
-                    // let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
-                    // let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
                     if(arcToArcIntPoint[0].doesIntersect === false) {
                         
                         // before first point
@@ -3357,9 +3319,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // dont need?
                         // fifthParPath.coords.x = 100
                         // fifthParPath.coords.y = 500
-                        fifthParPath.coords.x = sixthParPath.coords.x
-                        fifthParPath.coords.y = sixthParPath.coords.y
-
                     }
                     else if(arcToArcIntPoint[0].doesIntersect === true) {
                         console.log("Remove_Points_and_Paths")
@@ -3448,9 +3407,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 let updateSVG_PathToArcIntersect_01_switches = [0,0]
 let updateSVG_PathToArcIntersect_02_switches = [0,0]
-let updateSVG_arcToArcIntersect_01_switches = [0,0]
-let updateSVG_highlightOPD_01_switches = [1,0]
-let updateSVG_highlightOPD_02_switches = [1,0]
+let updateSVG_arcToArcIntersect_01_switches = [1,0]
+let updateSVG_highlightOPD_01_switches = [0,0]
+let updateSVG_highlightOPD_02_switches = [0,0]
 
 
 function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
