@@ -1819,17 +1819,35 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     let intersectionClosestToXys
 
     // Check for no intersection, one circle contained within the other, or identical circles
-    if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
-        // Circles don't intersect; return the closest points on each circle
+    if (distance < Math.abs(r1 - r2)) {
+        // // Circles don't intersect; return the closest points on each circle
         
         // let closestPointToOtherCircleX1 = x1 + (dx * r1) / (distance * -1)
         // let closestPointToOtherCircleY1 = y1 + (dy * r1) / (distance * -1)
         let closestPointToOtherCircleX1 = x1 + (dx * r1) / distance
         let closestPointToOtherCircleY1 = y1 + (dy * r1) / distance
-        // let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
-        // let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
-        let closestPointToOtherCircleX2 = x2 - (dx * r2) / (distance * -1)
-        let closestPointToOtherCircleY2 = y2 - (dy * r2) / (distance * -1)
+
+        let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
+        let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
+        // let closestPointToOtherCircleX2 = x2 - (dx * r2) / (distance * -1)
+        // let closestPointToOtherCircleY2 = y2 - (dy * r2) / (distance * -1)
+
+        intersectionClosestToXys = [
+            // getting visual errors when shape has curves going in same direction
+            { x: closestPointToOtherCircleX1, y: closestPointToOtherCircleY1, doesIntersect: false },
+            { x: closestPointToOtherCircleX2, y: closestPointToOtherCircleY2, doesIntersect: false }
+        ]
+        return intersectionClosestToXys
+    }
+
+    // Check for no intersection, one circle contained within the other, or identical circles
+    // if (distance > r1 + r2 || distance < Math.abs(r1 - r2)) {
+    if (distance > r1 + r2) {
+        // Circles don't intersect; return the closest points on each circle
+        let closestPointToOtherCircleX1 = x1 + (dx * r1) / distance
+        let closestPointToOtherCircleY1 = y1 + (dy * r1) / distance
+        let closestPointToOtherCircleX2 = x2 - (dx * r2) / distance
+        let closestPointToOtherCircleY2 = y2 - (dy * r2) / distance
 
         intersectionClosestToXys = [
             // getting visual errors when shape has curves going in same direction
@@ -3075,8 +3093,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     parallelPathDataGLOBAL.splice(index, 0, [
                         {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
                         {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
-                        // {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 1, sweepFlag: 1, side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
-                        // {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
                     ])
 
                     parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, [
@@ -3092,34 +3108,6 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     secondParallelPathData[0].coords.x = interSectionPoint[0].x
                     secondParallelPathData[0].coords.y = interSectionPoint[0].y
                 }
-
-                // placeIntersectionPoints_OLDOLD(origPathDataIndexArray, a2aCount, thisParallelPathData, nextParallelPathData, arcToArcIntPoint, shape)
-                // function placeIntersectionPoints_OLDOLD(origPathDataIndexArray, intCount, firstParallelPathData, secondParallelPathData, interSectionPoint, shape) {
-                //     // NEW_ArcIntersectPICKER
-                //     let origPathDataIndex = origPathDataIndexArray[intCount]
-                //     let thisOriginalPathDataGLOBAL = originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-
-                //     if(shape === 'p2a') {
-                //     } else if(shape ==='a2p'){
-                //     } else if(shape ==='a2a'){
-                //         updateSVG_highlightOirginalPathData(thisOriginalPathDataGLOBAL)
-                //     }
-                //     // Find dinstance between pathData and each pathToCircle intersection point
-                //     let length0 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, interSectionPoint[0].x, interSectionPoint[0].y)
-                //     let length1 = getDistance(thisOriginalPathDataGLOBAL.coords.x, thisOriginalPathDataGLOBAL.coords.y, interSectionPoint[1].x, interSectionPoint[1].y)
-                //     // Determine which pathToCircle intersection is closest to pathData
-                //     if(length0 < length1) {
-                //         firstParallelPathData[1].coords.x = interSectionPoint[0].x
-                //         firstParallelPathData[1].coords.y = interSectionPoint[0].y
-                //         secondParallelPathData[0].coords.x = interSectionPoint[0].x
-                //         secondParallelPathData[0].coords.y = interSectionPoint[0].y
-                //     } else {
-                //         firstParallelPathData[1].coords.x = interSectionPoint[1].x
-                //         firstParallelPathData[1].coords.y = interSectionPoint[1].y
-                //         secondParallelPathData[0].coords.x = interSectionPoint[1].x
-                //         secondParallelPathData[0].coords.y = interSectionPoint[1].y
-                //     }
-                // }
 
 
 
