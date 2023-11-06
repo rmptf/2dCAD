@@ -2453,6 +2453,43 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 }
             }
 
+            function doLinesIntersect(line1Start, line1End, line2Start, line2End) {
+                // Calculate the slopes of the two lines
+                const slope1 = (line1End[1] - line1Start[1]) / (line1End[0] - line1Start[0]);
+                const slope2 = (line2End[1] - line2Start[1]) / (line2End[0] - line2Start[0]);
+            
+                // Calculate the y-intercepts of the two lines
+                const yIntercept1 = line1Start[1] - slope1 * line1Start[0];
+                const yIntercept2 = line2Start[1] - slope2 * line2Start[0];
+            
+                // // Check if the lines are parallel (slopes are equal)
+                // if (slope1 === slope2) {
+                //     // If the lines are parallel, check if they are coincident (overlapping)
+                //     if (yIntercept1 === yIntercept2) {
+                //         return "Coincident"; // Lines overlap
+                //     } else {
+                //         return "Parallel"; // Lines are parallel but not coincident
+                //     }
+                // }
+            
+                // Calculate the x-coordinate of the intersection point
+                const intersectionX = (yIntercept2 - yIntercept1) / (slope1 - slope2);
+            
+                // Check if the intersection point is within the line segments
+                if (
+                    intersectionX >= Math.min(line1Start[0], line1End[0]) &&
+                    intersectionX <= Math.max(line1Start[0], line1End[0]) &&
+                    intersectionX >= Math.min(line2Start[0], line2End[0]) &&
+                    intersectionX <= Math.max(line2Start[0], line2End[0])
+                ) {
+                    // return [intersectionX, slope1 * intersectionX + yIntercept1];
+                    console.log("ASDFSDFSFS")
+                    return true
+                } else {
+                    return false
+                }
+            }
+
 
 
 
@@ -2489,13 +2526,47 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             // find better names for these and use in a better way.
             let parallelPathSegmentCounter_FIRST = -1
             let parallelPathSegmentCounter_SECOND = 0
-
             // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.y])
+
+
+            // trackPoints(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords)
+            // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.y])
+            // updateSVG_highlight_1_point_03([parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.y])
+            // function trackPoints(point1, point2) {
+            //     let distance = getDistance(point1.x, point1.y, point2.x, point2.y)
+            //     console.log("distance")
+            //     console.log(distance)
+            //     if(distance < 1) {
+            //         console.log("zero")
+            //     }
+            // }
+
 
             // Loop through each parallelPathData
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 console.log("i: " + i)
                 let skipperChecker = false
+
+
+                console.log("Checking_all_parallelPathDatas_against_eachother_for_intersections.")
+                for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; j++) {
+                    if(i !== j) {
+                        // doLinesIntersect(line1Start, line1End, line2Start, line2End)
+                        let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
+                        if(checker === true) {
+                            console.log("WEHERE")
+                        }
+                        // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i] === parallelPathDatas_stopAtIntersect_fromGLOBAL[j]) {
+                        //     console.log("MATCHIE_MATCHIE")
+                        // } else {
+                        //     console.log("NO_MATCHIE")
+                        // }
+                    } else {
+                        // console.log("MATCHIE_ISTELF")
+                    }
+                }
+
+
                 // Determine if this parallelPathData is an Arc
                 if (parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.exist === true) {
                     let thisPathSegmentArcToCursorDistance
@@ -2524,99 +2595,100 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         }
                     }
 
-                    // console.log(thisOriginalParallelPathDataGlobal.arc.radius)
 
-                    if(thisOriginalParallelPathDataGlobal.arc.radius < 0){
-                        console.log("NEGATIVE")
-                        if(prevOriginalParallelPathDataGlobal.arc.exist === true && nextOriginalParallelPathDataGlobal.arc.exist === false && nextOriginalParallelPathDataGlobal !== "filler") {
-                            console.log("second_arc")
-                            // Remove Points and paths
-                            let pathToArcIntersectNoContactIndex = i - 1
-                            let prevIndex = pathToArcIntersectNoContactIndex
-                            let thisIndex = pathToArcIntersectNoContactIndex + 1
-                            let nextIndex = pathToArcIntersectNoContactIndex + 2
-                            let doubleIndex = thisIndex * 2
+                    // if(thisOriginalParallelPathDataGlobal.arc.radius < 0){
+                        // console.log("NEGATIVE")
+                        // if(prevOriginalParallelPathDataGlobal.arc.exist === true && nextOriginalParallelPathDataGlobal.arc.exist === false && nextOriginalParallelPathDataGlobal !== "filler") {
+                        //     console.log("second_arc")
+                        //     // Remove Points and paths
+                        //     let pathToArcIntersectNoContactIndex = i - 1
+                        //     let prevIndex = pathToArcIntersectNoContactIndex
+                        //     let thisIndex = pathToArcIntersectNoContactIndex + 1
+                        //     let nextIndex = pathToArcIntersectNoContactIndex + 2
+                        //     let doubleIndex = thisIndex * 2
 
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
 
-                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
-                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
-                            // updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex])
+                        //     // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
+                        //     // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
+                        //     // updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex])
 
-                            // Remove elements from various arrays
-                            parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-                            parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                            parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
-                            parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+                        //     // Remove elements from various arrays
+                        //     parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+                        //     parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        //     parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        //     parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
 
-                            let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-                            let svgPathGroup = self.parallelPathGroup._groups[0][0]
-                            let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-                            let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-                            let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+                        //     let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+                        //     let svgPathGroup = self.parallelPathGroup._groups[0][0]
+                        //     let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+                        //     let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+                        //     let addedSvgPath = svgPathGroup.childNodes[thisIndex]
 
-                            // Remove SVG elements from the DOM
-                            firstAddedSvgEndPoint.remove()
-                            secondAddedSvgEndPoint.remove()
-                            addedSvgPath.remove()
+                        //     // Remove SVG elements from the DOM
+                        //     firstAddedSvgEndPoint.remove()
+                        //     secondAddedSvgEndPoint.remove()
+                        //     addedSvgPath.remove()
 
-                            skipperChecker = true
-                        }
-                        if(prevOriginalParallelPathDataGlobal.arc.exist === false && nextOriginalParallelPathDataGlobal.arc.exist === true && prevOriginalParallelPathDataGlobal !== "filler") {
-                            console.log("first_arc")
-                            // Remove Points and paths
-                            let pathToArcIntersectNoContactIndex = i - 1
-                            let prevIndex = pathToArcIntersectNoContactIndex
-                            let thisIndex = pathToArcIntersectNoContactIndex + 1
-                            let nextIndex = pathToArcIntersectNoContactIndex + 2
-                            let nextNEXTIndex = pathToArcIntersectNoContactIndex + 3
-                            let doubleIndex = thisIndex * 2
-
-
-
-
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords
-
-                            console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextNEXTIndex])
-                            console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords)
-                            console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords)
-                            console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.radius)
-                            console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.sweepFlag)
-
-                            let newCenter = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextNEXTIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.sweepFlag)
-
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.center = newCenter
+                        //     skipperChecker = true
+                        // }
+                        // if(prevOriginalParallelPathDataGlobal.arc.exist === false && nextOriginalParallelPathDataGlobal.arc.exist === true && prevOriginalParallelPathDataGlobal !== "filler") {
+                        //     console.log("first_arc")
+                        //     // Remove Points and paths
+                        //     let pathToArcIntersectNoContactIndex = i - 1
+                        //     let prevIndex = pathToArcIntersectNoContactIndex
+                        //     let thisIndex = pathToArcIntersectNoContactIndex + 1
+                        //     let nextIndex = pathToArcIntersectNoContactIndex + 2
+                        //     let nextNEXTIndex = pathToArcIntersectNoContactIndex + 3
+                        //     let doubleIndex = thisIndex * 2
 
 
 
 
-                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
-                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
-                            updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex])
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords
 
-                            // Remove elements from various arrays
-                            parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-                            parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                            parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                            parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
-                            parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+                        //     console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextNEXTIndex])
+                        //     console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords)
+                        //     console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords)
+                        //     console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.radius)
+                        //     console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.sweepFlag)
 
-                            let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-                            let svgPathGroup = self.parallelPathGroup._groups[0][0]
-                            let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-                            let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-                            let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+                        //     let newCenter = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextNEXTIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.sweepFlag)
 
-                            // Remove SVG elements from the DOM
-                            firstAddedSvgEndPoint.remove()
-                            secondAddedSvgEndPoint.remove()
-                            addedSvgPath.remove()
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].arc.center = newCenter
 
-                            skipperChecker = true
-                        }
-                    }
+
+
+
+                        //     // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
+                        //     // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
+                        //     updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex])
+
+                        //     // Remove elements from various arrays
+                        //     parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+                        //     parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        //     parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        //     parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        //     parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+
+                        //     let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+                        //     let svgPathGroup = self.parallelPathGroup._groups[0][0]
+                        //     let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+                        //     let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+                        //     let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+
+                        //     // Remove SVG elements from the DOM
+                        //     firstAddedSvgEndPoint.remove()
+                        //     secondAddedSvgEndPoint.remove()
+                        //     addedSvgPath.remove()
+
+                        //     skipperChecker = true
+                        // }
+                    // }
+
+
 
 
 
