@@ -1271,7 +1271,7 @@ function findIntersectingPoint(line1Start, line1End, line2Start, line2End) {
     }
     // if line1 and line2 are segments, they intersect if both of the above are trues
     return result;
-};
+}
 
 function describeArcPath(radius, x1, y1, x2, y2, arcFlag, sweepFlag){
     let d = [
@@ -2455,12 +2455,12 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
             function doLinesIntersect(line1Start, line1End, line2Start, line2End) {
                 // Calculate the slopes of the two lines
-                const slope1 = (line1End[1] - line1Start[1]) / (line1End[0] - line1Start[0]);
-                const slope2 = (line2End[1] - line2Start[1]) / (line2End[0] - line2Start[0]);
+                const slope1 = (line1End.y - line1Start.y) / (line1End.x - line1Start.x);
+                const slope2 = (line2End.y - line2Start.y) / (line2End.x - line2Start.x);
             
                 // Calculate the y-intercepts of the two lines
-                const yIntercept1 = line1Start[1] - slope1 * line1Start[0];
-                const yIntercept2 = line2Start[1] - slope2 * line2Start[0];
+                const yIntercept1 = line1Start.y - slope1 * line1Start.x;
+                const yIntercept2 = line2Start.y - slope2 * line2Start.x;
             
                 // // Check if the lines are parallel (slopes are equal)
                 // if (slope1 === slope2) {
@@ -2476,17 +2476,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 const intersectionX = (yIntercept2 - yIntercept1) / (slope1 - slope2);
             
                 // Check if the intersection point is within the line segments
-                if (
-                    intersectionX >= Math.min(line1Start[0], line1End[0]) &&
-                    intersectionX <= Math.max(line1Start[0], line1End[0]) &&
-                    intersectionX >= Math.min(line2Start[0], line2End[0]) &&
-                    intersectionX <= Math.max(line2Start[0], line2End[0])
-                ) {
+                if (intersectionX >= Math.min(line1Start.x, line1End.x) && intersectionX <= Math.max(line1Start.x, line1End.x) && intersectionX >= Math.min(line2Start.x, line2End.x) && intersectionX <= Math.max(line2Start.x, line2End.x)) {
                     // return [intersectionX, slope1 * intersectionX + yIntercept1];
-                    console.log("ASDFSDFSFS")
-                    return true
+                    return {doesIntersect: true, coords: {x: intersectionX, y: slope1 * intersectionX + yIntercept1}}
                 } else {
-                    return false
+                    return {doesIntersect: false}
                 }
             }
 
@@ -2529,6 +2523,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.y])
 
 
+            // // track distance between two points to see if its 0 (doesnt work great)
             // trackPoints(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords)
             // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.y])
             // updateSVG_highlight_1_point_03([parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.y])
@@ -2548,23 +2543,99 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 let skipperChecker = false
 
 
-                console.log("Checking_all_parallelPathDatas_against_eachother_for_intersections.")
+
+
+                // loop through all points and check if any intersect
+                // **recursive**
                 for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; j++) {
-                    if(i !== j) {
-                        // doLinesIntersect(line1Start, line1End, line2Start, line2End)
+                    if(i !== j && i !== j - 1 && i !== j + 1) {
                         let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
-                        if(checker === true) {
-                            console.log("WEHERE")
+                        if(checker.doesIntersect === true) {
+                            console.log("These_INTERSECT: ")
+                            console.log(i, j)
+
+                            let arrayOfIndeciesToRemoveVar = arrayOfIndeciesToRemove(i, j)
+                            removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
                         }
-                        // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i] === parallelPathDatas_stopAtIntersect_fromGLOBAL[j]) {
-                        //     console.log("MATCHIE_MATCHIE")
-                        // } else {
-                        //     console.log("NO_MATCHIE")
-                        // }
-                    } else {
-                        // console.log("MATCHIE_ISTELF")
                     }
                 }
+
+                function arrayOfIndeciesToRemove(firstIntersectPath, secondIntersectPath) {
+                    let lowerIndex
+                    let higherIndex
+                    let array = []
+
+                    if(firstIntersectPath < secondIntersectPath){
+                        lowerIndex = firstIntersectPath
+                        higherIndex = secondIntersectPath
+                    } else {
+                        lowerIndex = secondIntersectPath
+                        higherIndex = firstIntersectPath
+                    }
+
+                    for (let k = lowerIndex + 1; k < higherIndex; k++) {
+                        array.push(k)
+                    }
+
+                    return {array1: array, firstPath: lowerIndex}
+                }
+
+                function removePaths(pathsToRemove, intersectCoords) {
+                    console.log("Remove_these_guys")
+                    console.log(pathsToRemove)
+                    console.log(intersectCoords)
+                    console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+
+                    let array = pathsToRemove.array1
+                    let firstPath = pathsToRemove.firstPath
+
+                    for (let l = 0; l < array.length; l++) {
+                        // Remove Points and paths
+                        let prevIndex = l - 1
+                        let thisIndex = l
+                        let nextIndex = l + 1
+                        let doubleIndex = thisIndex * 2
+
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
+
+                        // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
+                        // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
+                        // updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex])
+
+                        // Remove elements from various arrays
+                        parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+                        parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                        parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+
+                        let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+                        let svgPathGroup = self.parallelPathGroup._groups[0][0]
+                        let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+                        let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+                        let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+
+                        // Remove SVG elements from the DOM
+                        firstAddedSvgEndPoint.remove()
+                        secondAddedSvgEndPoint.remove()
+                        addedSvgPath.remove()
+                    }
+
+                    console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
+                    updateSVG_highlight_1_point_03([intersectCoords.x, intersectCoords.y])
+                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.x = 10
+                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.y = 10
+                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.x = 10
+                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.y = 10
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = 100
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = 100
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = intersectCoords.x
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = intersectCoords.y
+                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath][1].coords = intersectCoords
+                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath + 1][0].coords = intersectCoords
+                }
+
 
 
                 // Determine if this parallelPathData is an Arc
@@ -3978,11 +4049,17 @@ const SAVED_FIGURE_DATA = [
     // // shape 3: (basic)
     // '{"shapeData":[{"coords":{"x":27.33331298828125,"y":109},"arc":{"exist":false}},{"coords":{"x":154.33331298828125,"y":100},"arc":{"exist":false}},{"coords":{"x":226.33331298828125,"y":247},"arc":{"exist":false}},{"coords":{"x":253.33331298828125,"y":125.33332824707031},"arc":{"exist":true,"radius":141.65419894624156,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":364.02430756163574,"y":213.7268562876627},"startAngle":0.9109682992460733}},{"coords":{"x":337.33331298828125,"y":108},"arc":{"exist":true,"radius":67.09284357302008,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":305.76079935365544,"y":167.1998821071893},"startAngle":1.38688072058309}},{"coords":{"x":501.33331298828125,"y":207},"arc":{"exist":false}},{"coords":{"x":756.3333129882812,"y":209},"arc":{"exist":false}},{"coords":{"x":970.3333129882812,"y":138},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2189px","dragDivLeft":"2249px"},"svgDimensions":{"x":899.6666870117188,"y":137.6666717529297,"width":1070.3333740234375,"height":560.6666870117188,"top":137.6666717529297,"right":1970.0000610351562,"bottom":698.3333587646484,"left":899.6666870117188}}',
 
-    // Deleting arc-half at 0
-    // shape 1: (1)
-    '{"shapeData":[{"coords":{"x":31.88885498046875,"y":104.9984130859375},"arc":{"exist":false}},{"coords":{"x":135.88885498046875,"y":104.001708984375},"arc":{"exist":false}},{"coords":{"x":236.88885498046875,"y":152.00169372558594},"arc":{"exist":false}},{"coords":{"x":294.88885498046875,"y":125.001708984375},"arc":{"exist":true,"radius":168.75876457459788,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":335.8188448190568,"y":288.72176442217904},"startAngle":0.3814082635348811}},{"coords":{"x":340.88885498046875,"y":126.001708984375},"arc":{"exist":true,"radius":87.28619020913767,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":316.0588539865342,"y":209.68175470536497},"startAngle":0.5334284637601312}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2216.57px","dragDivLeft":"2250px"},"svgDimensions":{"x":535.4545288085938,"y":241.9815216064453,"width":891.8678588867188,"height":533.4161987304688,"top":241.9815216064453,"right":1427.3223876953125,"bottom":775.3977203369141,"left":535.4545288085938}}',
-    // shape 2: (1 other way)
-    '{"shapeData":[{"coords":{"x":34.25,"y":135.3203125},"arc":{"exist":false}},{"coords":{"x":151.25,"y":137.3203125},"arc":{"exist":false}},{"coords":{"x":343.25,"y":208.3203125},"arc":{"exist":false}},{"coords":{"x":384.25,"y":219.990234375},"arc":{"exist":true,"radius":95.65270310756114,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":389.2773944603715,"y":124.4697396279403},"startAngle":0.449431861233526}},{"coords":{"x":419.25,"y":212.3203125},"arc":{"exist":true,"radius":67.57784686169514,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":387.8018127759995,"y":152.50579163100926},"startAngle":0.5366270349478512}},{"coords":{"x":614.25,"y":100.31640625},"arc":{"exist":false}},{"coords":{"x":725.25,"y":101.990234375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2225.68px","dragDivLeft":"2250px"},"svgDimensions":{"x":828.75,"y":235.009765625,"width":825.244140625,"height":523.65234375,"top":235.009765625,"right":1653.994140625,"bottom":758.662109375,"left":828.75}}',
-    // shape 3: (2)
-    '{"shapeData":[{"coords":{"x":15.88885498046875,"y":66.9984130859375},"arc":{"exist":false}},{"coords":{"x":131.88885498046875,"y":58.001708984375},"arc":{"exist":false}},{"coords":{"x":231.88885498046875,"y":66.00169372558594},"arc":{"exist":false}},{"coords":{"x":279.88885498046875,"y":82.001708984375},"arc":{"exist":true,"radius":140.19470397918377,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":212.28313569687396,"y":204.8187344489202},"startAngle":0.3628891810517768}},{"coords":{"x":340.88885498046875,"y":126.001708984375},"arc":{"exist":true,"radius":309.79737857107045,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":130.49608894859978,"y":353.39849825582974},"startAngle":0.24338161378158185}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2222px","dragDivLeft":"2066px"},"svgDimensions":{"x":257.6000061035156,"y":203.1999969482422,"width":891.8624877929688,"height":533.4125366210938,"top":203.1999969482422,"right":1149.4624938964844,"bottom":736.6125335693359,"left":257.6000061035156}}',
+    // Delete paths
+    // shape 1:
+    '{"shapeData":[{"coords":{"x":283,"y":146},"arc":{"exist":false}},{"coords":{"x":603,"y":100},"arc":{"exist":false}},{"coords":{"x":647,"y":207},"arc":{"exist":false}},{"coords":{"x":626,"y":304},"arc":{"exist":false}},{"coords":{"x":100,"y":238},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2197px","dragDivLeft":"2081px"},"svgDimensions":{"x":445,"y":190,"width":747,"height":553,"top":190,"right":1192,"bottom":743,"left":445}}',
+
+
+
+    // // Deleting arc-half at 0
+    // // shape 1: (1)
+    // '{"shapeData":[{"coords":{"x":31.88885498046875,"y":104.9984130859375},"arc":{"exist":false}},{"coords":{"x":135.88885498046875,"y":104.001708984375},"arc":{"exist":false}},{"coords":{"x":236.88885498046875,"y":152.00169372558594},"arc":{"exist":false}},{"coords":{"x":294.88885498046875,"y":125.001708984375},"arc":{"exist":true,"radius":168.75876457459788,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":335.8188448190568,"y":288.72176442217904},"startAngle":0.3814082635348811}},{"coords":{"x":340.88885498046875,"y":126.001708984375},"arc":{"exist":true,"radius":87.28619020913767,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":316.0588539865342,"y":209.68175470536497},"startAngle":0.5334284637601312}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2216.57px","dragDivLeft":"2250px"},"svgDimensions":{"x":535.4545288085938,"y":241.9815216064453,"width":891.8678588867188,"height":533.4161987304688,"top":241.9815216064453,"right":1427.3223876953125,"bottom":775.3977203369141,"left":535.4545288085938}}',
+    // // shape 2: (1 other way)
+    // '{"shapeData":[{"coords":{"x":34.25,"y":135.3203125},"arc":{"exist":false}},{"coords":{"x":151.25,"y":137.3203125},"arc":{"exist":false}},{"coords":{"x":343.25,"y":208.3203125},"arc":{"exist":false}},{"coords":{"x":384.25,"y":219.990234375},"arc":{"exist":true,"radius":95.65270310756114,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":389.2773944603715,"y":124.4697396279403},"startAngle":0.449431861233526}},{"coords":{"x":419.25,"y":212.3203125},"arc":{"exist":true,"radius":67.57784686169514,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":387.8018127759995,"y":152.50579163100926},"startAngle":0.5366270349478512}},{"coords":{"x":614.25,"y":100.31640625},"arc":{"exist":false}},{"coords":{"x":725.25,"y":101.990234375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2225.68px","dragDivLeft":"2250px"},"svgDimensions":{"x":828.75,"y":235.009765625,"width":825.244140625,"height":523.65234375,"top":235.009765625,"right":1653.994140625,"bottom":758.662109375,"left":828.75}}',
+    // // shape 3: (2)
+    // '{"shapeData":[{"coords":{"x":15.88885498046875,"y":66.9984130859375},"arc":{"exist":false}},{"coords":{"x":131.88885498046875,"y":58.001708984375},"arc":{"exist":false}},{"coords":{"x":231.88885498046875,"y":66.00169372558594},"arc":{"exist":false}},{"coords":{"x":279.88885498046875,"y":82.001708984375},"arc":{"exist":true,"radius":140.19470397918377,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":212.28313569687396,"y":204.8187344489202},"startAngle":0.3628891810517768}},{"coords":{"x":340.88885498046875,"y":126.001708984375},"arc":{"exist":true,"radius":309.79737857107045,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":130.49608894859978,"y":353.39849825582974},"startAngle":0.24338161378158185}},{"coords":{"x":604.8888549804688,"y":179.001708984375},"arc":{"exist":false}},{"coords":{"x":791.8888549804688,"y":173.001708984375},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2222px","dragDivLeft":"2066px"},"svgDimensions":{"x":257.6000061035156,"y":203.1999969482422,"width":891.8624877929688,"height":533.4125366210938,"top":203.1999969482422,"right":1149.4624938964844,"bottom":736.6125335693359,"left":257.6000061035156}}',
 ]
