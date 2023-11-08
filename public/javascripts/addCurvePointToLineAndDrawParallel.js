@@ -2536,6 +2536,13 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
             //     }
             // }
 
+            // parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+            // // new
+            // parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)
+
+            console.log("hurrrhuh")
+            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+            console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
 
             // Loop through each parallelPathData
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
@@ -2555,7 +2562,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             console.log(i, j)
 
                             let arrayOfIndeciesToRemoveVar = arrayOfIndeciesToRemove(i, j)
-                            removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
+                            // removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
+                            let pooper = {array1: [1]}
+                            // console.log(arrayOfIndeciesToRemoveVar[0])
+                            // console.log(pooper)
+                            removePaths(pooper, checker.coords)
                         }
                     }
                 }
@@ -2590,11 +2601,18 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let firstPath = pathsToRemove.firstPath
 
                     for (let l = 0; l < array.length; l++) {
+                        console.log("remove_this_guy")
+                        console.log("index: " + l + ", item: " + array[l])
                         // Remove Points and paths
-                        let prevIndex = l - 1
-                        let thisIndex = l
-                        let nextIndex = l + 1
+                        let prevIndex = array[l - 1]
+                        let thisIndex = array[l]
+                        let nextIndex = array[l + 1]
                         let doubleIndex = thisIndex * 2
+
+
+
+
+
 
                         // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
                         // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
@@ -2607,8 +2625,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
                         parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
                         parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                        parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                        parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 1)
                         parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
+                        // new
+                        // parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)
 
                         let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
                         let svgPathGroup = self.parallelPathGroup._groups[0][0]
@@ -2622,16 +2643,30 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         addedSvgPath.remove()
                     }
 
+                    console.log("okooo")
                     console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
+                    console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
                     updateSVG_highlight_1_point_03([intersectCoords.x, intersectCoords.y])
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.x = 10
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.y = 10
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.x = 10
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.y = 10
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = 100
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = 100
+
+                    // function findLineMidpoint(x1, y1, x2, y2) {
+                    //     return [(x1 + x2) / 2, (y1 + y2) / 2];
+                    // }
+                    // let midpoint = findLineMidpoint(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.x, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.y, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.x, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.y)
+                    // updateSVG_highlight_1_point_03([midpoint[0], midpoint[1]])
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = midpoint[0]
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = midpoint[1]
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = 10
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = 10
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = midpoint[0]
+                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = midpoint[1]
                     // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = intersectCoords.x
                     // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = intersectCoords.y
+
+
                     // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath][1].coords = intersectCoords
                     // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath + 1][0].coords = intersectCoords
                 }
@@ -4051,6 +4086,8 @@ const SAVED_FIGURE_DATA = [
 
     // Delete paths
     // shape 1:
+    '{"shapeData":[{"coords":{"x":267,"y":132},"arc":{"exist":false}},{"coords":{"x":547,"y":100},"arc":{"exist":false}},{"coords":{"x":569,"y":264},"arc":{"exist":false}},{"coords":{"x":100,"y":205},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2161px","dragDivLeft":"2151px"},"svgDimensions":{"x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515}}',
+    // shape 2:
     '{"shapeData":[{"coords":{"x":283,"y":146},"arc":{"exist":false}},{"coords":{"x":603,"y":100},"arc":{"exist":false}},{"coords":{"x":647,"y":207},"arc":{"exist":false}},{"coords":{"x":626,"y":304},"arc":{"exist":false}},{"coords":{"x":100,"y":238},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2197px","dragDivLeft":"2081px"},"svgDimensions":{"x":445,"y":190,"width":747,"height":553,"top":190,"right":1192,"bottom":743,"left":445}}',
 
 
