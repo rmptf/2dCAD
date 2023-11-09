@@ -2621,6 +2621,14 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
                         // updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex])
 
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords
+                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords
+
+                        // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
+                        updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
+                        updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y])
+                        updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.y])
+
                         // Remove elements from various arrays
                         parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
                         parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
@@ -2644,9 +2652,15 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }
 
                     console.log("okooo")
+                    console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+                    console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+                    console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
                     console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
                     console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-                    updateSVG_highlight_1_point_03([intersectCoords.x, intersectCoords.y])
+                    // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
+                    // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
+                    // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y])
+                    // updateSVG_highlight_1_point_03([intersectCoords.x, intersectCoords.y])
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.x = 10
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.y = 10
                     // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.x = 10
