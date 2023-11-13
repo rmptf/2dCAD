@@ -2109,6 +2109,8 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+
+
     // Check if drawing parallel is not initiated
     if (!isDownDrawParellelInitiated) {
         // Set the flag to indicate drawing parallel is initiated
@@ -2251,6 +2253,30 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+    // Retrieve the array from the global variable
+    let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
+    // Initialize an empty array to store the transformed data
+    let parallelPathDatas_stopAtPerpendicular_fromLOCAL = transformData(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+
+    // Define a function to transform data from one array to a new one
+    function transformData(oldArrayWithOriginalData) {
+        // Initialize a new array to store the transformed data
+        let newArrayWithTransformedData
+        // Map through the oldArrayWithOriginalData and transform each element
+        newArrayWithTransformedData = oldArrayWithOriginalData.map(([point1, point2]) => (
+            [
+                // Create an object for the first and second points with x and y coordinates
+                { x: point1.coords.x, y: point1.coords.y },
+                { x: point2.coords.x, y: point2.coords.y }
+            ]
+        ))
+        return newArrayWithTransformedData
+    }
+
+
+    
+
+
 
 
 
@@ -2325,6 +2351,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+    let removeornot_allParData = true
+    let removeStartIndex
+
+    // let parallelPathDatas_stopAtIntersect_fromGLOBAL
+    // let parallelPathDatas_stopAtPerpendicular_fromLOCAL
 
     function mouseMoveDrawParallel(event) {
         console.log(" ")
@@ -2332,25 +2363,32 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
         console.log(" ")
         console.log("START SHAPE")
         if(isDownDrawParellelInitiated === true) {
-            // Retrieve the array from the global variable
-            let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
-            // Initialize an empty array to store the transformed data
-            let parallelPathDatas_stopAtPerpendicular_fromLOCAL = transformData(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+            // // Retrieve the array from the global variable
+            // let parallelPathDatas_stopAtIntersect_fromGLOBAL = parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
+            // // Initialize an empty array to store the transformed data
+            // let parallelPathDatas_stopAtPerpendicular_fromLOCAL = transformData(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+
+            // // Define a function to transform data from one array to a new one
+            // function transformData(oldArrayWithOriginalData) {
+            //     // Initialize a new array to store the transformed data
+            //     let newArrayWithTransformedData
+            //     // Map through the oldArrayWithOriginalData and transform each element
+            //     newArrayWithTransformedData = oldArrayWithOriginalData.map(([point1, point2]) => (
+            //         [
+            //             // Create an object for the first and second points with x and y coordinates
+            //             { x: point1.coords.x, y: point1.coords.y },
+            //             { x: point2.coords.x, y: point2.coords.y }
+            //         ]
+            //     ))
+            //     return newArrayWithTransformedData
+            // }
+
+            // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[1][0].coords.y])
+            // updateSVG_highlight_1_point_03([parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.y])
+
+
             
-            // Define a function to transform data from one array to a new one
-            function transformData(oldArrayWithOriginalData) {
-                // Initialize a new array to store the transformed data
-                let newArrayWithTransformedData
-                // Map through the oldArrayWithOriginalData and transform each element
-                newArrayWithTransformedData = oldArrayWithOriginalData.map(([point1, point2]) => (
-                    [
-                        // Create an object for the first and second points with x and y coordinates
-                        { x: point1.coords.x, y: point1.coords.y },
-                        { x: point2.coords.x, y: point2.coords.y }
-                    ]
-                ))
-                return newArrayWithTransformedData
-            }
+
 
 
 
@@ -2515,58 +2553,28 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
-
+            // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtPerpendicular_fromLOCAL[1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[1][0].y])
+            // updateSVG_highlight_1_point_03([parallelPathDatas_stopAtPerpendicular_fromLOCAL[1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[1][1].y])
+            // // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.y])
 
             // find better names for these and use in a better way.
             let parallelPathSegmentCounter_FIRST = -1
             let parallelPathSegmentCounter_SECOND = 0
-            // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].arc.center.y])
-
-
-            // // track distance between two points to see if its 0 (doesnt work great)
-            // trackPoints(parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords)
-            // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[1][1].coords.y])
-            // updateSVG_highlight_1_point_03([parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords.y])
-            // function trackPoints(point1, point2) {
-            //     let distance = getDistance(point1.x, point1.y, point2.x, point2.y)
-            //     console.log("distance")
-            //     console.log(distance)
-            //     if(distance < 1) {
-            //         console.log("zero")
-            //     }
-            // }
-
-            // parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
-            // // new
-            // parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)
-
-            console.log("hurrrhuh")
-            console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
-            console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
 
             // Loop through each parallelPathData
             for (let i = 0; i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; i++) {
                 console.log("i: " + i)
-                let skipperChecker = false
+                let skipperCheck_Path = false
+                let skipperChecker_Arc = false
 
-
-
-
-                // loop through all points and check if any intersect
-                // **recursive**
+                // **recursive** loop through all points and check if any intersect
                 for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; j++) {
                     if(i !== j && i !== j - 1 && i !== j + 1) {
                         let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
                         if(checker.doesIntersect === true) {
                             console.log("These_INTERSECT: ")
-                            console.log(i, j)
-
                             let arrayOfIndeciesToRemoveVar = arrayOfIndeciesToRemove(i, j)
-                            // removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
-                            let pooper = {array1: [1]}
-                            // console.log(arrayOfIndeciesToRemoveVar[0])
-                            // console.log(pooper)
-                            removePaths(pooper, checker.coords)
+                            removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
                         }
                     }
                 }
@@ -2574,7 +2582,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 function arrayOfIndeciesToRemove(firstIntersectPath, secondIntersectPath) {
                     let lowerIndex
                     let higherIndex
-                    let array = []
+                    let counter = 0
 
                     if(firstIntersectPath < secondIntersectPath){
                         lowerIndex = firstIntersectPath
@@ -2585,104 +2593,73 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     }
 
                     for (let k = lowerIndex + 1; k < higherIndex; k++) {
-                        array.push(k)
+                        counter = counter + 1
                     }
 
-                    return {array1: array, firstPath: lowerIndex}
+                    removeStartIndex = lowerIndex
+                    return {removeCount: counter, startIndex: lowerIndex + 1, endIndex: higherIndex - 1}
                 }
 
-                function removePaths(pathsToRemove, intersectCoords) {
-                    console.log("Remove_these_guys")
-                    console.log(pathsToRemove)
-                    console.log(intersectCoords)
-                    console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
+                function removePaths(removalData, intersectCoords) {
+                    removeornot_arcsAndFillers = true
+                    for (let l = 0; l < removalData.removeCount; l++) {
+                        if(removeornot_allParData === true) {
+                            // Remove Points and paths
+                            let prevIndex = removalData.startIndex - 1
+                            let thisIndex = removalData.startIndex
+                            let nextIndex = removalData.startIndex + 1
+                            let doubleIndex = removalData.startIndex * 2
 
-                    let array = pathsToRemove.array1
-                    let firstPath = pathsToRemove.firstPath
+                            let startIndex = removalData.startIndex
+                            let finishIndex = removalData.endIndex
 
-                    for (let l = 0; l < array.length; l++) {
-                        console.log("remove_this_guy")
-                        console.log("index: " + l + ", item: " + array[l])
-                        // Remove Points and paths
-                        let prevIndex = array[l - 1]
-                        let thisIndex = array[l]
-                        let nextIndex = array[l + 1]
-                        let doubleIndex = thisIndex * 2
-
-
+                            parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+                            parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+                            parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)           //parallelPathDatas_stopAtIntersect_fromGLOBAL          parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
+                            parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
 
 
 
+                            let removeCountDAF = finishIndex - startIndex
 
-                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
-                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
+                            console.log("findmeeeee")
+                            console.log(startIndex)
+                            console.log(finishIndex)
+                            console.log(removeCountDAF)
 
-                        // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords.y])
-                        // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center.y])
-                        // updateSVG_highlight_1_point_1_circ_01(parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex])
+                            if (removeornot_arcsAndFillers === true) {
+                                for (let m = 0; m < removeCountDAF; m++) {
+                                    console.log("Remove_Above_PathDatasAndFillers")
+                                    console.log(m)
+                                    parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1) // only elim middle?
+                                }
+                                removeornot_arcsAndFillers = false
+                            } else {
+                                console.log("Remove_No_PathDatasAndFillers")
+                            }
 
-                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords
-                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords
 
-                        // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
-                        updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
-                        updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y])
-                        updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.y])
 
-                        // Remove elements from various arrays
-                        parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-                        parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                        parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-                        // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
-                        parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 1)
-                        parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
-                        // new
-                        // parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)
+                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
+                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
+                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y]) // end
+                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.y])
 
-                        let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-                        let svgPathGroup = self.parallelPathGroup._groups[0][0]
-                        let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-                        let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-                        let addedSvgPath = svgPathGroup.childNodes[thisIndex]
-
-                        // Remove SVG elements from the DOM
-                        firstAddedSvgEndPoint.remove()
-                        secondAddedSvgEndPoint.remove()
-                        addedSvgPath.remove()
+                            let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+                            let svgPathGroup = self.parallelPathGroup._groups[0][0]
+                            let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+                            let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+                            let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+    
+                            // Remove SVG elements from the DOM
+                            firstAddedSvgEndPoint.remove()
+                            secondAddedSvgEndPoint.remove()
+                            addedSvgPath.remove()
+    
+                            skipperCheck_Path = true
+                        }
                     }
-
-                    console.log("okooo")
-                    console.log(parallelFigure_data_pathDatasAndFillers_array_drawParallel)
-                    console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL)
-                    console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL)
-                    console.log(parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL])
-                    console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-                    // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
-                    // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
-                    // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y])
-                    // updateSVG_highlight_1_point_03([intersectCoords.x, intersectCoords.y])
-                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.x = 10
-                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][0][1].coords.y = 10
-                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.x = 10
-                    // parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL][1][0].coords.y = 10
-
-                    // function findLineMidpoint(x1, y1, x2, y2) {
-                    //     return [(x1 + x2) / 2, (y1 + y2) / 2];
-                    // }
-                    // let midpoint = findLineMidpoint(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.x, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.y, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.x, originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.y)
-                    // updateSVG_highlight_1_point_03([midpoint[0], midpoint[1]])
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = midpoint[0]
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = midpoint[1]
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = 10
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = 10
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = midpoint[0]
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = midpoint[1]
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x = intersectCoords.x
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y = intersectCoords.y
-
-
-                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath][1].coords = intersectCoords
-                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[firstPath + 1][0].coords = intersectCoords
+                    removeornot_allParData = false
                 }
 
 
@@ -2752,7 +2729,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         //     secondAddedSvgEndPoint.remove()
                         //     addedSvgPath.remove()
 
-                        //     skipperChecker = true
+                        //     skipperChecker_Arc = true
                         // }
                         // if(prevOriginalParallelPathDataGlobal.arc.exist === false && nextOriginalParallelPathDataGlobal.arc.exist === true && prevOriginalParallelPathDataGlobal !== "filler") {
                         //     console.log("first_arc")
@@ -2804,7 +2781,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         //     secondAddedSvgEndPoint.remove()
                         //     addedSvgPath.remove()
 
-                        //     skipperChecker = true
+                        //     skipperChecker_Arc = true
                         // }
                     // }
 
@@ -2989,7 +2966,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
                         parallelPathSegmentCounter_SECOND = 1
                     }
-                    else if(skipperChecker === true){
+                    else if(skipperChecker_Arc === true){
                         console.log(6 + " - Skipper")
                         console.log("skipped")
                         parallelPathSegmentCounter_FIRST = 0
@@ -3272,9 +3249,61 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             console.log("333333")
                             nextFillerAdder = 1
                         }
+                        
 
-                        let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
-                        let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
+
+                        // test
+                        let thisPathDataOutside
+                        let nextPathDataOutside
+                        if (removeornot_allParData === true) {
+                            thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                            nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
+                        } else {
+                            let thisRemoveIndex = removeStartIndex
+                            let nextRemoveIndex = thisRemoveIndex + 1
+
+                            if(i === thisRemoveIndex) {
+                                console.log("thisRemoveIndex")
+                                thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
+                            }
+                            else if(i === nextRemoveIndex) {
+                                console.log("nextRemoveIndex")
+                                thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + fillerAdder]
+                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2 + nextFillerAdder]
+                            }
+                            else {
+                                console.log("noRemoveIndex")
+                                thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
+                            }
+
+                            // let b = i * 2
+                            // thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[b + fillerAdder]
+                            // nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[b + 1 + nextFillerAdder]
+
+                            // this works for when i = 0 then 1. not sure if it will work in any other situations
+
+                            // Currently Have:
+                            // round 1
+                            // i(0) * 2 + 0 = 0
+                            // i(0) * 2 + 1 = 1
+                            // round 2
+                            // i(1) * 2 + 0 = 2
+                            // i(1) * 2 + 1 = 3
+
+                            // Need:
+                            // round 1
+                            // i = 0   0
+                            //         1
+                            // round 2
+                            // i = 1   2
+                            //         3
+                        }
+
+
+                        // let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                        // let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
 
                         let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                         let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
@@ -3299,56 +3328,60 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x = next_parallel_perp_AnchorPointX
                                     parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y = next_parallel_perp_AnchorPointY
                                 }
-                            } 
+                            }
                             if (i != 0 && i !== parallelPathDatas_stopAtIntersect_fromGLOBAL.length - 1) {
                                 if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i - 1][1].arc.exist === false){
-                                    // // HANDLE FIRST WAY
-                                    // console.log("D")
-                                    // // set prev point
-                                    // let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
-    
-                                    // console.log("C")
-                                    // // set this point
-                                    // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                    // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                    // // HANDLE FIRST WAY
-
-                                    // HANDLE OTHER WAY
-                                    if( parallelPathSegmentCounter_SECOND === 0) {
-                                        console.log("D&C_running")
-                                        console.log(i)
-                                        console.log("D")
-                                        // set prev point
-                                        let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
-                                        console.log("C")
-                                        // set this point
-                                        let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                    } else {
-                                        console.log("D&C_not_running")
-                                        console.log("C+_running")
-                                        console.log(i)
-                                        console.log("C+")
-                                        // ORIGINALLY USED parallelPathDatas_stopAtPerpendicular_fromLOCAL BUT CAUSING ERRORS
+                                    // if(skipperCheck_Path === false) {
+                                        // // HANDLE FIRST WAY
+                                        // console.log("D")
+                                        // // set prev point
+                                        // let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                        // parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+                                        // parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+        
+                                        // console.log("C")
+                                        // // set this point
                                         // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        // NEW WAY USING parallelPathDatas_stopAtIntersect_fromGLOBAL AND WORKS BUT NOT SURE EXACTLY WHY AND MAKES THINGS CONFUSING
-                                        let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][0].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][0].coords.y, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        // set prev point
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                        // set this point
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
-                                    }
-                                    parallelPathSegmentCounter_SECOND = 0
-                                    // HANDLE OTHER WAY
+                                        // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                        // parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        // // HANDLE FIRST WAY
 
+                                        // HANDLE OTHER WAY
+                                        if( parallelPathSegmentCounter_SECOND === 0) {
+                                            console.log("findmeee")
+                                            console.log("D&C_running")
+                                            console.log(i)
+                                            console.log("D")
+                                            // set prev point
+                                            let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+                                            console.log("C")
+                                            // set this point
+                                            let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        } else {
+                                            console.log("D&C_not_running")
+                                            console.log("C+_running")
+                                            console.log(i)
+                                            console.log("C+")
+                                            // ORIGINALLY USED parallelPathDatas_stopAtPerpendicular_fromLOCAL BUT CAUSING ERRORS
+                                            // let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            // NEW WAY USING parallelPathDatas_stopAtIntersect_fromGLOBAL AND WORKS BUT NOT SURE EXACTLY WHY AND MAKES THINGS CONFUSING
+                                            let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][0].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][0].coords.y, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            // set prev point
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                            // set this point
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        }
+                                        parallelPathSegmentCounter_SECOND = 0
+                                        // HANDLE OTHER WAY
+                                    // } else {
+                                    //     console.log("SKIP_D_C")
+                                    // }
                                 } else {
                                     // set prev point
                                     console.log("E")
@@ -3386,12 +3419,24 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     if( parallelPathSegmentCounter_SECOND === 0) {
                                         console.log("G_running")
                                         console.log(i)
-                                        let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
-                                        let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-                                        parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        if(removeornot_allParData === true){
+                                            let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+                                            let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        } else {
+                                            let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i-1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+                                            let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i-1][1].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0].y, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].x, parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1].y)
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+                                            parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+                                        }
+
+
+
                                     } else {
                                         console.log("G_not_running")
                                         console.log("G+_running")
@@ -3407,6 +3452,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                         // set this point
                                         parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.x = this_parallelPathDatasIntersectingPoint.x
                                         parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+
                                     }
                                     parallelPathSegmentCounter_SECOND = 0
                                     // HANDLE OTHER WAY
@@ -3415,8 +3461,13 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                     console.log("H")
                                 }
                                 console.log("I")
-                                parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x = next_parallel_perp_AnchorPointX
-                                parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y = next_parallel_perp_AnchorPointY
+                                if(removeornot_allParData === true){
+                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x = next_parallel_perp_AnchorPointX
+                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y = next_parallel_perp_AnchorPointY
+                                } else {
+                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.x = next_parallel_perp_AnchorPointX
+                                    parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords.y = next_parallel_perp_AnchorPointY
+                                }
                             }
                         }
                     // HANDLE OTHER WAY
@@ -3830,6 +3881,7 @@ let updateSVG_highlightOPD_02_switches = [0,0]
 let updateSVG_highlight_1_point_01_switches = [1,0]
 let updateSVG_highlight_1_point_02_switches = [1,0]
 let updateSVG_highlight_1_point_03_switches = [1,0]
+let updateSVG_highlight_1_point_04_switches = [1,0]
 let updateSVG_highlight_1_point_1_circ_01_switches = [1,0]
 
 
@@ -4030,17 +4082,31 @@ function updateSVG_highlight_1_point_03(coords) {
     }
 }
 
+function updateSVG_highlight_1_point_04(coords) {
+    if(updateSVG_highlight_1_point_04_switches[0] === 1) {
+        if(updateSVG_highlight_1_point_04_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_10')
+            updateSVG_highlight_1_point_04_switches[1] = 1
+        }
+        let point = d3.select("#visualTest--intersectPt1--IDTAG_10")
+
+        // let coords = [coords[0], coords[1]]
+
+        point.attr('cx', coords[0]).attr('cy', coords[1])
+    }
+}
+
 function updateSVG_highlight_1_point_1_circ_01(firstParallelPathData) {
     if(updateSVG_highlight_1_point_1_circ_01_switches[0] === 1) {
         if(updateSVG_highlight_1_point_1_circ_01_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_010')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_010')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_010')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_011')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_011')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--unset testElem-strokeWidth--2 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_011')
             updateSVG_highlight_1_point_1_circ_01_switches[1] = 1
         }
-        let thisPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_010")
-        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_010")
-        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_010")
+        let thisPoint1 = d3.select("#visualTest--intersectPt1--IDTAG_011")
+        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_011")
+        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_011")
 
         let arcCenterCoords1 = [firstParallelPathData.arc.center.x, firstParallelPathData.arc.center.y]
         let arcRadius = firstParallelPathData.arc.radius
