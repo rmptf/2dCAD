@@ -2619,6 +2619,27 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
 
 
+                            // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
+                            // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
+
+                            // let removeCountDAF = finishIndex - startIndex
+                            // console.log("findmee123")
+                            // console.log(removeCountDAF)
+
+                            // // remove only the middle parallelFigure_data_pathDatasAndFillers_array_drawParallel's
+                            // if (removeornot_arcsAndFillers === true) {
+                            //     for (let m = 0; m < removeCountDAF; m++) {
+                            //         console.log("Remove_Above_PathDatasAndFillers")
+                            //         console.log(m)
+                            //         // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 1)
+                            //         parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
+                            //         // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextNEXTIndex, 1)
+                            //     }
+                            //     removeornot_arcsAndFillers = false
+                            // } else {
+                            //     console.log("Remove_No_PathDatasAndFillers")
+                            // }
+
 
                             let removeCountDAF = finishIndex - startIndex
 
@@ -2631,6 +2652,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 for (let m = 0; m < removeCountDAF; m++) {
                                     console.log("Remove_Above_PathDatasAndFillers")
                                     console.log(m)
+                                    console.log(nextIndex)
                                     parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1) // only elim middle?
                                 }
                                 removeornot_arcsAndFillers = false
@@ -2639,11 +2661,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             }
 
 
-
-                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[0].coords.y])
-                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[1].coords.y])
-                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[2].coords.y]) // end
-                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[3].coords.y])
+                            let updateSvgCounter = prevIndex
+                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
+                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
+                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
+                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
 
                             let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
                             let svgPathGroup = self.parallelPathGroup._groups[0][0]
@@ -3267,7 +3289,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
                                 nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
                             }
-                            else if(i === nextRemoveIndex) {
+                            else if(i >= nextRemoveIndex) {
                                 console.log("nextRemoveIndex")
                                 thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + fillerAdder]
                                 nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2 + nextFillerAdder]
@@ -3275,7 +3297,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             else {
                                 console.log("noRemoveIndex")
                                 thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
-                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
+                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + nextFillerAdder]
                             }
 
                             // let b = i * 2
@@ -4169,7 +4191,12 @@ const SAVED_FIGURE_DATA = [
     '{"shapeData":[{"coords":{"x":267,"y":132},"arc":{"exist":false}},{"coords":{"x":547,"y":100},"arc":{"exist":false}},{"coords":{"x":569,"y":264},"arc":{"exist":false}},{"coords":{"x":100,"y":205},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2161px","dragDivLeft":"2151px"},"svgDimensions":{"x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515}}',
     // shape 2:
     '{"shapeData":[{"coords":{"x":283,"y":146},"arc":{"exist":false}},{"coords":{"x":603,"y":100},"arc":{"exist":false}},{"coords":{"x":647,"y":207},"arc":{"exist":false}},{"coords":{"x":626,"y":304},"arc":{"exist":false}},{"coords":{"x":100,"y":238},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2197px","dragDivLeft":"2081px"},"svgDimensions":{"x":445,"y":190,"width":747,"height":553,"top":190,"right":1192,"bottom":743,"left":445}}',
-
+    // shape 3:
+    '{"shapeData":[{"coords":{"x":121,"y":22.796875},"arc":{"exist":false}},{"coords":{"x":242,"y":94.796875},"arc":{"exist":false}},{"coords":{"x":285,"y":252.796875},"arc":{"exist":false}},{"coords":{"x":643,"y":191.796875},"arc":{"exist":false}},{"coords":{"x":658,"y":416.796875},"arc":{"exist":false}},{"coords":{"x":100.00390625,"y":327.796875},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2142px","dragDivLeft":"2217.26px"},"svgDimensions":{"x":796.005859375,"y":228.203125,"width":757.98828125,"height":516.796875,"top":228.203125,"right":1553.994140625,"bottom":745,"left":796.005859375}}',
+    // shape 4:
+    '{"shapeData":[{"coords":{"x":190.00390625,"y":23.79296875},"arc":{"exist":false}},{"coords":{"x":246.00390625,"y":176.79296875},"arc":{"exist":false}},{"coords":{"x":540.00390625,"y":125.79296875},"arc":{"exist":false}},{"coords":{"x":577.00390625,"y":302.79296875},"arc":{"exist":false}},{"coords":{"x":100,"y":266.79296875},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2176px","dragDivLeft":"2167px"},"svgDimensions":{"x":745.7421875,"y":262.20703125,"width":676.9921875,"height":500,"top":262.20703125,"right":1422.734375,"bottom":762.20703125,"left":745.7421875}}',
+    // shape 5:
+    '{"shapeData":[{"coords":{"x":213.74609375,"y":33.998046875},"arc":{"exist":false}},{"coords":{"x":251.74609375,"y":173.998046875},"arc":{"exist":false}},{"coords":{"x":549.74609375,"y":100.001953125},"arc":{"exist":false}},{"coords":{"x":559.74609375,"y":277.001953125},"arc":{"exist":false}},{"coords":{"x":184.74609375,"y":230.001953125},"arc":{"exist":false}},{"coords":{"x":99.99609375,"y":384.001953125},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2231.17px","dragDivLeft":"2145.25px"},"svgDimensions":{"x":723.994140625,"y":242.998046875,"width":659.736328125,"height":518.828125,"top":242.998046875,"right":1383.73046875,"bottom":761.826171875,"left":723.994140625}}',
 
 
     // // Deleting arc-half at 0
