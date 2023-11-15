@@ -66,8 +66,24 @@ function measurePath() {
 
 document.addEventListener('keydown', function(event) {
     if (event.metaKey && event.key === "'") {
+        console.log("cloneDragDiv")
         cloneDragDivs()
     }
+
+    if (event.metaKey && event.key === "/") {
+        console.log("pressAddCurveButton = true")
+        addCurvePoint()
+    }
+
+    if (event.metaKey && event.key === ";") {
+        console.log("pressAddParallelButton = true")
+        addParallelPath()
+    }
+
+    if (event.metaKey && event.key === ".") {
+        printFigureData()
+    }
+
     if (event.key === "F1") {
         drawSavedFigure(0)
     }
@@ -1772,21 +1788,21 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
 
 
 
-    // function findPointAlongSlopeAtDistance(startingPoint, endPoint, midPoint, distanceRatioArc1, distanceAwayCenterArc1, distanceAwayArcArc1){
-    function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcArc1){
-        let newPoint = [0,0]
-        let startPtX = startingPoint[0]
-        let startPtY = startingPoint[1]
-        let endPtX = endPoint[0]
-        let endPtY = endPoint[1]
-        let totalDistance = getDistance(startPtX,startPtY,endPtX,endPtY)
-        let distanceRatioUsingArc1DistanceFromCenter = distanceAwayArcArc1 / totalDistance
+// function findPointAlongSlopeAtDistance(startingPoint, endPoint, midPoint, distanceRatioArc1, distanceAwayCenterArc1, distanceAwayArcArc1){
+function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcArc1){
+    let newPoint = [0,0]
+    let startPtX = startingPoint[0]
+    let startPtY = startingPoint[1]
+    let endPtX = endPoint[0]
+    let endPtY = endPoint[1]
+    let totalDistance = getDistance(startPtX,startPtY,endPtX,endPtY)
+    let distanceRatioUsingArc1DistanceFromCenter = distanceAwayArcArc1 / totalDistance
+
+    newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
+    newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtY))
     
-        newPoint[0] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtX) + (distanceRatioUsingArc1DistanceFromCenter * endPtX))
-        newPoint[1] = (((1 - distanceRatioUsingArc1DistanceFromCenter) * startPtY) + (distanceRatioUsingArc1DistanceFromCenter * endPtY))
-        
-        return newPoint
-    }
+    return newPoint
+}
 
 
 
@@ -2600,10 +2616,16 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     return {removeCount: counter, startIndex: lowerIndex + 1, endIndex: higherIndex - 1}
                 }
 
+
+                // TODO: 1
+                // Have to make it dynamic: allow figure to remove multiple overlapping sections
+                // TODO: 2
+                // Undo remove when sections no longer intersect
                 function removePaths(removalData, intersectCoords) {
                     removeornot_arcsAndFillers = true
                     for (let l = 0; l < removalData.removeCount; l++) {
                         if(removeornot_allParData === true) {
+                            console.log("findme_Remove")
                             // Remove Points and paths
                             let prevIndex = removalData.startIndex - 1
                             let thisIndex = removalData.startIndex
@@ -2618,41 +2640,10 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(thisIndex, 1)           //parallelPathDatas_stopAtIntersect_fromGLOBAL          parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL]
                             parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(thisIndex, 1)
 
-
-                            // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].coords = parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords
-                            // parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.center = findCircleCenter(parallelFigure_data_pathDatasAndFillers_array_drawParallel[prevIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[nextIndex].coords, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.radius, parallelFigure_data_pathDatasAndFillers_array_drawParallel[thisIndex].arc.sweepFlag)
-
-                            // let removeCountDAF = finishIndex - startIndex
-                            // console.log("findmee123")
-                            // console.log(removeCountDAF)
-
-                            // // remove only the middle parallelFigure_data_pathDatasAndFillers_array_drawParallel's
-                            // if (removeornot_arcsAndFillers === true) {
-                            //     for (let m = 0; m < removeCountDAF; m++) {
-                            //         console.log("Remove_Above_PathDatasAndFillers")
-                            //         console.log(m)
-                            //         // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(thisIndex, 1)
-                            //         parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1)
-                            //         // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextNEXTIndex, 1)
-                            //     }
-                            //     removeornot_arcsAndFillers = false
-                            // } else {
-                            //     console.log("Remove_No_PathDatasAndFillers")
-                            // }
-
-
                             let removeCountDAF = finishIndex - startIndex
-
-                            console.log("findmeeeee")
-                            console.log(startIndex)
-                            console.log(finishIndex)
-                            console.log(removeCountDAF)
-
                             if (removeornot_arcsAndFillers === true) {
                                 for (let m = 0; m < removeCountDAF; m++) {
                                     console.log("Remove_Above_PathDatasAndFillers")
-                                    console.log(m)
-                                    console.log(nextIndex)
                                     parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(nextIndex, 1) // only elim middle?
                                 }
                                 removeornot_arcsAndFillers = false
@@ -2660,12 +2651,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 console.log("Remove_No_PathDatasAndFillers")
                             }
 
-
-                            let updateSvgCounter = prevIndex
-                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
-                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
-                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
-                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
+                            // let updateSvgCounter = prevIndex
+                            // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
+                            // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
+                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
+                            // updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
 
                             let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
                             let svgPathGroup = self.parallelPathGroup._groups[0][0]
@@ -3271,61 +3261,42 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             console.log("333333")
                             nextFillerAdder = 1
                         }
-                        
 
+                        // old
+                        // let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                        // let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
 
-                        // test
+                        // new
                         let thisPathDataOutside
                         let nextPathDataOutside
                         if (removeornot_allParData === true) {
+                            console.log("removeornot_allParData: Hasn't run.")
                             thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
                             nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
                         } else {
+                            console.log("removeornot_allParData: Has run.")
                             let thisRemoveIndex = removeStartIndex
                             let nextRemoveIndex = thisRemoveIndex + 1
 
-                            if(i === thisRemoveIndex) {
-                                console.log("thisRemoveIndex")
+                            if(i <= thisRemoveIndex) {
+                                console.log("LessThan_or_EqualTo_thisRemoveIndex")
                                 thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
                                 nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
                             }
                             else if(i >= nextRemoveIndex) {
-                                console.log("nextRemoveIndex")
+                                console.log("GreaterThan_or_EqualTo_nextRemoveIndex")
                                 thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + fillerAdder]
                                 nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2 + nextFillerAdder]
                             }
                             else {
-                                console.log("noRemoveIndex")
-                                thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
-                                nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + nextFillerAdder]
+                                console.log("Not_Handled_RemoveIndex")
+                                // thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
+                                // nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + nextFillerAdder]
+
+                                // thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + fillerAdder]
+                                // nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 2 + nextFillerAdder]
                             }
-
-                            // let b = i * 2
-                            // thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[b + fillerAdder]
-                            // nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[b + 1 + nextFillerAdder]
-
-                            // this works for when i = 0 then 1. not sure if it will work in any other situations
-
-                            // Currently Have:
-                            // round 1
-                            // i(0) * 2 + 0 = 0
-                            // i(0) * 2 + 1 = 1
-                            // round 2
-                            // i(1) * 2 + 0 = 2
-                            // i(1) * 2 + 1 = 3
-
-                            // Need:
-                            // round 1
-                            // i = 0   0
-                            //         1
-                            // round 2
-                            // i = 1   2
-                            //         3
                         }
-
-
-                        // let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
-                        // let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
 
                         let this_parallel_perp_AnchorPointX = thisPathDataOutside.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
                         let this_parallel_perp_AnchorPointY = thisPathDataOutside.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside.coords.y - nextPathDataOutside.coords.y, thisPathDataOutside.coords.x - nextPathDataOutside.coords.x)))
@@ -4197,6 +4168,10 @@ const SAVED_FIGURE_DATA = [
     '{"shapeData":[{"coords":{"x":190.00390625,"y":23.79296875},"arc":{"exist":false}},{"coords":{"x":246.00390625,"y":176.79296875},"arc":{"exist":false}},{"coords":{"x":540.00390625,"y":125.79296875},"arc":{"exist":false}},{"coords":{"x":577.00390625,"y":302.79296875},"arc":{"exist":false}},{"coords":{"x":100,"y":266.79296875},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2176px","dragDivLeft":"2167px"},"svgDimensions":{"x":745.7421875,"y":262.20703125,"width":676.9921875,"height":500,"top":262.20703125,"right":1422.734375,"bottom":762.20703125,"left":745.7421875}}',
     // shape 5:
     '{"shapeData":[{"coords":{"x":213.74609375,"y":33.998046875},"arc":{"exist":false}},{"coords":{"x":251.74609375,"y":173.998046875},"arc":{"exist":false}},{"coords":{"x":549.74609375,"y":100.001953125},"arc":{"exist":false}},{"coords":{"x":559.74609375,"y":277.001953125},"arc":{"exist":false}},{"coords":{"x":184.74609375,"y":230.001953125},"arc":{"exist":false}},{"coords":{"x":99.99609375,"y":384.001953125},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2231.17px","dragDivLeft":"2145.25px"},"svgDimensions":{"x":723.994140625,"y":242.998046875,"width":659.736328125,"height":518.828125,"top":242.998046875,"right":1383.73046875,"bottom":761.826171875,"left":723.994140625}}',
+    // shape 6:
+    '{"shapeData":[{"coords":{"x":216,"y":19},"arc":{"exist":false}},{"coords":{"x":259,"y":102},"arc":{"exist":false}},{"coords":{"x":570,"y":133},"arc":{"exist":false}},{"coords":{"x":598,"y":245},"arc":{"exist":false}},{"coords":{"x":211,"y":274},"arc":{"exist":false}},{"coords":{"x":100,"y":354},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2249.67px","dragDivLeft":"2143.33px"},"svgDimensions":{"x":794,"y":275,"width":697.9896240234375,"height":500.3333435058594,"top":275,"right":1491.9896240234375,"bottom":775.3333435058594,"left":794}}',
+    // shape 7:
+    '{"shapeData":[{"coords":{"x":148,"y":21},"arc":{"exist":false}},{"coords":{"x":370,"y":126},"arc":{"exist":false}},{"coords":{"x":379,"y":176},"arc":{"exist":false}},{"coords":{"x":136,"y":256},"arc":{"exist":false}},{"coords":{"x":148,"y":302},"arc":{"exist":false}},{"coords":{"x":410,"y":372},"arc":{"exist":false}},{"coords":{"x":421,"y":464},"arc":{"exist":false}},{"coords":{"x":100,"y":564},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2124px","dragDivLeft":"2179.33px"},"svgDimensions":{"x":829.9896240234375,"y":323.3333435058594,"width":520.9896240234375,"height":664,"top":323.3333435058594,"right":1350.979248046875,"bottom":987.3333435058594,"left":829.9896240234375}}',
 
 
     // // Deleting arc-half at 0
