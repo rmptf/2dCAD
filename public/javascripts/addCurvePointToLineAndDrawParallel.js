@@ -2589,8 +2589,12 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
                         if(checker.doesIntersect === true) {
                             console.log("These_INTERSECT: ")
+                            console.log(i, j)
                             let arrayOfIndeciesToRemoveVar = arrayOfIndeciesToRemove(i, j)
                             removePaths(arrayOfIndeciesToRemoveVar, checker.coords)
+                        } else {
+                            console.log("These__DONT_INTERSECT: ")
+                            console.log(i, j)
                         }
                     }
                 }
@@ -2651,11 +2655,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 console.log("Remove_No_PathDatasAndFillers")
                             }
 
-                            // let updateSvgCounter = prevIndex
-                            // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
-                            // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
-                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
-                            // updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
+                            let updateSvgCounter = prevIndex
+                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
+                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
+                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
+                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
 
                             let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
                             let svgPathGroup = self.parallelPathGroup._groups[0][0]
@@ -3262,7 +3266,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                             nextFillerAdder = 1
                         }
 
-                        // old
+                        // // old
                         // let thisPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + fillerAdder]
                         // let nextPathDataOutside = parallelFigure_data_pathDatasAndFillers_array_drawParallel[i + 1 + nextFillerAdder]
 
