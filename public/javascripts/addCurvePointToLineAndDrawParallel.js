@@ -2585,8 +2585,42 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
                 // **recursive** loop through all points and check if any intersect
                 for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; j++) {
+                    
+                    // new
+                    // maybe use parallelPathDatas_stopAtPerpendicular_fromLOCAL?
+                    console.log("findme_checklines")
+                    // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords)
+                    // console.log(parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
+                    // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0])
+                    // console.log(parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1])
+
+                    let firstLine1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1].coords]
+                    let firstLine2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords]
+
+                    let firstLine1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][1]]
+                    let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1]]
+
+                    updateSVG_highlight_1_point_01([firstLine1_int[0].x, firstLine1_int[0].y])
+                    updateSVG_highlight_1_point_02([firstLine1_int[1].x, firstLine1_int[1].y])
+                    updateSVG_highlight_1_point_03([firstLine1_perp[0].x, firstLine1_perp[0].y])
+                    updateSVG_highlight_1_point_04([firstLine1_perp[1].x, firstLine1_perp[1].y])
+
                     if(i !== j && i !== j - 1 && i !== j + 1) {
-                        let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
+
+
+                        // // old
+                        // let checker = doLinesIntersect(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords)
+
+                        // new
+                        let line1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords]
+                        let line2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords]
+
+                        let line1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1]]
+                        let line2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1]]
+
+                        let checker = doLinesIntersect(line1_int[0], line1_int[1], line2_int[0], line2_int[1])
+
+
                         if(checker.doesIntersect === true) {
                             console.log("These_INTERSECT: ")
                             console.log(i, j)
@@ -2655,11 +2689,11 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                                 console.log("Remove_No_PathDatasAndFillers")
                             }
 
-                            let updateSvgCounter = prevIndex
-                            updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
-                            updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
-                            updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
-                            updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
+                            // let updateSvgCounter = prevIndex
+                            // updateSVG_highlight_1_point_01([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 0].coords.y])
+                            // updateSVG_highlight_1_point_02([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 1].coords.y])
+                            // updateSVG_highlight_1_point_03([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 2].coords.y]) // end
+                            // updateSVG_highlight_1_point_04([parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.x, parallelFigure_data_pathDatasAndFillers_array_drawParallel[updateSvgCounter + 3].coords.y])
 
                             let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
                             let svgPathGroup = self.parallelPathGroup._groups[0][0]
