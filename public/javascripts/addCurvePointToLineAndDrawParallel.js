@@ -2536,6 +2536,59 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 }
             }
 
+            // function midpointOfAngle(x1, y1, x2, y2, x3, y3, x4, y4, x) {
+            //     // Calculate the intersection point of the lines
+            //     let intersectionPoint = intersectionPointOfLines(x1, y1, x2, y2, x3, y3, x4, y4);
+            
+            //     // Calculate the unit vectors along the lines
+            //     let unitVector1 = unitVector(x1, y1, x2, y2);
+            //     let unitVector2 = unitVector(x3, y3, x4, y4);
+            
+            //     // Calculate the unit vector bisecting the angle between the lines
+            //     let bisectingVector = bisectingVectorFun(unitVector1, unitVector2);
+            
+            //     // Calculate the midpoint at a distance x along the bisecting vector
+            //     let xMidpoint = intersectionPoint.x + x * bisectingVector.x;
+            //     let yMidpoint = intersectionPoint.y + x * bisectingVector.y;
+            
+            //     return { x: xMidpoint, y: yMidpoint };
+            // }
+            
+            // // Function to calculate the intersection point of two lines
+            // function intersectionPointOfLines(x1, y1, x2, y2, x3, y3, x4, y4) {
+            //     let denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+            //     let x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denominator;
+            //     let y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denominator;
+            //     return { x, y };
+            // }
+            
+            // // Function to calculate the unit vector given two points
+            // function unitVector(x1, y1, x2, y2) {
+            //     let magnitude = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+            //     return { x: (x2 - x1) / magnitude, y: (y2 - y1) / magnitude };
+            // }
+
+            // function bisectingVectorFun(vector1, vector2) {
+            //     let sumVector = { x: vector1.x + vector2.x, y: vector1.y + vector2.y };
+            //     let magnitude = Math.sqrt(sumVector.x ** 2 + sumVector.y ** 2);
+            //     return { x: sumVector.y / magnitude, y: -sumVector.x / magnitude }; // Rotate 90 degrees counterclockwise
+            // }
+
+            // let intersectingPoint = midpointOfAngle(
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.x, 
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][0].coords.y,
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.x, 
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.y, 
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.x,
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][1].coords.y, 
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.x,
+            //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][2].coords.y,
+            //     parallelDistance
+            // )
+
+            // console.log(intersectingPoint)
+            // updateSVG_highlight_1_point_01([intersectingPoint.x, intersectingPoint.y])
+            // updateSVG_highlight_1_point_02([parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][1].coords.x, parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][1].coords.y])
 
 
 
@@ -2586,9 +2639,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 for (let j = 0; j < parallelPathDatas_stopAtIntersect_fromGLOBAL.length; j++) {
                     // // might need later
                     // // this is helpful for deciding which lines to check for intersection: (SAI or SAP)
-                    // let firstLine1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[0][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[0][1].coords]
+                    // let firstLine1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[2][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[2][1].coords]
                     // let firstLine2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords]
-                    // let firstLine1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[0][1]]
+                    // let firstLine1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[2][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[2][1]]
                     // let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1]]
                     // updateSVG_highlight_1_point_01([firstLine1_int[0].x, firstLine1_int[0].y])
                     // updateSVG_highlight_1_point_02([firstLine1_int[1].x, firstLine1_int[1].y])
@@ -2600,7 +2653,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // new
                         let line1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[i][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].coords]
                         let line2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[j][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[j][1].coords]
-                        // might be better to use these: (check lter)
+                        // might be better to use these: (check later)
                         // let line1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[i][1]]
                         // let line2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1]]
                         let checker = doLinesIntersect(line1_int[0], line1_int[1], line2_int[0], line2_int[1])
@@ -2621,18 +2674,27 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 checkInteractionBetweenTheseGuys(runObserver, line1IfInter, line2IfInter)
                 function checkInteractionBetweenTheseGuys(runOrNot, i, j) {
                     console.log("inside_checker_runner")
+                    console.log(i, j)
+                    console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
                     let indeciesInOrder = higherLowerIndex(i, j)
                     let thisIndex = indeciesInOrder[0]
-                    let nextIndex = indeciesInOrder[0] + 1 // FIXME: this
+                    let nextIndex = indeciesInOrder[0] + 1
                     if(runOrNot === true) {
                         console.log("checker_running")
+                        // let line1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][1].coords]
+                        // let line2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][1].coords]
+
                         let firstLine1_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[thisIndex][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[thisIndex][1]]
                         let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][1]]
+
+                        // let firstLine1_perp = [parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][0].coords, parallelPathDatas_stopAtPerpendicular_fromLOCAL[thisIndex][1]]
+                        // let firstLine2_perp = [parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][0].coords, parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][1]]
+
+                        updateSVG_highlight_2_points_1_line_01([firstLine1_perp[0].x, firstLine1_perp[0].y], [firstLine1_perp[1].x, firstLine1_perp[1].y])
+                        updateSVG_highlight_2_points_1_line_02([firstLine2_perp[0].x, firstLine2_perp[0].y], [firstLine2_perp[1].x, firstLine2_perp[1].y])
+
                         let checker = doLinesIntersect(firstLine1_perp[0], firstLine1_perp[1], firstLine2_perp[0], firstLine2_perp[1])
-                        // updateSVG_highlight_2_points_1_line_01([firstLine1_perp[0].x, firstLine1_perp[0].y], [firstLine1_perp[1].x, firstLine1_perp[1].y])
-                        // updateSVG_highlight_2_points_1_line_02([firstLine2_perp[0].x, firstLine2_perp[0].y], [firstLine2_perp[1].x, firstLine2_perp[1].y])
                         if(checker.doesIntersect === false) {
-                            // add paths back
                             addPaths()
                         }
                     } else {
@@ -2744,19 +2806,22 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                 }
 
                 function addPaths() {
-                    console.log("findme_removedPathDatas")
+                    console.log("findme_addPaths_removedPathDataArray")
                     console.log(removedPathData)
 
-                    for (let n = 0; n < removedPathData[0].length; n++) {
-                        let index = removedPathData[0][0].thisIndex
-                        let pathDataSAI = removedPathData[0][0].pathDataSAI
-                        let pathDataSAP = removedPathData[0][0].pathDataSAP
-                        let pathDataPAF = removedPathData[0][0].pathDataPAF
+                    // for (let n = 0; n < removedPathData[0].length; n++) {
+                    // backwards for loop
+                    for (let n = removedPathData[0].length - 1; n >= 0; n--) {
+                        console.log(n)
+                        let index = removedPathData[0][n].thisIndex
+                        let pathDataSAI = removedPathData[0][n].pathDataSAI
+                        let pathDataSAP = removedPathData[0][n].pathDataSAP
+                        let pathDataPAF = removedPathData[0][n].pathDataPAF
     
                         // create svg element for dom
-                        let newParallelEndPoint1 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved');
-                        let newParallelEndPoint2 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved');
-                        let newParallelPath = self.parallelPathGroup.append('path').attr('class', 'path parallelPath wasRemoved');
+                        let newParallelEndPoint1 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved:_' + n);
+                        let newParallelEndPoint2 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved:_' + n);
+                        let newParallelPath = self.parallelPathGroup.append('path').attr('class', 'path parallelPath wasRemoved:_' + n);
     
                         // place svg element in correct index of dom
                         let thisSvgEndPointIndex = (index * 2) + 1
@@ -2776,43 +2841,17 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
     
                         // place pathDatas in global arrays
                         parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, pathDataSAP[0])
+
+                        // place pathDatas in global arrays
+                        if(pathDataPAF[0] !== undefined) {
+                            parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(index + 1, 0, pathDataPAF[0]) // FIXME: index + 1 might not be the best way for this to run
+                        }
                     }
-                    
-                    let index = removedPathData[0][0].thisIndex
-                    let pathDataSAI = removedPathData[0][0].pathDataSAI
-                    let pathDataSAP = removedPathData[0][0].pathDataSAP
-                    let pathDataPAF = removedPathData[0][0].pathDataPAF
-
-                    // create svg element for dom
-                    let newParallelEndPoint1 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved');
-                    let newParallelEndPoint2 = self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint wasRemoved');
-                    let newParallelPath = self.parallelPathGroup.append('path').attr('class', 'path parallelPath wasRemoved');
-
-                    // place svg element in correct index of dom
-                    let thisSvgEndPointIndex = (index * 2) + 1
-                    let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-                    let thisSvgPathIndex = index + 1
-                    self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
-                    self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
-                    self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')')
-
-                    // place svg element in global arrays
-                    let doubleIndex = index * 2
-                    parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2)
-                    parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][parallelFigure_counter_groupCount_GLOBAL].splice(index, 0, newParallelPath)
-
-                    // place pathDatas in global arrays
-                    parallelPathDatas_stopAtIntersect_fromGLOBAL.splice(index, 0, pathDataSAI[0])
-
-                    // place pathDatas in global arrays
-                    parallelPathDatas_stopAtPerpendicular_fromLOCAL.splice(index, 0, pathDataSAP[0])
-
-                    // need later
-                    // parallelFigure_data_pathDatasAndFillers_array_drawParallel.splice(index, 0, pathDataPAF)
 
                     skipperCheck_Path = false
                     removeornot_allParData = true
                     runObserver = false
+                    removedPathData = [[]]
                 }
 
 
@@ -4345,6 +4384,10 @@ const SAVED_FIGURE_DATA = [
     // Delete paths
     // shape 1:
     '{"shapeData":[{"coords":{"x":267,"y":132},"arc":{"exist":false}},{"coords":{"x":547,"y":100},"arc":{"exist":false}},{"coords":{"x":569,"y":264},"arc":{"exist":false}},{"coords":{"x":100,"y":205},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2161px","dragDivLeft":"2151px"},"svgDimensions":{"x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515}}',
+    // shape 2a:
+    '{"shapeData":[{"coords":{"x":315,"y":63},"arc":{"exist":false}},{"coords":{"x":370,"y":169},"arc":{"exist":false}},{"coords":{"x":715,"y":100},"arc":{"exist":false}},{"coords":{"x":771,"y":290},"arc":{"exist":false}},{"coords":{"x":100,"y":254},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2195.67px","dragDivLeft":"2068.33px"},"svgDimensions":{"x":719,"y":223,"width":871,"height":554.3333740234375,"top":223,"right":1590,"bottom":777.3333740234375,"left":719}}',
+    // shape 3a:
+    '{"shapeData":[{"coords":{"x":285.66668701171875,"y":40},"arc":{"exist":false}},{"coords":{"x":355.66668701171875,"y":149},"arc":{"exist":false}},{"coords":{"x":723.6666870117188,"y":100},"arc":{"exist":false}},{"coords":{"x":769.6666870117188,"y":251},"arc":{"exist":false}},{"coords":{"x":198.66668701171875,"y":218},"arc":{"exist":false}},{"coords":{"x":100,"y":290},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2203.67px","dragDivLeft":"2048.33px"},"svgDimensions":{"x":699,"y":231,"width":869.6666870117188,"height":503.3333435058594,"top":231,"right":1568.6666870117188,"bottom":734.3333435058594,"left":699}}',
     // shape 2:
     '{"shapeData":[{"coords":{"x":283,"y":146},"arc":{"exist":false}},{"coords":{"x":603,"y":100},"arc":{"exist":false}},{"coords":{"x":647,"y":207},"arc":{"exist":false}},{"coords":{"x":626,"y":304},"arc":{"exist":false}},{"coords":{"x":100,"y":238},"arc":{"exist":false}}],"dragDivPosition":{"dragDivTop":"2197px","dragDivLeft":"2081px"},"svgDimensions":{"x":445,"y":190,"width":747,"height":553,"top":190,"right":1192,"bottom":743,"left":445}}',
     // shape 3:
