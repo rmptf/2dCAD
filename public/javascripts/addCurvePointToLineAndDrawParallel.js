@@ -2077,6 +2077,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
     console.log("DRAW_PARALLEL")
 
     let parallelFigure_data_pathDatasAndFillers_array_drawParallel = makeDeepCopy(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    let parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY = makeDeepCopy(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
     let secondaryPathIndex = secondaryPathClicked
     let isDownDrawParallelActive = false
 
@@ -2681,6 +2682,44 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let nextIndex = indeciesInOrder[0] + 1
                     if(runOrNot === true) {
                         console.log("checker_running")
+
+                        // first line
+                        let thisPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[0]
+                        let nextPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[0 + 1]
+
+                        let this_parallel_perp_AnchorPointX_SECOND_1 = thisPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        let this_parallel_perp_AnchorPointY_SECOND_1 = thisPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        let next_parallel_perp_AnchorPointX_SECOND_1 = nextPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        let next_parallel_perp_AnchorPointY_SECOND_1 = nextPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+
+                        // second line
+                        let thisPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[1]
+                        let nextPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[1 + 1]
+
+                        let this_parallel_perp_AnchorPointX_SECOND_2 = thisPathDataOutside_SECOND_2.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
+                        let this_parallel_perp_AnchorPointY_SECOND_2 = thisPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
+                        let next_parallel_perp_AnchorPointX_SECOND_2 = nextPathDataOutside_SECOND_2.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
+                        let next_parallel_perp_AnchorPointY_SECOND_2 = nextPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
+
+                        let intersectingPoint_1 = findIntersectingPointSIMPLER(
+                            this_parallel_perp_AnchorPointX_SECOND_1,
+                            this_parallel_perp_AnchorPointY_SECOND_1,
+                            next_parallel_perp_AnchorPointX_SECOND_1,
+                            next_parallel_perp_AnchorPointY_SECOND_1, 
+                            this_parallel_perp_AnchorPointX_SECOND_2, 
+                            this_parallel_perp_AnchorPointY_SECOND_2, 
+                            next_parallel_perp_AnchorPointX_SECOND_2, 
+                            next_parallel_perp_AnchorPointY_SECOND_2, 
+                        )
+
+                        // updateSVG_highlight_1_point_01([intersectingPoint_1.x, intersectingPoint_1.y])
+                        // updateSVG_highlight_2_points_1_line_01([this_parallel_perp_AnchorPointX_SECOND_1, this_parallel_perp_AnchorPointY_SECOND_1], [next_parallel_perp_AnchorPointX_SECOND_1, next_parallel_perp_AnchorPointY_SECOND_1])
+                        // updateSVG_highlight_2_points_1_line_02([this_parallel_perp_AnchorPointX_SECOND_2, this_parallel_perp_AnchorPointY_SECOND_2], [next_parallel_perp_AnchorPointX_SECOND_2, next_parallel_perp_AnchorPointY_SECOND_2])
+                        updateSVG_highlight_2_points_1_line_01([this_parallel_perp_AnchorPointX_SECOND_1, this_parallel_perp_AnchorPointY_SECOND_1], [intersectingPoint_1.x, intersectingPoint_1.y],)
+                        // updateSVG_highlight_2_points_1_line_02([intersectingPoint_1.x, intersectingPoint_1.y], [next_parallel_perp_AnchorPointX_SECOND_2, next_parallel_perp_AnchorPointY_SECOND_2])
+
+
+
                         // let line1_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][1].coords]
                         // let line2_int = [parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][0].coords, parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][1].coords]
 
@@ -2688,14 +2727,17 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][1]]
 
                         // let firstLine1_perp = [parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][0].coords, parallelPathDatas_stopAtPerpendicular_fromLOCAL[thisIndex][1]]
-                        // let firstLine2_perp = [parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][0].coords, parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][1]]
+                        // let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][1].coords]
 
-                        updateSVG_highlight_2_points_1_line_01([firstLine1_perp[0].x, firstLine1_perp[0].y], [firstLine1_perp[1].x, firstLine1_perp[1].y])
-                        updateSVG_highlight_2_points_1_line_02([firstLine2_perp[0].x, firstLine2_perp[0].y], [firstLine2_perp[1].x, firstLine2_perp[1].y])
+                        // let firstLine1_perp = [parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex][0].coords, parallelPathDatas_stopAtPerpendicular_fromLOCAL[thisIndex][1]]
+                        // let firstLine2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[nextIndex][0], parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex][1].coords]
+
+                        // updateSVG_highlight_2_points_1_line_01([firstLine1_perp[0].x, firstLine1_perp[0].y], [firstLine1_perp[1].x, firstLine1_perp[1].y])
+                        // updateSVG_highlight_2_points_1_line_02([firstLine2_perp[0].x, firstLine2_perp[0].y], [firstLine2_perp[1].x, firstLine2_perp[1].y])
 
                         let checker = doLinesIntersect(firstLine1_perp[0], firstLine1_perp[1], firstLine2_perp[0], firstLine2_perp[1])
                         if(checker.doesIntersect === false) {
-                            addPaths()
+                            // addPaths()
                         }
                     } else {
                         console.log("checker_not_running")
