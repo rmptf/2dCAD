@@ -2659,6 +2659,9 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         // let line2_perp = [parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][0], parallelPathDatas_stopAtPerpendicular_fromLOCAL[j][1]]
                         let checker = doLinesIntersect(line1_int[0], line1_int[1], line2_int[0], line2_int[1])
                         if(checker.doesIntersect === true) {
+                            // FIXME: this currently has an issue where it doesnt remove the last intersection if the shape has a double intersection at the second point of intersect.
+                            // might fix itself when i run this dynamically, since right now it only removes first intersection then stops
+                            // circle back to make sure works properly after making dynamic.
                             console.log("These_INTERSECT: ")
                             console.log(i, j)
                             runObserver = true
@@ -2679,22 +2682,35 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     console.log(originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
                     let indeciesInOrder = higherLowerIndex(i, j)
                     let thisIndex = indeciesInOrder[0]
-                    let nextIndex = indeciesInOrder[0] + 1
+                    // let nextIndex = indeciesInOrder[0] + 1
+                    let nextIndex = thisIndex + 1
                     if(runOrNot === true) {
                         console.log("checker_running")
 
-                        // first line
-                        let thisPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[0]
-                        let nextPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[0 + 1]
+                        // find this intersection point between itself and its intersecting line of the lines of the parallel shape that intersect.
+                        
+                        // first line of the first intersecting shape
+                        let thisPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex]
+                        let nextPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex + 1]
+                        // let firstPathPerpCoords = findPerpendicularPointsOfPath(parallelDistance, thisPathDataOutside_SECOND_1, nextPathDataOutside_SECOND_1)
+
+                        // function findPerpendicularPointsOfPath(parallelDistance, thisPathDataOutside_SECOND_1, nextPathDataOutside_SECOND_1) {
+                        //     let this_parallel_perp_AnchorPointX_SECOND_1 = thisPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        //     let this_parallel_perp_AnchorPointY_SECOND_1 = thisPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        //     let next_parallel_perp_AnchorPointX_SECOND_1 = nextPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        //     let next_parallel_perp_AnchorPointY_SECOND_1 = nextPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+
+                        //     return {anchorPoint1_X: this_parallel_perp_AnchorPointX_SECOND_1, anchorPoint1_Y: this_parallel_perp_AnchorPointY_SECOND_1, anchorPoint2_X: next_parallel_perp_AnchorPointX_SECOND_1, anchorPoint2_Y: next_parallel_perp_AnchorPointY_SECOND_1}
+                        // }
 
                         let this_parallel_perp_AnchorPointX_SECOND_1 = thisPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
                         let this_parallel_perp_AnchorPointY_SECOND_1 = thisPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
                         let next_parallel_perp_AnchorPointX_SECOND_1 = nextPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
                         let next_parallel_perp_AnchorPointY_SECOND_1 = nextPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
 
-                        // second line
-                        let thisPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[1]
-                        let nextPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[1 + 1]
+                        // second line of the first intersecting shape
+                        let thisPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex]
+                        let nextPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex + 1]
 
                         let this_parallel_perp_AnchorPointX_SECOND_2 = thisPathDataOutside_SECOND_2.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
                         let this_parallel_perp_AnchorPointY_SECOND_2 = thisPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
@@ -2702,6 +2718,12 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                         let next_parallel_perp_AnchorPointY_SECOND_2 = nextPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
 
                         let intersectingPoint_1 = findIntersectingPointSIMPLER(
+                            // firstPathPerpCoords.anchorPoint1_X,
+                            // firstPathPerpCoords.anchorPoint1_Y,
+                            // firstPathPerpCoords.anchorPoint2_X,
+                            // firstPathPerpCoords.anchorPoint2_Y,
+
+
                             this_parallel_perp_AnchorPointX_SECOND_1,
                             this_parallel_perp_AnchorPointY_SECOND_1,
                             next_parallel_perp_AnchorPointX_SECOND_1,
