@@ -1,3 +1,5 @@
+
+
 let svg
 let canvas
 let dragDiv
@@ -2684,61 +2686,87 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     let thisIndex = indeciesInOrder[0]
                     // let nextIndex = indeciesInOrder[0] + 1
                     let nextIndex = thisIndex + 1
+
+                    let thisIndex_shape2 = indeciesInOrder[1]
+                    let nextIndex_shape2 = thisIndex_shape2 + 1
                     if(runOrNot === true) {
                         console.log("checker_running")
-
                         // find this intersection point between itself and its intersecting line of the lines of the parallel shape that intersect.
-                        
-                        // first line of the first intersecting shape
-                        let thisPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex]
-                        let nextPathDataOutside_SECOND_1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex + 1]
-                        // let firstPathPerpCoords = findPerpendicularPointsOfPath(parallelDistance, thisPathDataOutside_SECOND_1, nextPathDataOutside_SECOND_1)
+                        let line1_shape1_point1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex]
+                        let line1_shape1_point2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex + 1]
+                        let line1_shape1_perpPoints = findPerpendicularPointsOfPath(parallelDistance, line1_shape1_point1, line1_shape1_point2)
 
-                        // function findPerpendicularPointsOfPath(parallelDistance, thisPathDataOutside_SECOND_1, nextPathDataOutside_SECOND_1) {
-                        //     let this_parallel_perp_AnchorPointX_SECOND_1 = thisPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        //     let this_parallel_perp_AnchorPointY_SECOND_1 = thisPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        //     let next_parallel_perp_AnchorPointX_SECOND_1 = nextPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        //     let next_parallel_perp_AnchorPointY_SECOND_1 = nextPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
+                        let line2_shape1_point1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex]
+                        let line2_shape1_point2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex + 1]
+                        let line2_shape1_perpPoints = findPerpendicularPointsOfPath(parallelDistance, line2_shape1_point1, line2_shape1_point2)
 
-                        //     return {anchorPoint1_X: this_parallel_perp_AnchorPointX_SECOND_1, anchorPoint1_Y: this_parallel_perp_AnchorPointY_SECOND_1, anchorPoint2_X: next_parallel_perp_AnchorPointX_SECOND_1, anchorPoint2_Y: next_parallel_perp_AnchorPointY_SECOND_1}
-                        // }
+                        let line1_shape2_point1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex_shape2]
+                        let line1_shape2_point2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[thisIndex_shape2 + 1]
+                        let line1_shape2_perpPoints = findPerpendicularPointsOfPath(parallelDistance, line1_shape2_point1, line1_shape2_point2)
 
-                        let this_parallel_perp_AnchorPointX_SECOND_1 = thisPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        let this_parallel_perp_AnchorPointY_SECOND_1 = thisPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        let next_parallel_perp_AnchorPointX_SECOND_1 = nextPathDataOutside_SECOND_1.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-                        let next_parallel_perp_AnchorPointY_SECOND_1 = nextPathDataOutside_SECOND_1.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_1.coords.y - nextPathDataOutside_SECOND_1.coords.y, thisPathDataOutside_SECOND_1.coords.x - nextPathDataOutside_SECOND_1.coords.x)))
-
-                        // second line of the first intersecting shape
-                        let thisPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex]
-                        let nextPathDataOutside_SECOND_2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex + 1]
-
-                        let this_parallel_perp_AnchorPointX_SECOND_2 = thisPathDataOutside_SECOND_2.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
-                        let this_parallel_perp_AnchorPointY_SECOND_2 = thisPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
-                        let next_parallel_perp_AnchorPointX_SECOND_2 = nextPathDataOutside_SECOND_2.coords.x - (parallelDistance * Math.sin(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
-                        let next_parallel_perp_AnchorPointY_SECOND_2 = nextPathDataOutside_SECOND_2.coords.y + (parallelDistance * Math.cos(Math.atan2(thisPathDataOutside_SECOND_2.coords.y - nextPathDataOutside_SECOND_2.coords.y, thisPathDataOutside_SECOND_2.coords.x - nextPathDataOutside_SECOND_2.coords.x)))
+                        let line2_shape2_point1 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex_shape2]
+                        let line2_shape2_point2 = parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY[nextIndex_shape2 + 1]
+                        let line2_shape2_perpPoints = findPerpendicularPointsOfPath(parallelDistance, line2_shape2_point1, line2_shape2_point2)
 
                         let intersectingPoint_1 = findIntersectingPointSIMPLER(
-                            // firstPathPerpCoords.anchorPoint1_X,
-                            // firstPathPerpCoords.anchorPoint1_Y,
-                            // firstPathPerpCoords.anchorPoint2_X,
-                            // firstPathPerpCoords.anchorPoint2_Y,
-
-
-                            this_parallel_perp_AnchorPointX_SECOND_1,
-                            this_parallel_perp_AnchorPointY_SECOND_1,
-                            next_parallel_perp_AnchorPointX_SECOND_1,
-                            next_parallel_perp_AnchorPointY_SECOND_1, 
-                            this_parallel_perp_AnchorPointX_SECOND_2, 
-                            this_parallel_perp_AnchorPointY_SECOND_2, 
-                            next_parallel_perp_AnchorPointX_SECOND_2, 
-                            next_parallel_perp_AnchorPointY_SECOND_2, 
+                            line1_shape1_perpPoints.perpendicularPoint1_X,
+                            line1_shape1_perpPoints.perpendicularPoint1_Y,
+                            line1_shape1_perpPoints.perpendicularPoint2_X,
+                            line1_shape1_perpPoints.perpendicularPoint2_Y,
+                            line2_shape1_perpPoints.perpendicularPoint1_X,
+                            line2_shape1_perpPoints.perpendicularPoint1_Y,
+                            line2_shape1_perpPoints.perpendicularPoint2_X,
+                            line2_shape1_perpPoints.perpendicularPoint2_Y
                         )
 
+                        let intersectingPoint_2 = findIntersectingPointSIMPLER(
+                            line1_shape2_perpPoints.perpendicularPoint1_X,
+                            line1_shape2_perpPoints.perpendicularPoint1_Y,
+                            line1_shape2_perpPoints.perpendicularPoint2_X,
+                            line1_shape2_perpPoints.perpendicularPoint2_Y,
+                            line2_shape2_perpPoints.perpendicularPoint1_X,
+                            line2_shape2_perpPoints.perpendicularPoint1_Y,
+                            line2_shape2_perpPoints.perpendicularPoint2_X,
+                            line2_shape2_perpPoints.perpendicularPoint2_Y
+                        )
+
+                        function findPerpendicularPointsOfPath(pardistance, point11, point22) {
+                            const line1_X = getPerpPoint("X", "sin", pardistance, point11, point22, point11)
+                            const line1_Y = getPerpPoint("Y", "cos", pardistance, point11, point22, point11)
+                            const line2_X = getPerpPoint("X", "sin", pardistance, point11, point22, point22)
+                            const line2_Y = getPerpPoint("Y", "cos", pardistance, point11, point22, point22)
+
+                            return {
+                                perpendicularPoint1_X: line1_X,
+                                perpendicularPoint1_Y: line1_Y,
+                                perpendicularPoint2_X: line2_X,
+                                perpendicularPoint2_Y: line2_Y
+                            }
+
+                            function getPerpPoint(plane, sinOrCos, distance, point1, point2, target) {
+                                const angle = Math.atan2(point1.coords.y - point2.coords.y, point1.coords.x - point2.coords.x)
+                                const sinCosValue = (sinOrCos === "sin") ? Math.sin(angle) : Math.cos(angle)
+                        
+                                return (plane === "X") ? target.coords.x - distance * sinCosValue : target.coords.y + distance * sinCosValue
+                            }
+                        }
+
                         // updateSVG_highlight_1_point_01([intersectingPoint_1.x, intersectingPoint_1.y])
-                        // updateSVG_highlight_2_points_1_line_01([this_parallel_perp_AnchorPointX_SECOND_1, this_parallel_perp_AnchorPointY_SECOND_1], [next_parallel_perp_AnchorPointX_SECOND_1, next_parallel_perp_AnchorPointY_SECOND_1])
-                        // updateSVG_highlight_2_points_1_line_02([this_parallel_perp_AnchorPointX_SECOND_2, this_parallel_perp_AnchorPointY_SECOND_2], [next_parallel_perp_AnchorPointX_SECOND_2, next_parallel_perp_AnchorPointY_SECOND_2])
-                        updateSVG_highlight_2_points_1_line_01([this_parallel_perp_AnchorPointX_SECOND_1, this_parallel_perp_AnchorPointY_SECOND_1], [intersectingPoint_1.x, intersectingPoint_1.y],)
-                        // updateSVG_highlight_2_points_1_line_02([intersectingPoint_1.x, intersectingPoint_1.y], [next_parallel_perp_AnchorPointX_SECOND_2, next_parallel_perp_AnchorPointY_SECOND_2])
+                        updateSVG_highlight_2_points_1_line_01([line1_shape1_perpPoints.perpendicularPoint1_X, line1_shape1_perpPoints.perpendicularPoint1_Y], [intersectingPoint_1.x, intersectingPoint_1.y])
+
+                        // updateSVG_highlight_1_point_02([intersectingPoint_2.x, intersectingPoint_2.y])
+                        updateSVG_highlight_2_points_1_line_02([line1_shape2_perpPoints.perpendicularPoint1_X, line1_shape2_perpPoints.perpendicularPoint1_Y], [intersectingPoint_2.x, intersectingPoint_2.y])
+                        
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2917,6 +2945,18 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
                     runObserver = false
                     removedPathData = [[]]
                 }
+
+
+
+
+
+
+
+
+
+                function findIntersectingPointsFromOriginalShape(parallelPathDatas_stopAtIntersect_fromGLOBAL, i){}
+
+
 
 
                 if(i < parallelPathDatas_stopAtIntersect_fromGLOBAL.length) {
@@ -3106,6 +3146,7 @@ function drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDownDra
 
 
 
+                        // TODO: break this off into its own independant function
                         // HANDLE PATH TO ARC
                         if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true && parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joinerSide === "AAA") {
                         // if(parallelPathDatas_stopAtIntersect_fromGLOBAL[i][1].arc.joiner === true) {
