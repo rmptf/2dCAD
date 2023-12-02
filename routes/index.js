@@ -3,10 +3,6 @@ const express = require('express')
 const router = express.Router()
 // Express / Router
 
-
-// import * as d3 from "d3"
-// const d3 = require('d3')
-
 // Data
 const { 
     MODULE_LOCATIONS,

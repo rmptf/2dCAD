@@ -1,5 +1,3 @@
-
-
 let svg
 let canvas
 let dragDiv
