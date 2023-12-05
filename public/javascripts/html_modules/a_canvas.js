@@ -1,5 +1,5 @@
-// import {fuckMyAss} from '../functions/dragDiv.js'
+import {cloneDragDivs} from '../functions/dragDiv.js'
 
-// console.log("a_canvas")
+console.log("a_canvas")
 
-// fuckers.fuckMyAss = fuckMyAss
+fuckers.fuckMyAss = cloneDragDivs
