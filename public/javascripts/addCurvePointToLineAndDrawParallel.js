@@ -5,15 +5,15 @@
 // let scale = 1
 // let dragScaler
 
-let parentElem = document.getElementById("aCanvasPanLayer")
+// let parentElem = document.getElementById("aCanvasPanLayer")
 // dragElement(parentElem)
-let canvasElement = document.getElementById("aCanvasZoomLayer")
+// let canvasElement = document.getElementById("aCanvasZoomLayer")
 
-function cloneDragDivs() {
-    console.log("clonedragtits")
-    let content = document.getElementById("aCanvasTemplate").content;
-    var targetContainer = document.getElementById('aCanvasPanLayer');
-    targetContainer.appendChild(document.importNode(content, true));
+// function cloneDragDivs() {
+//     console.log("clonedragtits")
+//     let content = document.getElementById("aCanvasTemplate").content;
+//     var targetContainer = document.getElementById('aCanvasPanLayer');
+//     targetContainer.appendChild(document.importNode(content, true));
 
     // templateContent = document.getElementById("aDocumentContainer")
     // templateHeader = templateContent.children[0]
@@ -52,7 +52,7 @@ function cloneDragDivs() {
     //     let newId = rootName + counter3
     //     return newId
     // }
-}
+// }
 
 // function svgElementClick(element, svgId123) {
 //     let svgContainers = document.querySelectorAll(".a-document__container")

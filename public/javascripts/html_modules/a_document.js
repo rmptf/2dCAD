@@ -1,5 +1,3 @@
-// import {fuckMyAss} from '../functions/dragDiv.js'
+// import {testFunction} from '../functions/dragDiv.js'
 
-// console.log("a_document")
-
-// fuckers.fuckMyAss = fuckMyAss
+// a_document_object.testFunction = testFunction
