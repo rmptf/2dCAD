@@ -26,7 +26,8 @@ function cloneDragDivs() {
     let dragElem = document.getElementById(newTemplateId)
     dragElement(dragElem)
     svgElementClick(templateContent)
-    a_canvas_functions.setSvg(templateContent.id, templateContent.children[4].id)
+    setSvg(templateContent.id, templateContent.children[4].id)
+    // a_canvas_functions.setSvg(templateContent.id, templateContent.children[4].id)
 
     dragElem.style.top = 'calc(50% - 250px)'
     dragElem.style.left = 'calc(50% - 250px)'
@@ -98,8 +99,17 @@ function dragElement(elmnt) {
     }
 }
 
+function setSvg(dragDivId, svgId, canvasId){
+    a_canvas_globalVars.svg = d3.select('#' + svgId)
+    a_canvas_globalVars.canvas = d3.select('#' + canvasId)
+    a_canvas_globalVars.dragDiv = document.getElementById(dragDivId)
+    a_canvas_globalVars.svgHTML = document.getElementById(svgId)
+}
+
 export {
-    cloneDragDivs
+    cloneDragDivs,
+    svgElementClick,
+    setSvg,
 }
 
 

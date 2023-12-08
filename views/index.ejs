@@ -105,7 +105,8 @@
                 ACTIONS_aDocument_element_btn: {
                     element_01: {
                         elementBtnExist: true,
-                        elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
+                        elementBtnOnClick: "a_canvas_functions.svgElementClick(this), a_canvas_functions.setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
+                        // elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
                         elementId: "",
                     },
                 },
@@ -128,7 +129,8 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Path",
-                        btnOnClick: "drawPath()",
+                        btnOnClick: "a_canvas_functions.drawPath()",
+                        // btnOnClick: "drawPath()",
                         btnId: "pathBtn",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
