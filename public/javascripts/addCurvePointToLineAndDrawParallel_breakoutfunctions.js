@@ -39,18 +39,19 @@
 // *** BREAKOUT ***
 
 
+// *** BREAKOUT ***
+// function addCurvePoint() {
+//     pressAddCurveButton = true
+// }
 
-function addCurvePoint() {
-    pressAddCurveButton = true
-}
+// function addParallelPath() {
+//     pressAddParallelButton = true
+// }
 
-function addParallelPath() {
-    pressAddParallelButton = true
-}
-
-function measurePath() {
-    pressMeasurePathButton = true
-}
+// function measurePath() {
+//     pressMeasurePathButton = true
+// }
+// *** BREAKOUT ***
 
 document.addEventListener('keydown', function(event) {
     if (event.metaKey && event.key === "'") {

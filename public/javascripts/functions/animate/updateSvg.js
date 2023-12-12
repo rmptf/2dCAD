@@ -1,64 +1,69 @@
+import {findPerpendicularFromPoint, findRightTriangle, findIntersectingPoint, getDistance, solveForAngleOfRightTriangle, inRange} from '../math/mathFunctions.js'
+import {solvTriangleALL} from '../math/curvePointFunctions.js'
+
 function mainPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self){
     console.log('Main Path Click')
 }
 
-function secondaryPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, pathCount, isDown2){
+// function secondaryPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, pathCount, isDown2){
+function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pathCount, isDown2, selfGroup) {
+    console.log("Secondary Path Click")
     // for now
-    console.log('Secondary Path Click')
+    // console.log('Secondary Path Click')
 
     // isolate and break out further
 
-    // m1 = d3.pointer(event)
-    // console.log("Path Count Clicked: " + pathCount)
-    // if (pressAddCurveButton === false && pressAddParallelButton === false && pressMeasurePathButton == false) {
-    //     console.log('path Clicked, All other path click functions off')
-    // } else if (pressAddCurveButton === true) {
-    //     console.log('Add Path Arc = true')
+    let m1 = d3.pointer(event)
+    console.log("Path Count Clicked: " + pathCount)
+    if (a_canvas_globalVars.pressAddCurveButton === false && a_canvas_globalVars.pressAddParallelButton === false && a_canvas_globalVars.pressMeasurePathButton == false) {
+        console.log('path Clicked, All other path click functions off')
+    } else if (a_canvas_globalVars.pressAddCurveButton === true) {
+        console.log('Add Path Arc = true')
 
-    //     originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
-    //     secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
-
-
-    //     // CHANGES_FINDME_001
-    //     //old
-    //     let newPathCounter = -1
-    //     //new
-    //     // let NEW_new_FAKE_secondryPathCounter_LOCAL = -1
+        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((selfGroup.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(selfGroup.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
 
 
-    //     for (let i = 0; i < secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
-    //         // CHANGES_FINDME_001
-    //         //old
-    //         newPathCounter = newPathCounter + 1
-    //         let thisPathCount = newPathCounter
-    //         secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2)})
-    //         //new
-    //         // NEW_new_FAKE_secondryPathCounter_LOCAL = NEW_new_FAKE_secondryPathCounter_LOCAL + 1
-    //         // secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, NEW_new_FAKE_secondryPathCounter_LOCAL, isDown2)})
-    //     }
+        // CHANGES_FINDME_001
+        //old
+        let newPathCounter = -1
+        //new
+        // let NEW_new_FAKE_secondryPathCounter_LOCAL = -1
 
-    //     let index = pathCount + 1
-    //     let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
-    //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}
-    //     originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].splice(index, 0, data);
 
-    //     for (let i = 0; i < originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
-    //         let currentEndPoint = originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
-    //         currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
-    //     }
+        for (let i = 0; i < a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
+            // CHANGES_FINDME_001
+            //old
+            newPathCounter = newPathCounter + 1
+            let thisPathCount = newPathCounter
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].on("click", function(event) {secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2, selfGroup)})
+            //new
+            // NEW_new_FAKE_secondryPathCounter_LOCAL = NEW_new_FAKE_secondryPathCounter_LOCAL + 1
+            // a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i].on("click", function(event) {secondaryPathClick(this, event, originalFigure_counter_groupCount_GLOBAL, NEW_new_FAKE_secondryPathCounter_LOCAL, isDown2)})
+        }
 
-    //     updateSVG_mainPathAndPoints(originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+        let index = pathCount + 1
+        let data = {coords: {x: m1[0], y: m1[1]}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'east', center: {x: 0, y: 0}}}
+        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][pathCount + 1].arc = {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: 0, side: 'west', center: {x: 0, y: 0}}
+        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].splice(index, 0, data);
 
-    //     pressAddCurveButton = false
-    // } else if (pressAddParallelButton === true) {
-    //     console.log('Add Parallel = true')
-    //     drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
-    //     pressAddParallelButton = false
-    // } else if (pressMeasurePathButton === true) {
-    //     console.log('Measure Path = true')
-    //     measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
-    //     pressMeasurePathButton = false
-    // }
+        for (let i = 0; i < a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
+            let currentEndPoint = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
+            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
+        }
+
+        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+
+        a_canvas_globalVars.pressAddCurveButton = false
+    } else if (a_canvas_globalVars.pressAddParallelButton === true) {
+        console.log('Add Parallel = true')
+        drawParallel(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
+        a_canvas_globalVars.pressAddParallelButton = false
+    } else if (a_canvas_globalVars.pressMeasurePathButton === true) {
+        console.log('Measure Path = true')
+        measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount)
+        a_canvas_globalVars.pressMeasurePathButton = false
+    }
 }
 
 // PATH

@@ -102,14 +102,14 @@
             // CONTENT_aDocument_content: ''
         // ACTIONS
             // ELEMENT BTN
-                ACTIONS_aDocument_element_btn: {
-                    element_01: {
-                        elementBtnExist: true,
-                        elementBtnOnClick: "a_canvas_functions.svgElementClick(this), a_canvas_functions.setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
+                // ACTIONS_aDocument_element_btn: {
+                    // element_01: {
+                        // elementBtnExist: true,
+                        // elementBtnOnClick: "a_canvas_functions.svgElementClick(this), a_canvas_functions.setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
                         // elementBtnOnClick: "svgElementClick(this), setSvg(this.id, this.children[4].id), 'aCanvasZoomLayer'",
-                        elementId: "",
-                    },
-                },
+                        // elementId: "",
+                    // },
+                // },
             // BTN CONTAINER 01
                 ACTIONS_aDocument_btn_cont: {
                     btn_cont_01: {
@@ -142,7 +142,8 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Curve",
-                        btnOnClick: "addCurvePoint()",
+                        btnOnClick: "a_canvas_functions.addCurvePoint()",
+                        // btnOnClick: "addCurvePoint()",
                         btnId: "curveBtn",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -154,7 +155,8 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Parallel",
-                        btnOnClick: "addParallelPath()",
+                        btnOnClick: "a_canvas_functions.addParallelPath()",
+                        // btnOnClick: "addParallelPath()",
                         btnId: "parallelBtn",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -166,7 +168,8 @@
                         btnExist: true,
                         btnType: "button",
                         btnText: "Measure",
-                        btnOnClick: "measurePath()",
+                        btnOnClick: "a_canvas_functions.measurePath()",
+                        // btnOnClick: "measurePath()",
                         btnId: "measureBtn",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
@@ -268,7 +271,7 @@
                         btnType: "button",
                         btnText: "New Svg",
                         // btnOnClick: "cloneDragDivs()",
-                        btnOnClick: "a_canvas_functions.cloneDragDivs()",
+                        btnOnClick: "a_canvas_functions.createDocument()",
                         
                         btnId: "",
                         btnTheme_class: btnVars.BTNCLASS.aButton,

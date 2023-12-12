@@ -1,63 +1,58 @@
-let counter1 = 0
-let counter2 = 0
-let counter3 = 0
+let stringIncrement = 0
 
-let scale = 1 // find way to share variable scale with scaleCanvas.js
-let dragScaler
+let canvasPanLayer = document.getElementById("aCanvasPanLayer")
+dragElement(canvasPanLayer)
 
-let parentElem = document.getElementById("aCanvasPanLayer")
-dragElement(parentElem)
-
-function cloneDragDivs() {
+function createDocument() {
+    stringIncrement = stringIncrement + 1
     let content = document.getElementById("aCanvasTemplate").content
     let targetContainer = document.getElementById('aCanvasPanLayer')
     targetContainer.appendChild(document.importNode(content, true))
 
-    let templateContent = document.getElementById("aDocumentContainer")
-    let templateHeader = templateContent.children[0]
-    let templateSvg = templateContent.children[4]
+    let documentElement = document.getElementById("aDocumentContainer")
+    let documentHeader = documentElement.children[0]
+    let documentSvg = documentElement.children[4]
 
-    let newTemplateId = increaseCountDrgId("aDocument")
+    documentElement.id = changeStringIncrementally("aDocument")
+    documentHeader.innerText = changeStringIncrementally("Pattern_Pc_")
+    documentSvg.id = changeStringIncrementally("aDocumentSvg")
 
-    templateContent.id = newTemplateId
-    templateHeader.innerText = increaseCountInnerText("Pattern_Pc_")
-    templateSvg.id = increaseCountSvgId("aDocumentSvg")
-
-    let dragElem = document.getElementById(newTemplateId)
-    dragElement(dragElem)
-    svgElementClick(templateContent)
-    setSvg(templateContent.id, templateContent.children[4].id)
-    // a_canvas_functions.setSvg(templateContent.id, templateContent.children[4].id)
-
-    dragElem.style.top = 'calc(50% - 250px)'
-    dragElem.style.left = 'calc(50% - 250px)'
-    let toPixelWidth = dragElem.offsetTop
-    let toPixelHeight = dragElem.offsetTop
-    dragElem.style.top = toPixelWidth + 'px'
-    dragElem.style.left = toPixelHeight + 'px'
-
-    function increaseCountDrgId(rootName) {
-        counter1 = counter1 + 1
-        let newId = rootName + counter1
-        return newId
-    }
-    function increaseCountInnerText(innerText) {
-        counter2 = counter2 + 1
-        let newInnerText = innerText + counter2
-        return newInnerText
-    }
-    function increaseCountSvgId(rootName) {
-        counter3 = counter3 + 1
-        let newId = rootName + counter3
-        return newId
+    placeElement(documentElement)
+    activateDocument(documentElement)
+    setGlobalSvgElementVars(documentElement.id, documentSvg.id, 'aCanvasZoomLayer')
+    dragElement(documentElement)
+    documentElement.onclick = function() {
+        activateDocument(documentElement)
+        setGlobalSvgElementVars(documentElement.id, documentSvg.id, 'aCanvasZoomLayer')
     }
 }
 
-function svgElementClick(element, svgId123) {
+function placeElement(documentElement) {
+    documentElement.style.top = 'calc(50% - 250px)'
+    documentElement.style.left = 'calc(50% - 250px)'
+    let toPixelWidth = documentElement.offsetTop
+    let toPixelHeight = documentElement.offsetTop
+    documentElement.style.top = toPixelWidth + 'px'
+    documentElement.style.left = toPixelHeight + 'px'
+}
+
+function changeStringIncrementally(origString) {
+    let newString = origString + stringIncrement
+    return newString
+}
+
+function activateDocument(element) {
     let svgContainers = document.querySelectorAll(".a-document__container")
     let activeClass = "a-document__container--active"
-    svgContainers.forEach(element => element.classList.remove(activeClass));
+    svgContainers.forEach(element => element.classList.remove(activeClass))
     element.classList.add(activeClass)
+}
+
+function setGlobalSvgElementVars(dragDivId, svgId, canvasId){
+    a_canvas_globalVars.svg = d3.select('#' + svgId)
+    a_canvas_globalVars.canvas = d3.select('#' + canvasId)
+    a_canvas_globalVars.dragDiv = document.getElementById(dragDivId)
+    a_canvas_globalVars.svgHTML = document.getElementById(svgId)
 }
 
 function dragElement(elmnt) {
@@ -84,7 +79,7 @@ function dragElement(elmnt) {
         e = e || window.event;
         e.preventDefault();
         // To fix drag while scaled issued (multply pos1 & pos1 by the opposite scale)
-        dragScaler = 1 / scale
+        let dragScaler = 1 / a_canvas_globalVars.scale
         pos1 = (pos3 - e.clientX) * dragScaler;
         pos2 = (pos4 - e.clientY) * dragScaler;
         pos3 = e.clientX;
@@ -99,17 +94,8 @@ function dragElement(elmnt) {
     }
 }
 
-function setSvg(dragDivId, svgId, canvasId){
-    a_canvas_globalVars.svg = d3.select('#' + svgId)
-    a_canvas_globalVars.canvas = d3.select('#' + canvasId)
-    a_canvas_globalVars.dragDiv = document.getElementById(dragDivId)
-    a_canvas_globalVars.svgHTML = document.getElementById(svgId)
-}
-
 export {
-    cloneDragDivs,
-    svgElementClick,
-    setSvg,
+    createDocument,
 }
 
 
@@ -139,8 +125,8 @@ export {
 // let scale = 1
 // let dragScaler
 
-// let parentElem = document.getElementById("aCanvasPanLayer")
-// dragElement(parentElem)
+// let canvasPanLayer = document.getElementById("aCanvasPanLayer")
+// dragElement(canvasPanLayer)
 // let canvasElement = document.getElementById("aCanvasZoomLayer")
 
 // function cloneDragDivs() {
