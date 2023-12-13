@@ -12,24 +12,6 @@ function measurePath() {
     a_canvas_globalVars.pressMeasurePathButton = true
 }
 
-// Define a drag function
-function handleMainPathDrag(event) {
-    const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-
-    dragPath(event, originalPath, secondaryPath, endPoints, pathData)
-}
-// Define a click function
-function handleMainPathClick(event, isDown2, self) {
-    mainPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, isDown2, self)
-}
-// Define a click function
-function handleSecondaryPathClick(event, thisPathCount, isDown2, self) {
-    secondaryPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2, self)
-}
-
 function drawPath() {
     a_canvas_globalVars.pressAddCurveButton = false
     a_canvas_globalVars.pressAddParallelButton = false
@@ -49,59 +31,40 @@ function drawPath() {
             let thisPathCount = 0
             a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL + 1
 
-            self.group = a_canvas_globalVars.svg.append('g').attr('class', 'figureGroup').attr('id', 'figureGroup123')
-            self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
-            self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
-            self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
-            self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
+            createSvgGroups(['figureGroup', 'mainPathGroup', 'secondaryPathGroup', 'endPointGroup', 'testEndPointGroup'])
 
             // MAIN PATH
-            // Append a new path to mainPathGroup
             let newMainPath = self.mainPathGroup
                 .append('path')
                 .attr('class', 'path mainPath')
-                .call(d3.drag().on("drag", (event) => handleMainPathDrag(event)))
                 .on("click", (event) => handleMainPathClick(event, isDown2, self))
-            // Push the new path to the global array
+                .call(d3.drag().on("drag", (event) => handleMainPathDrag(event)))
             a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL.push(newMainPath)
-            // Push the new pathData to the global array
-            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL.push([
-                {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
-                {coords: {x: m1[0], y: m1[1]}, arc: {exist: false}},
-            ])
+            let newPathData1 = rawPathData(m1), newPathData2 = rawPathData(m1)
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL.push([newPathData1, newPathData2])
             // MAIN PATH
 
             // SECONDARY PATH
             let secondaryPathGroup = []
-            // Append a new path to secondaryPathGroup
             let newSecondaryPath = self.secondaryPathGroup
                 .append('path')
                 .attr('class', 'path secondaryPath')
                 .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, isDown2, self))
-            // Push the new path to the local array
             secondaryPathGroup.push(newSecondaryPath)
-            // Push the new path to the global array
             a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL.push(secondaryPathGroup)
             // SECONDARY PATH
 
             // DYNAMIC END POINTS
             let endPointGroup = []
-            for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
-                // const handleDragEndPoint = (event) => {
-                //     const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-                //     const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-                //     const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-                //     const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    
-                //     dragEndPoint(event, i, originalPath, secondaryPath, endPoints, pathData)
-                // }
-
-                let newEndPoint = self.endPointGroup
-                    .append('circle')
-                    .attr('class', 'endPoint mainEndPoint')
-                    // .call(d3.drag().on("drag", handleDragEndPoint))
-                endPointGroup.push(newEndPoint)
-            }
+            let newEndPoint1 = self.endPointGroup
+                .append('circle')
+                .attr('class', 'endPoint mainEndPoint')
+                .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, 0)}))
+            let newEndPoint2 = self.endPointGroup
+                .append('circle')
+                .attr('class', 'endPoint mainEndPoint')
+                .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, 1)}))
+            endPointGroup.push(newEndPoint1, newEndPoint2)
             a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL.push(endPointGroup)
             // DYNAMIC END POINTS
 
@@ -115,40 +78,50 @@ function drawPath() {
             isDown = true
             updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
 
+            // const expandSvgVars = () => {
+            //     let thisCountCurrentPathDatas_x = [a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][0].coords.x]
+            //     let thisCountCurrentPathDatas_y = [a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][0].coords.y]
+            //     let pathDatasPositions = 'placeholder'
+            //     let dragDivLeftPos = parseInt(a_canvas_globalVars.dragDiv.style.left.replace('px', ''))
+            //     let dragDivTopPos = parseInt(a_canvas_globalVars.dragDiv.style.top.replace('px', ''))
+            //     let svgDimensions = a_canvas_globalVars.svgHTML.getBoundingClientRect()
+            //     let vars = [thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions]
+            //     return vars
+            // }
             let thisCountCurrentPathDatas_x = [a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][0].coords.x]
             let thisCountCurrentPathDatas_y = [a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][0].coords.y]
             let pathDatasPositions = 'placeholder'
             let dragDivLeftPos = parseInt(a_canvas_globalVars.dragDiv.style.left.replace('px', ''))
             let dragDivTopPos = parseInt(a_canvas_globalVars.dragDiv.style.top.replace('px', ''))
             let svgDimensions = a_canvas_globalVars.svgHTML.getBoundingClientRect()
-            a_canvas_globalVars.svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y)})
+            a_canvas_globalVars.svg
+                .on("mousemove", (event) => {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y)})
+                // .on("mousemove", (event) => {event, expandSvgVars})
 
         } else {
-            console.log("second click")
-
-
-            // CHANGES_FINDME_001
-            //old
             secondaryPathCount = secondaryPathCount + 1
             let thisPathCount = secondaryPathCount
-            //new
-            // new_FAKE_secondryPathCounter_GLOBAL = new_FAKE_secondryPathCounter_GLOBAL + 1
+            let endPointCount = secondaryPathCount + 1
 
+            let newPathData = rawPathData(m1)
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newPathData)
 
-            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
-            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+            let newSecondaryPath = self.secondaryPathGroup
+                .append('path')
+                .attr('class', 'path secondaryPath')
+                .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, isDown2, self))
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newSecondaryPath)
 
-
-            // CHANGES_FINDME_001
-            //old
-            console.log("2222")
-            // a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2)}))
-            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2, self)}))
-            //new
-            // a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath').on("click", function(event) {secondaryPathClick(this, event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, new_FAKE_secondryPathCounter_GLOBAL, isDown2)}))
-
+            let newEndPoint = self.endPointGroup
+                .append('circle')
+                .attr('class', 'endPoint mainEndPoint')
+                .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, isDown2, self))
+                .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, endPointCount)}))
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newEndPoint)
 
             updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+
+
 
             let thisCountCurrentPathDatas_x = []
             a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x));
@@ -159,7 +132,6 @@ function drawPath() {
             let dragDivTopPos = parseInt(a_canvas_globalVars.dragDiv.style.top.replace('px', ''))
             let svgDimensions = a_canvas_globalVars.svgHTML.getBoundingClientRect()
             a_canvas_globalVars.svg.on("mousemove", function(event) {mousemove(event, m1, pathDatasPositions, dragDivLeftPos, dragDivTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y)})
-            
         }
     }
 
@@ -270,12 +242,54 @@ function drawPath() {
         }
         updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
         
-        for (let i = 0; i < a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
-            let currentEndPoint = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][i]
-            currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])}))
-        }
+        // for (let i = 0; i < a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
+        //     let currentEndPoint = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][i]
+        //     currentEndPoint.call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])}))
+        // }
     }
 }
+
+function createSvgGroups(groupClassNamesArray) {
+    // self.group = a_canvas_globalVars.svg.append('g').attr('class', 'figureGroup').attr('id', 'figureGroup123')
+    // self.mainPathGroup = self.group.append('g').attr('class', 'mainPathGroup')
+    // self.secondaryPathGroup = self.group.append('g').attr('class', 'secondaryPathGroup')
+    // self.endPointGroup = self.group.append('g').attr('class', 'endPointGroup')
+    // self.testEndPointGroup = self.group.append('g').attr('class', 'testEndPointGroup')
+    const groupNames = groupClassNamesArray
+    group = a_canvas_globalVars.svg
+        .append('g')
+        .attr('class', groupNames[0])
+        .attr('id', 'figureGroup123')
+    groupNames.slice(1).forEach(name => {
+        [name] = group
+            .append('g')
+            .attr('class', name)
+    })
+}
+
+function handleMainPathDrag(event) {
+    const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+
+    dragPath(event, originalPath, secondaryPath, endPoints, pathData)
+}
+function handleEndPointDrag(event, index) {
+    const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+
+    dragEndPoint(event, index, originalPath, secondaryPath, endPoints, pathData)
+}
+function handleMainPathClick(event, isDown2, self) {
+    mainPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, isDown2, self)
+}
+function handleSecondaryPathClick(event, thisPathCount, isDown2, self) {
+    secondaryPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2, self)
+}
+let rawPathData = (mouseData) => {return {coords: {x: mouseData[0], y: mouseData[1]}, arc: {exist: false}}}
 
 export {
     drawPath,
