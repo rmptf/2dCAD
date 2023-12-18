@@ -10,21 +10,21 @@ function increaseScale() {
     // console.log("Zoom in: 10%. Scale: " + a_canvas_globalVars.scale)
     a_canvas_globalVars.scale = a_canvas_globalVars.scale + (a_canvas_globalVars.scale * .1)
     setCanvasScale(a_canvas_globalVars.scale)
-    setSvgStyles(a_canvas_globalVars.scale)
+    setSvgElmntsScale(a_canvas_globalVars.scale)
 }
 
 function resetScale() {
     // console.log("Zoom 100%. Scale: " + a_canvas_globalVars.scale)
     a_canvas_globalVars.scale = 1
     setCanvasScale(a_canvas_globalVars.scale)
-    setSvgStyles(a_canvas_globalVars.scale)
+    setSvgElmntsScale(a_canvas_globalVars.scale)
 }
 
 function decreaseScale() {
     // console.log("Zoom out: 10%. Scale: " + a_canvas_globalVars.scale)
     a_canvas_globalVars.scale = a_canvas_globalVars.scale - (a_canvas_globalVars.scale * .1)
     setCanvasScale(a_canvas_globalVars.scale)
-    setSvgStyles(a_canvas_globalVars.scale)
+    setSvgElmntsScale(a_canvas_globalVars.scale)
 }
 
 function setCanvasScale(scale) {
@@ -32,7 +32,7 @@ function setCanvasScale(scale) {
     canvasElement.style["transform"] = "scale("+scale+")";
 }
 
-function setSvgStyles(scale) {
+function setSvgElmntsScale(scale) {
         var d3Circles = d3.selectAll(endPointClass)
         var d3Paths = d3.select(pathClass)
         if (scale > minScaleLimit) {

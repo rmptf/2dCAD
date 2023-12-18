@@ -1,39 +1,42 @@
+import {svgClick} from '../drafting/svgElementTools.js'
+
 let stringIncrement = 0
 
+// maybe set as global element and add drag at that point.
 let canvasPanLayer = document.getElementById("aCanvasPanLayer")
 dragElement(canvasPanLayer)
 
-function createDocument() {
+function createSvgDocument() {
     stringIncrement = stringIncrement + 1
     let content = document.getElementById("aCanvasTemplate").content
     let targetContainer = document.getElementById('aCanvasPanLayer')
     targetContainer.appendChild(document.importNode(content, true))
 
-    let documentElement = document.getElementById("aDocumentContainer")
-    let documentHeader = documentElement.children[0]
-    let documentSvg = documentElement.children[4]
+    let svgDocElement = document.getElementById("aDocumentContainer")
+    let svgDocHeader = svgDocElement.children[0]
+    let svgDocSvg = svgDocElement.children[4]
 
-    documentElement.id = changeStringIncrementally("aDocument")
-    documentHeader.innerText = changeStringIncrementally("Pattern_Pc_")
-    documentSvg.id = changeStringIncrementally("aDocumentSvg")
+    svgDocElement.id = changeStringIncrementally("aDocument")
+    svgDocHeader.innerText = changeStringIncrementally("Pattern_Pc_")
+    svgDocSvg.id = changeStringIncrementally("aDocumentSvg")
 
-    placeElement(documentElement)
-    activateDocument(documentElement)
-    setGlobalSvgElementVars(documentElement.id, documentSvg.id, 'aCanvasZoomLayer')
-    dragElement(documentElement)
-    documentElement.onclick = function() {
-        activateDocument(documentElement)
-        setGlobalSvgElementVars(documentElement.id, documentSvg.id, 'aCanvasZoomLayer')
+    placeElement(svgDocElement)
+    activateSvgDoc(svgDocElement)
+    setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id)
+    dragElement(svgDocElement)
+    svgDocElement.onclick = function() {
+        activateSvgDoc(svgDocElement)
+        setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id)
     }
 }
 
-function placeElement(documentElement) {
-    documentElement.style.top = 'calc(50% - 250px)'
-    documentElement.style.left = 'calc(50% - 250px)'
-    let toPixelWidth = documentElement.offsetTop
-    let toPixelHeight = documentElement.offsetTop
-    documentElement.style.top = toPixelWidth + 'px'
-    documentElement.style.left = toPixelHeight + 'px'
+function placeElement(svgDocElement) {
+    svgDocElement.style.top = 'calc(50% - 250px)'
+    svgDocElement.style.left = 'calc(50% - 250px)'
+    let toPixelWidth = svgDocElement.offsetTop
+    let toPixelHeight = svgDocElement.offsetTop
+    svgDocElement.style.top = toPixelWidth + 'px'
+    svgDocElement.style.left = toPixelHeight + 'px'
 }
 
 function changeStringIncrementally(origString) {
@@ -41,17 +44,16 @@ function changeStringIncrementally(origString) {
     return newString
 }
 
-function activateDocument(element) {
+function activateSvgDoc(element) {
     let svgContainers = document.querySelectorAll(".a-document__container")
     let activeClass = "a-document__container--active"
     svgContainers.forEach(element => element.classList.remove(activeClass))
     element.classList.add(activeClass)
 }
 
-function setGlobalSvgElementVars(dragDivId, svgId, canvasId){
-    a_canvas_globalVars.svg = d3.select('#' + svgId)
-    a_canvas_globalVars.canvas = d3.select('#' + canvasId)
-    a_canvas_globalVars.dragDiv = document.getElementById(dragDivId)
+function setGlobalSvgElementVars(documentId, svgId) {
+    a_canvas_globalVars.svgDocHTML = document.getElementById(documentId)
+    a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
     a_canvas_globalVars.svgHTML = document.getElementById(svgId)
 }
 
@@ -95,7 +97,7 @@ function dragElement(elmnt) {
 }
 
 export {
-    createDocument,
+    createSvgDocument,
 }
 
 

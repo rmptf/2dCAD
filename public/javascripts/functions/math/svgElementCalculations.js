@@ -1,4 +1,84 @@
-import {findLineMidpoint} from '../math/mathFunctions.js'
+import {findLineMidpoint, findPerpendicularFromPoint, findRightTriangle, findIntersectingPoint, getDistance, solveForAngleOfRightTriangle, inRange} from './mathFunctions.js'
+
+function calculateArcAndDescribePath(pathDataPass) {
+    let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
+    let arcsAndLines = []
+
+    for (let i = 1; i < pathDataPass.length; i++) {
+        if (pathDataPass[i].arc.exist === true) {
+            if(pathDataPass[i].arc.side === 'east') {
+                let thisPoint = pathDataPass[i]
+                let curvePoint = pathDataPass[i]
+                let anchorPointStart = pathDataPass[i - 1]
+                let anchorPointEnd = pathDataPass[i + 1]
+                solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, thisPoint.arc.side)
+            } else if (pathDataPass[i].arc.side === 'west') {
+                let thisPoint = pathDataPass[i]
+                let curvePoint = pathDataPass[i - 1]
+                let anchorPointStart = pathDataPass[i]
+                let anchorPointEnd = pathDataPass[i - 2]
+                solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, thisPoint.arc.side)
+            }
+        } if(pathDataPass[i].arc.exist === false){
+            arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+        }
+    }
+
+    let d = [
+        M, 
+        arcsAndLines.join(' ')
+    ].join(' ')
+    return d
+
+    function solveArc(thisPoint, curvePoint, anchorPointStart, anchorPointEnd, side) {
+        let curvePointAnchor = findPerpendicularFromPoint(curvePoint, anchorPointStart, anchorPointEnd)
+        let rightTriangleData = findRightTriangle(anchorPointStart.coords, curvePoint.coords)
+        let solveTriangleData = solvTriangleALL(rightTriangleData.sides, anchorPointStart.coords, anchorPointEnd.coords, curvePoint.coords, curvePointAnchor)
+        let intersectingPoint = findIntersectingPoint([curvePoint.coords.x, curvePoint.coords.y], [curvePointAnchor[0],curvePointAnchor[1]], [solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]], [solveTriangleData.coords.coord_B[0],solveTriangleData.coords.coord_B[1]])
+        let circRadius = getDistance(curvePoint.coords.x, curvePoint.coords.y, intersectingPoint.x, intersectingPoint.y)
+        let rightTriangleTheta = solveForAngleOfRightTriangle([intersectingPoint.x,intersectingPoint.y],[curvePoint.coords.x,curvePoint.coords.y],[solveTriangleData.coords.coord_A[0],solveTriangleData.coords.coord_A[1]])
+        if(inRange(curvePoint.coords.x, (curvePointAnchor[0] - 0.5), (curvePointAnchor[0]) + 0.5) === true && inRange(curvePoint.coords.y, (curvePointAnchor[1] - 0.5), (curvePointAnchor[1]) + 0.5)) {
+            // console.log('str1')
+            arcsAndLines.push(['L', thisPoint.coords.x, thisPoint.coords.y].join(' '))
+        } else {
+            // console.log('arc1')
+            if(side === 'east'){                
+                arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagEast, thisPoint.coords.x, thisPoint.coords.y].join(' '))
+                thisPoint.arc.radius = circRadius,
+                thisPoint.arc.arcFlag = solveTriangleData.arcFlag,
+                thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagEast,
+                thisPoint.arc.center.x = intersectingPoint.x,
+                thisPoint.arc.center.y = intersectingPoint.y
+                thisPoint.arc.startAngle = rightTriangleTheta
+            } else if(side === 'west'){
+                arcsAndLines.push(['A', circRadius, circRadius, 0, solveTriangleData.arcFlag, solveTriangleData.sweepFlagWest, thisPoint.coords.x, thisPoint.coords.y].join(' '))
+                thisPoint.arc.radius = circRadius,
+                thisPoint.arc.arcFlag = solveTriangleData.arcFlag,
+                thisPoint.arc.sweepFlag = solveTriangleData.sweepFlagWest,
+                thisPoint.arc.center.x = intersectingPoint.x,
+                thisPoint.arc.center.y = intersectingPoint.y
+                thisPoint.arc.startAngle = rightTriangleTheta
+            }
+        }
+    }
+}
+
+function describeComplexPath(pathDataPass) {
+    let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
+    let arcsAndLines = []
+    for (let i = 1; i < pathDataPass.length; i++) {
+        if (pathDataPass[i].arc.exist == true) {
+            arcsAndLines.push(['A', pathDataPass[i].arc.radius, pathDataPass[i].arc.radius, pathDataPass[i].arc.rotation, pathDataPass[i].arc.arcFlag, pathDataPass[i].arc.sweepFlag, pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+        } if (pathDataPass[i].arc.exist == false){
+            arcsAndLines.push(['L', pathDataPass[i].coords.x, pathDataPass[i].coords.y].join(' '))
+        }
+        }
+    let d = [
+        M, 
+        arcsAndLines.join(' ')
+    ].join(' ')
+    return d
+}
 
 function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     let ap1x = apStart.x
@@ -332,5 +412,7 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
 }
 
 export {
+    calculateArcAndDescribePath,
+    describeComplexPath,
     solvTriangleALL
 }

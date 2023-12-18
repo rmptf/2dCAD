@@ -1,3 +1,32 @@
+// Find the length of an arc segment from radius and start angle
+function findArcLength(radius, startAngle, arcFlag) {
+
+    // NOT WORKING CORRECTLY RN
+
+    let θRad = startAngle
+    let θRadReflex = (Math.PI * 2) - θRad
+    let arcLength = θRad * radius
+    let arcLengthReflex = θRadReflex * radius
+    if (arcFlag === 0){
+
+            // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+            let radiusCircumference = (2 * radius) * Math.PI
+            let addArcsCircumference = arcLength + arcLengthReflex
+            console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
+        return arcLength
+    } else {
+        // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+        let radiusCircumference = (2 * radius) * Math.PI
+        let addArcsCircumference = arcLength + arcLengthReflex
+        console.log(arcFlag, arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference, radius, θRad)
+        return arcLengthReflex
+    }
+    // // This finds circumference from radius and circumference from adding both arcLengths - Use to double check calculations:
+    // let radiusCircumference = (2 * radius) * Math.PI
+    // let addArcsCircumference = arcLength + arcLengthReflex
+    // console.log(arcLength, arcLengthReflex, radiusCircumference, addArcsCircumference)
+}
+
 function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
     let lineData0 = firstPoint
     let lineData1 = secondPoint
@@ -136,6 +165,7 @@ function findLineMidpoint(x1, y1, x2, y2) {
 }
 
 export {
+    findArcLength,
     findPerpendicularFromPoint,
     findRightTriangle,
     findIntersectingPoint,
