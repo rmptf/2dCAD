@@ -1,5 +1,3 @@
-import {svgClick} from '../drafting/svgElementTools.js'
-
 let stringIncrement = 0
 
 // maybe set as global element and add drag at that point.
@@ -53,7 +51,8 @@ function activateSvgDoc(element) {
 
 function setGlobalSvgElementVars(documentId, svgId) {
     a_canvas_globalVars.svgDocHTML = document.getElementById(documentId)
-    a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
+    // a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
+    a_canvas_globalVars.svgD3 = d3.select('#' + svgId)
     a_canvas_globalVars.svgHTML = document.getElementById(svgId)
 }
 
