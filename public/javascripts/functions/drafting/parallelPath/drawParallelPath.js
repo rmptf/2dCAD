@@ -112,10 +112,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
                         parallelPathDatasCopyForPerpendicular,
                         basePathDatasCopy,
                         originalFigure_counter_groupCount_GLOBAL,
-
                         self,
                         i,
-
                         parallelPathObject,
                         skipperCheckers
                     )
