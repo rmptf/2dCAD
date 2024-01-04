@@ -28,6 +28,7 @@ function sortEndpoints(
             parallelPathObject,
             skipperCheckers
         )
+        // (targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject, skipperCheckers)
     // Determine if this parallelPathData is a straight path
     } else {
         sort_endPoint_noArc(
@@ -135,7 +136,7 @@ function sort_endPoint_withArc(
 
             // NEW_ArcIntersectPICKER
             parallelPathObject.pathToArcCounter += 1
-            handlePathToArcIntersectionNoContact(self, index, referenceEndPointsBaseAndFillers, referenceEndPointsParallelPerpendicular, targetEndPointsParallelFull, documentFigureCount)
+            handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index)
 
             parallelPathObject.parallelPathSegmentCounter_FIRST = 0
         } 
@@ -183,7 +184,7 @@ function sort_endPoint_withArc(
             if (parallelPathObject.collectIndicesOfIntersections === true) {
                 parallelPathObject.arcToPathIndexArray.push(index + 1)
             }
-            handleArcToPathIntersection(self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter, targetEndPointsParallelFull, documentFigureCount, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers)
+            handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
             // CHECK
             if (targetEndPointsParallelFull[index + 1][1].arc.joiner) {
                 parallelPathObject.arcToPathCounter -= 1
@@ -202,7 +203,7 @@ function sort_endPoint_withArc(
         // NEW_ArcIntersectPICKER
         parallelPathObject.arcToArcCounter += 1
 
-        handleArcToArcIntersectionNoContact(self, index-1, referenceEndPointsBaseAndFillers, referenceEndPointsParallelPerpendicular, targetEndPointsParallelFull, documentFigureCount)
+        handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index-1)
 
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     } 
@@ -240,7 +241,7 @@ function sort_endPoint_withArc(
         parallelPathObject.arcToPathCounter += 1
 
         console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-        handleArcToPathIntersectionNoContact(self, index-1, referenceEndPointsBaseAndFillers, referenceEndPointsParallelPerpendicular, targetEndPointsParallelFull, documentFigureCount)
+        handleArcToPathIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index-1)
 
         parallelPathObject.parallelPathSegmentCounter_SECOND = 1
     }
@@ -271,7 +272,7 @@ function sort_endPoint_withArc(
                     if (parallelPathObject.collectIndicesOfIntersections === true) {
                         parallelPathObject.pathToArchIndexArray.push(index)
                     }
-                    handlePathToArcIntersection(self, index, parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, targetEndPointsParallelFull, documentFigureCount, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers)
+                    handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter)
                     // old
                     // handlePathToArcIntersection(index)
 
@@ -331,7 +332,7 @@ function sort_endPoint_withArc(
                 if (parallelPathObject.collectIndicesOfIntersections === true) {
                     parallelPathObject.arcToPathIndexArray.push(index + 1)
                 }
-                handleArcToPathIntersection(self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter, targetEndPointsParallelFull, documentFigureCount, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers)
+                handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
                 // CHECK
                 if (targetEndPointsParallelFull[index + 1][1].arc.joiner) {
                     parallelPathObject.arcToPathCounter -= 1
@@ -369,7 +370,7 @@ function sort_endPoint_withArc(
                         }
                         // this does get called when it should (no arc - arc) sometimes:
                         // but only when the par line gets to far and the curves loop onto themselves
-                        handleArcToArcIntersection(self, index, parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter, targetEndPointsParallelFull, documentFigureCount, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers)
+                        handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter)
                     }
 
 
@@ -436,7 +437,7 @@ function sort_endPoint_withArc(
                     if (parallelPathObject.collectIndicesOfIntersections === true) {
                         parallelPathObject.arcToPathIndexArray.push(index + 1)
                     }
-                    handleArcToPathIntersection(self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter, targetEndPointsParallelFull, documentFigureCount, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers)
+                    handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
                     if (targetEndPointsParallelFull[index + 1][1].arc.joiner) {
                         parallelPathObject.arcToPathCounter -= 1
                     }

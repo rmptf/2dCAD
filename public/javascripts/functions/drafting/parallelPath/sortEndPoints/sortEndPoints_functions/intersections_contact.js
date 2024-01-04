@@ -1,61 +1,65 @@
 import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
 
-function handleArcToArcIntersection(self, arcToArcIntersectIndex, origPathDataIndexArray, a2aCount, parallelPathDatas_stopAtIntersect_fromGLOBAL, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel) {
+function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
     let shape = 'a2a'
-    let thisIndex = arcToArcIntersectIndex
-    let nextIndex = arcToArcIntersectIndex + 1
-    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
-    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex]
-    let origPathDataIndex = origPathDataIndexArray[a2aCount]
-    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-    let arcToArcIntPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData)
-    if(arcToArcIntPoint) {
-        if(arcToArcIntPoint[0].doesIntersect === false) {
-            createAndAddSvgElementAndUpdateDataArrays(self, nextIndex, shape, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+    // let prevIndex = index - 1
+    let thisIndex = index
+    let nextIndex = index + 1
+    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
+    let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
+    let origPathDataIndex = indexArray[shapeCount]
+    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData)
+    if(intersectPoint) {
+        if(intersectPoint[0].doesIntersect === false) {
+            createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
         } else {
-            // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, arcToArcIntPoint, thisOriginalPathData)
-            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToArcIntPoint)
+            // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
+            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
         }
     }
 }
 
-// NEW_ArcIntersectPICKER
-function handlePathToArcIntersection(self, pathToArcIntersectIndex, origPathDataIndexArray, p2aCount, parallelPathDatas_stopAtIntersect_fromGLOBAL, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel) {
+function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
     let shape = 'p2a'
-    let prevIndex = pathToArcIntersectIndex - 1
-    let thisIndex = pathToArcIntersectIndex
-    let prevParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[prevIndex]
-    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
-    let origPathDataIndex = origPathDataIndexArray[p2aCount]
-    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-    let pathToArcIntPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
-    if(pathToArcIntPoint) {
-        if(pathToArcIntPoint[0].doesIntersect === false) {
-            createAndAddSvgElementAndUpdateDataArrays(self, thisIndex, shape, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+    let prevIndex = index - 1
+    let thisIndex = index
+    // let nextIndex = index + 1
+    let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
+    // let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
+    let origPathDataIndex = indexArray[shapeCount]
+    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    let intersectPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
+    if(intersectPoint) {
+        if(intersectPoint[0].doesIntersect === false) {
+            createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, thisIndex, shape)
         } else {
-            // updateSVG_PathToArcIntersect_01(thisParallelPathData, pathToArcIntPoint, thisOriginalPathData)
-            placeIntersectionPoints(prevParallelPathData, thisParallelPathData, pathToArcIntPoint)
+            // updateSVG_PathToArcIntersect_01(thisParallelPathData, intersectPoint, thisOriginalPathData)
+            placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
         }
     }
 }
 
-// NEW_ArcIntersectPICKER
-function handleArcToPathIntersection(self, arcToPathIntersectIndex, origPathDataIndexArray, a2pCount, parallelPathDatas_stopAtIntersect_fromGLOBAL, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel) {
+function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
     let shape = 'a2p'
-    let thisIndex = arcToPathIntersectIndex
-    let nextIndex = arcToPathIntersectIndex + 1
-    let thisParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[thisIndex]
-    let nextParallelPathData = parallelPathDatas_stopAtIntersect_fromGLOBAL[nextIndex]
-    let origPathDataIndex = origPathDataIndexArray[a2pCount]
-    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][origPathDataIndex]
-    let arcToPathIntPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
-    if(arcToPathIntPoint) {
-        if(arcToPathIntPoint[0].doesIntersect === false) {
-            createAndAddSvgElementAndUpdateDataArrays(self, nextIndex, shape, originalFigure_counter_groupCount_GLOBAL, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel)
+    // let prevIndex = index - 1
+    let thisIndex = index
+    let nextIndex = index + 1
+    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
+    let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
+    let origPathDataIndex = indexArray[shapeCount]
+    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
+    if(intersectPoint) {
+        if(intersectPoint[0].doesIntersect === false) {
+            createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
         } else {
-            // updateSVG_PathToArcIntersect_02(thisParallelPathData, arcToPathIntPoint, thisOriginalPathData)
-            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, arcToPathIntPoint)
+            // updateSVG_PathToArcIntersect_02(thisParallelPathData, intersectPoint, thisOriginalPathData)
+            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
         }
     }
 }
