@@ -28,8 +28,6 @@ function sortEndpoints(
             parallelPathObject,
             skipperCheckers
         )
-        // (targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parallelPathObject, skipperCheckers)
-    // Determine if this parallelPathData is a straight path
     } else {
         sort_endPoint_noArc(
             targetEndPointsParallelFull,
@@ -128,13 +126,11 @@ function sort_endPoint_withArc(
     }
 
 
-    // TODO: break this off into its own independant function
     // HANDLE PATH TO ARC
     if(targetEndPointsParallelFull[index][1].arc.joiner === true && targetEndPointsParallelFull[index][1].arc.joinerSide === "AAA") {
         // if(targetEndPointsParallelFull[index][1].arc.joiner === true) {
             console.log(1 + " - Joiner")
 
-            // NEW_ArcIntersectPICKER
             parallelPathObject.pathToArcCounter += 1
             handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index)
 
