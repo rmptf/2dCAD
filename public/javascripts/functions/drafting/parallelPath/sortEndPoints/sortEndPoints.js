@@ -5,7 +5,7 @@ import {getDistance} from '../../../math/mathFunctions.js'
 
 // FIXME:
 // path to arc wasnt working correct after the first path switched up code there but untested 
-// second path to arcs dont work unless there is more than one path before the arc
+// second path to arcs dont work unless there is more than one path before the arc (not true) (seems to work fine)
 
 function sortEndpoints(
     targetEndPointsParallelFull,
@@ -128,7 +128,6 @@ function sort_endPoint_withArc(
 
     // HANDLE PATH TO ARC
     if(targetEndPointsParallelFull[index][1].arc.joiner === true && targetEndPointsParallelFull[index][1].arc.joinerSide === "AAA") {
-        // if(targetEndPointsParallelFull[index][1].arc.joiner === true) {
             console.log(1 + " - Joiner")
 
             parallelPathObject.pathToArcCounter += 1
@@ -137,9 +136,7 @@ function sort_endPoint_withArc(
             parallelPathObject.parallelPathSegmentCounter_FIRST = 0
         } 
     else if(targetEndPointsParallelFull[index - 1][1].arc.joiner === true && targetEndPointsParallelFull[index - 1][1].arc.joinerSide === "AAA") {
-    // } else if(targetEndPointsParallelFull[index - 1][1].arc.joiner === true) {
         console.log(2 + " - Joiner")
-        // parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 
         if(targetEndPointsParallelFull[index + 1][1].arc.exist === true){
             console.log("orig (double_arc) shape")
@@ -247,6 +244,7 @@ function sort_endPoint_withArc(
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     }
     // HANDLE ARC TO PATH
+    
     else {
         parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
         // Applies to first Arc Half

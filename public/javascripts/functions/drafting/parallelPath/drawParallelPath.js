@@ -1,9 +1,10 @@
 import {makeDeepCopy, transformData, findParallelDistance} from './drawParallelPath_functions/parallelPathFunctions.js'
 import {updateSVG_parallelPathAndPoints} from '../../animate/updateSvg.js'
-import {sortEndpoints} from './sortEndPoints/sortEndPoints.js'
+// import {sortEndpoints} from './sortEndPoints/sortEndPoints.js'
+import {sortEndpoints} from './sortEndPoints/sortEndPoints_refactor.js'
 import {createParallelPathElements} from './createParallelPathElements/createParallelPathElements.js'
 import {checkForIntersectingPaths} from './intersectingParPaths/intersectingParPaths.js'
-import {titsAndAss} from './intersectingParPaths/intPathsTests.js'
+import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/intPathsTests.js'
 
 
 function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked) {
@@ -57,24 +58,6 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.removeStartIndex
     parallelPathObject.parallelDistance
 
-    // let parallelPathDatas_globalRef22 = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
-    // let parallelPathDatasCopyForPerpendicular22 = transformData(parallelPathDatas_globalRef)
-    // let basePathDatasCopy22 = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    // let basePathDatasCopySecondary22 = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    // let parallelPathObject22 = []
-    // parallelPathObject22.pathToArcCounter = -1
-    // parallelPathObject22.arcToPathCounter = -1
-    // parallelPathObject22.arcToArcCounter = -1
-    // parallelPathObject22.pathToArchIndexArray = []
-    // parallelPathObject22.arcToPathIndexArray = []
-    // parallelPathObject22.arcToArcIndexArray = []
-    // parallelPathObject22.collectIndicesOfIntersections = true
-    // parallelPathObject22.removeornot_allParData = true
-    // parallelPathObject22.parallelPathSegmentCounter_FIRST = -1
-    // parallelPathObject22.parallelPathSegmentCounter_SECOND = 0
-    // parallelPathObject22.removeStartIndex
-    // parallelPathObject22.parallelDistance
-
     function mouseDownDrawParallel() {
         if (isDownDrawParallelActive === false) {
             isDownDrawParallelActive = true
@@ -93,18 +76,16 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log("START SHAPE")
         if(isDownDrawParellelInitiated === true) {
             parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
-            parallelPathObject.parallelPathSegmentCounter_FIRST = -1
-            parallelPathObject.parallelPathSegmentCounter_SECOND = 0
 
-            titsAndAss(
-                self,
-                parallelPathDatas_globalRef,
-                basePathDatasCopySecondary,
-                parallelPathDatasCopyForPerpendicular,
-                basePathDatasCopy,
-                originalFigure_counter_groupCount_GLOBAL,
-                parallelPathObject
-            )
+            // handleIntersectingParallelPaths_testing(
+            //     self,
+            //     parallelPathDatas_globalRef,
+            //     basePathDatasCopySecondary,
+            //     parallelPathDatasCopyForPerpendicular,
+            //     basePathDatasCopy,
+            //     originalFigure_counter_groupCount_GLOBAL,
+            //     parallelPathObject
+            // )
 
             for (let i = 0; i < parallelPathDatas_globalRef.length; i++) {
                 console.log("i: " + i)

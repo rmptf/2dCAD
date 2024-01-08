@@ -2,7 +2,7 @@ import {doLinesIntersect} from './intParPaths_functions/doLinesIntersect.js'
 import {updateSVG_highlight_1_point_01,updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 import {findIntersectingPointSIMPLER} from '../drawParallelPath_functions/parallelPathFunctions.js'
 
-function titsAndAss(self, parallelPathDatas_stopAtIntersect_fromGLOBAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel, originalFigure_counter_groupCount_GLOBAL, parallelPathObject) {
+function handleIntersectingParallelPaths_testing(self, parallelPathDatas_stopAtIntersect_fromGLOBAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel_SECONDARY, parallelPathDatas_stopAtPerpendicular_fromLOCAL, parallelFigure_data_pathDatasAndFillers_array_drawParallel, originalFigure_counter_groupCount_GLOBAL, parallelPathObject) {
     let runObserverCheck = false
     let intCoords
     let paths = parallelPathDatas_stopAtIntersect_fromGLOBAL
@@ -131,5 +131,5 @@ function runObserver(self, intCoords) {
 // // 0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55,
 
 export {
-    titsAndAss
+    handleIntersectingParallelPaths_testing
 }
