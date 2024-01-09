@@ -36,7 +36,29 @@ function sortEndpoints(
     }
 }
 
+    /*
+    VAR RENAMiNG THIS WHOLE FILE
 
+    targetEndPointsParallelFull                  changed to targetEndPoints
+    referenceEndPointsParallelPerpendicular      changed to refEndPointsPerp
+    referenceEndPointsBaseAndFillers             changed to refEndPointsBase
+
+
+    let prevEndPointStart = targetEndPoints[index - 1][0]
+    let thisEndPointStart = targetEndPoints[index][0]
+    let nextEndPointStart = targetEndPoints[index + 1][0]
+    let prevEndPointEnd = targetEndPoints[index - 1][1]
+    let thisEndPointEnd = targetEndPoints[index][1]
+    let nextEndPointEnd = targetEndPoints[index + 1][1]
+
+
+    targetEndPoints[index][0]   /   15
+    targetEndPoints[index + 1][0]   /   19
+    targetEndPoints[index - 1][0]   /   5
+    targetEndPoints[index][1]   /   20
+    targetEndPoints[index + 1][1]   /   30
+    targetEndPoints[index - 1][1]   /   27
+    */
 
 
 
@@ -85,31 +107,6 @@ function sort_endPoint_withArc(
     parallelPathObject,
     skipperCheckers
 ) {
-    /*
-    VAR RENAMiNG THIS WHOLE FILE
-
-    targetEndPointsParallelFull                  changed to targetEndPoints
-    referenceEndPointsParallelPerpendicular      changed to refEndPointsPerp
-    referenceEndPointsBaseAndFillers             changed to refEndPointsBase
-
-
-    let prevEndPointStart = targetEndPoints[index - 1][0]
-    let thisEndPointStart = targetEndPoints[index][0]
-    let nextEndPointStart = targetEndPoints[index + 1][0]
-    let prevEndPointEnd = targetEndPoints[index - 1][1]
-    let thisEndPointEnd = targetEndPoints[index][1]
-    let nextEndPointEnd = targetEndPoints[index + 1][1]
-
-
-    targetEndPoints[index][0]   /   15
-    targetEndPoints[index + 1][0]   /   19
-    targetEndPoints[index - 1][0]   /   5
-    targetEndPoints[index][1]   /   20
-    targetEndPoints[index + 1][1]   /   30
-    targetEndPoints[index - 1][1]   /   27
-    */
-
-
     // let baseArcToCursorDist
     let handleArcsObject = []
     handleArcsObject.baseArcToCursorDist
@@ -202,6 +199,7 @@ function sort_endPoint_withArc(
     else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
         console.log(5 + " - Joiner")
         console.log("Set Path Point (Shape 2: Part 1)")
+        
         let fillerAdder = 0
         let nextFillerAdder = 0
 
@@ -220,9 +218,10 @@ function sort_endPoint_withArc(
         targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
         targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
 
+        console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+
         parallelPathObject.arcToPathCounter += 1
 
-        console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
         handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
 
         parallelPathObject.parallelPathSegmentCounter_SECOND = 1
@@ -253,6 +252,7 @@ function sort_endPoint_withArc(
                 }
             } else {
                 console.log(5)
+
                 let thisPathData = refEndPointsBase[index]
                 let nextPathData = refEndPointsBase[index + 1]
                 let thisParallelPathData = targetEndPoints[index][0]
@@ -341,7 +341,7 @@ function sort_endPoint_withArc(
                     let fillerAdder = 0
                     let nextFillerAdder = 0
 
-                    if(refEndPointsBase[index + 2] === "filler"){
+                    if(refEndPointsBase[index + 2] === "filler") {
                         fillerAdder = fillerAdder + 0
                         nextFillerAdder = nextFillerAdder + 1
                     }
@@ -372,6 +372,7 @@ function sort_endPoint_withArc(
             // Check if this is the last point of entire shape
             } else {
                 console.log(10)
+
                 let thisPathData = refEndPointsBase[index + 1]
                 let nextPathData = refEndPointsBase[index + 1]
                 let thisParallelPathData = targetEndPoints[index][1]
@@ -388,13 +389,29 @@ function sort_endPoint_withArc(
 
 
 
+// console.log(5)
+// let thisPathData = refEndPointsBase[index]
+// let nextPathData = refEndPointsBase[index + 1]
+// let thisParallelPathData = targetEndPoints[index][0]
+// let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
+// thisParallelPathData.coords.x = parallelAnchorPoints[0]
+// thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
+// console.log(7)
+// let thisPathData = refEndPointsBase[index]
+// let nextPathData = refEndPointsBase[index + 1]
+// let thisParallelPathData = targetEndPoints[index][0]
+// let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
+// thisParallelPathData.coords.x = parallelAnchorPoints[0]
+// thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
-
-
-
-
-
+// console.log(10)
+// let thisPathData = refEndPointsBase[index + 1]
+// let nextPathData = refEndPointsBase[index + 1]
+// let thisParallelPathData = targetEndPoints[index][1]
+// let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
+// thisParallelPathData.coords.x = parallelAnchorPoints[0]
+// thisParallelPathData.coords.y = parallelAnchorPoints[1]
 
 
 
