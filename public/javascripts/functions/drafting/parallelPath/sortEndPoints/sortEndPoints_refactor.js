@@ -73,7 +73,7 @@ function sortEndpoints(
 // FIXME:
 // curve on second to last point causes bug on las point when it has a joiner
 // FIXME:
-// parallel distance is oposite when going the otherway if there is a arc on the second path (but not third) (not if there is a second arc somewhere)
+// parallel path doesnt work perfectly when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
 
 function sort_endPoint_withArc(
     targetEndPoints,
@@ -110,8 +110,6 @@ function sort_endPoint_withArc(
     */
 
 
-    // this sets the distance of parallelline when there is a curve. it works fine when the shape goes left to right but has issues when it goes right to left
-    // this issue could come from somewhere else though
     // let baseArcToCursorDist
     let handleArcsObject = []
     handleArcsObject.baseArcToCursorDist
@@ -500,6 +498,7 @@ function sort_endPoint_noArc(
         }
 
         let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
+        // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, handleArcsObject.baseArcToCursorDist)
 
         refEndPointsPerp[index][0].x = parallelProjections.thisPointX
         refEndPointsPerp[index][0].y = parallelProjections.thisPointY
@@ -619,6 +618,43 @@ function sort_endPoint_noArc(
 export {
     sortEndpoints
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Write a good comment to describe this function
 function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, parallelDistance) {

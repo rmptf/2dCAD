@@ -77,29 +77,38 @@ function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
     }
 }
 
-// ChatGPT refactored above code. Dobule check if correct and to understand.
 function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
+    // TODO: change to swtitch statement.
+    // FIXME: if point1 to parallel (horizontal) to point2, negative still does in positive direction
+    // FIXME: if thats true then: if point1 to parallel (vertical) to point2, negative still does in positive direction (unchecked though)
     let thisDirection
-
-    // Check the x-axis direction
-    if (perpendicularPoint[0] < a[0]) {
-        thisDirection = 'positive' // X-axis direction is positive
-    } else {
-        thisDirection = 'negative' // X-axis direction is negative
-    }
-
-    // Check the y-axis direction only if b[0] < c[0]
-    if (b[0] < c[0]) {
-        if (b[1] > c[1]) {
-            // Override the direction if necessary based on y-axis
-            if (perpendicularPoint[0] > a[0]) {
-                thisDirection = 'positive' // Y-axis direction is positive
+    if(b[0] < c[0]) {
+        if(perpendicularPoint[0] < a[0]) {
+            thisDirection = 'positive'
+        } else {
+            thisDirection = 'negative'
+        }
+        if(b[1] > c[1]) {
+            if(perpendicularPoint[0] > a[0]) {
+                thisDirection = 'positive'
             } else {
-                thisDirection = 'negative' // Y-axis direction is negative
+                thisDirection = 'negative'
+            }
+        }
+    } else {
+        if(perpendicularPoint[0] < a[0]) {
+            thisDirection = 'positive'
+        } else {
+            thisDirection = 'negative'
+        }
+        if(b[1] > c[1]) {
+            if(perpendicularPoint[0] > a[0]) {
+                thisDirection = 'positive'
+            } else {
+                thisDirection = 'negative'
             }
         }
     }
-
     return thisDirection
 }
 
