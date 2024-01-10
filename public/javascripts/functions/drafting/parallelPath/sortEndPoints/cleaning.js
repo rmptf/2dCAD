@@ -92,12 +92,17 @@ else {
 
 
 // HANDLE PATH TO ARC
+// thisEndPoint has Joiner & Joiner is AAA
+// thisEndPoint is a PathToArcEndPoint
 if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") { // 1 + " - Joiner"
     parallelPathObject.pathToArcCounter += 1
     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
+// previousEndPoint has a Joiner & Joiner is AAA
+// previousEndPoint is ArcToPath
 else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") { // 2 + " - Joiner"
+    // nextEndPoint
     if(targetEndPoints[index + 1][1].arc.exist === true){ // orig (double_arc) shape"
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     } else { // "new (single_arc) shape"
