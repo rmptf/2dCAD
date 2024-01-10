@@ -389,6 +389,29 @@ function sort_endPoint_withArc(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // console.log(5)
 // let thisPathData = refEndPointsBase[index]
 // let nextPathData = refEndPointsBase[index + 1]
@@ -415,6 +438,168 @@ function sort_endPoint_withArc(
 
 
 
+
+
+
+
+
+// let fillerAdder = 0
+// let nextFillerAdder = 0
+
+// if(refEndPointsBase[index + 2] === "filler") {
+//     fillerAdder = fillerAdder + 0
+//     nextFillerAdder = nextFillerAdder + 1
+// }
+
+// let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
+// let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
+
+// let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
+
+// targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
+// targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
+// targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
+
+// console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+
+// parallelPathObject.arcToPathCounter += 1
+
+
+
+
+// if (parallelPathObject.collectIndicesOfIntersections === true) {
+//     parallelPathObject.arcToPathIndexArray.push(index + 1)
+// }
+// handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
+
+// if (targetEndPoints[index + 1][1].arc.joiner) {
+//     parallelPathObject.arcToPathCounter -= 1
+// }
+
+
+
+
+
+
+
+
+// let fillerAdder = 0
+// let nextFillerAdder = 0
+
+// if(refEndPointsBase[index + 2] === "filler") {
+//     fillerAdder = fillerAdder + 0
+//     nextFillerAdder = nextFillerAdder + 1
+// }
+
+// let thisPathDataOutside = refEndPointsBase[index + 0 + fillerAdder]
+// let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
+
+// let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
+
+// targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
+// targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
+// targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
+
+// console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+
+// parallelPathObject.arcToPathCounter += 1
+
+
+
+
+
+// handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
+
+// parallelPathObject.parallelPathSegmentCounter_SECOND = 1
+
+
+
+
+
+
+
+
+
+// let fillerAdder = 0
+// let nextFillerAdder = 0
+
+// if(refEndPointsBase[index + 2] === "filler") {
+//     fillerAdder = fillerAdder + 0
+//     nextFillerAdder = nextFillerAdder + 1
+// }
+
+// let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
+// let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
+
+// let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
+
+// targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
+// targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
+// targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
+
+// console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+
+// parallelPathObject.arcToPathCounter += 1
+
+
+
+
+// if (parallelPathObject.collectIndicesOfIntersections === true) {
+//     parallelPathObject.arcToPathIndexArray.push(index + 1)
+// }
+
+// handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
+
+// if (targetEndPoints[index + 1][1].arc.joiner) {
+//     parallelPathObject.arcToPathCounter -= 1
+// }
+
+
+
+
+
+
+
+
+
+
+// let fillerAdder = 0
+// let nextFillerAdder = 0
+
+// if(refEndPointsBase[index + 2] === "filler") {
+//     fillerAdder = fillerAdder + 0
+//     nextFillerAdder = nextFillerAdder + 1
+// }
+
+// let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
+// let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
+
+// let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
+
+// targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
+// targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
+// targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
+
+// console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+
+// parallelPathObject.arcToPathCounter += 1
+
+
+
+
+// if (parallelPathObject.collectIndicesOfIntersections === true) {
+//     parallelPathObject.arcToPathIndexArray.push(index + 1)
+// }
+
+// handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
+
+// if (targetEndPoints[index + 1][1].arc.joiner) {
+//     parallelPathObject.arcToPathCounter -= 1
+// }
 
 
 
