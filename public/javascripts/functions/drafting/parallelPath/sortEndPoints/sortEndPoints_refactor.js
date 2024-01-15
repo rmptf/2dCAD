@@ -129,11 +129,9 @@ function sort_endPoint_withArc(
 
 
 
-
-
     // HANDLE PATH TO ARC
     if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") {
-        console.log(1 + " - Joiner")
+        console.log("1_Joiner")
 
         parallelPathObject.pathToArcCounter += 1
         handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
@@ -141,12 +139,12 @@ function sort_endPoint_withArc(
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     }
     else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") {
-        console.log(2 + " - Joiner")
-
-        if(targetEndPoints[index + 1][1].arc.exist === true){
+        if(targetEndPoints[index + 1][1].arc.exist === true) {
+            console.log("2_A_Joiner")
             console.log("orig (double_arc) shape")
             parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-        } else {
+        } else { // (NOT IN USE YET) FOR ELIMINATING 1 ARC HALF
+            console.log("2_B_Joiner")
             console.log("new (single_arc) shape")
 
             let fillerAdder = 0
@@ -184,20 +182,20 @@ function sort_endPoint_withArc(
 
     // HANDLE ARC TO ARC
     else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") {
-        console.log(3 + " - Joiner")
+        console.log("3_Joiner")
         parallelPathObject.arcToArcCounter += 1
         handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     } 
     else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") {
-        console.log(4 + " - Joiner")
+        console.log("4_Joiner")
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     }
     // HANDLE ARC TO ARC
     
     // HANDLE ARC TO PATH
     else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
-        console.log(5 + " - Joiner")
+        console.log("5_Joiner")
         console.log("Set Path Point (Shape 2: Part 1)")
         
         let fillerAdder = 0
@@ -226,8 +224,8 @@ function sort_endPoint_withArc(
 
         parallelPathObject.parallelPathSegmentCounter_SECOND = 1
     }
-    else if(skipperCheckers.skipperChecker_Arc === true){
-        console.log(6 + " - Skipper")
+    else if(skipperCheckers.skipperChecker_Arc === true) { // (NOT IN USE YET) FOR ELIMINATING 1 ARC HALF
+        console.log("6_Joiner")
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     }
     // HANDLE ARC TO PATH
@@ -260,8 +258,8 @@ function sort_endPoint_withArc(
                 thisParallelPathData.coords.x = parallelAnchorPoints[0]
                 thisParallelPathData.coords.y = parallelAnchorPoints[1]
             }
-            console.log(6)
             if(targetEndPoints[index + 1][1].arc.exist === true) {
+                console.log("6_A")
                 console.log("orig (double_arc) shape")
                 let prevParallelPathData = targetEndPoints[index - 1][1]
                 let thisParallelPathData = targetEndPoints[index][1]
@@ -270,6 +268,7 @@ function sort_endPoint_withArc(
                     thisParallelPathData.coords.y = prevParallelPathData.coords.y
                 }
             } else {
+                console.log("6_B")
                 console.log("new (single_arc) shape")
 
                 let fillerAdder = 0
@@ -320,10 +319,10 @@ function sort_endPoint_withArc(
             prevParallelPathData.coords.x = parallelAnchorPoints[0]
             prevParallelPathData.coords.y = parallelAnchorPoints[1]
 
-            if(index !== targetEndPoints.length - 1){
-                if(targetEndPoints[index + 1][1].arc.exist === true){
-                    console.log(8)
+            if(index !== targetEndPoints.length - 1) {
+                if(targetEndPoints[index + 1][1].arc.exist === true) {
                     if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {
+                        console.log(8)
                         console.log('arc_arc: 22222')
 
                         parallelPathObject.arcToArcCounter += 1

@@ -89,7 +89,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
 
             for (let i = 0; i < parallelPathDatas_globalRef.length; i++) {
                 console.log("i: " + i)
-                let skipperCheckers = []
+                let skipperCheckers = [] // these have to do with adding and eliminating paths based on parallel intersections (not in use right now)
                 skipperCheckers.skipperChecker_Path = false
                 skipperCheckers.skipperChecker_Arc = false
 
