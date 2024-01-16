@@ -129,6 +129,232 @@ function sort_endPoint_withArc(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
+    const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
+    const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
+    const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
+    const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide)
+    const segmentCounter = parallelPathObject.parallelPathSegmentCounter_FIRST
+
+    switch(true) {
+        case isJoiner(index):
+        case isJoiner(index - 1):
+            handleDisconnectedArcIntersection()
+            break
+        default:
+            handleArcIntersection()
+    }
+
+    function handleArcIntersection() {
+        switch(true) {
+            case segmentCounter === 0:
+                handleFirctArcSegment()
+                break
+            default:
+                handleSecondArcSegment()
+        }
+    }
+
+    function handleFirctArcSegment() {
+        switch(true) {
+            case index !== 0:
+                if(arcExist(index - 1)){
+                    // 3
+                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+                    break
+                } else {
+                    // 4
+                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
+                    break
+                }
+            case index === 0:
+                // 5
+                arcIntersection_firstArcSegment_fistIndex()
+                break
+            case arcExist(index + 1):
+                // 6_A
+                arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+                break
+            case !arcExist(index + 1):
+                // 6_B
+                arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+                break
+        }
+    }
+
+    // 11 goes here somewhere
+    function handleSecondArcSegment() {
+        // 7
+        arcIntersection_secondArcSegment_everyIndex_firstAction()
+        switch(true) {
+            case !lastPosition(index) && arcExist(index + 1) && !includes(["AAA", "BBB", "CCC"], index + 1):
+                // 8
+                arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+            case !lastPosition(index) && !arcExist(index + 1):
+                // 9
+                arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+            case lastPosition(index):
+                // 10
+                arcIntersection_secondArcSegment_lastIndex()
+            default:
+                // 11
+                arcIntersection_secondArcSegment_everyIndex_lastAction()
+        }
+    }
+
+    function handleDisconnectedArcIntersection() {
+        switch(true) {
+            case joinerType(index, "AAA"):
+                // 1_Joiner
+                disconnectedArcIntersection_thisIndexIsPathToArc()
+                break
+            case joinerType(index - 1, "AAA"):
+                if(targetEndPoints[index + 1][1].arc.exist) {
+                    // 2_A_Joiner
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc()
+                } else {
+                    // 2_B_Joiner
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
+                }
+                break
+            case joinerType(index, "CCC"):
+                // 3_Joiner
+                disconnectedArcIntersection_thisIndexIsArcToArc()
+                break
+            case joinerType(index - 1, "CCC"):
+                // 4_Joiner
+                disconnectedArcIntersection_prevIndexIsArcToArc()
+                break
+            case joinerType(index - 1, "BBB"):
+                // 5_Joiner
+                disconnectedArcIntersection_prevIndexIsArcToPath()
+                break
+            case skipperCheckers.skipperChecker_Arc:
+                // 6_Joiner
+                disconnectedArcIntersection_skipThisIndex()
+                break
+        }
+    }
+    function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() {
+        // 3
+        console.log("3_ooo")
+    }
+    function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc() {
+        // 4
+        console.log("4_ooo")
+    }
+    function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(){
+        // 5
+        console.log("5_ooo")
+    }
+    function arcIntersection_firstArcSegment_fistIndex() {
+        // 6_A
+        console.log("6_A_ooo")
+    }
+    function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc() {
+        // 6_B
+        console.log("6_B_ooo")
+    }
+    
+    
+    
+    function arcIntersection_secondArcSegment_everyIndex_firstAction() {
+        // 7
+        console.log("7_ooo")
+    }
+    function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() {
+        // 8
+        console.log("8_ooo")
+    }
+    function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc() {
+        // 9
+        console.log("9_ooo")
+    }
+    function arcIntersection_secondArcSegment_lastIndex() {
+        // 10
+        console.log("10_ooo")
+    }
+    function arcIntersection_secondArcSegment_everyIndex_lastAction() {
+        // 11
+        console.log("11_ooo")
+    }
+    
+    
+    
+    function disconnectedArcIntersection_thisIndexIsPathToArc() {
+        // 1_Joiner
+        console.log("1_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() {
+        // 2_A_Joiner
+        console.log("2_A_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc() {
+        // 2_B_Joiner
+        console.log("2_B_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_thisIndexIsArcToArc() {
+        // 3_Joiner
+        console.log("3_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_prevIndexIsArcToArc() {
+        // 4_Joiner
+        console.log("4_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_prevIndexIsArcToPath() {
+        // 5_Joiner
+        console.log("5_Joiner_ooo")
+    }
+    function disconnectedArcIntersection_skipThisIndex() {
+        // 6_Joiner
+        console.log("6_Joiner_ooo")
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // HANDLE PATH TO ARC
     if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") {
         console.log("1_Joiner")
