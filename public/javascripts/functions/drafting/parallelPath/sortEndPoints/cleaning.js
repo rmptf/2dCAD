@@ -1,86 +1,86 @@
-// // HANDLE PATH TO ARC
-// // thisEndPoint has Joiner & Joiner is AAA
-// // thisEndPoint is a noContactPathToArcEndPoint
-// if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") { // 1 + " - Joiner"
-//     parallelPathObject.pathToArcCounter += 1
-//     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// // previousEndPoint has a Joiner & Joiner is AAA
-// // previousEndPoint is noContactArcToPathEndPoint
-// else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") { // 2 + " - Joiner"
-//     // nextEndPoint is a noContactPathToArcEndPoint
-//     if(targetEndPoints[index + 1][1].arc.exist === true){ // orig (double_arc) shape"
-//         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-//     } else { // "new (single_arc) shape"
-//         function skipFillersAndSetParallelProjections() {}
-//         function handleIntersectionArcToPath() {}
-//     }
-// }
-// // HANDLE ARC TO ARC
-// else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") { // 3 + " - Joiner"
-//     parallelPathObject.arcToArcCounter += 1
-//     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// } 
-// else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") { // 4 + " - Joiner
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// // HANDLE ARC TO PATH
-// else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") { // 5 + " - Joiner // Set Path Point (Shape 2: Part 1)
-//     function skipFillersAndSetParallelProjections() {}
-//     function handleNOIntersection() {}
-//     parallelPathObject.parallelPathSegmentCounter_SECOND = 1
-// }
-// else if(skipperCheckers.skipperChecker_Arc === true){ // 6 + " - Skipper // for adding and removing intersecting paths
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// // HANDLE OTHERS
-// else {
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
-//     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 0) {
-//         if(index !== 0) {
-//             if(targetEndPoints[index - 1][1].arc.exist === true) {
-//                 // 3
-//                 // empty
-//             } else {
-//                 // 4
-//                 function handleIntersectionPathToArc() {}
-//             }
-//         } else {
-//             // 5
-//             function setPerpendicularPoints() {}
-//         }
-//         if(targetEndPoints[index + 1][1].arc.exist === true) {
-//             // 6_A
-//             function setThisPathDataAsPreviousPathData() {}
-//         } else {
-//             // 6_B
-//             function skipFillersAndSetParallelProjections() {}
-//             function handleIntersectionArcToPath() {}
-//         }
-//     }
-//     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 1) {
-//         // 7
-//         function setPerpendicularPointsAndPrevious() {}
-//         if(index !== targetEndPoints.length - 1){
-//             if(targetEndPoints[index + 1][1].arc.exist === true) {
-//                 if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {
-//                     // 8
-//                     function handleIntersectionArcToArc() {}
-//                 }
-//             } else {
-//                 // 9
-//                 function skipFillersAndSetParallelProjections() {}
-//                 function handleIntersectionArcToPath() {}
-//             }
-//         } else {
-//             // 10
-//             function setPerpendicularPoints() {}
-//         }
-//         parallelPathObject.parallelPathSegmentCounter_FIRST = -1
-//     }
-// }
+// HANDLE PATH TO ARC
+// thisEndPoint has Joiner & Joiner is AAA
+// thisEndPoint is a noContactPathToArcEndPoint
+if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") { // 1 + " - Joiner"
+    parallelPathObject.pathToArcCounter += 1
+    handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+// previousEndPoint has a Joiner & Joiner is AAA
+// previousEndPoint is noContactArcToPathEndPoint
+else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") { // 2 + " - Joiner"
+    // nextEndPoint is a noContactPathToArcEndPoint
+    if(targetEndPoints[index + 1][1].arc.exist === true){ // orig (double_arc) shape"
+        parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+    } else { // "new (single_arc) shape"
+        function skipFillersAndSetParallelProjections() {}
+        function handleIntersectionArcToPath() {}
+    }
+}
+// HANDLE ARC TO ARC
+else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") { // 3 + " - Joiner"
+    parallelPathObject.arcToArcCounter += 1
+    handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+} 
+else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") { // 4 + " - Joiner
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+// HANDLE ARC TO PATH
+else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") { // 5 + " - Joiner // Set Path Point (Shape 2: Part 1)
+    function skipFillersAndSetParallelProjections() {}
+    function handleNOIntersection() {}
+    parallelPathObject.parallelPathSegmentCounter_SECOND = 1
+}
+else if(skipperCheckers.skipperChecker_Arc === true){ // 6 + " - Skipper // for adding and removing intersecting paths
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+// HANDLE OTHERS
+else {
+    parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
+    if(parallelPathObject.parallelPathSegmentCounter_FIRST === 0) {
+        if(index !== 0) {
+            if(targetEndPoints[index - 1][1].arc.exist === true) {
+                // 3
+                // empty
+            } else {
+                // 4
+                function handleIntersectionPathToArc() {}
+            }
+        } else {
+            // 5
+            function setPerpendicularPoints() {}
+        }
+        if(targetEndPoints[index + 1][1].arc.exist === true) {
+            // 6_A
+            function setThisPathDataAsPreviousPathData() {}
+        } else {
+            // 6_B
+            function skipFillersAndSetParallelProjections() {}
+            function handleIntersectionArcToPath() {}
+        }
+    }
+    if(parallelPathObject.parallelPathSegmentCounter_FIRST === 1) {
+        // 7
+        function setPerpendicularPointsAndPrevious() {}
+        if(index !== targetEndPoints.length - 1){
+            if(targetEndPoints[index + 1][1].arc.exist === true) {
+                if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {
+                    // 8
+                    function handleIntersectionArcToArc() {}
+                }
+            } else {
+                // 9
+                function skipFillersAndSetParallelProjections() {}
+                function handleIntersectionArcToPath() {}
+            }
+        } else {
+            // 10
+            function setPerpendicularPoints() {}
+        }
+        parallelPathObject.parallelPathSegmentCounter_FIRST = -1
+    }
+}
 
 
 
@@ -151,85 +151,88 @@
 
 
 
-// if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") {
-//     // 1_Joiner
-//     parallelPathObject.pathToArcCounter += 1
-//     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") {
-//     if(targetEndPoints[index + 1][1].arc.exist === true) {
-//         // 2_A_Joiner
-//         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-//     } else {
-//         // 2_B_Joiner
-//         skipFillersAndSetParallelProjections(1)
-//         handleIntersectionArcToPath()
-//     }
-// }
-// else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") {
-//     // 3_Joiner
-//     parallelPathObject.arcToArcCounter += 1
-//     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") {
-//     // 4_Joiner
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// }
-// else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
-//     // 5_Joiner
-//     skipFillersAndSetParallelProjections(0)
-//     handleNOIntersection()
-//     parallelPathObject.parallelPathSegmentCounter_SECOND = 1
-// }
-// else if(skipperCheckers.skipperChecker_Arc === true) {
-//     // 6_Joiner
-//     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-// } else {
-//     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 0) {
-//         if(index !== 0) {
-//             if(targetEndPoints[index - 1][1].arc.exist === true) {
-//                 // 3
-//                 // empty
-//             } else {
-//                 // 4
-//                 handleArcIntersection(parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, "p2a")
-//             }
-//         } else {
-//             // 5
-//             setPerpendicularPoints(index, index + 1, index[0], false)
-//         }
-//         if(targetEndPoints[index + 1][1].arc.exist === true) {
-//             // 6_A
-//             setThisPathDataAsPreviousPathData()
-//         } else {
-//             // 6_B
-//             skipFillersAndSetParallelProjections(1)
-//             handleIntersectionArcToPath()
-//         }
-//     }
-//     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 1) {
-//         // 7
-//         setPerpendicularPoints(index, index + 1, index[0], true)
-//         if(index !== targetEndPoints.length - 1) {
-//             if(targetEndPoints[index + 1][1].arc.exist === true) {
-//                 if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {}
-//                 // 8
-//                 handleArcIntersection(parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter, "a2a")
-//             } else {
-//                 // 9
-//                 skipFillersAndSetParallelProjections(1)
-//                 handleIntersectionArcToPath()
-//             }
-//         } else {
-//             // 10
-//             setPerpendicularPoints(index + 1, index + 1, index[1], false)
-//         }
-//         // 11
-//         parallelPathObject.parallelPathSegmentCounter_FIRST = -1
-//     }
-// }
+if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") {
+    // 1_Joiner
+    parallelPathObject.pathToArcCounter += 1
+    handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") {
+    if(targetEndPoints[index + 1][1].arc.exist === true) {
+        // 2_A_Joiner
+        parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+    } else {
+        // 2_B_Joiner
+        skipFillersAndSetParallelProjections(1)
+        handleIntersectionArcToPath()
+    }
+}
+else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") {
+    // 3_Joiner
+    parallelPathObject.arcToArcCounter += 1
+    handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") {
+    // 4_Joiner
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+}
+else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
+    // 5_Joiner
+    skipFillersAndSetParallelProjections(0)
+    handleNOIntersection()
+    parallelPathObject.parallelPathSegmentCounter_SECOND = 1
+}
+else if(skipperCheckers.skipperChecker_Arc === true) {
+    // 6_Joiner
+    parallelPathObject.parallelPathSegmentCounter_FIRST = 0
+} else {
+    // 2
+    parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
+    if(parallelPathObject.parallelPathSegmentCounter_FIRST === 0) {
+        if(index !== 0) {
+            if(targetEndPoints[index - 1][1].arc.exist === true) {
+                // 3
+                // empty
+            } else {
+                // 4
+                handleArcIntersection(parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, "p2a")
+            }
+        } else {
+            // 5
+            setPerpendicularPoints(index, index + 1, index[0], false)
+        }
+        if(targetEndPoints[index + 1][1].arc.exist === true) {
+            // 6_A
+            setThisPathDataAsPreviousPathData()
+        } else {
+            // 6_B
+            skipFillersAndSetParallelProjections(1)
+            handleIntersectionArcToPath()
+        }
+    }
+    if(parallelPathObject.parallelPathSegmentCounter_FIRST === 1) {
+        // 7
+        setPerpendicularPoints(index, index + 1, index[0], true)
+        if(index !== targetEndPoints.length - 1) {
+            if(targetEndPoints[index + 1][1].arc.exist === true) {
+                if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {
+                    // 8
+                    handleArcIntersection(parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter, "a2a")
+                }
+            } else {
+                // 9
+                skipFillersAndSetParallelProjections(1)
+                handleIntersectionArcToPath()
+            }
+        } else {
+            // 10
+            setPerpendicularPoints(index + 1, index + 1, index[1], false)
+        }
+        // 11
+        parallelPathObject.parallelPathSegmentCounter_FIRST = -1
+    }
+}
 
 
 
@@ -245,7 +248,6 @@ const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner =
 const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
 const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
 const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide)
-const segmentCounter = parallelPathObject.parallelPathSegmentCounter_FIRST
 
 switch(true) {
     case isJoiner(index):
@@ -256,9 +258,11 @@ switch(true) {
         handleArcIntersection()
 }
 
-function handleArcIntersection() {
+function handleDefaultArcIntersection() {
+    // 1
+    arcIntersection_allArcSegments_everyIndex_firstAction()
     switch(true) {
-        case segmentCounter === 0:
+        case parallelPathObject.parallelPathSegmentCounter_FIRST === 0:
             handleFirctArcSegment()
             break
         default:
@@ -267,46 +271,89 @@ function handleArcIntersection() {
 }
 
 function handleFirctArcSegment() {
-    switch(true) {
-        case index !== 0:
-            if(arcExist(index - 1)){
-                // 3
-                arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
-            } else {
-                // 4
-                arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
-            }
-        case index === 0:
-            // 5
-            arcIntersection_firstArcSegment_fistIndex()
-        case arcExist(index + 1):
-            // 6_A
-            arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
-        case !arcExist(index + 1):
-            // 6_B
-            arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
-            break
+    // 2
+    arcIntersection_firstArcSegment_everyIndex_firstAction()
+    if(index !== 0) {
+        if(arcExist(index - 1)) {
+            // 3
+            arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+        } else {
+            // 4
+            arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
+        }
+    } else {
+        // 5
+        arcIntersection_firstArcSegment_fistIndex()
     }
+    if(arcExist(index + 1)) {
+        // 6_A
+        arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+    } else {
+        // 6_B
+        arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+        handleIntersectionArcToPath()
+    }
+    // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
+    // // 2
+    // arcIntersection_firstArcSegment_everyIndex_firstAction()
+    // switch(true) {
+    //     case index !== 0:
+    //         if(arcExist(index - 1)){
+    //             // 3
+    //             arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+    //         } else {
+    //             // 4
+    //             arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
+    //         }
+    //     case index === 0:
+    //         // 5
+    //         arcIntersection_firstArcSegment_fistIndex()
+    //     case arcExist(index + 1):
+    //         // 6_A
+    //         arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+    //     case !arcExist(index + 1):
+    //         // 6_B
+    //         arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+    //         break
+    // }
 }
 
-// 11 goes here somewhere
 function handleSecondArcSegment() {
-    // 7
-    arcIntersection_secondArcSegment_everyIndex_firstAction()
-    switch(true) {
-        case !lastPosition(index) && arcExist(index + 1) && !includes(["AAA", "BBB", "CCC"], index + 1):
-            // 8
-            arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-        case !lastPosition(index) && !arcExist(index + 1):
-            // 9
-            arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
-        case lastPosition(index):
+        // 7
+        arcIntersection_secondArcSegment_everyIndex_firstAction()
+        if(!lastPosition(index)) {
+            if(arcExist(index + 1)) {
+                if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
+                    // 8
+                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+                }
+            } else {
+                // 9
+                arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+            }
+        } else {
             // 10
             arcIntersection_secondArcSegment_lastIndex()
-        default:
-            // 11
-            arcIntersection_secondArcSegment_everyIndex_lastAction()
-    }
+        }
+        // 11
+        arcIntersection_secondArcSegment_everyIndex_lastAction()
+    // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
+    // // 7
+    // arcIntersection_secondArcSegment_everyIndex_firstAction()
+    // switch(true) {
+    //     case !lastPosition(index) && arcExist(index + 1) && !includes(["AAA", "BBB", "CCC"], index + 1):
+    //         // 8
+    //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+    //     case !lastPosition(index) && !arcExist(index + 1):
+    //         // 9
+    //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+    //     case lastPosition(index):
+    //         // 10
+    //         arcIntersection_secondArcSegment_lastIndex()
+    //     default:
+    //         // 11
+    //         arcIntersection_secondArcSegment_everyIndex_lastAction()
+    // }
 }
 
 function handleDisconnectedArcIntersection() {
@@ -344,49 +391,66 @@ function handleDisconnectedArcIntersection() {
 }
 
 
+function arcIntersection_firstArcSegment_everyIndex_firstAction() {
+    // 2
+    console.log("2_ooo")
+    parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
+}
 function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() {
     // 3
+    console.log("3_ooo")
     // empty
 }
 function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc() {
     // 4
+    console.log("4_ooo")
     handleArcIntersection(parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, "p2a")
 }
 function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(){
     // 5
+    console.log("5_ooo")
     setPerpendicularPoints(index, index + 1, index[0], false)
 }
 function arcIntersection_firstArcSegment_fistIndex() {
     // 6_A
+    console.log("6_A_ooo")
     setThisPathDataAsPreviousPathData()
 }
 function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc() {
     // 6_B
+    console.log("6_B_ooo")
     skipFillersAndSetParallelProjections(1)
     handleIntersectionArcToPath()
 }
 
 
-
+function arcIntersection_allArcSegments_everyIndex_firstAction() {
+    parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
+}
 function arcIntersection_secondArcSegment_everyIndex_firstAction() {
     // 7
+    console.log("7_ooo")
     setPerpendicularPoints(index, index + 1, index[0], true)
 }
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() {
     // 8
+    console.log("8_ooo")
     handleArcIntersection(parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter, "a2a")
 }
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc() {
     // 9
+    console.log("9_ooo")
     skipFillersAndSetParallelProjections(1)
     handleIntersectionArcToPath()
 }
 function arcIntersection_secondArcSegment_lastIndex() {
     // 10
+    console.log("10_ooo")
     setPerpendicularPoints(index + 1, index + 1, index[1], false)
 }
 function arcIntersection_secondArcSegment_everyIndex_lastAction() {
     // 11
+    console.log("11_ooo")
     parallelPathObject.parallelPathSegmentCounter_FIRST = -1
 }
 
@@ -394,37 +458,44 @@ function arcIntersection_secondArcSegment_everyIndex_lastAction() {
 
 function disconnectedArcIntersection_thisIndexIsPathToArc() {
     // 1_Joiner
+    console.log("1_Joiner_ooo")
     parallelPathObject.pathToArcCounter += 1
     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
 function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() {
     // 2_A_Joiner
+    console.log("2_A_Joiner_ooo")
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
 function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc() {
     // 2_B_Joiner
+    console.log("2_B_Joiner_ooo")
     skipFillersAndSetParallelProjections(1)
     handleIntersectionArcToPath()
 }
 function disconnectedArcIntersection_thisIndexIsArcToArc() {
     // 3_Joiner
+    console.log("3_Joiner_ooo")
     parallelPathObject.arcToArcCounter += 1
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
 function disconnectedArcIntersection_prevIndexIsArcToArc() {
     // 4_Joiner
+    console.log("4_Joiner_ooo")
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
 function disconnectedArcIntersection_prevIndexIsArcToPath() {
     // 5_Joiner
+    console.log("5_Joiner_ooo")
     skipFillersAndSetParallelProjections(0)
     handleNOIntersection()
     parallelPathObject.parallelPathSegmentCounter_SECOND = 1
 }
 function disconnectedArcIntersection_skipThisIndex() {
     // 6_Joiner
+    console.log("6_Joiner_ooo")
     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
 }
 
@@ -541,82 +612,4 @@ function setThisPathDataAsPreviousPathData() {
         thisParallelPathData.coords.x = prevParallelPathData.coords.x
         thisParallelPathData.coords.y = prevParallelPathData.coords.y
     }
-}
-
-
-
-
-function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() {
-    // 3
-    console.log("3_ooo")
-}
-function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc() {
-    // 4
-    console.log("4_ooo")
-}
-function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(){
-    // 5
-    console.log("5_ooo")
-}
-function arcIntersection_firstArcSegment_fistIndex() {
-    // 6_A
-    console.log("6_A_ooo")
-}
-function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc() {
-    // 6_B
-    console.log("6_B_ooo")
-}
-
-
-
-function arcIntersection_secondArcSegment_everyIndex_firstAction() {
-    // 7
-    console.log("7_ooo")
-}
-function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() {
-    // 8
-    console.log("8_ooo")
-}
-function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc() {
-    // 9
-    console.log("9_ooo")
-}
-function arcIntersection_secondArcSegment_lastIndex() {
-    // 10
-    console.log("10_ooo")
-}
-function arcIntersection_secondArcSegment_everyIndex_lastAction() {
-    // 11
-    console.log("11_ooo")
-}
-
-
-
-function disconnectedArcIntersection_thisIndexIsPathToArc() {
-    // 1_Joiner
-    console.log("1_Joiner_ooo")
-}
-function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() {
-    // 2_A_Joiner
-    console.log("2_A_Joiner_ooo")
-}
-function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc() {
-    // 2_B_Joiner
-    console.log("2_B_Joiner_ooo")
-}
-function disconnectedArcIntersection_thisIndexIsArcToArc() {
-    // 3_Joiner
-    console.log("3_Joiner_ooo")
-}
-function disconnectedArcIntersection_prevIndexIsArcToArc() {
-    // 4_Joiner
-    console.log("4_Joiner_ooo")
-}
-function disconnectedArcIntersection_prevIndexIsArcToPath() {
-    // 5_Joiner
-    console.log("5_Joiner_ooo")
-}
-function disconnectedArcIntersection_skipThisIndex() {
-    // 6_Joiner
-    console.log("6_Joiner_ooo")
 }
