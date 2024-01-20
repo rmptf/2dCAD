@@ -173,51 +173,50 @@ function sort_endPoint_withArc(
     }
     
     function handleFirctArcSegment() {
-        // 2
-        arcIntersection_firstArcSegment_everyIndex_firstAction()
-        if(index !== 0) {
-            if(arcExist(index - 1)) {
-                // 3
-                arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
-            } else {
-                // 4
-                arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
-            }
-        } else {
-            // 5
-            arcIntersection_firstArcSegment_fistIndex()
-        }
-        if(arcExist(index + 1)) {
-            // 6_A
-            arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
-        } else {
-            // 6_B
-            arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
-            handleIntersectionArcToPath()
-        }
-        // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
         // // 2
         // arcIntersection_firstArcSegment_everyIndex_firstAction()
-        // switch(true) {
-        //     case index !== 0:
-        //         if(arcExist(index - 1)){
-        //             // 3
-        //             arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
-        //         } else {
-        //             // 4
-        //             arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
-        //         }
-        //     case index === 0:
-        //         // 5
-        //         arcIntersection_firstArcSegment_fistIndex()
-        //     case arcExist(index + 1):
-        //         // 6_A
-        //         arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
-        //     case !arcExist(index + 1):
-        //         // 6_B
-        //         arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
-        //         break
+        // if(index !== 0) {
+        //     if(arcExist(index - 1)) {
+        //         // 3
+        //         arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+        //     } else {
+        //         // 4
+        //         arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
+        //     }
+        // } else {
+        //     // 5
+        //     arcIntersection_firstArcSegment_fistIndex()
         // }
+        // if(arcExist(index + 1)) {
+        //     // 6_A
+        //     arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+        // } else {
+        //     // 6_B
+        //     arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+        // }
+        // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
+        // 2
+        arcIntersection_firstArcSegment_everyIndex_firstAction()
+        switch(true) {
+            case index !== 0:
+                if(arcExist(index - 1)){
+                    // 3
+                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+                } else {
+                    // 4
+                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
+                }
+            case index === 0:
+                // 5
+                arcIntersection_firstArcSegment_fistIndex()
+            case arcExist(index + 1):
+                // 6_A
+                arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+            case !arcExist(index + 1):
+                // 6_B
+                arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+                break
+        }
     }
     
     function handleSecondArcSegment() {
@@ -338,12 +337,12 @@ function sort_endPoint_withArc(
         console.log("4_ooo")
         handleArcIntersection(parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, "p2a")
     }
-    function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(){
+    function arcIntersection_firstArcSegment_fistIndex(){
         // 5
         console.log("5_ooo")
-        setPerpendicularPoints(index, index + 1, index[0], false)
+        setPerpendicularPoints(index, index + 1, 0, false)
     }
-    function arcIntersection_firstArcSegment_fistIndex() {
+    function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() {
         // 6_A
         console.log("6_A_ooo")
         setThisPathDataAsPreviousPathData()
@@ -360,7 +359,7 @@ function sort_endPoint_withArc(
     function arcIntersection_secondArcSegment_everyIndex_firstAction() {
         // 7
         console.log("7_ooo")
-        setPerpendicularPoints(index, index + 1, index[0], true)
+        setPerpendicularPoints(index, index + 1, 0, true)
     }
     function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() {
         // 8
@@ -376,7 +375,7 @@ function sort_endPoint_withArc(
     function arcIntersection_secondArcSegment_lastIndex() {
         // 10
         console.log("10_ooo")
-        setPerpendicularPoints(index + 1, index + 1, index[1], false)
+        setPerpendicularPoints(index + 1, index + 1, 1, false)
     }
     function arcIntersection_secondArcSegment_everyIndex_lastAction() {
         // 11
@@ -428,10 +427,6 @@ function sort_endPoint_withArc(
         console.log("6_Joiner_ooo")
         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
     }
-    
-    
-    
-    
 
 
 
@@ -464,7 +459,8 @@ function sort_endPoint_withArc(
     function setPerpendicularPoints(thisIndex, nextIndex, target, setPrevious) {
         let thisPathData = refEndPointsBase[thisIndex]
         let nextPathData = refEndPointsBase[nextIndex]
-        let thisParallelPathData = targetEndPoints[target]
+        let thisParallelPathData = targetEndPoints[thisIndex][target]
+
         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
         thisParallelPathData.coords.x = parallelAnchorPoints[0]
         thisParallelPathData.coords.y = parallelAnchorPoints[1]
@@ -565,280 +561,6 @@ function sort_endPoint_withArc(
             thisParallelPathData.coords.y = prevParallelPathData.coords.y
         }
     }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // // HANDLE PATH TO ARC
-    // if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "AAA") {
-    //     console.log("1_Joiner")
-
-    //     parallelPathObject.pathToArcCounter += 1
-    //     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
-
-    //     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-    // }
-    // else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "AAA") {
-    //     if(targetEndPoints[index + 1][1].arc.exist === true) {
-    //         console.log("2_A_Joiner")
-    //         console.log("orig (double_arc) shape")
-    //         parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-    //     } else { // (NOT IN USE YET) FOR ELIMINATING 1 ARC HALF
-    //         console.log("2_B_Joiner")
-    //         console.log("new (single_arc) shape")
-
-    //         let fillerAdder = 0
-    //         let nextFillerAdder = 0
-
-    //         if(refEndPointsBase[index + 2] === "filler"){
-    //             fillerAdder = fillerAdder + 0
-    //             nextFillerAdder = nextFillerAdder + 1
-    //         }
-
-    //         let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
-    //         let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-
-    //         let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
-
-    //         targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
-    //         targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
-    //         targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
-    //         targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
-            
-    //         console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
-    //         parallelPathObject.arcToPathCounter += 1
-    //         if (parallelPathObject.collectIndicesOfIntersections === true) {
-    //             parallelPathObject.arcToPathIndexArray.push(index + 1)
-    //         }
-    //         handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
-
-    //         if (targetEndPoints[index + 1][1].arc.joiner) {
-    //             parallelPathObject.arcToPathCounter -= 1
-    //         }
-    //     }
-    // }
-    // // HANDLE PATH TO ARC
-
-    // // HANDLE ARC TO ARC
-    // else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "CCC") {
-    //     console.log("3_Joiner")
-    //     parallelPathObject.arcToArcCounter += 1
-    //     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
-    //     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-    // } 
-    // else if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index - 1][1].arc.joinerSide === "CCC") {
-    //     console.log("4_Joiner")
-    //     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-    // }
-    // // HANDLE ARC TO ARC
-    
-    // // HANDLE ARC TO PATH
-    // else if(targetEndPoints[index][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
-    //     console.log("5_Joiner")
-    //     console.log("Set Path Point (Shape 2: Part 1)")
-        
-    //     let fillerAdder = 0
-    //     let nextFillerAdder = 0
-
-    //     if(refEndPointsBase[index + 2] === "filler"){
-    //         fillerAdder = fillerAdder + 0
-    //         nextFillerAdder = nextFillerAdder + 1
-    //     }
-
-    //     let thisPathDataOutside = refEndPointsBase[index + 0 + fillerAdder]
-    //     let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-
-    //     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
-
-    //     targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
-    //     targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
-    //     targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
-    //     targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
-
-    //     console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
-    //     parallelPathObject.arcToPathCounter += 1
-
-    //     handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
-
-    //     parallelPathObject.parallelPathSegmentCounter_SECOND = 1
-    // }
-    // else if(skipperCheckers.skipperChecker_Arc === true) { // (NOT IN USE YET) FOR ELIMINATING 1 ARC HALF
-    //     console.log("6_Joiner")
-    //     parallelPathObject.parallelPathSegmentCounter_FIRST = 0
-    // }
-    // // HANDLE ARC TO PATH
-
-    // else {
-    //     console.log(2)
-    //     parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
-    //     // Applies to first Arc Half
-    //     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 0) {
-    //         if(index !== 0) {
-    //             if(targetEndPoints[index - 1][1].arc.exist === true){
-    //                 console.log(3)
-    //                 console.log('arc_arc: 1111')
-    //             } else {
-    //                 console.log(4)
-    //                 console.log("run function: handlePathToArcIntersection() (Shape 1: Part 2)")
-                    
-    //                 parallelPathObject.pathToArcCounter += 1
-    //                 if (parallelPathObject.collectIndicesOfIntersections === true) {
-    //                     parallelPathObject.pathToArchIndexArray.push(index)
-    //                 }
-    //                 handlePathToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter)
-    //             }
-    //         } else {
-    //             console.log(5)
-
-    //             let thisPathData = refEndPointsBase[index]
-    //             let nextPathData = refEndPointsBase[index + 1]
-    //             let thisParallelPathData = targetEndPoints[index][0]
-    //             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
-    //             thisParallelPathData.coords.x = parallelAnchorPoints[0]
-    //             thisParallelPathData.coords.y = parallelAnchorPoints[1]
-    //         }
-    //         if(targetEndPoints[index + 1][1].arc.exist === true) {
-    //             console.log("6_A")
-    //             console.log("orig (double_arc) shape")
-    //             let prevParallelPathData = targetEndPoints[index - 1][1]
-    //             let thisParallelPathData = targetEndPoints[index][1]
-    //             if(thisParallelPathData.arc.joiner) {
-    //                 thisParallelPathData.coords.x = prevParallelPathData.coords.x
-    //                 thisParallelPathData.coords.y = prevParallelPathData.coords.y
-    //             }
-    //         } else {
-    //             console.log("6_B")
-    //             console.log("new (single_arc) shape")
-
-    //             let fillerAdder = 0
-    //             let nextFillerAdder = 0
-
-    //             if(refEndPointsBase[index + 2] === "filler") {
-    //                 fillerAdder = fillerAdder + 0
-    //                 nextFillerAdder = nextFillerAdder + 1
-    //             }
-
-    //             let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
-    //             let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-
-    //             let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
-
-    //             targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
-    //             targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
-    //             targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
-    //             targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
-
-    //             console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
-    //             parallelPathObject.arcToPathCounter += 1
-    //             if (parallelPathObject.collectIndicesOfIntersections === true) {
-    //                 parallelPathObject.arcToPathIndexArray.push(index + 1)
-    //             }
-
-    //             handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
-
-    //             if (targetEndPoints[index + 1][1].arc.joiner) {
-    //                 parallelPathObject.arcToPathCounter -= 1
-    //             }
-    //         }
-    //     }
-
-    //     // Applies to second Arc Half
-    //     if(parallelPathObject.parallelPathSegmentCounter_FIRST === 1) {
-    //         console.log(7)
-
-    //         let thisPathData = refEndPointsBase[index]
-    //         let nextPathData = refEndPointsBase[index + 1]
-    //         let thisParallelPathData = targetEndPoints[index][0]
-    //         let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
-    //         thisParallelPathData.coords.x = parallelAnchorPoints[0]
-    //         thisParallelPathData.coords.y = parallelAnchorPoints[1]
-
-    //         let prevParallelPathData = targetEndPoints[index - 1][1]
-    //         prevParallelPathData.coords.x = parallelAnchorPoints[0]
-    //         prevParallelPathData.coords.y = parallelAnchorPoints[1]
-
-    //         if(index !== targetEndPoints.length - 1) {
-    //             if(targetEndPoints[index + 1][1].arc.exist === true) {
-    //                 if(targetEndPoints[index + 1][1].arc.joinerSide != "AAA" && targetEndPoints[index + 1][1].arc.joinerSide != "BBB" && targetEndPoints[index + 1][1].arc.joinerSide != "CCC") {
-    //                     console.log(8)
-    //                     console.log('arc_arc: 22222')
-
-    //                     parallelPathObject.arcToArcCounter += 1
-    //                     if (parallelPathObject.collectIndicesOfIntersections === true) {
-    //                         parallelPathObject.arcToArcIndexArray.push(index + 1)
-    //                     }
-    //                     // this does get called when it should (no arc - arc) sometimes:
-    //                     // but only when the par line gets to far and the curves loop onto themselves
-    //                     handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter)
-    //                 }
-    //             } else {
-    //                 console.log(9)
-    //                 console.log("Set Path Point (Shape 2: Part 1)")
-
-    //                 let fillerAdder = 0
-    //                 let nextFillerAdder = 0
-
-    //                 if(refEndPointsBase[index + 2] === "filler") {
-    //                     fillerAdder = fillerAdder + 0
-    //                     nextFillerAdder = nextFillerAdder + 1
-    //                 }
-
-    //                 let thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
-    //                 let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-
-    //                 let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelPathObject.parallelDistance)
-
-    //                 targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
-    //                 targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
-    //                 targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
-    //                 targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
-
-    //                 console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
-    //                 parallelPathObject.arcToPathCounter += 1
-    //                 if (parallelPathObject.collectIndicesOfIntersections === true) {
-    //                     parallelPathObject.arcToPathIndexArray.push(index + 1)
-    //                 }
-
-    //                 handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parallelPathObject.arcToPathIndexArray, parallelPathObject.arcToPathCounter)
-
-    //                 if (targetEndPoints[index + 1][1].arc.joiner) {
-    //                     parallelPathObject.arcToPathCounter -= 1
-    //                 }
-    //             }
-    //         // Check if this is the last point of entire shape
-    //         } else {
-    //             console.log(10)
-
-    //             let thisPathData = refEndPointsBase[index + 1]
-    //             let nextPathData = refEndPointsBase[index + 1]
-    //             let thisParallelPathData = targetEndPoints[index][1]
-    //             let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
-    //             thisParallelPathData.coords.x = parallelAnchorPoints[0]
-    //             thisParallelPathData.coords.y = parallelAnchorPoints[1]
-    //         }
-    //         // Reset parallelPathObject.parallelPathSegmentCounter_FIRST after both arc halfs have been handled.
-    //         parallelPathObject.parallelPathSegmentCounter_FIRST = -1
-    //     }
-    // }
 }
 
 
