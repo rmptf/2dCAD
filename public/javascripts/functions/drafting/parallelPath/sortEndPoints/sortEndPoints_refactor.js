@@ -173,29 +173,6 @@ function sort_endPoint_withArc(
     }
     
     function handleFirctArcSegment() {
-        // // 2
-        // arcIntersection_firstArcSegment_everyIndex_firstAction()
-        // if(index !== 0) {
-        //     if(arcExist(index - 1)) {
-        //         // 3
-        //         arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
-        //     } else {
-        //         // 4
-        //         arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
-        //     }
-        // } else {
-        //     // 5
-        //     arcIntersection_firstArcSegment_fistIndex()
-        // }
-        // if(arcExist(index + 1)) {
-        //     // 6_A
-        //     arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
-        // } else {
-        //     // 6_B
-        //     arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
-        // }
-        // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
-        // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction()
         switch(true) {
             case index !== 0:
@@ -208,7 +185,6 @@ function sort_endPoint_withArc(
                 }
                 break
             default:
-            // case index === 0: // change to default
                 // 5
                 arcIntersection_firstArcSegment_fistIndex()
                 break
@@ -219,7 +195,6 @@ function sort_endPoint_withArc(
                 arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
                 break
             default:
-            // case !arcExist(index + 1): // change to default
                 // 6_B
                 arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
                 break
