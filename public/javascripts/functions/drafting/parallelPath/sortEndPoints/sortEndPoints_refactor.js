@@ -202,24 +202,24 @@ function sort_endPoint_withArc(
     }
     
     function handleSecondArcSegment() {
-            // 7
-            arcIntersection_secondArcSegment_everyIndex_firstAction()
-            if(!lastPosition(index)) {
-                if(arcExist(index + 1)) {
-                    if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
-                        // 8
-                        arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-                    }
-                } else {
-                    // 9
-                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
-                }
-            } else {
-                // 10
-                arcIntersection_secondArcSegment_lastIndex()
-            }
-            // 11
-            arcIntersection_secondArcSegment_everyIndex_lastAction()
+            // // 7
+            // arcIntersection_secondArcSegment_everyIndex_firstAction()
+            // if(!lastPosition(index)) {
+            //     if(arcExist(index + 1)) {
+            //         if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
+            //             // 8
+            //             arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+            //         }
+            //     } else {
+            //         // 9
+            //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+            //     }
+            // } else {
+            //     // 10
+            //     arcIntersection_secondArcSegment_lastIndex()
+            // }
+            // // 11
+            // arcIntersection_secondArcSegment_everyIndex_lastAction()
 
         // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
         // 7
