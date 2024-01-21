@@ -140,9 +140,22 @@ function sort_endPoint_withArc(
 
 
 
-
-
-
+    // const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true;
+    // const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code;
+    // const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true;
+    // const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1;
+    // const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide);
+    
+    // // Define conditions and their associated handlers
+    // const conditionsHandlers = [
+    //     { condition: isJoiner(index) || isJoiner(index - 1), handler: handleDisconnectedArcIntersection },
+    //     { condition: parallelPathObject.parallelPathSegmentCounter_FIRST === 0, handler: handleFirctArcSegment },
+    //     { condition: true, handler: handleSecondArcSegment }
+    // ];
+    
+    // // Find the first matching condition and execute the associated handler
+    // const { handler } = conditionsHandlers.find(({ condition }) => condition) || {};
+    // handler ? handler() : handleDefaultArcIntersection();
 
 
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
@@ -173,6 +186,7 @@ function sort_endPoint_withArc(
     }
     
     function handleFirctArcSegment() {
+        // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction()
         switch(true) {
             case index !== 0:
@@ -187,7 +201,6 @@ function sort_endPoint_withArc(
             default:
                 // 5
                 arcIntersection_firstArcSegment_fistIndex()
-                break
         }
         switch(true) {
             case arcExist(index + 1):
@@ -197,31 +210,10 @@ function sort_endPoint_withArc(
             default:
                 // 6_B
                 arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
-                break
         }
     }
     
     function handleSecondArcSegment() {
-            // // 7
-            // arcIntersection_secondArcSegment_everyIndex_firstAction()
-            // if(!lastPosition(index)) {
-            //     if(arcExist(index + 1)) {
-            //         if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
-            //             // 8
-            //             arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-            //         }
-            //     } else {
-            //         // 9
-            //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
-            //     }
-            // } else {
-            //     // 10
-            //     arcIntersection_secondArcSegment_lastIndex()
-            // }
-            // // 11
-            // arcIntersection_secondArcSegment_everyIndex_lastAction()
-
-        // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
         // 7
         arcIntersection_secondArcSegment_everyIndex_firstAction()
         switch(true) {
@@ -242,24 +234,6 @@ function sort_endPoint_withArc(
         }
         // 11
         arcIntersection_secondArcSegment_everyIndex_lastAction()
-
-        // // Using a switch satement: (Doesnt work because I need the function to keep running after the first case is true)
-        // // 7
-        // arcIntersection_secondArcSegment_everyIndex_firstAction()
-        // switch(true) {
-        //     case !lastPosition(index) && arcExist(index + 1) && !includes(["AAA", "BBB", "CCC"], index + 1):
-        //         // 8
-        //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-        //     case !lastPosition(index) && !arcExist(index + 1):
-        //         // 9
-        //         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
-        //     case lastPosition(index):
-        //         // 10
-        //         arcIntersection_secondArcSegment_lastIndex()
-        //     default:
-        //         // 11
-        //         arcIntersection_secondArcSegment_everyIndex_lastAction()
-        // }
     }
     
     function handleDisconnectedArcIntersection() {
@@ -285,7 +259,7 @@ function sort_endPoint_withArc(
                 // 4_Joiner
                 disconnectedArcIntersection_prevIndexIsArcToArc()
                 break
-            case joinerType(index - 1, "BBB"):
+            case joinerType(index, "BBB"):
                 // 5_Joiner
                 disconnectedArcIntersection_prevIndexIsArcToPath()
                 break
@@ -295,7 +269,44 @@ function sort_endPoint_withArc(
                 break
         }
     }
-    
+
+    const disconnectedArcIntersectionCases = [
+        {
+            // 1_Joiner
+            condition: joinerType(index, "AAA"),
+            handler: disconnectedArcIntersection_thisIndexIsPathToArc
+        },
+        {
+            // 2_A_Joiner
+            condition: joinerType(index - 1, "AAA") && arcExist(index + 1),
+            handler: disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc
+        },
+        {
+            // 2_B_Joiner
+            condition: joinerType(index - 1, "AAA") && !arcExist(index + 1),
+            handler: disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc
+        },
+        {
+            // 3_Joiner
+            condition: joinerType(index, "CCC"),
+            handler: disconnectedArcIntersection_thisIndexIsArcToArc
+        },
+        {
+            // 4_Joiner
+            condition: joinerType(index - 1, "CCC"),
+            handler: disconnectedArcIntersection_prevIndexIsArcToArc
+        },
+        {
+            // 5_Joiner
+            condition: joinerType(index, "BBB"),
+            handler: disconnectedArcIntersection_prevIndexIsArcToPath
+        },
+        {
+            // 6_Joiner
+            condition: skipperCheckers.skipperChecker_Arc,
+            handler: disconnectedArcIntersection_skipThisIndex
+        },
+    ]
 
 
 
@@ -322,7 +333,9 @@ function sort_endPoint_withArc(
 
 
 
-    
+
+
+
     function arcIntersection_allArcSegments_everyIndex_firstAction() {
         console.log("1_ooo")
         parallelPathObject.parallelPathSegmentCounter_FIRST = parallelPathObject.parallelPathSegmentCounter_FIRST + 1
@@ -453,14 +466,6 @@ function sort_endPoint_withArc(
 
 
 
-    
-    
-    // console.log(5)
-    // setPerpendicularPoints(index, index + 1, index[0], false)
-    // console.log(7)
-    // setPerpendicularPoints(index, index + 1, index[0], true)
-    // console.log(10)
-    // setPerpendicularPoints(index + 1, index + 1, index[1], false)
     function setPerpendicularPoints(thisIndex, nextIndex, target, setPrevious) {
         let thisPathData = refEndPointsBase[thisIndex]
         let nextPathData = refEndPointsBase[nextIndex]
@@ -476,15 +481,7 @@ function sort_endPoint_withArc(
             prevParallelPathData.coords.y = parallelAnchorPoints[1]
         }
     }
-    
-    // // 2_B_Joiner
-    // skipFillersAndSetParallelProjections(1)
-    // // 5_Joiner
-    // skipFillersAndSetParallelProjections(0)
-    // // 6_B
-    // skipFillersAndSetParallelProjections(1)
-    // // 9
-    // skipFillersAndSetParallelProjections(1)
+
     function skipFillersAndSetParallelProjections(offset) {
         let fillerAdder = 0
         let nextFillerAdder = 0
@@ -508,15 +505,7 @@ function sort_endPoint_withArc(
     
         parallelPathObject.arcToPathCounter += 1
     }
-    
-    // // 2_B_Joiner
-    // handleIntersectionArcToPath()
-    // // 5_Joiner
-    // handleNOIntersection()
-    // // 6_B
-    // handleIntersectionArcToPath()
-    // // 9
-    // handleIntersectionArcToPath()
+
     function handleIntersectionArcToPath() {
         if (parallelPathObject.collectIndicesOfIntersections === true) {
             parallelPathObject.arcToPathIndexArray.push(index + 1)
@@ -527,15 +516,11 @@ function sort_endPoint_withArc(
             parallelPathObject.arcToPathCounter -= 1
         }
     }
-    
+
     function handleNOIntersection() {
         handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     }
-    
-    // // 4
-    // handleArcIntersection(parallelPathObject.pathToArchIndexArray, parallelPathObject.pathToArcCounter, "p2a")
-    // // 8
-    // handleArcIntersection(parallelPathObject.arcToArcIndexArray, parallelPathObject.arcToArcCounter, "a2a")
+
     function handleArcIntersection(arcIndexArray, arcShapeCounter, arcShape) {
         arcShapeCounter += 1
     
@@ -555,9 +540,7 @@ function sort_endPoint_withArc(
                 break
         }
     }
-    
-    // 6_A
-    // setThisPathDataAsPreviousPathData()
+
     function setThisPathDataAsPreviousPathData() {
         let prevParallelPathData = targetEndPoints[index - 1][1]
         let thisParallelPathData = targetEndPoints[index][1]
