@@ -189,27 +189,16 @@ function sort_endPoint_withArc(
         // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction()
         switch(true) {
-            case index !== 0:
-                if(arcExist(index - 1)) {
-                    // 3
-                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
-                } else {
-                    // 4
-                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc()
-                }
-                break
-            default:
-                // 5
-                arcIntersection_firstArcSegment_fistIndex()
+            // 3 : 4
+            case index !== 0: arcExist(index - 1) ? arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() : arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(); break
+            // 5
+            default: arcIntersection_firstArcSegment_fistIndex()
         }
         switch(true) {
-            case arcExist(index + 1):
-                // 6_A
-                arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
-                break
-            default:
-                // 6_B
-                arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+            // 6_A
+            case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
+            // 6_B
+            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
         }
     }
     
@@ -228,9 +217,8 @@ function sort_endPoint_withArc(
                     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
                 }
                 break
-            default:
                 // 10
-                arcIntersection_secondArcSegment_lastIndex()
+            default: arcIntersection_secondArcSegment_lastIndex()
         }
         // 11
         arcIntersection_secondArcSegment_everyIndex_lastAction()
@@ -238,76 +226,20 @@ function sort_endPoint_withArc(
     
     function handleDisconnectedArcIntersection() {
         switch(true) {
-            case joinerType(index, "AAA"):
-                // 1_Joiner
-                disconnectedArcIntersection_thisIndexIsPathToArc()
-                break
-            case joinerType(index - 1, "AAA"):
-                if(targetEndPoints[index + 1][1].arc.exist) {
-                    // 2_A_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc()
-                } else {
-                    // 2_B_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
-                }
-                break
-            case joinerType(index, "CCC"):
-                // 3_Joiner
-                disconnectedArcIntersection_thisIndexIsArcToArc()
-                break
-            case joinerType(index - 1, "CCC"):
-                // 4_Joiner
-                disconnectedArcIntersection_prevIndexIsArcToArc()
-                break
-            case joinerType(index, "BBB"):
-                // 5_Joiner
-                disconnectedArcIntersection_prevIndexIsArcToPath()
-                break
-            case skipperCheckers.skipperChecker_Arc:
-                // 6_Joiner
-                disconnectedArcIntersection_skipThisIndex()
-                break
+            // 1_Joiner
+            case joinerType(index, "AAA"): disconnectedArcIntersection_thisIndexIsPathToArc(); break
+            // 2_A_Joiner : 2_A_Joiner
+            case joinerType(index - 1, "AAA"): arcExist(index + 1) ? disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() : disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(); break
+            // 3_Joiner
+            case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(); break
+            // 4_Joiner
+            case joinerType(index - 1, "CCC"): disconnectedArcIntersection_prevIndexIsArcToArc(); break
+            // 5_Joiner
+            case joinerType(index, "BBB"): disconnectedArcIntersection_prevIndexIsArcToPath(); break
+            // 6_Joiner
+            case skipperCheckers.skipperChecker_Arc: disconnectedArcIntersection_skipThisIndex()
         }
     }
-
-    const disconnectedArcIntersectionCases = [
-        {
-            // 1_Joiner
-            condition: joinerType(index, "AAA"),
-            handler: disconnectedArcIntersection_thisIndexIsPathToArc
-        },
-        {
-            // 2_A_Joiner
-            condition: joinerType(index - 1, "AAA") && arcExist(index + 1),
-            handler: disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc
-        },
-        {
-            // 2_B_Joiner
-            condition: joinerType(index - 1, "AAA") && !arcExist(index + 1),
-            handler: disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc
-        },
-        {
-            // 3_Joiner
-            condition: joinerType(index, "CCC"),
-            handler: disconnectedArcIntersection_thisIndexIsArcToArc
-        },
-        {
-            // 4_Joiner
-            condition: joinerType(index - 1, "CCC"),
-            handler: disconnectedArcIntersection_prevIndexIsArcToArc
-        },
-        {
-            // 5_Joiner
-            condition: joinerType(index, "BBB"),
-            handler: disconnectedArcIntersection_prevIndexIsArcToPath
-        },
-        {
-            // 6_Joiner
-            condition: skipperCheckers.skipperChecker_Arc,
-            handler: disconnectedArcIntersection_skipThisIndex
-        },
-    ]
-
 
 
 
