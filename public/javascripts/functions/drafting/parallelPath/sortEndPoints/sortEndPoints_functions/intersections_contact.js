@@ -23,6 +23,7 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
 }
 
 function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+    console.log("oooooooooooo_111")
     let shape = 'p2a'
     let prevIndex = index - 1
     let thisIndex = index
@@ -44,6 +45,7 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
 }
 
 function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+    console.log("oooooooooooo_222")
     let shape = 'a2p'
     // let prevIndex = index - 1
     let thisIndex = index
@@ -53,6 +55,20 @@ function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPo
     let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+
+
+
+
+    console.log(indexArray)
+    console.log(shapeCount)
+    console.log(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL)
+    console.log(documentFigureCount)
+    console.log(origPathDataIndex)
+    console.log(thisOriginalPathData)
+
+
+
+
     let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
