@@ -142,74 +142,74 @@ if(index > 1) {
 
 
 
-// A
-targetEndPoints[index][0].coords.x = parallelProjections.thisPointX
-targetEndPoints[index][0].coords.y = parallelProjections.thisPointY
+// // A
+// targetEndPoints[index][0].coords.x = parallelProjections.thisPointX
+// targetEndPoints[index][0].coords.y = parallelProjections.thisPointY
 
-// B
-targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
-targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
+// // B
+// targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
 
-// D
-let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+// // D
+// let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
 
-// C
-let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+// // C
+// let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
-// C+
-let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index - 1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index - 1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
-targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+// // C+
+// let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index - 1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index - 1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
+// targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
-// DC_After
-parPathObj.parallelPathSegmentCounter_SECOND = 0
+// // DC_After
+// parPathObj.parallelPathSegmentCounter_SECOND = 0
 
-// E
-// Empty
+// // E
+// // Empty
 
-// F
-targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
-targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
+// // F
+// targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
 
-// G_A
-let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
-let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+// // G_A
+// let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+// let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
-// G_B
-let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
-let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+// // G_B
+// let previous_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index - 1][1].coords.x = previous_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index - 1][1].coords.y = previous_parallelPathDatasIntersectingPoint.y
+// let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
-// G+
-let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-targetEndPoints[index - 1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index - 1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
-targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
-targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
+// // G+
+// let this_parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
+// targetEndPoints[index - 1][1].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index - 1][1].coords.y = this_parallelPathDatasIntersectingPoint.y
+// targetEndPoints[index][0].coords.x = this_parallelPathDatasIntersectingPoint.x
+// targetEndPoints[index][0].coords.y = this_parallelPathDatasIntersectingPoint.y
 
-// G_After
-parPathObj.parallelPathSegmentCounter_SECOND = 0
+// // G_After
+// parPathObj.parallelPathSegmentCounter_SECOND = 0
 
-// H
-// Empty
+// // H
+// // Empty
 
-// I_A
-targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
-targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
+// // I_A
+// targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
 
-// I_B
-targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
-targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
+// // I_B
+// targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
+// targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
