@@ -1,5 +1,3 @@
-// import {handleArcToArcIntersection, handlePathToArcIntersection, handleArcToPathIntersection} from './sortEndPoints_functions/intersections_contact.js'
-// import {handlePathToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handleArcToArcIntersectionNoContact} from './sortEndPoints_functions/intersections_noContact.js'
 import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../drawParallelPath_functions/parallelPathFunctions.js'
 import {getDistance} from '../../../math/mathFunctions.js'
 import {
@@ -58,54 +56,6 @@ function sortEndpoints(
     }
 }
 
-    /*
-    VAR RENAMiNG THIS WHOLE FILE
-
-    targetEndPointsParallelFull                  changed to targetEndPoints
-    referenceEndPointsParallelPerpendicular      changed to refEndPointsPerp
-    referenceEndPointsBaseAndFillers             changed to refEndPointsBase
-
-
-    let prevEndPointStart = targetEndPoints[index - 1][0]
-    let thisEndPointStart = targetEndPoints[index][0]
-    let nextEndPointStart = targetEndPoints[index + 1][0]
-    let prevEndPointEnd = targetEndPoints[index - 1][1]
-    let thisEndPointEnd = targetEndPoints[index][1]
-    let nextEndPointEnd = targetEndPoints[index + 1][1]
-
-
-    targetEndPoints[index][0]   /   15
-    targetEndPoints[index + 1][0]   /   19
-    targetEndPoints[index - 1][0]   /   5
-    targetEndPoints[index][1]   /   20
-    targetEndPoints[index + 1][1]   /   30
-    targetEndPoints[index - 1][1]   /   27
-    */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -118,6 +68,7 @@ function sortEndpoints(
 // curve on second to last point causes bug on las point when it has a joiner
 // FIXME:
 // parallel path doesnt work perfectly when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
+// FIXME:
 
 function sort_endPoint_withArc(
     targetEndPoints,
@@ -147,37 +98,6 @@ function sort_endPoint_withArc(
             targetEndPoints[index][1].arc.radius = calcArcParDistance(handleArcsObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true;
-    // const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code;
-    // const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true;
-    // const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1;
-    // const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide);
-    
-    // // Define conditions and their associated handlers
-    // const conditionsHandlers = [
-    //     { condition: isJoiner(index) || isJoiner(index - 1), handler: handleDisconnectedArcIntersection },
-    //     { condition: parPathObj.parallelPathSegmentCounter_FIRST === 0, handler: handleFirctArcSegment },
-    //     { condition: true, handler: handleSecondArcSegment }
-    // ];
-    
-    // // Find the first matching condition and execute the associated handler
-    // const { handler } = conditionsHandlers.find(({ condition }) => condition) || {};
-    // handler ? handler() : handleDefaultArcIntersection();
 
 
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
@@ -211,10 +131,11 @@ function sort_endPoint_withArc(
         // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
         switch(true) {
-            // 3 : 4
             case index !== 0:
                 arcExist(index - 1) ?
+                    // 3
                     arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
+                    // 4
                     arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break
             // 5
@@ -254,10 +175,11 @@ function sort_endPoint_withArc(
         switch(true) {
             // 1_Joiner
             case joinerType(index, "AAA"): disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
-            // 2_A_Joiner : 2_A_Joiner
             case joinerType(index - 1, "AAA"): 
-                arcExist(index + 1) ? 
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj) : 
+                arcExist(index + 1) ?
+                    // 2_A_Joiner
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj) :
+                    // 2_B_Joiner
                     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break
             // 3_Joiner
@@ -380,6 +302,22 @@ function sort_endPoint_noArc(
 
         findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke(){
             if (index === 0) {
                 console.log("A")
@@ -531,114 +469,3 @@ function calcArcParDistance(handleArcsObject, nextRefEndPointBase, distance) {
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - handleArcsObject.baseArcToCursorDist
     return nextArcToCenterMinusPointerToArcFromArc1
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // done except names
-// function setPerpendicularPoints(refEndPointsBase, targetEndPoints, handleArcsObject, thisIndex, nextIndex, target, setPrevious) {
-//     let thisPathData = refEndPointsBase[thisIndex]
-//     let nextPathData = refEndPointsBase[nextIndex]
-//     let thisParallelPathData = targetEndPoints[thisIndex][target]
-
-//     let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
-//     thisParallelPathData.coords.x = parallelAnchorPoints[0]
-//     thisParallelPathData.coords.y = parallelAnchorPoints[1]
-
-//     if (setPrevious) {
-//         let prevParallelPathData = targetEndPoints[thisIndex - 1][1]
-//         prevParallelPathData.coords.x = parallelAnchorPoints[0]
-//         prevParallelPathData.coords.y = parallelAnchorPoints[1]
-//     }
-// }
-
-// // done except names
-// function skipFillersAndSetParallelProjections(refEndPointsBase, targetEndPoints, index, offset, parallelDistance, parPathObj) {
-//     let fillerAdder = 0
-//     let nextFillerAdder = 0
-
-//     if (refEndPointsBase[index + 2] === "filler") {
-//         fillerAdder = fillerAdder + 0
-//         nextFillerAdder = nextFillerAdder + 1
-//     }
-
-//     let thisPathDataOutside = refEndPointsBase[index + offset + fillerAdder]
-//     let nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-
-//     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parallelDistance)
-
-//     targetEndPoints[index + 1][0].coords.x = parallelProjections.thisPointX
-//     targetEndPoints[index + 1][0].coords.y = parallelProjections.thisPointY
-//     targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
-//     targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
-
-//     console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
-
-//     parPathObj.arcToPathCounter += 1
-// }
-
-// // done
-// function handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, collectIdecies, arcIndexArray, arcShapeCounter) {
-//     if (collectIdecies === true) {
-//         arcIndexArray.push(index + 1)
-//     }
-//     handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, arcIndexArray, arcShapeCounter)
-
-//     if (targetEndPoints[index + 1][1].arc.joiner) {
-//         arcShapeCounter -= 1
-//     }
-// }
-
-// // done
-// function handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) {
-//     handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)
-// }
-
-// function handleArcIntersection(collectIdecies, arcIndexArray, arcShapeCounter, arcShape, targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) {
-//     arcShapeCounter += 1
-
-//     if (collectIdecies === true) {
-//         arcIndexArray.push(index);
-//     }
-
-//     switch (arcShape) {
-//         case "p2a":
-//             handlePathToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, arcIndexArray, arcShapeCounter);
-//             break
-//         case "a2a":
-//             handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, arcIndexArray, arcShapeCounter);
-//             break
-//         default:
-//             console.log("no shape")
-//             break
-//     }
-// }
-
-// // done
-// function setThisPathDataAsPreviousPathData(targetEndPoints, index) {
-//     let prevParallelPathData = targetEndPoints[index - 1][1]
-//     let thisParallelPathData = targetEndPoints[index][1]
-//     if(thisParallelPathData.arc.joiner) {
-//         thisParallelPathData.coords.x = prevParallelPathData.coords.x
-//         thisParallelPathData.coords.y = prevParallelPathData.coords.y
-//     }
-// }
