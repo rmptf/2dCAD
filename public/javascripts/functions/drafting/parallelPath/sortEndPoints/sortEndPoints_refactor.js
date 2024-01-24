@@ -1,4 +1,4 @@
-import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../drawParallelPath_functions/parallelPathFunctions.js'
+import {findIntersectingPointSIMPLER, findIntersectingPointTwoFormats, findPointAlongSlopeAtDistance} from '../drawParallelPath_functions/parallelPathFunctions.js'
 import {getDistance} from '../../../math/mathFunctions.js'
 import {
     arcIntersection_allArcSegments_everyIndex_firstAction,

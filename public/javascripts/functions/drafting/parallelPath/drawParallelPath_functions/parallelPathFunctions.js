@@ -186,11 +186,15 @@ function findIntersectingPointSIMPLER(x1, y1, x2, y2, x3, y3, x4, y4) {
     return result
 }
 
-findPathDataIntersectingPoint([refEndPointsPerp[index-1], false], [refEndPointsPerp[index], false])
 
-function findPathDataIntersectingPoint(coord1, coord2) {
-    const getCoords = (coords, addCoords, isX) => addCoords ? isX ? coords.coords.x : coords.coords.y : isX ? coords.x : coords.y
+// refEndPointsPerp[index-1][0].x
+// targetEndPoints[index - 1][0].coords.x
+// findPathDataIntersectingPoint([refEndPointsPerp[index-1], false], [refEndPointsPerp[index], false])
+// findPathDataIntersectingPoint([targetEndPoints[index - 1], true], [targetEndPoints[index], true])
+// findPathDataIntersectingPoint([targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
 
+function findIntersectingPointTwoFormats(coord1, coord2) {
+    const getCoords = (coordinates, addCoordsKey, isCoord_X) => addCoordsKey ? (isCoord_X ? coordinates.coords.x : coordinates.coords.y) : (isCoord_X ? coordinates.x : coordinates.y);
 
     let path1Coord1_X = getCoords(coord1[0][0], coord1[1], true)
     let path1Coord1_Y = getCoords(coord1[0][0], coord1[1], false)
@@ -201,20 +205,6 @@ function findPathDataIntersectingPoint(coord1, coord2) {
     let path2Coord1_Y = getCoords(coord2[0][0], coord2[1], false)
     let path2Coord2_X = getCoords(coord2[0][1], coord2[1], true)
     let path2Coord2_Y = getCoords(coord2[0][1], coord2[1], false)
-
-
-    // let path1Coord1_X = coord1[0].x
-    // let path1Coord1_Y = coord1[0].y
-    // let path1Coord2_X = coord1[1].x
-    // let path1Coord2_Y = coord1[1].y
-
-    // let path2Coord1_X = coord2[0].x
-    // let path2Coord1_Y = coord2[0].y
-    // let path2Coord2_X = coord2[1].x
-    // let path2Coord2_Y = coord2[1].y
-
-
-
 
     var ua, ub, denom = (path2Coord2_Y - path2Coord1_Y)*(path1Coord2_X - path1Coord1_X) - (path2Coord2_X - path2Coord1_X)*(path1Coord2_Y - path1Coord1_Y)
     // if (denom == 0) {
@@ -434,6 +424,7 @@ export{
     transformData,
     findParallelDistance,
     findIntersectingPointSIMPLER,
+    findIntersectingPointTwoFormats,
     getPathToArcIntersections,
     findPointAlongSlopeAtDistance,
     getArcToArcIntersections,

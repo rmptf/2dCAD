@@ -74,10 +74,9 @@ if(thisIsArcToPath === false) {
 
 
     findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
-
     function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke() {
         const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
-        const firstPosition = (newIndex) => (index) === 0
+        const firstPosition = (newIndex) => (newIndex) === 0
         const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
 
         if (firstPosition(index)) {
@@ -131,6 +130,103 @@ if(thisIsArcToPath === false) {
         }
     }
 }
+
+
+
+
+
+// A_FIRST_ALL
+function calculateAndSetParallelProjectionPoints() {
+    let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
+    refEndPointsPerp[index][0].x = parallelProjections.thisPointX
+    refEndPointsPerp[index][0].y = parallelProjections.thisPointY
+    refEndPointsPerp[index][1].x = parallelProjections.nextPointX
+    refEndPointsPerp[index][1].y = parallelProjections.nextPointY
+}
+
+// C
+calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
+// D
+calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+// H
+calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
+// J
+calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+function calculateAndSetIntersectionPoints(targetData, index, parallelEndPointsI, parallelEndPointsII) {
+    let intersectionPoint =  findIntersectingPointTwoFormats(parallelEndPointsI, parallelEndPointsII)
+    targetData[index - 1][1].coords.x = intersectionPoint.x
+    targetData[index - 1][1].coords.y = intersectionPoint.y
+    targetData[index][0].coords.x = intersectionPoint.x
+    targetData[index][0].coords.y = intersectionPoint.y
+}
+
+// A
+setTargetEndPoints(targetEndPoints, index, 0, parallelProjections.thisPointX)
+// B
+setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
+// G
+setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
+// M
+setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
+function setTargetEndPoints(targetData, index, side, referenceCoords) {
+    targetData[index][side].coords.x = referenceCoords
+    targetData[index][side].coords.y = referenceCoords
+}
+
+
+// E
+// K
+parPathObj.parallelPathSegmentCounter_SECOND = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -199,101 +295,3 @@ if(thisIsArcToPath === false) {
 // // M
 // targetEndPoints[index][1].coords.x = parallelProjections.nextPointX
 // targetEndPoints[index][1].coords.y = parallelProjections.nextPointY
-
-
-
-
-
-// A_FIRST_ALL
-function calculateAndSetParallelProjectionPoints() {
-    let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
-    refEndPointsPerp[index][0].x = parallelProjections.thisPointX
-    refEndPointsPerp[index][0].y = parallelProjections.thisPointY
-    refEndPointsPerp[index][1].x = parallelProjections.nextPointX
-    refEndPointsPerp[index][1].y = parallelProjections.nextPointY
-}
-
-
-
-
-// A
-setTargetEndPoints(targetEndPoints, index, 0, parallelProjections.thisPointX)
-// B
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
-// G
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
-// M
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
-
-function setTargetEndPoints(targetData, index, side, referenceCoords) {
-    targetData[index][side].coords.x = referenceCoords
-    targetData[index][side].coords.y = referenceCoords
-}
-
-
-// E
-// K
-parPathObj.parallelPathSegmentCounter_SECOND = 0
-
-
-
-
-
-
-
-
-
-
-
-// C
-// D
-// H
-// J
-// findIntersectingPointSIMPLER(refEndPointsPerp[index-1], refEndPointsPerp[index])
-refEndPointsPerp[index-1][0].y
-targetEndPoints[index - 1][0].coords.x
-
-function calculateAndSetIntersectionPoints(targetData, index, intersectDataI, intersectDataII) {
-    let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1], refEndPointsPerp[index])
-    // let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-    targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-    targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-    targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-    targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
-}
-
-
-
-// let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-// targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-// targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
-
-// // J
-// let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-// targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-// targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
-
-
-// let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-// targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-// targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
-
-
-// let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(refEndPointsPerp[index-1][0].x, refEndPointsPerp[index-1][0].y, refEndPointsPerp[index-1][1].x, refEndPointsPerp[index-1][1].y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-// targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-// targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
-
-
-// let parallelPathDatasIntersectingPoint = findIntersectingPointSIMPLER(targetEndPoints[index - 1][0].coords.x, targetEndPoints[index - 1][0].coords.y, targetEndPoints[index - 1][1].coords.x, targetEndPoints[index - 1][1].coords.y, refEndPointsPerp[index][0].x, refEndPointsPerp[index][0].y, refEndPointsPerp[index][1].x, refEndPointsPerp[index][1].y)
-// targetEndPoints[index - 1][1].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index - 1][1].coords.y = parallelPathDatasIntersectingPoint.y
-// targetEndPoints[index][0].coords.x = parallelPathDatasIntersectingPoint.x
-// targetEndPoints[index][0].coords.y = parallelPathDatasIntersectingPoint.y
