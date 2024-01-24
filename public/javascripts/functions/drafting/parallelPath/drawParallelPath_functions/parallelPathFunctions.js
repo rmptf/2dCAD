@@ -186,6 +186,52 @@ function findIntersectingPointSIMPLER(x1, y1, x2, y2, x3, y3, x4, y4) {
     return result
 }
 
+findPathDataIntersectingPoint([refEndPointsPerp[index-1], false], [refEndPointsPerp[index], false])
+
+function findPathDataIntersectingPoint(coord1, coord2) {
+    const getCoords = (coords, addCoords, isX) => addCoords ? isX ? coords.coords.x : coords.coords.y : isX ? coords.x : coords.y
+
+
+    let path1Coord1_X = getCoords(coord1[0][0], coord1[1], true)
+    let path1Coord1_Y = getCoords(coord1[0][0], coord1[1], false)
+    let path1Coord2_X = getCoords(coord1[0][1], coord1[1], true)
+    let path1Coord2_Y = getCoords(coord1[0][1], coord1[1], false)
+
+    let path2Coord1_X = getCoords(coord2[0][0], coord2[1], true)
+    let path2Coord1_Y = getCoords(coord2[0][0], coord2[1], false)
+    let path2Coord2_X = getCoords(coord2[0][1], coord2[1], true)
+    let path2Coord2_Y = getCoords(coord2[0][1], coord2[1], false)
+
+
+    // let path1Coord1_X = coord1[0].x
+    // let path1Coord1_Y = coord1[0].y
+    // let path1Coord2_X = coord1[1].x
+    // let path1Coord2_Y = coord1[1].y
+
+    // let path2Coord1_X = coord2[0].x
+    // let path2Coord1_Y = coord2[0].y
+    // let path2Coord2_X = coord2[1].x
+    // let path2Coord2_Y = coord2[1].y
+
+
+
+
+    var ua, ub, denom = (path2Coord2_Y - path2Coord1_Y)*(path1Coord2_X - path1Coord1_X) - (path2Coord2_X - path2Coord1_X)*(path1Coord2_Y - path1Coord1_Y)
+    // if (denom == 0) {
+    //     return null
+    // }
+
+    ua = ((path2Coord2_X - path2Coord1_X)*(path1Coord1_Y - path2Coord1_Y) - (path2Coord2_Y - path2Coord1_Y)*(path1Coord1_X - path2Coord1_X))/denom
+    ub = ((path1Coord2_X - path1Coord1_X)*(path1Coord1_Y - path2Coord1_Y) - (path1Coord2_Y - path1Coord1_Y)*(path1Coord1_X - path2Coord1_X))/denom
+
+    let result = {
+        x: path1Coord1_X + ua * (path1Coord2_X - path1Coord1_X),
+        y: path1Coord1_Y + ua * (path1Coord2_Y - path1Coord1_Y),
+    }
+    return result
+}
+
+
 function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}

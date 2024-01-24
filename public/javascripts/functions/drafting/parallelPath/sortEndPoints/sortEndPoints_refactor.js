@@ -103,6 +103,7 @@ function sort_endPoint_withArc(
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
     const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
+    const firstPosition = (newIndex) => (index) === 0
     const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
     const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide)
     
@@ -131,7 +132,7 @@ function sort_endPoint_withArc(
         // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
         switch(true) {
-            case index !== 0:
+            case !firstPosition(index):
                 arcExist(index - 1) ?
                     // 3
                     arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :

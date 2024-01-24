@@ -23,7 +23,6 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
 }
 
 function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
-    console.log("oooooooooooo_111")
     let shape = 'p2a'
     let prevIndex = index - 1
     let thisIndex = index
@@ -45,7 +44,6 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
 }
 
 function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
-    console.log("oooooooooooo_222")
     let shape = 'a2p'
     // let prevIndex = index - 1
     let thisIndex = index
