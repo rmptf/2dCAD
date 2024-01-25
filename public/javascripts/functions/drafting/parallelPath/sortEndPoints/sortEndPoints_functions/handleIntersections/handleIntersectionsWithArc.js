@@ -4,6 +4,7 @@ import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../..
 
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(parPathObj) {
+    // 1
     console.log("1_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
 }

@@ -60,19 +60,6 @@ if(thisIsArcToPath === false) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
     function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke() {
         const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
@@ -140,50 +127,62 @@ if(thisIsArcToPath === false) {
 
 function noArcIntersection_firstPos(targetEndPoints, index, thisParallelProjection) {
     // A
+    console.log("A_ooo")
     setTargetEndPoints(targetEndPoints, index, thisParallelProjection, 0)
 }
 function noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, nextParallelProjection) {
     // B
+    console.log("B_ooo")
     setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
 }
 function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
     // C
+    console.log("C_ooo")
     calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
 }
 function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
     // D
+    console.log("D_ooo")
     calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
 }
 function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj) {
     // E
+    console.log("E_ooo")
     parPathObj.parallelPathSegmentCounter_SECOND = 0
 }
 function noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc() {
     // F
+    console.log("F_ooo")
     // Empry
 }
 function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, nextParallelProjection) {
     // G
+    console.log("G_ooo")
     setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
 }
 function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
     // H
+    console.log("H_ooo")
     calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
 }
 function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
     // J
+    console.log("J_ooo")
     calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
 }
 function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj) {
     // K
+    console.log("K_ooo")
     parPathObj.parallelPathSegmentCounter_SECOND = 0
 }
 function noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() {
     // L
+    console.log("L_ooo")
     // Empry
 }
 function noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, nextParallelProjection) {
     // M
+    console.log("M_ooo")
     setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
 }
 
@@ -219,7 +218,7 @@ function setTargetEndPoints(targetData, index, referenceCoords, side) {
 }
 // E
 // K
-parPathObj.parallelPathSegmentCounter_SECOND = 0
+// parPathObj.parallelPathSegmentCounter_SECOND = 0
 
 
 
