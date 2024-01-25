@@ -319,7 +319,7 @@ function sort_endPoint_noArc(
 
 
         
-        function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke(){
+        function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke() {
             if (index === 0) {
                 console.log("A")
                 // set first point

@@ -50,7 +50,7 @@ if(thisIsArcToPath === false) {
         }
     }
 
-    // A_FIRST_ALL
+    // AA_FIRST_ALL
     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
     refEndPointsPerp[index][0].x = parallelProjections.thisPointX
     refEndPointsPerp[index][0].y = parallelProjections.thisPointY
@@ -81,10 +81,10 @@ if(thisIsArcToPath === false) {
 
         if (firstPosition(index)) {
             // A
-            noArcIntersection_firstPos()
+            noArcIntersection_firstPos(targetEndPoints, index, parallelProjections.thisPointX)
             if(arcExist(index + 1)) {
                 // B
-                noArcIntersection_firstPos_nextIndexIsArc()
+                noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, parallelProjections.nextPointX)
             }
         }
 
@@ -92,13 +92,13 @@ if(thisIsArcToPath === false) {
             if(!arcExist(index - 1)) {
                 if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
                 } else {
                     // D (C+)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, targetEndPoints, refEndPointsPerp)
                 }
                 // E (DC After)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
             } else {
                 // F (E)
                 noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
@@ -106,7 +106,7 @@ if(thisIsArcToPath === false) {
             }
             if(arcExist(index + 1) && !arcExist(index - 1)) {
                 // G (F)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc()
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, parallelProjections.nextPointX)
             }
         }
 
@@ -114,19 +114,20 @@ if(thisIsArcToPath === false) {
             if(!arcExist(index - 1)) {
                 if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
                     // H (Ga)
-                    noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
+                    noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
                 } else {
                     // J (G+)
-                    noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment()
+                    noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
                 }
                 // K (G After)
+                noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
             } else {
                 // L (H)
                 noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
                 // empty
             }
             // M (Ia)
-            noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction()
+            noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, parallelProjections.nextPointX)
         }
     }
 }
@@ -135,7 +136,61 @@ if(thisIsArcToPath === false) {
 
 
 
-// A_FIRST_ALL
+
+
+function noArcIntersection_firstPos(targetEndPoints, index, thisParallelProjection) {
+    // A
+    setTargetEndPoints(targetEndPoints, index, thisParallelProjection, 0)
+}
+function noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, nextParallelProjection) {
+    // B
+    setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
+}
+function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
+    // C
+    calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
+}
+function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
+    // D
+    calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+}
+function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj) {
+    // E
+    parPathObj.parallelPathSegmentCounter_SECOND = 0
+}
+function noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc() {
+    // F
+    // Empry
+}
+function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, nextParallelProjection) {
+    // G
+    setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
+}
+function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
+    // H
+    calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
+}
+function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
+    // J
+    calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+}
+function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj) {
+    // K
+    parPathObj.parallelPathSegmentCounter_SECOND = 0
+}
+function noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() {
+    // L
+    // Empry
+}
+function noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, nextParallelProjection) {
+    // M
+    setTargetEndPoints(targetEndPoints, index, nextParallelProjection, 1)
+}
+
+
+
+
+// AA_FIRST_ALL
 function calculateAndSetParallelProjectionPoints() {
     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
     refEndPointsPerp[index][0].x = parallelProjections.thisPointX
@@ -143,15 +198,10 @@ function calculateAndSetParallelProjectionPoints() {
     refEndPointsPerp[index][1].x = parallelProjections.nextPointX
     refEndPointsPerp[index][1].y = parallelProjections.nextPointY
 }
-
 // C
-calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
 // D
-calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
 // H
-calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
 // J
-calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
 function calculateAndSetIntersectionPoints(targetData, index, parallelEndPointsI, parallelEndPointsII) {
     let intersectionPoint =  findIntersectingPointTwoFormats(parallelEndPointsI, parallelEndPointsII)
     targetData[index - 1][1].coords.x = intersectionPoint.x
@@ -159,21 +209,14 @@ function calculateAndSetIntersectionPoints(targetData, index, parallelEndPointsI
     targetData[index][0].coords.x = intersectionPoint.x
     targetData[index][0].coords.y = intersectionPoint.y
 }
-
 // A
-setTargetEndPoints(targetEndPoints, index, 0, parallelProjections.thisPointX)
 // B
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
 // G
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
 // M
-setTargetEndPoints(targetEndPoints, index, 1, parallelProjections.nextPointX)
-function setTargetEndPoints(targetData, index, side, referenceCoords) {
+function setTargetEndPoints(targetData, index, referenceCoords, side) {
     targetData[index][side].coords.x = referenceCoords
     targetData[index][side].coords.y = referenceCoords
 }
-
-
 // E
 // K
 parPathObj.parallelPathSegmentCounter_SECOND = 0
