@@ -1,79 +1,3 @@
-const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
-const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
-
-let thisIsArcToPath = false
-
-if(index > 1) {
-    if(isJoiner(index - 1) && joinerType(index, "BBB")) {
-        thisIsArcToPath = true
-    } else {
-        thisIsArcToPath = false
-    }
-} 
-
-if(thisIsArcToPath === false) {
-    const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
-    const firstPosition = (newIndex) => (newIndex) === 0
-    const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
-
-    let pathDatasOutside = setPathDataOUTSIDE(refEndPointsBase, index, parPathObj)
-
-    let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
-
-    // AA_FIRST_ALL
-    noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
-    
-    if (firstPosition(index)) {
-        // A
-        noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
-        if(arcExist(index + 1)) {
-            // B
-            noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        }
-    }
-
-    else if (!lastPosition(index)) {
-        if(!arcExist(index - 1)) {
-            if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-                // C (DC)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-            } else {
-                // D (C+)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, targetEndPoints, refEndPointsPerp)
-            }
-            // E (DC After)
-            noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-        } else {
-            // F (E)
-            noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
-            // empty
-        }
-        if(arcExist(index + 1) && !arcExist(index - 1)) {
-            // G (F)
-            noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        }
-    }
-
-    else if(lastPosition(index)) {
-        if(!arcExist(index - 1)) {
-            if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-                // H (Ga)
-                noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-            } else {
-                // J (G+)
-                noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
-            }
-            // K (G After)
-            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-        } else {
-            // L (H)
-            noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
-            // empty
-        }
-        // M (Ia)
-        noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-    }
-}
 
 
 
@@ -82,50 +6,8 @@ if(thisIsArcToPath === false) {
 
 
 
-function setPathDataOUTSIDE(refEndPointsBase, index, parPathObj) {
-    let thisPathDataOutside
-    let nextPathDataOutside
-
-    let fillerAdder = 0
-    let nextFillerAdder = 0
-
-    const isFiller = (newIndex) => refEndPointsBase[newIndex] === "filler"
-
-    if (isFiller(index) && !isFiller(index + 1)){
-        fillerAdder = 1
-    }
-    if (isFiller(index) && isFiller(index + 1)){
-        fillerAdder = -1
-    }
-    if (isFiller(index + 1)){
-        nextFillerAdder = 1
-    }
 
 
-    if (parPathObj.removeornot_allParData === true) {
-        thisPathDataOutside = refEndPointsBase[index + fillerAdder]
-        nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
-    } else {
-        let thisRemoveIndex = parPathObj.removeStartIndex
-        let nextRemoveIndex = thisRemoveIndex + 1
-
-        if(index <= thisRemoveIndex) {
-            thisPathDataOutside = refEndPointsBase[index + fillerAdder]
-            nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
-        }
-
-        else if(index >= nextRemoveIndex) {
-            thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
-            nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-        }
-
-        else {
-            console.log("Not_Handled_RemoveIndex")
-        }
-    }
-
-    return [thisPathDataOutside, nextPathDataOutside]
-}
 
 
 
@@ -366,7 +248,7 @@ function setPathDataOUTSIDE(refEndPointsBase, index, parPathObj) {
     //     }
 
     //     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
-    //     // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, handleArcsObject.baseArcToCursorDist)
+    //     // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, arcRadiusObject.parDistAndDir)
 
     //     refEndPointsPerp[index][0].x = parallelProjections.thisPointX
     //     refEndPointsPerp[index][0].y = parallelProjections.thisPointY

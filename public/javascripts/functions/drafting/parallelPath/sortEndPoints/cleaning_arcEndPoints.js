@@ -544,7 +544,7 @@ function setPerpendicularPoints(thisIndex, nextIndex, target, setPrevious) {
     let nextPathData = refEndPointsBase[nextIndex]
     let thisParallelPathData = targetEndPoints[thisIndex][target]
 
-    let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], handleArcsObject.baseArcToCursorDist)
+    let parallelAnchorPoints = findPointAlongSlopeAtDistance([thisPathData.coords.x, thisPathData.coords.y], [nextPathData.arc.center.x, nextPathData.arc.center.y], arcRadiusObject.parDistAndDir)
     thisParallelPathData.coords.x = parallelAnchorPoints[0]
     thisParallelPathData.coords.y = parallelAnchorPoints[1]
 

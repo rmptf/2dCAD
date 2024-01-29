@@ -1,4 +1,5 @@
 import {getDistance} from '../../../math/mathFunctions.js'
+import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../drawParallelPath_functions/parallelPathFunctions.js'
 import {
     arcIntersection_allArcSegments_everyIndex_firstAction,
     arcIntersection_firstArcSegment_everyIndex_firstAction,
@@ -71,14 +72,23 @@ function sortEndpoints(
 }
 
 // FIXME:
-// path to arc wasnt working correct after the first path switched up code there but untested
+// 1 path doesnt work
 // FIXME:
 // curve on first path doesnt work
 // FIXME:
-// curve on second to last point causes bug on las point when it has a joiner
+// curve on last path does work
 // FIXME:
-// parallel path doesnt work perfectly when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
+// parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
 // FIXME:
+// Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
+
+// FIXME:
+// Shapes with Errors:
+// 1 shape
+
+
+// FIXED
+// curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
 
 function sort_endPoint_withArc(
     targetEndPoints,
@@ -90,24 +100,42 @@ function sort_endPoint_withArc(
     parPathObj,
     skipperCheckers
 ) {
-    // let baseArcToCursorDist
-    let handleArcsObject = []
-    handleArcsObject.baseArcToCursorDist
+    let arcRadiusObject = []
+    arcRadiusObject.parDistAndDir
 
+
+
+    // consiering placing this logic inside the arc handler
+
+    // if(refEndPointsBase[index] !== "filler" && index !== 1) {
+    //     if(refEndPointsBase[index + 1] !== "filler"){
+    //         console.log("CHECKER_111")
+    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+    //     }
+    // }
+
+
+
+    // works for path - arc with filler
+    // works for arc - path with fillers
     // handle any path / arc interaction no filler
     if(refEndPointsBase[index] !== "filler") {
         if(refEndPointsBase[index + 1] !== "filler"){
             console.log("CHECKER_111")
-            targetEndPoints[index][1].arc.radius = calcArcParDistance(handleArcsObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+            targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
         }
     }
+
+    // fix so only happens when its arc to arc
     // handle arc / arc interaction with filler
-    if(refEndPointsBase[index] === "filler" && refEndPointsBase[index - 1].arc.exist === true && refEndPointsBase[index - 2].arc.exist === true) {
+    if(refEndPointsBase[index] === "filler" && refEndPointsBase[index - 1].arc.exist === true && refEndPointsBase[index - 2].arc.exist === true && refEndPointsBase[index + 1].arc.exist === true && refEndPointsBase[index + 2].arc.exist === true) {
         if(refEndPointsBase[index + 1] !== "filler"){
             console.log("CHECKER_222")
-            targetEndPoints[index][1].arc.radius = calcArcParDistance(handleArcsObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+            targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
         }
     }
+
+
 
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
@@ -128,6 +156,7 @@ function sort_endPoint_withArc(
     function handleDefaultArcIntersection() {
         // 1
         arcIntersection_allArcSegments_everyIndex_firstAction(parPathObj)
+        // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
         switch(true) {
             case parPathObj.parallelPathSegmentCounter_FIRST === 0:
                 handleFirctArcSegment()
@@ -146,22 +175,22 @@ function sort_endPoint_withArc(
                     // 3
                     arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
                     // 4
-                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
+                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject);
                 break
             // 5
-            default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, handleArcsObject)
+            default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
         }
         switch(true) {
             // 6_A
             case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
             // 6_B
-            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
         }
     }
     
     function handleSecondArcSegment() {
         // 7
-        arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, handleArcsObject)
+        arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
         switch(true) {
             case !lastPosition(index):
                 if(arcExist(index + 1)) {
@@ -171,11 +200,11 @@ function sort_endPoint_withArc(
                     }
                 } else {
                     // 9
-                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
                 }
                 break
                 // 10
-            default: arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, handleArcsObject)
+            default: arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
         }
         // 11
         arcIntersection_secondArcSegment_everyIndex_lastAction(parPathObj)
@@ -190,7 +219,7 @@ function sort_endPoint_withArc(
                     // 2_A_Joiner
                     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj) :
                     // 2_B_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject);
                 break
             // 3_Joiner
             case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
@@ -217,101 +246,63 @@ function sort_endPoint_noArc(
     index,
     parPathObj
 ) {
+    const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
+    const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
     let thisIsArcToPath = false
+    
     if(index > 1) {
-        // check if this point is a no contact arc to path
-        if(targetEndPoints[index - 1][1].arc.joiner === true && targetEndPoints[index][1].arc.joinerSide === "BBB") {
-            console.log("Dont_run_check_straight_path")
+        if(isJoiner(index - 1) && joinerType(index, "BBB")) {
             thisIsArcToPath = true
         } else {
             thisIsArcToPath = false
         }
     } 
-
+    
     if(thisIsArcToPath === false) {
-        let fillerAdder = 0
-        let nextFillerAdder = 0
-
-        if(refEndPointsBase[index] === "filler" && refEndPointsBase[index + 1] != "filler") {
-            fillerAdder = 1
-        }
-
-        if(refEndPointsBase[index] === "filler" && refEndPointsBase[index + 1] === "filler") {
-            fillerAdder = -1
-        }
-
-        if(refEndPointsBase[index + 1] === "filler") {
-            nextFillerAdder = 1
-        }
-
-        let thisPathDataOutside
-        let nextPathDataOutside
-
-        if (parPathObj.removeornot_allParData === true) {
-            thisPathDataOutside = refEndPointsBase[index + fillerAdder]
-            nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
-        } else {
-            let thisRemoveIndex = parPathObj.removeStartIndex
-            let nextRemoveIndex = thisRemoveIndex + 1
-
-            if(index <= thisRemoveIndex) {
-                thisPathDataOutside = refEndPointsBase[index + fillerAdder]
-                nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
-            }
-
-            else if(index >= nextRemoveIndex) {
-                thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
-                nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
-            }
-
-            else {
-                console.log("Not_Handled_RemoveIndex")
-            }
-        }
-
-        let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parPathObj.parallelDistance)
-
+        const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
+        const firstPosition = (newIndex) => (newIndex) === 0
+        const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
+        let pathDatasOutside = setPathDataOUTSIDE(refEndPointsBase, index, parPathObj)
+        let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
+    
         // AA_FIRST_ALL
         noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
-
-        findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke()
-        function findParallelPathIntersectingPoint_fixedvisualbug_arcsbroke() {
-            const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
-            const firstPosition = (newIndex) => (newIndex) === 0
-            const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
-
-            if (firstPosition(index)) {
-                // A
-                noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
-                if(arcExist(index + 1)) {
-                    // B
-                    noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-                }
+        
+        if (firstPosition(index)) {
+            // A
+            noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
+            if(arcExist(index + 1)) {
+                // B
+                noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
             }
-
-            else if (!lastPosition(index)) {
-                if(!arcExist(index - 1)) {
-                    if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-                        // C (DC)
-                        noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-                    } else {
-                        // D (C+)
-                        noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, targetEndPoints, refEndPointsPerp)
-                    }
-                    // E (DC After)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
+        }
+    
+        if (!firstPosition(index) && !lastPosition(index)) {
+            if(!arcExist(index - 1)) {
+                if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
+                    // C (DC)
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
                 } else {
-                    // F (E)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
-                    // empty
+                    // D (C+)
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
                 }
-                if(arcExist(index + 1) && !arcExist(index - 1)) {
-                    // G (F)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-                }
+                // E (DC After)
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
+            } else {
+                // F (E)
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
+                // empty
             }
-
-            else if(lastPosition(index)) {
+            if(arcExist(index + 1) && !arcExist(index - 1)) {
+                // G (F)
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+            }
+        }
+    
+        // TODO: Orgnazine better
+        checkForAndRunLastPosition()
+        function checkForAndRunLastPosition() {
+            if (!firstPosition(index) && lastPosition(index)) {
                 if(!arcExist(index - 1)) {
                     if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
                         // H (Ga)
@@ -324,8 +315,8 @@ function sort_endPoint_noArc(
                     noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
                 } else {
                     // L (H)
-                    noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
-                    // empty
+                    noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() // empty
+                    return;
                 }
                 // M (Ia)
                 noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
@@ -337,6 +328,89 @@ function sort_endPoint_noArc(
 export {
     sortEndpoints
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setPathDataOUTSIDE(refEndPointsBase, index, parPathObj) {
+    let thisPathDataOutside
+    let nextPathDataOutside
+    let fillerAdder = 0
+    let nextFillerAdder = 0
+    const isFiller = (newIndex) => refEndPointsBase[newIndex] === "filler"
+
+    if (isFiller(index) && !isFiller(index + 1)){
+        fillerAdder = 1
+    }
+    if (isFiller(index) && isFiller(index + 1)){
+        fillerAdder = -1
+    }
+    if (isFiller(index + 1)){
+        nextFillerAdder = 1
+    }
+
+    if (parPathObj.removeornot_allParData === true) {
+        thisPathDataOutside = refEndPointsBase[index + fillerAdder]
+        nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
+    } else {
+        let thisRemoveIndex = parPathObj.removeStartIndex
+        let nextRemoveIndex = thisRemoveIndex + 1
+
+        if(index <= thisRemoveIndex) {
+            thisPathDataOutside = refEndPointsBase[index + fillerAdder]
+            nextPathDataOutside = refEndPointsBase[index + 1 + nextFillerAdder]
+        }
+
+        else if(index >= nextRemoveIndex) {
+            thisPathDataOutside = refEndPointsBase[index + 1 + fillerAdder]
+            nextPathDataOutside = refEndPointsBase[index + 2 + nextFillerAdder]
+        }
+
+        else {
+            console.log("Not_Handled_RemoveIndex")
+        }
+    }
+
+    return [thisPathDataOutside, nextPathDataOutside]
+}
+
 
 // TODO: (in two places at once rn, find a place for it)
 // Write a good comment to describe this function
@@ -365,9 +439,9 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 
 // TODO: keep here or move?
 // Working on this function (not 100% sure what it does)
-function calcArcParDistance(handleArcsObject, nextRefEndPointBase, distance) {
-    handleArcsObject.baseArcToCursorDist = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
+    arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
-    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - handleArcsObject.baseArcToCursorDist
+    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
     return nextArcToCenterMinusPointerToArcFromArc1
 }

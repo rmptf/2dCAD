@@ -186,13 +186,6 @@ function findIntersectingPointSIMPLER(x1, y1, x2, y2, x3, y3, x4, y4) {
     return result
 }
 
-
-// refEndPointsPerp[index-1][0].x
-// targetEndPoints[index - 1][0].coords.x
-// findPathDataIntersectingPoint([refEndPointsPerp[index-1], false], [refEndPointsPerp[index], false])
-// findPathDataIntersectingPoint([targetEndPoints[index - 1], true], [targetEndPoints[index], true])
-// findPathDataIntersectingPoint([targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
-
 function findIntersectingPointTwoFormats(coord1, coord2) {
     const getCoords = (coordinates, addCoordsKey, isCoord_X) => addCoordsKey ? (isCoord_X ? coordinates.coords.x : coordinates.coords.y) : (isCoord_X ? coordinates.x : coordinates.y);
 
@@ -218,6 +211,7 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
         x: path1Coord1_X + ua * (path1Coord2_X - path1Coord1_X),
         y: path1Coord1_Y + ua * (path1Coord2_Y - path1Coord1_Y),
     }
+
     return result
 }
 
