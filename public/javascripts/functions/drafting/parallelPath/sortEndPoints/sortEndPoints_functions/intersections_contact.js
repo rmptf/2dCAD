@@ -41,11 +41,11 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
             // updateSVG_PathToArcIntersect_01(thisParallelPathData, intersectPoint, thisOriginalPathData)
             placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
 
-            console.log("setArcRadius")
-            let arcRad =  calcArcParDistance(arcRadiusObject, referenceEndPointsBaseAndFillers[index + 1], parPathObj.parallelDistance)
-            console.log(arcRad)
-            targetEndPointsParallelFull[index][1].arc.radius = arcRad
-            targetEndPointsParallelFull[index+1][1].arc.radius = 650
+            // console.log("setArcRadius")
+            // let arcRad =  calcArcParDistance(arcRadiusObject, referenceEndPointsBaseAndFillers[index + 1], parPathObj.parallelDistance)
+            // console.log(arcRad)
+            // targetEndPointsParallelFull[index][1].arc.radius = arcRad
+            // targetEndPointsParallelFull[index+1][1].arc.radius = 650
             // targetEndPointsParallelFull[index][1].arc.radius = 400
         }
     }
