@@ -63,9 +63,7 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // 9
     console.log("9_ooo")
-    console.log("A")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
-    console.log("B")
     handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
 }
 // done

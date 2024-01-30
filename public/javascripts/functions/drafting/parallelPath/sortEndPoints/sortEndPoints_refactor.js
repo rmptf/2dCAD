@@ -116,24 +116,24 @@ function sort_endPoint_withArc(
 
 
 
-    // works for path - arc with filler
-    // works for arc - path with fillers
-    // handle any path / arc interaction no filler
-    if(refEndPointsBase[index] !== "filler") {
-        if(refEndPointsBase[index + 1] !== "filler"){
-            console.log("CHECKER_111")
-            targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
-        }
-    }
+    // // works for path - arc with filler
+    // // works for arc - path with fillers
+    // // handle any path / arc interaction no filler
+    // if(refEndPointsBase[index] !== "filler") {
+    //     if(refEndPointsBase[index + 1] !== "filler"){
+    //         console.log("CHECKER_111")
+    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+    //     }
+    // }
 
-    // fix so only happens when its arc to arc
-    // handle arc / arc interaction with filler
-    if(refEndPointsBase[index] === "filler" && refEndPointsBase[index - 1].arc.exist === true && refEndPointsBase[index - 2].arc.exist === true && refEndPointsBase[index + 1].arc.exist === true && refEndPointsBase[index + 2].arc.exist === true) {
-        if(refEndPointsBase[index + 1] !== "filler"){
-            console.log("CHECKER_222")
-            targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
-        }
-    }
+    // // fix so only happens when its arc to arc
+    // // handle arc / arc interaction with filler
+    // if(refEndPointsBase[index] === "filler" && refEndPointsBase[index - 1].arc.exist === true && refEndPointsBase[index - 2].arc.exist === true && refEndPointsBase[index + 1].arc.exist === true && refEndPointsBase[index + 2].arc.exist === true) {
+    //     if(refEndPointsBase[index + 1] !== "filler"){
+    //         console.log("CHECKER_222")
+    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+    //     }
+    // }
 
 
 
@@ -156,7 +156,8 @@ function sort_endPoint_withArc(
     function handleDefaultArcIntersection() {
         // 1
         arcIntersection_allArcSegments_everyIndex_firstAction(parPathObj)
-        // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+        console.log("set_arc_rad__1")
+        targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance) // TODO: (Set_arcRad)
         switch(true) {
             case parPathObj.parallelPathSegmentCounter_FIRST === 0:
                 handleFirctArcSegment()
@@ -217,14 +218,25 @@ function sort_endPoint_withArc(
             case joinerType(index - 1, "AAA"): 
                 arcExist(index + 1) ?
                     // 2_A_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj) :
+                    (
+                        disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj),
+                        console.log("set_arc_rad__2AJ"),
+                        targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance) // TODO: (Set_arcRad)
+                    )
+                    :
                     // 2_B_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject);
+                    (
+                        disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+                    )
                 break
             // 3_Joiner
             case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
             // 4_Joiner
-            case joinerType(index - 1, "CCC"): disconnectedArcIntersection_prevIndexIsArcToArc(parPathObj); break
+            case joinerType(index - 1, "CCC"):
+                disconnectedArcIntersection_prevIndexIsArcToArc(parPathObj);
+                console.log("set_arc_rad__4J")
+                targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance);  // TODO: (Set_arcRad)
+                break
             // 5_Joiner
             case joinerType(index, "BBB"): disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
             // 6_Joiner
