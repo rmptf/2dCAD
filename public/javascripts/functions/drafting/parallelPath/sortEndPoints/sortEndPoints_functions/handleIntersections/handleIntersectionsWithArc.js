@@ -1,12 +1,14 @@
 import {handleArcToArcIntersection, handlePathToArcIntersection, handleArcToPathIntersection} from '../../sortEndPoints_functions/intersections_contact.js'
 import {handlePathToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handleArcToArcIntersectionNoContact} from '../../sortEndPoints_functions/intersections_noContact.js'
-import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
+import {findPointAlongSlopeAtDistance} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
+import {getDistance} from '../../../../../math/mathFunctions.js'
 
 // done
-function arcIntersection_allArcSegments_everyIndex_firstAction(parPathObj) {
+function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
     // 1
     console.log("1_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
+    setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
 }
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
@@ -21,10 +23,10 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() {
     // empty
 }
 // done
-function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 4
     console.log("4_ooo")
-    handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+    handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
@@ -39,11 +41,11 @@ function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints
     setThisPathDataAsPreviousPathData(targetEndPoints, index)
 }
 // done
-function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 6_B
     console.log("6_B_ooo")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
-    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 
 
@@ -60,11 +62,11 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
-function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 9
     console.log("9_ooo")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
-    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
@@ -89,31 +91,34 @@ function disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEn
     parPathObj.parallelPathSegmentCounter_FIRST = 0
 }
 // done
-function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj) {
+function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+    setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_2AJ") // TODO: (Set_arcRad)
 }
 // done
-function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 2_B_Joiner
     console.log("2_B_Joiner_ooo")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
-    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+    handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 3_Joiner
     console.log("3_Joiner_ooo")
-    parPathObj.arcToArcCounter += 1
+    // TODO: // I removed this, test all variations, check if keep or remove from over places
+    // parPathObj.arcToArcCounter += 1
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
 }
 // done
-function disconnectedArcIntersection_prevIndexIsArcToArc(parPathObj) {
+function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
     // 4_Joiner
     console.log("4_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+    setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
 }
 // done
 function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -143,6 +148,11 @@ function disconnectedArcIntersection_skipThisIndex(parPathObj) {
 
 
 
+
+function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, logId) {
+    console.log(logId)
+    targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+}
 
 function setPerpendicularPoints(targetEndPoints, refEndPointsBase, thisIndex, nextIndex, arcRadiusObject, target, setPrevious) {
     let thisPathData = refEndPointsBase[thisIndex]
@@ -184,26 +194,26 @@ function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase,
     parPathObj.arcToPathCounter += 1
 }
 
-function handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj, arcRadiusObject) {
+function handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj) {
     if (parPathObj.collectIndicesOfIntersections === true) {
         parPathObj.arcToPathIndexArray.push(index + 1)
     }
 
-    handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj.arcToPathIndexArray, parPathObj.arcToPathCounter, arcRadiusObject, parPathObj)
+    handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj.arcToPathIndexArray, parPathObj.arcToPathCounter)
 
     if (targetEndPoints[index + 1][1].arc.joiner) {
         parPathObj.arcToPathCounter -= 1
     }
 }
 
-function handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+function handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     parPathObj.pathToArcCounter += 1
 
     if (parPathObj.collectIndicesOfIntersections === true) {
         parPathObj.pathToArchIndexArray.push(index);
     }
 
-    handlePathToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj.pathToArchIndexArray, parPathObj.pathToArcCounter, arcRadiusObject, parPathObj);
+    handlePathToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj.pathToArchIndexArray, parPathObj.pathToArcCounter);
 }
 
 function handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -282,6 +292,14 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
         nextPointX: calcProjection(nextPathDataCoordsX, sinValue, parallelDistance, true),
         nextPointY: calcProjection(nextPathDataCoordsY, cosValue, parallelDistance, false)
     }
+}
+
+// TODO: (in two places at once rn, find a place for it)
+function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
+    arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+    let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
+    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
+    return nextArcToCenterMinusPointerToArcFromArc1
 }
 
 

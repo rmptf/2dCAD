@@ -1,5 +1,4 @@
 import {getDistance} from '../../../math/mathFunctions.js'
-import {findIntersectingPointSIMPLER, findPointAlongSlopeAtDistance} from '../drawParallelPath_functions/parallelPathFunctions.js'
 import {
     arcIntersection_allArcSegments_everyIndex_firstAction,
     arcIntersection_firstArcSegment_everyIndex_firstAction,
@@ -71,25 +70,6 @@ function sortEndpoints(
     }
 }
 
-// FIXME:
-// 1 path doesnt work
-// FIXME:
-// curve on first path doesnt work
-// FIXME:
-// curve on last path does work
-// FIXME:
-// parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
-// FIXME:
-// Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
-
-// FIXME:
-// Shapes with Errors:
-// 1 shape
-
-
-// FIXED
-// curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
-
 function sort_endPoint_withArc(
     targetEndPoints,
     refEndPointsPerp,
@@ -100,49 +80,14 @@ function sort_endPoint_withArc(
     parPathObj,
     skipperCheckers
 ) {
-    let arcRadiusObject = []
-    arcRadiusObject.parDistAndDir
-
-
-
-    // consiering placing this logic inside the arc handler
-
-    // if(refEndPointsBase[index] !== "filler" && index !== 1) {
-    //     if(refEndPointsBase[index + 1] !== "filler"){
-    //         console.log("CHECKER_111")
-    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
-    //     }
-    // }
-
-
-
-    // // works for path - arc with filler
-    // // works for arc - path with fillers
-    // // handle any path / arc interaction no filler
-    // if(refEndPointsBase[index] !== "filler") {
-    //     if(refEndPointsBase[index + 1] !== "filler"){
-    //         console.log("CHECKER_111")
-    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
-    //     }
-    // }
-
-    // // fix so only happens when its arc to arc
-    // // handle arc / arc interaction with filler
-    // if(refEndPointsBase[index] === "filler" && refEndPointsBase[index - 1].arc.exist === true && refEndPointsBase[index - 2].arc.exist === true && refEndPointsBase[index + 1].arc.exist === true && refEndPointsBase[index + 2].arc.exist === true) {
-    //     if(refEndPointsBase[index + 1] !== "filler"){
-    //         console.log("CHECKER_222")
-    //         targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
-    //     }
-    // }
-
-
-
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
     const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
     const firstPosition = (newIndex) => (newIndex) === 0
     const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
     const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide)
+    let arcRadiusObject = []
+    arcRadiusObject.parDistAndDir
     
     switch(true) {
         case isJoiner(index):
@@ -155,9 +100,7 @@ function sort_endPoint_withArc(
     
     function handleDefaultArcIntersection() {
         // 1
-        arcIntersection_allArcSegments_everyIndex_firstAction(parPathObj)
-        console.log("set_arc_rad__1")
-        targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance) // TODO: (Set_arcRad)
+        arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) // TODO: (Set_arcRad)
         switch(true) {
             case parPathObj.parallelPathSegmentCounter_FIRST === 0:
                 handleFirctArcSegment()
@@ -176,7 +119,7 @@ function sort_endPoint_withArc(
                     // 3
                     arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
                     // 4
-                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject);
+                    arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break
             // 5
             default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
@@ -185,7 +128,7 @@ function sort_endPoint_withArc(
             // 6_A
             case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
             // 6_B
-            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
         }
     }
     
@@ -201,7 +144,7 @@ function sort_endPoint_withArc(
                     }
                 } else {
                     // 9
-                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
+                    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
                 }
                 break
                 // 10
@@ -218,24 +161,16 @@ function sort_endPoint_withArc(
             case joinerType(index - 1, "AAA"): 
                 arcExist(index + 1) ?
                     // 2_A_Joiner
-                    (
-                        disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(parPathObj),
-                        console.log("set_arc_rad__2AJ"),
-                        targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance) // TODO: (Set_arcRad)
-                    )
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) // TODO: (Set_arcRad)
                     :
                     // 2_B_Joiner
-                    (
-                        disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject)
-                    )
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
                 break
             // 3_Joiner
             case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
             // 4_Joiner
             case joinerType(index - 1, "CCC"):
-                disconnectedArcIntersection_prevIndexIsArcToArc(parPathObj);
-                console.log("set_arc_rad__4J")
-                targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance);  // TODO: (Set_arcRad)
+                disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject); // TODO: (Set_arcRad)
                 break
             // 5_Joiner
             case joinerType(index, "BBB"): disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
@@ -377,6 +312,25 @@ export {
 
 
 
+
+
+
+// FIXME:
+// 1 path doesnt work
+// FIXME:
+// curve on first path doesnt work
+// FIXME:
+// curve on last path does work
+// FIXME:
+// parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
+// FIXME:
+// Shapes with Errors:
+// 1 shape
+
+// FIXED
+// curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
+// FIXED
+// Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
 
 
 
