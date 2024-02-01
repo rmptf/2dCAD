@@ -1,4 +1,5 @@
 import {getDistance} from '../../../math/mathFunctions.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_2_points_1_line_01} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {
@@ -216,7 +217,8 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
 }
 
 
-function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
+// let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData, self)
+function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}
     let circleCenter = {x: circ.arc.center.x, y: circ.arc.center.y}
@@ -271,13 +273,29 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
         let length0 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection1X, intersection1Y)
         let length1 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection2X, intersection2Y)
 
+        updateSVG_highlight_1_point_01([originalPathDataCoords.x, originalPathDataCoords.y], self)
+        updateSVG_highlight_2_points_1_line_01([intersection1X, intersection1Y], [intersection2X, intersection2Y], self)
+
+        // return [
+        //     { x: intersection1X, y: intersection1Y, doesIntersect: true },
+        //     { x: intersection2X, y: intersection2Y, doesIntersect: true }
+        // ]
+
         // Choose the closest int point to OPD
         if(length0 < length1) {
+            console.log("direction_AAA")
+            console.log(length0)
+            console.log(length1)
+            console.log(intersection1X)
             return [
                 { x: intersection1X, y: intersection1Y, doesIntersect: true },
                 { x: intersection2X, y: intersection2Y, doesIntersect: true }
             ]
         } else {
+            console.log("direction_BBB")
+            console.log(length0)
+            console.log(length1)
+            console.log(intersection1X)
             return [
                 { x: intersection2X, y: intersection2Y, doesIntersect: true },
                 { x: intersection1X, y: intersection1Y, doesIntersect: true }
