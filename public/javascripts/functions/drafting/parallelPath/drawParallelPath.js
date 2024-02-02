@@ -58,6 +58,14 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.removeStartIndex
     parallelPathObject.parallelDistance
 
+
+    console.log("STARTED")
+    let checker123 = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL][2][1].arc.radius
+    let checkerabc = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL][3][1].arc.radius
+    console.log(checker123)
+    console.log(checkerabc)
+    console.log(checker123 + checkerabc)
+
     function mouseDownDrawParallel() {
         if (isDownDrawParallelActive === false) {
             isDownDrawParallelActive = true
@@ -69,6 +77,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         }
     }
 
+    // TODO: working right here on current issue
+    // set this event to reset to the CENTER of the original path shape after clicked
     function mouseMoveDrawParallel(event) {
         console.log(" ")
         console.log(" ")

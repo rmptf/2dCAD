@@ -195,11 +195,8 @@ function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase,
 }
 
 function handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj) {
-    // this is the lates in where the problem is: FIXME: might be before it, but latest investigation shows here
     if (parPathObj.collectIndicesOfIntersections === true) {
         parPathObj.arcToPathIndexArray.push(index + 1)
-        console.log("passsssss_ed")
-        console.log(index)
     }
 
     handleArcToPathIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj.arcToPathIndexArray, parPathObj.arcToPathCounter, parPathObj)

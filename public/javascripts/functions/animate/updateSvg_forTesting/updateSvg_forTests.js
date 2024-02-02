@@ -10,6 +10,8 @@ let updateSVG_highlight_1_point_04_switches = [1,0]
 let updateSVG_highlight_1_point_1_circ_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_02_switches = [1,0]
+let updateSVG_highlight_1_circ_and_center_01_switches = [1,0]
+let updateSVG_highlight_1_circ_and_center_02_switches = [1,0]
 
 
 function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
@@ -286,6 +288,46 @@ function updateSVG_highlight_2_points_1_line_02(coords1, coords2, self) {
     }
 }
 
+
+function updateSVG_highlight_1_circ_and_center_01(coords, radius, self) {
+    if(updateSVG_highlight_1_circ_and_center_01_switches[0] === 1) {
+        if(updateSVG_highlight_1_circ_and_center_01_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_014')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--4 testElem-radius--unset testElem-strokeWidth--1 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_014')
+            updateSVG_highlight_1_circ_and_center_01_switches[1] = 1
+        }
+
+        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_014")
+        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_014")
+
+        let arcCenterCoords1 = [coords[0], coords[1]]
+        let arcRadius = radius
+
+        arcCenter1.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1])
+        fullArc.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1]).style("r", arcRadius)
+    }
+}
+
+
+function updateSVG_highlight_1_circ_and_center_02(coords, radius, self) {
+    if(updateSVG_highlight_1_circ_and_center_02_switches[0] === 1) {
+        if(updateSVG_highlight_1_circ_and_center_02_switches[1] < 1) {
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--5 testElem-strokeWidth--0 testElem-stroke-color--none testElem-fill-color--5 testElem-dasharray--none').attr('id', 'visualTest--arcCent1--IDTAG_015')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-arc testElement-palette--1 testElem-radius--unset testElem-strokeWidth--1 testElem-stroke-color--5 testElem-fill-color--none testElem-dasharray--10').attr('id', 'visualTest--fullArc1--IDTAG_015')
+            updateSVG_highlight_1_circ_and_center_02_switches[1] = 1
+        }
+
+        let arcCenter1 = d3.select("#visualTest--arcCent1--IDTAG_015")
+        let fullArc = d3.select("#visualTest--fullArc1--IDTAG_015")
+
+        let arcCenterCoords1 = [coords[0], coords[1]]
+        let arcRadius = radius
+
+        arcCenter1.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1])
+        fullArc.attr('cx', arcCenterCoords1[0]).attr('cy', arcCenterCoords1[1]).style("r", arcRadius)
+    }
+}
+
 export {
     updateSVG_PathToArcIntersect_01,
     updateSVG_PathToArcIntersect_02,
@@ -298,5 +340,7 @@ export {
     updateSVG_highlight_1_point_04,
     updateSVG_highlight_1_point_1_circ_01,
     updateSVG_highlight_2_points_1_line_01,
-    updateSVG_highlight_2_points_1_line_02
+    updateSVG_highlight_2_points_1_line_02,
+    updateSVG_highlight_1_circ_and_center_01,
+    updateSVG_highlight_1_circ_and_center_02
 }
