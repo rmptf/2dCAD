@@ -1,5 +1,5 @@
 import {getDistance} from '../../../math/mathFunctions.js'
-import {updateSVG_highlight_1_point_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_1_circ_and_center_01, updateSVG_highlight_1_circ_and_center_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+// import {} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {
@@ -112,8 +112,9 @@ function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
     }
     return thisDirection
 }
-
 function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, event) {
+// function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, event, newguy, self) {
+// function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, m1P) {
     let parallelDistance
     // Retrieve the array from the global variable
     let thisSelectedOriginalFigurePathData = thisOriginalFigurePathDataFromGlobal[thisSecondaryPathIndex];
@@ -273,8 +274,8 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, sel
         let length0 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection1X, intersection1Y)
         let length1 = getDistance(originalPathDataCoords.x, originalPathDataCoords.y, intersection2X, intersection2Y)
 
-        updateSVG_highlight_1_point_01([originalPathDataCoords.x, originalPathDataCoords.y], self)
-        updateSVG_highlight_2_points_1_line_01([intersection1X, intersection1Y], [intersection2X, intersection2Y], self)
+        // updateSVG_highlight_1_point_01([originalPathDataCoords.x, originalPathDataCoords.y], self)
+        // updateSVG_highlight_2_points_1_line_01([intersection1X, intersection1Y], [intersection2X, intersection2Y], self)
 
         // return [
         //     { x: intersection1X, y: intersection1Y, doesIntersect: true },
@@ -325,34 +326,6 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     const dy = y2 - y1
     const distance = Math.sqrt(dx * dx + dy * dy)
 
-
-    // TODO: !!!!Discovered the issue!!!!
-    // r1 and r2 are determined by where the original line is clicked when starting the parallel line.
-    // in shape #8, when the OUTER edge of the original shape line is clicked, the sum of r1 and r2 is always LARGER than "distance"
-    // in shape #8 when the INNER edge of the original shape line is clicked, the sum of r1 and r2 is always SMALLER than "distance"
-    // if the EXACT center of the line is clicked, the two numbers will be equal
-    // FIXME: ???SOLUTION???
-    // dont have one yet
-    // potentially set the click point to the center of the original shape line
-    // OR use two lines, the line to click can be bigger than 1px but the ref line will only be exaclty 1px
-    // this is already causes another issue from long ago... when adding a point to a line, that point will be added to where the line was clicked
-    // rather than the center of the line. this causes the issue of adding a point to a straight line makes two lines that arent perfectly straight
-    // work with: findParallelDistance
-
-
-    updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
-    updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
-
-
-    console.log("FindMEEE_111")
-    console.log("Radii")
-    console.log(Math.ceil(r1 + r2))
-    console.log(r1 + r2)
-    console.log(r1 + " : " + r2)
-    console.log("Distance")
-    console.log(distance)
-
-
     // Circles are identical; return one of the two circles
     // Maybe need? (not finished need to return correct data)
     // if (distance === 0 && r1 === r2) {
@@ -364,7 +337,6 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
 
     // Check for no intersection, one circle contained within the other, or identical circles
     if (distance < Math.abs(r1 - r2)) {
-        console.log("FindMEEE_222")
         // Circles don't intersect; return the closest points on each circle
         let closestPointToOtherCircleX1
         let closestPointToOtherCircleY1
@@ -407,11 +379,6 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
 
     // Check for no intersection, one circle contained within the other, or identical circles
     if (distance > (r1 + r2)) {
-        console.log("FindMEEE_333")
-        console.log(r1 + r2)
-        console.log(distance)
-
-
         // Circles don't intersect; return the closest points on each circle
         let closestPointToOtherCircleX1 = x1 + (dx * r1) / distance
         let closestPointToOtherCircleY1 = y1 + (dy * r1) / distance

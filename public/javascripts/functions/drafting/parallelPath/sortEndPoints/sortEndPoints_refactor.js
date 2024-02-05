@@ -324,13 +324,25 @@ export {
 // FIXME:
 // parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
 // FIXME:
+// in some arc - arc shapes, if the connection is too smooth it will create a wobbly intersection while dragging par path
+// example F9
+// FIXME:
+// in some arc - arc shapes, the arc - arc connection will not find the correct circle intersection to follow
+// example F6
+// FIXME:
 // Shapes with Errors:
-// 1 shape
+// F9
+// F6
+// F8 (Fixed)
+
 
 // FIXED
 // curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
 // FIXED
 // Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
+// FIXED
+// in some arc - arc shapes, when the arcs are ver close to being not connected, if you click secondary path on the side of origPath that makes the two arcs not connected, the parallelpath will start with a non connected shape and ruin the counting of each point
+// example: F8 shape
 
 
 

@@ -1,7 +1,11 @@
 import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
 
-function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+// function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+    let indexArray = parPathObj.arcToArcIndexArray
+    let shapeCount = parPathObj.arcToArcCounter
+
     let shape = 'a2a'
     // let prevIndex = index - 1
     let thisIndex = index
@@ -22,7 +26,11 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     }
 }
 
-function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+// function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
+function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+    let indexArray = parPathObj.pathToArchIndexArray
+    let shapeCount = parPathObj.pathToArcCounter
+
     let shape = 'p2a'
     let prevIndex = index - 1
     let thisIndex = index
@@ -43,9 +51,11 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
     }
 }
 
-function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount, parPathObj) {
-    console.log("uuhhghghghg")
-    console.log(index)
+// function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount, parPathObj) {
+function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+    let indexArray = parPathObj.arcToPathIndexArray
+    let shapeCount = parPathObj.arcToPathCounter
+
     let shape = 'a2p'
     // let prevIndex = index - 1
     let thisIndex = index
@@ -54,11 +64,6 @@ function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPo
     let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
     let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
     let origPathDataIndex = indexArray[shapeCount]
-    console.log(origPathDataIndex)
-    console.log("starthere: passed final var")
-    console.log(indexArray)
-    console.log("starthere: passed orig var")
-    console.log(parPathObj.arcToPathIndexArray)
     let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
     let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData, self)
     if(intersectPoint) {

@@ -1,6 +1,7 @@
 import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../drafting/svgElementTools.js'
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 import {getElementPositionData} from '../drafting/resizeSvg.js'
+import {updateSVG_highlight_1_point_01} from '../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function drawPathFunction(event, obj) {
     a_canvas_globalVars.svgD3.on('dblclick', finishDrawPath)
@@ -38,6 +39,59 @@ function drawPathFunction(event, obj) {
         secondaryPathGroup.push(newSecondaryPath)
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL.push(secondaryPathGroup)
         // SECONDARY PATH
+
+
+            // To find the point in the center of the SVG path closest to where you clicked, you can use the getPointAtLength 
+            // method available for SVG paths. Here's an example:
+
+            // This script uses the getPointAtLength method to iterate over the length of the path and find the point closest
+            // to the click coordinates. The getCenterPointAlongPath function takes the path element and the coordinates of
+            // the click event and returns the closest point on the path. The example also includes an event listener to
+            // handle the click event on the SVG.
+            
+            // const path = document.getElementById('myPath');
+
+            // function getCenterPointAlongPath(path, clickX, clickY) {
+            //   const pathLength = path.getTotalLength();
+            //   let closestPoint = null;
+            //   let minDistance = Number.MAX_SAFE_INTEGER;
+          
+            //   for (let distance = 0; distance < pathLength; distance += 0.1) {
+            //     const point = path.getPointAtLength(distance);
+            //     const distanceToClick = Math.sqrt((point.x - clickX) ** 2 + (point.y - clickY) ** 2);
+          
+            //     if (distanceToClick < minDistance) {
+            //       minDistance = distanceToClick;
+            //       closestPoint = point;
+            //     }
+            //   }
+          
+            //   return closestPoint;
+            // }
+
+            // const svg = document.querySelector('svg');
+            // svg.addEventListener('click', function(event) {
+            //     console.log("findmeokokoko")
+            //     console.log(event)
+            //     const { clientX, clientY } = event;
+            //     const { left, top } = svg.getBoundingClientRect();
+            //     const clickX = clientX - left;
+            //     const clickY = clientY - top;
+
+            //     const centerPoint = getCenterPointAlongPath(path, clickX, clickY);
+
+            //     updateSVG_highlight_1_point_01([centerPoint.x, centerPoint.y], obj.self)
+            // });
+
+
+
+
+
+
+
+
+
+
 
         // END POINTS
         let endPointGroup = []

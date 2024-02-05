@@ -9,17 +9,21 @@ svg{
 }
 
 .mainPath {
-  stroke-width: 4;
+  stroke-width: 1;
   fill: none;
   stroke: var(--highlight-10);
   opacity: 1;
 }
 
 .secondaryPath {
-  stroke-width: 15;
+  /* stroke-width: 15; */
   fill: none;
+  /* stroke: var(--highlight-80); */
+  /* opacity: 0.0; */
+
+  stroke-width: 15;
   stroke: var(--highlight-80);
-  opacity: 0.0;
+  opacity: 0.3;
 }
 
 .parallelPath {

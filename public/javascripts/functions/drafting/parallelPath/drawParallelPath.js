@@ -5,6 +5,7 @@ import {sortEndpoints} from './sortEndPoints/sortEndPoints_refactor.js'
 import {createParallelPathElements} from './createParallelPathElements/createParallelPathElements.js'
 import {checkForIntersectingPaths} from './intersectingParPaths/intersectingParPaths.js'
 import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/intPathsTests.js'
+// import {updateSVG_highlight_1_point_02} from '../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 
 function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked) {
@@ -38,6 +39,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     }
 
     let isDownDrawParallelActive = false
+    // let centerPoint
 
 
     let parallelPathDatas_globalRef = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
@@ -57,18 +59,18 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.parallelPathSegmentCounter_SECOND = 0
     parallelPathObject.removeStartIndex
     parallelPathObject.parallelDistance
+    parallelPathObject.iterationCounter = 0
 
 
     console.log("STARTED")
-    let checker123 = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL][2][1].arc.radius
-    let checkerabc = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL][3][1].arc.radius
-    console.log(checker123)
-    console.log(checkerabc)
-    console.log(checker123 + checkerabc)
 
     function mouseDownDrawParallel() {
         if (isDownDrawParallelActive === false) {
             isDownDrawParallelActive = true
+            // TODO:
+            // Dont currently need this for purpose built, but can use it for other functions.
+            // centerPoint = setPointClickedOnOrigPath(event)
+            // updateSVG_highlight_1_point_02([centerPoint.x, centerPoint.y], self)
         } else {
             isDownDrawParellelInitiated = false
             a_canvas_globalVars.svgD3.on("mousemove", null)
@@ -77,15 +79,24 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         }
     }
 
-    // TODO: working right here on current issue
-    // set this event to reset to the CENTER of the original path shape after clicked
+
     function mouseMoveDrawParallel(event) {
         console.log(" ")
         console.log(" ")
         console.log(" ")
         console.log("START SHAPE")
         if(isDownDrawParellelInitiated === true) {
-            parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
+            parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
+            if(parallelPathObject.iterationCounter === 1) {
+                parallelPathObject.parallelDistance = 0
+            } else {
+                parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
+            }
+
+            // TODO:
+            // Dont currently need this for purpose built, but can use it for other functions.
+            // centerPoint = setPointClickedOnOrigPath(event)
+            // updateSVG_highlight_1_point_02([centerPoint.x, centerPoint.y], self)
 
             // handleIntersectingParallelPaths_testing(
             //     self,
@@ -145,4 +156,29 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
 
 export{
     drawParallelPathFunction
+}
+
+
+
+
+function setPointClickedOnOrigPath(event) {
+    let m1P = d3.pointer(event)
+    const path = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[0]._groups[0][0] // can this be passed?
+    const centerPoint = getCenterPointAlongPath(path, m1P[0], m1P[1])
+    return centerPoint
+
+    function getCenterPointAlongPath(path, clickX, clickY) {
+      const pathLength = path.getTotalLength()
+      let closestPoint = null
+      let minDistance = Number.MAX_SAFE_INTEGER
+      for (let distance = 0; distance < pathLength; distance += 0.1) {
+        const point = path.getPointAtLength(distance)
+        const distanceToClick = Math.sqrt((point.x - clickX) ** 2 + (point.y - clickY) ** 2)
+        if (distanceToClick < minDistance) {
+          minDistance = distanceToClick
+          closestPoint = point
+        }
+      }
+      return closestPoint
+    }
 }
