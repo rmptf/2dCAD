@@ -6,44 +6,44 @@ import {getDistance} from '../../../../../math/mathFunctions.js'
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
     // 1
-    console.log("1_ooo")
+    console.log("1_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
 }
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
     // 2
-    console.log("2_ooo")
+    console.log("2_seg1_first_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
 }
 // done
 function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() {
     // 3
-    console.log("3_ooo")
+    console.log("3_seg1")
     // empty
 }
 // done
 function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 4
-    console.log("4_ooo")
+    console.log("4_seg1")
     handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
     // 5
-    console.log("5_ooo")
+    console.log("5_seg1")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index + 1, arcRadiusObject, 0, false)
 }
 // done
 function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index) {
     // 6_A
-    console.log("6_A_ooo")
+    console.log("6_A_seg1")
     setThisPathDataAsPreviousPathData(targetEndPoints, index)
 }
 // done
 function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 6_B
-    console.log("6_B_ooo")
+    console.log("6_B_seg1")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
     handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
@@ -52,32 +52,32 @@ function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoin
 // done
 function arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
     // 7
-    console.log("7_ooo")
+    console.log("7_seg2_first_all")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index + 1, arcRadiusObject, 0, true)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 8
-    console.log("8_ooo")
+    console.log("8_seg2")
     handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 9
-    console.log("9_ooo")
+    console.log("9_seg2")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
     handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
     // 10
-    console.log("10_ooo")
+    console.log("10_seg2")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index + 1, index + 1, arcRadiusObject, 1, false)
 }
 // done
 function arcIntersection_secondArcSegment_everyIndex_lastAction(parPathObj) {
     // 11
-    console.log("11_ooo")
+    console.log("11_seg2_last_all")
     parPathObj.parallelPathSegmentCounter_FIRST = -1
 }
 
@@ -150,7 +150,7 @@ function disconnectedArcIntersection_skipThisIndex(parPathObj) {
 
 
 function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, logId) {
-    console.log(logId)
+    // console.log(logId)
     targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
 }
 
@@ -189,7 +189,7 @@ function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase,
     targetEndPoints[index + 1][1].coords.x = parallelProjections.nextPointX
     targetEndPoints[index + 1][1].coords.y = parallelProjections.nextPointY
 
-    console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
+    // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
 
     parPathObj.arcToPathCounter += 1
 }
