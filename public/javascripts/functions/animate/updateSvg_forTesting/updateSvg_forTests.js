@@ -12,6 +12,7 @@ let updateSVG_highlight_2_points_1_line_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_02_switches = [1,0]
 let updateSVG_highlight_1_circ_and_center_01_switches = [1,0]
 let updateSVG_highlight_1_circ_and_center_02_switches = [1,0]
+let updateSVG_highlight_1_path_and_2_points_01_switches = [1,0]
 
 
 function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
@@ -328,6 +329,25 @@ function updateSVG_highlight_1_circ_and_center_02(coords, radius, self) {
     }
 }
 
+function updateSVG_highlight_1_path_and_2_points_01(intersectPoint1Coords, intersectPoint2Coords, self) {
+    if(updateSVG_highlight_1_path_and_2_points_01_switches[0] === 1) {
+        if(updateSVG_highlight_1_path_and_2_points_01_switches[1] < 1) {
+            self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--5 testElem-dashArray--none').attr('id', 'intArcTEST--path1--IDTAG_016')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--2 testElem-radius--8 testElem-fill-color--1').attr('id', 'intCircTEST--incCirc1--IDTAG_16')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--2 testElem-radius--8 testElem-fill-color--2').attr('id', 'intCircTEST--incCirc2--IDTAG_16')
+            updateSVG_highlight_1_path_and_2_points_01_switches[1] = 1
+        }
+
+        let path = d3.select("#intArcTEST--path1--IDTAG_016")
+        let point1 = d3.select("#intCircTEST--incCirc1--IDTAG_16")
+        let point2 = d3.select("#intCircTEST--incCirc2--IDTAG_16")
+
+        path.attr("x1", intersectPoint1Coords[0]).attr("y1", intersectPoint1Coords[1]).attr("x2", intersectPoint2Coords[0]).attr("y2", intersectPoint2Coords[1])
+        point1.attr('cx', intersectPoint1Coords[0]).attr('cy', intersectPoint1Coords[1])
+        point2.attr('cx', intersectPoint2Coords[0]).attr('cy', intersectPoint2Coords[1])
+    }
+}
+
 export {
     updateSVG_PathToArcIntersect_01,
     updateSVG_PathToArcIntersect_02,
@@ -342,5 +362,6 @@ export {
     updateSVG_highlight_2_points_1_line_01,
     updateSVG_highlight_2_points_1_line_02,
     updateSVG_highlight_1_circ_and_center_01,
-    updateSVG_highlight_1_circ_and_center_02
+    updateSVG_highlight_1_circ_and_center_02,
+    updateSVG_highlight_1_path_and_2_points_01
 }

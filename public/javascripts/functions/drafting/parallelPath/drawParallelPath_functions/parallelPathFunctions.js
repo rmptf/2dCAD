@@ -1,5 +1,5 @@
 import {getDistance} from '../../../math/mathFunctions.js'
-// import {} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_circ_and_center_01, updateSVG_highlight_1_circ_and_center_02, updateSVG_highlight_1_path_and_2_points_01} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {
@@ -332,6 +332,9 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     //     // return [center1]
     // }
 
+    updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
+
+    updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
     // Determine which intersection point is closest to Xys
     let intersectionClosestToXys
 
@@ -420,6 +423,7 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     } else {
         intersectionClosestToXys = NaN
     }
+    updateSVG_highlight_1_path_and_2_points_01([intersectionClosestToXys[0].x, intersectionClosestToXys[0].y], [intersectionClosestToXys[1].x, intersectionClosestToXys[1].y], self)
     return intersectionClosestToXys
 }
 
