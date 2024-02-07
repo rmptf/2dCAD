@@ -314,11 +314,10 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
 
 function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData, self) {
     console.log("ARC2ARC_111")
-    // POTENTIAL SOLUTIONS:
-    // 1
-    // for jiggly arc - arc shapes, draw a line from some arc center through opd a2a and place pep on cicrlce at distance (might not work)
-    // 2
+    // SOLUTION!!:
     // consider handling the a2a shape on the second arc instead of the first
+
+
     let x1 = firstParallelPathData.arc.center.x
     let y1 = firstParallelPathData.arc.center.y
     let r1 = firstParallelPathData.arc.radius
@@ -338,9 +337,13 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     //     // return [center1]
     // }
 
-    updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
 
+
+    updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
     updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
+
+
+
     // Determine which intersection point is closest to Xys
     let intersectionClosestToXys
 

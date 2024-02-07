@@ -6,22 +6,36 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     let indexArray = parPathObj.arcToArcIndexArray
     let shapeCount = parPathObj.arcToArcCounter
 
+    console.log("numbers")
+    console.log(indexArray)
+    console.log(shapeCount)
+
     let shape = 'a2a'
-    // let prevIndex = index - 1
+    let prevIndex = index - 1
     let thisIndex = index
     let nextIndex = index + 1
-    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
     let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
     let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    // old
     let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
+    // new
+    // let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self)
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
+            // old
+            // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+            // new
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+
         } else {
             // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
+            // old
             placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+            // new
+            // placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
         }
     }
 }

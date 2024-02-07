@@ -117,7 +117,7 @@ function sort_endPoint_withArc(
             case !firstPosition(index):
                 arcExist(index - 1) ?
                     // 3
-                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
+                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
                     // 4
                     arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break
@@ -317,23 +317,33 @@ export {
 
 // FIXME:
 // 1 path doesnt work
+
 // FIXME:
 // curve on first path doesnt work
+
 // FIXME:
 // curve on last path does work
+
 // FIXME:
 // parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
+
 // FIXME:
 // in some arc - arc shapes, if the connection is too smooth it will create a wobbly intersection while dragging par path
 // example F9
 // FIXME:
+// fixed jiggling from above but causing errors on multiple a2as with no contact
+// example F10
+
+// FIXME:
 // in some arc - arc shapes, the arc - arc connection will not find the correct circle intersection to follow
 // example F6
+
 // FIXME:
 // Shapes with Errors:
-// F9
 // F6
 // F8 (Fixed)
+// F9
+// F10
 
 
 // FIXED
