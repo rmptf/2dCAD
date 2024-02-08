@@ -20,10 +20,12 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
         parPathData[0] = 0
         parPathData[1] = "CCC"
         // old
-        // indexer = index + 1
+        indexer = index + 1
         // new
-        indexer = index - 1
+        // indexer = index
     }
+    console.log('referenceEndPointsBaseAndFillers')
+    console.log(referenceEndPointsBaseAndFillers)
 
     self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
     self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
