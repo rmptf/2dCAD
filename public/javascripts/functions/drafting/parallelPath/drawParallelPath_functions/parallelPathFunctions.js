@@ -339,8 +339,8 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
 
 
 
-    updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
-    updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
+    // updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
+    // updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
 
 
 
@@ -432,7 +432,7 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     } else {
         intersectionClosestToXys = NaN
     }
-    updateSVG_highlight_1_path_and_2_points_01([intersectionClosestToXys[0].x, intersectionClosestToXys[0].y], [intersectionClosestToXys[1].x, intersectionClosestToXys[1].y], self)
+    // updateSVG_highlight_1_path_and_2_points_01([intersectionClosestToXys[0].x, intersectionClosestToXys[0].y], [intersectionClosestToXys[1].x, intersectionClosestToXys[1].y], self)
     return intersectionClosestToXys
 }
 

@@ -19,7 +19,10 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
     }else if(shape === 'a2a'){
         parPathData[0] = 0
         parPathData[1] = "CCC"
-        indexer = index + 1
+        // old
+        // indexer = index + 1
+        // new
+        indexer = index - 1
     }
 
     self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')

@@ -1,8 +1,8 @@
 let updateSVG_PathToArcIntersect_01_switches = [0,0]
 let updateSVG_PathToArcIntersect_02_switches = [0,0]
 let updateSVG_arcToArcIntersect_01_switches = [0,0]
-let updateSVG_highlightOPD_01_switches = [0,0]
-let updateSVG_highlightOPD_02_switches = [0,0]
+let updateSVG_highlightOPD_01_switches = [1,0]
+let updateSVG_highlightOPD_02_switches = [1,0]
 let updateSVG_highlight_1_point_01_switches = [0,0]
 let updateSVG_highlight_1_point_02_switches = [1,0]
 let updateSVG_highlight_1_point_03_switches = [0,0]
@@ -116,7 +116,7 @@ function updateSVG_arcToArcIntersect_01(firstParallelPathData, secondParallelPat
     }
 }
 
-function updateSVG_highlightOPD_01(firstParallelPathData) {
+function updateSVG_highlightOPD_01(firstParallelPathData, self) {
     if(updateSVG_highlightOPD_01_switches[0] === 1) {
         if(updateSVG_highlightOPD_01_switches[1] < 1) {
             self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_04')
@@ -137,7 +137,7 @@ function updateSVG_highlightOPD_01(firstParallelPathData) {
     }
 }
 
-function updateSVG_highlightOPD_02(firstParallelPathData) {
+function updateSVG_highlightOPD_02(firstParallelPathData, self) {
     if(updateSVG_highlightOPD_02_switches[0] === 1) {
         if(updateSVG_highlightOPD_02_switches[1] < 1) {
             self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_05')

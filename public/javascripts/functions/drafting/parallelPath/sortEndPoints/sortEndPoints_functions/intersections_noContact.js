@@ -1,4 +1,5 @@
 import {getPathToArcIntersections, findPointAlongSlopeAtDistance, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
+import {updateSVG_highlightOPD_01, updateSVG_highlightOPD_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
     let prevIndex = index - 1
@@ -126,6 +127,7 @@ function handleArcToPathIntersectionNoContact(targetEndPointsParallelFull, refer
 }
 
 function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
+    console.log('hurhurhuhruhur')
     let prevIndex = index - 1
 
     let zeroParPath = targetEndPointsParallelFull[prevIndex + 1][0]
@@ -137,8 +139,9 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
-    // updateSVG_highlightOPD_01(firstParPath)
-    // updateSVG_highlightOPD_02(fifthParPath)
+    console.log("okokokokokok")
+    // updateSVG_highlightOPD_01(firstParPath, self)
+    // updateSVG_highlightOPD_02(fifthParPath, self)
     // let firstParPathOK = targetEndPointsParallelFull[prevIndex + 1]
     // let fourthParPathOK = targetEndPointsParallelFull[prevIndex + 3]
     // updateSVG_arcToArcIntersect_01(firstParPathOK, fourthParPathOK, arcToArcIntPoint, {coords: {x: 0, y: 0}})
