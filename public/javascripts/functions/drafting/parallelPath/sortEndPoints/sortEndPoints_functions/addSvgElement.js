@@ -1,4 +1,9 @@
-function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, shape) {
+function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index123, shape) {
+    // old
+    // let index = index123
+    // new
+    let index = index123 - 1 // (prob only works for a2a so need to fix)
+
     let thisSvgEndPointIndex = (index * 2) + 1
     let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
     let thisSvgPathIndex = index + 1
@@ -19,10 +24,7 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
     }else if(shape === 'a2a'){
         parPathData[0] = 0
         parPathData[1] = "CCC"
-        // old
         indexer = index + 1
-        // new
-        // indexer = index
     }
 
 
