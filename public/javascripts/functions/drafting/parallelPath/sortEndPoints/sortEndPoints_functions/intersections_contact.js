@@ -20,23 +20,23 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
     // old
-    // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
+    let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
     // new
-    let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self)
+    // let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self)
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
             console.log("NEW_POINT_ADDED")
             // old
-            // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
-            // new
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+            // new
+            // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
 
         } else {
             // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
             // old
-            // placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+            placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
             // new
-            placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+            // placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
         }
     }
 }

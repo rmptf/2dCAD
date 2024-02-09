@@ -24,8 +24,7 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
         // new
         // indexer = index
     }
-    console.log('referenceEndPointsBaseAndFillers')
-    console.log(referenceEndPointsBaseAndFillers)
+
 
     self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
     self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
@@ -48,6 +47,14 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
         {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
     ])
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
+
+    console.log('createAndAddSvgElementAndUpdateDataArrays')
+    console.log(referenceEndPointsBaseAndFillers)
+    console.log( a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
+    console.log(a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
+    console.log(parallelPathDataGLOBAL)
+    console.log(referenceEndPointsParallelPerpendicular)
+
 }
 
 export {

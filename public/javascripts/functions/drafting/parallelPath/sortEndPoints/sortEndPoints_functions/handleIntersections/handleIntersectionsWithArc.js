@@ -23,7 +23,7 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
     // empty
 
     // new
-    handleArcIntersectionArcToArc222(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+    // handleArcIntersectionArcToArc222(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -63,9 +63,9 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // 8
     console.log("8_seg2")
     // old
-    // handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+    handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
     // new
-    handleArcIntersectionArcToArc111(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+    // handleArcIntersectionArcToArc111(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
