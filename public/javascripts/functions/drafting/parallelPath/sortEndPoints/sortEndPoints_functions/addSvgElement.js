@@ -34,19 +34,66 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
     let parallelPathDataGLOBAL = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
     let thisParPathData = parallelPathDataGLOBAL[index][0]
 
-    function determineSweepFlag() {
-        let sweepFlag
+    // function determineSweepFlag() {
+    //     console.log("pooper")
+    //     console.log(index)
+    //     let sweepFlagOK
+    //     let prevParPathDataArc = parallelPathDataGLOBAL[index - 1][1].arc
+    //     let thisParPathDataArc = parallelPathDataGLOBAL[index][0].arc
+
+    //     if(prevParPathDataArc.exist) {
+    //         console.log(prevParPathDataArc.sweepFlag)
+    //         prevParPathDataArc.sweepFlag === 0 ? sweepFlagOK = 1 : sweepFlagOK = 0
+    //     }
+    //     if(thisParPathDataArc.exist) {
+    //         console.log(thisParPathDataArc.sweepFlag)
+    //         thisParPathDataArc.sweepFlag === 0 ? sweepFlagOK = 1 : sweepFlagOK = 0
+    //     }
+    //     console.log(sweepFlagOK)
+    //     return sweepFlagOK
+    // }
+
+
+
+        function determineSweepFlag() {
+        console.log("pooper")
+        console.log(index)
+        let sweepFlagOK
         let prevParPathDataArc = parallelPathDataGLOBAL[index - 1][1].arc
         let thisParPathDataArc = parallelPathDataGLOBAL[index][0].arc
 
         if(prevParPathDataArc.exist) {
-            prevParPathDataArc.sweepFlag === 0 ? sweepFlag = 1 : sweepFlag = 0
+            console.log(prevParPathDataArc.sweepFlag)
+            prevParPathDataArc.sweepFlag === 0 ? sweepFlagOK = 1 : sweepFlagOK = 0
+            if(thisParPathDataArc.exist) {
+                if(prevParPathDataArc.sweepFlag === thisParPathDataArc.sweepFlag) {
+                    let direction
+                    if(1 === 1) { // determine if a2a points up or down here somehow
+                        direction = 1
+                    } else {
+                        direction = 0
+                    }
+                    console.log(thisParPathDataArc.sweepFlag)
+                    console.log("crapper_111")
+                    sweepFlagOK = direction
+                    return sweepFlagOK
+                }
+            }
         }
+
         if(thisParPathDataArc.exist) {
-            thisParPathDataArc.sweepFlag === 0 ? sweepFlag = 1 : sweepFlag = 0
+            console.log(thisParPathDataArc.sweepFlag)
+            thisParPathDataArc.sweepFlag === 0 ? sweepFlagOK = 1 : sweepFlagOK = 0
         }
-        return sweepFlag
+
+        console.log(sweepFlagOK)
+        console.log("crapper_333")
+        return sweepFlagOK
     }
+
+
+
+
 
     parallelPathDataGLOBAL.splice(index, 0, [
         {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
