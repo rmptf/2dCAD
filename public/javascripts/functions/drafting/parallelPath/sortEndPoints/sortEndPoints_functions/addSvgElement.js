@@ -1,8 +1,20 @@
-function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index123, shape) {
-    // old
-    // let index = index123
-    // new
-    let index = index123 - 1 // (prob only works for a2a so need to fix)
+function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, passedIndex, shape) {
+    let index
+    let indexer
+    let sideCode
+    if(shape === 'p2a'){
+        index = passedIndex
+        indexer = index
+        sideCode = "AAA"
+    }else if(shape === 'a2p'){
+        index = passedIndex
+        indexer = index + 1
+        sideCode = "BBB"
+    }else if(shape === 'a2a'){
+        index = passedIndex - 1
+        indexer = index + 1
+        sideCode = "CCC"
+    }
 
     let thisSvgEndPointIndex = (index * 2) + 1
     let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
@@ -10,23 +22,6 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
     let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
     let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
     let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + index + '_'))
-    let parPathData = []
-    let indexer
-
-    if(shape === 'p2a'){
-        parPathData[0] = 0
-        parPathData[1] = "AAA"
-        indexer = index
-    }else if(shape === 'a2p'){
-        parPathData[0] = 1
-        parPathData[1] = "BBB"
-        indexer = index + 1
-    }else if(shape === 'a2a'){
-        parPathData[0] = 0
-        parPathData[1] = "CCC"
-        indexer = index + 1
-    }
-
 
     self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
     self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
@@ -38,10 +33,24 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
 
     let parallelPathDataGLOBAL = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
     let thisParPathData = parallelPathDataGLOBAL[index][0]
-    // Add function here to determine things like arcFlags, sweepFlags and ?center?
+
+    function determineSweepFlag() {
+        let sweepFlag
+        let prevParPathDataArc = parallelPathDataGLOBAL[index - 1][1].arc
+        let thisParPathDataArc = parallelPathDataGLOBAL[index][0].arc
+
+        if(prevParPathDataArc.exist) {
+            prevParPathDataArc.sweepFlag === 0 ? sweepFlag = 1 : sweepFlag = 0
+        }
+        if(thisParPathDataArc.exist) {
+            thisParPathDataArc.sweepFlag === 0 ? sweepFlag = 1 : sweepFlag = 0
+        }
+        return sweepFlag
+    }
+
     parallelPathDataGLOBAL.splice(index, 0, [
-        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
-        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: parPathData[0], side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: parPathData[1]}},
+        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
+        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
     ])
 
     referenceEndPointsParallelPerpendicular.splice(index, 0, [
@@ -49,14 +58,6 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
         {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
     ])
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
-
-    console.log('createAndAddSvgElementAndUpdateDataArrays')
-    console.log(referenceEndPointsBaseAndFillers)
-    console.log( a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
-    console.log(a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
-    console.log(parallelPathDataGLOBAL)
-    console.log(referenceEndPointsParallelPerpendicular)
-
 }
 
 export {

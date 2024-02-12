@@ -134,8 +134,8 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     let thirdParPath = targetEndPointsParallelFull[prevIndex + 2][1]
     let fourthParPath = targetEndPointsParallelFull[prevIndex + 3][0]
     let fifthParPath = targetEndPointsParallelFull[prevIndex + 3][1]
-
-    let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
+    
+    let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}}, self)
 
     // updateSVG_highlightOPD_01(firstParPath)
     // updateSVG_highlightOPD_02(fifthParPath)

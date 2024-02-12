@@ -1,5 +1,5 @@
 import {getDistance} from '../../../math/mathFunctions.js'
-import {updateSVG_highlight_1_circ_and_center_01, updateSVG_highlight_1_circ_and_center_02, updateSVG_highlight_1_path_and_2_points_01} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_circ_and_center_01, updateSVG_highlight_1_circ_and_center_02, updateSVG_highlight_1_path_and_2_points_01,updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_point_03, updateSVG_highlight_1_point_04} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {
@@ -78,40 +78,6 @@ function findPerpendicularFromPoint(curvePoint, firstPoint, secondPoint){
     }
 }
 
-function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
-    // TODO: change to swtitch statement.
-    // FIXME: if point1 to parallel (horizontal) to point2, negative still does in positive direction
-    // FIXME: if thats true then: if point1 to parallel (vertical) to point2, negative still does in positive direction (unchecked though)
-    let thisDirection
-    if(b[0] < c[0]) {
-        if(perpendicularPoint[0] < a[0]) {
-            thisDirection = 'positive'
-        } else {
-            thisDirection = 'negative'
-        }
-        if(b[1] > c[1]) {
-            if(perpendicularPoint[0] > a[0]) {
-                thisDirection = 'positive'
-            } else {
-                thisDirection = 'negative'
-            }
-        }
-    } else {
-        if(perpendicularPoint[0] < a[0]) {
-            thisDirection = 'positive'
-        } else {
-            thisDirection = 'negative'
-        }
-        if(b[1] > c[1]) {
-            if(perpendicularPoint[0] > a[0]) {
-                thisDirection = 'positive'
-            } else {
-                thisDirection = 'negative'
-            }
-        }
-    }
-    return thisDirection
-}
 function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, event) {
 // function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, event, newguy, self) {
 // function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondaryPathIndex, m1P) {
@@ -166,6 +132,71 @@ function findParallelDistance(thisOriginalFigurePathDataFromGlobal, thisSecondar
         }
         return parallelDistance;
     }
+}
+
+function directionOfARelatedToPathBetweenBandC(a, b, c, perpendicularPoint) {
+    // TODO: change to swtitch statement. and cleanup
+    let thisDirection
+    if(b[0] < c[0]) {
+        // console.log("crap")
+        if(b[1] === c[1]){
+            // console.log("PARALLEL")
+            if(a[1] < b[1]){
+                // console.log("aaaa")
+                thisDirection = 'positive'
+            } else {
+                // console.log("bbbb")
+                thisDirection = 'negative'
+            }
+        } else {
+            if(perpendicularPoint[0] < a[0]) {
+                // console.log(1)
+                thisDirection = 'positive'
+            } else {
+                // console.log(2)
+                thisDirection = 'negative'
+            }
+            if(b[1] > c[1]) {
+                if(perpendicularPoint[0] > a[0]) {
+                    // console.log(3)
+                    thisDirection = 'positive'
+                } else {
+                    // console.log(4)
+                    thisDirection = 'negative'
+                }
+            }
+        }
+    } else {
+        // console.log("poo")
+        if(b[1] === c[1]){
+            // console.log("PARALLEL")
+            if(a[1] > b[1]){
+                // console.log("aaaa")
+                thisDirection = 'positive'
+            } else {
+                // console.log("bbbb")
+                thisDirection = 'negative'
+            }
+        } else {
+            if(perpendicularPoint[0] < a[0]) {
+                // console.log(1)
+                thisDirection = 'positive'
+            } else {
+                // console.log(2)
+                thisDirection = 'negative'
+            }
+            if(b[1] > c[1]) {
+                if(perpendicularPoint[0] > a[0]) {
+                    // console.log(3)
+                    thisDirection = 'positive'
+                } else {
+                    // console.log(4)
+                    thisDirection = 'negative'
+                }
+            }
+        }
+    }
+    return thisDirection
 }
 
 
@@ -313,11 +344,6 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
 }
 
 function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData, self) {
-    console.log("ARC2ARC_111")
-    // SOLUTION!!:
-    // consider handling the a2a shape on the second arc instead of the first
-
-
     let x1 = firstParallelPathData.arc.center.x
     let y1 = firstParallelPathData.arc.center.y
     let r1 = firstParallelPathData.arc.radius
@@ -417,6 +443,21 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     let distance1 = getDistance(opd.x, opd.y, intersectionX1, intersectionY1)
     let distance2 = getDistance(opd.x, opd.y, intersectionX2, intersectionY2)
 
+
+    // TODO: clean
+    // let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+
+    // console.log("Asser")
+    // // console.log(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[0])
+    // // let pooper = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[0][9]
+    // // let pooperX = pooper.coords.x
+    // // let pooperY = pooper.coords.y
+    // // updateSVG_highlight_1_point_04([pooperX, pooperY], self)
+    // updateSVG_highlight_1_point_01([opd.x, opd.y], self)
+    // updateSVG_highlight_1_point_02([intersectionX1, intersectionY1], self)
+    // updateSVG_highlight_1_point_03([intersectionX2, intersectionY2], self)
+    
+    
     if(!isNaN(intersectionX1)) {    // ***This doesn't work whent circles overlap***
         if(distance1 < distance2) {
             intersectionClosestToXys = [

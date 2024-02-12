@@ -3,10 +3,10 @@ let updateSVG_PathToArcIntersect_02_switches = [0,0]
 let updateSVG_arcToArcIntersect_01_switches = [0,0]
 let updateSVG_highlightOPD_01_switches = [1,0]
 let updateSVG_highlightOPD_02_switches = [1,0]
-let updateSVG_highlight_1_point_01_switches = [0,0]
+let updateSVG_highlight_1_point_01_switches = [1,0]
 let updateSVG_highlight_1_point_02_switches = [1,0]
-let updateSVG_highlight_1_point_03_switches = [0,0]
-let updateSVG_highlight_1_point_04_switches = [0,0]
+let updateSVG_highlight_1_point_03_switches = [1,0]
+let updateSVG_highlight_1_point_04_switches = [1,0]
 let updateSVG_highlight_1_point_1_circ_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_02_switches = [1,0]
@@ -175,7 +175,7 @@ function updateSVG_highlight_1_point(coords) {
 function updateSVG_highlight_1_point_01(coords, self) {
     if(updateSVG_highlight_1_point_01_switches[0] === 1) {
         if(updateSVG_highlight_1_point_01_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_07')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--1 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_07')
             updateSVG_highlight_1_point_01_switches[1] = 1
         }
         let point = d3.select("#visualTest--intersectPt1--IDTAG_07")
@@ -188,20 +188,20 @@ function updateSVG_highlight_1_point_01(coords, self) {
 function updateSVG_highlight_1_point_02(coords, self) {
     if(updateSVG_highlight_1_point_02_switches[0] === 1) {
         if(updateSVG_highlight_1_point_02_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_07')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--2 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_08')
             updateSVG_highlight_1_point_02_switches[1] = 1
         }
-        let point = d3.select("#visualTest--intersectPt1--IDTAG_07")
+        let point = d3.select("#visualTest--intersectPt1--IDTAG_08")
 
         // let coords = [coords[0], coords[1]]
 
         point.attr('cx', coords[0]).attr('cy', coords[1])
     }
 }
-function updateSVG_highlight_1_point_03(coords) {
+function updateSVG_highlight_1_point_03(coords, self) {
     if(updateSVG_highlight_1_point_03_switches[0] === 1) {
         if(updateSVG_highlight_1_point_03_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--2 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_09')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_09')
             updateSVG_highlight_1_point_03_switches[1] = 1
         }
         let point = d3.select("#visualTest--intersectPt1--IDTAG_09")
@@ -212,10 +212,10 @@ function updateSVG_highlight_1_point_03(coords) {
     }
 }
 
-function updateSVG_highlight_1_point_04(coords) {
+function updateSVG_highlight_1_point_04(coords, self) {
     if(updateSVG_highlight_1_point_04_switches[0] === 1) {
         if(updateSVG_highlight_1_point_04_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--3 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_10')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_10')
             updateSVG_highlight_1_point_04_switches[1] = 1
         }
         let point = d3.select("#visualTest--intersectPt1--IDTAG_10")

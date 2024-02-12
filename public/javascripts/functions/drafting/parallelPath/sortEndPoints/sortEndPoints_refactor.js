@@ -88,16 +88,45 @@ function sort_endPoint_withArc(
     const includes = (list, newIndex) => list.includes(targetEndPoints[newIndex][1].arc.joinerSide)
     let arcRadiusObject = []
     arcRadiusObject.parDistAndDir
-    
-    switch(true) {
-        case isJoiner(index):
-        case isJoiner(index - 1):
-            handleDisconnectedArcIntersection()
-            break
-        default:
-            handleDefaultArcIntersection()
+
+
+
+    // // old first_arc
+    // // Arc on First Path DOESNT WORK
+    // switch(true) {
+    //     case isJoiner(index):
+    //     case isJoiner(index - 1):
+    //         handleDisconnectedArcIntersection()
+    //         break
+    //     default:
+    //         handleDefaultArcIntersection()
+    // }
+
+
+    // TODO: Orgnazine Better
+    // new first_arc
+    // Arc on First Path DOES WORK
+    if(!firstPosition(index)) {
+        switch(true) {
+            case isJoiner(index):
+            case isJoiner(index - 1):
+                handleDisconnectedArcIntersection()
+                break
+            default:
+                handleDefaultArcIntersection()
+        }
+    } else if (firstPosition(index)) {
+        switch(true) {
+            case isJoiner(index):
+            // case isJoiner(index - 1):
+                handleDisconnectedArcIntersection()
+                break
+            default:
+                handleDefaultArcIntersection()
+        }
     }
-    
+
+
     function handleDefaultArcIntersection() {
         // 1
         arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) // TODO: (Set_arcRad)
@@ -109,7 +138,33 @@ function sort_endPoint_withArc(
                 handleSecondArcSegment()
         }
     }
-    
+
+    // // old first_arc
+    // // Arc on First Path DOESNT WORK
+    // function handleFirctArcSegment() {
+    //     // 2
+    //     arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
+    //     switch(true) {
+    //         case !firstPosition(index):
+    //             arcExist(index - 1) ?
+    //                 // 3
+    //                 arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
+    //                 // 4
+    //                 arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
+    //             break
+    //         // 5
+    //         default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
+    //     }
+    //     switch(true) {
+    //         // 6_A
+    //         case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
+    //         // 6_B
+    //         default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+    //     }
+    // }
+
+    // new first_arc
+    // Arc on First Path DOES WORK
     function handleFirctArcSegment() {
         // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
@@ -124,14 +179,18 @@ function sort_endPoint_withArc(
             // 5
             default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
         }
-        switch(true) {
-            // 6_A
-            case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
-            // 6_B
-            default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+        if(!firstPosition(index)) {
+            switch(true) {
+                // 6_A
+                case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
+                // 6_B
+                default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+            }
         }
     }
-    
+
+
+
     function handleSecondArcSegment() {
         // 7
         arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
@@ -148,12 +207,12 @@ function sort_endPoint_withArc(
                 }
                 break
                 // 10
-            default: arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
+            default: arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject, self)
         }
         // 11
         arcIntersection_secondArcSegment_everyIndex_lastAction(parPathObj)
     }
-    
+
     function handleDisconnectedArcIntersection() {
         switch(true) {
             // 1_Joiner
@@ -196,7 +255,7 @@ function sort_endPoint_noArc(
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
     let thisIsArcToPath = false
-    
+
     if(index > 1) {
         if(isJoiner(index - 1) && joinerType(index, "BBB")) {
             thisIsArcToPath = true
@@ -214,16 +273,18 @@ function sort_endPoint_noArc(
     
         // AA_FIRST_ALL
         noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
-        
+
         if (firstPosition(index)) {
             // A
             noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
-            if(arcExist(index + 1)) {
-                // B
-                noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+            if(targetEndPoints.length !== 1) {
+                if(arcExist(index + 1)) {
+                    // B
+                    noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+                }
             }
         }
-    
+
         if (!firstPosition(index) && !lastPosition(index)) {
             if(!arcExist(index - 1)) {
                 if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
@@ -246,24 +307,26 @@ function sort_endPoint_noArc(
             }
         }
     
-        // TODO: Orgnazine better
+        // TODO: Orgnazine Better
         checkForAndRunLastPosition()
         function checkForAndRunLastPosition() {
-            if (!firstPosition(index) && lastPosition(index)) {
-                if(!arcExist(index - 1)) {
-                    if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-                        // H (Ga)
-                        noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
+            if (lastPosition(index)) {
+                if(!firstPosition(index)) {
+                    if(!arcExist(index - 1)) {
+                        if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
+                            // H (Ga)
+                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
+                        } else {
+                            // J (G+)
+                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
+                        }
+                        // K (G After)
+                        noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
                     } else {
-                        // J (G+)
-                        noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
+                        // L (H)
+                        noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() // empty
+                        return;
                     }
-                    // K (G After)
-                    noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-                } else {
-                    // L (H)
-                    noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() // empty
-                    return;
                 }
                 // M (Ia)
                 noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
@@ -275,84 +338,6 @@ function sort_endPoint_noArc(
 export {
     sortEndpoints
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// FIXME:
-// 1 path doesnt work
-
-// FIXME:
-// curve on first path doesnt work
-
-// FIXME:
-// curve on last path does work
-
-// FIXME:
-// parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
-
-// FIXME:
-// in some arc - arc shapes, if the connection is too smooth it will create a wobbly intersection while dragging par path
-// example F9
-// FIXME:
-// fixed jiggling from above but causing errors on multiple a2as with no contact
-// example F10
-
-// FIXME:
-// in some arc - arc shapes, the arc - arc connection will not find the correct circle intersection to follow
-// example F6
-
-// FIXME:
-// Shapes with Errors:
-// F6
-// F8 (Fixed)
-// F9
-// F10
-
-
-// FIXED
-// curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
-// FIXED
-// Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
-// FIXED
-// in some arc - arc shapes, when the arcs are ver close to being not connected, if you click secondary path on the side of origPath that makes the two arcs not connected, the parallelpath will start with a non connected shape and ruin the counting of each point
-// example: F8 shape
 
 
 
@@ -433,3 +418,95 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
     return nextArcToCenterMinusPointerToArcFromArc1
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Priority Issues
+// FIXME:
+// Joiner paths dont go in correct direction
+// FIXME:
+// Mostly fixed above, but still not perfect for shape with a2a and sweep flags go to one direction
+// example: F8
+// FIXME: (might be another file)
+// parallel paths on multiple shapes dont work correctly
+
+// Small Issues
+// FIXME:
+// small jiggle of circle when arc - arc no connection in index 15? on F6
+// example: F1
+// FIXME:
+// I think same issue as above but another example
+// example: F2
+// FIXME:
+// in shape arc 2 arc; when the original path two arce overlap, the parallel line picks the incorrect arc intersection to follow
+// also affects add filler shape
+// example: F3
+
+// REF:
+// Shapes with Errors:
+// F1
+// F2
+// F3
+// F4 (Fixed)
+// F5 (Fixed)
+// F8
+
+
+// FIXED
+// parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
+// FIXED
+// curve on last path doesnt work
+// FIXED
+// curve on first path doesnt work
+// FIXED
+// Fixed part of above but curve on first path not connected doesnt work.
+// FIXED
+// 1 path doesnt work
+// FIXED
+// in some arc - arc shapes, the arc - arc connection will not find the correct circle intersection to follow
+// example F6
+// FIXED
+// in some arc - arc shapes, if the connection is too smooth it will create a wobbly intersection while dragging par path
+// example F9
+// FIXED
+// fixed jiggling from above but causing errors on multiple a2as with no contact
+// example F10
+// FIXED
+// curve on second to last point causes bug on las point when it has a joiner (arc - joiner - path)
+// FIXED
+// Cant make arc - path - arc. Need arc - path - path - arc currently. Specifically: arc(with filler) - path - arc (with filler) not working.
+// FIXED
+// in some arc - arc shapes, when the arcs are ver close to being not connected, if you click secondary path on the side of origPath that makes the two arcs not connected, the parallelpath will start with a non connected shape and ruin the counting of each point
+// example: F8 shape

@@ -6,10 +6,6 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     let indexArray = parPathObj.arcToArcIndexArray
     let shapeCount = parPathObj.arcToArcCounter
 
-    console.log("numbers")
-    console.log(indexArray)
-    console.log(shapeCount)
-
     let shape = 'a2a'
     let prevIndex = index - 1
     let thisIndex = index
@@ -22,10 +18,9 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     // old
     // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
     // new
-    let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self)
+    let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self, index)
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
-            console.log("NEW_POINT_ADDED")
             // old
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
             // new
