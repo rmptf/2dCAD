@@ -1,4 +1,5 @@
 import {getPathToArcIntersections, findPointAlongSlopeAtDistance, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
+import {updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
     let prevIndex = index - 1
@@ -136,6 +137,23 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     let fifthParPath = targetEndPointsParallelFull[prevIndex + 3][1]
     
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}}, self)
+
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([thirdParPath, fifthParPath], self)
+    updateSVG_highlight_2_points_1_line_01([thirdParPath.coords.x, thirdParPath.coords.y], [fifthParPath.coords.x, fifthParPath.coords.y], self)
+    console.log(calculateAngle(thirdParPath.coords.x, thirdParPath.coords.y, fifthParPath.coords.x, fifthParPath.coords.y))
+    function calculateAngle(x1, y1, x2, y2) {
+        const deltaX = x2 - x1;
+        const deltaY = y2 - y1;
+        const angleRad = Math.atan2(deltaY, deltaX);
+        let angleDegrees = angleRad * (180 / Math.PI);
+        // Ensure angle is positive
+        angleDegrees = angleDegrees >= 0 ? angleDegrees : angleDegrees + 360;
+        return angleDegrees;
+    }
+
+
+
 
     // updateSVG_highlightOPD_01(firstParPath)
     // updateSVG_highlightOPD_02(fifthParPath)

@@ -1,5 +1,15 @@
 import {getDistance} from '../../../math/mathFunctions.js'
-import {updateSVG_highlight_1_circ_and_center_01, updateSVG_highlight_1_circ_and_center_02, updateSVG_highlight_1_path_and_2_points_01,updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_point_03, updateSVG_highlight_1_point_04} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {
+    updateSVG_highlight_2_points_1_line_01,
+    updateSVG_highlight_1_circ_and_center_01,
+    updateSVG_highlight_1_circ_and_center_02,
+    updateSVG_highlight_1_path_and_2_points_01,
+    updateSVG_highlight_1_point_01,
+    updateSVG_highlight_1_point_02,
+    updateSVG_highlight_1_point_03,
+    updateSVG_highlight_1_point_04,
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01
+    } from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {
@@ -367,6 +377,18 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
 
     // updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
     // updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([firstParallelPathData, secondParallelPathData], self)
+    // updateSVG_highlight_2_points_1_line_01([firstParallelPathData.coords.x, firstParallelPathData.coords.y], [secondParallelPathData.coords.x, secondParallelPathData.coords.y], self)
+    // console.log(calculateAngle(firstParallelPathData.coords.x, firstParallelPathData.coords.y, secondParallelPathData.coords.x, secondParallelPathData.coords.y))
+    // function calculateAngle(x1, y1, x2, y2) {
+    //     const deltaX = x2 - x1;
+    //     const deltaY = y2 - y1;
+    //     const angleRad = Math.atan2(deltaY, deltaX);
+    //     let angleDegrees = angleRad * (180 / Math.PI);
+    //     // Ensure angle is positive
+    //     // angleDegrees = angleDegrees >= 0 ? angleDegrees : angleDegrees + 360;
+    //     return angleDegrees;
+    // }
 
 
 

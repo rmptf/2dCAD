@@ -268,7 +268,7 @@ function sort_endPoint_noArc(
         const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
         const firstPosition = (newIndex) => (newIndex) === 0
         const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
-        let pathDatasOutside = setPathDataOUTSIDE(refEndPointsBase, index, parPathObj)
+        let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
         let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
     
         // AA_FIRST_ALL
@@ -342,7 +342,7 @@ export {
 
 
 
-function setPathDataOUTSIDE(refEndPointsBase, index, parPathObj) {
+function getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) {
     let thisPathDataOutside
     let nextPathDataOutside
     let fillerAdder = 0
@@ -455,35 +455,27 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 
 // Priority Issues
 // FIXME:
-// Joiner paths dont go in correct direction
+// small jiggle of circle when arc - arc no connection in index 15? on F6
 // FIXME:
-// Mostly fixed above, but still not perfect for shape with a2a and sweep flags go to one direction
-// example: F8
+// I think same issue as above but another example
 // FIXME: (might be another file)
 // parallel paths on multiple shapes dont work correctly
 
 // Small Issues
 // FIXME:
-// small jiggle of circle when arc - arc no connection in index 15? on F6
-// example: F1
-// FIXME:
-// I think same issue as above but another example
-// example: F2
-// FIXME:
 // in shape arc 2 arc; when the original path two arce overlap, the parallel line picks the incorrect arc intersection to follow
 // also affects add filler shape
 // example: F3
 
-// REF:
-// Shapes with Errors:
-// F1
-// F2
-// F3
-// F4 (Fixed)
-// F5 (Fixed)
-// F8
 
-
+// FIXED
+// Joiner paths dont go in correct direction
+// FIXED
+// Mostly fixed above, but still not perfect for shape with a2a and sweep flags go to one direction
+// example: F8
+// FIXED
+// Mostly fixed above but not accounting for fillers
+// exmaple: F8
 // FIXED
 // parallel path doesnt work perfectly (doesnt go above and below line correctly just below or just above) when path point1 and path point2 are horizontally parellel with each other (and potentially when they are vertically parellel with each other)
 // FIXED

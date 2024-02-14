@@ -1,3 +1,6 @@
+import {calculateArcAndDescribePath, describeComplexPath} from '../../math/svgElementCalculations.js'
+import {makeDeepCopy, transformData, findParallelDistance} from '../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js'
+
 let updateSVG_PathToArcIntersect_01_switches = [0,0]
 let updateSVG_PathToArcIntersect_02_switches = [0,0]
 let updateSVG_arcToArcIntersect_01_switches = [0,0]
@@ -13,6 +16,7 @@ let updateSVG_highlight_2_points_1_line_02_switches = [1,0]
 let updateSVG_highlight_1_circ_and_center_01_switches = [1,0]
 let updateSVG_highlight_1_circ_and_center_02_switches = [1,0]
 let updateSVG_highlight_1_path_and_2_points_01_switches = [1,0]
+let updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01_switches = [1,0]
 
 
 function updateSVG_PathToArcIntersect_01(parallelPathData, intersectionData, originalPathData) {
@@ -348,6 +352,40 @@ function updateSVG_highlight_1_path_and_2_points_01(intersectPoint1Coords, inter
     }
 }
 
+function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01(pathData, self) {
+    if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01_switches[0] === 1) {
+        if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01_switches[1] < 1) {
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path1--IDTAG_027')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path2--IDTAG_027')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--3 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path3--IDTAG_027')
+            updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01_switches[1] = 1
+        }
+
+        // GREEN
+        let pathData1 = makeDeepCopy(pathData)
+        pathData1[1].arc.arcFlag = 1
+        pathData1[1].arc.sweepFlag = 1
+        // PINK
+        let pathData2 = makeDeepCopy(pathData)
+        pathData2[1].arc.arcFlag = 1
+        pathData2[1].arc.sweepFlag = 0
+        // NAVY
+        let pathData3 = makeDeepCopy(pathData)
+        pathData3[1].arc.arcFlag = 0
+        pathData3[1].arc.sweepFlag = 1
+
+        let path1 = d3.select("#intArcTEST--path1--IDTAG_027")
+        let path2 = d3.select("#intArcTEST--path2--IDTAG_027")
+        let path3 = d3.select("#intArcTEST--path3--IDTAG_027")
+
+        path1.attr('d', describeComplexPath([pathData1[0], pathData1[1]]))
+        path2.attr('d', describeComplexPath([pathData2[0], pathData2[1]]))
+        path3.attr('d', describeComplexPath([pathData3[0], pathData3[1]]))
+    }
+}
+
+
+
 export {
     updateSVG_PathToArcIntersect_01,
     updateSVG_PathToArcIntersect_02,
@@ -363,5 +401,6 @@ export {
     updateSVG_highlight_2_points_1_line_02,
     updateSVG_highlight_1_circ_and_center_01,
     updateSVG_highlight_1_circ_and_center_02,
-    updateSVG_highlight_1_path_and_2_points_01
+    updateSVG_highlight_1_path_and_2_points_01,
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01
 }
