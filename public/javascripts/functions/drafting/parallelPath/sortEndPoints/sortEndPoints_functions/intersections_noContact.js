@@ -1,5 +1,6 @@
 import {getPathToArcIntersections, findPointAlongSlopeAtDistance, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
-import {updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {findLineMidpoint} from '../../../../math/mathFunctions.js'
 
 function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
     let prevIndex = index - 1
@@ -139,18 +140,36 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}}, self)
 
 
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([thirdParPath, fifthParPath], self)
-    updateSVG_highlight_2_points_1_line_01([thirdParPath.coords.x, thirdParPath.coords.y], [fifthParPath.coords.x, fifthParPath.coords.y], self)
-    console.log(calculateAngle(thirdParPath.coords.x, thirdParPath.coords.y, fifthParPath.coords.x, fifthParPath.coords.y))
-    function calculateAngle(x1, y1, x2, y2) {
-        const deltaX = x2 - x1;
-        const deltaY = y2 - y1;
-        const angleRad = Math.atan2(deltaY, deltaX);
-        let angleDegrees = angleRad * (180 / Math.PI);
-        // Ensure angle is positive
-        angleDegrees = angleDegrees >= 0 ? angleDegrees : angleDegrees + 360;
-        return angleDegrees;
-    }
+    // Two Shapes:
+    // A2A1 - First Seg (Shapes: F2, F4)
+    // A2A2 - Second Seg (Shapes: F1, F3)
+
+    // A2A - First Seg
+    let midPointBetweenInts = findLineMidpoint(firstParPath.coords.x, firstParPath.coords.y, zeroParPath.coords.x, zeroParPath.coords.y)
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([zeroParPath, firstParPath], self)
+    updateSVG_highlight_2_points_1_line_01([firstParPath.coords.x, firstParPath.coords.y], [zeroParPath.coords.x, zeroParPath.coords.y], self)
+    updateSVG_highlight_1_point_01([firstParPath.arc.center.x, firstParPath.arc.center.y], self)
+    updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[firstParPath.arc.center.x, firstParPath.arc.center.y], self)
+
+    // A2A - Second Seg
+    // let midPointBetweenInts = findLineMidpoint(thirdParPath.coords.x, thirdParPath.coords.y, fifthParPath.coords.x, fifthParPath.coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([thirdParPath, fifthParPath], self)
+    // updateSVG_highlight_2_points_1_line_01([thirdParPath.coords.x, thirdParPath.coords.y], [fifthParPath.coords.x, fifthParPath.coords.y], self)
+    // updateSVG_highlight_1_point_01([fifthParPath.arc.center.x, fifthParPath.arc.center.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[fifthParPath.arc.center.x, fifthParPath.arc.center.y], self)
+
+    
+
+    // console.log(calculateAngle(thirdParPath.coords.x, thirdParPath.coords.y, fifthParPath.coords.x, fifthParPath.coords.y))
+    // function calculateAngle(x1, y1, x2, y2) {
+    //     const deltaX = x2 - x1;
+    //     const deltaY = y2 - y1;
+    //     const angleRad = Math.atan2(deltaY, deltaX);
+    //     let angleDegrees = angleRad * (180 / Math.PI);
+    //     // Ensure angle is positive
+    //     angleDegrees = angleDegrees >= 0 ? angleDegrees : angleDegrees + 360;
+    //     return angleDegrees;
+    // }
 
 
 
