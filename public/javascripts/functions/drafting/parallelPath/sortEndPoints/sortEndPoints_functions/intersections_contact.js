@@ -1,6 +1,7 @@
 import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
-import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 import {findLineMidpoint} from '../../../../math/mathFunctions.js'
 
 // function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
@@ -32,11 +33,12 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     // A2A2 - Second Seg (Shapes: F1, F3)
 
     // A2A - First Seg
-    let midPointBetweenInts = findLineMidpoint(prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y, prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y)
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevPrevParallelPathData[1], prevParallelPathData[1]], self)
-    updateSVG_highlight_2_points_1_line_01([prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y], [prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y], self)
-    updateSVG_highlight_1_point_01([prevParallelPathData[1].arc.center.x, prevParallelPathData[1].arc.center.y], self)
-    updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[prevParallelPathData[1].arc.center.x, prevParallelPathData[1].arc.center.y], self)
+    // console.log("poop")
+    // let midPointBetweenInts = findLineMidpoint(prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y, prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevPrevParallelPathData[1], prevParallelPathData[1]], self)
+    // updateSVG_highlight_2_points_1_line_01([prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y], [prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y], self)
+    // updateSVG_highlight_1_point_01([prevParallelPathData[1].arc.center.x, prevParallelPathData[1].arc.center.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[prevParallelPathData[1].arc.center.x, prevParallelPathData[1].arc.center.y], self)
 
     // if(midPointBetweenInts[1] > prevPrevParallelPathData[1].arc.center.y) {
     //     prevPrevParallelPathData[1].arc.arcFlag = 1
@@ -46,7 +48,7 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
     // }
 
 
-    // A2A - Second Seg
+    // // A2A - Second Seg
     // let midPointBetweenInts = findLineMidpoint(prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y, thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y)
     // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevParallelPathData[1], thisParallelPathData[1]], self)
     // updateSVG_highlight_2_points_1_line_01([prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y], [thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y], self)
@@ -130,15 +132,41 @@ function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPo
     let shapeCount = parPathObj.arcToPathCounter
 
     let shape = 'a2p'
-    // let prevIndex = index - 1
+    let prevPrevPrevIndex = index - 3   // new
+    let prevPrevIndex = index - 2   // new
+    let prevIndex = index - 1
     let thisIndex = index
     let nextIndex = index + 1
-    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let prevPrevPrevParallelPathData = targetEndPointsParallelFull[prevPrevPrevIndex]   // new
+    let prevPrevParallelPathData = targetEndPointsParallelFull[prevPrevIndex]   // new
+    let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
     let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
     let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
     let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData, self)
+
+
+    // console.log("poop")
+    // // A2A - Second Seg
+
+    // console.log(prevPrevPrevIndex)
+    // console.log(prevPrevIndex)
+    // console.log(prevIndex)
+    // let midPointBetweenInts = findLineMidpoint(prevPrevPrevParallelPathData[1].coords.x, prevPrevPrevParallelPathData[1].coords.y, prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevPrevPrevParallelPathData[1], prevPrevParallelPathData[1]], self)
+    // updateSVG_highlight_2_points_1_line_01([prevPrevPrevParallelPathData[1].coords.x, prevPrevPrevParallelPathData[1].coords.y], [prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [prevPrevParallelPathData[1].arc.center.x, prevPrevParallelPathData[1].arc.center.y], self)
+
+    // console.log("poop")
+    // // A2A - Second Seg
+    // let midPointBetweenInts = findLineMidpoint(prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y, prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevPrevParallelPathData[1], prevParallelPathData[1]], self)
+    // updateSVG_highlight_2_points_1_line_01([prevPrevParallelPathData[1].coords.x, prevPrevParallelPathData[1].coords.y], [prevParallelPathData[1].coords.x, prevParallelPathData[1].coords.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [prevParallelPathData[1].arc.center.x, prevParallelPathData[1].arc.center.y], self)
+
+
+
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)

@@ -363,7 +363,7 @@ function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01(pathDa
 
         // GREEN
         let pathData1 = makeDeepCopy(pathData)
-        pathData1[1].arc.arcFlag = 0
+        pathData1[1].arc.arcFlag = 1
         pathData1[1].arc.sweepFlag = 0
         // PINK
         let pathData2 = makeDeepCopy(pathData)

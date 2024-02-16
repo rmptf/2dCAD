@@ -37,6 +37,10 @@ import {
     noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction
 } from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc.js'
 
+// import {updateSVG_highlight_1_point_01} from '../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
+import {findLineMidpoint} from '../../../math/mathFunctions.js'
+
 function sortEndpoints(
     targetEndPoints,
     refEndPointsPerp,
@@ -237,6 +241,35 @@ function sort_endPoint_withArc(
             case skipperCheckers.skipperChecker_Arc: disconnectedArcIntersection_skipThisIndex(parPathObj)
         }
     }
+
+
+
+    // handle large arc flag
+    console.log("pooper")
+    console.log(index)
+    if(isJoiner(index)) {
+        console.log("JOINER")
+    }
+    if(!isJoiner(index)) {
+        console.log("no_joiner")
+        if(index === 3) {
+            let prevTargetEndPoint = targetEndPoints[index - 2][1]
+            let thisTargetEndPoint = targetEndPoints[index - 1][1]
+            console.log(prevTargetEndPoint)
+            console.log(thisTargetEndPoint)
+            // updateSVG_highlight_1_point_01([thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+            // updateSVG_highlight_1_point_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], self)
+            // updateSVG_highlight_1_point_02([thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+
+            let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+            updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+            updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+            updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+        }
+    }
+
+
+    
 }
 
 

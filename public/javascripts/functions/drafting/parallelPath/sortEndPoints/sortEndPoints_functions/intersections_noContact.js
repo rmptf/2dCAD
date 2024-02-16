@@ -145,11 +145,11 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     // A2A2 - Second Seg (Shapes: F1, F3)
 
     // A2A - First Seg
-    let midPointBetweenInts = findLineMidpoint(firstParPath.coords.x, firstParPath.coords.y, zeroParPath.coords.x, zeroParPath.coords.y)
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([zeroParPath, firstParPath], self)
-    updateSVG_highlight_2_points_1_line_01([firstParPath.coords.x, firstParPath.coords.y], [zeroParPath.coords.x, zeroParPath.coords.y], self)
-    updateSVG_highlight_1_point_01([firstParPath.arc.center.x, firstParPath.arc.center.y], self)
-    updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[firstParPath.arc.center.x, firstParPath.arc.center.y], self)
+    // let midPointBetweenInts = findLineMidpoint(firstParPath.coords.x, firstParPath.coords.y, zeroParPath.coords.x, zeroParPath.coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([zeroParPath, firstParPath], self)
+    // updateSVG_highlight_2_points_1_line_01([firstParPath.coords.x, firstParPath.coords.y], [zeroParPath.coords.x, zeroParPath.coords.y], self)
+    // updateSVG_highlight_1_point_01([firstParPath.arc.center.x, firstParPath.arc.center.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[firstParPath.arc.center.x, firstParPath.arc.center.y], self)
 
     // A2A - Second Seg
     // let midPointBetweenInts = findLineMidpoint(thirdParPath.coords.x, thirdParPath.coords.y, fifthParPath.coords.x, fifthParPath.coords.y)
@@ -157,6 +157,7 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     // updateSVG_highlight_2_points_1_line_01([thirdParPath.coords.x, thirdParPath.coords.y], [fifthParPath.coords.x, fifthParPath.coords.y], self)
     // updateSVG_highlight_1_point_01([fifthParPath.arc.center.x, fifthParPath.arc.center.y], self)
     // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts,[fifthParPath.arc.center.x, fifthParPath.arc.center.y], self)
+    // console.log("poop")
 
     
 
