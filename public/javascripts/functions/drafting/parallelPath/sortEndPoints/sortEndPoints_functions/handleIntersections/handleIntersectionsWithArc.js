@@ -2,6 +2,9 @@ import {handleArcToArcIntersection, handlePathToArcIntersection, handleArcToPath
 import {handlePathToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handleArcToArcIntersectionNoContact} from '../../sortEndPoints_functions/intersections_noContact.js'
 import {findPointAlongSlopeAtDistance} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
 import {getDistance} from '../../../../../math/mathFunctions.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02, updateSVG_highlight_2_points_1_line_03, updateSVG_highlight_2_points_1_line_04} from '../../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
+import {findLineMidpoint} from '../../../../../math/mathFunctions.js'
+// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02} from '../../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
@@ -24,6 +27,19 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
     // empty
     // new
     handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+
+
+
+    // NEW_STUFF_ARCFLAG
+    let prevTargetEndPoint = targetEndPoints[index - 2][1]
+    let thisTargetEndPoint = targetEndPoints[index - 1][1]
+    let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+
+    fuckHerTits([thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], midPointBetweenInts)
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
 // done
 function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -66,6 +82,24 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
     // new
     // empty
+
+
+
+    // // Basic
+    // // if(index === 3) {
+    //     let prevTargetEndPoint = targetEndPoints[index - 1][1]
+    //     let thisTargetEndPoint = targetEndPoints[index - 0][1]
+    //     updateSVG_highlight_1_point_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_1_point_02([thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // // }
+
+    // // NEW_STUFF_ARCFLAG
+    // let prevTargetEndPoint = targetEndPoints[index - 2][1]
+    // let thisTargetEndPoint = targetEndPoints[index - 1][1]
+    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -119,6 +153,15 @@ function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEnd
     parPathObj.arcToArcCounter += 1
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+
+
+    // // NEW_STUFF_ARCFLAG
+    // let prevTargetEndPoint = targetEndPoints[index - 3][1]
+    // let thisTargetEndPoint = targetEndPoints[index - 2][1]
+    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
 // done
 function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
@@ -126,6 +169,15 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
     console.log("4_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
+
+
+    // NEW_STUFF_ARCFLAG
+    let prevTargetEndPoint = targetEndPoints[index - 3][1]
+    let thisTargetEndPoint = targetEndPoints[index - 2][1]
+    let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
 // done
 function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -177,6 +229,8 @@ function setPerpendicularPoints(targetEndPoints, refEndPointsBase, targetIndex, 
     }
 }
 
+
+// skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
 function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, offset) {
     let fillerAdder = 0
     let nextFillerAdder = 0
@@ -304,4 +358,61 @@ export {
     disconnectedArcIntersection_prevIndexIsArcToArc,
     disconnectedArcIntersection_prevIndexIsArcToPath,
     disconnectedArcIntersection_skipThisIndex,
+}
+
+
+
+
+let setterChecker = true
+let initialDistance
+let prevDistance
+
+function fuckHerTits(stationaryPointXY, movingPointXY) {
+    console.log("checkin")
+
+    // Coordinates of the stationary point
+    const stationaryPoint = { x: stationaryPointXY[0], y: stationaryPointXY[1] }
+    // Coordinates of the moving point
+    let movingPoint = { x: movingPointXY[0], y: movingPointXY[1] }
+
+    if(setterChecker) {
+        console.log("set_it")
+        // Initial distance between the points
+        initialDistance = Math.sqrt(Math.pow(movingPoint.x - stationaryPoint.x, 2) + Math.pow(movingPoint.y - stationaryPoint.y, 2))
+        prevDistance = initialDistance
+        setterChecker = false
+    }
+
+    // Track the previous distance for direction checking
+    // prevDistance = initialDistance
+
+    // Function to calculate the distance between two points
+    function calculateDistance(point1, point2) {
+        return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2))
+    }
+
+    // Function to move the point and check for crossing
+    function moveAndCheck() {
+        // Calculate the new distance between the points
+        let newDistance = calculateDistance(movingPoint, stationaryPoint)
+        console.log(initialDistance)
+        console.log(newDistance)
+        console.log(prevDistance)
+
+        // Check if the moving point crossed the stationary point
+        if (newDistance > initialDistance && prevDistance < initialDistance) {
+            // console.log("The moving point has crossed the stationary point.")
+            console.log("crossed_the_point")
+
+            // return
+        }
+
+        // Update the previous distance
+        prevDistance = newDistance
+        // If not crossed, continue moving
+        // You might want to use requestAnimationFrame or setTimeout to repeatedly call moveAndCheck
+    }
+
+    // Example usage
+    moveAndCheck()
 }
