@@ -50,7 +50,8 @@ function sortEndpoints(
     self,
     index,
     parallelPathObject,
-    skipperCheckers
+    skipperCheckers,
+    pooper
 ) {
     if (targetEndPoints[index][1].arc.exist === true) {
         sort_endPoint_withArc(
@@ -61,7 +62,8 @@ function sortEndpoints(
             self,
             index,
             parallelPathObject,
-            skipperCheckers
+            skipperCheckers,
+            pooper
         )
     } else {
         sort_endPoint_noArc(
@@ -83,7 +85,8 @@ function sort_endPoint_withArc(
     self,
     index,
     parPathObj,
-    skipperCheckers
+    skipperCheckers,
+    pooper
 ) {
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
@@ -177,7 +180,7 @@ function sort_endPoint_withArc(
             case !firstPosition(index):
                 arcExist(index - 1) ?
                     // 3
-                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
+                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, pooper) :
                     // 4
                     arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break
@@ -242,52 +245,6 @@ function sort_endPoint_withArc(
             case skipperCheckers.skipperChecker_Arc: disconnectedArcIntersection_skipThisIndex(parPathObj)
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    // // handle large arc flag
-    // console.log("pooper")
-    // console.log(index)
-
-    // if(index === 3) {
-    //     console.log(targetEndPoints[index - 2][1])
-    //     console.log(targetEndPoints[index - 1][1])
-    //     let prevTargetEndPointPOOP = getRefPointAtIndexIfNotFillerPOOP(targetEndPoints, index - 2)
-    //     let thisTargetEndPointPOOP = getRefPointAtIndexIfNotFillerPOOP(targetEndPoints, index - 1)
-    //     let prevTargetEndPoint = prevTargetEndPointPOOP[1]
-    //     let thisTargetEndPoint = thisTargetEndPointPOOP[1]
-    //     // let prevTargetEndPoint = targetEndPoints[index - 2][1]
-    //     // let thisTargetEndPoint = targetEndPoints[index - 1][1]
-    //     console.log(prevTargetEndPoint)
-    //     console.log(thisTargetEndPoint)
-    //     // updateSVG_highlight_1_point_01([thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    //     // updateSVG_highlight_1_point_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], self)
-    //     // updateSVG_highlight_1_point_02([thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-
-    //     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-    //     updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    //     updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    // }
-
-    // // Basic
-    // if(index === 3) {
-    //     let prevTargetEndPoint = targetEndPoints[index - 1][1]
-    //     let thisTargetEndPoint = targetEndPoints[index - 0][1]
-    //     updateSVG_highlight_1_point_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], self)
-    //     updateSVG_highlight_1_point_02([thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // }
-
-
-
 }
 
 function getRefPointAtIndexIfNotFillerPOOP(refEndPointsBase, index) {

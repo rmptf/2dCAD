@@ -62,6 +62,15 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.iterationCounter = 0
 
 
+
+    let pooper = []
+    pooper.counter = 0
+    pooper.startingPosition_X1
+    pooper.startingPosition_Y1
+
+
+
+
     console.log("STARTED")
 
     function mouseDownDrawParallel() {
@@ -80,11 +89,23 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     }
 
 
+
     function mouseMoveDrawParallel(event) {
         console.log(" ")
         console.log(" ")
         console.log(" ")
         console.log("START SHAPE")
+
+
+
+        pooper.counter = pooper.counter + 1
+        console.log("POOOOOOPER_1")
+        console.log(pooper.counter)
+
+
+
+
+
         if(isDownDrawParellelInitiated === true) {
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
             if(parallelPathObject.iterationCounter === 1) {
@@ -135,7 +156,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
                         self,
                         i,
                         parallelPathObject,
-                        skipperCheckers
+                        skipperCheckers,
+                        pooper
                     )
                 }
 
@@ -151,6 +173,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log(" ")
         console.log(" ")
         console.log(" ")
+        
     }
 }
 

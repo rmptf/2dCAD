@@ -20,7 +20,7 @@ function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
 }
 // done
-function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
+function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, pooper) {
     // 3
     console.log("3_seg1")
     // old
@@ -30,16 +30,41 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
 
 
 
+
+
+
+
+    // RIGHTHERE
+    // RIGHTHERE
+
     // NEW_STUFF_ARCFLAG
     let prevTargetEndPoint = targetEndPoints[index - 2][1]
     let thisTargetEndPoint = targetEndPoints[index - 1][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
-    fuckHerTits([thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], midPointBetweenInts)
+    console.log("POOPER")
+
+    if(pooper.counter === 1){
+        console.log("ASSSS")
+        pooper.startingPosition_X1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+        pooper.startingPosition_Y1 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+    }
+    
+    console.log("Orig")
+    dettectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], pooper, self, prevTargetEndPoint, thisTargetEndPoint)
 
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
     updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
     updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+
+    // RIGHTHERE
+    // RIGHTHERE
+
+
+
+
+
+
 }
 // done
 function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -363,56 +388,46 @@ export {
 
 
 
-let setterChecker = true
-let initialDistance
-let prevDistance
 
-function fuckHerTits(stationaryPointXY, movingPointXY) {
-    console.log("checkin")
 
-    // Coordinates of the stationary point
-    const stationaryPoint = { x: stationaryPointXY[0], y: stationaryPointXY[1] }
-    // Coordinates of the moving point
-    let movingPoint = { x: movingPointXY[0], y: movingPointXY[1] }
 
-    if(setterChecker) {
-        console.log("set_it")
-        // Initial distance between the points
-        initialDistance = Math.sqrt(Math.pow(movingPoint.x - stationaryPoint.x, 2) + Math.pow(movingPoint.y - stationaryPoint.y, 2))
-        prevDistance = initialDistance
-        setterChecker = false
+// RIGHTHERE
+// RIGHTHERE
+
+function dettectCrossover(movingPoint, stationaryPoint, pooper, self, prevEndPoint, thisEndPoint) {
+    let x1 = movingPoint[0]
+    let y1 = movingPoint[1]
+    let x2 = stationaryPoint[0]
+    let y2 = stationaryPoint[1]
+
+    let didX1StartGreaterThanX2 = pooper.startingPosition_X1
+    let didY1StartGreaterThanY2 = pooper.startingPosition_Y1
+
+    let isX1GreaterThanX2 = isGreaterThan(x1, x2)
+    let isY1GreaterThanY2 = isGreaterThan(y1, y2)
+
+    console.log("CHECK123 X_Start: _" + didX1StartGreaterThanX2 + "_ X_Now: _" + isX1GreaterThanX2 + "_")
+    console.log("CHECK123 Y_Start: _" + didY1StartGreaterThanY2 + "_ Y_Now: _" + isY1GreaterThanY2 + "_")
+
+    if(didX1StartGreaterThanX2 !== isX1GreaterThanX2 && didY1StartGreaterThanY2 !== isY1GreaterThanY2){
+        console.log("CROSSED_BITCH")
+
+        thisEndPoint.arc.arcFlag = +!thisEndPoint.arc.arcFlag
+
+        pooper.startingPosition_X1 =  !pooper.startingPosition_X1
+        pooper.startingPosition_Y1 = !pooper.startingPosition_Y1
+    } else {
+        console.log("NO_CROSS")
     }
-
-    // Track the previous distance for direction checking
-    // prevDistance = initialDistance
-
-    // Function to calculate the distance between two points
-    function calculateDistance(point1, point2) {
-        return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2))
-    }
-
-    // Function to move the point and check for crossing
-    function moveAndCheck() {
-        // Calculate the new distance between the points
-        let newDistance = calculateDistance(movingPoint, stationaryPoint)
-        console.log(initialDistance)
-        console.log(newDistance)
-        console.log(prevDistance)
-
-        // Check if the moving point crossed the stationary point
-        if (newDistance > initialDistance && prevDistance < initialDistance) {
-            // console.log("The moving point has crossed the stationary point.")
-            console.log("crossed_the_point")
-
-            // return
-        }
-
-        // Update the previous distance
-        prevDistance = newDistance
-        // If not crossed, continue moving
-        // You might want to use requestAnimationFrame or setTimeout to repeatedly call moveAndCheck
-    }
-
-    // Example usage
-    moveAndCheck()
 }
+
+function isGreaterThan(coord1, coord2) {
+    let greaterThan = true
+    if(coord1 < coord2){
+        greaterThan = false
+    }
+    return greaterThan
+}
+
+// RIGHTHERE
+// RIGHTHERE

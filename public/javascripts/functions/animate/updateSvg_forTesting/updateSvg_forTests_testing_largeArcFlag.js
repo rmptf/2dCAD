@@ -14,7 +14,7 @@ let updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02_switches = 
 function updateSVG_highlight_1_point_01(coords, self) {
     if(updateSVG_highlight_1_point_01_switches[0] === 1) {
         if(updateSVG_highlight_1_point_01_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_01')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--1').attr('id', 'visualTest--intersectPt1--IDTAG_01')
             updateSVG_highlight_1_point_01_switches[1] = 1
         }
 
