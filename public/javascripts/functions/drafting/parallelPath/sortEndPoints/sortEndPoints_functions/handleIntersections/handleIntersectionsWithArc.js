@@ -20,7 +20,7 @@ function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
 }
 // done
-function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, pooper) {
+function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 3
     console.log("3_seg1")
     // old
@@ -38,20 +38,33 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
     // RIGHTHERE
 
     // NEW_STUFF_ARCFLAG
+    console.log("RUNNING_ARCFLAG_FLIPPERCHECKER")
+
     let prevTargetEndPoint = targetEndPoints[index - 2][1]
     let thisTargetEndPoint = targetEndPoints[index - 1][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
-    console.log("POOPER")
-
-    if(pooper.counter === 1){
-        console.log("ASSSS")
-        pooper.startingPosition_X1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-        pooper.startingPosition_Y1 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+    if(parPathObj.iterationCounter === 1) {
+        console.log("Should_be_FIRST_endPointSort_iteration")
+        // parPathObj.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+        // parPathObj.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+        
+        parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+        parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
     }
-    
-    console.log("Orig")
-    dettectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], pooper, self, prevTargetEndPoint, thisTargetEndPoint)
+
+    let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, thisTargetEndPoint)
+
+    const flipFlagAndFunction = (flipFlag, endPOINT) => {
+        if (flipFlag) {
+            endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
+        }
+    }
+
+    flipFlagAndFunction(flipFlag, thisTargetEndPoint)
+
+
+
 
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
     updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
@@ -125,6 +138,35 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
     // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
     // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+
+
+    // // RIGHTHERE
+    // // RIGHTHERE
+
+    // // NEW_STUFF_ARCFLAG
+    // let prevTargetEndPoint = targetEndPoints[index - 2][1]
+    // let thisTargetEndPoint = targetEndPoints[index - 1][1]
+    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+
+    // console.log("POOPER")
+
+    // if(parPathObj.iterationCounter === 1) {
+    //     console.log("ASSSS")
+    //     parPathObj.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+    //     parPathObj.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+    // }
+    
+    // console.log("Orig")
+    // detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, thisTargetEndPoint)
+
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+
+    // // RIGHTHERE
+    // // RIGHTHERE
+
+
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -196,13 +238,13 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
 
 
-    // NEW_STUFF_ARCFLAG
-    let prevTargetEndPoint = targetEndPoints[index - 3][1]
-    let thisTargetEndPoint = targetEndPoints[index - 2][1]
-    let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-    updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // // NEW_STUFF_ARCFLAG
+    // let prevTargetEndPoint = targetEndPoints[index - 3][1]
+    // let thisTargetEndPoint = targetEndPoints[index - 2][1]
+    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    // updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
 // done
 function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -394,38 +436,36 @@ export {
 // RIGHTHERE
 // RIGHTHERE
 
-function dettectCrossover(movingPoint, stationaryPoint, pooper, self, prevEndPoint, thisEndPoint) {
+function detectCrossover(movingPoint, stationaryPoint, parPathObj, thisEndPoint) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]
     let x2 = stationaryPoint[0]
     let y2 = stationaryPoint[1]
+    let currentPos_x1GreaterThanX2 = isGreaterThan(x1, x2)
+    let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
+    let flipFlag = false
 
-    let didX1StartGreaterThanX2 = pooper.startingPosition_X1
-    let didY1StartGreaterThanY2 = pooper.startingPosition_Y1
+    console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
+    console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
 
-    let isX1GreaterThanX2 = isGreaterThan(x1, x2)
-    let isY1GreaterThanY2 = isGreaterThan(y1, y2)
+    if(parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+        console.log("CROSSED")
+        flipFlag = true
 
-    console.log("CHECK123 X_Start: _" + didX1StartGreaterThanX2 + "_ X_Now: _" + isX1GreaterThanX2 + "_")
-    console.log("CHECK123 Y_Start: _" + didY1StartGreaterThanY2 + "_ Y_Now: _" + isY1GreaterThanY2 + "_")
+        parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2
+        parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2
 
-    if(didX1StartGreaterThanX2 !== isX1GreaterThanX2 && didY1StartGreaterThanY2 !== isY1GreaterThanY2){
-        console.log("CROSSED_BITCH")
-
-        thisEndPoint.arc.arcFlag = +!thisEndPoint.arc.arcFlag
-
-        pooper.startingPosition_X1 =  !pooper.startingPosition_X1
-        pooper.startingPosition_Y1 = !pooper.startingPosition_Y1
+        return flipFlag
     } else {
         console.log("NO_CROSS")
     }
+
+    return flipFlag
 }
 
-function isGreaterThan(coord1, coord2) {
-    let greaterThan = true
-    if(coord1 < coord2){
-        greaterThan = false
-    }
+function isGreaterThan(num1, num2) {
+    let greaterThan
+    num1 > num2 ? greaterThan = true : greaterThan = false;
     return greaterThan
 }
 

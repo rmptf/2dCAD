@@ -50,8 +50,7 @@ function sortEndpoints(
     self,
     index,
     parallelPathObject,
-    skipperCheckers,
-    pooper
+    skipperCheckers
 ) {
     if (targetEndPoints[index][1].arc.exist === true) {
         sort_endPoint_withArc(
@@ -62,8 +61,7 @@ function sortEndpoints(
             self,
             index,
             parallelPathObject,
-            skipperCheckers,
-            pooper
+            skipperCheckers
         )
     } else {
         sort_endPoint_noArc(
@@ -85,8 +83,7 @@ function sort_endPoint_withArc(
     self,
     index,
     parPathObj,
-    skipperCheckers,
-    pooper
+    skipperCheckers
 ) {
     const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
     const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
@@ -180,7 +177,7 @@ function sort_endPoint_withArc(
             case !firstPosition(index):
                 arcExist(index - 1) ?
                     // 3
-                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, pooper) :
+                    arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
                     // 4
                     arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
                 break

@@ -61,13 +61,9 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.parallelDistance
     parallelPathObject.iterationCounter = 0
 
-
-
-    let pooper = []
-    pooper.counter = 0
-    pooper.startingPosition_X1
-    pooper.startingPosition_Y1
-
+    // parallelPathObject.startPos_x1GreaterThanX2
+    // parallelPathObject.startPos_y1GreaterThanY2
+    parallelPathObject.newARCFLAG_stuff = {}
 
 
 
@@ -96,11 +92,6 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log(" ")
         console.log("START SHAPE")
 
-
-
-        pooper.counter = pooper.counter + 1
-        console.log("POOOOOOPER_1")
-        console.log(pooper.counter)
 
 
 
@@ -156,8 +147,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
                         self,
                         i,
                         parallelPathObject,
-                        skipperCheckers,
-                        pooper
+                        skipperCheckers
                     )
                 }
 
