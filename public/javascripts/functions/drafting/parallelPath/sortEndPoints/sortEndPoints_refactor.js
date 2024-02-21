@@ -198,7 +198,7 @@ function sort_endPoint_withArc(
 
     function handleSecondArcSegment() {
         // 7
-        arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
+        arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject, parPathObj, self)
         switch(true) {
             case !lastPosition(index):
                 if(arcExist(index + 1)) {
@@ -215,7 +215,7 @@ function sort_endPoint_withArc(
             default: arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject, self)
         }
         // 11
-        arcIntersection_secondArcSegment_everyIndex_lastAction(parPathObj)
+        arcIntersection_secondArcSegment_everyIndex_lastAction(targetEndPoints, parPathObj, index, self)
     }
 
     function handleDisconnectedArcIntersection() {

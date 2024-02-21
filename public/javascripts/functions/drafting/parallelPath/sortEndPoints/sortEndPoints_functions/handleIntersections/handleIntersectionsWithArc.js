@@ -98,10 +98,11 @@ function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoin
 
 
 // done
-function arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
+function arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject, parPathObj, self) {
     // 7
     console.log("7_seg2_first_all")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index, index + 1, arcRadiusObject, 0, true)
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -117,7 +118,7 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     
     // NEW_STUFF_ARCFLAG
 
-    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
 
     // RIGHTHERE
@@ -136,7 +137,7 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEn
     // RIGHTHERE
     
     // NEW_STUFF_ARCFLAG
-    //TODO:  issues here
+
     // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
 
@@ -150,10 +151,22 @@ function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPoint
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index + 1, index + 1, arcRadiusObject, 1, false)
 }
 // done
-function arcIntersection_secondArcSegment_everyIndex_lastAction(parPathObj) {
+function arcIntersection_secondArcSegment_everyIndex_lastAction(targetEndPoints, parPathObj, index, self) {
     // 11
     console.log("11_seg2_last_all")
     parPathObj.parallelPathSegmentCounter_FIRST = -1
+
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
 
 
@@ -188,6 +201,17 @@ function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEnd
     parPathObj.arcToArcCounter += 1
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
 
 
     // // NEW_STUFF_ARCFLAG
@@ -413,9 +437,12 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
     let thisTargetEndPoint = targetEndPoints[index - 1][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
+    parPathObj.counter_INSIDE_shape = parPathObj.counter_INSIDE_shape + 1
+
     if(parPathObj.iterationCounter === 1) {
         // console.log("Should_be_FIRST_endPointSort_iteration")
-        parPathObj.newARCFLAG_stuff[index] = {
+        parPathObj.newARCFLAG_stuff_new.push(parPathObj.counter_INSIDE_shape)
+        parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape] = {
             startPos_x1GreaterThanX2: isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x),
             startPos_y1GreaterThanY2: isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
         }
@@ -449,11 +476,11 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
         updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
     }
 
-    if(index === 5) {
-        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
-        updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    }
+    // // if(index === 5) {
+    // //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
+    // //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    // //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // // }
 }
 
 
@@ -470,15 +497,15 @@ function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    // console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
-    // console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
+    // console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
+    // console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
 
-    if(parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+    if(parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         // console.log("CROSSED")
         flipFlag = true
 
-        parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2
-        parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2
+        parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2
+        parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2
 
         return flipFlag
     } else {
