@@ -2,9 +2,28 @@ import {handleArcToArcIntersection, handlePathToArcIntersection, handleArcToPath
 import {handlePathToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handleArcToArcIntersectionNoContact} from '../../sortEndPoints_functions/intersections_noContact.js'
 import {findPointAlongSlopeAtDistance} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
 import {getDistance} from '../../../../../math/mathFunctions.js'
-import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02, updateSVG_highlight_2_points_1_line_03, updateSVG_highlight_2_points_1_line_04} from '../../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 import {findLineMidpoint} from '../../../../../math/mathFunctions.js'
-// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02} from '../../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
+import {
+    updateSVG_highlight_1_point_01,
+    updateSVG_highlight_1_point_02,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01,
+    updateSVG_highlight_2_points_1_line_01_A,
+    updateSVG_highlight_2_points_1_line_01_B,
+    
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
+    updateSVG_highlight_2_points_1_line_02_A,
+    updateSVG_highlight_2_points_1_line_02_B,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03,
+    updateSVG_highlight_2_points_1_line_03_A,
+    updateSVG_highlight_2_points_1_line_03_B,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04,
+    updateSVG_highlight_2_points_1_line_04_A,
+    updateSVG_highlight_2_points_1_line_04_B,
+} from '../../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
+
 
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
@@ -36,39 +55,11 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
 
     // RIGHTHERE
     // RIGHTHERE
-
+    
     // NEW_STUFF_ARCFLAG
-    console.log("RUNNING_ARCFLAG_FLIPPERCHECKER")
 
-    let prevTargetEndPoint = targetEndPoints[index - 2][1]
-    let thisTargetEndPoint = targetEndPoints[index - 1][1]
-    let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
-    if(parPathObj.iterationCounter === 1) {
-        console.log("Should_be_FIRST_endPointSort_iteration")
-        // parPathObj.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-        // parPathObj.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
-        
-        parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-        parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
-    }
-
-    let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, thisTargetEndPoint)
-
-    const flipFlagAndFunction = (flipFlag, endPOINT) => {
-        if (flipFlag) {
-            endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
-        }
-    }
-
-    flipFlagAndFunction(flipFlag, thisTargetEndPoint)
-
-
-
-
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-    updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 
     // RIGHTHERE
     // RIGHTHERE
@@ -121,50 +112,16 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // new
     // empty
 
-
-
-    // // Basic
-    // // if(index === 3) {
-    //     let prevTargetEndPoint = targetEndPoints[index - 1][1]
-    //     let thisTargetEndPoint = targetEndPoints[index - 0][1]
-    //     updateSVG_highlight_1_point_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], self)
-    //     updateSVG_highlight_1_point_02([thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // // }
-
-    // // NEW_STUFF_ARCFLAG
-    // let prevTargetEndPoint = targetEndPoints[index - 2][1]
-    // let thisTargetEndPoint = targetEndPoints[index - 1][1]
-    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-
-
-    // // RIGHTHERE
-    // // RIGHTHERE
-
-    // // NEW_STUFF_ARCFLAG
-    // let prevTargetEndPoint = targetEndPoints[index - 2][1]
-    // let thisTargetEndPoint = targetEndPoints[index - 1][1]
-    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-
-    // console.log("POOPER")
-
-    // if(parPathObj.iterationCounter === 1) {
-    //     console.log("ASSSS")
-    //     parPathObj.startPos_x1GreaterThanX2 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-    //     parPathObj.startPos_y1GreaterThanY2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
-    // }
+    // RIGHTHERE
+    // RIGHTHERE
     
-    // console.log("Orig")
-    // detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, thisTargetEndPoint)
+    // NEW_STUFF_ARCFLAG
 
-    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
-    // // RIGHTHERE
-    // // RIGHTHERE
+
+    // RIGHTHERE
+    // RIGHTHERE
 
 
 }
@@ -174,6 +131,17 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEn
     console.log("9_seg2")
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
     handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+    //TODO:  issues here
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
 // done
 function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
@@ -436,7 +404,64 @@ export {
 // RIGHTHERE
 // RIGHTHERE
 
-function detectCrossover(movingPoint, stationaryPoint, parPathObj, thisEndPoint) {
+
+
+function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
+    console.log("RUNNING_ARCFLAG_FLIPPERCHECKER")
+
+    let prevTargetEndPoint = targetEndPoints[index - 2][1]
+    let thisTargetEndPoint = targetEndPoints[index - 1][1]
+    let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+
+    if(parPathObj.iterationCounter === 1) {
+        // console.log("Should_be_FIRST_endPointSort_iteration")
+        parPathObj.newARCFLAG_stuff[index] = {
+            startPos_x1GreaterThanX2: isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x),
+            startPos_y1GreaterThanY2: isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+        }
+    }
+
+    let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, index)
+
+    const flipFlagAndFunction = (flipFlag, endPOINT) => {
+        if (flipFlag) {
+            endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
+        }
+    }
+
+    flipFlagAndFunction(flipFlag, thisTargetEndPoint)
+
+    if(index === 2) {
+        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+        updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+        updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    }
+
+    if(index === 3) {
+        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+        updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+        updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    }
+
+    if(index === 4) {
+        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
+        updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+        updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    }
+
+    if(index === 5) {
+        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
+        updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+        updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    }
+}
+
+
+
+
+
+
+function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]
     let x2 = stationaryPoint[0]
@@ -445,19 +470,19 @@ function detectCrossover(movingPoint, stationaryPoint, parPathObj, thisEndPoint)
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
-    console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
+    // console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
+    // console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
 
-    if(parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
-        console.log("CROSSED")
+    if(parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+        // console.log("CROSSED")
         flipFlag = true
 
-        parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff.startPos_x1GreaterThanX2
-        parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff.startPos_y1GreaterThanY2
+        parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff[index].startPos_x1GreaterThanX2
+        parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff[index].startPos_y1GreaterThanY2
 
         return flipFlag
     } else {
-        console.log("NO_CROSS")
+        // console.log("NO_CROSS")
     }
 
     return flipFlag
