@@ -26,11 +26,25 @@ import {
 
 
 // done
-function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
+function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // 1
     console.log("1_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+
+    // TODO:  currently running before filler is added. needs to run after
+    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
+
+
 }
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
@@ -58,7 +72,7 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
     
     // NEW_STUFF_ARCFLAG
 
-    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
 
     // RIGHTHERE
@@ -83,7 +97,7 @@ function arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPoints
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index, index + 1, arcRadiusObject, 0, false)
 }
 // done
-function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index) {
+function arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self) {
     // 6_A
     console.log("6_A_seg1")
     setThisPathDataAsPreviousPathData(targetEndPoints, index)
@@ -102,7 +116,6 @@ function arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints
     // 7
     console.log("7_seg2_first_all")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index, index + 1, arcRadiusObject, 0, true)
-    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -112,19 +125,6 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
     // new
     // empty
-
-    // RIGHTHERE
-    // RIGHTHERE
-    
-    // NEW_STUFF_ARCFLAG
-
-    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
-
-
-    // RIGHTHERE
-    // RIGHTHERE
-
-
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -162,7 +162,7 @@ function arcIntersection_secondArcSegment_everyIndex_lastAction(targetEndPoints,
     
     // NEW_STUFF_ARCFLAG
 
-    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
 
     // RIGHTHERE
@@ -177,6 +177,24 @@ function disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEn
     parPathObj.pathToArcCounter += 1
     handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+
+    console.log("settttt_1J")
+    parPathObj.pooper_is_1j_running_for_2j = true
+
+    // FIXME:
+    // on the last form before removing the fillers, 3j and or 1j runs and 4j and or 2j doLinesIntersect, meaning the arc setter runs 3 times instead of 4 and throws off all following timers
+
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
 // done
 function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
@@ -184,6 +202,19 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
     console.log("2_A_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_2AJ") // TODO: (Set_arcRad)
+
+    // RIGHTHERE
+    // RIGHTHERE
+
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_1j_running_for_2j === true) {
+        console.log("running")
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+        parPathObj.pooper_is_1j_running_for_2j = false
+    }
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
 // done
 function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -192,52 +223,95 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targe
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
     handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
+
+
+
+
+
 // done
-function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
+function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // 3_Joiner
     console.log("3_Joiner_ooo")
     // TODO: // I removed this, test all variations, check if keep or remove from over places
     // TODO: // Why did i remove this? I need it now for arcToArcCounter (turned back on)
     parPathObj.arcToArcCounter += 1
+
+    // old
+    // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
+    // parPathObj.parallelPathSegmentCounter_FIRST = 0
+
+    // new (should prob move a2a to 4_joiner but too many issues, keeping here seems to work as long as i place setArtRad here first)
+    setArcRadius(targetEndPoints, refEndPointsBase, index + 1, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+
+    console.log("settttt_3J")
+    parPathObj.pooper_is_3j_running_for_4j = true
+
+    // FIXME:
+    // on the last form before removing the fillers, 3j and or 1j runs and 4j and or 2j doLinesIntersect, meaning the arc setter runs 3 times instead of 4 and throws off all following timers
+
+
+
 
     // RIGHTHERE
     // RIGHTHERE
     
     // NEW_STUFF_ARCFLAG
-
-    setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
 
 
     // RIGHTHERE
     // RIGHTHERE
-
-
-    // // NEW_STUFF_ARCFLAG
-    // let prevTargetEndPoint = targetEndPoints[index - 3][1]
-    // let thisTargetEndPoint = targetEndPoints[index - 2][1]
-    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-    // updateSVG_highlight_2_points_1_line_01([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // updateSVG_highlight_2_points_1_line_02(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
 }
+
 // done
-function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) {
+function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // 4_Joiner
     console.log("4_Joiner_ooo")
+    // old
+    // parPathObj.parallelPathSegmentCounter_FIRST = 0
+    // setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
+
+    // new (too many issues, kept handlea2a in 3_joiner)
+    // setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
+    // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 2)
+
+    // new
     parPathObj.parallelPathSegmentCounter_FIRST = 0
-    setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
 
 
-    // // NEW_STUFF_ARCFLAG
-    // let prevTargetEndPoint = targetEndPoints[index - 3][1]
-    // let thisTargetEndPoint = targetEndPoints[index - 2][1]
-    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
-    // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-    // updateSVG_highlight_2_points_1_line_03([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // updateSVG_highlight_2_points_1_line_04(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+    console.log("oookookok")
+    console.log(parPathObj.pooper_is_3j_running_for_4j)
+
+    if(parPathObj.pooper_is_3j_running_for_4j === true) {
+        console.log("running")
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+        parPathObj.pooper_is_3j_running_for_4j = false
+    }
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // done
 function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 5_Joiner
@@ -245,7 +319,19 @@ function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEn
     skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 0)
     handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
     parPathObj.parallelPathSegmentCounter_SECOND = 1
+
+    // RIGHTHERE
+    // RIGHTHERE
+    
+    // NEW_STUFF_ARCFLAG
+
+    // setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
+
 // done
 function disconnectedArcIntersection_skipThisIndex(parPathObj) {
     // 6_Joiner
@@ -431,10 +517,15 @@ export {
 
 
 function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
+    // console.log("set_arcflag_TurnedOFF")
     console.log("RUNNING_ARCFLAG_FLIPPERCHECKER")
+    // old
+    // let prevTargetEndPoint = targetEndPoints[index - 2][1]
+    // let thisTargetEndPoint = targetEndPoints[index - 1][1]
 
-    let prevTargetEndPoint = targetEndPoints[index - 2][1]
-    let thisTargetEndPoint = targetEndPoints[index - 1][1]
+    // new
+    let prevTargetEndPoint = targetEndPoints[index - 1][1]
+    let thisTargetEndPoint = targetEndPoints[index][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
     parPathObj.counter_INSIDE_shape = parPathObj.counter_INSIDE_shape + 1
@@ -448,6 +539,12 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
         }
     }
 
+
+    // console.log(parPathObj.newARCFLAG_stuff)
+    // console.log(parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape])
+    // console.log(parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2)
+    // console.log(parPathObj.counter_INSIDE_shape)
+
     let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parPathObj, index)
 
     const flipFlagAndFunction = (flipFlag, endPOINT) => {
@@ -458,29 +555,35 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
 
     flipFlagAndFunction(flipFlag, thisTargetEndPoint)
 
-    if(index === 2) {
-        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-        updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    }
 
-    if(index === 3) {
-        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-        updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    }
 
-    if(index === 4) {
-        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
-        updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    }
 
-    // // if(index === 5) {
-    // //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
-    // //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    // //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    // // }
+
+
+
+    // if(index === 1) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 2) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 4 || index === 5) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 4 || index === 5) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
 }
 
 
@@ -497,8 +600,8 @@ function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    // console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
-    // console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
+    console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
+    console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
 
     if(parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         // console.log("CROSSED")

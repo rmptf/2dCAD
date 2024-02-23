@@ -134,7 +134,7 @@ function sort_endPoint_withArc(
 
     function handleDefaultArcIntersection() {
         // 1
-        arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) // TODO: (Set_arcRad)
+        arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
         switch(true) {
             case parPathObj.parallelPathSegmentCounter_FIRST === 0:
                 handleFirctArcSegment()
@@ -187,7 +187,7 @@ function sort_endPoint_withArc(
         if(!firstPosition(index)) {
             switch(true) {
                 // 6_A
-                case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
+                case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
                 // 6_B
                 default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
             }
@@ -231,10 +231,10 @@ function sort_endPoint_withArc(
                     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
                 break
             // 3_Joiner
-            case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
+            case joinerType(index, "CCC"): disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); break
             // 4_Joiner
             case joinerType(index - 1, "CCC"):
-                disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject); // TODO: (Set_arcRad)
+                disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); // TODO: (Set_arcRad)
                 break
             // 5_Joiner
             case joinerType(index, "BBB"): disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
@@ -348,7 +348,12 @@ function sort_endPoint_noArc(
                         noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
                     } else {
                         // L (H)
-                        noArcIntersection_notFirstPos_lastPos_prevIndexIsArc() // empty
+                        // TODO: fix this
+                        let prevJoiner = false
+                        if(isJoiner(index - 1)) {
+                            prevJoiner = true
+                        }
+                        noArcIntersection_notFirstPos_lastPos_prevIndexIsArc(targetEndPoints, parPathObj, index, self, prevJoiner) // empty
                         return;
                     }
                 }
@@ -479,11 +484,16 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 
 // Priority Issues
 // FIXME:
-// small jiggle of circle when arc - arc no connection in index 15? on F6
+// some shapes need a function to set the correct large arc flag
+// exampless: F1, F2, F3, F4
+
 // FIXME:
-// I think same issue as above but another example
+// arc 2 arc not connected isnt working correctly on some shapes, need to handle the first and second arcs from the SECOND shape
+// (similar to wobble line on arc 2 arc shapes connected)
+// example: F2
+
 // FIXME: (might be another file)
-// parallel paths on multiple shapes dont work correctly
+// parallel paths on multiple shapes on one doc dont work correctly
 
 // Small Issues
 // FIXME:

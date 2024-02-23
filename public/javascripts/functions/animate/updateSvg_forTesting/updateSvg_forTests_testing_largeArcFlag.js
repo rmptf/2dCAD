@@ -94,8 +94,8 @@ function updateSVG_highlight_2_points_1_line_01_A(coords1, coords2, self) {
 function updateSVG_highlight_2_points_1_line_01_B(coords1, coords2, self) {
     if(updateSVG_highlight_2_points_1_line_01_B_switches[0] === 1) {
         if(updateSVG_highlight_2_points_1_line_01_B_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--3').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_04')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--3').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_04')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_04')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_04')
             self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--1 testElem-stroke-color--3 testElem-dashArray--5').attr('id', 'visualTest--path--largeArcFlag-IDTAG_04')
             updateSVG_highlight_2_points_1_line_01_B_switches[1] = 1
         }
@@ -387,12 +387,12 @@ function updateSVG_highlight_2_points_1_line_04_A(coords1, coords2, self) {
 
 
 function updateSVG_highlight_2_points_1_line_04_B(coords1, coords2, self) {
-    if(updateSVG_highlight_2_points_1_line_05_B_switches[0] === 1) {
-        if(updateSVG_highlight_2_points_1_line_05_B_switches[1] < 1) {
+    if(updateSVG_highlight_2_points_1_line_04_B_switches[0] === 1) {
+        if(updateSVG_highlight_2_points_1_line_04_B_switches[1] < 1) {
             self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_13')
             self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_13')
             self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--1 testElem-stroke-color--3 testElem-dashArray--5').attr('id', 'visualTest--path--largeArcFlag-IDTAG_13')
-            updateSVG_highlight_2_points_1_line_05_B_switches[1] = 1
+            updateSVG_highlight_2_points_1_line_04_B_switches[1] = 1
         }
 
         let point1 = d3.select("#visualTest--intersectPt1--largeArcFlag-IDTAG_13")

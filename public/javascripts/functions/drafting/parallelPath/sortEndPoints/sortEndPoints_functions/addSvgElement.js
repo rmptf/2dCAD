@@ -54,7 +54,7 @@ export {
 
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
-    console.log("starter")
+    // console.log("starter")
     let newSweepFlag
     let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
     let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
@@ -80,7 +80,7 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     // both arcs exist
     // if(prevBaseRefArc.exist && nextBaseRefArc.exist) {
     if(thisBaseRefArc.exist && nextBaseRefArc.exist) {
-        console.log(111)
+        // console.log(111)
         // both arcs have different sweep flags
         // if(prevBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
         if(thisBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {

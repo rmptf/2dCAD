@@ -1,5 +1,5 @@
 import {getPathToArcIntersections, findPointAlongSlopeAtDistance, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
-import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 import {findLineMidpoint} from '../../../../math/mathFunctions.js'
 
 function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
@@ -136,8 +136,28 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     let thirdParPath = targetEndPointsParallelFull[prevIndex + 2][1]
     let fourthParPath = targetEndPointsParallelFull[prevIndex + 3][0]
     let fifthParPath = targetEndPointsParallelFull[prevIndex + 3][1]
-    
+
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}}, self)
+
+
+    // let thisIND = index
+    // let nextIND = index + 1
+    // let thisINDpoint0 = targetEndPointsParallelFull[thisIND][1]
+    // let nextINDpoint1 = targetEndPointsParallelFull[nextIND][1]
+
+    // updateSVG_highlight_1_point_01([thisINDpoint0.coords.x, firstParPath.coords.y], self)
+    // updateSVG_highlight_1_point_02([nextINDpoint1.coords.x, nextINDpoint1.coords.y], self)
+
+
+
+
+
+
+    // used in with contact
+    // old
+    // // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
+    // // new
+    // let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self, index)
 
 
     // Two Shapes:
@@ -182,23 +202,33 @@ function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, refere
     // updateSVG_arcToArcIntersect_01(firstParPathOK, fourthParPathOK, arcToArcIntPoint, {coords: {x: 0, y: 0}})
 
     if(arcToArcIntPoint[0].doesIntersect === false) {
-        
+
+        // old
         // before first point
         // zeroParPath.coords.x = 100
         // zeroParPath.coords.y = 10
+
         // first point (joiner 1 parent)
         firstParPath.coords.x = arcToArcIntPoint[0].x
         firstParPath.coords.y = arcToArcIntPoint[0].y
+        // firstParPath.coords.x = 100
+        // firstParPath.coords.y = 100
+
         // joiner 1
         secondParPath.coords.x = arcToArcIntPoint[0].x
         secondParPath.coords.y = arcToArcIntPoint[0].y
+        // secondParPath.coords.x = 100
+        // secondParPath.coords.y = 100
+
         // joiner 2
         thirdParPath.coords.x = arcToArcIntPoint[1].x
         thirdParPath.coords.y = arcToArcIntPoint[1].y
         thirdParPath.arc.radius = 1
+
         // last point  (joiner 2 parent)
         fourthParPath.coords.x = arcToArcIntPoint[1].x
         fourthParPath.coords.y = arcToArcIntPoint[1].y
+
         // after last point
         // fifthParPath.coords.x = 100
         // fifthParPath.coords.y = 500

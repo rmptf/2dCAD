@@ -65,6 +65,10 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.newARCFLAG_stuff = []
     parallelPathObject.newARCFLAG_stuff_new = []
     parallelPathObject.counter_INSIDE_shape = 0
+    
+    parallelPathObject.pooper_is_1j_running_for_2j
+    parallelPathObject.pooper_is_3j_running_for_4j
+
 
 
 
@@ -98,6 +102,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log("START SHAPE")
 
         parallelPathObject.counter_INSIDE_shape = -1
+        parallelPathObject.pooper_is_1j_running_for_2j = false
+        parallelPathObject.pooper_is_3j_running_for_4j = false
 
 
 

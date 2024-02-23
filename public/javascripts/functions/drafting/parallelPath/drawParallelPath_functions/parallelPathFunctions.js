@@ -375,8 +375,6 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
 
 
 
-    // updateSVG_highlight_1_circ_and_center_01([x1, y1], r1, self)
-    // updateSVG_highlight_1_circ_and_center_02([x2, y2], r2, self)
     // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([firstParallelPathData, secondParallelPathData], self)
     // updateSVG_highlight_2_points_1_line_01([firstParallelPathData.coords.x, firstParallelPathData.coords.y], [secondParallelPathData.coords.x, secondParallelPathData.coords.y], self)
     // console.log(calculateAngle(firstParallelPathData.coords.x, firstParallelPathData.coords.y, secondParallelPathData.coords.x, secondParallelPathData.coords.y))
@@ -474,7 +472,7 @@ function getArcToArcIntersections(firstParallelPathData, secondParallelPathData,
     // // let pooper = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[0][9]
     // // let pooperX = pooper.coords.x
     // // let pooperY = pooper.coords.y
-    // // updateSVG_highlight_1_point_04([pooperX, pooperY], self)
+    // updateSVG_highlight_1_point_04([pooperX, pooperY], self)
     // updateSVG_highlight_1_point_01([opd.x, opd.y], self)
     // updateSVG_highlight_1_point_02([intersectionX1, intersectionY1], self)
     // updateSVG_highlight_1_point_03([intersectionX2, intersectionY2], self)
