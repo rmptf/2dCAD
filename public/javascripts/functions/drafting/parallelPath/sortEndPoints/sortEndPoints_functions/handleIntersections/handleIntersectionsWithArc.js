@@ -34,6 +34,21 @@ function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, 
 
     // RIGHTHERE
     // RIGHTHERE
+
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_1j_running_for_1all === true) {
+        console.log("running_1all")
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self)
+        parPathObj.pooper_is_1j_running_for_1all = false
+    }
+
+    // RIGHTHERE
+    // RIGHTHERE
+
+
+
+    // RIGHTHERE
+    // RIGHTHERE
     
     // NEW_STUFF_ARCFLAG
 
@@ -180,6 +195,7 @@ function disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEn
 
     console.log("settttt_1J")
     parPathObj.pooper_is_1j_running_for_2j = true
+    parPathObj.pooper_is_1j_running_for_1all = true
 
     // FIXME:
     // on the last form before removing the fillers, 3j and or 1j runs and 4j and or 2j doLinesIntersect, meaning the arc setter runs 3 times instead of 4 and throws off all following timers
@@ -211,6 +227,7 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
         console.log("running")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self)
         parPathObj.pooper_is_1j_running_for_2j = false
+        parPathObj.pooper_is_1j_running_for_1all = false
     }
 
     // RIGHTHERE

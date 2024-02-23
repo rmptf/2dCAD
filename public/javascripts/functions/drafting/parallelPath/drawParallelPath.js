@@ -68,7 +68,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     
     parallelPathObject.pooper_is_1j_running_for_2j
     parallelPathObject.pooper_is_3j_running_for_4j
-
+    parallelPathObject.pooper_is_1j_running_for_1all
 
 
 
@@ -104,6 +104,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.counter_INSIDE_shape = -1
         parallelPathObject.pooper_is_1j_running_for_2j = false
         parallelPathObject.pooper_is_3j_running_for_4j = false
+
+        parallelPathObject.pooper_is_1j_running_for_1all = false
 
 
 
