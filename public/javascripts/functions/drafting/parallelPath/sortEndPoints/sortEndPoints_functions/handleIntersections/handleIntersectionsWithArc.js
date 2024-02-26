@@ -40,9 +40,9 @@ import {
 
     // index of arcs to set
         // is
-    // new: 2, 5 6, 7 8, 7 9 9
+    // new: 2, 5 6, 7 8, 7 9xs 9
         // should be
-    // new: 2, 3 4, 5 6, 7 8 9
+    // new: 2, 3 4xs, 5 6, 7 8 9
 
 
     // old: 2, 3, 5xs 5, 6, 7, 8, 9
