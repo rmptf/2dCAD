@@ -213,11 +213,6 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self) {
     // }
 }
 
-
-
-
-
-
 function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]

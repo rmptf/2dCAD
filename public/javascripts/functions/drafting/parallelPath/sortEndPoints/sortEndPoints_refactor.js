@@ -8,6 +8,7 @@ import {
     arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc,
     arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc,
     arcIntersection_secondArcSegment_everyIndex_firstAction,
+    pooppooppooper,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc,
     arcIntersection_secondArcSegment_lastIndex,
@@ -202,6 +203,8 @@ function sort_endPoint_withArc(
         switch(true) {
             case !lastPosition(index):
                 if(arcExist(index + 1)) {
+                    console.log("pre_888")
+                    pooppooppooper(targetEndPoints, parPathObj, index, self)
                     if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
                         // 8
                         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
@@ -225,7 +228,7 @@ function sort_endPoint_withArc(
             case joinerType(index - 1, "AAA"): 
                 arcExist(index + 1) ?
                     // 2_A_Joiner
-                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject) // TODO: (Set_arcRad)
+                    disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
                     :
                     // 2_B_Joiner
                     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
@@ -488,9 +491,27 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 // exampless: F1, F2, F3, F4
 
 // FIXME:
+// a problem with the fix for above:
+// the arc setter runs before interset points are set, doesnt always, but would eventaully have an effect on the arc set
+// haave to set them to run after all intersectors run
+
+// FIXME:
+// Fixed the above 2 issues, but the fix has caused error in arc at first index
+
+
+
+
+// FIXME:
 // arc 2 arc not connected isnt working correctly on some shapes, need to handle the first and second arcs from the SECOND shape
 // (similar to wobble line on arc 2 arc shapes connected)
 // example: F2
+
+// FIXME:
+// some jiggly shape in large blob, marked in shaves shapes
+
+
+
+
 
 // FIXME: (might be another file)
 // parallel paths on multiple shapes on one doc dont work correctly

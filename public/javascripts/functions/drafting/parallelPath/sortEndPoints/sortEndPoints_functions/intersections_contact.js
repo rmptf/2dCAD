@@ -5,7 +5,7 @@ import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawPar
 import {findLineMidpoint} from '../../../../math/mathFunctions.js'
 
 // function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
-function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection) {
     let indexArray = parPathObj.arcToArcIndexArray
     let shapeCount = parPathObj.arcToArcCounter
 
@@ -86,6 +86,7 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
+            thisConnection.connected = false
             // old
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
             // new
@@ -102,7 +103,7 @@ function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPoi
 }
 
 // function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
-function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection2) {
     let indexArray = parPathObj.pathToArchIndexArray
     let shapeCount = parPathObj.pathToArcCounter
 
@@ -118,6 +119,7 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
     let intersectPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self)
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
+            thisConnection2.connected = false
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, thisIndex, shape)
         } else {
             // updateSVG_PathToArcIntersect_01(thisParallelPathData, intersectPoint, thisOriginalPathData)
@@ -127,7 +129,7 @@ function handlePathToArcIntersection(targetEndPointsParallelFull, referenceEndPo
 }
 
 // function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount, parPathObj) {
-function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj) {
+function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection3) {
     let indexArray = parPathObj.arcToPathIndexArray
     let shapeCount = parPathObj.arcToPathCounter
 
@@ -169,6 +171,7 @@ function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPo
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
+            thisConnection3.connected = false
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
         } else {
             // updateSVG_PathToArcIntersect_02(thisParallelPathData, intersectPoint, thisOriginalPathData)
