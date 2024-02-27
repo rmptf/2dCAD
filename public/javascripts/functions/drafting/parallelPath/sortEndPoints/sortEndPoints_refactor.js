@@ -10,6 +10,7 @@ import {
     arcIntersection_secondArcSegment_everyIndex_firstAction,
     pooppooppooper,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected,
+    arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc,
     arcIntersection_secondArcSegment_lastIndex,
     arcIntersection_secondArcSegment_everyIndex_lastAction,
@@ -203,11 +204,14 @@ function sort_endPoint_withArc(
         switch(true) {
             case !lastPosition(index):
                 if(arcExist(index + 1)) {
-                    console.log("pre_888")
+                    // 8_all
                     pooppooppooper(targetEndPoints, parPathObj, index, self)
                     if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
-                        // 8
+                        // 8_A
                         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+                    } else {
+                        // 8_B
+                        arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
                     }
                 } else {
                     // 9
