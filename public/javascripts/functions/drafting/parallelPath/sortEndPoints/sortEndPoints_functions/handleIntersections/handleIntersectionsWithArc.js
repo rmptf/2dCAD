@@ -55,8 +55,8 @@ import {
 
 
 // 4 8 3 9
-// let run_arcFlipper_at_1All = true
-let run_arcFlipper_at_1All = false
+let run_arcFlipper_at_1All = true
+// let run_arcFlipper_at_1All = false
 
 
 
@@ -125,7 +125,8 @@ function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPo
         // setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, thisConnection.connected ? true : false)
 
         // TODO: (set this to -1 to handle 8's but prob shouldnt be for other shapes)
-        setLargeArcFlag(targetEndPoints, parPathObj, index, self, thisConnection.connected ? true : false)
+        setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, thisConnection.connected ? true : false)
+        // setLargeArcFlag(targetEndPoints, parPathObj, index, self, thisConnection.connected ? true : false)
 
         // RIGHTHERE
         // RIGHTHERE
@@ -190,6 +191,7 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     console.log("8_seg2_connected")
     // empty
 
+    // ARC - ARC CONNECTED
     console.log("from: 3")
     setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, true)
 
@@ -202,6 +204,7 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     console.log("8_seg2_not_connected")
     // empty
 
+    // ARC - ARC DISCONNECTED
     console.log("from: 9")
     setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
 
@@ -296,7 +299,7 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
 
     // NEW_STUFF_ARCFLAG
     if(parPathObj.pooper_is_1j_running_for_2j === true) {
-        console.log("running_123")
+        console.log("running_2j_from_1j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
         parPathObj.pooper_is_1j_running_for_2j = false
         parPathObj.pooper_is_1j_running_for_1all = false
@@ -363,7 +366,7 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
 
 
 
-        console.log("running_abc")
+        console.log("running_4j_from_3j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
         parPathObj.pooper_is_3j_running_for_4j = false
         parPathObj.pooper_is_3j_running_for_1all = false
