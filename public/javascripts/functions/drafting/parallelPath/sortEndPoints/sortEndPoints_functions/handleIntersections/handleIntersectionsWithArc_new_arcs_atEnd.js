@@ -36,21 +36,27 @@ function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, 
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
 
+    // first shape
+    // console.log("running_arcSet_SKIP_from_1j_IN_1all")
+    // console.log("running_arcSet_SKIP_from_1j_IN_2j")
 
+    // second shape
+    // console.log("running_arcSet_SKIP_from_3j_IN_1all")           // running in second shape (runs once per joiner set, only on last) (staggers on last), called by prev joiner, runs on next index as that index
+    // console.log("running_arcSet_SKIP_from_3j_IN_4j")             // running in second shape (runs every round on joiner set, except first and last) (staggers on first and last)
 
     // // RIGHTHERE
     // // RIGHTHERE
 
     // // NEW_STUFF_ARCFLAG
     // if(parPathObj.pooper_is_1j_running_for_1all === true) {
-    //     console.log("running_arcSet_SKIP_from_1j")
+    //     console.log("running_arcSet_SKIP_from_1j_IN_1all")
     //     setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
     //     parPathObj.pooper_is_1j_running_for_1all = false
     // }
 
     // // NEW_STUFF_ARCFLAG
     // if(parPathObj.pooper_is_3j_running_for_1all === true) {
-    //     console.log("running_arcSet_SKIP_from_3j")
+    //     console.log("running_arcSet_SKIP_from_3j_IN_1all")
     //     setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
     //     parPathObj.pooper_is_3j_running_for_1all = false
     // }
@@ -74,21 +80,25 @@ function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, r
 
     // NEW_STUFF_ARCFLAG
     if(parPathObj.pooper_is_1j_running_for_1all === true) {
-        console.log("running_arcSet_SKIP_from_1j")
+        console.log("running_arcSet_SKIP_from_1j_IN_1all")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
         parPathObj.pooper_is_1j_running_for_1all = false
     }
 
     // NEW_STUFF_ARCFLAG
     if(parPathObj.pooper_is_3j_running_for_1all === true) {
-        console.log("running_arcSet_SKIP_from_3j")
+        console.log("running_arcSet_SKIP_from_3j_IN_1all")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
         parPathObj.pooper_is_3j_running_for_1all = false
     }
 
+
+    // shape F3 error is caused by first shape
+    // shape F$ error is caused by last shape but from same reason as F3)
+    
+    // TODO: have to find a way to set arc set run as false for FIRST joiner round
     // NEW_STUFF_ARCFLAG
     setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-
 
     // RIGHTHERE
     // RIGHTHERE
@@ -222,7 +232,7 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
 
     // NEW_STUFF_ARCFLAG
     if(parPathObj.pooper_is_1j_running_for_2j === true) {
-        console.log("running_2j_from_1j")
+        console.log("running_arcSet_SKIP_from_1j_IN_2j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
         parPathObj.pooper_is_1j_running_for_2j = false
         parPathObj.pooper_is_1j_running_for_1all = false
@@ -273,7 +283,7 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
     
     // NEW_STUFF_ARCFLAG
     if(parPathObj.pooper_is_3j_running_for_4j === true) {
-        console.log("running_4j_from_3j")
+        console.log("running_arcSet_SKIP_from_3j_IN_4j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
         parPathObj.pooper_is_3j_running_for_4j = false
         parPathObj.pooper_is_3j_running_for_1all = false
@@ -522,11 +532,11 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
 
 
-        // if(index === 1) {
-        //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-        //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-        // }
+        if(index === 1) {
+            updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+            updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+            updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+        }
 
         // if(index === 2) {
         //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
