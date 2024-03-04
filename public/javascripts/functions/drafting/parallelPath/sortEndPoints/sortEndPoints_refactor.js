@@ -32,7 +32,6 @@ import {
     arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc,
     arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc,
     arcIntersection_secondArcSegment_everyIndex_firstAction,
-    pooppooppooper,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected,
     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc,
@@ -121,23 +120,7 @@ function sort_endPoint_withArc(
     let arcRadiusObject = []
     arcRadiusObject.parDistAndDir
 
-
-
-    // // old first_arc
-    // // Arc on First Path DOESNT WORK
-    // switch(true) {
-    //     case isJoiner(index):
-    //     case isJoiner(index - 1):
-    //         handleDisconnectedArcIntersection()
-    //         break
-    //     default:
-    //         handleDefaultArcIntersection()
-    // }
-
-
     // TODO: Orgnazine Better
-    // new first_arc
-    // Arc on First Path DOES WORK
     if(!firstPosition(index)) {
         switch(true) {
             case isJoiner(index):
@@ -172,32 +155,6 @@ function sort_endPoint_withArc(
         arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
     }
 
-    // // old first_arc
-    // // Arc on First Path DOESNT WORK
-    // function handleFirctArcSegment() {
-    //     // 2
-    //     arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
-    //     switch(true) {
-    //         case !firstPosition(index):
-    //             arcExist(index - 1) ?
-    //                 // 3
-    //                 arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
-    //                 // 4
-    //                 arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
-    //             break
-    //         // 5
-    //         default: arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
-    //     }
-    //     switch(true) {
-    //         // 6_A
-    //         case arcExist(index + 1): arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, index); break
-    //         // 6_B
-    //         default: arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
-    //     }
-    // }
-
-    // new first_arc
-    // Arc on First Path DOES WORK
     function handleFirctArcSegment() {
         // 2
         arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
@@ -230,8 +187,6 @@ function sort_endPoint_withArc(
         switch(true) {
             case !lastPosition(index):
                 if(arcExist(index + 1)) {
-                    // 8_all
-                    pooppooppooper(targetEndPoints, parPathObj, index, self)
                     if(!includes(["AAA", "BBB", "CCC"], index + 1)) {
                         // 8_A
                         arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
@@ -275,34 +230,7 @@ function sort_endPoint_withArc(
             case skipperCheckers.skipperChecker_Arc: disconnectedArcIntersection_skipThisIndex(parPathObj)
         }
     }
-
-
-    // function handleLastArc_all(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
-    //     // last_all
-        // arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
-    // }
 }
-
-function getRefPointAtIndexIfNotFillerPOOP(refEndPointsBase, index) {
-    let refEndPointsBaseNoFiller
-    let fillerAdder = 0
-    // const isFiller = (newIndex) => refEndPointsBase[newIndex] === "filler"
-    const isFiller = (newIndex) => refEndPointsBase[newIndex][1].arc.joiner === true
-
-    if (isFiller(index) && !isFiller(index + 1)){
-        fillerAdder = 1
-    }
-
-    if (isFiller(index) && isFiller(index + 1)){
-        fillerAdder = -1
-    }
-
-    refEndPointsBaseNoFiller = refEndPointsBase[index + fillerAdder]
-
-    return refEndPointsBaseNoFiller
-}
-
-
 
 
 
@@ -522,25 +450,25 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 
 
 // Priority Issues
-// FIXME:
+// FIXED
 // some shapes need a function to set the correct large arc flag
 // exampless: F1, F2, F3, F4
 
-// FIXME:
+// FIXED
 // a problem with the fix for above:
 // the arc setter runs before interset points are set, doesnt always, but would eventaully have an effect on the arc set
 // haave to set them to run after all intersectors run
 
-// FIXME:
-// Fixed the above 2 issues, but the fix has caused error in arc at first index
-
-
-
-
-// FIXME:
+// FIXED (different problem and solution as below but fixed.)
 // arc 2 arc not connected isnt working correctly on some shapes, need to handle the first and second arcs from the SECOND shape
 // (similar to wobble line on arc 2 arc shapes connected)
 // example: F2
+
+// FIXED
+// big shapes having errors when moving parallel line too fast
+
+// FIXME:
+// Fixed the above 2 issues, but the fix has caused error in arc at first index
 
 // FIXME:
 // some jiggly shape in large blob, marked in shaves shapes

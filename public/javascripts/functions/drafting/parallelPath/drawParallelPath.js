@@ -63,7 +63,6 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
 
     // arc flag stuff
     parallelPathObject.newARCFLAG_stuff = []
-    parallelPathObject.newARCFLAG_stuff_new = []
     
     parallelPathObject.counter_INSIDE_shape = 0
     
@@ -184,8 +183,6 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.arcToPathCounter = -1
         parallelPathObject.arcToArcCounter = -1
 
-        // console.log(parallelPathObject.newARCFLAG_stuff)
-        // console.log(parallelPathObject.newARCFLAG_stuff_new)
         console.log("ENDSHAPE")
         console.log(" ")
         console.log(" ")
