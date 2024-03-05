@@ -27,80 +27,51 @@ import {
 let thisConnection = []
 thisConnection.connected = true
 
-// let run_arcFlipper_at_1All = true
-let run_arcFlipper_at_1All = false
-
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // 1
     console.log("1_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
-
-    if(run_arcFlipper_at_1All === true) {
-        // RIGHTHERE
-        // RIGHTHERE
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_1j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_1j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_1j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_3j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_3j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_3j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-
-        // RIGHTHERE
-        // RIGHTHERE
-    }
 }
 
 function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // Final
     console.log("FINAL_all")
 
-    if(run_arcFlipper_at_1All === false) {
-        // RIGHTHERE
-        // RIGHTHERE
+    // RIGHTHERE
+    // RIGHTHERE
 
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_1j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_1j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_1j_running_for_2j = false
-            parPathObj.pooper_is_1j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_3j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_3j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
-            parPathObj.pooper_is_3j_running_for_4j = false
-            parPathObj.pooper_is_3j_running_for_1all = false
-        }
-
-        if(thisConnection.connected === true) {
-            console.log("CONNECTED")
-            // NEW_STUFF_ARCFLAG
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-        } else {
-            console.log("NOT_CONNECTED")
-            // NEW_STUFF_ARCFLAG
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            thisConnection.connected = true
-        }
-
-        // RIGHTHERE
-        // RIGHTHERE
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_1j_running_for_1all === true) {
+        console.log("running_arcSet_SKIP_from_1j_IN_1all")
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+        parPathObj.pooper_is_1j_running_for_2j = false
+        parPathObj.pooper_is_1j_running_for_1all = false
     }
+
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_3j_running_for_1all === true) {
+        console.log("running_arcSet_SKIP_from_3j_IN_1all")
+        setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
+        parPathObj.pooper_is_3j_running_for_4j = false
+        parPathObj.pooper_is_3j_running_for_1all = false
+    }
+
+    if(thisConnection.connected === true) {
+        console.log("CONNECTED")
+        // NEW_STUFF_ARCFLAG
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+    } else {
+        console.log("NOT_CONNECTED")
+        // NEW_STUFF_ARCFLAG
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+        thisConnection.connected = true
+    }
+
+    // RIGHTHERE
+    // RIGHTHERE
+
 }
 
 
@@ -481,12 +452,9 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
         console.log(index)
 
         if(parPathObj.iterationCounter === 1) {
-            let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-            let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
-
             parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape] = {
-                startPos_x1GreaterThanX2: pooper1,
-                startPos_y1GreaterThanY2: pooper2
+                startPos_x1GreaterThanX2: isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x),
+                startPos_y1GreaterThanY2: isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
             }
         }
 
@@ -500,45 +468,13 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
 
-        // if(index === 1) {
-        //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-        //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-        // }
-
-        // if(index === 2) {
-        //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-        //     updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        //     updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-        // }
-
-        // if(index === 3) {
-        //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
-        //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-        // }
-
-        // if(index === 4) {
-        //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
-        //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-        // }
+        runArcFlagUpdateSVGs(index, self, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)
     }
     console.log(" ")
 }
-
-// Jill Notes:
-// take sunghiuns shirt and lay it on side of the crib (not in the crib because choking hazard) 
-// swaddle
-// walking around
-// book: baby wise
-// started sleeping through the night at 8 weeks
-
-
-
 
 function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let x1 = movingPoint[0]
@@ -570,5 +506,40 @@ function isGreaterThan(num1, num2) {
     return greaterThan
 }
 
+function runArcFlagUpdateSVGs(index, self, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts) {
+    // if(index === 1) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 2) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 3) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+
+    // if(index === 4) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // }
+}
+
 // RIGHTHERE
 // RIGHTHERE
+
+
+
+// Jill Notes:
+// take sunghiuns shirt and lay it on side of the crib (not in the crib because choking hazard) 
+// swaddle
+// walking around
+// book: baby wise
+// started sleeping through the night at 8 weeks

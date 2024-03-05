@@ -61,7 +61,7 @@ import {
     noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments,
     noArcIntersection_notFirstPos_lastPos_prevIndexIsArc,
     noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction
-} from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc.js'
+} from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc_OLD_dontuseanymore.js'
 
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 // import {findLineMidpoint} from '../../../math/mathFunctions.js'
@@ -152,6 +152,7 @@ function sort_endPoint_withArc(
             default:
                 handleSecondArcSegment()
         }
+        // Last
         arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
     }
 
