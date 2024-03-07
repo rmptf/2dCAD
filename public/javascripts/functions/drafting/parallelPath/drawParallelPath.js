@@ -61,14 +61,16 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     parallelPathObject.parallelDistance
     parallelPathObject.iterationCounter = 0
 
-    // Set Large Arc Flag of each arc stuff:
-    parallelPathObject.arrayOfArcFlagsInitPos = []
-    parallelPathObject.counterOfArcsAsTheyArrive = 0
-    parallelPathObject.setThisArcFlag_atFinal_from1Joiner
-    parallelPathObject.setPrevArcFlag_atFinal_from3Joiner
-    parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner
-    parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner
-    // parallelPathObject.thisConnection = [] add this later
+    // arc flag stuff
+    parallelPathObject.newARCFLAG_stuff = []
+    
+    parallelPathObject.counter_INSIDE_shape = 0
+    
+    parallelPathObject.pooper_is_1j_running_for_2j
+    parallelPathObject.pooper_is_3j_running_for_4j
+
+    parallelPathObject.pooper_is_1j_running_for_1all
+    parallelPathObject.pooper_is_3j_running_for_1all
 
 
 
@@ -100,11 +102,19 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log(" ")
         console.log("START SHAPE")
 
-        parallelPathObject.counterOfArcsAsTheyArrive = -1
-        parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
-        parallelPathObject.setThisArcFlag_atFinal_from3Joiner = false
-        parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
-        parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
+        parallelPathObject.counter_INSIDE_shape = -1
+
+        parallelPathObject.pooper_is_1j_running_for_2j = false
+        parallelPathObject.pooper_is_3j_running_for_4j = false
+
+        parallelPathObject.pooper_is_1j_running_for_1all = false
+        parallelPathObject.pooper_is_3j_running_for_1all = false
+
+
+
+
+
+
 
         if(isDownDrawParellelInitiated === true) {
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1

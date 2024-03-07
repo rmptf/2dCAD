@@ -1,4 +1,28 @@
 import {getDistance} from '../../../math/mathFunctions.js'
+// import {
+//     arcIntersection_allArcSegments_everyIndex_firstAction,
+//     arcIntersection_firstArcSegment_everyIndex_firstAction,
+//     arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc,
+//     arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc,
+//     arcIntersection_firstArcSegment_fistIndex,
+//     arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc,
+//     arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc,
+//     arcIntersection_secondArcSegment_everyIndex_firstAction,
+//     pooppooppooper,
+//     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected,
+//     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected,
+//     arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc,
+//     arcIntersection_secondArcSegment_lastIndex,
+//     arcIntersection_secondArcSegment_everyIndex_lastAction,
+//     disconnectedArcIntersection_thisIndexIsPathToArc,
+//     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc,
+//     disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc,
+//     disconnectedArcIntersection_thisIndexIsArcToArc,
+//     disconnectedArcIntersection_prevIndexIsArcToArc,
+//     disconnectedArcIntersection_prevIndexIsArcToPath,
+//     disconnectedArcIntersection_skipThisIndex,
+// } from './sortEndPoints_functions/handleIntersections/handleIntersectionsWithArc.js'
+
 import {
     arcIntersection_allArcSegments_everyIndex_firstAction,
     arcIntersection_firstArcSegment_everyIndex_firstAction,
@@ -21,7 +45,7 @@ import {
     disconnectedArcIntersection_prevIndexIsArcToPath,
     disconnectedArcIntersection_skipThisIndex,
     arcIntersection_allArcSegments_everyIndex_lastAction,
-} from './sortEndPoints_functions/handleIntersections/handleIntersectionsWithArc.js'
+} from './sortEndPoints_functions/handleIntersections/handleIntersectionsWithArc_new_arcs_atEnd.js'
 
 import {
     noArcIntersection_setPerpRefEndPointsToParallelProjections,
@@ -37,7 +61,7 @@ import {
     noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments,
     noArcIntersection_notFirstPos_lastPos_prevIndexIsArc,
     noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction
-} from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc.js'
+} from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc_OLD_dontuseanymore.js'
 
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 // import {findLineMidpoint} from '../../../math/mathFunctions.js'
