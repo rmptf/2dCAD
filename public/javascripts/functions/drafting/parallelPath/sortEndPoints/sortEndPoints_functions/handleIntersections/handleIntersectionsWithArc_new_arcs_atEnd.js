@@ -27,80 +27,50 @@ import {
 let thisConnection = []
 thisConnection.connected = true
 
-// let run_arcFlipper_at_1All = true
-let run_arcFlipper_at_1All = false
-
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // 1
     console.log("1_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
-
-    if(run_arcFlipper_at_1All === true) {
-        // RIGHTHERE
-        // RIGHTHERE
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_1j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_1j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_1j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_3j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_3j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_3j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-
-        // RIGHTHERE
-        // RIGHTHERE
-    }
 }
 
 function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // Final
     console.log("FINAL_all")
 
-    if(run_arcFlipper_at_1All === false) {
-        // RIGHTHERE
-        // RIGHTHERE
+    // RIGHTHERE
+    // RIGHTHERE
 
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_1j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_1j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.pooper_is_1j_running_for_2j = false
-            parPathObj.pooper_is_1j_running_for_1all = false
-        }
-
-        // NEW_STUFF_ARCFLAG
-        if(parPathObj.pooper_is_3j_running_for_1all === true) {
-            console.log("running_arcSet_SKIP_from_3j_IN_1all")
-            setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
-            parPathObj.pooper_is_3j_running_for_4j = false
-            parPathObj.pooper_is_3j_running_for_1all = false
-        }
-
-        if(thisConnection.connected === true) {
-            console.log("CONNECTED")
-            // NEW_STUFF_ARCFLAG
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-        } else {
-            console.log("NOT_CONNECTED")
-            // NEW_STUFF_ARCFLAG
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            thisConnection.connected = true
-        }
-
-        // RIGHTHERE
-        // RIGHTHERE
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_1j_running_for_1all === true) {
+        console.log("running_arcSet_SKIP_from_1j_IN_1all")
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+        parPathObj.pooper_is_1j_running_for_2j = false
+        parPathObj.pooper_is_1j_running_for_1all = false
     }
+
+    // NEW_STUFF_ARCFLAG
+    if(parPathObj.pooper_is_3j_running_for_1all === true) {
+        console.log("running_arcSet_SKIP_from_3j_IN_1all")
+        setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
+        parPathObj.pooper_is_3j_running_for_4j = false
+        parPathObj.pooper_is_3j_running_for_1all = false
+    }
+
+    if(thisConnection.connected === true) {
+        console.log("CONNECTED")
+        // NEW_STUFF_ARCFLAG
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+    } else {
+        console.log("NOT_CONNECTED")
+        // NEW_STUFF_ARCFLAG
+        setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+        thisConnection.connected = true
+    }
+
+    // RIGHTHERE
+    // RIGHTHERE
 }
 
 
@@ -530,16 +500,6 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
     console.log(" ")
 }
 
-// Jill Notes:
-// take sunghiuns shirt and lay it on side of the crib (not in the crib because choking hazard) 
-// swaddle
-// walking around
-// book: baby wise
-// started sleeping through the night at 8 weeks
-
-
-
-
 function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]
@@ -572,3 +532,11 @@ function isGreaterThan(num1, num2) {
 
 // RIGHTHERE
 // RIGHTHERE
+
+
+// Jill Notes:
+// take sunghiuns shirt and lay it on side of the crib (not in the crib because choking hazard) 
+// swaddle
+// walking around
+// book: baby wise
+// started sleeping through the night at 8 weeks
