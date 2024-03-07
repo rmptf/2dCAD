@@ -34,7 +34,6 @@ function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, 
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_1") // TODO: (Set_arcRad)
 }
-
 function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // Final
     console.log("FINAL_all")
@@ -72,8 +71,6 @@ function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, r
     // RIGHTHERE
     // RIGHTHERE
 }
-
-
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
     // 2
@@ -122,14 +119,12 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexI
     // 8_A
     console.log("8_seg2_connected")
     // empty
-
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // 8_B
     console.log("8_seg2_not_connected")
     // empty
-
 }
 // done
 function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -440,7 +435,8 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
     console.log(" ")
     console.log("ARCFLAG_FLIPPER_running")
 
-    let prevTargetEndPoint = targetEndPoints[index - 1][1]
+    // let prevTargetEndPoint = targetEndPoints[index - 1][1]
+    let prevTargetEndPoint = targetEndPoints[index][0]
     let thisTargetEndPoint = targetEndPoints[index][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 

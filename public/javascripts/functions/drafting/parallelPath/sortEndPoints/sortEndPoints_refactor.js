@@ -152,6 +152,7 @@ function sort_endPoint_withArc(
             default:
                 handleSecondArcSegment()
         }
+        // Final
         arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
     }
 
@@ -467,7 +468,7 @@ function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 // FIXED
 // big shapes having errors when moving parallel line too fast
 
-// FIXME:
+// FIXED
 // Fixed the above 2 issues, but the fix has caused error in arc at first index
 
 // FIXME:
