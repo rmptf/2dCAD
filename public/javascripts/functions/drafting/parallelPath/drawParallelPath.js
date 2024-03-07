@@ -64,10 +64,10 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     // Set Large Arc Flag of each arc stuff:
     parallelPathObject.arrayOfArcFlagsInitPos = []
     parallelPathObject.counterOfArcsAsTheyArrive = 0
-    parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner
-    parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner
     parallelPathObject.setThisArcFlag_atFinal_from1Joiner
     parallelPathObject.setPrevArcFlag_atFinal_from3Joiner
+    parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner
+    parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner
     // parallelPathObject.thisConnection = [] add this later
 
 
@@ -101,10 +101,10 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log("START SHAPE")
 
         parallelPathObject.counterOfArcsAsTheyArrive = -1
-        parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
-        parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
         parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
         parallelPathObject.setThisArcFlag_atFinal_from3Joiner = false
+        parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
+        parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
 
         if(isDownDrawParellelInitiated === true) {
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
@@ -173,6 +173,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log(" ")
         console.log(" ")
         console.log(" ")
+        
     }
 }
 

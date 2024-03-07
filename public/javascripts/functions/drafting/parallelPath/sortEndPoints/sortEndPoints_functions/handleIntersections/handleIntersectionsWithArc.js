@@ -440,25 +440,6 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
     let prevTargetEndPoint = targetEndPoints[index - 1][1]
     let thisTargetEndPoint = targetEndPoints[index][1]
-
-    // console.log(index)
-    // console.log(targetEndPoints)
-
-    // let prevTargetEndPoint
-    // let thisTargetEndPoint
-
-    // if(index === 0) {
-    //     prevTargetEndPoint = targetEndPoints[index][0]
-    //     thisTargetEndPoint = targetEndPoints[index][1]
-    // } else {
-    //     prevTargetEndPoint = targetEndPoints[index - 1][1]
-    //     thisTargetEndPoint = targetEndPoints[index][1]
-    // }
-
-    // let prevTargetEndPoint = targetEndPoints[index - 1][1]
-    // let thisTargetEndPoint = targetEndPoints[index][1]
-
-    
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
     parPathObj.counterOfArcsAsTheyArrive = parPathObj.counterOfArcsAsTheyArrive + 1
