@@ -42,19 +42,19 @@ function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, r
     // RIGHTHERE
 
     // NEW_STUFF_ARCFLAG
-    if(parPathObj.pooper_is_1j_running_for_1all === true) {
+    if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
         console.log("running_arcSet_SKIP_from_1j_IN_1all")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-        parPathObj.pooper_is_1j_running_for_2j = false
-        parPathObj.pooper_is_1j_running_for_1all = false
+        parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
+        parPathObj.setThisArcFlag_atFinal_from1Joiner = false
     }
 
     // NEW_STUFF_ARCFLAG
-    if(parPathObj.pooper_is_3j_running_for_1all === true) {
+    if(parPathObj.setPrevArcFlag_atFinal_from3Joiner === true) {
         console.log("running_arcSet_SKIP_from_3j_IN_1all")
         setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
-        parPathObj.pooper_is_3j_running_for_4j = false
-        parPathObj.pooper_is_3j_running_for_1all = false
+        parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
+        parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
     }
 
     if(thisConnection.connected === true) {
@@ -159,8 +159,8 @@ function disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEn
 
     // NEW_STUFF_ARCFLAG
     console.log("settttt_1J")
-    parPathObj.pooper_is_1j_running_for_2j = true
-    parPathObj.pooper_is_1j_running_for_1all = true
+    parPathObj.setThisArcFlag_at2Joiner_from1Joiner = true
+    parPathObj.setThisArcFlag_atFinal_from1Joiner = true
 
     // RIGHTHERE
     // RIGHTHERE
@@ -176,11 +176,11 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
     // RIGHTHERE
 
     // NEW_STUFF_ARCFLAG
-    if(parPathObj.pooper_is_1j_running_for_2j === true) {
+    if(parPathObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
         console.log("running_arcSet_SKIP_from_1j_IN_2j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-        parPathObj.pooper_is_1j_running_for_2j = false
-        parPathObj.pooper_is_1j_running_for_1all = false
+        parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
+        parPathObj.setThisArcFlag_atFinal_from1Joiner = false
     }
 
     // RIGHTHERE
@@ -209,8 +209,8 @@ function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEnd
 
     // NEW_STUFF_ARCFLAG
     console.log("settttt_3J")
-    parPathObj.pooper_is_3j_running_for_4j = true
-    parPathObj.pooper_is_3j_running_for_1all = true
+    parPathObj.setThisArcFlag_at4Joiner_from3Joiner = true
+    parPathObj.setPrevArcFlag_atFinal_from3Joiner = true
     // thisConnection.shittass = true
 
     // RIGHTHERE
@@ -228,11 +228,11 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
     // RIGHTHERE
     
     // NEW_STUFF_ARCFLAG
-    if(parPathObj.pooper_is_3j_running_for_4j === true) {
+    if(parPathObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
         console.log("running_arcSet_SKIP_from_3j_IN_4j")
         setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-        parPathObj.pooper_is_3j_running_for_4j = false
-        parPathObj.pooper_is_3j_running_for_1all = false
+        parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
+        parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
     }
 
     // RIGHTHERE
@@ -436,11 +436,11 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
     console.log("ARCFLAG_FLIPPER_running")
 
     // let prevTargetEndPoint = targetEndPoints[index - 1][1]
-    let prevTargetEndPoint = targetEndPoints[index][0]
+    let prevTargetEndPoint = targetEndPoints[index][0] //TODO: test that this works 100%
     let thisTargetEndPoint = targetEndPoints[index][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
 
-    parPathObj.counter_INSIDE_shape = parPathObj.counter_INSIDE_shape + 1
+    parPathObj.counterOfArcsAsTheyArrive = parPathObj.counterOfArcsAsTheyArrive + 1
 
     if(runOrNot === true) {
         console.log("FLIPPER__set")
@@ -450,7 +450,7 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
 
-            parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape] = {
+            parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive] = {
                 startPos_x1GreaterThanX2: pooper1,
                 startPos_y1GreaterThanY2: pooper2
             }
@@ -505,14 +505,14 @@ function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    // console.log("CHECK123 X_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
-    // console.log("CHECK123 Y_Start: _" + parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
+    // console.log("CHECK123 X_Start: _" + parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 + "_ X_Now: _" + currentPos_x1GreaterThanX2 + "_")
+    // console.log("CHECK123 Y_Start: _" + parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 + "_ Y_Now: _" + currentPos_Y1GreaterThanY2 + "_")
 
-    if(parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+    if(parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         // console.log("CROSSED")
         flipFlag = true
-        parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2 = !parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_x1GreaterThanX2
-        parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2 = !parPathObj.newARCFLAG_stuff[parPathObj.counter_INSIDE_shape].startPos_y1GreaterThanY2
+        parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
+        parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
         return flipFlag
     } else {
         // console.log("NO_CROSS")
