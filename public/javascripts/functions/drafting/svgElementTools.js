@@ -4,6 +4,7 @@ import {drawParallelPathFunction} from './parallelPath/drawParallelPath.js'
 import {measurePathFunction} from '../drafting/measurePath.js'
 import {dragPath, dragEndPoint} from '../drafting/dragSvgElements.js'
 import {expandSvgElementOnMouseMove} from '../drafting/resizeSvg.js'
+import {Path} from '../../tests/classes_test/newClass_test.js'
 
 let drawPathObj = {}
 drawPathObj.self = []
@@ -13,8 +14,13 @@ drawPathObj.isDown2 = false
 drawPathObj.secondaryPathCount = 0
 
 function selectDrawPath() {
-    a_canvas_globalVars.pressSvgElement = true
-    a_canvas_globalVars.svgD3.on("click", svgClick) // prob place somewhere else
+    var newPathClass = new Path(0, 0, 69)
+    a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
+    newPathClass.printClass()
+
+    // a_canvas_globalVars.pressSvgElement = true
+    // a_canvas_globalVars.svgD3.on("click", svgClick(newPathClass)) // prob place somewhere else
+    // a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event, newPathClass)) // prob place somewhere else
 }
 
 function selectAddCurvePoint() {
@@ -29,13 +35,15 @@ function selectMeasurePath() {
     a_canvas_globalVars.pressMeasurePathButton = true
 }
 
-function svgClick(event) {
+// function svgClick(event) {
+function svgClick(event, pathClass) {
     if (a_canvas_globalVars.pressSvgElement === true) {
         // console.log("Svg Element Click: Draw Path.")
         a_canvas_globalVars.pressAddCurveButton = false
         a_canvas_globalVars.pressAddParallelButton = false
         a_canvas_globalVars.pressMeasurePathButton = false
-        drawPathFunction(event, drawPathObj)
+        // drawPathFunction(event, drawPathObj)
+        drawPathFunction(event, drawPathObj, pathClass)
     } else {
         // console.log("Svg Element Click: Don't Draw Path.")
     }
@@ -82,11 +90,16 @@ function handleMainPathDrag(event) {
 
     dragPath(event, originalPath, secondaryPath, endPoints, pathData)
 }
-function handleEndPointDrag(event, index) {
-    const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+function handleEndPointDrag(event, index, figureCount) {
+    // const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    // const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    // const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    // const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+    
+    const originalPath = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount]
+    const secondaryPath = a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount]
+    const endPoints = a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount]
+    const pathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount]
 
     dragEndPoint(event, index, originalPath, secondaryPath, endPoints, pathData)
 }

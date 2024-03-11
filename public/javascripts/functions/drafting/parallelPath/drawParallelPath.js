@@ -1,7 +1,6 @@
 import {makeDeepCopy, transformData, findParallelDistance} from './drawParallelPath_functions/parallelPathFunctions.js'
 import {updateSVG_parallelPathAndPoints} from '../../animate/updateSvg.js'
-// import {sortEndpoints} from './sortEndPoints/sortEndPoints.js'
-import {sortEndpoints} from './sortEndPoints/sortEndPoints_refactor.js'
+import {sortEndpoints} from './sortEndPoints/sortEndPoints.js'
 import {createParallelPathElements} from './createParallelPathElements/createParallelPathElements.js'
 import {checkForIntersectingPaths} from './intersectingParPaths/intersectingParPaths.js'
 import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/intPathsTests.js'
@@ -19,6 +18,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         // Set mouse events
         a_canvas_globalVars.svgD3.on("mousemove", mouseMoveDrawParallel)
         a_canvas_globalVars.svgD3.on('click', mouseDownDrawParallel)
+
 
         // This currently doesnt work (doesnt work in pre breakout either)
         // Check if the global counters don't match
@@ -108,8 +108,11 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
             if(parallelPathObject.iterationCounter === 1) {
                 parallelPathObject.parallelDistance = 0
             } else {
-                parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
+                // parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
+                parallelPathObject.parallelDistance = 25
             }
+
+
 
             // TODO:
             // Dont currently need this for purpose built, but can use it for other functions.

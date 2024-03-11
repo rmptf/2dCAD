@@ -164,6 +164,12 @@ function findLineMidpoint(x1, y1, x2, y2) {
     return [(x1 + x2) / 2, (y1 + y2) / 2];
 }
 
+function isGreaterThan(num1, num2) {
+    let greaterThan
+    num1 > num2 ? greaterThan = true : greaterThan = false;
+    return greaterThan
+}
+
 export {
     findArcLength,
     findPerpendicularFromPoint,
@@ -173,4 +179,5 @@ export {
     solveForAngleOfRightTriangle,
     inRange,
     findLineMidpoint,
+    isGreaterThan
 }
