@@ -9,6 +9,7 @@ function drawSavedFigure(index, obj) {
     // SET VARS FROM GLOBAL
     obj.isDown2 = false
     a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL + 1
+    let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
     // SET VARS FROM GLOBAL
 
     // GRAB DATA FROM SAVED FIGURE
@@ -42,8 +43,8 @@ function drawSavedFigure(index, obj) {
     let newMainPath = obj.self.mainPathGroup
         .append('path')
         .attr('class', 'path mainPath')
-        .on("click", (event) => handleMainPathClick(event, obj.isDown2, obj.self))
-        .call(d3.drag().on("drag", (event) => handleMainPathDrag(event)))
+        .on("click", (event) => handleMainPathClick(event, figureCount, obj.isDown2, obj.self))
+        .call(d3.drag().on("drag", (event) => handleMainPathDrag(event, figureCount)))
     a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL.push(newMainPath)
     a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL.push(mainPathData)
     // MAIN PATH

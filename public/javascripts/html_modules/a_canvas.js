@@ -15,6 +15,10 @@ a_canvas_globalVars.svgHTML
 a_canvas_globalVars.canvasD3 = d3.select('#aCanvasZoomLayer')
 a_canvas_globalVars.panHTML
 
+// new
+// SVG ELEVEMENT
+a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL = -1                          // Counter
+
 // ORIGINAL FIGURE
 a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL = []                    // Data                         originalFigure_data_pathDatas_array_GLOBAL
 a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL = []                 // SVG Elements                 originalFigure_svgElements_paths_array_GLOBAL

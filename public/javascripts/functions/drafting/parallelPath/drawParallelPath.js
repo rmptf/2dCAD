@@ -108,8 +108,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
             if(parallelPathObject.iterationCounter === 1) {
                 parallelPathObject.parallelDistance = 0
             } else {
-                // parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
-                parallelPathObject.parallelDistance = 25
+                parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
+                // parallelPathObject.parallelDistance = 25
             }
 
 

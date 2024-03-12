@@ -33,14 +33,14 @@ function Path(svgCount, figureCount, secondaryPaths) {
     }
 }
 
-Path.prototype.printClass = function() {
-    console.log(this)
-}
+// Path.prototype.printClass = function() {
+//     console.log(this)
+// }
 
-Path.prototype.setEvent = function(event) {
-    this.event = event
-    this.printClass()
-}
+// Path.prototype.setEvent = function(event) {
+//     this.event = event
+//     this.printClass()
+// }
 
 // Path.prototype.drawPathFunction123 = function() {
 //     drawPathFunction(this)

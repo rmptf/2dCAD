@@ -7,8 +7,6 @@ function drawPathFunction(event, obj, pathClass) {
     a_canvas_globalVars.svgD3.on('dblclick', finishDrawPath)
     obj.m1 = d3.pointer(event)
 
-    // pathClass.printClass()
-
     if (obj.isDown === false) {
         let thisPathCount = 0
         a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL + 1
@@ -27,8 +25,8 @@ function drawPathFunction(event, obj, pathClass) {
         let newMainPath = obj.self.mainPathGroup
             .append('path')
             .attr('class', 'path mainPath')
-            .on("click", (event) => handleMainPathClick(event, obj.isDown2, obj.self))
-            .call(d3.drag().on("drag", (event) => handleMainPathDrag(event)))
+            .on("click", (event) => handleMainPathClick(event, figureCount, obj.isDown2, obj.self))
+            .call(d3.drag().on("drag", (event) => handleMainPathDrag(event, figureCount)))
         a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL.push(newMainPath)
         let newPathData1 = rawPathData(obj.m1), newPathData2 = rawPathData(obj.m1)
         a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL.push([newPathData1, newPathData2])
@@ -107,7 +105,9 @@ function drawPathFunction(event, obj, pathClass) {
         a_canvas_globalVars.svgD3.on("mousemove", null)
         a_canvas_globalVars.pressSvgElement = false
         obj.isDown = false
+        // old
         // obj.secondaryPathCount = obj.secondaryPathCount - 1
+        // new
         obj.secondaryPathCount = 0
         for (let i = 0; i < 2; i++) {
             a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].pop()
