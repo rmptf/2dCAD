@@ -37,7 +37,7 @@ function drawPathFunction(event, obj, pathClass) {
         let newSecondaryPath = obj.self.secondaryPathGroup
             .append('path')
             .attr('class', 'path secondaryPath')
-            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, obj.isDown2, obj.self))
+            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
         secondaryPathGroup.push(newSecondaryPath)
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL.push(secondaryPathGroup)
         // SECONDARY PATH
@@ -78,7 +78,7 @@ function drawPathFunction(event, obj, pathClass) {
         let newSecondaryPath = obj.self.secondaryPathGroup
             .append('path')
             .attr('class', 'path secondaryPath')
-            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, obj.isDown2, obj.self))
+            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newSecondaryPath)
         // SECONDARY PATH
         console.log(figureCount)
@@ -87,7 +87,7 @@ function drawPathFunction(event, obj, pathClass) {
         let newEndPoint = obj.self.endPointGroup
             .append('circle')
             .attr('class', 'endPoint mainEndPoint')
-            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, obj.isDown2, obj.self))
+            .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, endPointCount, figureCount)}))
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newEndPoint)
         // END POINTS

@@ -57,7 +57,7 @@ function mainPathClick(event, originalFigure_counter_groupCount_GLOBAL, figureCo
     console.log(figureCount)
 }
 
-function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pathCount, isDown2, selfGroup) {
+function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pathCount, figureCount, isDown2, selfGroup) {
     let m1 = d3.pointer(event)
     // console.log("Secondary Path Click")
     console.log("Path Count Clicked: " + pathCount)
@@ -66,7 +66,7 @@ function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pat
         // console.log('path Clicked, All other path click functions off')
     } else if (a_canvas_globalVars.pressAddCurveButton === true) {
         console.log('Add Path Arc = true')
-        addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, m1)
+        addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount, m1)
         a_canvas_globalVars.pressAddCurveButton = false
     } else if (a_canvas_globalVars.pressAddParallelButton === true) {
         console.log('Add Parallel = true')
@@ -83,8 +83,8 @@ function handleMainPathClick(event, figureCount, isDown2, self) {
     mainPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, figureCount, isDown2, self)
 }
 
-function handleSecondaryPathClick(event, thisPathCount, isDown2, self) {
-    secondaryPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, isDown2, self)
+function handleSecondaryPathClick(event, thisPathCount, figureCount, isDown2, self) {
+    secondaryPathClick(event, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, thisPathCount, figureCount, isDown2, self)
 }
 
 function handleMainPathDrag(event, figureCount) {
