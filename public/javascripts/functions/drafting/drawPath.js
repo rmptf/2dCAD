@@ -60,7 +60,12 @@ function drawPathFunction(event, obj, pathClass) {
         a_canvas_globalVars.svgD3
             .on("mousemove", (event) => {event, handleExpandSvg(event, obj.m1, obj.isDown, elementPositionData)})
 
-        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(
+            a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount],
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount],
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount],
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount]
+            )
 
         obj.isDown = true
     } else {
@@ -71,7 +76,7 @@ function drawPathFunction(event, obj, pathClass) {
 
         // MAIN PATH
         let newPathData = rawPathData(obj.m1)
-        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newPathData)
+        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].push(newPathData)
         // MAIN PATH
 
         // SECONDARY PATH
@@ -79,7 +84,7 @@ function drawPathFunction(event, obj, pathClass) {
             .append('path')
             .attr('class', 'path secondaryPath')
             .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
-        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newSecondaryPath)
+        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount].push(newSecondaryPath)
         // SECONDARY PATH
         console.log(figureCount)
 
@@ -89,14 +94,14 @@ function drawPathFunction(event, obj, pathClass) {
             .attr('class', 'endPoint mainEndPoint')
             .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, endPointCount, figureCount)}))
-        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newEndPoint)
+        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].push(newEndPoint)
         // END POINTS
 
         let elementPositionData = getElementPositionData()
         a_canvas_globalVars.svgD3
             .on("mousemove", (event) => {event, handleExpandSvg(event, obj.m1, obj.isDown, elementPositionData)})
 
-        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount])
     }
 
     function finishDrawPath() {

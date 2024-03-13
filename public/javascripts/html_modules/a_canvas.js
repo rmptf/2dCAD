@@ -18,6 +18,7 @@ a_canvas_globalVars.panHTML
 // new
 // SVG ELEVEMENT
 a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL = -1                          // Counter
+a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL = 0                         // Counter
 
 // ORIGINAL FIGURE
 a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL = []                    // Data                         originalFigure_data_pathDatas_array_GLOBAL

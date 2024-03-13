@@ -6,8 +6,8 @@ import {checkForIntersectingPaths} from './intersectingParPaths/intersectingParP
 import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/intPathsTests.js'
 // import {updateSVG_highlight_1_point_02} from '../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
-
-function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked) {
+// drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
+function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
     console.log("DRAW_PARALLEL")
 
     // Check if drawing parallel is not initiated
@@ -19,6 +19,8 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         a_canvas_globalVars.svgD3.on("mousemove", mouseMoveDrawParallel)
         a_canvas_globalVars.svgD3.on('click', mouseDownDrawParallel)
 
+        console.log(a_canvas_globalVars.parallelFigure_counter_currentCount_GLOBAL)
+        console.log(originalFigure_counter_groupCount_GLOBAL)
 
         // This currently doesnt work (doesnt work in pre breakout either)
         // Check if the global counters don't match

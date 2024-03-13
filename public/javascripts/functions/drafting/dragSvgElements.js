@@ -1,4 +1,5 @@
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
+import {describeComplexPath} from '../math/svgElementCalculations.js'
 
 function dragPath(event, mainPathsArray, secondaryPathsArray, endPointsArray, pathData) {
     for (let i = 0; i < pathData.length; i++) {

@@ -52,13 +52,13 @@ function drawSavedFigure(index, obj) {
     // SECONDARY PATH
     let secondaryPathCounter = -1
     let secondaryPathGroup = []
-    for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length-1; i++) {
+    for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].length-1; i++) {
         secondaryPathCounter = secondaryPathCounter + 1
         let thisPathCount = secondaryPathCounter
         let newSecondaryPath = obj.self.secondaryPathGroup
         .append('path')
         .attr('class', 'path secondaryPath')
-        .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, obj.isDown2, obj.self))
+        .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
         secondaryPathGroup.push(newSecondaryPath)
     }
     a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL.push(secondaryPathGroup)
@@ -66,11 +66,11 @@ function drawSavedFigure(index, obj) {
 
     // DYNAMIC END POINTS
     let endPoints = []
-    for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
+    for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].length; i++) {
         let newPoint = obj.self.endPointGroup
             .append('circle')
             .attr('class', 'endPoint mainEndPoint')
-            .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, i)}))
+            .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, i, figureCount)}))
         endPoints.push(newPoint)
     }
     a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL.push(endPoints)
@@ -78,10 +78,10 @@ function drawSavedFigure(index, obj) {
 
     // Update SVG
     updateSVG_mainPathAndPoints(
-        a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+        a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount],
+        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount],
+        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount],
+        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount]
     )
     // Update SVG
 }

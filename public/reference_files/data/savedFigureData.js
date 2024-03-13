@@ -137,6 +137,7 @@ const SAVED_FIGURE_DATA = [
 
     // fixing counters
     '{"shapeData":[{"coords":{"x":116.5,"y":214},"arc":{"exist":false}},{"coords":{"x":282.5,"y":291},"arc":{"exist":false}},{"coords":{"x":422.5,"y":285},"arc":{"exist":false}}],"svgDocPosition":{"svgDocTop":"2227px","svgDocLeft":"2250px"},"svgDimensions":{"x":238.5,"y":408,"width":526.5,"height":523,"top":408,"right":765,"bottom":931,"left":238.5}}',
+    '{"shapeData":[{"coords":{"x":71.5,"y":121},"arc":{"exist":false}},{"coords":{"x":238.5,"y":108},"arc":{"exist":false}},{"coords":{"x":295.5,"y":176},"arc":{"exist":true,"radius":124.87770426000704,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":356.45940872829635,"y":67.01196621304572},"startAngle":0.7263999920465132}},{"coords":{"x":415.5,"y":207},"arc":{"exist":true,"radius":243.64872540810103,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":414.4378226184892,"y":-36.64641013608721},"startAngle":0.5143315355993111}}],"svgDocPosition":{"svgDocTop":"2250px","svgDocLeft":"2250px"},"svgDimensions":{"x":238.5,"y":431,"width":515.5,"height":500,"top":431,"right":754,"bottom":931,"left":238.5}}',
 ]
 export{
     SAVED_FIGURE_DATA

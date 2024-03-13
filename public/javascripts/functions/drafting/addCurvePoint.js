@@ -19,7 +19,7 @@ function addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, 
 
     for (let i = 0; i < a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].length; i++) {
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount][i]
-        .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, i)}))
+        .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, i, figureCount)}))
     }
 
     let index = pathCount + 1
@@ -28,8 +28,12 @@ function addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, 
     a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount][pathCount + 1].arc = arcData
     a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].splice(index, 0, data);
 
-    // updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount])
+    updateSVG_mainPathAndPoints(
+        a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount],
+        a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount],
+        a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount],
+        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount]
+    )
 }
 
 export {

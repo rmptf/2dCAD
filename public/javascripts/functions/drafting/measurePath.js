@@ -1,12 +1,12 @@
 import {getDistance, findArcLength} from '../math/mathFunctions.js'
 
-function measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount) {
-    let numberOfSegments = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1
+function measurePathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, self, pathCount, figureCount) {
+    let numberOfSegments = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].length - 1
     let arrayOfLengths = []
     // loop through total number of originalFigure_data_pathDatas_array_GLOBAL - 1
     for (let i = 0; i < numberOfSegments; i++) {
-        let point1 = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i]
-        let point2 = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][i + 1]
+        let point1 = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount][i]
+        let point2 = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount][i + 1]
         // check points, starting with second point, if it is an path or an arc
         if (point2.arc.exist === false) {
             // if its a path, find distance between two points, add length to array
