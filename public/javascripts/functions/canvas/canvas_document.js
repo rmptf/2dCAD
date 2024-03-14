@@ -6,6 +6,9 @@ dragElement(canvasPanLayer)
 
 function createSvgDocument() {
     stringIncrement = stringIncrement + 1
+    a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL = a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL + 1
+    let thisSvgElemCount = a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL
+
     let content = document.getElementById("aCanvasTemplate").content
     let targetContainer = document.getElementById('aCanvasPanLayer')
     targetContainer.appendChild(document.importNode(content, true))
@@ -20,11 +23,11 @@ function createSvgDocument() {
 
     placeElement(svgDocElement)
     activateSvgDoc(svgDocElement)
-    setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id)
+    setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
     dragElement(svgDocElement)
     svgDocElement.onclick = function() {
         activateSvgDoc(svgDocElement)
-        setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id)
+        setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
     }
 }
 
@@ -49,9 +52,20 @@ function activateSvgDoc(element) {
     element.classList.add(activeClass)
 }
 
-function setGlobalSvgElementVars(documentId, svgId) {
+function setGlobalSvgElementVars(documentId, svgId, thisSvgElemCount) {
+    a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL = thisSvgElemCount
+    // console.log(thisSvgElemCount)
+    // console.log(a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL)
     a_canvas_globalVars.svgDocHTML = document.getElementById(documentId)
     // a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
+
+
+    // let okokok = d3.select("#aDocumentSvg1")
+    // okokok.on('click', null)
+    // console.log(okokok)
+
+
+
     a_canvas_globalVars.svgD3 = d3.select('#' + svgId)
     a_canvas_globalVars.svgHTML = document.getElementById(svgId)
 }

@@ -12,6 +12,9 @@ function drawSavedFigure(index, obj) {
     let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
     // SET VARS FROM GLOBAL
 
+    // if using svgElementcounters
+    // let figureCount222 = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL[a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL]
+
     // GRAB DATA FROM SAVED FIGURE
     let figureData = JSON.parse(SAVED_FIGURE_DATA[index])
     let mainPathData = figureData.shapeData

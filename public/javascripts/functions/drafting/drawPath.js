@@ -14,6 +14,8 @@ function drawPathFunction(event, obj, pathClass) {
 
         createSvgGroups(obj.self, ['figureGroup', 'mainPathGroup', 'secondaryPathGroup', 'endPointGroup', 'testEndPointGroup'])
 
+        // console.log(obj.self)
+
         // PARALLEL GROUPS
         a_canvas_globalVars.parallelFigure_counter_groups_array_GLOBAL.push(0)
         a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL.push([])
@@ -100,6 +102,7 @@ function drawPathFunction(event, obj, pathClass) {
     }
 
     function finishDrawPath() {
+        console.log("done")
         // a_canvas_globalVars.svgD3.on("click", null)
         a_canvas_globalVars.svgD3.on("dblclick", null)
         a_canvas_globalVars.svgD3.on("mousemove", null)

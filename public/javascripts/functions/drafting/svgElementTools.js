@@ -17,6 +17,8 @@ function selectDrawPath() {
     a_canvas_globalVars.pressSvgElement = true
     a_canvas_globalVars.svgD3.on("click", svgClick) // prob place somewhere else
 
+    // console.log(a_canvas_globalVars.svgD3)
+
     // var newPathClass = new Path(0, 0, 69)
     // a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
     // newPathClass.printClass()
