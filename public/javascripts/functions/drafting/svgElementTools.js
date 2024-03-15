@@ -15,9 +15,10 @@ drawPathObj.secondaryPathCount = 0
 
 function selectDrawPath() {
     a_canvas_globalVars.pressSvgElement = true
-    a_canvas_globalVars.svgD3.on("click", svgClick) // prob place somewhere else
+    // a_canvas_globalVars.svgD3.on("click", svgClick) // prob place somewhere else
+    a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event))
 
-    // console.log(a_canvas_globalVars.svgD3)
+
 
     // var newPathClass = new Path(0, 0, 69)
     // a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
@@ -39,6 +40,19 @@ function selectMeasurePath() {
 
 // function svgClick(event, pathClass) {
 function svgClick(event) {
+    // console.log(event.target.parentElement.parentElement.parentElement)
+    // if(event.target.classList.contains("a-document__svg")) {
+    //     console.log("first_click")
+    //     if(event.target.id !== a_canvas_globalVars.svgHTML.id) {
+    //         a_canvas_globalVars.pressSvgElement = false
+    //         console.log("diff")
+    //     } else {
+    //         console.log("same")
+    //     }
+    // } else {
+    //     console.log("not_first_click")
+    // }
+
     if (a_canvas_globalVars.pressSvgElement === true) {
         console.log("Svg Element Click: Draw Path.")
         a_canvas_globalVars.pressAddCurveButton = false
