@@ -1,26 +1,30 @@
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 
-function getElementPositionData() {
+function getElementPositionData(svgHTML, svgDocHTML, origFigure) {
     let thisCountCurrentPathDatas_x = []
     let thisCountCurrentPathDatas_y = []
-    a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x))
-    a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y))
+
+    // a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x))
+    // a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y))
+    origFigure.forEach(pathData => thisCountCurrentPathDatas_x.push(pathData.coords.x))
+    origFigure.forEach(pathData => thisCountCurrentPathDatas_y.push(pathData.coords.y))
     
     let positionData = [
         thisCountCurrentPathDatas_x,
         thisCountCurrentPathDatas_y,
-        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-        parseInt(a_canvas_globalVars.svgDocHTML.style.left.replace('px', '')),
-        parseInt(a_canvas_globalVars.svgDocHTML.style.top.replace('px', '')),
-        a_canvas_globalVars.svgHTML.getBoundingClientRect()
+        origFigure,
+        parseInt(svgDocHTML.style.left.replace('px', '')),
+        parseInt(svgDocHTML.style.top.replace('px', '')),
+        svgHTML.getBoundingClientRect()
     ]
     return positionData
 }
 
-function expandSvgElementOnMouseMove(event, m1Origin, isDown, pathDatasPositions, svgDocLeftPos, svgDocTopPos, svgDimensions, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y) {
+function expandSvgElementOnMouseMove(event, m1Origin, isDown, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, pathDatasPositions, svgDocLeftPos, svgDocTopPos, svgDimensions, thisSvgHTML, thisSvgDocHTML, figureCount) {
+    // console.log(thisSvgHTML)
     let m2 = d3.pointer(event)
-    let p1_x = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-2).coords.x
-    let p1_y = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-2).coords.y
+    let p1_x = pathDatasPositions.at(-2).coords.x
+    let p1_y = pathDatasPositions.at(-2).coords.y
     let p1m2Dif_x = p1_x - m2[0]
     let p1m2Dif_y = p1_y - m2[1]
 
@@ -50,52 +54,57 @@ function expandSvgElementOnMouseMove(event, m1Origin, isDown, pathDatasPositions
     if(m2[0] < p1_x){
         if(p1m2Dif_x >= distanceToBubble_x_left) {
             // Resize SVG
-            a_canvas_globalVars.svgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_left) + 'px';
+            thisSvgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_left) + 'px';
             // Reposition svgDoc
-            a_canvas_globalVars.svgDocHTML.style.left = (svgDocLeftPos - movePathDatasThisAmount_x_left) + "px"
+            thisSvgDocHTML.style.left = (svgDocLeftPos - movePathDatasThisAmount_x_left) + "px"
             // Reposition SVG Elements
             // Repositions all path datas except for dragged
-            let dragedPathDataIndex = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length - 1
-            for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
+            let dragedPathDataIndex = pathDatasPositions.length - 1
+            for (let i = 0; i < pathDatasPositions.length; i++) {
                 if(i !== dragedPathDataIndex) {
-                    a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
+                    pathDatasPositions[i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
                 }
             }
         }
     } else {
         if((p1m2Dif_x * -1) >= distanceToBubble_x_right) {
             // Resize SVG
-            a_canvas_globalVars.svgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_right) + 'px';
+            thisSvgHTML.style.width = (svgWidth + movePathDatasThisAmount_x_right) + 'px';
         }
     }
 
     if(m2[1] < p1_y){
         if(p1m2Dif_y >= distanceToBubble_y_up) {
             // Resize SVG
-            a_canvas_globalVars.svgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_up) + 'px';
+            thisSvgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_up) + 'px';
             // Reposition svgDoc
-            a_canvas_globalVars.svgDocHTML.style.top = (svgDocTopPos - movePathDatasThisAmount_y_up) + "px"
+            thisSvgDocHTML.style.top = (svgDocTopPos - movePathDatasThisAmount_y_up) + "px"
             // Reposition SVG Elements
             // Repositions all path datas except for dragged
-            let dragedPathDataIndex = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length - 1
-            for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].length; i++) {
+            let dragedPathDataIndex = pathDatasPositions.length - 1
+            for (let i = 0; i < pathDatasPositions.length; i++) {
                 if(i !== dragedPathDataIndex) {
-                    a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL][i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
+                    pathDatasPositions[i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
                 }
             }
         }
     } else {
         if((p1m2Dif_y * -1) >= distanceToBubble_y_down) {
             // Resize SVG
-            a_canvas_globalVars.svgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_down) + 'px';
+            thisSvgHTML.style.height = (svgHeight + movePathDatasThisAmount_y_down) + 'px';
             // a_canvas_globalVars.svg.attr('height', (svgHeight + movePathDatasThisAmount_y_down)+'px')
         }
     }
 
     if(isDown === true) {
-        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-1).coords.x = m2[0]
-        a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-1).coords.y = m2[1]
-        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+        pathDatasPositions.at(-1).coords.x = m2[0]
+        pathDatasPositions.at(-1).coords.y = m2[1]
+        updateSVG_mainPathAndPoints(
+            a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+            )
     }
 }
 

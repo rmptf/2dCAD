@@ -1,3 +1,4 @@
+import {finishDrawPath} from '../drafting/drawPath.js'
 let stringIncrement = 0
 
 // maybe set as global element and add drag at that point.
@@ -29,7 +30,17 @@ function createSvgDocument() {
     svgDocElement.onclick = function() {
         if(!svgDocElement.classList.contains("a-document__container--active")) {
             // console.log("Activating.")
+
+            // deactivate all events on previously Active svgDocument
+            // call 1 by 1
             a_canvas_globalVars.pressSvgElement = false
+            a_canvas_globalVars.svgD3.on("click", null)
+            a_canvas_globalVars.svgD3.on("dblclick", null)
+            a_canvas_globalVars.svgD3.on("mousemove", null)
+            // call finishdrawpath function (but how to pass vars)
+            // finishDrawPath(object, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL)
+
+            // activate current svgDocument
             activateSvgDoc(svgDocElement)
             setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
         } else {

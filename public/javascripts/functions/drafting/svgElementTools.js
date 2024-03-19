@@ -15,10 +15,10 @@ drawPathObj.secondaryPathCount = 0
 
 function selectDrawPath() {
     a_canvas_globalVars.pressSvgElement = true
-    // a_canvas_globalVars.svgD3.on("click", svgClick) // prob place somewhere else
-    a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event))
-
-
+    let svgHTML = a_canvas_globalVars.svgHTML
+    let svgDocHTML = a_canvas_globalVars.svgDocHTML
+    let svgD3 = a_canvas_globalVars.svgD3
+    svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
 
     // var newPathClass = new Path(0, 0, 69)
     // a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
@@ -39,26 +39,13 @@ function selectMeasurePath() {
 }
 
 // function svgClick(event, pathClass) {
-function svgClick(event) {
-    // console.log(event.target.parentElement.parentElement.parentElement)
-    // if(event.target.classList.contains("a-document__svg")) {
-    //     console.log("first_click")
-    //     if(event.target.id !== a_canvas_globalVars.svgHTML.id) {
-    //         a_canvas_globalVars.pressSvgElement = false
-    //         console.log("diff")
-    //     } else {
-    //         console.log("same")
-    //     }
-    // } else {
-    //     console.log("not_first_click")
-    // }
-
+function svgClick(event, svgHTML, svgDocHTML, svgD3) {
     if (a_canvas_globalVars.pressSvgElement === true) {
         console.log("Svg Element Click: Draw Path.")
         a_canvas_globalVars.pressAddCurveButton = false
         a_canvas_globalVars.pressAddParallelButton = false
         a_canvas_globalVars.pressMeasurePathButton = false
-        drawPathFunction(event, drawPathObj)
+        drawPathFunction(event, drawPathObj, svgHTML, svgDocHTML, svgD3)
         // drawPathFunction(event, drawPathObj, pathClass)
     } else {
         console.log("Svg Element Click: Don't Draw Path.")
@@ -68,15 +55,15 @@ function svgClick(event) {
 // function mainPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self) {
 function mainPathClick(event, originalFigure_counter_groupCount_GLOBAL, figureCount, isDown2, self) {
     console.log('Main Path Click')
-    console.log(originalFigure_counter_groupCount_GLOBAL)
-    console.log(figureCount)
+    // console.log(originalFigure_counter_groupCount_GLOBAL)
+    // console.log(figureCount)
 }
 
 function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pathCount, figureCount, isDown2, selfGroup) {
     let m1 = d3.pointer(event)
     // console.log("Secondary Path Click")
-    console.log("Path Count Clicked: " + pathCount)
-    console.log("Figure Count Clicked: " + figureCount)
+    // console.log("Path Count Clicked: " + pathCount)
+    // console.log("Figure Count Clicked: " + figureCount)
     if (a_canvas_globalVars.pressAddCurveButton === false && a_canvas_globalVars.pressAddParallelButton === false && a_canvas_globalVars.pressMeasurePathButton == false) {
         console.log('path Clicked, All other path click functions off')
     } else if (a_canvas_globalVars.pressAddCurveButton === true) {
@@ -119,8 +106,8 @@ function handleEndPointDrag(event, index, figureCount) {
     dragEndPoint(event, index, originalPath, secondaryPath, endPoints, pathData)
 }
 
-const handleExpandSvg = (event, m1, isDown, elmntPosData) => {
-    expandSvgElementOnMouseMove(event, m1, isDown, elmntPosData[2], elmntPosData[3], elmntPosData[4], elmntPosData[5], elmntPosData[0], elmntPosData[1])
+const handleExpandSvg = (event, m1, isDown, elmntPosData, thisSvgHTML, thisSvgDocHTML, figureCount) => {
+    expandSvgElementOnMouseMove(event, m1, isDown, elmntPosData[0], elmntPosData[1], elmntPosData[2], elmntPosData[3], elmntPosData[4], elmntPosData[5], thisSvgHTML, thisSvgDocHTML, figureCount)
 }
 
 export {
