@@ -1,7 +1,7 @@
 <%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
 
 <% 
-let drawPath = "a_canvas_functions.selectDrawPath()"
+let drawPath = "a_canvas_functions.selectDrawPath(this)"
 let addCurvePoint = "a_canvas_functions.selectAddCurvePoint()"
 let drawParellel = "a_canvas_functions.selectDrawParallelPath()"
 let measurePath = "a_canvas_functions.selectMeasurePath()"
@@ -152,8 +152,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "Path",
                         // btnOnClick: "a_canvas_functions.selectDrawPath()",
                         // btnOnClick: "drawPath()",
-                        btnOnClick: drawPath,
-                        btnId: "pathBtn",
+                        // btnOnClick: drawPath,
+                        // btnId: "pathBtn",
+                        btnId: "aDoc_btn_01",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,

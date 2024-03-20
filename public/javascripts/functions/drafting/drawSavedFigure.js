@@ -1,5 +1,5 @@
 import {SAVED_FIGURE_DATA} from '../../../reference_files/data/savedFigureData.js'
-import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../drafting/svgElementTools.js'
+import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../canvas/svgDocument_actions.js'
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 import {createSvgGroups} from '../drafting/drawPath.js'
 

@@ -1,7 +1,7 @@
-import {createSvgDocument} from '../functions/canvas/canvas_document.js'
+import {createSvgDocument} from '../functions/canvas/svgDocument.js'
 import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
-import {selectDrawPath, selectAddCurvePoint, selectDrawParallelPath, selectMeasurePath} from '../functions/drafting/svgElementTools.js'
-import {saveFigureData} from '../functions/tools/saveFigureData.js'
+// import {selectDrawPath, selectAddCurvePoint, selectDrawParallelPath, selectMeasurePath} from '../functions/canvas/svgDocument_actions.js'
+// import {saveFigureData} from '../functions/tools/saveFigureData.js'
 import {hotKeyPress} from '../functions/tools/hotKeys.js'
 
 a_canvas_globalVars.scale = 1
@@ -39,11 +39,11 @@ a_canvas_functions.createSvgDocument = createSvgDocument
 a_canvas_functions.increaseScale = increaseScale
 a_canvas_functions.resetScale = resetScale
 a_canvas_functions.decreaseScale = decreaseScale
-a_canvas_functions.selectDrawPath = selectDrawPath
-a_canvas_functions.selectAddCurvePoint = selectAddCurvePoint
-a_canvas_functions.selectDrawParallelPath = selectDrawParallelPath
-a_canvas_functions.selectMeasurePath = selectMeasurePath
-a_canvas_functions.saveFigureData = saveFigureData
+// a_canvas_functions.selectDrawPath = selectDrawPath
+// a_canvas_functions.selectAddCurvePoint = selectAddCurvePoint
+// a_canvas_functions.selectDrawParallelPath = selectDrawParallelPath
+// a_canvas_functions.selectMeasurePath = selectMeasurePath
+// a_canvas_functions.saveFigureData = saveFigureData
 
 document.addEventListener("keydown", (event) => hotKeyPress(event))
 

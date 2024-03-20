@@ -17,28 +17,57 @@ function createSvgDocument() {
     let svgDocElement = document.getElementById("aDocumentContainer")
     let svgDocHeader = svgDocElement.children[0]
     let svgDocSvg = svgDocElement.children[4]
+    let svgDoc_actions_Button_01 = document.getElementById('aDoc_btn_01')
 
     svgDocElement.id = changeStringIncrementally("aDocument")
     svgDocHeader.innerText = changeStringIncrementally("Pattern_Pc_")
     svgDocSvg.id = changeStringIncrementally("aDocumentSvg")
+    svgDoc_actions_Button_01.id = changeStringIncrementally("aDocumentActionsButton01_")
+
 
     placeElement(svgDocElement)
     activateSvgDoc(svgDocElement)
     setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
     dragElement(svgDocElement)
 
-    svgDocElement.onclick = function() {
+
+
+    // handle button1 click
+    let drawPathObj = {}
+    drawPathObj.self = []
+    drawPathObj.m1
+    drawPathObj.isDown = false
+    drawPathObj.isDown2 = false
+    drawPathObj.secondaryPathCount = 0
+
+
+
+
+
+
+
+
+    // handle svgDoc events
+    svgDocElement.onclick = selectSvgDocument
+
+    function selectSvgDocument() {
+        console.log(this)
         if(!svgDocElement.classList.contains("a-document__container--active")) {
             // console.log("Activating.")
 
             // deactivate all events on previously Active svgDocument
+
             // call 1 by 1
             a_canvas_globalVars.pressSvgElement = false
             a_canvas_globalVars.svgD3.on("click", null)
             a_canvas_globalVars.svgD3.on("dblclick", null)
             a_canvas_globalVars.svgD3.on("mousemove", null)
-            // call finishdrawpath function (but how to pass vars)
-            // finishDrawPath(object, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL)
+
+            // // call finishdrawpath function (but how to pass vars)
+            // if(a_canvas_globalVars.pressSvgElement) {
+            //     finishDrawPath(object, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL)
+            //     a_canvas_globalVars.pressSvgElement = false
+            // }
 
             // activate current svgDocument
             activateSvgDoc(svgDocElement)
@@ -47,7 +76,43 @@ function createSvgDocument() {
             // console.log("Already active.")
         }
     }
+
+
+
+    // handle button1 events
+    svgDoc_actions_Button_01.onclick = selectDrawPath
+
+    function selectDrawPath() {
+        console.log(this)
+
+        a_canvas_globalVars.pressSvgElement = true
+        let svgHTML = a_canvas_globalVars.svgHTML
+        let svgDocHTML = a_canvas_globalVars.svgDocHTML
+        let svgD3 = a_canvas_globalVars.svgD3
+        // svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
+    }
+
+    function svgClick(event, svgHTML, svgDocHTML, svgD3) {
+        if (a_canvas_globalVars.pressSvgElement === true) {
+            a_canvas_globalVars.pressAddCurveButton = false
+            a_canvas_globalVars.pressAddParallelButton = false
+            a_canvas_globalVars.pressMeasurePathButton = false
+            drawPathFunction(event, drawPathObj, svgHTML, svgDocHTML, svgD3)
+        }
+    }
+
+
+
+
+
+
+    // handle button2 events
 }
+
+
+
+
+
 
 function placeElement(svgDocElement) {
     svgDocElement.style.top = 'calc(50% - 250px)'
@@ -119,6 +184,7 @@ function dragElement(elmnt) {
 
 export {
     createSvgDocument,
+    // selectDrawPath,
 }
 
 

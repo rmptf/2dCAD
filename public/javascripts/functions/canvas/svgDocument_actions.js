@@ -1,56 +1,57 @@
 import {drawPathFunction} from '../drafting/drawPath.js'
 import {addCurvePointFunction} from '../drafting/addCurvePoint.js'
-import {drawParallelPathFunction} from './parallelPath/drawParallelPath.js'
+import {drawParallelPathFunction} from '../drafting/parallelPath/drawParallelPath.js'
 import {measurePathFunction} from '../drafting/measurePath.js'
 import {dragPath, dragEndPoint} from '../drafting/dragSvgElements.js'
 import {expandSvgElementOnMouseMove} from '../drafting/resizeSvg.js'
 import {Path} from '../../tests/classes_test/newClass_test.js'
 
-let drawPathObj = {}
-drawPathObj.self = []
-drawPathObj.m1
-drawPathObj.isDown = false
-drawPathObj.isDown2 = false
-drawPathObj.secondaryPathCount = 0
+// let drawPathObj = {}
+// drawPathObj.self = []
+// drawPathObj.m1
+// drawPathObj.isDown = false
+// drawPathObj.isDown2 = false
+// drawPathObj.secondaryPathCount = 0
 
-function selectDrawPath() {
-    a_canvas_globalVars.pressSvgElement = true
-    let svgHTML = a_canvas_globalVars.svgHTML
-    let svgDocHTML = a_canvas_globalVars.svgDocHTML
-    let svgD3 = a_canvas_globalVars.svgD3
-    svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
+// function selectDrawPath(thisElement) {
+//     console.log(thisElement)
+//     a_canvas_globalVars.pressSvgElement = true
+//     let svgHTML = a_canvas_globalVars.svgHTML
+//     let svgDocHTML = a_canvas_globalVars.svgDocHTML
+//     let svgD3 = a_canvas_globalVars.svgD3
+//     svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
 
-    // var newPathClass = new Path(0, 0, 69)
-    // a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
-    // newPathClass.printClass()
-    // a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event, newPathClass)) // prob place somewhere else
-}
+//     // var newPathClass = new Path(0, 0, 69)
+//     // a_canvas_globalVars.svgD3.on("click", (event) => newPathClass.setEvent(event))
+//     // newPathClass.printClass()
+//     // a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event, newPathClass)) // prob place somewhere else
+// }
 
-function selectAddCurvePoint() {
-    a_canvas_globalVars.pressAddCurveButton = true
-}
+// function selectAddCurvePoint() {
+//     a_canvas_globalVars.pressAddCurveButton = true
+// }
 
-function selectDrawParallelPath() {
-    a_canvas_globalVars.pressAddParallelButton = true
-}
+// function selectDrawParallelPath() {
+//     a_canvas_globalVars.pressAddParallelButton = true
+// }
 
-function selectMeasurePath() {
-    a_canvas_globalVars.pressMeasurePathButton = true
-}
+// function selectMeasurePath() {
+//     a_canvas_globalVars.pressMeasurePathButton = true
+// }
 
-// function svgClick(event, pathClass) {
-function svgClick(event, svgHTML, svgDocHTML, svgD3) {
-    if (a_canvas_globalVars.pressSvgElement === true) {
-        console.log("Svg Element Click: Draw Path.")
-        a_canvas_globalVars.pressAddCurveButton = false
-        a_canvas_globalVars.pressAddParallelButton = false
-        a_canvas_globalVars.pressMeasurePathButton = false
-        drawPathFunction(event, drawPathObj, svgHTML, svgDocHTML, svgD3)
-        // drawPathFunction(event, drawPathObj, pathClass)
-    } else {
-        console.log("Svg Element Click: Don't Draw Path.")
-    }
-}
+// // function svgClick(event, pathClass) {
+// function svgClick(event, svgHTML, svgDocHTML, svgD3) {
+//     if (a_canvas_globalVars.pressSvgElement === true) {
+//         console.log("Svg Element Click: Draw Path.")
+//         a_canvas_globalVars.pressAddCurveButton = false
+//         a_canvas_globalVars.pressAddParallelButton = false
+//         a_canvas_globalVars.pressMeasurePathButton = false
+//         drawPathFunction(event, drawPathObj, svgHTML, svgDocHTML, svgD3)
+//         // drawPathFunction(event, drawPathObj, pathClass)
+//     } else {
+//         console.log("Svg Element Click: Don't Draw Path.")
+//     }
+// }
 
 // function mainPathClick(this1, event, originalFigure_counter_groupCount_GLOBAL, isDown2, self) {
 function mainPathClick(event, originalFigure_counter_groupCount_GLOBAL, figureCount, isDown2, self) {
@@ -111,11 +112,11 @@ const handleExpandSvg = (event, m1, isDown, elmntPosData, thisSvgHTML, thisSvgDo
 }
 
 export {
-    selectDrawPath,
+    // selectDrawPath,
     selectAddCurvePoint,
     selectDrawParallelPath,
     selectMeasurePath,
-    svgClick,
+    // svgClick,
     handleMainPathClick,
     handleSecondaryPathClick,
     handleMainPathDrag,
