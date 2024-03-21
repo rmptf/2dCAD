@@ -4,13 +4,17 @@ import {getElementPositionData} from '../drafting/resizeSvg.js'
 import {updateSVG_highlight_1_point_01} from '../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
-    let figureCount
-    thisSvgD3.on("dblclick", () => finishDrawPath(obj, thisSvgD3, figureCount))
+    thisSvgD3.on("dblclick", () => finishDrawPath(obj, thisSvgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, true))
     obj.m1 = d3.pointer(event)
 
     if (obj.isDown === false) {
+        obj.thisSvgDocCount = obj.thisSvgDocCount + 1 
+        console.log("counter_22")
+        console.log(obj.thisSvgDocCount)
+
         let thisPathCount = 0
         a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL + 1
+        let figureCount
         figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
 
         createSvgGroups(obj.self, ['figureGroup', 'mainPathGroup', 'secondaryPathGroup', 'endPointGroup', 'testEndPointGroup'])
@@ -64,7 +68,9 @@ function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
 
         obj.isDown = true
     } else {
-        figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
+        console.log("secondclick")
+        console.log(" ")
+        let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
         obj.secondaryPathCount = obj.secondaryPathCount + 1
         let thisPathCount = obj.secondaryPathCount
         let endPointCount = obj.secondaryPathCount + 1
@@ -98,11 +104,8 @@ function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
     }
 }
 
-function finishDrawPath(obj, thisSvgD3, figureCount) {
+function finishDrawPath(obj, thisSvgD3, figureCount, chkr) {
     console.log("FINISH")
-    // TODO: working here. Have to call this when svgDocument becomes inactive
-    // Opt1: make it so that no other svgDoc can be activated while path is being drawn in one
-    // Opt2: make it so that the path being drawn will be finished if another svgDoc is activated
 
     thisSvgD3.on("click", null)
     thisSvgD3.on("dblclick", null)
@@ -110,26 +113,23 @@ function finishDrawPath(obj, thisSvgD3, figureCount) {
     a_canvas_globalVars.pressSvgElement = false
     obj.isDown = false
     obj.secondaryPathCount = 0
-    // for (let i = 0; i < 2; i++) {
-    //     a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].pop()
-    //     a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-1).remove()
-    //     a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].pop()
-    //     a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].at(-1).remove()
-    //     a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].pop()
-    // }
-    // updateSVG_mainPathAndPoints(
-    //     a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-    //     a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-    //     a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-    //     a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
-    //     )
-    for (let i = 0; i < 2; i++) {
+
+    if(chkr === true) {
+        for (let i = 0; i < 2; i++) {
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].pop()
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].at(-1).remove()
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].pop()
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount].at(-1).remove()
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount].pop()
+        }
+    } else {
         a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].pop()
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].at(-1).remove()
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].pop()
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount].at(-1).remove()
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount].pop()
     }
+
     updateSVG_mainPathAndPoints(
         a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[figureCount],
         a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[figureCount],

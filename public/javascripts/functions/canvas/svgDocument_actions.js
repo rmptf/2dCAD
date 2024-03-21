@@ -27,17 +27,17 @@ import {Path} from '../../tests/classes_test/newClass_test.js'
 //     // a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event, newPathClass)) // prob place somewhere else
 // }
 
-// function selectAddCurvePoint() {
-//     a_canvas_globalVars.pressAddCurveButton = true
-// }
+function selectAddCurvePoint() {
+    a_canvas_globalVars.pressAddCurveButton = true
+}
 
-// function selectDrawParallelPath() {
-//     a_canvas_globalVars.pressAddParallelButton = true
-// }
+function selectDrawParallelPath() {
+    a_canvas_globalVars.pressAddParallelButton = true
+}
 
-// function selectMeasurePath() {
-//     a_canvas_globalVars.pressMeasurePathButton = true
-// }
+function selectMeasurePath() {
+    a_canvas_globalVars.pressMeasurePathButton = true
+}
 
 // // function svgClick(event, pathClass) {
 // function svgClick(event, svgHTML, svgDocHTML, svgD3) {
@@ -66,7 +66,7 @@ function secondaryPathClick(event, originalFigure_counter_groupCount_GLOBAL, pat
     // console.log("Path Count Clicked: " + pathCount)
     // console.log("Figure Count Clicked: " + figureCount)
     if (a_canvas_globalVars.pressAddCurveButton === false && a_canvas_globalVars.pressAddParallelButton === false && a_canvas_globalVars.pressMeasurePathButton == false) {
-        console.log('path Clicked, All other path click functions off')
+        // console.log('path Clicked, All other path click functions off')
     } else if (a_canvas_globalVars.pressAddCurveButton === true) {
         console.log('Add Path Arc = true')
         addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount, m1)

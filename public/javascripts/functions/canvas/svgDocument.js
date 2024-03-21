@@ -1,5 +1,7 @@
-import {finishDrawPath} from '../drafting/drawPath.js'
+import {drawPathFunction, finishDrawPath} from '../drafting/drawPath.js'
+
 let stringIncrement = 0
+let previousDrawPathObj
 
 // maybe set as global element and add drag at that point.
 let canvasPanLayer = document.getElementById("aCanvasPanLayer")
@@ -24,13 +26,19 @@ function createSvgDocument() {
     svgDocSvg.id = changeStringIncrementally("aDocumentSvg")
     svgDoc_actions_Button_01.id = changeStringIncrementally("aDocumentActionsButton01_")
 
-
     placeElement(svgDocElement)
     activateSvgDoc(svgDocElement)
     setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
     dragElement(svgDocElement)
 
 
+
+
+
+
+
+    // new stuff
+    // ...
 
     // handle button1 click
     let drawPathObj = {}
@@ -39,35 +47,19 @@ function createSvgDocument() {
     drawPathObj.isDown = false
     drawPathObj.isDown2 = false
     drawPathObj.secondaryPathCount = 0
-
-
-
-
-
-
-
+    drawPathObj.thisSvgDocCount = -1
 
     // handle svgDoc events
     svgDocElement.onclick = selectSvgDocument
-
     function selectSvgDocument() {
-        console.log(this)
+        // console.log(this)
         if(!svgDocElement.classList.contains("a-document__container--active")) {
             // console.log("Activating.")
 
-            // deactivate all events on previously Active svgDocument
-
-            // call 1 by 1
-            a_canvas_globalVars.pressSvgElement = false
-            a_canvas_globalVars.svgD3.on("click", null)
-            a_canvas_globalVars.svgD3.on("dblclick", null)
-            a_canvas_globalVars.svgD3.on("mousemove", null)
-
-            // // call finishdrawpath function (but how to pass vars)
-            // if(a_canvas_globalVars.pressSvgElement) {
-            //     finishDrawPath(object, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL)
-            //     a_canvas_globalVars.pressSvgElement = false
-            // }
+            // finish draw path on previously active svgElement if drawPath was active
+            if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
+                finishDrawPath(previousDrawPathObj, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, false)
+            }
 
             // activate current svgDocument
             activateSvgDoc(svgDocElement)
@@ -77,19 +69,16 @@ function createSvgDocument() {
         }
     }
 
-
-
     // handle button1 events
     svgDoc_actions_Button_01.onclick = selectDrawPath
-
     function selectDrawPath() {
-        console.log(this)
-
+        // console.log(this)
+        previousDrawPathObj = drawPathObj
         a_canvas_globalVars.pressSvgElement = true
         let svgHTML = a_canvas_globalVars.svgHTML
         let svgDocHTML = a_canvas_globalVars.svgDocHTML
         let svgD3 = a_canvas_globalVars.svgD3
-        // svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
+        svgD3.on("click", (event) => svgClick(event, svgHTML, svgDocHTML, svgD3))
     }
 
     function svgClick(event, svgHTML, svgDocHTML, svgD3) {
@@ -101,12 +90,8 @@ function createSvgDocument() {
         }
     }
 
-
-
-
-
-
     // handle button2 events
+    // ...
 }
 
 
