@@ -41,6 +41,7 @@ function createSvgDocument() {
     // ...
 
     // handle button1 click
+    // rename this: svgElement?
     let drawPathObj = {}
     drawPathObj.self = []
     drawPathObj.m1
@@ -48,6 +49,11 @@ function createSvgDocument() {
     drawPathObj.isDown2 = false
     drawPathObj.secondaryPathCount = 0
     drawPathObj.thisSvgDocCount = -1
+
+    // TODO:
+    // issues:
+    // 1- 1 click path, click another svgdoc, then click drawpath on original doc causes error.
+
 
     // handle svgDoc events
     svgDocElement.onclick = selectSvgDocument
