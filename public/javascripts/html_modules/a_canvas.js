@@ -9,7 +9,7 @@ a_canvas_globalVars.pressAddCurveButton = false
 a_canvas_globalVars.pressAddParallelButton = false
 a_canvas_globalVars.pressMeasurePathButton = false
 
-a_canvas_globalVars.svgDocHTML  // previously dragDiv
+a_canvas_globalVars.svgDocHTML
 a_canvas_globalVars.svgD3
 a_canvas_globalVars.svgHTML
 a_canvas_globalVars.canvasD3 = d3.select('#aCanvasZoomLayer')
