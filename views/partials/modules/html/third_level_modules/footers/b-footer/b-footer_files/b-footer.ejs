@@ -1,4 +1,4 @@
-<div class="b-footer <%= THEME_moduleTheme %>">
+<div class="b-footer <%= THEME_moduleTheme %>" id=<%= ID_bFooter_id %>>
     <div class="b-footer__container <%= THEME_bFooterContainerFill %>">
         <div class="b-footer__sidebar b-footer__sidebar--left">
             <div class="b-footer__button-cont">
@@ -24,10 +24,10 @@
             </div>
         </div>
     </div>
-    
 </div>
 
-<script>
-    // const b_footer_object = {}
-</script>
-<script type='module' src='./javascripts/html_modules/b_footer.js'></script>
+<!-- <script>
+</script> -->
+
+<!-- <script  type='module' src='./javascripts/html_modules/b_footer.js'></script> -->
+<script id='bFooter_scriptId' type='module' data-json='["<%= ID_bFooter_id %>", "<%= ACTIONS_bFooter_btn.btn_02.btnId %>"]' src='./javascripts/html_modules/b_footer.js'></script>
