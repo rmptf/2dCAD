@@ -8,9 +8,9 @@ function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
     obj.m1 = d3.pointer(event)
 
     if (obj.isDown === false) {
-        obj.thisSvgDocCount = obj.thisSvgDocCount + 1 
+        obj.originalFigureCount = obj.originalFigureCount + 1 
         console.log("counter_22")
-        console.log(obj.thisSvgDocCount)
+        console.log(obj.originalFigureCount)
 
         let thisPathCount = 0
         a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL + 1
@@ -68,8 +68,15 @@ function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
 
         obj.isDown = true
     } else {
-        console.log("secondclick")
-        console.log(" ")
+        
+        console.log("self")
+        console.log(obj.self)
+        console.log("global")
+        console.log(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL)
+
+
+        // console.log("secondclick")
+        // console.log(" ")
         let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
         obj.secondaryPathCount = obj.secondaryPathCount + 1
         let thisPathCount = obj.secondaryPathCount

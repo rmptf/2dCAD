@@ -7,7 +7,7 @@ let previousDrawPathObj
 let canvasPanLayer = document.getElementById("aCanvasPanLayer")
 dragElement(canvasPanLayer)
 
-function createSvgDocument() {
+function createSvgDocument(ThisClass, drawPathObj) {
     stringIncrement = stringIncrement + 1
     a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL = a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL + 1
     let thisSvgElemCount = a_canvas_globalVars.svgElement_counter_groupCount_GLOBAL
@@ -30,29 +30,6 @@ function createSvgDocument() {
     activateSvgDoc(svgDocElement)
     setGlobalSvgElementVars(svgDocElement.id, svgDocSvg.id, thisSvgElemCount)
     dragElement(svgDocElement)
-
-
-
-
-
-
-
-    // new stuff
-    // ...
-
-    // handle button1 click
-    // rename this: svgElement?
-    let drawPathObj = {}
-    drawPathObj.self = []
-    drawPathObj.m1
-    drawPathObj.isDown = false
-    drawPathObj.isDown2 = false
-    drawPathObj.secondaryPathCount = 0
-    drawPathObj.thisSvgDocCount = -1
-
-    // TODO:
-    // issues:
-    // 1- 1 click path, click another svgdoc, then click drawpath on original doc causes error.
 
 
     // handle svgDoc events
@@ -88,6 +65,8 @@ function createSvgDocument() {
     }
 
     function svgClick(event, svgHTML, svgDocHTML, svgD3) {
+        ThisClass.runNewPath()
+        ThisClass.printClass()
         if (a_canvas_globalVars.pressSvgElement === true) {
             a_canvas_globalVars.pressAddCurveButton = false
             a_canvas_globalVars.pressAddParallelButton = false
