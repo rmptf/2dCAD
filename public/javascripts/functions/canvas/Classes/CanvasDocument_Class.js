@@ -16,74 +16,14 @@ function CanvasDocument() {
     this.svgDocumentD3Elements = {
         documentSvgD3: undefined
     }
+    this.documentSvg = new DocumentSvg(this.svgDocumentD3Elements.documentSvgD3)
 
-    // Class Extenstions
-    this.DocumentSvg = undefined
-
-    // Class Builders
     this.runCreateSvgDocument()
-    this.runCreateDocumentSvg()
 }
 
 CanvasDocument.prototype.runCreateSvgDocument = function() {
     createSvgDocument(this, this.drawPathObj)
 }
-
-CanvasDocument.prototype.runCreateDocumentSvg = function() {
-    this.DocumentSvg = new DocumentSvg(this.svgDocumentD3Elements.documentSvgD3)
-}
-
-
-
-// CanvasDocument.prototype.runNewPath = function() {
-//     let newPath = new SvgPath('path1', 'path2')
-//     this.paths.push(newPath)
-// }
-
-// function CanvasDocument(name, name2, name3) {
-//     // tests egs
-//     this.name = name
-//     this.name2 = name2
-//     this.name3 = this.testFunction(name3)
-//     this.paths = []
-//     // tests egs
-
-//     this.drawPathObj = {
-//         // self: [], // refactoring this (will need to change all usecases... many)
-//         m1: '',
-//         isDown: false,
-//         isDown2: false,
-//         originalFigureCount: 0,
-//         secondaryPathCount: 0,
-//     }
-
-//     this.documentSvgAndData = {
-//         svgGroups: {
-//             primary: undefined,
-//             secondary: []
-//         },
-//         svgElements: {
-//             svgGroups: {},
-//             svgElements: {
-//                 originalFigure: {
-//                     paths: {},
-//                     endPoints: {}
-//                 },
-//                 secondaryFigure: {
-//                     paths: {}
-//                 },
-//                 parallelFigure: {}
-//             }
-//         },
-//         data: {
-//             originalFigure: [],
-//             secondaryFigure: [],
-//             parallelFigure: []
-//         },
-//     }
-
-//     this.runCreateSvgDocument(this.drawPathObj)
-// }
 
 export {
     CanvasDocument

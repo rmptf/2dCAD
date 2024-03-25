@@ -40,6 +40,17 @@ function createSvgDocument(ThisClass, drawPathObj) {
     dragElement(svgDocElement)
 
 
+
+
+
+
+
+
+
+
+
+
+    
     // handle svgDoc events
     svgDocElement.onclick = selectSvgDocument
     function selectSvgDocument() {
