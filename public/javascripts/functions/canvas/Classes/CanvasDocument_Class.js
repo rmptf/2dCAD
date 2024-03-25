@@ -4,6 +4,7 @@ import {SvgPath} from './SvgPath_Class.js'
 import {createSvgDocument} from '../svgDocument.js'
 
 function CanvasDocument() {
+    // Class Elements
     this.drawPathObj = {
         self: [], // moving
         m1: '',
@@ -12,9 +13,14 @@ function CanvasDocument() {
         originalFigureCount: 0,
         secondaryPathCount: 0,
     }
+    this.svgDocumentD3Elements = {
+        documentSvgD3: undefined
+    }
 
+    // Class Extenstions
     this.DocumentSvg = undefined
 
+    // Class Builders
     this.runCreateSvgDocument()
     this.runCreateDocumentSvg()
 }
@@ -24,7 +30,7 @@ CanvasDocument.prototype.runCreateSvgDocument = function() {
 }
 
 CanvasDocument.prototype.runCreateDocumentSvg = function() {
-    this.DocumentSvg = new DocumentSvg()
+    this.DocumentSvg = new DocumentSvg(this.svgDocumentD3Elements.documentSvgD3)
 }
 
 

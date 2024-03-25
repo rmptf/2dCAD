@@ -1,41 +1,54 @@
 import {SvgGroup} from './SvgGroup_Class.js'
 
-function DocumentSvg() {
+function DocumentSvg(documentSvgD3) {
     this.documentSvgAndData = {
-        svgGroups: {
-            primary: undefined,
-            secondary: [],
-            primaryName: "name1",
-            secondaryNames: ["name2", "name3", "name4", "name5"]
-        },
-        svgElements: {
-            svgGroups: {},
-            svgElements: {
+        svgData: {
+            svgGroupsData: {
+                primaryName: "name1",
+                secondaryNames: ["name2", "name3", "name4", "name5"]
+            },
+            svgElementsData: {
                 originalFigure: {
-                    paths: {},
-                    endPoints: {}
+                    pathDatas: []
                 },
                 secondaryFigure: {
-                    paths: {}
+                    // empty
                 },
-                parallelFigure: {}
+                parallelFigure: {
+                    pathDatas: []
+                }
+            },
+        },
+        svgElements: {
+            svgGroupElements: {
+                primary: undefined,
+                secondary: [],
+            },
+            svgElements: {
+                originalFigure: {
+                    paths: [],
+                    endPoints: []
+                },
+                secondaryFigure: {
+                    paths: []
+                },
+                parallelFigure: {
+                    // ...
+                }
             }
         },
-        data: {
-            originalFigure: [],
-            secondaryFigure: [],
-            parallelFigure: []
-        },
+
     }
+    this.documentSvgD3 = documentSvgD3
 
     this.createSvgGroups()
 }
 
 DocumentSvg.prototype.createSvgGroups = function() {
-    this.documentSvgAndData.svgGroups.primary = new SvgGroup(this.documentSvgAndData.svgGroups.primaryName)
+    this.documentSvgAndData.svgElements.svgGroupElements.primary = new SvgGroup(this.documentSvgAndData.svgData.svgGroupsData.primaryName, this.documentSvgD3)
 
-    this.documentSvgAndData.svgGroups.secondaryNames.forEach(name => {
-        this.documentSvgAndData.svgGroups.secondary.push(new SvgGroup(name))
+    this.documentSvgAndData.svgData.svgGroupsData.secondaryNames.forEach(name => {
+        this.documentSvgAndData.svgElements.svgGroupElements.secondary.push(new SvgGroup(name, this.documentSvgD3))
     })
 }
 

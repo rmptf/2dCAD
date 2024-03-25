@@ -1,11 +1,16 @@
 import {drawPathFunction, finishDrawPath} from '../drafting/drawPath.js'
 
+
+// handle these in Canvas Class
+// handle these in Canvas Class
 let stringIncrement = 0
 let previousDrawPathObj
 
-// maybe set as global element and add drag at that point.
 let canvasPanLayer = document.getElementById("aCanvasPanLayer")
 dragElement(canvasPanLayer)
+// handle these in Canvas Class
+// handle these in Canvas Class
+
 
 function createSvgDocument(ThisClass, drawPathObj) {
     stringIncrement = stringIncrement + 1
@@ -25,6 +30,9 @@ function createSvgDocument(ThisClass, drawPathObj) {
     svgDocHeader.innerText = changeStringIncrementally("Pattern_Pc_")
     svgDocSvg.id = changeStringIncrementally("aDocumentSvg")
     svgDoc_actions_Button_01.id = changeStringIncrementally("aDocumentActionsButton01_")
+
+    ThisClass.svgDocumentD3Elements.documentSvgD3 = d3.select('#' + svgDocSvg.id)
+
 
     placeElement(svgDocElement)
     activateSvgDoc(svgDocElement)
