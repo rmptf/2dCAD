@@ -1,40 +1,83 @@
+import {DocumentSvg} from './DocumentSvg_Class.js'
 import {SvgGroup} from './SvgGroup_Class.js'
 import {SvgPath} from './SvgPath_Class.js'
 import {createSvgDocument} from '../svgDocument.js'
 
-function CanvasDocument(name, name2, name3) {
-    // tests egs
-    this.name = name
-    this.name2 = name2
-    this.name3 = this.testFunction(name3)
-    this.paths = []
-    // tests egs
+function CanvasDocument() {
+    this.drawPathObj = {
+        self: [], // moving
+        m1: '',
+        isDown: false,
+        isDown2: false,
+        originalFigureCount: 0,
+        secondaryPathCount: 0,
+    }
 
-    this.drawPathObj = undefined
+    this.DocumentSvg = undefined
 
-    this.documentSvgAndData = undefined
-
-    this.runCreateSvgDocument(this.drawPathObj)
+    this.runCreateSvgDocument()
+    this.runCreateDocumentSvg()
 }
 
-CanvasDocument.prototype.testFunction = function(testVar) {
-    return testVar
+CanvasDocument.prototype.runCreateSvgDocument = function() {
+    createSvgDocument(this, this.drawPathObj)
 }
 
-CanvasDocument.prototype.runCreateSvgDocument = function(drawPathObj) {
-    createSvgDocument(this, drawPathObj)
-}
-
-CanvasDocument.prototype.runNewPath = function() {
-    let newPath = new SvgPath('path1', 'path2')
-    this.paths.push(newPath)
-}
-
-CanvasDocument.prototype.printClass = function() {
-    console.log(this)
+CanvasDocument.prototype.runCreateDocumentSvg = function() {
+    this.DocumentSvg = new DocumentSvg()
 }
 
 
+
+// CanvasDocument.prototype.runNewPath = function() {
+//     let newPath = new SvgPath('path1', 'path2')
+//     this.paths.push(newPath)
+// }
+
+// function CanvasDocument(name, name2, name3) {
+//     // tests egs
+//     this.name = name
+//     this.name2 = name2
+//     this.name3 = this.testFunction(name3)
+//     this.paths = []
+//     // tests egs
+
+//     this.drawPathObj = {
+//         // self: [], // refactoring this (will need to change all usecases... many)
+//         m1: '',
+//         isDown: false,
+//         isDown2: false,
+//         originalFigureCount: 0,
+//         secondaryPathCount: 0,
+//     }
+
+//     this.documentSvgAndData = {
+//         svgGroups: {
+//             primary: undefined,
+//             secondary: []
+//         },
+//         svgElements: {
+//             svgGroups: {},
+//             svgElements: {
+//                 originalFigure: {
+//                     paths: {},
+//                     endPoints: {}
+//                 },
+//                 secondaryFigure: {
+//                     paths: {}
+//                 },
+//                 parallelFigure: {}
+//             }
+//         },
+//         data: {
+//             originalFigure: [],
+//             secondaryFigure: [],
+//             parallelFigure: []
+//         },
+//     }
+
+//     this.runCreateSvgDocument(this.drawPathObj)
+// }
 
 export {
     CanvasDocument

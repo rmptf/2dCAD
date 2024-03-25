@@ -68,12 +68,10 @@ function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
 
         obj.isDown = true
     } else {
-        
-        console.log("self")
-        console.log(obj.self)
-        console.log("global")
-        console.log(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL)
-
+        // console.log("self")
+        // console.log(obj.self)
+        // console.log("global")
+        // console.log(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL)
 
         // console.log("secondclick")
         // console.log(" ")

@@ -1,16 +1,18 @@
-function SvgGroup() {
-    this.svgGroup = undefined
-    this.parentElement
-    this.groupData = {
-        className: '',
-        id: '',
-    }
+function SvgGroup(name) {
+    this.name = name
+
+    // this.svgGroup = undefined
+    // this.parentElement
+    // this.groupData = {
+    //     className: '',
+    //     id: '',
+    // }
 }
 
-SvgGroup.prototype.createSvgGroups = function(parentElement, className, id) {
-    let newGroup = createSvgGroup(parentElement, className, id)
-    this.groupItsvgGroupself = newGroup
-}
+// SvgGroup.prototype.createSvgGroups = function(parentElement, className, id) {
+//     let newGroup = createSvgGroup(parentElement, className, id)
+//     this.groupItsvgGroupself = newGroup
+// }
 
 export {
     SvgGroup

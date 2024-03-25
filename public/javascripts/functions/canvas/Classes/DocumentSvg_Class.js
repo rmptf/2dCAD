@@ -1,8 +1,12 @@
+import {SvgGroup} from './SvgGroup_Class.js'
+
 function DocumentSvg() {
     this.documentSvgAndData = {
         svgGroups: {
             primary: undefined,
-            secondary: []
+            secondary: [],
+            primaryName: "name1",
+            secondaryNames: ["name2", "name3", "name4", "name5"]
         },
         svgElements: {
             svgGroups: {},
@@ -23,12 +27,16 @@ function DocumentSvg() {
             parallelFigure: []
         },
     }
+
+    this.createSvgGroups()
 }
 
-DocumentSvg.prototype.createSvgGroups = function(groupLocation) {
-    let newSvgGroup = new SvgGroup()
-    newSvgGroup.createSvgGroups()
-    this.figureDataALTERNATE.svgGroups.groupLocation.push(newSvgGroup)
+DocumentSvg.prototype.createSvgGroups = function() {
+    this.documentSvgAndData.svgGroups.primary = new SvgGroup(this.documentSvgAndData.svgGroups.primaryName)
+
+    this.documentSvgAndData.svgGroups.secondaryNames.forEach(name => {
+        this.documentSvgAndData.svgGroups.secondary.push(new SvgGroup(name))
+    })
 }
 
 export {

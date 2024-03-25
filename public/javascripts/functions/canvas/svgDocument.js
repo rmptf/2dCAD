@@ -35,6 +35,7 @@ function createSvgDocument(ThisClass, drawPathObj) {
     // handle svgDoc events
     svgDocElement.onclick = selectSvgDocument
     function selectSvgDocument() {
+        console.log(ThisClass)
         // console.log(this)
         if(!svgDocElement.classList.contains("a-document__container--active")) {
             // console.log("Activating.")
@@ -65,8 +66,6 @@ function createSvgDocument(ThisClass, drawPathObj) {
     }
 
     function svgClick(event, svgHTML, svgDocHTML, svgD3) {
-        ThisClass.runNewPath()
-        ThisClass.printClass()
         if (a_canvas_globalVars.pressSvgElement === true) {
             a_canvas_globalVars.pressAddCurveButton = false
             a_canvas_globalVars.pressAddParallelButton = false
