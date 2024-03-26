@@ -1,4 +1,4 @@
-import {drawPathFunction, finishDrawPath} from '../drafting/drawPath.js'
+import {drawPathFunction, finishDrawPath} from '../../../drafting/drawPath.js'
 
 
 // handle these in Canvas Class
@@ -26,10 +26,10 @@ function createSvgDocument(ThisClass, drawPathObj) {
     let svgDocSvg = svgDocElement.children[4]
     let svgDoc_actions_Button_01 = document.getElementById('aDoc_btn_01')
 
-    svgDocElement.id = changeStringIncrementally("aDocument")
-    svgDocHeader.innerText = changeStringIncrementally("Pattern_Pc_")
-    svgDocSvg.id = changeStringIncrementally("aDocumentSvg")
-    svgDoc_actions_Button_01.id = changeStringIncrementally("aDocumentActionsButton01_")
+    svgDocElement.id = changeStringIncrementally("aDocument", stringIncrement)
+    svgDocHeader.innerText = changeStringIncrementally("Pattern_Pc_", stringIncrement)
+    svgDocSvg.id = changeStringIncrementally("aDocumentSvg", stringIncrement)
+    svgDoc_actions_Button_01.id = changeStringIncrementally("aDocumentActionsButton01_", stringIncrement)
 
     ThisClass.svgDocumentD3Elements.documentSvgD3 = d3.select('#' + svgDocSvg.id)
 
@@ -111,8 +111,8 @@ function placeElement(svgDocElement) {
     svgDocElement.style.left = toPixelHeight + 'px'
 }
 
-function changeStringIncrementally(origString) {
-    let newString = origString + stringIncrement
+function changeStringIncrementally(origString, stringIncrement123) {
+    let newString = origString + stringIncrement123
     return newString
 }
 
@@ -172,6 +172,8 @@ function dragElement(elmnt) {
 
 export {
     createSvgDocument,
+    changeStringIncrementally,
+    placeElement,
     // selectDrawPath,
 }
 
