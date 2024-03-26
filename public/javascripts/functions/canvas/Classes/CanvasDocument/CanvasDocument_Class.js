@@ -2,16 +2,24 @@ import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgGroup} from '../SvgGroup_Class.js'
 import {SvgPath} from '../SvgPath_Class.js'
 import {createSvgDocument} from './canvasDocumentFunctions.js'
-import {changeStringIncrementally, placeElement} from './canvasDocumentFunctions.js'
+import {
+    changeStringIncrementally,
+    activateSvgDoc,
+    dragElement,
+    placeElement,
+    NEWselectSvgDocument,
+    NEWselectDrawPath,
+    NEWsvgClick,
+} from './canvasDocumentFunctions.js'
 
 function CanvasDocument() {
-    // this.runCreateSvgDocument() // orig
     this.stringIncrementCount = undefined
     this.canvasDocument_htmlElement = null
     this.canvasDocumentHeader_htmlElement = null
     this.documentSvg_htmlElement = null
     this.documentSvg_D3Element = null
     this.documentSvgActionBtn01_htmlElement = null
+    this.documentSvg = new DocumentSvg(this.documentSvg_D3Element)
 
     this.drawPathObj = {
         self: [], // moving
@@ -20,9 +28,12 @@ function CanvasDocument() {
         isDown2: false,
         originalFigureCount: 0,
         secondaryPathCount: 0,
+        previousDrawPathObj: null
     }
 
-    this.documentSvg = new DocumentSvg(this.documentSvg_D3Element)
+    // this.runCreateSvgDocument() // orig
+    // this.documentSvgD3 = null
+    // this.documentSvg = new DocumentSvg(this.documentSvgD3)
 }
 
 // CanvasDocument.prototype.runCreateSvgDocument = function() { // orig
@@ -57,13 +68,18 @@ CanvasDocument.prototype.setElementParams = function(canvDocId, headerInnerTxt, 
 
 CanvasDocument.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
-    //...
+    activateSvgDoc(this.canvasDocument_htmlElement)
+    dragElement(this.canvasDocument_htmlElement)
+    //... 
 }
 
 CanvasDocument.prototype.setClickEvents = function() {
-    this.canvasDocument_htmlElement.onclick = selectSvgDocument
-    function selectSvgDocument() {
-        console.log("clicki_clacki")
+    console.log(this)
+    this.canvasDocument_htmlElement.onclick = function() {
+        NEWselectSvgDocument(this.canvasDocument_htmlElement, this.drawPathObj)
+    }
+    this.documentSvgActionBtn01_htmlElement.onclick = function() {
+        NEWselectDrawPath(this.drawPathObj, this.documentSvg_htmlElement, this.canvasDocument_htmlElement, this.documentSvg_D3Element)
     }
     //...
 }

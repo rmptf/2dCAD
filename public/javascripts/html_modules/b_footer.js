@@ -19,4 +19,6 @@ function addClickEvent1() {
     newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDocumentActionsButton01_')
     newCanvasDoc.setActions()
     newCanvasDoc.setClickEvents()
+
+    // console.log(newCanvasDoc)
 }
