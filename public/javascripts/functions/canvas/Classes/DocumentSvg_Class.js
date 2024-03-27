@@ -55,12 +55,15 @@ DocumentSvg.prototype.createSvgGroups = function() {
 }
 
 DocumentSvg.prototype.NEWcreateSvgGroups = function() {
+    console.log("assssssssssssssssss")
 
     // take the primaryGroup name, create and SVG group for it and place inside the documentSVG D3 Element
-    this.documentSvgAndData.svgElements.svgGroupElements.primary = this.documentSvgD3
-        .append('g')
-        .attr('class', this.documentSvgAndData.svgData.svgGroupsData.primaryName)
-        .attr('id', 'figureGroup123')
+
+    // this.documentSvgAndData.svgElements.svgGroupElements.primary = this.documentSvgD3
+    //     .append('g')
+    //     .attr('class', this.documentSvgAndData.svgData.svgGroupsData.primaryName)
+    //     .attr('id', 'figureGroup123')
+
 
     // loop through secondaryGroup names, create an SVG group for each and place inside the primary SVG group
     // not working yet ...
@@ -75,9 +78,9 @@ DocumentSvg.prototype.NEWcreateSvgGroups = function() {
     // })
 
     // working ...
-    this.documentSvgAndData.svgElements.svgGroupElements.secondary = this.documentSvgAndData.svgElements.svgGroupElements.primary
-        .append('g')
-        .attr('class', this.documentSvgAndData.svgData.svgGroupsData.secondaryNames)
+    // this.documentSvgAndData.svgElements.svgGroupElements.secondary = this.documentSvgAndData.svgElements.svgGroupElements.primary
+    //     .append('g')
+    //     .attr('class', this.documentSvgAndData.svgData.svgGroupsData.secondaryNames)
 
 
 
@@ -94,6 +97,9 @@ DocumentSvg.prototype.NEWcreateSvgGroups = function() {
     //             .attr('class', name)
     //     })
     // }
+
+
+    this.documentSvgAndData.svgElements.svgGroupElements.primary = new SvgGroup(this.documentSvgD3, 'bigPoopa', 'lilDICKY')
 }
 
 export {
