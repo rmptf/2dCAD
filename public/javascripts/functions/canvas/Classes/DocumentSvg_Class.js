@@ -4,8 +4,9 @@ function DocumentSvg(documentSvgD3) {
     this.documentSvgAndData = {
         svgData: {
             svgGroupsData: {
-                primaryName: "name1",
-                secondaryNames: ["name2", "name3", "name4", "name5"]
+                primaryName: "primaryGROUP_001",
+                secondaryNames: ["secondaryGROUP_001", "secondaryGROUP_002", "secondaryGROUP_003", "secondaryGROUP_004"],
+                // secondaryNames: "secondaryGROUP_001"
             },
             svgElementsData: {
                 originalFigure: {
@@ -21,8 +22,9 @@ function DocumentSvg(documentSvgD3) {
         },
         svgElements: {
             svgGroupElements: {
-                primary: undefined,
-                secondary: [],
+                primary: null,
+                // secondary: [],
+                secondary: null,
             },
             svgElements: {
                 originalFigure: {
@@ -41,7 +43,7 @@ function DocumentSvg(documentSvgD3) {
     }
     this.documentSvgD3 = documentSvgD3
 
-    this.createSvgGroups()
+    // this.createSvgGroups()
 }
 
 DocumentSvg.prototype.createSvgGroups = function() {
@@ -50,6 +52,48 @@ DocumentSvg.prototype.createSvgGroups = function() {
     this.documentSvgAndData.svgData.svgGroupsData.secondaryNames.forEach(name => {
         this.documentSvgAndData.svgElements.svgGroupElements.secondary.push(new SvgGroup(name, this.documentSvgD3))
     })
+}
+
+DocumentSvg.prototype.NEWcreateSvgGroups = function() {
+
+    // take the primaryGroup name, create and SVG group for it and place inside the documentSVG D3 Element
+    this.documentSvgAndData.svgElements.svgGroupElements.primary = this.documentSvgD3
+        .append('g')
+        .attr('class', this.documentSvgAndData.svgData.svgGroupsData.primaryName)
+        .attr('id', 'figureGroup123')
+
+    // loop through secondaryGroup names, create an SVG group for each and place inside the primary SVG group
+    // not working yet ...
+    // this.documentSvgAndData.svgData.svgGroupsData.secondaryNames.forEach(name => {
+    //     // this.documentSvgAndData.svgElements.svgGroupElements.secondary = this.documentSvgAndData.svgElements.svgGroupElements.primary
+    //     //     .append('g')
+    //     //     .attr('class', this.documentSvgAndData.svgData.svgGroupsData.primaryName.secondaryNames)
+        
+    //     this.documentSvgAndData.svgElements.svgGroupElements.secondary[name] = this.documentSvgAndData.svgElements.svgGroupElements.primary
+    //         .append('g')
+    //         .attr('class', this.documentSvgAndData.svgData.svgGroupsData.secondaryNames)
+    // })
+
+    // working ...
+    this.documentSvgAndData.svgElements.svgGroupElements.secondary = this.documentSvgAndData.svgElements.svgGroupElements.primary
+        .append('g')
+        .attr('class', this.documentSvgAndData.svgData.svgGroupsData.secondaryNames)
+
+
+
+    // ex...
+    // function createSvgGroups(self, groupClassNamesArray) {
+    //     const groupNames = groupClassNamesArray
+    //     self.group = a_canvas_globalVars.svgD3
+    //         .append('g')
+    //         .attr('class', groupNames[0])
+    //         .attr('id', 'figureGroup123')
+    //     groupNames.slice(1).forEach(name => {
+    //         self[name] = self.group
+    //             .append('g')
+    //             .attr('class', name)
+    //     })
+    // }
 }
 
 export {

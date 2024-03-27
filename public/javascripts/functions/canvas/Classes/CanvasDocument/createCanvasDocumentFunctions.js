@@ -88,39 +88,39 @@ function createSvgDocument(ThisClass, drawPathObj) {
 
 
 
-function NEWselectSvgDocument(canvasDocument, drawPathObj) {
-    console.log(this)
-    // if(!canvasDocument.classList.contains("a-document__container--active")) {
-    //     console.log("Activating.")
+function NEWselectSvgDocument(thisCanvasDoc) {
+    console.log(thisCanvasDoc)
+    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
+        console.log("Activating.")
 
-    //     // finish draw path on previously active svgElement if drawPath was active
-    //     if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
-    //         finishDrawPath(drawPathObj.previousDrawPathObj, a_canvas_globalVars.svgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, false)
-    //     }
+        // finish draw path on previously active svgElement if drawPath was active
+        if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
+            finishDrawPath(thisCanvasDoc.drawPathObj.previousDrawPathObj, thisCanvasDoc.documentSvg_D3Element, thisCanvasDoc.stringIncrementCount, false)
+        }
 
-    //     // activate current svgDocument
-    //     activateSvgDoc(canvasDocument)
-    //     // setGlobalSvgElementVars(canvasDocument.id, svgDocSvg.id, thisSvgElemCount)
-    // } else {
-    //     // console.log("Already active.")
-    // }
+        // activate current svgDocument
+        activateSvgDoc(thisCanvasDoc.canvasDocument_htmlElement)
+        setGlobalSvgElementVars(thisCanvasDoc.canvasDocument_htmlElement.id, thisCanvasDoc.documentSvg_D3Element.id, thisCanvasDoc.stringIncrementCount)
+    } else {
+        console.log("Already active.")
+    }
 }
 
-function NEWselectDrawPath(drawPathObj, svgHTML, svgDocHTML, svgD3) {
-    console.log(this)
-    // drawPathObj.previousDrawPathObj = drawPathObj
-    // a_canvas_globalVars.pressSvgElement = true
-    // svgD3.on("click", (event) => NEWsvgClick(event, svgHTML, svgDocHTML, svgD3))
+function NEWselectDrawPath(thisCanvasDoc) {
+    console.log(thisCanvasDoc)
+    thisCanvasDoc.drawPathObj.previousDrawPathObj = thisCanvasDoc.drawPathObj
+    a_canvas_globalVars.pressSvgElement = true
+    thisCanvasDoc.documentSvg_D3Element.on("click", (event) => NEWsvgClick(event, thisCanvasDoc))
 }
 
-function NEWsvgClick(event, svgHTML, svgDocHTML, svgD3) {
-    console.log(this)
-    // if (a_canvas_globalVars.pressSvgElement === true) {
-    //     a_canvas_globalVars.pressAddCurveButton = false
-    //     a_canvas_globalVars.pressAddParallelButton = false
-    //     a_canvas_globalVars.pressMeasurePathButton = false
-    //     drawPathFunction(event, drawPathObj, svgHTML, svgDocHTML, svgD3)
-    // }
+function NEWsvgClick(event, thisCanvasDoc) {
+    console.log(thisCanvasDoc)
+    if (a_canvas_globalVars.pressSvgElement === true) {
+        a_canvas_globalVars.pressAddCurveButton = false
+        a_canvas_globalVars.pressAddParallelButton = false
+        a_canvas_globalVars.pressMeasurePathButton = false
+        drawPathFunction(event, thisCanvasDoc.drawPathObj, thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc.documentSvg_htmlElement, thisCanvasDoc.documentSvg_D3Element)
+    }
 }
 
 
@@ -197,6 +197,7 @@ export {
     changeStringIncrementally,
     placeElement,
     activateSvgDoc,
+    setGlobalSvgElementVars,
     dragElement,
     NEWselectSvgDocument,
     NEWselectDrawPath,

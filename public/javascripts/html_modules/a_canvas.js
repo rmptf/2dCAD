@@ -1,4 +1,4 @@
-import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/canvasDocumentFunctions.js'
+import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/createCanvasDocumentFunctions.js'
 import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
 // import {selectDrawPath, selectAddCurvePoint, selectDrawParallelPath, selectMeasurePath} from '../functions/canvas/svgDocument_actions.js'
 // import {saveFigureData} from '../functions/tools/saveFigureData.js'

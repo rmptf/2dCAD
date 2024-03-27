@@ -16,6 +16,7 @@ function addClickEvent1() {
     newCanvasDoc.iterateCounters(vars)
     newCanvasDoc.cloneAndAppendTemplate('aCanvasTemplate', 'aCanvasPanLayer')
     newCanvasDoc.setVars('aDocumentContainer', 'aDoc_btn_01')
+    newCanvasDoc.createDocSvg()
     newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDocumentActionsButton01_')
     newCanvasDoc.setActions()
     newCanvasDoc.setClickEvents()

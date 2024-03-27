@@ -3,7 +3,7 @@ import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 import {getElementPositionData} from '../drafting/resizeSvg.js'
 import {updateSVG_highlight_1_point_01} from '../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
-function drawPathFunction(event, obj, thisSvgHTML, thisSvgDocHTML, thisSvgD3) {
+function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
     thisSvgD3.on("dblclick", () => finishDrawPath(obj, thisSvgD3, a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL, true))
     obj.m1 = d3.pointer(event)
 
