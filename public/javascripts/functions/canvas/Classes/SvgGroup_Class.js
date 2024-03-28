@@ -1,25 +1,15 @@
 function SvgGroup(parentElement, className, id) {
     this.parentElement = parentElement
-    this.element = 'group'
-    this.classname = className
+    this.element = 'g'
+    this.className = className
     this.id = id
-
-    this.newGroup = this.createGroup()
+    this.newSvgGroup = this.createSvgGroup()
 }
 
-SvgGroup.prototype.getAttributes = function() {
-    return {
-        'class': this.className,
-        'id': this.id
-    }
-}
-
-SvgGroup.prototype.createGroup = function() {
+SvgGroup.prototype.createSvgGroup = function() {
     let newGroup = this.parentElement.append(this.element)
-        .attr(this.getAttributes())
-
-    console.log('newGroup__okokokokokokok')
-    console.log(newGroup)
+        .attr('class', this.className)
+        .attr('id', this.id)
     return newGroup
 }
 

@@ -14,7 +14,7 @@ import {
 } from './createCanvasDocumentFunctions.js'
 
 function CanvasDocument() {
-    this.stringIncrementCount = undefined
+    this.stringIncrementCount = null
     this.canvasDocument_htmlElement = null
     this.canvasDocumentHeader_htmlElement = null
     this.documentSvg_htmlElement = null
@@ -43,7 +43,7 @@ function CanvasDocument() {
 
 CanvasDocument.prototype.createDocSvg = function() {
     let newDocumentSvg = new DocumentSvg(this.documentSvg_D3Element)
-    newDocumentSvg.NEWcreateSvgGroups()
+    newDocumentSvg.createSvgGroups()
 
     this.documentSvg = newDocumentSvg
 }
