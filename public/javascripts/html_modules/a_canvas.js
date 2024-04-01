@@ -1,7 +1,5 @@
-import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/createCanvasDocumentFunctions.js'
-import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
-// import {selectDrawPath, selectAddCurvePoint, selectDrawParallelPath, selectMeasurePath} from '../functions/canvas/svgDocument_actions.js'
-// import {saveFigureData} from '../functions/tools/saveFigureData.js'
+// import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/createCanvasDocumentFunctions.js'
+// import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
 import {hotKeyPress} from '../functions/tools/hotKeys.js'
 
 a_canvas_globalVars.scale = 1
@@ -12,7 +10,7 @@ a_canvas_globalVars.pressMeasurePathButton = false
 a_canvas_globalVars.svgDocHTML
 a_canvas_globalVars.svgD3
 a_canvas_globalVars.svgHTML
-a_canvas_globalVars.canvasD3 = d3.select('#aCanvasZoomLayer')
+// a_canvas_globalVars.canvasD3 = d3.select('#aCanvasZoomLayer')
 a_canvas_globalVars.panHTML
 
 // new
@@ -35,17 +33,44 @@ a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL = -1               
 a_canvas_globalVars.parallelFigure_counter_currentCount_GLOBAL = 0                     // Counter                      parallelFigure_counter_currentCount_GLOBAL
 a_canvas_globalVars.parallelFigure_counter_groups_array_GLOBAL = []                    // Array of Counters            parallelFigure_counter_groups_array_GLOBAL
 
-a_canvas_functions.createSvgDocument = createSvgDocument
-a_canvas_functions.increaseScale = increaseScale
-a_canvas_functions.resetScale = resetScale
-a_canvas_functions.decreaseScale = decreaseScale
-// a_canvas_functions.selectDrawPath = selectDrawPath
-// a_canvas_functions.selectAddCurvePoint = selectAddCurvePoint
-// a_canvas_functions.selectDrawParallelPath = selectDrawParallelPath
-// a_canvas_functions.selectMeasurePath = selectMeasurePath
-// a_canvas_functions.saveFigureData = saveFigureData
+// a_canvas_functions.createSvgDocument = createSvgDocument
+// a_canvas_functions.increaseScale = increaseScale
+// a_canvas_functions.resetScale = resetScale
+// a_canvas_functions.decreaseScale = decreaseScale
 
 document.addEventListener("keydown", (event) => hotKeyPress(event))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

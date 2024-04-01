@@ -1,15 +1,15 @@
 <%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
 
-<% 
-let drawPath = "a_canvas_functions.selectDrawPath(this)"
-let addCurvePoint = "a_canvas_functions.selectAddCurvePoint()"
-let drawParellel = "a_canvas_functions.selectDrawParallelPath()"
-let measurePath = "a_canvas_functions.selectMeasurePath()"
-let saveFigure = "a_canvas_functions.saveFigureData()"
-let createSvgDoc = "a_canvas_functions.createSvgDocument()"
-let increaseScale = "a_canvas_functions.increaseScale()"
-let resetScale = "a_canvas_functions.resetScale()"
-let decreaseScale = "a_canvas_functions.decreaseScale()"
+<%#
+// let drawPath = "a_canvas_functions.selectDrawPath(this)"
+// let addCurvePoint = "a_canvas_functions.selectAddCurvePoint()"
+// let drawParellel = "a_canvas_functions.selectDrawParallelPath()"
+// let measurePath = "a_canvas_functions.selectMeasurePath()"
+// let saveFigure = "a_canvas_functions.saveFigureData()"
+// let createSvgDoc = "a_canvas_functions.createSvgDocument()"
+// let increaseScale = "a_canvas_functions.increaseScale()"
+// let resetScale = "a_canvas_functions.resetScale()"
+// let decreaseScale = "a_canvas_functions.decreaseScale()"
 
 // let drawPath = "drawPath()"
 // let addCurvePoint = "addCurvePoint()"
@@ -105,10 +105,17 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
 
     // ------------------------------------------------------------------------------------------
     // MODULE: a-Canvas
+        // ID
+            ID_aCanvas_id: "aCanvas_01",
         // MODULE
             MODULE_aCanvas_first: moduleLocationVARS.A_DOCUMENT,
         // CONTENT
-            // CONTENT_aCanvas_content: ''
+            // CONTENT_aCanvas_content: '',
+            // CONTENT ID
+                // CONTENT_ID_aCanvas_zoom_id: "aCanvas_zoom_01",
+                CONTENT_ID_aCanvas_zoom_id: "aCanvasZoomLayer",
+                // CONTENT_ID_aCanvas_pan_id: "aCanvas_pan_01",
+                CONTENT_ID_aCanvas_pan_id: "aCanvasPanLayer",
         // ACTIONS
             // ACTIONS_aCanvas_footerBtnExist: false,
         // THEME
@@ -154,7 +161,7 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         // btnOnClick: "drawPath()",
                         // btnOnClick: drawPath,
                         // btnId: "pathBtn",
-                        btnId: "aDoc_btn_01",
+                        btnId: "aDoc_btnCont01_btn01",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -167,8 +174,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "Curve",
                         // btnOnClick: "a_canvas_functions.selectAddCurvePoint()",
                         // btnOnClick: "addCurvePoint()",
-                        btnOnClick: addCurvePoint,
-                        btnId: "curveBtn",
+                        // btnOnClick: addCurvePoint,
+                        // btnId: "curveBtn",
+                        btnId: "aDoc_btnCont01_btn02",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -181,8 +189,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "Parallel",
                         // btnOnClick: "a_canvas_functions.selectDrawParallelPath()",
                         // btnOnClick: "addParallelPath()",
-                        btnOnClick: drawParellel,
-                        btnId: "parallelBtn",
+                        // btnOnClick: drawParellel,
+                        // btnId: "parallelBtn",
+                        btnId: "aDoc_btnCont01_btn03",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -195,8 +204,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "Measure",
                         // btnOnClick: "a_canvas_functions.selectMeasurePath()",
                         // btnOnClick: "measurePath()",
-                        btnOnClick: measurePath,
-                        btnId: "measureBtn",
+                        // btnOnClick: measurePath,
+                        // btnId: "measureBtn",
+                        btnId: "aDoc_btnCont01_btn04",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -247,8 +257,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                     btnText: "Save",
                     // btnOnClick: "a_canvas_functions.saveFigureData()",
                     // btnOnClick: "printFigureData()",
-                    btnOnClick: saveFigure,
-                    btnId: "printFigureDataBtn",
+                    // btnOnClick: saveFigure,
+                    // btnId: "printFigureDataBtn",
+                    btnId: "aDoc_btnCont02_btn01",
                     btnTheme_class: btnVars.BTNCLASS.aButton,
                     btnTheme_type: btnVars.BTNTYPES.default,
                     btnTheme_size: btnVars.BTNSIZES.small,
@@ -289,7 +300,7 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnType: "button",
                         btnText: "About",
                         btnOnClick: "window.location.href='/'",
-                        btnId: "",
+                        btnId: "bFooter01_actons_btn01",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -317,8 +328,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "+",
                         // btnOnClick: "a_canvas_functions.increaseScale()",
                         // btnOnClick: "increaseScale()",
-                        btnOnClick: increaseScale,
-                        btnId: "",
+                        // btnOnClick: increaseScale,
+                        btnOnClick: "",
+                        btnId: "bFooter01_actons_btn03",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -331,8 +343,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "100%", 
                         // btnOnClick: "a_canvas_functions.resetScale()",
                         // btnOnClick: "resetScale()",
-                        btnOnClick: resetScale,
-                        btnId: "",
+                        // btnOnClick: resetScale,
+                        btnOnClick: "",
+                        btnId: "bFooter01_actons_btn04",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,
@@ -345,8 +358,9 @@ let decreaseScale = "a_canvas_functions.decreaseScale()"
                         btnText: "-",
                         // btnOnClick: "a_canvas_functions.decreaseScale()",
                         // btnOnClick: "decreaseScale()",
-                        btnOnClick: decreaseScale,
-                        btnId: "",
+                        // btnOnClick: decreaseScale,
+                        btnOnClick: "",
+                        btnId: "bFooter01_actons_btn05",
                         btnTheme_class: btnVars.BTNCLASS.aButton,
                         btnTheme_type: btnVars.BTNTYPES.default,
                         btnTheme_size: btnVars.BTNSIZES.small,

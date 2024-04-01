@@ -27,17 +27,17 @@ import {Path} from '../../tests/classes_test/newClass_test.js'
 //     // a_canvas_globalVars.svgD3.on("click", (event) => svgClick(event, newPathClass)) // prob place somewhere else
 // }
 
-function selectAddCurvePoint() {
-    a_canvas_globalVars.pressAddCurveButton = true
-}
+// function selectAddCurvePoint() {
+//     a_canvas_globalVars.pressAddCurveButton = true
+// }
 
-function selectDrawParallelPath() {
-    a_canvas_globalVars.pressAddParallelButton = true
-}
+// function selectDrawParallelPath() {
+//     a_canvas_globalVars.pressAddParallelButton = true
+// }
 
-function selectMeasurePath() {
-    a_canvas_globalVars.pressMeasurePathButton = true
-}
+// function selectMeasurePath() {
+//     a_canvas_globalVars.pressMeasurePathButton = true
+// }
 
 // // function svgClick(event, pathClass) {
 // function svgClick(event, svgHTML, svgDocHTML, svgD3) {
@@ -113,9 +113,9 @@ const handleExpandSvg = (event, m1, isDown, elmntPosData, thisSvgHTML, thisSvgDo
 
 export {
     // selectDrawPath,
-    selectAddCurvePoint,
-    selectDrawParallelPath,
-    selectMeasurePath,
+    // selectAddCurvePoint,
+    // selectDrawParallelPath,
+    // selectMeasurePath,
     // svgClick,
     handleMainPathClick,
     handleSecondaryPathClick,

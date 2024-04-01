@@ -1,13 +1,10 @@
 import {drawPathFunction, finishDrawPath} from '../../../drafting/drawPath.js'
-
+import {dragElement} from '../../htmlElementFunctions.js'
 
 // handle these in Canvas Class
 // handle these in Canvas Class
 let stringIncrement = 0
 let previousDrawPathObj
-
-let canvasPanLayer = document.getElementById("aCanvasPanLayer")
-dragElement(canvasPanLayer)
 // handle these in Canvas Class
 // handle these in Canvas Class
 
@@ -89,7 +86,7 @@ function createSvgDocument(ThisClass, drawPathObj) {
 
 
 function NEWselectSvgDocument(thisCanvasDoc) {
-    console.log(thisCanvasDoc)
+    // console.log(thisCanvasDoc)
     if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
         console.log("Activating.")
 
@@ -107,14 +104,14 @@ function NEWselectSvgDocument(thisCanvasDoc) {
 }
 
 function NEWselectDrawPath(thisCanvasDoc) {
-    console.log(thisCanvasDoc)
-    thisCanvasDoc.drawPathObj.previousDrawPathObj = thisCanvasDoc.drawPathObj
+    // console.log(thisCanvasDoc)
     a_canvas_globalVars.pressSvgElement = true
+    thisCanvasDoc.drawPathObj.previousDrawPathObj = thisCanvasDoc.drawPathObj
     thisCanvasDoc.documentSvg_D3Element.on("click", (event) => NEWsvgClick(event, thisCanvasDoc))
 }
 
 function NEWsvgClick(event, thisCanvasDoc) {
-    console.log(thisCanvasDoc)
+    // console.log(thisCanvasDoc)
     if (a_canvas_globalVars.pressSvgElement === true) {
         a_canvas_globalVars.pressAddCurveButton = false
         a_canvas_globalVars.pressAddParallelButton = false
@@ -122,6 +119,20 @@ function NEWsvgClick(event, thisCanvasDoc) {
         drawPathFunction(event, thisCanvasDoc.drawPathObj, thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc.documentSvg_htmlElement, thisCanvasDoc.documentSvg_D3Element)
     }
 }
+
+function NEWselectAddCurvePoint() {
+    a_canvas_globalVars.pressAddCurveButton = true
+}
+
+function NEWselectDrawParallelPath() {
+    a_canvas_globalVars.pressAddParallelButton = true
+}
+
+function NEWselectMeasurePath() {
+    a_canvas_globalVars.pressMeasurePathButton = true
+}
+
+
 
 
 
@@ -155,52 +166,15 @@ function setGlobalSvgElementVars(documentId, svgId, thisSvgElemCount) {
     a_canvas_globalVars.svgHTML = document.getElementById(svgId)
 }
 
-function dragElement(element) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if(document.getElementById(element.id + "Header")) {
-        // if present, the header is where you move the DIV from:
-        document.getElementById(element.id + "Header").onmousedown = dragMouseDown
-    } else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        element.onmousedown = dragMouseDown
-    }
-
-    function dragMouseDown(event) {
-        event.stopPropagation()
-        event.preventDefault()
-        pos3 = event.clientX
-        pos4 = event.clientY
-        document.onmouseup = closeDragElement
-        document.onmousemove = elementDrag
-    }
-
-    function elementDrag(event) {
-        event.preventDefault()
-        // To fix drag while scaled issued (multply pos1 & pos1 by the opposite scale)
-        let dragScaler = 1 / a_canvas_globalVars.scale
-        pos1 = (pos3 - event.clientX) * dragScaler
-        pos2 = (pos4 - event.clientY) * dragScaler
-        pos3 = event.clientX
-        pos4 = event.clientY
-        element.style.top = (element.offsetTop - pos2) + "px"
-        element.style.left = (element.offsetLeft - pos1) + "px"
-    }
-
-    function closeDragElement() {
-        document.onmouseup = null
-        document.onmousemove = null
-    }
-}
-
 export {
     createSvgDocument,
     changeStringIncrementally,
     placeElement,
     activateSvgDoc,
     setGlobalSvgElementVars,
-    dragElement,
     NEWselectSvgDocument,
     NEWselectDrawPath,
-    NEWsvgClick,
-    // selectDrawPath,
+    NEWselectAddCurvePoint,
+    NEWselectDrawParallelPath,
+    NEWselectMeasurePath,
 }

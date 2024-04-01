@@ -1,7 +1,7 @@
-<div class="a-canvas <%= THEME_moduleTheme %>">
+<div class="a-canvas <%= THEME_moduleTheme %>" id="<%= ID_aCanvas_id %>">
     <div class="a-canvas__container <%= THEME_aCanvasContainerFill %>">
-        <div class="a-canvas__zoomLayer" id="aCanvasZoomLayer">
-            <div class="a-canvas__panLayer <%= THEME_aCanvasPanLayerFill %>" id="aCanvasPanLayer"></div>
+        <div class="a-canvas__zoomLayer" id=<%=CONTENT_ID_aCanvas_zoom_id%>>
+            <div class="a-canvas__panLayer <%= THEME_aCanvasPanLayerFill %>" id=<%=CONTENT_ID_aCanvas_pan_id%>></div>
         </div>
     </div>
 </div>
@@ -14,10 +14,10 @@
 </template>
 
 <script>
-    const a_canvas_functions = {}
+    // const a_canvas_functions = {}
     const a_canvas_globalVars = {}
 </script>
-<script type='module' src='./javascripts/html_modules/a_canvas.js'></script>
+<script id='aCanvas_scriptId' type='module' data-json='[""]' src='./javascripts/html_modules/a_canvas.js'></script>
 
 
 

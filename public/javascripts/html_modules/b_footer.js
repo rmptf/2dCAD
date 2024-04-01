@@ -1,25 +1,32 @@
-import {CanvasDocument} from '../functions/canvas/Classes/CanvasDocument/CanvasDocument_Class.js'
+// // old
+// // old
 
-let bFooterElementIdsArray = JSON.parse(document.getElementById("bFooter_scriptId").dataset.json)
-let bFooter_element = document.getElementById(bFooterElementIdsArray[0])
-let bFooterActions_button_02 = document.getElementById(bFooterElementIdsArray[1])
+// import {Footer} from '../../javascripts/functions/canvas/Classes/Footer_Class.js'
+// import {CanvasDocument} from '../functions/canvas/Classes/CanvasDocument/CanvasDocument_Class.js'
 
-bFooterActions_button_02.onclick = addClickEvent1
+// let bFooterElementIdsArray = JSON.parse(document.getElementById("bFooter_scriptId").dataset.json)
+// let bFooter_element = document.getElementById(bFooterElementIdsArray[0])
+// let bFooterActions_button_02 = document.getElementById(bFooterElementIdsArray[1])
 
-let vars = {
-    stringIncrement: 0,
-    previousDrawPathObj: undefined
-}
+// bFooterActions_button_02.onclick = addClickEvent1
 
-function addClickEvent1() {
-    let newCanvasDoc = new CanvasDocument()
-    newCanvasDoc.iterateCounters(vars)
-    newCanvasDoc.cloneAndAppendTemplate('aCanvasTemplate', 'aCanvasPanLayer')
-    newCanvasDoc.setVars('aDocumentContainer', 'aDoc_btn_01')
-    newCanvasDoc.createDocSvg()
-    newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDocumentActionsButton01_')
-    newCanvasDoc.setActions()
-    newCanvasDoc.setClickEvents()
+// let vars = {
+//     stringIncrement: 0,
+//     previousDrawPathObj: undefined
+// }
 
-    // console.log(newCanvasDoc)
-}
+// function addClickEvent1() {
+//     let newCanvasDoc = new CanvasDocument(vars)
+//     newCanvasDoc.iterateCounters(vars)
+//     newCanvasDoc.cloneAndAppendTemplate('aCanvasTemplate', 'aCanvasPanLayer')
+//     newCanvasDoc.setVars('aDocumentContainer', ['aDoc_btnCont01_btn01', 'aDoc_btnCont01_btn02', 'aDoc_btnCont01_btn03', 'aDoc_btnCont01_btn04'], ['aDoc_btnCont02_btn01'])
+//     newCanvasDoc.createDocSvg()
+//     newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDoc_btn_01_')
+//     newCanvasDoc.setActions()
+//     newCanvasDoc.setClickEvents()
+
+//     // console.log(newCanvasDoc)
+// }
+
+// // old
+// // old

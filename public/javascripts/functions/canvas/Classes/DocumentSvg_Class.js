@@ -1,7 +1,6 @@
 import {SvgGroup} from './SvgGroup_Class.js'
 
 function DocumentSvg(documentSvgD3) {
-    this.documentSvgD3 = documentSvgD3
     this.documentSvgAndData = {
         svgData: {
             svgGroupsData: {
@@ -39,6 +38,8 @@ function DocumentSvg(documentSvgD3) {
             }
         },
     }
+    // DocumentSvg Elements
+    this.documentSvgD3 = documentSvgD3
 }
 
 DocumentSvg.prototype.createSvgGroups = function() {
@@ -53,7 +54,7 @@ DocumentSvg.prototype.createSvgGroups = function() {
         secondarySvgGroupElements.push(newSecondaryGroup)
     })
 
-    console.log(primarySvgGroupElement)
+    // console.log(primarySvgGroupElement)
 }
 
 export {

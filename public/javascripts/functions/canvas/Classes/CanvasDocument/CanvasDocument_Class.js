@@ -1,25 +1,35 @@
+import {ActionButton} from '../ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgGroup} from '../SvgGroup_Class.js'
 import {SvgPath} from '../SvgPath_Class.js'
 import {createSvgDocument} from './createCanvasDocumentFunctions.js'
+import {dragElement} from '../../htmlElementFunctions.js'
 import {
     changeStringIncrementally,
     activateSvgDoc,
     setGlobalSvgElementVars,
-    dragElement,
     placeElement,
     NEWselectSvgDocument,
     NEWselectDrawPath,
-    NEWsvgClick,
+    NEWselectAddCurvePoint,
+    NEWselectDrawParallelPath,
+    NEWselectMeasurePath,
 } from './createCanvasDocumentFunctions.js'
+import {saveFigureData} from '../../../tools/saveFigureData.js'
 
-function CanvasDocument() {
-    this.stringIncrementCount = null
+function CanvasDocument(topLevelParent, passedVars) {
+    this.topLevelParentClass = topLevelParent
+    this.stringIncrementCount = passedVars.stringIncrement
     this.canvasDocument_htmlElement = null
     this.canvasDocumentHeader_htmlElement = null
     this.documentSvg_htmlElement = null
     this.documentSvg_D3Element = null
-    this.documentSvgActionBtn01_htmlElement = null
+    this.canvasDocActionBar01_btn01_htmlElement = null
+    // this.canvasDocActionBar01_btn01_htmlElement = new ActionButton('aDoc_btnCont01_btn01', NEWselectSvgDocument, this)
+    this.canvasDocActionBar01_btn02_htmlElement = null
+    this.canvasDocActionBar01_btn03_htmlElement = null
+    this.canvasDocActionBar01_btn04_htmlElement = null
+    this.canvasDocActionBar02_btn01_htmlElement = null
     this.documentSvg = null
 
     this.drawPathObj = {
@@ -59,26 +69,30 @@ CanvasDocument.prototype.cloneAndAppendTemplate = function(templateId, targetId)
     targetContainer.appendChild(document.importNode(canvDocTemplate, true))
 }
 
-CanvasDocument.prototype.setVars = function(canvasDocId, svgAction01Id) {
+CanvasDocument.prototype.setVars = function(canvasDocId, svgActionBar01Ids, svgActionBar02Ids) {
     this.canvasDocument_htmlElement = document.getElementById(canvasDocId)
     this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.children[0]
     this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
     this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
-    this.documentSvgActionBtn01_htmlElement = document.getElementById(svgAction01Id)
+    this.canvasDocActionBar01_btn01_htmlElement = document.getElementById(svgActionBar01Ids[0])
+    this.canvasDocActionBar01_btn02_htmlElement = document.getElementById(svgActionBar01Ids[1])
+    this.canvasDocActionBar01_btn03_htmlElement = document.getElementById(svgActionBar01Ids[2])
+    this.canvasDocActionBar01_btn04_htmlElement = document.getElementById(svgActionBar01Ids[3])
+    this.canvasDocActionBar02_btn01_htmlElement = document.getElementById(svgActionBar02Ids[0])
 }
 
 CanvasDocument.prototype.setElementParams = function(canvDocId, headerInnerTxt, docSvgId, btn01Id) { // can place this in an existing method
     this.canvasDocument_htmlElement.id = changeStringIncrementally(canvDocId, this.stringIncrementCount)
     this.canvasDocumentHeader_htmlElement.innerText = changeStringIncrementally(headerInnerTxt, this.stringIncrementCount)
     this.documentSvg_htmlElement.id = changeStringIncrementally(docSvgId, this.stringIncrementCount)
-    this.documentSvgActionBtn01_htmlElement.id = changeStringIncrementally(btn01Id, this.stringIncrementCount)
+    this.canvasDocActionBar01_btn01_htmlElement.id = changeStringIncrementally(btn01Id, this.stringIncrementCount)
 }
 
 CanvasDocument.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
     activateSvgDoc(this.canvasDocument_htmlElement)
     setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
-    dragElement(this.canvasDocument_htmlElement)
+    dragElement(this.canvasDocument_htmlElement, this.topLevelParentClass.canvScaleClass.scaleObject)
 }
 
 CanvasDocument.prototype.setClickEvents = function() {
@@ -86,8 +100,24 @@ CanvasDocument.prototype.setClickEvents = function() {
     this.canvasDocument_htmlElement.onclick = function() {
         NEWselectSvgDocument(thisCanvasDoc)
     }
-    this.documentSvgActionBtn01_htmlElement.onclick = function() {
+    this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
         NEWselectDrawPath(thisCanvasDoc)
+    }
+    this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
+        console.log(this)
+        NEWselectAddCurvePoint()
+    }
+    this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
+        console.log(this)
+        NEWselectDrawParallelPath()
+    }
+    this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
+        console.log(this)
+        NEWselectMeasurePath()
+    }
+    this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
+        console.log(this)
+        saveFigureData()
     }
 }
 
