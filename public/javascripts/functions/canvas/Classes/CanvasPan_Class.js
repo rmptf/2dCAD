@@ -1,11 +1,12 @@
 import {dragElement} from '../htmlElementFunctions.js'
-function CanvasPan(parentClass, canvasPanElement) {
-    this.topLevelParentClass = parentClass
+
+function CanvasPan(scaleObject, canvasPanElement) {
+    this.scaleClass_scaleObject = scaleObject
     this.canvasPanElement = canvasPanElement
 }
 
 CanvasPan.prototype.setEvents = function(element) {
-    dragElement(element, this.topLevelParentClass.canvScaleClass.scaleObject)
+    dragElement(element, this.scaleClass_scaleObject)
 }
 
 export {

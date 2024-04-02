@@ -1,6 +1,4 @@
 import {Canvas} from '../functions/canvas/Classes/Canvas_Class.js'
-import {CanvasScale} from '../functions/canvas/Classes/CanvasScale_Class.js'
-import {CanvasPan} from '../functions/canvas/Classes/CanvasPan_Class.js'
 import {Footer} from '../functions/canvas/Classes/Footer_Class.js'
 
 let aArtboardElementIdsArray = JSON.parse(document.getElementById("aArtboard_scriptId").dataset.json)
@@ -19,5 +17,5 @@ let newCanvas = new Canvas(aCanvas_element, aCanvas_scale_element, bFooterAction
 // newCanvasScale.setClickEvents()
 // let newCanvasPan = new CanvasPan(aCanvas_pan_element, newCanvas.panObject)
 // newCanvasPan.setEvents(newCanvasPan.canvasPan)
-let newFooter = new Footer(newCanvas, bFooter_element, bFooterActions_button_02)
+let newFooter = new Footer(newCanvas.canvasDocuments, newCanvas.canvScaleClass, bFooter_element, bFooterActions_button_02)
 newFooter.setClickEvents(bFooterActions_button_02)

@@ -1,7 +1,8 @@
 import {CanvasDocument} from '../Classes/CanvasDocument/CanvasDocument_Class.js'
 
-function Footer(canvasClass, footer, button) {
-    this.topLevelParentClass = canvasClass
+function Footer(topLevelParentClass_canvasDocuments, topLevelParentClass_scaleClass, footer, button) {
+    this.canvasClass_canvasDocuments = topLevelParentClass_canvasDocuments
+    this.scaleClass_scaleObject = topLevelParentClass_scaleClass.scaleObject
     this.footerElement = footer
     this.buttonClickEvent = button
     this.vars = {
@@ -19,24 +20,16 @@ Footer.prototype.setClickEvents = function(element) {
     let thisClass = this
     element.onclick = function() {
         thisClass.iterateCounters()
-        let newCanvasDoc = new CanvasDocument(thisClass.topLevelParentClass, thisClass.vars)
+        let newCanvasDoc = new CanvasDocument(thisClass.scaleClass_scaleObject, thisClass.vars)
         newCanvasDoc.cloneAndAppendTemplate('aCanvasTemplate', 'aCanvasPanLayer')
         newCanvasDoc.setVars('aDocumentContainer', ['aDoc_btnCont01_btn01', 'aDoc_btnCont01_btn02', 'aDoc_btnCont01_btn03', 'aDoc_btnCont01_btn04'], ['aDoc_btnCont02_btn01'])
         newCanvasDoc.createDocSvg()
         newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDoc_btn_01_')
         newCanvasDoc.setActions()
         newCanvasDoc.setClickEvents()
-        thisClass.topLevelParentClass.canvasDocuments.push(newCanvasDoc)
+        thisClass.canvasClass_canvasDocuments.push(newCanvasDoc)
     }
 }
-
-// // new way, call from topLevel
-// Footer.prototype.setClickEvents = function(element) {
-//     let thisClass = this
-//     element.onclick = function() {
-//         thisClass.topLevelParentClass.createCanvDocClass
-//     }
-// }
 
 export {
     Footer

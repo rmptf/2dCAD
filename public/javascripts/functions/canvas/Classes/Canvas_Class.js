@@ -1,6 +1,5 @@
 import {CanvasScale} from '../Classes/CanvasScale_Class.js'
 import {CanvasPan} from '../Classes/CanvasPan_Class.js'
-import {CanvasDocument} from '../Classes/CanvasDocument/CanvasDocument_Class.js'
 
 function Canvas(canvasElement, aCanvas_scale_element, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05, aCanvas_pan_element) {
     this.canvasElement = canvasElement
@@ -10,18 +9,11 @@ function Canvas(canvasElement, aCanvas_scale_element, bFooterActions_button_03, 
     }
     this.scaleObject = {}
     this.panObject = {}
-    this.canvScaleClass = new CanvasScale(this, aCanvas_scale_element, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05)
+    this.canvScaleClass = new CanvasScale(aCanvas_scale_element, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05)
     this.canvScaleClass.setClickEvents()
-    this.canvasPanClass = new CanvasPan(this, aCanvas_pan_element)
+    this.canvasPanClass = new CanvasPan(this.canvScaleClass.scaleObject, aCanvas_pan_element)
     this.canvasPanClass.setEvents(aCanvas_pan_element)
-    this.canvasDocuments = [] // changing
-    
-    this.canvasDocumentClasses = [] // potential change
-}
-
-Canvas.prototype.createCanvDocClass = function() {
-    let newCanvDoc = new CanvasDocument(this)
-    this.canvasDocumentClasses.push(newCanvDoc)
+    this.canvasDocuments = []
 }
 
 export {

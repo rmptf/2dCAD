@@ -1,7 +1,7 @@
 import {ActionButton} from '../ActionButton_Class.js'
-import {DocumentSvg} from '../DocumentSvg_Class.js'
-import {SvgGroup} from '../SvgGroup_Class.js'
-import {SvgPath} from '../SvgPath_Class.js'
+import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
+import {SvgGroup} from '../DocumentSvg/SvgGroup_Class.js'
+import {SvgPath} from '../DocumentSvg/SvgPath_Class.js'
 import {createSvgDocument} from './createCanvasDocumentFunctions.js'
 import {dragElement} from '../../htmlElementFunctions.js'
 import {
@@ -17,8 +17,8 @@ import {
 } from './createCanvasDocumentFunctions.js'
 import {saveFigureData} from '../../../tools/saveFigureData.js'
 
-function CanvasDocument(topLevelParent, passedVars) {
-    this.topLevelParentClass = topLevelParent
+function CanvasDocument(scaleObject, passedVars) {
+    this.scaleClass_scaleObject = scaleObject
     this.stringIncrementCount = passedVars.stringIncrement
     this.canvasDocument_htmlElement = null
     this.canvasDocumentHeader_htmlElement = null
@@ -92,7 +92,7 @@ CanvasDocument.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
     activateSvgDoc(this.canvasDocument_htmlElement)
     setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
-    dragElement(this.canvasDocument_htmlElement, this.topLevelParentClass.canvScaleClass.scaleObject)
+    dragElement(this.canvasDocument_htmlElement, this.scaleClass_scaleObject)
 }
 
 CanvasDocument.prototype.setClickEvents = function() {
