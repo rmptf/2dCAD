@@ -1,4 +1,4 @@
-import {SvgGroup} from './SvgGroup_Class.js'
+import {SvgGroup} from './SvgElement/SvgGroup/SvgGroup_Class.js'
 
 function DocumentSvg(documentSvgD3) {
     this.documentSvgAndData = {

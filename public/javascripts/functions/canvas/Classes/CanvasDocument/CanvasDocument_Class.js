@@ -1,7 +1,7 @@
 import {ActionButton} from '../ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
-import {SvgGroup} from '../DocumentSvg/SvgGroup_Class.js'
-import {SvgPath} from '../DocumentSvg/SvgPath_Class.js'
+import {SvgGroup} from '../DocumentSvg/SvgElement/SvgGroup/SvgGroup_Class.js'
+import {SvgPath} from '../DocumentSvg/SvgElement/SvgPath/SvgPath_Class.js'
 import {createSvgDocument} from './createCanvasDocumentFunctions.js'
 import {dragElement} from '../../htmlElementFunctions.js'
 import {
