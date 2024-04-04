@@ -1,31 +1,24 @@
-function SvgElement() {
-    this.parentElement = parentElement
-    this.newSvgElement = this.createSvgElement()
-    // this.element = ''
-    // this.className = className
-    // this.id = id
+function SvgFigure() {
+    this.newSvgFigure = this.test()
+    this.svgPaths = []
+    this.svgEndPints = []
 }
 
-SvgElement.prototype.createSvgElement = function() {
-    let newElement = this.parentElement.append(this.element)
-        // .attr('class', this.className)
-        // .attr('id', this.id)
-        // .on("click", (event) => clickFunction())
-        // .call(d3.drag().on("drag", (event) => calledFunction()))
-    return newElement
+SvgFigure.prototype.test = function() {
+    let newFigure = "figure"
+    return newFigure
 }
 
 export {
-    SvgElement
+    SvgFigure
 }
 
-// SvgElement
-//     SvgGroup
-//     SvgPath (click, drag)
-//         SvgPath_Closed
-//     SvgEndPoint (click, drag)
-//         EndPoint_Corner
-//         EndPoint_Curve
+
+
+
+
+
+
 
 
 
