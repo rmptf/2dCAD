@@ -22,9 +22,71 @@ SvgPath.prototype.createSvgPath = function() {
     return newPath
 }
 
-export {
-    SvgPath
+
+
+
+// Child class using "Inheritance"
+function SvgPath_Closed(parentElement, parentFigure) {
+    // Call the constructor of the parent class
+    SvgPath.call(this, parentElement, parentFigure);
+    this.className_2 = className_2; // Add className_2 property
 }
+
+// Inherit methods from the parent class
+SvgPath_Closed.prototype = Object.create(SvgPath.prototype);
+SvgPath_Closed.prototype.constructor = SvgPath_Closed;
+
+// Override the createSvgPath method
+SvgPath_Closed.prototype.createSvgPath = function() {
+    let newPath = SvgPath.prototype.createSvgPath.call(this); // Call parent method
+    newPath.attr('class_2', this.className_2); // Add additional attribute
+    return newPath;
+};
+
+export {
+    SvgPath,
+    SvgPath_Closed
+};
+
+
+
+// // SvgPath class
+// function SvgPath(parentElement, parentFigure, className, id) {
+//     this.parentElement = parentElement;
+//     this.element = 'path';
+//     this.className = className;
+//     this.id = id;
+//     this.figure = parentFigure;
+//     this.pathData = new PathData();
+// }
+
+// SvgPath.prototype.createSvgPath = function(className_2) {
+//     let newPath = this.parentElement.append(this.element)
+//         .attr('class', this.className)
+//         .attr('id', this.id)
+//         .on("click", (event) => handleClick())
+//         .call(d3.drag().on("drag", (event) => handleDrag()));
+//     if(className_2) {
+//         newPath.attr('class_2', className_2);
+//     }
+//     this.figure.push(newPath);
+//     return newPath;
+// };
+
+// // SvgPath_Closed class using composition
+// function SvgPath_Closed(parentElement, parentFigure, className, id, className_2) {
+//     this.svgPath = new SvgPath(parentElement, parentFigure, className, id);
+//     this.className_2 = className_2;
+// }
+
+// SvgPath_Closed.prototype.createSvgPath = function() {
+//     return this.svgPath.createSvgPath(this.className_2);
+// };
+
+// export {
+//     SvgPath,
+//     SvgPath_Closed
+// };
 
 
 
