@@ -1,7 +1,7 @@
 import {ActionButton} from '../ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
-import {SvgGroup} from '../DocumentSvg/SvgElement/SvgGroup/SvgGroup_Class.js'
-import {SvgPath} from '../DocumentSvg/SvgElement/SvgFigure/SvgPath/SvgPath_Class.js'
+import {SvgGroup} from '../DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
+import {SvgPath} from '../DocumentSvg/SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
 import {createSvgDocument} from './createCanvasDocumentFunctions.js'
 import {dragElement} from '../../htmlElementFunctions.js'
 import {
@@ -32,6 +32,20 @@ function CanvasDocument(scaleObject, passedVars) {
     this.canvasDocActionBar02_btn01_htmlElement = null
     this.documentSvg = null
 
+    this.actionStates = {
+        drawPathActive: false,
+        addCurvePointActive: false,
+        drawParallelPathAcive: false,
+        measurePathActive: false
+    }
+
+    this.pathDrawingData = {
+        m1: null,
+        primaryFigureCount: 0,
+        secondaryFigurecount: 0,
+        previouslPathDrawingData: null
+    }
+
     this.drawPathObj = {
         self: [], // moving
         m1: '',
@@ -52,8 +66,7 @@ function CanvasDocument(scaleObject, passedVars) {
 // }
 
 CanvasDocument.prototype.createDocSvg = function() {
-    let newDocumentSvg = new DocumentSvg(this.documentSvg_D3Element)
-    newDocumentSvg.createSvgGroups()
+    let newDocumentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates, this.pathDrawingData)
 
     this.documentSvg = newDocumentSvg
 }
@@ -101,7 +114,8 @@ CanvasDocument.prototype.setClickEvents = function() {
         NEWselectSvgDocument(thisCanvasDoc)
     }
     this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
-        NEWselectDrawPath(thisCanvasDoc)
+        // NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
+        thisCanvasDoc.actionStates.drawPathActive = true // NEW DRAW
     }
     this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
         console.log(this)

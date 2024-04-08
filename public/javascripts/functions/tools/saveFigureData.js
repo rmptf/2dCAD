@@ -12,6 +12,7 @@ function saveFigureData() {
     console.log(JSON.parse(shapeDataString))
     // Console log the stringified object (to copy & paste)
     console.log("'" + shapeDataString + "',")
+    console.log(a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL)
 }
 
 export {

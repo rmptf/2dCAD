@@ -1,60 +1,40 @@
-import {SvgGroup} from './SvgElement/SvgGroup/SvgGroup_Class.js'
+import {drawPath} from './DocumentSvg_functions/drawPath.js'
 
-function DocumentSvg(documentSvgD3) {
-    this.documentSvgAndData = {
-        svgData: {
-            svgGroupsData: {
-                primaryName: "primaryGROUP_001",
-                secondaryNames: ["secondaryGROUP_001", "secondaryGROUP_002", "secondaryGROUP_003", "secondaryGROUP_004"],
-            },
-            svgElementsData: {
-                originalFigure: {
-                    pathDatas: []
-                },
-                secondaryFigure: {
-                    // empty
-                },
-                parallelFigure: {
-                    pathDatas: []
-                }
-            },
-        },
-        svgElements: {
-            svgGroupElements: {
-                primary: null,
-                secondary: [],
-            },
-            svgElements: {
-                originalFigure: {
-                    paths: [],
-                    endPoints: []
-                },
-                secondaryFigure: {
-                    paths: []
-                },
-                parallelFigure: {
-                    // ...
-                }
-            }
-        },
-    }
-    // DocumentSvg Elements
+function DocumentSvg(CanvDoc, documentSvgD3, documentSvgHTML, documentActionStates, documentPathDrawingData) {
     this.documentSvgD3 = documentSvgD3
+    this.documentSvgHTML = documentSvgHTML
+    this.documentSvgFigures = []
+
+    this.actionStates = documentActionStates
+    this.pathDrawingData = documentPathDrawingData
+    this.actionFlags = {
+        drawPathFlags: {
+            isDown: false,
+        }
+    }
+
+    setClickEvents(CanvDoc, this)
 }
 
-DocumentSvg.prototype.createSvgGroups = function() {
-    let primarySvgGroupName = this.documentSvgAndData.svgData.svgGroupsData.primaryName
-    let secondarySvgGroupNames = this.documentSvgAndData.svgData.svgGroupsData.secondaryNames
-    let primarySvgGroupElement = this.documentSvgAndData.svgElements.svgGroupElements.primary
-    let secondarySvgGroupElements = this.documentSvgAndData.svgElements.svgGroupElements.secondary
-
-    primarySvgGroupElement = new SvgGroup(this.documentSvgD3, primarySvgGroupName, 'fakeId_priamry').newSvgGroup
-    secondarySvgGroupNames.forEach((className) => {
-        let newSecondaryGroup = new SvgGroup(primarySvgGroupElement, className, 'fakeId_secondary').newSvgGroup
-        secondarySvgGroupElements.push(newSecondaryGroup)
-    })
-
-    // console.log(primarySvgGroupElement)
+function setClickEvents(CanvDoc, thisClass1) {
+    let thisClass = thisClass1
+    thisClass1.documentSvgHTML.onclick = function(event) {
+        if(thisClass.actionStates.drawPathActive === true) {
+            console.log("DRAW")
+            drawPath(event, thisClass.documentSvgFigures, thisClass.documentSvgD3, thisClass.actionStates, thisClass.actionFlags.drawPathFlags, thisClass.pathDrawingData, CanvDoc)
+        } else {
+            console.log("DONT_DRAW")
+        }
+    }
+    // thisClass.documentSvgD3.on("click", (event) => function() {
+    //     if(thisClass.actionStates.drawPathActive === true) {
+    //         console.log("DRAW")
+    //         drawPath(event, thisClass.documentSvgFigures, thisClass.documentSvgD3, thisClass.actionStates, thisClass.actionFlags.drawPathFlags, CanvDoc.pathDrawingData, CanvDoc)
+    //     } else {
+    //         console.log("DONT_DRAW")
+    //     }
+    // })
+    console.log(CanvDoc)
 }
 
 export {

@@ -34,6 +34,7 @@ function addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, 
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount],
         a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount]
     )
+    // console.log(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount])
 }
 
 export {

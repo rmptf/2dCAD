@@ -27,14 +27,20 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
         // PARALLEL GROUPS
 
         // MAIN PATH
+        // SVG
         let newMainPath = obj.self.mainPathGroup
             .append('path')
             .attr('class', 'path mainPath')
             .on("click", (event) => handleMainPathClick(event, figureCount, obj.isDown2, obj.self))
             .call(d3.drag().on("drag", (event) => handleMainPathDrag(event, figureCount)))
         a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL.push(newMainPath)
-        let newPathData1 = rawPathData(obj.m1), newPathData2 = rawPathData(obj.m1)
+        // SVG
+
+        // DATA
+        let newPathData1 = rawPathData(obj.m1)
+        let newPathData2 = rawPathData(obj.m1)
         a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL.push([newPathData1, newPathData2])
+        // DATA
         // MAIN PATH
 
         // SECONDARY PATH
@@ -105,7 +111,12 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
         let elementPositionData = getElementPositionData(thisSvgHTML, thisSvgDocHTML, a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount])
         thisSvgD3.on("mousemove", (event) => {event, handleExpandSvg(event, obj.m1, obj.isDown, elementPositionData, thisSvgHTML, thisSvgDocHTML, figureCount)})
 
-        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(
+            a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+            )
     }
 }
 
