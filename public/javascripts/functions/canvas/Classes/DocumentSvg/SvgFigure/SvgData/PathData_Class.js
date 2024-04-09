@@ -3,26 +3,29 @@ function PathData() {
         x: null,
         y: null
     },
+    // could create arc as child element of PathData?
     this.arc = {
         exist: false,
-        radius: 0,
-        rotation: 0,
-        arcFlag: 0,
-        sweepFlag: 0,
+        radius: null,
+        rotation: null,
+        arcFlag: null,
+        sweepFlag: null,
         side: undefined,
         center: {
-            x: 0,
-            y: 0
+            x: null,
+            y: null
         },
 
         startAngle: null,
 
-        joiner: false,
+        joiner: null,
         joinerSide: undefined,
     }
 }
 
-PathData.prototype.test = function() {
+PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
+    this.coords.x = xCoord
+    this.coords.y = yCoord
 }
 
 export {
