@@ -1,6 +1,8 @@
+import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
 import {PathData} from '../SvgFigure/SvgData/PathData_Class.js'
 import {SvgPath} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
-import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
+import {SvgPathPrimary} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Children/SvgPathPrimary_Class.js'
+import {SvgPathSecondary} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Children/SvgPathSecondary_Class.js'
 
 function drawPath(event, documentSvgFigures, documentSvgD3, actionStates, flags, pathDrawingData, CanvDoc) {
         pathDrawingData.m1 = d3.pointer(event)
@@ -16,8 +18,9 @@ function drawPath(event, documentSvgFigures, documentSvgD3, actionStates, flags,
 
             // MAIN PATH
             // SVG
-            let newPath = new SvgPath(newFigure.figureSvgGroups.secondarySvgGroupElements[0], newFigure)
-            newPath.createSvgPath_Primary // call here or from class?
+            // let newPath = new SvgPath(newFigure.figureSvgGroups.secondarySvgGroupElements[0], newFigure)
+            let newPathPrimary = new SvgPathPrimary(newFigure.figureSvgGroups.secondarySvgGroupElements[0], newFigure)
+            newPathPrimary.createSvgPath() // call here or from class?
             // SVG
             // DATA
             let newPathData1 = new PathData()
@@ -27,6 +30,11 @@ function drawPath(event, documentSvgFigures, documentSvgD3, actionStates, flags,
             newFigure.figureSvgData.push(newPathData1, newPathData2)
             // DATA
             // MAIN PATH
+
+            // SECONDARY PATH
+            let newPathSecondary = new SvgPathSecondary(newFigure.figureSvgGroups.secondarySvgGroupElements[0], newFigure)
+            newPathSecondary.createSvgPath() // call here or from class?
+            // SECONDARY PATH
 
             flags.isDown = true
         } else {

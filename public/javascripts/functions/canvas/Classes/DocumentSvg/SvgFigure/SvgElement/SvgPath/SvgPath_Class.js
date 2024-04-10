@@ -11,13 +11,12 @@ function SvgPath(parentElement, parentFigure) {
 }
 
 // Since because of how this handles adding this path to the Figure, the PrimarySvgPath should be a sub class.(Move Later)
-SvgPath.prototype.createSvgPath_Primary = function() {
+SvgPath.prototype.createSvgPath = function() {
     let newPath = this.parentElement.append(this.element)
         .attr('class', this.className)
         .attr('id', this.id)
         // .on("click", (event) => handleClick())
         // .call(d3.drag().on("drag", (event) => handleDrag()))
-    this.figure.figureSvgPaths.primaryPath = newPath
     return newPath
 }
 
