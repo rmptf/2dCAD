@@ -3,8 +3,8 @@ import {PathData} from '../../SvgData/PathData_Class.js'
 function SvgPath(parentElement, parentFigure) {
     this.parentElement = parentElement
     this.element = 'path'
-    this.className = 'className_FakeName'
-    this.id = 'id_FakeId'
+    this.className = 'path'
+    // this.id = 'id_FakeId'
     this.figure = parentFigure
     // this.newSvgPath = this.createSvgPath_Primary() // turned off for now, call here or at newPathInstantiate?
     // this.pathData = new PathData() // not sure if Ill do this here or at insantiate?
@@ -14,7 +14,7 @@ function SvgPath(parentElement, parentFigure) {
 SvgPath.prototype.createSvgPath = function() {
     let newPath = this.parentElement.append(this.element)
         .attr('class', this.className)
-        .attr('id', this.id)
+        // .attr('id', this.id)
         // .on("click", (event) => handleClick())
         // .call(d3.drag().on("drag", (event) => handleDrag()))
     return newPath

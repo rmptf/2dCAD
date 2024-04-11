@@ -3,6 +3,7 @@ import {PathData} from '../SvgFigure/SvgData/PathData_Class.js'
 import {SvgPath} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
 import {SvgPathPrimary} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Children/SvgPathPrimary_Class.js'
 import {SvgPathSecondary} from '../SvgFigure/SvgElement/SvgPath/SvgPath_Children/SvgPathSecondary_Class.js'
+import {SvgEndPointPrimary} from '../SvgFigure/SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointPrimary_Class.js'
 
 function drawPath(event, documentSvgFigures, documentSvgD3, actionStates, flags, pathDrawingData, CanvDoc) {
         pathDrawingData.m1 = d3.pointer(event)
@@ -32,9 +33,16 @@ function drawPath(event, documentSvgFigures, documentSvgD3, actionStates, flags,
             // MAIN PATH
 
             // SECONDARY PATH
-            let newPathSecondary = new SvgPathSecondary(newFigure.figureSvgGroups.secondarySvgGroupElements[0], newFigure)
+            let newPathSecondary = new SvgPathSecondary(newFigure.figureSvgGroups.secondarySvgGroupElements[1], newFigure)
             newPathSecondary.createSvgPath() // call here or from class?
             // SECONDARY PATH
+
+            // END POINTS
+            let newEndPointPrimary1 = new SvgEndPointPrimary(newFigure.figureSvgGroups.secondarySvgGroupElements[2], newFigure)
+            newEndPointPrimary1.createSvgEndPoint() // call here or from class?
+            let newEndPointPrimary2 = new SvgEndPointPrimary(newFigure.figureSvgGroups.secondarySvgGroupElements[2], newFigure)
+            newEndPointPrimary2.createSvgEndPoint() // call here or from class?
+            // END POINTS
 
             flags.isDown = true
         } else {
