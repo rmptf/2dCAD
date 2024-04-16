@@ -1,4 +1,4 @@
-import {drawPath} from './DocumentSvg_functions/drawPath.js'
+import {drawPath} from './DocumentSvg_functions/drawPathNew.js'
 
 function DocumentSvg(CanvDoc, documentSvgD3, documentSvgHTML, documentActionStates, documentPathDrawingData) {
     this.documentSvgD3 = documentSvgD3

@@ -10,6 +10,7 @@ SvgEndPointPrimary.prototype.constructor = SvgEndPointPrimary
 
 SvgEndPointPrimary.prototype.createSvgEndPoint = function() {
     let newEndPointPrimary = SvgEndPoint.prototype.createSvgEndPoint.call(this)
+        .attr('cx', 100).attr('cy', 100)
         // .on("click", (event) => handleClick())
         // .call(d3.drag().on("drag", (event) => handleDrag()))
     newEndPointPrimary.node().classList.add('mainEndPoint') // change to primaryEndPoint sometime

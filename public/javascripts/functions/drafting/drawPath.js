@@ -9,7 +9,7 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
 
     if (obj.isDown === false) {
         obj.originalFigureCount = obj.originalFigureCount + 1 
-        console.log("counter_22")
+        console.log("FIRST______")
         console.log(obj.originalFigureCount)
 
         let thisPathCount = 0
@@ -68,12 +68,19 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
         // END POINTS
 
         let elementPositionData = getElementPositionData(thisSvgHTML, thisSvgDocHTML, a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount])
+        // below handles expand svg AND draws non placed endpoint at mouse pos durring mousemove
         thisSvgD3.on("mousemove", (event) => {event, handleExpandSvg(event, obj.m1, obj.isDown, elementPositionData, thisSvgHTML, thisSvgDocHTML, figureCount)})
 
-        updateSVG_mainPathAndPoints(a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL])
+        updateSVG_mainPathAndPoints(
+            a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.secondaryFigure_svgElements_paths_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+            a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL]
+        )
 
         obj.isDown = true
     } else {
+        console.log("SECOND______")
         // console.log("self")
         // console.log(obj.self)
         // console.log("global")

@@ -1,3 +1,6 @@
+// import {describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
+import {calculateArcAndDescribePath, describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
+
 function PathData() {
     this.coords = {
         x: null,
@@ -21,11 +24,25 @@ function PathData() {
         joiner: null,
         joinerSide: undefined,
     }
+
+    this.svgElement_secondaryPath_descriptionAttr = undefined
+    this.svgElement_secondaryPath_descriptionAttr = undefined
 }
 
 PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
     this.coords.x = xCoord
     this.coords.y = yCoord
+}
+
+PathData.prototype.describeSvgAttribute_primaryPath = function () {
+    // let svgElementAttr_d = calculateArcAndDescribePath()
+    // this.
+}
+
+PathData.prototype.describeSvgAttribute_secondaryPath = function(prevPathData, thisPathData) {
+    let svgElementAttr_d = describeComplexPath([prevPathData, thisPathData])
+    this.svgElement_secondaryPath_descriptionAttr = svgElementAttr_d
+    return svgElementAttr_d
 }
 
 export {
