@@ -1,39 +1,41 @@
 import {drawPath} from './DocumentSvg_functions/drawPathNew.js'
 
-function DocumentSvg(CanvDoc, documentSvgD3, documentSvgHTML, documentActionStates, documentPathDrawingData) {
-    this.documentSvgD3 = documentSvgD3
-    this.documentSvgHTML = documentSvgHTML
+// function DocumentSvg(CanvDoc, documentSvgD3, documentSvgHTML, documentActionStates, documentPathDrawingData) {
+function DocumentSvg(CanvDoc) {
     this.documentSvgFigures = []
 
-    this.actionStates = documentActionStates
-    this.pathDrawingData = documentPathDrawingData
-    this.actionFlags = {
-        drawPathFlags: {
-            isDown: false,
-        }
+    this.pathDrawingData = {
+        currentFigure: null,
+        m1: null,
+        isDown: false,
+        figureCount: 0,
+        secondaryPathCount: 0,
+        previouslPathDrawingData: null
     }
+
+    // this.documentSvgD3 = documentSvg_D3Element
+    // this.documentSvgHTML = documentSvg_htmlElement
+    // this.actionStates = actionStates
+    // this.pathDrawingData = pathDrawingData
+    // this.actionFlags = {
+    //     drawPathFlags: {
+    //         isDown: false,
+    //     }
+    // }
 
     setClickEvents(CanvDoc, this)
 }
 
-function setClickEvents(CanvDoc, thisClass1) {
-    let thisClass = thisClass1
-    thisClass1.documentSvgHTML.onclick = function(event) {
-        if(thisClass.actionStates.drawPathActive === true) {
+function setClickEvents(CanvDoc, thisSvg) {
+    let thisClass = thisSvg
+    CanvDoc.documentSvg_htmlElement.onclick = function(event) {
+        if(CanvDoc.actionStates.drawPathActive === true) {
             console.log("DRAW")
-            drawPath(event, thisClass.documentSvgFigures, thisClass.documentSvgD3, thisClass.actionStates, thisClass.actionFlags.drawPathFlags, thisClass.pathDrawingData, CanvDoc)
+            drawPath(event, thisClass.documentSvgFigures, thisClass.pathDrawingData, CanvDoc.documentSvg_D3Element, CanvDoc.actionStates)
         } else {
             console.log("DONT_DRAW")
         }
     }
-    // thisClass.documentSvgD3.on("click", (event) => function() {
-    //     if(thisClass.actionStates.drawPathActive === true) {
-    //         console.log("DRAW")
-    //         drawPath(event, thisClass.documentSvgFigures, thisClass.documentSvgD3, thisClass.actionStates, thisClass.actionFlags.drawPathFlags, CanvDoc.pathDrawingData, CanvDoc)
-    //     } else {
-    //         console.log("DONT_DRAW")
-    //     }
-    // })
     console.log(CanvDoc)
 }
 

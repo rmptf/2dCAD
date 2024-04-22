@@ -39,12 +39,14 @@ function CanvasDocument(scaleObject, passedVars) {
         measurePathActive: false
     }
 
-    this.pathDrawingData = {
-        m1: null,
-        primaryFigureCount: 0,
-        secondaryFigurecount: 0,
-        previouslPathDrawingData: null
-    }
+    // this.pathDrawingData = {
+    //     m1: null,
+    //     isDown: false,
+    //     figureCount: 0,
+    //     currentFigure: null,
+    //     secondaryPathCount: 0,
+    //     previouslPathDrawingData: null
+    // }
 
     this.drawPathObj = {
         self: [], // moving
@@ -66,7 +68,7 @@ function CanvasDocument(scaleObject, passedVars) {
 // }
 
 CanvasDocument.prototype.createDocSvg = function() {
-    let newDocumentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates, this.pathDrawingData)
+    let newDocumentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
 
     this.documentSvg = newDocumentSvg
 }

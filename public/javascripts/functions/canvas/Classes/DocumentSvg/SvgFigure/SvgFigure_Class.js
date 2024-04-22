@@ -67,11 +67,10 @@ SvgFigure.prototype.createPathData = function(x, y) {
 
         return [newPathData_first, newPathData_second]
     } else {
-        // // let svgDataCount = this.svgPathDatas.length
-        // let newPathData_additional = new PathData()
-        // newPathData_additional.setCoordinateData(x, y)
-        // this.svgPathDatas.push(newPathData_additional)
-        // // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
+        let newPathData_additional = new PathData()
+        newPathData_additional.setCoordinateData(x, y)
+        this.svgPathDatas.push(newPathData_additional)
+        // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
     }
 }
 
@@ -90,29 +89,29 @@ SvgFigure.prototype.createPath_secondary = function(parentElement, parentFigure)
 }
 
 SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure, firstTwoPathDatas, firstSecondaryPath) {
+// SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure) {
     if(this.svgEndPoints.length === 0) {
         let newEndPoint_first = new SvgEndPointPrimary(parentElement, parentFigure)
         newEndPoint_first.pathData = firstTwoPathDatas[0]
-        newEndPoint_first.adjoiningSecondaryPaths.first = "no_first"
-        newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
+        // newEndPoint_first.adjoiningSecondaryPaths.first = "no_first"
+        // newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
         // newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
         // newEndPoint_first.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_first)
 
         let newEndPoint_second = new SvgEndPointPrimary(parentElement, parentFigure)
         newEndPoint_second.pathData = firstTwoPathDatas[0]
-        newEndPoint_second.adjoiningSecondaryPaths.first = firstSecondaryPath
-        newEndPoint_second.adjoiningSecondaryPaths.second = "no_second"
+        // newEndPoint_second.adjoiningSecondaryPaths.first = firstSecondaryPath
+        // newEndPoint_second.adjoiningSecondaryPaths.second = "no_second"
         // newEndPoint_second.adjoiningSecondaryPaths.second = firstSecondaryPath
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_second)
-        
     } else {
-        // let newEndPoint_additional = new SvgEndPointPrimary
-        // newEndPoint_additional.pathData = firstTwoPathDatas[x]
+        let newEndPoint_additional = new SvgEndPointPrimary(parentElement, parentFigure)
+        newEndPoint_additional.pathData = firstTwoPathDatas
         // newEndPoint_additional.adjoiningSecondaryPaths.first = "first"
         // newEndPoint_additional.adjoiningSecondaryPaths.second = "second"
-        // this.svgEndPoints.push(newEndPoint_additional)
+        this.svgEndPoints.push(newEndPoint_additional)
     }
 }
 
