@@ -1,26 +1,30 @@
-import {PathData} from './SvgData/PathData_Class.js'
 import {SvgGroup} from './SvgElement/SvgGroup/SvgGroup_Class.js'
+import {PathData} from './SvgData/PathData_Class.js'
+import {SvgPathPrimary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathPrimary_Class.js'
+import {SvgPathSecondary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathSecondary_Class.js'
+import {SvgEndPointPrimary} from './SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointPrimary_Class.js'
+import {updateSVG_thisSvgFigure} from '../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
+
 
 function SvgFigure(documentSvgD3) {
     this.documentSvgD3 = documentSvgD3
+
     // Svg Elements
-    // Svg Elements
-    this.figureSvgGroups = {
+    this.svgGroups = {
         primarySvgGroupElement: null,
         secondarySvgGroupElements: []
+        // primarySvgGroupElement: new SvgGroup(documentSvgD3, 'primaryFigureGROUP_001', 'fakeId_primary'),
+        // secondarySvgGroupElements: []
     }
-    this.figureSvgPaths = {
+    this.svgPaths = {
         primaryPath: null,
         secondaryPaths: []
     }
-    this.figureSvgEndPoints = []
-    // Svg Elements
+    this.svgEndPoints = []
     // Svg Elements
 
     // Figure Data
-    // Figure Data
-    this.figureSvgData = []
-    // Figure Data
+    this.svgPathDatas = []
     // Figure Data
 
     this.svgGroupsData = {
@@ -31,47 +35,102 @@ function SvgFigure(documentSvgD3) {
     createFigureGroups(this)
 }
 
-function createFigureGroups(thisClass) {
+function createFigureGroups(thisClass, className) {
     let primarySvgGroupName = thisClass.svgGroupsData.primaryName
     let secondarySvgGroupNames = thisClass.svgGroupsData.secondaryNames
 
-    thisClass.figureSvgGroups.primarySvgGroupElement = new SvgGroup(thisClass.documentSvgD3, primarySvgGroupName, 'fakeId_primary').newSvgGroup
+    let newPrimaryGroup = new SvgGroup(thisClass.documentSvgD3, primarySvgGroupName, 'fakeId_primary')
+    thisClass.svgGroups.primarySvgGroupElement = newPrimaryGroup.newSvgGroup
     secondarySvgGroupNames.forEach((className) => {
-        let newSecondaryGroup = new SvgGroup(thisClass.figureSvgGroups.primarySvgGroupElement, className, 'fakeId_secondary').newSvgGroup
-        thisClass.figureSvgGroups.secondarySvgGroupElements.push(newSecondaryGroup)
+        let newSecondaryGroup = new SvgGroup(thisClass.svgGroups.primarySvgGroupElement, className, 'fakeId_secondary')
+        thisClass.svgGroups.secondarySvgGroupElements.push(newSecondaryGroup.newSvgGroup)
     })
-}
 
-SvgFigure.prototype.createPath_primary = function() {
 
-}
-
-SvgFigure.prototype.createPath_secondary = function() {
-    
-}
-
-SvgFigure.prototype.createEndPoint_primary = function() {
-    
+    // className.forEach((name) => {
+    //     let newGroup = new SvgGroup(thisClass.svgGroups.primarySvgGroupElement, name, 'fakeId_secondary')
+    //     thisClass.svgGroups.secondarySvgGroupElements.push(newSecondaryGroup.newSvgGroup)
+    // })
 }
 
 SvgFigure.prototype.createPathData = function(x, y) {
-    if(this.figureSvgData.length === 0) {
+    if(this.svgPathDatas.length === 0) {
         let newPathData_first = new PathData()
         newPathData_first.setCoordinateData(x, y)
-        this.figureSvgData.push(newPathData_first)
+        this.svgPathDatas.push(newPathData_first)
 
         let newPathData_second = new PathData()
         newPathData_second.setCoordinateData(x, y)
-        this.figureSvgData.push(newPathData_second)
-        // newPathData_second.describeSvgAttribute_primaryPath(this.figureSvgData[0], this.figureSvgData[1])
-        newPathData_second.describeSvgAttribute_secondaryPath(this.figureSvgData[0], this.figureSvgData[1])
+        this.svgPathDatas.push(newPathData_second)
+        // newPathData_second.describeSvgAttribute_primaryPath(this.svgPathDatas[0], this.svgPathDatas[1])
+        // newPathData_second.describeSvgAttribute_secondaryPath(this.svgPathDatas[0], this.svgPathDatas[1])
+
+        return [newPathData_first, newPathData_second]
     } else {
-        // let svgDataCount = this.figureSvgData.length
+        // // let svgDataCount = this.svgPathDatas.length
         // let newPathData_additional = new PathData()
-        // this.figureSvgData.push(newPathData_additional)
-        // newPathData_additional.describeSvgAttribute_secondaryPath(this.figureSvgData[svgDataCount - 1], this.figureSvgData[svgDataCount])
+        // newPathData_additional.setCoordinateData(x, y)
+        // this.svgPathDatas.push(newPathData_additional)
+        // // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
     }
 }
+
+SvgFigure.prototype.createPath_primary = function(parentElement, parentFigure) {
+    let newPath_primary = new SvgPathPrimary(parentElement, parentFigure)
+    this.svgPaths.primaryPath = newPath_primary
+
+    return newPath_primary
+}
+
+SvgFigure.prototype.createPath_secondary = function(parentElement, parentFigure) {
+    let newPath_secondary = new SvgPathSecondary(parentElement, parentFigure)
+    this.svgPaths.secondaryPaths.push(newPath_secondary)
+
+    return newPath_secondary
+}
+
+SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure, firstTwoPathDatas, firstSecondaryPath) {
+    if(this.svgEndPoints.length === 0) {
+        let newEndPoint_first = new SvgEndPointPrimary(parentElement, parentFigure)
+        newEndPoint_first.pathData = firstTwoPathDatas[0]
+        newEndPoint_first.adjoiningSecondaryPaths.first = "no_first"
+        newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
+        // newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
+        // newEndPoint_first.setCoordinateData()
+        this.svgEndPoints.push(newEndPoint_first)
+
+        let newEndPoint_second = new SvgEndPointPrimary(parentElement, parentFigure)
+        newEndPoint_second.pathData = firstTwoPathDatas[0]
+        newEndPoint_second.adjoiningSecondaryPaths.first = firstSecondaryPath
+        newEndPoint_second.adjoiningSecondaryPaths.second = "no_second"
+        // newEndPoint_second.adjoiningSecondaryPaths.second = firstSecondaryPath
+        // newEndPoint_second.setCoordinateData()
+        this.svgEndPoints.push(newEndPoint_second)
+        
+    } else {
+        // let newEndPoint_additional = new SvgEndPointPrimary
+        // newEndPoint_additional.pathData = firstTwoPathDatas[x]
+        // newEndPoint_additional.adjoiningSecondaryPaths.first = "first"
+        // newEndPoint_additional.adjoiningSecondaryPaths.second = "second"
+        // this.svgEndPoints.push(newEndPoint_additional)
+    }
+}
+
+
+// SvgFigure.prototype.svg_mouseMove = function(event, isDown) {
+//     let m2 = d3.pointer(event)
+//     if(isDown === true) {
+//         this.svgPathDatas.at(-1).coords.x = m2[0]
+//         this.svgPathDatas.at(-1).coords.y = m2[1]
+//         this.figure_updateSvg()
+//     }
+// }
+
+SvgFigure.prototype.figure_updateSvg = function() {
+    updateSVG_thisSvgFigure(this)
+}
+
+
 
 export {
     SvgFigure

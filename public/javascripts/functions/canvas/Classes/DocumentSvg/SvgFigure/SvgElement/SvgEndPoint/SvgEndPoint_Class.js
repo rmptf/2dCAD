@@ -2,10 +2,14 @@ function SvgEndPoint(parentElement, parentFigure) {
     this.parentElement = parentElement
     this.element = 'circle'
     this.className = 'endPoint'
-    // this.id = 'id_FakeId'
     this.figure = parentFigure
-    // this.newEndPoint = this.createSvgEndPoint()
-    // this.endPointData = new endPointData() // not sure if Ill do this here or at insantiate?
+    this.adjoiningSecondaryPaths = {
+        first: null,
+        second: null
+    }
+    this.pathData = null
+
+    this.svgElementObject = this.createSvgEndPoint()
 }
 
 SvgEndPoint.prototype.createSvgEndPoint = function() {
@@ -16,6 +20,10 @@ SvgEndPoint.prototype.createSvgEndPoint = function() {
         // .call(d3.drag().on("drag", (event) => handleDrag()))
     return newEndPoint
 }
+
+// SvgEndPoint.prototype.setCoordinateData = function() {
+//     this.svgElementObject.attr('cx', this.pathData.coords.x).attr('cy', this.pathData.coords.y)
+// }
 
 export {
     SvgEndPoint

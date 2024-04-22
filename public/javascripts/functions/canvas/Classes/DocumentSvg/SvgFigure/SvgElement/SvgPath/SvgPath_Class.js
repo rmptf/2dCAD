@@ -6,8 +6,8 @@ function SvgPath(parentElement, parentFigure) {
     this.className = 'path'
     // this.id = 'id_FakeId'
     this.figure = parentFigure
-    // this.newSvgPath = this.createSvgPath_Primary() // turned off for now, call here or at newPathInstantiate?
-    // this.pathData = new PathData() // not sure if Ill do this here or at insantiate?
+
+    this.svgElementObject = this.createSvgPath()
 }
 
 // Since because of how this handles adding this path to the Figure, the PrimarySvgPath should be a sub class.(Move Later)
