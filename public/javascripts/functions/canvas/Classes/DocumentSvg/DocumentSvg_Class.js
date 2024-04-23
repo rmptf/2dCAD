@@ -1,6 +1,5 @@
 import {drawPath} from './DocumentSvg_functions/drawPathNew.js'
 
-// function DocumentSvg(CanvDoc, documentSvgD3, documentSvgHTML, documentActionStates, documentPathDrawingData) {
 function DocumentSvg(CanvDoc) {
     this.documentSvgFigures = []
 
@@ -27,6 +26,7 @@ function DocumentSvg(CanvDoc) {
 }
 
 function setClickEvents(CanvDoc, thisSvg) {
+    console.log(CanvDoc)
     let thisClass = thisSvg
     CanvDoc.documentSvg_htmlElement.onclick = function(event) {
         if(CanvDoc.actionStates.drawPathActive === true) {
@@ -36,7 +36,6 @@ function setClickEvents(CanvDoc, thisSvg) {
             console.log("DONT_DRAW")
         }
     }
-    console.log(CanvDoc)
 }
 
 export {

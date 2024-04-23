@@ -13,7 +13,6 @@ SvgPathSecondary.prototype.constructor = SvgPathSecondary
 // Override the createSvgPath method
 SvgPathSecondary.prototype.createSvgPath = function() {
     let newPathSecondary = SvgPath.prototype.createSvgPath.call(this) // Call parent method
-        // .attr('class', this.className_new) // Add additional attribute
         // .on("click", (event) => handleClick())
         // .call(d3.drag().on("drag", (event) => handleDrag()))
         newPathSecondary.node().classList.add('secondaryPath')

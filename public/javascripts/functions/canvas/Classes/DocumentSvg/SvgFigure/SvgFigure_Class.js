@@ -88,33 +88,24 @@ SvgFigure.prototype.createPath_secondary = function(parentElement, parentFigure)
     return newPath_secondary
 }
 
-SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure, firstTwoPathDatas, firstSecondaryPath) {
-// SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure) {
+SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure, pathData) {
     if(this.svgEndPoints.length === 0) {
         let newEndPoint_first = new SvgEndPointPrimary(parentElement, parentFigure)
-        newEndPoint_first.pathData = firstTwoPathDatas[0]
-        // newEndPoint_first.adjoiningSecondaryPaths.first = "no_first"
-        // newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
-        // newEndPoint_first.adjoiningSecondaryPaths.second = firstSecondaryPath
+        newEndPoint_first.pathData = pathData[0]
         // newEndPoint_first.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_first)
 
         let newEndPoint_second = new SvgEndPointPrimary(parentElement, parentFigure)
-        newEndPoint_second.pathData = firstTwoPathDatas[0]
-        // newEndPoint_second.adjoiningSecondaryPaths.first = firstSecondaryPath
-        // newEndPoint_second.adjoiningSecondaryPaths.second = "no_second"
-        // newEndPoint_second.adjoiningSecondaryPaths.second = firstSecondaryPath
+        newEndPoint_second.pathData = pathData[1]
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_second)
     } else {
         let newEndPoint_additional = new SvgEndPointPrimary(parentElement, parentFigure)
-        newEndPoint_additional.pathData = firstTwoPathDatas
-        // newEndPoint_additional.adjoiningSecondaryPaths.first = "first"
-        // newEndPoint_additional.adjoiningSecondaryPaths.second = "second"
+        newEndPoint_additional.pathData = pathData
+        // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_additional)
     }
 }
-
 
 // SvgFigure.prototype.svg_mouseMove = function(event, isDown) {
 //     let m2 = d3.pointer(event)
