@@ -1,8 +1,7 @@
 import {SvgEndPoint} from '../SvgEndPoint_Class.js'
 
-function SvgEndPointPrimary(parentElement, parentFigure) {
-    SvgEndPoint.call(this, parentElement, parentFigure)
-    // this.newSvgEndPointPrimary = this.createSvgEndPoint()
+function SvgEndPointPrimary(parentElement) {
+    SvgEndPoint.call(this, parentElement)
 }
 
 SvgEndPointPrimary.prototype = Object.create(SvgEndPoint.prototype)

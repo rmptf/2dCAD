@@ -6,8 +6,9 @@ import {SvgEndPointPrimary} from './SvgElement/SvgEndPoint/SvgEndPoint_Children/
 import {updateSVG_thisSvgFigure} from '../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 
 
-function SvgFigure(documentSvgD3) {
+function SvgFigure(documentSvgD3, actionStates) {
     this.documentSvgD3 = documentSvgD3
+    this.actionStates = actionStates
 
     // Svg Elements
     this.svgGroups = {
@@ -35,7 +36,7 @@ function SvgFigure(documentSvgD3) {
     createFigureGroups(this)
 }
 
-function createFigureGroups(thisClass, className) {
+function createFigureGroups(thisClass) {
     let primarySvgGroupName = thisClass.svgGroupsData.primaryName
     let secondarySvgGroupNames = thisClass.svgGroupsData.secondaryNames
 
@@ -74,33 +75,33 @@ SvgFigure.prototype.createPathData = function(x, y) {
     }
 }
 
-SvgFigure.prototype.createPath_primary = function(parentElement, parentFigure) {
-    let newPath_primary = new SvgPathPrimary(parentElement, parentFigure)
+SvgFigure.prototype.createPath_primary = function(parentElement) {
+    let newPath_primary = new SvgPathPrimary(parentElement, this.actionStates)
     this.svgPaths.primaryPath = newPath_primary
 
     return newPath_primary
 }
 
-SvgFigure.prototype.createPath_secondary = function(parentElement, parentFigure) {
-    let newPath_secondary = new SvgPathSecondary(parentElement, parentFigure)
+SvgFigure.prototype.createPath_secondary = function(parentElement) {
+    let newPath_secondary = new SvgPathSecondary(parentElement, this.actionStates)
     this.svgPaths.secondaryPaths.push(newPath_secondary)
 
     return newPath_secondary
 }
 
-SvgFigure.prototype.createEndPoint_primary = function(parentElement, parentFigure, pathData) {
+SvgFigure.prototype.createEndPoint_primary = function(parentElement, pathData) {
     if(this.svgEndPoints.length === 0) {
-        let newEndPoint_first = new SvgEndPointPrimary(parentElement, parentFigure)
+        let newEndPoint_first = new SvgEndPointPrimary(parentElement, this.actionStates)
         newEndPoint_first.pathData = pathData[0]
         // newEndPoint_first.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_first)
 
-        let newEndPoint_second = new SvgEndPointPrimary(parentElement, parentFigure)
+        let newEndPoint_second = new SvgEndPointPrimary(parentElement, this.actionStates)
         newEndPoint_second.pathData = pathData[1]
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_second)
     } else {
-        let newEndPoint_additional = new SvgEndPointPrimary(parentElement, parentFigure)
+        let newEndPoint_additional = new SvgEndPointPrimary(parentElement, this.actionStates)
         newEndPoint_additional.pathData = pathData
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_additional)

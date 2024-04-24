@@ -115,22 +115,37 @@ CanvasDocument.prototype.setClickEvents = function() {
     this.canvasDocument_htmlElement.onclick = function() {
         NEWselectSvgDocument(thisCanvasDoc)
     }
+
+
     this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
         // NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
+
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
         thisCanvasDoc.actionStates.drawPathActive = true // NEW DRAW
     }
     this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectAddCurvePoint()
+        // console.log(this)
+        // NEWselectAddCurvePoint() // OLD
+
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.addCurvePointActive = true // NEW
     }
     this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectDrawParallelPath()
+        // console.log(this)
+        // NEWselectDrawParallelPath() // OLD
+
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.drawParallelPathAcive = true // NEW
     }
     this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectMeasurePath()
+        // console.log(this)
+        // NEWselectMeasurePath() // OLD
+
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.measurePathActive = true // NEW
     }
+
+
     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
         console.log(this)
         saveFigureData()

@@ -1,8 +1,9 @@
-function SvgEndPoint(parentElement, parentFigure) {
+function SvgEndPoint(parentElement, actionStates) {
     this.parentElement = parentElement
     this.element = 'circle'
     this.className = 'endPoint'
-    this.figure = parentFigure
+    this.actionStates = actionStates
+    // this.figure = parentFigure
     this.adjoiningSecondaryPaths = {
         first: null,
         second: null
