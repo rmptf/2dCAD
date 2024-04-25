@@ -1,4 +1,5 @@
-function SvgPath(parentElement, actionStates) {
+function SvgPath(thisFigure, parentElement, actionStates) {
+    this.thisFigure = thisFigure
     this.parentElement = parentElement
     this.actionStates = actionStates
     this.element = 'path'

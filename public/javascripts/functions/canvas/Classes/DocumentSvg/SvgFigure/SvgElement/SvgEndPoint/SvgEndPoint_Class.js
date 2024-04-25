@@ -1,9 +1,11 @@
-function SvgEndPoint(parentElement, actionStates) {
+import {dragEndPoint} from '../SvgElement_functions/dragSvgElements_NEW.js'
+
+function SvgEndPoint(parentFigure, parentElement, actionStates) {
+    this.parentFigure = parentFigure
     this.parentElement = parentElement
+    this.actionStates = actionStates
     this.element = 'circle'
     this.className = 'endPoint'
-    this.actionStates = actionStates
-    // this.figure = parentFigure
     this.adjoiningSecondaryPaths = {
         first: null,
         second: null
@@ -16,9 +18,13 @@ function SvgEndPoint(parentElement, actionStates) {
 SvgEndPoint.prototype.createSvgEndPoint = function() {
     let newEndPoint = this.parentElement.append(this.element)
         .attr('class', this.className)
-        // .on("click", (event) => handleClick())
-        // .call(d3.drag().on("drag", (event) => handleDrag()))
+        .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
     return newEndPoint
+}
+
+SvgEndPoint.prototype.elementDrag = function(event, parentFigure, pathData, actionStates) {
+    // console.log('EndPoint dragging.')
+    dragEndPoint(event, parentFigure, pathData)
 }
 
 // SvgEndPoint.prototype.setCoordinateData = function() {

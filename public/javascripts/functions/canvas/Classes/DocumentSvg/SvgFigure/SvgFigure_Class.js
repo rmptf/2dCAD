@@ -75,33 +75,33 @@ SvgFigure.prototype.createPathData = function(x, y) {
     }
 }
 
-SvgFigure.prototype.createPath_primary = function(parentElement) {
-    let newPath_primary = new SvgPathPrimary(parentElement, this.actionStates)
+SvgFigure.prototype.createPath_primary = function(figure, parentElement) {
+    let newPath_primary = new SvgPathPrimary(figure, parentElement, this.actionStates)
     this.svgPaths.primaryPath = newPath_primary
 
     return newPath_primary
 }
 
-SvgFigure.prototype.createPath_secondary = function(parentElement) {
-    let newPath_secondary = new SvgPathSecondary(parentElement, this.actionStates)
+SvgFigure.prototype.createPath_secondary = function(figure, parentElement) {
+    let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates)
     this.svgPaths.secondaryPaths.push(newPath_secondary)
 
     return newPath_secondary
 }
 
-SvgFigure.prototype.createEndPoint_primary = function(parentElement, pathData) {
+SvgFigure.prototype.createEndPoint_primary = function(figure, parentElement, pathData) {
     if(this.svgEndPoints.length === 0) {
-        let newEndPoint_first = new SvgEndPointPrimary(parentElement, this.actionStates)
+        let newEndPoint_first = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_first.pathData = pathData[0]
         // newEndPoint_first.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_first)
 
-        let newEndPoint_second = new SvgEndPointPrimary(parentElement, this.actionStates)
+        let newEndPoint_second = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_second.pathData = pathData[1]
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_second)
     } else {
-        let newEndPoint_additional = new SvgEndPointPrimary(parentElement, this.actionStates)
+        let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_additional.pathData = pathData
         // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_additional)

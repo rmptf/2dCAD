@@ -9,9 +9,9 @@ function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, act
         pathDrawingData.currentFigure = newFigure
         documentSvgFigures.push(newFigure)
         let firstTwoPathDatas = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
-        let primaryPath = newFigure.createPath_primary(newFigure.svgGroups.secondarySvgGroupElements[0])
-        let firstSecondaryPath = newFigure.createPath_secondary(newFigure.svgGroups.secondarySvgGroupElements[1])
-        let firstTwoEndPoints = newFigure.createEndPoint_primary(newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas)
+        let primaryPath = newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0])
+        let firstSecondaryPath = newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1])
+        let firstTwoEndPoints = newFigure.createEndPoint_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas)
         documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure)})
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
@@ -19,8 +19,8 @@ function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, act
         console.log("isDown_true")
         let thisFigure = pathDrawingData.currentFigure
         let additionalPathData = thisFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
-        let additionalSecondaryPath = thisFigure.createPath_secondary(thisFigure.svgGroups.secondarySvgGroupElements[1])
-        let firstTwoEndPoints = thisFigure.createEndPoint_primary(thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData)
+        let additionalSecondaryPath = thisFigure.createPath_secondary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[1])
+        let firstTwoEndPoints = thisFigure.createEndPoint_primary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData)
         thisFigure.figure_updateSvg()
     }
 }
