@@ -1,5 +1,6 @@
 import {getDistance, findArcLength} from '../../../../../../math/mathFunctions.js'
 
+// not woring with multiple documents on screen, must be a actions issue
 function measureSvgPathFunction(secndaryPathClicked) {
     let figure = secndaryPathClicked.thisFigure
     let numberOfSegments = figure.svgPathDatas.length - 1
