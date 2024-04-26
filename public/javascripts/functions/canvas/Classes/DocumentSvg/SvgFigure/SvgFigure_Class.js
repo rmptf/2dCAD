@@ -72,6 +72,8 @@ SvgFigure.prototype.createPathData = function(x, y) {
         newPathData_additional.setCoordinateData(x, y)
         this.svgPathDatas.push(newPathData_additional)
         // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
+
+        return newPathData_additional
     }
 }
 
@@ -93,17 +95,14 @@ SvgFigure.prototype.createEndPoint_primary = function(figure, parentElement, pat
     if(this.svgEndPoints.length === 0) {
         let newEndPoint_first = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_first.pathData = pathData[0]
-        // newEndPoint_first.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_first)
 
         let newEndPoint_second = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_second.pathData = pathData[1]
-        // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_second)
     } else {
         let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates)
         newEndPoint_additional.pathData = pathData
-        // newEndPoint_second.setCoordinateData()
         this.svgEndPoints.push(newEndPoint_additional)
     }
 }

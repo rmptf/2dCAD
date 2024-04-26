@@ -1,4 +1,5 @@
 import {SvgPath} from '../SvgPath_Class.js'
+import {measureSvgPathFunction} from '../../SvgElement_functions/measureSvgPath_NEW.js'
 
 // Child class using "Inheritance"
 function SvgPathSecondary(thisFigure, parentElement, actionStates) {
@@ -29,7 +30,8 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
         console.log('Add Parallel = true')
         actionStates.drawParallelPathAcive = false
     } else if(actionStates.measurePathActive === true) {
-        console.log('Measure Path = true')
+        // console.log('Measure Path = true')
+        measureSvgPathFunction(this)
         actionStates.measurePathActive = false
     }
 }
@@ -43,10 +45,6 @@ SvgPathSecondary.prototype.elementDrag = function(event, thisFigure, actionState
 //     addCurvePointActive: false,
 //     drawParallelPathAcive: false,
 //     measurePathActive: false
-// }
-
-// SvgPathSecondary.prototype.setCoordinateData = function() {
-//     this.svgElementObject.attr('cx', this.pathData.coords.x).attr('cy', this.pathData.coords.y)
 // }
 
 export {

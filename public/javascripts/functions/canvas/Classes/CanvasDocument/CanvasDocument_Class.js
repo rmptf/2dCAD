@@ -31,6 +31,7 @@ function CanvasDocument(scaleObject, passedVars) {
     this.canvasDocActionBar01_btn04_htmlElement = null
     this.canvasDocActionBar02_btn01_htmlElement = null
     this.documentSvg = null
+    // this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
 
     this.actionStates = {
         drawPathActive: false,

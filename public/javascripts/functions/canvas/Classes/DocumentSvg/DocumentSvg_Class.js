@@ -22,10 +22,10 @@ function DocumentSvg(CanvDoc) {
     //     }
     // }
 
-    setClickEvents(CanvDoc, this)
+    this.setClickEvents(CanvDoc, this)
 }
 
-function setClickEvents(CanvDoc, thisSvg) {
+DocumentSvg.prototype.setClickEvents = function(CanvDoc, thisSvg) {
     console.log(CanvDoc)
     let thisClass = thisSvg
     CanvDoc.documentSvg_htmlElement.onclick = function(event) {
@@ -36,6 +36,10 @@ function setClickEvents(CanvDoc, thisSvg) {
             console.log("DONT_DRAW")
         }
     }
+}
+
+DocumentSvg.prototype.svg_dblClick = function() {
+
 }
 
 export {

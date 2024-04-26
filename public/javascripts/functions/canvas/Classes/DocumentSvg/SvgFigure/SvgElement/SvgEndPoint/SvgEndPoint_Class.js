@@ -26,11 +26,6 @@ SvgEndPoint.prototype.elementDrag = function(event, parentFigure, pathData, acti
     // console.log('EndPoint dragging.')
     dragEndPoint(event, parentFigure, pathData)
 }
-
-// SvgEndPoint.prototype.setCoordinateData = function() {
-//     this.svgElementObject.attr('cx', this.pathData.coords.x).attr('cy', this.pathData.coords.y)
-// }
-
 export {
     SvgEndPoint
 }
