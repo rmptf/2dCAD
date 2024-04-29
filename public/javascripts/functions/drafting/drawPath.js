@@ -57,11 +57,11 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
         let endPointGroup = []
         let newEndPoint1 = obj.self.endPointGroup
             .append('circle')
-            .attr('class', 'endPoint mainEndPoint')
+            .attr('class', 'endPoint primaryEndPoint')
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, 0, figureCount)}))
         let newEndPoint2 = obj.self.endPointGroup
             .append('circle')
-            .attr('class', 'endPoint mainEndPoint')
+            .attr('class', 'endPoint primaryEndPoint')
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, 1, figureCount)}))
         endPointGroup.push(newEndPoint1, newEndPoint2)
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL.push(endPointGroup)
@@ -109,7 +109,7 @@ function drawPathFunction(event, obj, thisSvgDocHTML, thisSvgHTML, thisSvgD3) {
         // END POINTS
         let newEndPoint = obj.self.endPointGroup
             .append('circle')
-            .attr('class', 'endPoint mainEndPoint')
+            .attr('class', 'endPoint primaryEndPoint')
             .on("click", (event) => handleSecondaryPathClick(event, thisPathCount, figureCount, obj.isDown2, obj.self))
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, endPointCount, figureCount)}))
         a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL].push(newEndPoint)

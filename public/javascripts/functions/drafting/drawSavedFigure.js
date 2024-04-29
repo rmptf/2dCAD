@@ -72,7 +72,7 @@ function drawSavedFigure(index, obj) {
     for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[figureCount].length; i++) {
         let newPoint = obj.self.endPointGroup
             .append('circle')
-            .attr('class', 'endPoint mainEndPoint')
+            .attr('class', 'endPoint primaryEndPoint')
             .call(d3.drag().on("drag", (event) => {handleEndPointDrag(event, i, figureCount)}))
         endPoints.push(newPoint)
     }

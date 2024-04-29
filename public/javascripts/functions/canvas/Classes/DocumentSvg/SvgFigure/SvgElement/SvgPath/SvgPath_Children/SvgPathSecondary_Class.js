@@ -1,10 +1,11 @@
 import {SvgPath} from '../SvgPath_Class.js'
-import {measureSvgPathFunction} from '../../SvgElement_functions/measureSvgPath_NEW.js'
+import {measureSvgPathFunction} from '../../../../DocumentSvg_functions/measureSvgPath_NEW.js'
+import {addCurvePointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
 
 // Child class using "Inheritance"
-function SvgPathSecondary(thisFigure, parentElement, actionStates) {
+function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
     // Call the constructor of the parent class
-    SvgPath.call(this, thisFigure, parentElement, actionStates)
+    SvgPath.call(this, thisFigure, parentElement, actionStates, index)
 }
 
 // Inherit methods from the parent class
@@ -12,8 +13,8 @@ SvgPathSecondary.prototype = Object.create(SvgPath.prototype)
 SvgPathSecondary.prototype.constructor = SvgPathSecondary
 
 // Override the createSvgPath method
-SvgPathSecondary.prototype.createSvgPath = function() {
-    let newPathSecondary = SvgPath.prototype.createSvgPath.call(this) // Call parent method
+SvgPathSecondary.prototype.createSvgPath = function(index) {
+    let newPathSecondary = SvgPath.prototype.createSvgPath.call(this, index) // Call parent method
         .on("click", (event) => this.elementClick(event, this.actionStates))
         .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.thisFigure, this.actionStates)))
         newPathSecondary.node().classList.add('secondaryPath')
@@ -23,8 +24,10 @@ SvgPathSecondary.prototype.createSvgPath = function() {
 SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
     if(actionStates.addCurvePointActive === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
         console.log('Secondary path clicked, all secondary path click functions off.')
+        console.log(this.thisFigure.svgPaths.secondaryPaths.indexOf(this))
     } else if(actionStates.addCurvePointActive === true) {
         console.log('Add Path Arc = true')
+        addCurvePointFunction(event, this)
         actionStates.addCurvePointActive = false
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')

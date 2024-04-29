@@ -1,6 +1,6 @@
 import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
-import {svg_expandSvgElementOnMouseMove_NEW} from '../../../../drafting/resizeSvg.js'
+import {svg_expandSvgElementOnMouseMove_NEW} from './resizeSvg_NEW.js'
 
 function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, actionStates) {
     pathDrawingData.m1 = d3.pointer(event)
@@ -10,18 +10,19 @@ function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, act
         pathDrawingData.currentFigure = newFigure
         documentSvgFigures.push(newFigure)
         let firstTwoPathDatas = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
-        newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0])
-        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1])
-        newFigure.createEndPoint_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas)
+        newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
+        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], 0)
+        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas, 0)
         documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure)})
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
     } else {
         console.log("isDown_true")
         let thisFigure = pathDrawingData.currentFigure
+        let index = thisFigure.svgPathDatas.length
         let additionalPathData = thisFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
-        thisFigure.createPath_secondary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[1])
-        thisFigure.createEndPoint_primary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData)
+        thisFigure.createPath_secondary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[1], index - 1)
+        thisFigure.createPrimaryEndPoint(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData, index)
         thisFigure.figure_updateSvg()
     }
 }
@@ -55,6 +56,8 @@ function svg_dblClick(documentSvgD3, actionStates, pathDrawingData, thisFigure) 
         // endPoints
         thisFigure.svgEndPoints.at(-1).svgElementObject.remove() // remove last endPoint svgElementObject
         thisFigure.svgEndPoints.pop() // remove last endPoint class
+
+        thisFigure.figure_updateSvg()
     }
     // remove last element from click other svg
     // ...

@@ -4,7 +4,7 @@ function CanvasScale(canvasScaleElment, btn01, btn02, btn03) {
         scaleLevel: 0.8
     }
     this.scaleSettings = {
-        endPointClass: ".mainEndPoint",
+        endPointClass: ".primaryEndPoint",
         pathClass: ".mainPath",
         baseRadius: 7,
         minRadius: 0,

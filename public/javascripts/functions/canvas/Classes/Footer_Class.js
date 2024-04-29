@@ -1,14 +1,21 @@
 import {CanvasDocument} from '../Classes/CanvasDocument/CanvasDocument_Class.js'
 
-function Footer(topLevelParentClass_canvasDocuments, topLevelParentClass_scaleClass, footer, button) {
+function Footer(topLevelParentClass_canvasElement, topLevelParentClass_canvasDocuments, topLevelParentClass_scaleClass, topLevelParentClass_panClass, footer, button) {
+    this.DOCUMENT_TEMPLATE_ID = 'aCanvasTemplate'
+    this.DOCUMENT_CONTAINER_ID = 'aDocumentContainer'
+    this.canvasClass_canvasElement = topLevelParentClass_canvasElement
+    this.documentTemplate = document.getElementById(this.DOCUMENT_TEMPLATE_ID).content
     this.canvasClass_canvasDocuments = topLevelParentClass_canvasDocuments
     this.scaleClass_scaleObject = topLevelParentClass_scaleClass.scaleObject
+    this.panElement = topLevelParentClass_panClass.canvasPanElement
     this.footerElement = footer
     this.buttonClickEvent = button
     this.vars = {
         stringIncrement: -1,
         previousDrawPathObj: undefined
     }
+
+    this.setClickEvents(button)
 }
 
 Footer.prototype.iterateCounters = function(){
@@ -20,13 +27,7 @@ Footer.prototype.setClickEvents = function(element) {
     let thisClass = this
     element.onclick = function() {
         thisClass.iterateCounters()
-        let newCanvasDoc = new CanvasDocument(thisClass.scaleClass_scaleObject, thisClass.vars)
-        newCanvasDoc.cloneAndAppendTemplate('aCanvasTemplate', 'aCanvasPanLayer')
-        newCanvasDoc.setVars('aDocumentContainer', ['aDoc_btnCont01_btn01', 'aDoc_btnCont01_btn02', 'aDoc_btnCont01_btn03', 'aDoc_btnCont01_btn04'], ['aDoc_btnCont02_btn01'])
-        newCanvasDoc.createDocSvg()
-        newCanvasDoc.setElementParams('aDocument', 'Pattern_Pc_', 'aDocumentSvg', 'aDoc_btn_01_')
-        newCanvasDoc.setActions()
-        newCanvasDoc.setClickEvents()
+        let newCanvasDoc = new CanvasDocument(thisClass)
         thisClass.canvasClass_canvasDocuments.push(newCanvasDoc)
     }
 }

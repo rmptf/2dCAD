@@ -169,7 +169,7 @@
 //     // DYNAMIC END POINTS
 //     let endPoints = []
 //     for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
-//         let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')).call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
+//         let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint primaryEndPoint')).call(d3.drag().on("drag", function(event) {dragEndPoint(event, i, originalFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])}))
 //         endPoints.push(newPoint)
 //     }
 //     originalFigure_svgElements_endPoints_array_GLOBAL.push(endPoints)
@@ -279,7 +279,7 @@
 //             // DYNAMIC END POINTS
 //             let endPoints = []
 //             for (let i = 0; i < originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length; i++) {
-//                 let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint'))
+//                 let newPoint = (self.endPointGroup.append('circle').attr('class', 'endPoint primaryEndPoint'))
 //                 endPoints.push(newPoint)
 //             }
 //             originalFigure_svgElements_endPoints_array_GLOBAL.push(endPoints)
@@ -316,7 +316,7 @@
 
 
 //             originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push({coords: {x: m1[0], y: m1[1]}, arc: {exist: false}})
-//             originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+//             originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint primaryEndPoint')))
 
 
 //             // CHANGES_FINDME_001
@@ -465,7 +465,7 @@
 //     //     } else if (pressAddCurveButton === true) {
 //     //         console.log('Add Path Arc = true')
 
-//     //         originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+//     //         originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint primaryEndPoint')))
 //     //         secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
     
 //     //         let newPathCounter = -1
@@ -516,7 +516,7 @@
 //     } else if (pressAddCurveButton === true) {
 //         console.log('Add Path Arc = true')
 
-//         originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint mainEndPoint')))
+//         originalFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push((self.endPointGroup.append('circle').attr('class', 'endPoint primaryEndPoint')))
 //         secondaryFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(self.secondaryPathGroup.append('path').attr('class', 'path secondaryPath'))
 
 

@@ -1,4 +1,4 @@
-import {drawPath} from './DocumentSvg_functions/drawPathNew.js'
+import {drawPath} from './DocumentSvg_functions/drawPath_NEW.js'
 
 function DocumentSvg(CanvDoc) {
     this.documentSvgFigures = []

@@ -4,7 +4,7 @@ import {handleSecondaryPathClick, handleEndPointDrag} from '../canvas/svgDocumen
 function addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount, m1) {
     let newEndPoint = selfGroup.endPointGroup
         .append('circle')
-        .attr('class', 'endPoint mainEndPoint')
+        .attr('class', 'endPoint primaryEndPoint')
     a_canvas_globalVars.originalFigure_svgElements_endPoints_array_GLOBAL[figureCount].push(newEndPoint)
 
     let newSecondaryPath = selfGroup.secondaryPathGroup

@@ -1,4 +1,4 @@
-let endPointClass = ".mainEndPoint"
+let endPointClass = ".primaryEndPoint"
 let pathClass = ".mainPath"
 let baseRadius = 7
 let minRadius = 0
