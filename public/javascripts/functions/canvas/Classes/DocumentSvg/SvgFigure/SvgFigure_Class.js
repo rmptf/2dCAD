@@ -120,21 +120,14 @@ SvgFigure.prototype.createPrimaryEndPoint = function(figure, parentElement, path
     }
 }
 
-SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElement, pathData, index) {
+SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElement, pathData, index, curve) {
     let newEndPoint_curve = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData, index)
-    newEndPoint_curve.addEndPointCurveClass()
+    if(curve) {
+        newEndPoint_curve.addEndPointCurveClass()
+    }
     // newEndPoint_additional.pathData = pathData
     this.svgEndPoints.splice(index, 0, newEndPoint_curve)
 }
-
-// SvgFigure.prototype.svg_mouseMove = function(event, isDown) {
-//     let m2 = d3.pointer(event)
-//     if(isDown === true) {
-//         this.svgPathDatas.at(-1).coords.x = m2[0]
-//         this.svgPathDatas.at(-1).coords.y = m2[1]
-//         this.figure_updateSvg()
-//     }
-// }
 
 SvgFigure.prototype.figure_updateSvg = function() {
     updateSVG_thisSvgFigure(this)

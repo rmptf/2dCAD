@@ -1,6 +1,6 @@
 import {SvgPath} from '../SvgPath_Class.js'
 import {measureSvgPathFunction} from '../../../../DocumentSvg_functions/measureSvgPath_NEW.js'
-import {addCurvePointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
+import {addEndPointFunction, addEndPointFunction_curve} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
 
 // Child class using "Inheritance"
 function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
@@ -22,13 +22,17 @@ SvgPathSecondary.prototype.createSvgPath = function(index) {
 }
 
 SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
-    if(actionStates.addCurvePointActive === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
+    if(actionStates.addEndPointActive === false && actionStates.addEndPointActive_curve === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
         console.log('Secondary path clicked, all secondary path click functions off.')
         console.log(this.thisFigure.svgPaths.secondaryPaths.indexOf(this))
-    } else if(actionStates.addCurvePointActive === true) {
+    } else if(actionStates.addEndPointActive === true) {
+        console.log('Add Path EndPoint = true')
+        addEndPointFunction(event, this)
+        actionStates.addEndPointActive = false
+    } else if(actionStates.addEndPointActive_curve === true) {
         console.log('Add Path Arc = true')
-        addCurvePointFunction(event, this)
-        actionStates.addCurvePointActive = false
+        addEndPointFunction_curve(event, this)
+        actionStates.addEndPointActive_curve = false
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')
         actionStates.drawParallelPathAcive = false
@@ -45,7 +49,7 @@ SvgPathSecondary.prototype.elementDrag = function(event, thisFigure, actionState
 
 // this.actionStates = {
 //     drawPathActive: false,
-//     addCurvePointActive: false,
+//     addEndPointActive_curve: false,
 //     drawParallelPathAcive: false,
 //     measurePathActive: false
 // }
