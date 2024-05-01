@@ -27,7 +27,8 @@ function CanvasDocument(footer) {
             BTN_04:'aDoc_btnCont01_btn04'
         }, 
         BTN_CONT_02: {
-            BTN_01:'aDoc_btnCont02_btn01'
+            BTN_01:'aDoc_btnCont02_btn01',
+            BTN_02:'aDoc_btnCont02_btn02'
         }
     }
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -49,6 +50,7 @@ function CanvasDocument(footer) {
     this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
     this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
     this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
+    this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
     this.setElementIds( // only really used in the old way. (can remover later)
         this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
         this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
@@ -59,8 +61,9 @@ function CanvasDocument(footer) {
         drawPathActive: false,
         addEndPointActive: false,
         addEndPointActive_curve: false,
+        removeEndPointActive: false,
         drawParallelPathAcive: false,
-        measurePathActive: false
+        measurePathActive: false,
     }
     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
     this.setActions()
@@ -118,9 +121,6 @@ CanvasDocument.prototype.setClickEvents = function() {
         thisCanvasDoc.actionStates.drawPathActive = true // NEW DRAW
     }
     this.canvasDocActionBar01_btn069_htmlElement.onclick = function() {
-        // console.log(this)
-        // NEWselectAddCurvePoint() // OLD
-
         Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
         thisCanvasDoc.actionStates.addEndPointActive = true // NEW
     }
@@ -144,6 +144,10 @@ CanvasDocument.prototype.setClickEvents = function() {
 
         Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
         thisCanvasDoc.actionStates.measurePathActive = true // NEW
+    }
+    this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
     }
 
     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {

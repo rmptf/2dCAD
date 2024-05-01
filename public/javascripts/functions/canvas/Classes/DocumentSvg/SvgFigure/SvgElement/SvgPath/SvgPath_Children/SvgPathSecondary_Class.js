@@ -1,6 +1,6 @@
 import {SvgPath} from '../SvgPath_Class.js'
 import {measureSvgPathFunction} from '../../../../DocumentSvg_functions/measureSvgPath_NEW.js'
-import {addEndPointFunction, addEndPointFunction_curve} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
+import {addEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
 
 // Child class using "Inheritance"
 function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
@@ -27,11 +27,11 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
         console.log(this.thisFigure.svgPaths.secondaryPaths.indexOf(this))
     } else if(actionStates.addEndPointActive === true) {
         console.log('Add Path EndPoint = true')
-        addEndPointFunction(event, this)
+        addEndPointFunction(event, this, false)
         actionStates.addEndPointActive = false
     } else if(actionStates.addEndPointActive_curve === true) {
         console.log('Add Path Arc = true')
-        addEndPointFunction_curve(event, this)
+        addEndPointFunction(event, this, true)
         actionStates.addEndPointActive_curve = false
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')
