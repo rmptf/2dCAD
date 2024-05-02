@@ -54,25 +54,25 @@ PathData.prototype.initiateCurvePoint = function(side) {
     }
 }
 
-// PathData.prototype.terminateCurvePoint = function() {
-//     this.arc = {
-//         exist: false,
-//         radius: null,
-//         rotation: null,
-//         arcFlag: null,
-//         sweepFlag: null,
-//         side: undefined,
-//         center: {
-//             x: null,
-//             y: null
-//         },
+PathData.prototype.terminateCurvePoint = function() {
+    this.arc = {
+        exist: false,
+        radius: "null",
+        rotation: null,
+        arcFlag: null,
+        sweepFlag: null,
+        side: undefined,
+        center: {
+            x: null,
+            y: null
+        },
 
-//         startAngle: null,
+        startAngle: null,
 
-//         joiner: null,
-//         joinerSide: undefined,
-//     }
-// }
+        joiner: null,
+        joinerSide: undefined,
+    }
+}
 
 // PathData.prototype.describeSvgAttribute_primaryPath = function () {
 //     // let svgElementAttr_d = calculateArcAndDescribePath()

@@ -1,5 +1,5 @@
 import {SvgEndPoint} from '../SvgEndPoint_Class.js'
-import {removeEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
+import {removeEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/endPointHandler_NEW.js'
 
 function SvgEndPointPrimary(parentFigure, parentElement, actionStates, pathData, index) {
     this.ENDPOINT_CLASS = 'primaryEndPoint'
@@ -23,6 +23,7 @@ SvgEndPointPrimary.prototype.createSvgEndPoint = function(index) {
 SvgEndPointPrimary.prototype.elementClick = function(event, actionStates) {
     // console.log('primaryEndPoint clicked.')
     // this.changeEndPointCurveClass()
+    console.log(this.pathData.arc.exist)
 
     if(actionStates.addEndPointActive === false && actionStates.addEndPointActive_curve === false && actionStates.removeEndPointActive === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
         console.log('EndPoint path clicked, all EndPoint click functions off.')

@@ -1,6 +1,6 @@
 import {SvgPath} from '../SvgPath_Class.js'
 import {measureSvgPathFunction} from '../../../../DocumentSvg_functions/measureSvgPath_NEW.js'
-import {addEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
+import {addEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/endPointHandler_NEW.js'
 
 // Child class using "Inheritance"
 function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
