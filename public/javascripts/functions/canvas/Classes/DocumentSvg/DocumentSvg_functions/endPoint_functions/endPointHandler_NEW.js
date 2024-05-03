@@ -17,27 +17,30 @@ function addEndPointFunction(event, secondaryPath, isArc) {
 }
 
 // needs cleaning
+// deleting first point not arc with second point as arc causes problem
 function removeEndPointFunction(event, endPoint) {
     let thisFigure = endPoint.parentFigure
     let index = thisFigure.svgEndPoints.indexOf(endPoint)
     let lastIndex = thisFigure.svgEndPoints.length - 1
     let secondaryPathIndex = index
+    let arcIndex
+
+
     if(index === lastIndex) {
         secondaryPathIndex = index - 1
     }
 
     if(endPoint.pathData.arc.exist === true) {
-        let arcIndex
         if(endPoint.pathData.arc.side === 'east') {
-            console.log("EAST")
             arcIndex = index + 1
         } else if(endPoint.pathData.arc.side === 'west') {
-            console.log("WEST")
             arcIndex = index - 1
             thisFigure.svgEndPoints[arcIndex].removeEndPointCurveClass()
         }
         thisFigure.svgPathDatas[arcIndex].terminateCurvePoint()
     }
+
+
     endPoint.svgElementObject.remove()
     thisFigure.svgEndPoints.splice(index, 1)
     thisFigure.svgPathDatas.splice(index, 1)
