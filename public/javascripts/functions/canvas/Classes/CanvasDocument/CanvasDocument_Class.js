@@ -15,7 +15,9 @@ import {
     NEWselectDrawParallelPath,
     NEWselectMeasurePath,
 } from './createCanvasDocumentFunctions.js'
-import {saveFigureData} from '../../../tools/saveFigureData.js'
+// import {saveFigureData} from '../../../tools/saveFigureData.js'
+import {saveFigureData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
+
 
 function CanvasDocument(footer) {
     this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
@@ -151,8 +153,8 @@ CanvasDocument.prototype.setClickEvents = function() {
     }
 
     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
-        console.log(this)
-        saveFigureData()
+        // console.log(this)
+        saveFigureData(thisCanvasDoc.documentSvg.documentSvgFigures)
     }
 }
 
