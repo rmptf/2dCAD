@@ -21,6 +21,10 @@ function saveFigureData(documentSvgFigures) {
     // console.log(a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL)
 }
 
+function saveSvgData() {
+    console.log("savewholeSVG")
+}
+
 // function saveFigureData() {
 //     // Get raw data and place in an object
 //     let shapeDataObject = {

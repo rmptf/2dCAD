@@ -2,7 +2,7 @@ import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
 import {svg_expandSvgElementOnMouseMove_NEW} from './resizeSvg_NEW.js'
 
-function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, actionStates) {
+function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3, actionStates) {
     pathDrawingData.m1 = d3.pointer(event)
     documentSvgD3.on("dblclick", () => svg_dblClick(documentSvgD3, actionStates, pathDrawingData, pathDrawingData.currentFigure))
     if(pathDrawingData.isDown === false) {
@@ -25,6 +25,10 @@ function drawPath(event, documentSvgFigures, pathDrawingData, documentSvgD3, act
         thisFigure.createPrimaryEndPoint(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData, index)
         thisFigure.figure_updateSvg()
     }
+}
+
+function drawSavedFigure() {
+    console.log("DRAW")
 }
 
 // place this function in documentSvg class
@@ -64,5 +68,5 @@ function svg_dblClick(documentSvgD3, actionStates, pathDrawingData, thisFigure) 
 }
 
 export {
-    drawPath
+    drawNewFigure
 }

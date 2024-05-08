@@ -1,4 +1,4 @@
-import {drawPath} from './DocumentSvg_functions/drawPath_NEW.js'
+import {drawNewFigure} from './DocumentSvg_functions/drawFigure_NEW.js'
 
 function DocumentSvg(CanvDoc) {
     this.documentSvgFigures = []
@@ -15,7 +15,7 @@ function DocumentSvg(CanvDoc) {
     // this.documentSvgD3 = documentSvg_D3Element
     // this.documentSvgHTML = documentSvg_htmlElement
     // this.actionStates = actionStates
-    // this.pathDrawingData = pathDrawingData
+    // Z.pathDrawingData = pathDrawingData
     // this.actionFlags = {
     //     drawPathFlags: {
     //         isDown: false,
@@ -31,7 +31,7 @@ DocumentSvg.prototype.setClickEvents = function(CanvDoc, thisSvg) {
     CanvDoc.documentSvg_htmlElement.onclick = function(event) {
         if(CanvDoc.actionStates.drawPathActive === true) {
             console.log("DRAW")
-            drawPath(event, thisClass.documentSvgFigures, thisClass.pathDrawingData, CanvDoc.documentSvg_D3Element, CanvDoc.actionStates)
+            drawNewFigure(event, thisClass.documentSvgFigures, thisClass.pathDrawingData, CanvDoc.documentSvg_D3Element, CanvDoc.actionStates)
         } else {
             console.log("DONT_DRAW")
         }
