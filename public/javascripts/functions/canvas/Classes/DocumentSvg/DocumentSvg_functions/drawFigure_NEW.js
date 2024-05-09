@@ -27,8 +27,21 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
     }
 }
 
-function drawSavedFigure() {
+function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, actionStates) { // add data to pass
     console.log("DRAW")
+    let newFigure = new SvgFigure(documentSvgD3, actionStates)
+    let pathDatas = JSON.parse(pathDataString)
+
+    for (let i = 0; i < pathDatas.length; i++) {
+        let newPathDataObject = newFigure.createPathData(0, 0)
+        newPathDataObject.passDataFromClassRepresentation(pathDatas[i])
+        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i) // FIX: will create 2 since its first
+        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], newPathDataObject, i) // FIX: will create 2 since its first
+    }
+
+    newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
+
+    thisFigure.figure_updateSvg()
 }
 
 // place this function in documentSvg class
