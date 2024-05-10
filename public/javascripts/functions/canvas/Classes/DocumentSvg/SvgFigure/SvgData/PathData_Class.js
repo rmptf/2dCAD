@@ -74,23 +74,23 @@ PathData.prototype.terminateCurvePoint = function() {
     }
 }
 
-PathData.prototype.passDataFromClassRepresentation = function(objectSourceCode) {
-    function deepCopy(obj) {
-        if (typeof obj !== 'object' || obj === null) {
-            return obj
-        }
+// PathData.prototype.passDataFromClassRepresentation = function(objectSourceCode) {
+//     function deepCopy(obj) {
+//         if (typeof obj !== 'object' || obj === null) {
+//             return obj
+//         }
         
-        let copy = Array.isArray(obj) ? [] : {}
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                copy[key] = deepCopy(obj[key])
-            }
-        }
-        return copy
-    }
+//         let copy = Array.isArray(obj) ? [] : {}
+//         for (let key in obj) {
+//             if (obj.hasOwnProperty(key)) {
+//                 copy[key] = deepCopy(obj[key])
+//             }
+//         }
+//         return copy
+//     }
     
-    this = deepCopy(objectSourceCode)
-}
+//     this = deepCopy(objectSourceCode)
+// }
 
 // PathData.prototype.describeSvgAttribute_primaryPath = function () {
 //     // let svgElementAttr_d = calculateArcAndDescribePath()

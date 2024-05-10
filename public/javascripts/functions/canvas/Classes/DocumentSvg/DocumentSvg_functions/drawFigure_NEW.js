@@ -9,10 +9,14 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
         let newFigure = new SvgFigure(documentSvgD3, actionStates)
         pathDrawingData.currentFigure = newFigure
         documentSvgFigures.push(newFigure)
-        let firstTwoPathDatas = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        // let firstTwoPathDatas = newFigure.createInitialPathDatas(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        let firstPathData = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        let secondPathData = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
         newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
         newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], 0)
-        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas, 0)
+        // newFigure.createInitialPrimaryEndPoints(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstTwoPathDatas, 0)
+        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstPathData, 0)
+        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], secondPathData, 0)
         documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure)})
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
@@ -33,10 +37,10 @@ function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, a
     let pathDatas = JSON.parse(pathDataString)
 
     for (let i = 0; i < pathDatas.length; i++) {
-        let newPathDataObject = newFigure.createPathData(0, 0)
+        let newPathDataObject = newFigure.createAddiionalPathData(0, 0)
         newPathDataObject.passDataFromClassRepresentation(pathDatas[i])
-        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i) // FIX: will create 2 since its first
-        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], newPathDataObject, i) // FIX: will create 2 since its first
+        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
+        newFigure.createAdditionalPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], newPathDataObject, i)
     }
 
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)

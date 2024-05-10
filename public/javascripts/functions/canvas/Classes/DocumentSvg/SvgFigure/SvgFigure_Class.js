@@ -55,25 +55,11 @@ function createFigureGroups(thisClass) {
 }
 
 SvgFigure.prototype.createPathData = function(x, y) {
-    if(this.svgPathDatas.length === 0) {
-        let newPathData_first = new PathData()
-        newPathData_first.setCoordinateData(x, y)
-        this.svgPathDatas.push(newPathData_first)
-
-        let newPathData_second = new PathData()
-        newPathData_second.setCoordinateData(x, y)
-        this.svgPathDatas.push(newPathData_second)
-        // newPathData_second.describeSvgAttribute_primaryPath(this.svgPathDatas[0], this.svgPathDatas[1])
-        // newPathData_second.describeSvgAttribute_secondaryPath(this.svgPathDatas[0], this.svgPathDatas[1])
-
-        return [newPathData_first, newPathData_second]
-    } else {
-        let newPathData_additional = new PathData()
-        newPathData_additional.setCoordinateData(x, y)
-        this.svgPathDatas.push(newPathData_additional)
-        // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
-        return newPathData_additional
-    }
+    let newPathData_additional = new PathData()
+    newPathData_additional.setCoordinateData(x, y)
+    this.svgPathDatas.push(newPathData_additional)
+    // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
+    return newPathData_additional
 }
 
 SvgFigure.prototype.createPathData_splice = function(x, y, index) {
@@ -105,19 +91,9 @@ SvgFigure.prototype.createPath_secondary_splice = function(figure, parentElement
 }
 
 SvgFigure.prototype.createPrimaryEndPoint = function(figure, parentElement, pathData, index) {
-    if(this.svgEndPoints.length === 0) {
-        let newEndPoint_first = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData[0], index)
-        // newEndPoint_first.pathData = pathData[0]
-        this.svgEndPoints.push(newEndPoint_first)
-
-        let newEndPoint_second = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData[1], index + 1)
-        // newEndPoint_second.pathData = pathData[1]
-        this.svgEndPoints.push(newEndPoint_second)
-    } else {
-        let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData, index)
-        // newEndPoint_additional.pathData = pathData
-        this.svgEndPoints.push(newEndPoint_additional)
-    }
+    let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData, index)
+    // newEndPoint_additional.pathData = pathData
+    this.svgEndPoints.push(newEndPoint_additional)
 }
 
 SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElement, pathData, index, curve) {
