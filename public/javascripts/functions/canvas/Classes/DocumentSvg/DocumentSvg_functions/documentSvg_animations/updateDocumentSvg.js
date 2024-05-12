@@ -2,6 +2,7 @@ import {calculateArcAndDescribePath, describeComplexPath} from '../documentSvg_a
 
 function updateSVG_thisSvgFigure(figure) {
     let pathDatas = figure.svgPathDatas
+    // console.log(pathDatas)
 
     // PATH
     let primaryPath = figure.svgPaths.primaryPath

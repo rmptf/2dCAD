@@ -17,6 +17,7 @@ import {
 } from './createCanvasDocumentFunctions.js'
 // import {saveFigureData} from '../../../tools/saveFigureData.js'
 import {saveFigureData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
+import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 
 
 function CanvasDocument(footer) {
@@ -30,7 +31,8 @@ function CanvasDocument(footer) {
         }, 
         BTN_CONT_02: {
             BTN_01:'aDoc_btnCont02_btn01',
-            BTN_02:'aDoc_btnCont02_btn02'
+            BTN_02:'aDoc_btnCont02_btn02',
+            BTN_03:'aDoc_btnCont02_btn03',
         }
     }
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -53,6 +55,7 @@ function CanvasDocument(footer) {
     this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
     this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
     this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
+    this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
     this.setElementIds( // only really used in the old way. (can remover later)
         this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
         this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
@@ -156,6 +159,12 @@ CanvasDocument.prototype.setClickEvents = function() {
         // console.log(this)
         saveFigureData(thisCanvasDoc.documentSvg.documentSvgFigures)
     }
+
+    // this.canvasDocActionBar02_btn03_htmlElement.onclick = function() {
+    //     // console.log(this)
+    //     // saveFigureData(thisCanvasDoc.documentSvg.documentSvgFigures)
+    //     drawFigureFromData()
+    // }
 }
 
 export {

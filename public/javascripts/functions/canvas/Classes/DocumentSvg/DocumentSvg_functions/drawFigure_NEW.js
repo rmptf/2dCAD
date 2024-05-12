@@ -29,21 +29,20 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
     }
 }
 
-function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, actionStates) { // add data to pass
-    console.log("DRAW")
+function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, actionStates) {
     let newFigure = new SvgFigure(documentSvgD3, actionStates)
     let pathDatas = JSON.parse(pathDataString)
-
+    documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
-    
     for (let i = 0; i < pathDatas.length; i++) {
-        let newPathDataObject = newFigure.createAddiionalPathData(0, 0)
-        newPathDataObject.passDataFromClassRepresentation(pathDatas[i])
-        newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
-        newFigure.createAdditionalPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], newPathDataObject, i)
+        let pathData = newFigure.createPathDataALLDATA(pathDatas[i]) // how to create new pathdata from existing pathdata
+        newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], pathData, i)
+        if(i !== pathDatas.length - 1) {
+            newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
+        }
     }
 
-    thisFigure.figure_updateSvg()
+    newFigure.figure_updateSvg()
 }
 
 // place this function in documentSvg class
@@ -83,5 +82,6 @@ function svg_dblClick(documentSvgD3, actionStates, pathDrawingData, thisFigure) 
 }
 
 export {
-    drawNewFigure
+    drawNewFigure,
+    drawFigureFromData
 }

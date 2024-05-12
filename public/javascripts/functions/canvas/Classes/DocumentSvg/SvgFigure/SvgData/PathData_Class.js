@@ -34,6 +34,22 @@ PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
     this.coords.y = yCoord
 }
 
+PathData.prototype.setAllData = function(data) {
+    this.coords.x = data.coords.x
+    this.coords.y = data.coords.y
+    this.arc.exist = data.arc.exist
+    this.arc.radius = data.arc.radius
+    this.arc.rotation = data.arc.rotation
+    this.arc.arcFlag = data.arc.arcFlag
+    this.arc.sweepFlag = data.arc.sweepFlag
+    this.arc.side = data.arc.side
+    this.arc.center.x = data.arc.center.x
+    this.arc.center.y = data.arc.center.y
+    this.arc.startAngle = data.arc.startAngle
+    this.arc.joiner = data.arc.joiner
+    this.arc.joinerSide = data.arc.joinerSide
+}
+
 PathData.prototype.initiateCurvePoint = function(side) {
     this.arc = {
         exist: true,
