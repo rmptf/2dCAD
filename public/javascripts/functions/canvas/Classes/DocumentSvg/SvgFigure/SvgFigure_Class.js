@@ -54,7 +54,7 @@ function createFigureGroups(thisClass) {
     // })
 }
 
-SvgFigure.prototype.createPathData = function(x, y) {
+SvgFigure.prototype.createPathData_newData = function(x, y) {
     let newPathData_additional = new PathData()
     newPathData_additional.setCoordinateData(x, y)
     this.svgPathDatas.push(newPathData_additional)
@@ -62,7 +62,7 @@ SvgFigure.prototype.createPathData = function(x, y) {
     return newPathData_additional
 }
 
-SvgFigure.prototype.createPathDataALLDATA = function(pathData) {
+SvgFigure.prototype.createPathData_savedData = function(pathData) {
     let newPathData_additional = new PathData()
     newPathData_additional.setAllData(pathData)
     this.svgPathDatas.push(newPathData_additional)

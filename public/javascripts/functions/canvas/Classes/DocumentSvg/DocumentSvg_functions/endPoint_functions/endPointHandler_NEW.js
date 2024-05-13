@@ -1,4 +1,5 @@
 function addEndPointFunction(event, secondaryPath, isArc) {
+    //TODO: // has error when adding straight point betwen curve and straight point (only at west pos)
     let m1 = d3.pointer(event)
     let thisFigure = secondaryPath.thisFigure
     let index = thisFigure.svgPaths.secondaryPaths.indexOf(secondaryPath) + 1

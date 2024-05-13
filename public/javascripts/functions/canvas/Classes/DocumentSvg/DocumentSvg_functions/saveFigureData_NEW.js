@@ -1,11 +1,7 @@
 
 function saveFigureData(documentSvgFigures) {
-    console.log("SAVE")
-
     let pathDataString = JSON.stringify(documentSvgFigures[0].svgPathDatas)
     console.log(pathDataString)
-    console.log(JSON.parse(pathDataString)) // this saves the pathData classes source code, not the classes themselves, will need to recreate each pathData class on load
-    console.log(documentSvgFigures[0].svgPathDatas)
 }
 
 function saveSvgData() {

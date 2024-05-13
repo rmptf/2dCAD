@@ -35,20 +35,15 @@ PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
 }
 
 PathData.prototype.setAllData = function(data) {
-    this.coords.x = data.coords.x
-    this.coords.y = data.coords.y
-    this.arc.exist = data.arc.exist
-    this.arc.radius = data.arc.radius
-    this.arc.rotation = data.arc.rotation
-    this.arc.arcFlag = data.arc.arcFlag
-    this.arc.sweepFlag = data.arc.sweepFlag
-    this.arc.side = data.arc.side
-    this.arc.center.x = data.arc.center.x
-    this.arc.center.y = data.arc.center.y
-    this.arc.startAngle = data.arc.startAngle
-    this.arc.joiner = data.arc.joiner
-    this.arc.joinerSide = data.arc.joinerSide
+    const { coords, arc } = data
+    this.coords = { ...coords }
+    this.arc = { ...arc }
+    // if (arc.center) {
+    //     this.arc.center = { ...arc.center }
+    // }
 }
+
+
 
 PathData.prototype.initiateCurvePoint = function(side) {
     this.arc = {
@@ -90,24 +85,6 @@ PathData.prototype.terminateCurvePoint = function() {
     }
 }
 
-// PathData.prototype.passDataFromClassRepresentation = function(objectSourceCode) {
-//     function deepCopy(obj) {
-//         if (typeof obj !== 'object' || obj === null) {
-//             return obj
-//         }
-        
-//         let copy = Array.isArray(obj) ? [] : {}
-//         for (let key in obj) {
-//             if (obj.hasOwnProperty(key)) {
-//                 copy[key] = deepCopy(obj[key])
-//             }
-//         }
-//         return copy
-//     }
-    
-//     this = deepCopy(objectSourceCode)
-// }
-
 // PathData.prototype.describeSvgAttribute_primaryPath = function () {
 //     // let svgElementAttr_d = calculateArcAndDescribePath()
 //     // this.
@@ -122,81 +99,3 @@ PathData.prototype.terminateCurvePoint = function() {
 export {
     PathData
 }
-
-
-
-
-
-
-
-// let allDATA = {
-//     coords: {
-//         x: m1[0],
-//         y: m1[1]
-//     }, 
-//     arc: {
-//         exist: true,
-//         radius: 0,
-//         rotation: 0,
-//         arcFlag: 0,
-//         sweepFlag: 0,
-//         side: 'east',
-//         center: {x: 0, y: 0},
-
-//         startAngle: 1.4478215111125212,
-
-//         joiner: true,
-//         joinerSide: "AAA",
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let data = {
-//     "coords":{
-//         "x":148.24996948242188,
-//         "y":90.49999237060547
-//     },
-//     "arc":{
-//         "exist":true,
-//         "radius":446.5020880924565,
-//         "rotation":0,
-//         "arcFlag":0,
-//         "sweepFlag":0,
-//         "side":"east",
-//         "center":{
-//             "x":310.6562893929397,
-//             "y":-325.4186317904753
-//         },
-//         "startAngle":0.14914627473343187
-//     }
-// }

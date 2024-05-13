@@ -9,8 +9,8 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
         let newFigure = new SvgFigure(documentSvgD3, actionStates)
         pathDrawingData.currentFigure = newFigure
         documentSvgFigures.push(newFigure)
-        let firstPathData = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
-        let secondPathData = newFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        let firstPathData = newFigure.createPathData_newData(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        let secondPathData = newFigure.createPathData_newData(pathDrawingData.m1[0], pathDrawingData.m1[1])
         newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
         newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], 0)
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstPathData, 0)
@@ -22,20 +22,21 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
         console.log("isDown_true")
         let thisFigure = pathDrawingData.currentFigure
         let index = thisFigure.svgPathDatas.length
-        let additionalPathData = thisFigure.createPathData(pathDrawingData.m1[0], pathDrawingData.m1[1])
+        let additionalPathData = thisFigure.createPathData_newData(pathDrawingData.m1[0], pathDrawingData.m1[1])
         thisFigure.createPath_secondary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[1], index - 1)
         thisFigure.createPrimaryEndPoint(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData, index)
         thisFigure.figure_updateSvg()
     }
 }
 
-function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, actionStates) {
+function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actionStates) {
+    //TODO: draws extra endPoints as Curve 
     let newFigure = new SvgFigure(documentSvgD3, actionStates)
-    let pathDatas = JSON.parse(pathDataString)
+    let pathDatas = JSON.parse(figureData)
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
     for (let i = 0; i < pathDatas.length; i++) {
-        let pathData = newFigure.createPathDataALLDATA(pathDatas[i]) // how to create new pathdata from existing pathdata
+        let pathData = newFigure.createPathData_savedData(pathDatas[i])
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], pathData, i)
         if(i !== pathDatas.length - 1) {
             newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
@@ -43,6 +44,25 @@ function drawFigureFromData(pathDataString, documentSvgFigures, documentSvgD3, a
     }
 
     newFigure.figure_updateSvg()
+}
+
+// working
+function drawDocumentSvgAllFiguresFromData(figuresData, documentSvgFigures, documentSvgD3, actionStates) {
+    //TODO: draws extra endPoints as Curve
+    for (let i = 0; i < figuresData.length; i++) {
+        let newFigure = new SvgFigure(documentSvgD3, actionStates)
+        let pathDatas = JSON.parse(figuresData[i])
+        documentSvgFigures.push(newFigure)
+        newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
+        for (let i = 0; i < pathDatas.length; i++) {
+            let pathData = newFigure.createPathData_savedData(pathDatas[i])
+            newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], pathData, i)
+            if(i !== pathDatas.length - 1) {
+                newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
+            }
+        }
+        newFigure.figure_updateSvg()
+    }
 }
 
 // place this function in documentSvg class
