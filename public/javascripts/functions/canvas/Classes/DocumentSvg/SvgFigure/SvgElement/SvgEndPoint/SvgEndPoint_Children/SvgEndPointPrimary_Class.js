@@ -14,7 +14,7 @@ SvgEndPointPrimary.prototype.createSvgEndPoint = function(index) {
     let newEndPointPrimary = SvgEndPoint.prototype.createSvgEndPoint.call(this, index)
         .on("click", (event) => this.elementClick(event, this.actionStates))
     newEndPointPrimary.node().classList.add(this.ENDPOINT_CLASS)
-    if(this.pathData.arc.exist === true) {
+    if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
         newEndPointPrimary.node().classList.add(this.ENDPOINT_CURVE_CLASS)
     }
     return newEndPointPrimary
@@ -25,7 +25,14 @@ SvgEndPointPrimary.prototype.elementClick = function(event, actionStates) {
     // this.changeEndPointCurveClass()
     console.log(this.pathData.arc.exist)
 
-    if(actionStates.addEndPointActive === false && actionStates.addEndPointActive_curve === false && actionStates.removeEndPointActive === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
+    if(
+        // actionStates.addEndPointActive === false &&
+        // actionStates.addEndPointActive_curve === false &&
+        actionStates.removeEndPointActive === false
+        // actionStates.drawParallelPathAcive === false &&
+        // actionStates.measurePathActive === false &&
+        // actionStates.saveFigureDataActive === false
+    ) {
         console.log('EndPoint path clicked, all EndPoint click functions off.')
     } else if(actionStates.removeEndPointActive === true) {
         console.log('Remove EndPoint = true')

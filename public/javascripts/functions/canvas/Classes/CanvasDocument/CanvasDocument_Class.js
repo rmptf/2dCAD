@@ -16,7 +16,7 @@ import {
     NEWselectMeasurePath,
 } from './createCanvasDocumentFunctions.js'
 // import {saveFigureData} from '../../../tools/saveFigureData.js'
-import {saveFigureData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
+import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 
 
@@ -31,8 +31,10 @@ function CanvasDocument(footer) {
         }, 
         BTN_CONT_02: {
             BTN_01:'aDoc_btnCont02_btn01',
+            BTN_069:'aDoc_btnCont02_btn069',
             BTN_02:'aDoc_btnCont02_btn02',
             BTN_03:'aDoc_btnCont02_btn03',
+            BTN_04:'aDoc_btnCont02_btn04',
         }
     }
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -54,8 +56,10 @@ function CanvasDocument(footer) {
     this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
     this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
     this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
+    this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
     this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
     this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
+    this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
     this.setElementIds( // only really used in the old way. (can remover later)
         this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
         this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
@@ -69,6 +73,7 @@ function CanvasDocument(footer) {
         removeEndPointActive: false,
         drawParallelPathAcive: false,
         measurePathActive: false,
+        saveFigureDataActive: false,
     }
     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
     this.setActions()
@@ -151,20 +156,22 @@ CanvasDocument.prototype.setClickEvents = function() {
         thisCanvasDoc.actionStates.measurePathActive = true // NEW
     }
     this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
+        // console.log(this)
+
         Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
         thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
     }
-
     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
         // console.log(this)
-        saveFigureData(thisCanvasDoc.documentSvg.documentSvgFigures)
-    }
 
-    // this.canvasDocActionBar02_btn03_htmlElement.onclick = function() {
-    //     // console.log(this)
-    //     // saveFigureData(thisCanvasDoc.documentSvg.documentSvgFigures)
-    //     drawFigureFromData()
-    // }
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.saveFigureDataActive = true // NEW
+    }
+    this.canvasDocActionBar02_btn069_htmlElement.onclick = function() {
+        // console.log(this)
+
+        saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
+    }
 }
 
 export {

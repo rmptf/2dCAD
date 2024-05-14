@@ -1,6 +1,7 @@
 import {SvgPath} from '../SvgPath_Class.js'
 import {measureSvgPathFunction} from '../../../../DocumentSvg_functions/measureSvgPath_NEW.js'
 import {addEndPointFunction} from '../../../../DocumentSvg_functions/endPoint_functions/endPointHandler_NEW.js'
+import {saveFigureData} from '../../../../DocumentSvg_functions/saveFigureData_NEW.js'
 
 // Child class using "Inheritance"
 function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
@@ -22,7 +23,13 @@ SvgPathSecondary.prototype.createSvgPath = function(index) {
 }
 
 SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
-    if(actionStates.addEndPointActive === false && actionStates.addEndPointActive_curve === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {
+    if(
+        actionStates.addEndPointActive === false &&
+        actionStates.addEndPointActive_curve === false &&
+        actionStates.drawParallelPathAcive === false &&
+        actionStates.measurePathActive === false &&
+        actionStates.saveFigureDataActive === false
+    ) {
         console.log('Secondary path clicked, all secondary path click functions off.')
         console.log(this.thisFigure.svgPaths.secondaryPaths.indexOf(this))
     } else if(actionStates.addEndPointActive === true) {
@@ -40,19 +47,16 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
         // console.log('Measure Path = true')
         measureSvgPathFunction(this)
         actionStates.measurePathActive = false
+    } else if(actionStates.saveFigureDataActive === true) {
+        console.log('Save Figure Data = true')
+        saveFigureData(this.thisFigure)
+        actionStates.saveFigureDataActive = false
     }
 }
 
 SvgPathSecondary.prototype.elementDrag = function(event, thisFigure, actionStates) {
     console.log('Secondary path dragging.')
 }
-
-// this.actionStates = {
-//     drawPathActive: false,
-//     addEndPointActive_curve: false,
-//     drawParallelPathAcive: false,
-//     measurePathActive: false
-// }
 
 export {
     SvgPathSecondary

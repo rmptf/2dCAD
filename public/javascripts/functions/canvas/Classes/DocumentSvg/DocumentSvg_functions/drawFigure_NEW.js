@@ -30,7 +30,6 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
 }
 
 function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actionStates) {
-    //TODO: draws extra endPoints as Curve 
     let newFigure = new SvgFigure(documentSvgD3, actionStates)
     let pathDatas = JSON.parse(figureData)
     documentSvgFigures.push(newFigure)
@@ -42,23 +41,21 @@ function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actio
             newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
         }
     }
-
     newFigure.figure_updateSvg()
 }
 
-// working
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvgFigures, documentSvgD3, actionStates) {
-    //TODO: draws extra endPoints as Curve
-    for (let i = 0; i < figuresData.length; i++) {
+    let figures = JSON.parse(figuresData)
+    for (let i = 0; i < figures.length; i++) {
         let newFigure = new SvgFigure(documentSvgD3, actionStates)
-        let pathDatas = JSON.parse(figuresData[i])
+        let pathDatas = figures[i]
         documentSvgFigures.push(newFigure)
         newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
-        for (let i = 0; i < pathDatas.length; i++) {
-            let pathData = newFigure.createPathData_savedData(pathDatas[i])
-            newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], pathData, i)
-            if(i !== pathDatas.length - 1) {
-                newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
+        for (let j = 0; j < pathDatas.length; j++) {
+            let pathData = newFigure.createPathData_savedData(pathDatas[j])
+            newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], pathData, j)
+            if(j !== pathDatas.length - 1) {
+                newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], j)
             }
         }
         newFigure.figure_updateSvg()
@@ -103,5 +100,6 @@ function svg_dblClick(documentSvgD3, actionStates, pathDrawingData, thisFigure) 
 
 export {
     drawNewFigure,
-    drawFigureFromData
+    drawFigureFromData,
+    drawDocumentSvgAllFiguresFromData
 }
