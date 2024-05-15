@@ -150,6 +150,7 @@ function changeStringIncrementally(origString, stringIncrement123) {
     return newString
 }
 
+// TODO: do i turn off all active states from prev canvDoc?
 function activateSvgDoc(element) {
     let activeClass = "a-document__container--active";
     document.querySelectorAll(".a-document__container").forEach(container => {

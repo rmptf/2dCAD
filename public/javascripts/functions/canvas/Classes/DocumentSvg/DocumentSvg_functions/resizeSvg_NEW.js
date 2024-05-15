@@ -1,7 +1,8 @@
 // import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 
+// FIXME: working here
 function svg_expandSvgElementOnMouseMove_NEW(event, figure) {
-    console.log("workiworki")
+    console.log("expandSvgElement_Running")
     // let m2 = d3.pointer(event)
     // let p1_x = pathDatasPositions.at(-2).coords.x
     // let p1_y = pathDatasPositions.at(-2).coords.y
@@ -77,7 +78,20 @@ function svg_expandSvgElementOnMouseMove_NEW(event, figure) {
     // }
 }
 
-function expandSvgElementOnMouseMove(event, m1Origin, isDown, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, pathDatasPositions, svgDocLeftPos, svgDocTopPos, svgDimensions, thisSvgHTML, thisSvgDocHTML, figureCount) {
+function expandSvgElementOnMouseMove(
+    event,
+    m1Origin,
+    isDown,
+    thisCountCurrentPathDatas_x,
+    thisCountCurrentPathDatas_y,
+    pathDatasPositions,
+    svgDocLeftPos,
+    svgDocTopPos,
+    svgDimensions,
+    thisSvgHTML,
+    thisSvgDocHTML,
+    figureCount
+) {
     // console.log(thisSvgHTML)
     let m2 = d3.pointer(event)
     let p1_x = pathDatasPositions.at(-2).coords.x

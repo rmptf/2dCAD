@@ -67,6 +67,19 @@ function CanvasDocument(footer) {
         this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
         )
     this.actionStates = {
+        // documentSvgActionStates: {
+        //     drawPathActive: false,
+        // },
+        // secondaryPathActionStates: {
+        //     addEndPointActive: false,
+        //     addEndPointActive_curve: false,
+        //     drawParallelPathAcive: false,
+        //     measurePathActive: false,
+        //     saveFigureDataActive: false,
+        // },
+        // endPointActionStates: {
+        //     removeEndPointActive: false,
+        // },
         drawPathActive: false,
         addEndPointActive: false,
         addEndPointActive_curve: false,

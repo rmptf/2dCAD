@@ -1,7 +1,8 @@
 svg{
-  /* background-color: rgb(43, 43, 43);; */
+  /* background-color: var(--highlight-60); */
   /* width: 500px;
   height: 500px; */
+  border: 1px solid var(--highlight-60);
 }
 
 .path {

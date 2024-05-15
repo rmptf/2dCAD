@@ -28,6 +28,7 @@ function updateSVG_thisSvgFigure(figure) {
     // END POINTS
 }
 
+// keep around until working on parallel path
 // function updateSVG_parallelPathAndPoints(parallelEndPointsArray, parallelPathsArray, parallelPathData) {
 //     // PARALLEL END POINTS
 //     let k = -1
