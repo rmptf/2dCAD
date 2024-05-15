@@ -108,12 +108,7 @@ function expandSvgElementOnMouseMove(event, m1Origin, isDown, thisCountCurrentPa
     }
 }
 
-function svg_expandSvgElementOnMouseMove_NEW(event, figure) {
-    console.log("rdy_to_build...")
-}
-
 export {
     getElementPositionData,
-    expandSvgElementOnMouseMove,
-    svg_expandSvgElementOnMouseMove_NEW
+    expandSvgElementOnMouseMove
 }
