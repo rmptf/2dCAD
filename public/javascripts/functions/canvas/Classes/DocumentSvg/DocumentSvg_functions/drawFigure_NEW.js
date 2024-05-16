@@ -2,7 +2,11 @@ import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
 import {svg_expandSvgElementOnMouseMove_NEW} from './resizeSvg_NEW.js'
 
-function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3, actionStates) {
+function drawNewFigure(event, DocSvg, CanvDoc) {
+    let documentSvgFigures = DocSvg.documentSvgFigures
+    let pathDrawingData = DocSvg.pathDrawingData
+    let documentSvgD3 = CanvDoc.documentSvg_D3Element
+    let actionStates = CanvDoc.actionStates
     pathDrawingData.m1 = d3.pointer(event)
     documentSvgD3.on("dblclick", () => svg_dblClick(documentSvgD3, actionStates, pathDrawingData, pathDrawingData.currentFigure))
     if(pathDrawingData.isDown === false) {
@@ -15,11 +19,28 @@ function drawNewFigure(event, documentSvgFigures, pathDrawingData, documentSvgD3
         newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], 0)
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstPathData, 0)
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], secondPathData, 0)
-        
-        // FIXME: working here
-        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure)})
+
+
+
+
+
+        // FIXME: Got working; needs cleaning
+        let pathDataPosX = []
+        let pathDataPosY = []
+        newFigure.svgPathDatas.forEach(pathData => pathDataPosX.push(pathData.coords.x))
+        newFigure.svgPathDatas.forEach(pathData => pathDataPosY.push(pathData.coords.y))
+        let svgDocLeftPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.left.replace('px', ''))
+        let svgDocTopPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.top.replace('px', ''))
+        let svgDimensions = CanvDoc.documentSvg_htmlElement.getBoundingClientRect()
+
+        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure, DocSvg, CanvDoc, pathDataPosX, pathDataPosY, svgDocLeftPos, svgDocTopPos, svgDimensions)})
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
+
+
+
+
+
     } else {
         console.log("isDown_true")
         let thisFigure = pathDrawingData.currentFigure

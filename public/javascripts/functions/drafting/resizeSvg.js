@@ -20,7 +20,23 @@ function getElementPositionData(svgHTML, svgDocHTML, origFigure) {
     return positionData
 }
 
-function expandSvgElementOnMouseMove(event, m1Origin, isDown, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, pathDatasPositions, svgDocLeftPos, svgDocTopPos, svgDimensions, thisSvgHTML, thisSvgDocHTML, figureCount) {
+function expandSvgElementOnMouseMove(
+    event,
+    m1Origin,
+    isDown,
+    thisCountCurrentPathDatas_x,
+    thisCountCurrentPathDatas_y,
+    pathDatasPositions,
+    svgDocLeftPos,
+    svgDocTopPos,
+    svgDimensions,
+    thisSvgHTML,
+    thisSvgDocHTML,
+    figureCount
+) {
+    console.log("checkererer")
+    console.log(thisCountCurrentPathDatas_x)
+    console.log(pathDatasPositions)
     // console.log(thisSvgHTML)
     let m2 = d3.pointer(event)
     let p1_x = pathDatasPositions.at(-2).coords.x

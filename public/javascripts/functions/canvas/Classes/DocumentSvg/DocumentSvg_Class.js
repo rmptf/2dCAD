@@ -24,7 +24,7 @@ DocumentSvg.prototype.setClickEvents = function(CanvDoc, thisSvg) {
     CanvDoc.documentSvg_htmlElement.onclick = function(event) {
         if(CanvDoc.actionStates.drawPathActive === true) {
             console.log("DRAW")
-            drawNewFigure(event, thisClass.documentSvgFigures, thisClass.pathDrawingData, CanvDoc.documentSvg_D3Element, CanvDoc.actionStates)
+            drawNewFigure(event, thisClass, CanvDoc)
         } else {
             console.log("DONT_DRAW")
         }
