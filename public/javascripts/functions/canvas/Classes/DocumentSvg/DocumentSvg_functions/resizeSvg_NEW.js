@@ -1,15 +1,22 @@
 // FIXME: Got working; needs cleaning
-function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, svgDocLeftPos, svgDocTopPos, svgDimensions) {
-    let pathDatasPositions = ThisFigure.svgPathDatas
-    // let thisCountCurrentPathDatas_x = pathDataPosX
-    // let thisCountCurrentPathDatas_y = pathDataPosY
+// function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, svgDocLeftPos, svgDocTopPos, svgDimensions) {
+function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc, posData) {
+    // let pathDatasPositions = ThisFigure.svgPathDatas
+    // // let thisCountCurrentPathDatas_x = pathDataPosX
+    // // let thisCountCurrentPathDatas_y = pathDataPosY
 
-    let m1Origin = DocSvg.pathDrawingData.m1
-    let thisSvgDocHTML = CanvDoc.canvasDocument_htmlElement
-    let thisSvgHTML = CanvDoc.documentSvg_htmlElement
-    // let svgDocLeftPos = parseInt(thisSvgDocHTML.style.left.replace('px', ''))
-    // let svgDocTopPos = parseInt(thisSvgDocHTML.style.top.replace('px', ''))
-    // let svgDimensions = thisSvgHTML.getBoundingClientRect()
+    // let m1Origin = DocSvg.pathDrawingData.m1
+    // let thisSvgDocHTML = CanvDoc.canvasDocument_htmlElement
+    // let thisSvgHTML = CanvDoc.documentSvg_htmlElement
+    // // let svgDocLeftPos = parseInt(thisSvgDocHTML.style.left.replace('px', ''))
+    // // let svgDocTopPos = parseInt(thisSvgDocHTML.style.top.replace('px', ''))
+    // // let svgDimensions = thisSvgHTML.getBoundingClientRect()
+
+    let thisCountCurrentPathDatas_x = posData.pathDataPos.x
+    let thisCountCurrentPathDatas_y = posData.pathDataPos.y
+    let svgDocLeftPos = posData.svgDocLeftPos
+    let svgDocTopPos = posData.svgDocTopPos
+    let svgDimensions = posData.svgDimensions
 
 
 
@@ -91,6 +98,27 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc,
     ThisFigure.figure_updateSvg()
 }
 
+function getElementPositionDataNEW(newFigure, CanvDoc) {
+    let pathDataPosX = []
+    let pathDataPosY = []
+    newFigure.svgPathDatas.forEach(pathData => pathDataPosX.push(pathData.coords.x))
+    newFigure.svgPathDatas.forEach(pathData => pathDataPosY.push(pathData.coords.y))
+    let svgDocLeftPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.left.replace('px', ''))
+    let svgDocTopPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.top.replace('px', ''))
+    let svgDimensions = CanvDoc.documentSvg_htmlElement.getBoundingClientRect()
+
+    let data = {
+        pathDataPos: {
+            x: pathDataPosX,
+            y: pathDataPosY
+        },
+        svgDocLeftPos: svgDocLeftPos,
+        svgDocTopPos: svgDocTopPos,
+        svgDimensions: svgDimensions
+    }
+    return data
+}
+
 // function getElementPositionData(svgHTML, svgDocHTML, origFigure) {
 //     let thisCountCurrentPathDatas_x = []
 //     let thisCountCurrentPathDatas_y = []
@@ -114,5 +142,6 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc,
 export {
     // getElementPositionData,
     // expandSvgElementOnMouseMove,
-    svg_expandSvgElementOnMouseMove_NEW
+    svg_expandSvgElementOnMouseMove_NEW,
+    getElementPositionDataNEW
 }

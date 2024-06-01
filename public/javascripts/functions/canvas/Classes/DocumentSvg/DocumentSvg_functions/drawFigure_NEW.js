@@ -1,6 +1,6 @@
 import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
-import {svg_expandSvgElementOnMouseMove_NEW} from './resizeSvg_NEW.js'
+import {svg_expandSvgElementOnMouseMove_NEW, getElementPositionDataNEW} from './resizeSvg_NEW.js'
 
 function drawNewFigure(event, DocSvg, CanvDoc) {
     let documentSvgFigures = DocSvg.documentSvgFigures
@@ -20,31 +20,8 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], firstPathData, 0)
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], secondPathData, 0)
 
-
-        // documentSvgFigures.forEach((figure) => {
-        //     // FIXME: Got working; needs cleaning
-        //     let pathDataPosX = []
-        //     let pathDataPosY = []
-        //     newFigure.svgPathDatas.forEach(pathData => pathDataPosX.push(pathData.coords.x))
-        //     newFigure.svgPathDatas.forEach(pathData => pathDataPosY.push(pathData.coords.y))
-        //     let svgDocLeftPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.left.replace('px', ''))
-        //     let svgDocTopPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.top.replace('px', ''))
-        //     let svgDimensions = CanvDoc.documentSvg_htmlElement.getBoundingClientRect()
-
-        //     documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure, DocSvg, CanvDoc, pathDataPosX, pathDataPosY, svgDocLeftPos, svgDocTopPos, svgDimensions)})
-        // })
-
-        // FIXME: Got working; needs cleaning
-        let pathDataPosX = []
-        let pathDataPosY = []
-        newFigure.svgPathDatas.forEach(pathData => pathDataPosX.push(pathData.coords.x))
-        newFigure.svgPathDatas.forEach(pathData => pathDataPosY.push(pathData.coords.y))
-        let svgDocLeftPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.left.replace('px', ''))
-        let svgDocTopPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.top.replace('px', ''))
-        let svgDimensions = CanvDoc.documentSvg_htmlElement.getBoundingClientRect()
-
-        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure, DocSvg, CanvDoc, pathDataPosX, pathDataPosY, svgDocLeftPos, svgDocTopPos, svgDimensions)})
-
+        let posData = getElementPositionDataNEW(newFigure, CanvDoc)
+        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure, DocSvg, CanvDoc, posData)})
 
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
@@ -56,18 +33,8 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
         thisFigure.createPath_secondary(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[1], index - 1)
         thisFigure.createPrimaryEndPoint(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData, index)
 
-
-        // FIXME: Got working; needs cleaning
-        let pathDataPosX = []
-        let pathDataPosY = []
-        thisFigure.svgPathDatas.forEach(pathData => pathDataPosX.push(pathData.coords.x))
-        thisFigure.svgPathDatas.forEach(pathData => pathDataPosY.push(pathData.coords.y))
-        let svgDocLeftPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.left.replace('px', ''))
-        let svgDocTopPos = parseInt(CanvDoc.canvasDocument_htmlElement.style.top.replace('px', ''))
-        let svgDimensions = CanvDoc.documentSvg_htmlElement.getBoundingClientRect()
-
-        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, thisFigure), svg_expandSvgElementOnMouseMove_NEW(event, thisFigure, DocSvg, CanvDoc, pathDataPosX, pathDataPosY, svgDocLeftPos, svgDocTopPos, svgDimensions)})
-
+        let posData = getElementPositionDataNEW(thisFigure, CanvDoc)
+        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, thisFigure), svg_expandSvgElementOnMouseMove_NEW(event, thisFigure, DocSvg, CanvDoc, posData)})
 
         thisFigure.figure_updateSvg()
     }
