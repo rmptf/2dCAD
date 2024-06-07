@@ -7,7 +7,8 @@
 // // import {updateSVG_highlight_1_point_02} from '../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
-function drawParallelPathFunction_NEW(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
+// function drawParallelPathFunction_NEW(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
+function drawParallelPathFunction_NEW(event, thisFigure) {
     console.log("DRAW_PARALLEL")
 
     // // Check if drawing parallel is not initiated

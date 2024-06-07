@@ -117,6 +117,13 @@ SvgFigure.prototype.figure_updateSvg = function() {
     updateSVG_thisSvgFigure(this)
 }
 
+SvgFigure.prototype.createPath_parallel = function(figure, parentElement, index) {
+    let newPath_primary = new SvgPathPrimary(figure, parentElement, this.actionStates, index)
+    this.svgPaths.primaryPath = newPath_primary
+
+    return newPath_primary
+}
+
 
 
 export {

@@ -44,7 +44,7 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')
 
-        drawParallelPathFunction_NEW()
+        drawParallelPathFunction_NEW(event, this.thisFigure)
 
         actionStates.drawParallelPathAcive = false
     } else if(actionStates.measurePathActive === true) {
