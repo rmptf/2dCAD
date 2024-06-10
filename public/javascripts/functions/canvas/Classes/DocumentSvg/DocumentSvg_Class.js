@@ -1,6 +1,11 @@
 import {drawDocumentSvgAllFiguresFromData, drawFigureFromData, drawNewFigure} from './DocumentSvg_functions/drawFigure_NEW.js'
+import {SvgGroup} from './SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
+import {SvgFigure} from './SvgFigure/SvgFigure_Class.js'
 
 function DocumentSvg(CanvDoc) {
+    this.D3Element = CanvDoc.documentSvg_D3Element
+    this.actionStates = CanvDoc.actionStates
+    this.documentSvgGroup = new SvgGroup(this.D3Element, 'documentGROUP_001', 'fakeId_document')
     this.documentSvgFigures = []
 
     this.pathDrawingData = {
@@ -41,6 +46,13 @@ DocumentSvg.prototype.setClickEvents = function(CanvDoc, thisSvg) {
 
 // DocumentSvg.prototype.svg_dblClick = function() {
 // }
+
+DocumentSvg.prototype.createFigure = function() {
+    let newFigure = new SvgFigure(this)
+    this.documentSvgFigures.push(newFigure)
+
+    return newFigure
+}
 
 export {
     DocumentSvg

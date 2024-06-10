@@ -1,6 +1,6 @@
 // FIXME: Got working; needs cleaning
 // function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, DocSvg, CanvDoc, thisCountCurrentPathDatas_x, thisCountCurrentPathDatas_y, svgDocLeftPos, svgDocTopPos, svgDimensions) {
-function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, CanvDoc, posData) {
+function svg_expandSvgElementOnMouseMove_NEW(event, m1, ThisFigure, CanvDoc, posData) {
     // let pathDatasPositions = ThisFigure.svgPathDatas
     // // let thisCountCurrentPathDatas_x = pathDataPosX
     // // let thisCountCurrentPathDatas_y = pathDataPosY
@@ -12,14 +12,19 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, CanvDoc, posData
     // // let svgDocTopPos = parseInt(thisSvgDocHTML.style.top.replace('px', ''))
     // // let svgDimensions = thisSvgHTML.getBoundingClientRect()
 
+
+
+    
+
     let DocSvg = CanvDoc.documentSvg
+    let docSvgGroupD3 = DocSvg.documentSvgGroup.newSvgGroup
     let allFigures = CanvDoc.documentSvg.documentSvgFigures
     let ThisFigureabc = CanvDoc.documentSvg.documentSvgFigures[0]
-
     // console.log(allFigures.length)
     // console.log(posData.length)
 
     // console.log(posData)
+
 
 
 
@@ -130,6 +135,8 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, CanvDoc, posData
     let p1_y = ThisFigure.svgPathDatas.at(-2).coords.y
     let p1m2Dif_x = p1_x - m2[0]
     let p1m2Dif_y = p1_y - m2[1]
+    // let p1m2Dif_x = m1[0] - m2[0]
+    // let p1m2Dif_y = m1[1] - m2[1]
 
     // Svg Dimenstions
     let svgWidth = svgDimensions.width
@@ -165,11 +172,17 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, CanvDoc, posData
             // Reposition svgDoc
             CanvDoc.canvasDocument_htmlElement.style.left = (svgDocLeftPos - movePathDatasThisAmount_x_left) + "px"
             // Reposition SVG Elements
+                // let newX = 100
+                // let newY = 0
+                // docSvgGroupD3.attr("transform", `translate(${movePathDatasThisAmount_x_left}, ${newY})`)
             // Repositions all path datas except for dragged
             let dragedPathDataIndex = ThisFigure.svgPathDatas.length - 1
             for (let i = 0; i < ThisFigure.svgPathDatas.length; i++) {
                 if(i !== dragedPathDataIndex) {
                     ThisFigure.svgPathDatas[i].coords.x = thisCountCurrentPathDatas_x[i] + movePathDatasThisAmount_x_left
+                    // let newX = 100
+                    // let newY = 0
+                    // docSvgGroupD3.attr("transform", `translate(${movePathDatasThisAmount_x_left}, ${newY})`)
                 }
             }
         }
@@ -187,11 +200,17 @@ function svg_expandSvgElementOnMouseMove_NEW(event, ThisFigure, CanvDoc, posData
             // Reposition svgDoc
             CanvDoc.canvasDocument_htmlElement.style.top = (svgDocTopPos - movePathDatasThisAmount_y_up) + "px"
             // Reposition SVG Elements
+                // let newX = 0
+                // // let newY = 0
+                // docSvgGroupD3.attr("transform", `translate(${newX}, ${movePathDatasThisAmount_y_up})`)
             // Repositions all path datas except for dragged
             let dragedPathDataIndex = ThisFigure.svgPathDatas.length - 1
             for (let i = 0; i < ThisFigure.svgPathDatas.length; i++) {
                 if(i !== dragedPathDataIndex) {
                     ThisFigure.svgPathDatas[i].coords.y = thisCountCurrentPathDatas_y[i] + movePathDatasThisAmount_y_up
+                    // let newX = 0
+                    // let newY = 0
+                    // docSvgGroupD3.attr("transform", `translate(${newX}, ${movePathDatasThisAmount_y_up})`)
                 }
             }
         }

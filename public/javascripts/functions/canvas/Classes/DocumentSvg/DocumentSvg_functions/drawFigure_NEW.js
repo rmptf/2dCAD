@@ -3,6 +3,7 @@ import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
 import {svg_expandSvgElementOnMouseMove_NEW, getElementPositionDataNEW} from './resizeSvg_NEW.js'
 
 function drawNewFigure(event, DocSvg, CanvDoc) {
+    let m111 = d3.pointer(event)
     let documentSvgFigures = DocSvg.documentSvgFigures
     let pathDrawingData = DocSvg.pathDrawingData
     let documentSvgD3 = CanvDoc.documentSvg_D3Element
@@ -10,9 +11,10 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
     pathDrawingData.m1 = d3.pointer(event)
     documentSvgD3.on("dblclick", () => svg_dblClick(documentSvgD3, actionStates, pathDrawingData, pathDrawingData.currentFigure))
     if(pathDrawingData.isDown === false) {
-        let newFigure = new SvgFigure(documentSvgD3, actionStates)
+        // let newFigure = new SvgFigure(documentSvgD3, actionStates)
+        // documentSvgFigures.push(newFigure)
+        let newFigure = DocSvg.createFigure()
         pathDrawingData.currentFigure = newFigure
-        documentSvgFigures.push(newFigure)
         let firstPathData = newFigure.createPathData_newData(pathDrawingData.m1[0], pathDrawingData.m1[1])
         let secondPathData = newFigure.createPathData_newData(pathDrawingData.m1[0], pathDrawingData.m1[1])
         newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
@@ -21,7 +23,7 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
         newFigure.createPrimaryEndPoint(newFigure, newFigure.svgGroups.secondarySvgGroupElements[2], secondPathData, 0)
 
         let posData = getElementPositionDataNEW(newFigure, CanvDoc)
-        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, newFigure, CanvDoc, posData)})
+        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, newFigure), svg_expandSvgElementOnMouseMove_NEW(event, m111, newFigure, CanvDoc, posData)})
 
         newFigure.figure_updateSvg()
         pathDrawingData.isDown = true
@@ -34,12 +36,13 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
         thisFigure.createPrimaryEndPoint(thisFigure, thisFigure.svgGroups.secondarySvgGroupElements[2], additionalPathData, index)
 
         let posData = getElementPositionDataNEW(thisFigure, CanvDoc)
-        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, thisFigure), svg_expandSvgElementOnMouseMove_NEW(event, thisFigure, CanvDoc, posData)})
+        documentSvgD3.on("mousemove", (event) => {svg_mouseMove(event, pathDrawingData.isDown, thisFigure), svg_expandSvgElementOnMouseMove_NEW(event, m111, thisFigure, CanvDoc, posData)})
 
         thisFigure.figure_updateSvg()
     }
 }
 
+//TODO: fix after changing how to create new figure
 function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actionStates) {
     let newFigure = new SvgFigure(documentSvgD3, actionStates)
     let pathDatas = JSON.parse(figureData)
@@ -55,6 +58,7 @@ function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actio
     newFigure.figure_updateSvg()
 }
 
+//TODO: fix after changing how to create new figure
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvgFigures, documentSvgD3, actionStates) {
     let figures = JSON.parse(figuresData)
     for (let i = 0; i < figures.length; i++) {

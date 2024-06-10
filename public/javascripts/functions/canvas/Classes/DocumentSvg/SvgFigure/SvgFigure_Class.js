@@ -4,54 +4,48 @@ import {SvgPathPrimary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathPrima
 import {SvgPathSecondary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathSecondary_Class.js'
 import {SvgEndPointPrimary} from './SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointPrimary_Class.js'
 import {updateSVG_thisSvgFigure} from '../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
+import {ParallelFigure} from './ParallelFigure/ParallelFigure_Class.js'
 
-
-function SvgFigure(documentSvgD3, actionStates) {
-    this.documentSvgD3 = documentSvgD3
-    this.actionStates = actionStates
-
-    // Svg Elements
-    this.svgGroups = {
-        primarySvgGroupElement: null,
-        secondarySvgGroupElements: []
-        // primarySvgGroupElement: new SvgGroup(documentSvgD3, 'primaryFigureGROUP_001', 'fakeId_primary'),
-        // secondarySvgGroupElements: []
+// function SvgFigure(documentSvgD3, actionStates, docSvgGroup) {
+function SvgFigure(DocSvg) {
+    this.SVGGROUPSDATA = {
+        PRIMARYNAME: "figureGROUP_001",
+        SECONDARYNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001", "parallelPathGROUP_001","endPointGROUP_001", "testEndpointGROUP_001"],
     }
-    this.svgPaths = {
-        primaryPath: null,
-        secondaryPaths: []
-    }
-    this.svgEndPoints = []
-    // Svg Elements
+    this.documentSvgD3 = DocSvg.D3Element
+    this.actionStates = DocSvg.actionStates
+    this.docSvgGroup = DocSvg.documentSvgGroup
 
     // Figure Data
     this.svgPathDatas = []
     // Figure Data
 
-    this.svgGroupsData = {
-        primaryName: "primaryFigureGROUP_001",
-        secondaryNames: ["mainPathGROUP_001", "secondaryPathGROUP_001", "endPointGROUP_001", "testEndpointGROUP_001"],
+    // Svg Elements
+    this.primaryFigureGroup =  new SvgGroup(this.docSvgGroup.newSvgGroup, this.SVGGROUPSDATA.PRIMARYNAME, 'fakeId_figure').newSvgGroup
+    this.secondaryFigureGroups = createSecondaryGroups(this)
+    this.svgGroups = {
+        primarySvgGroupElement: this.primaryFigureGroup,
+        secondarySvgGroupElements: this.secondaryFigureGroups,
     }
+    this.svgPaths = {
+        primaryPath: null,
+        secondaryPaths: [],
+    }
+    this.svgEndPoints = []
+    // Svg Elements
 
-    createFigureGroups(this)
+    this.parallelFigure = null
 }
 
-function createFigureGroups(thisClass) {
-    let primarySvgGroupName = thisClass.svgGroupsData.primaryName
-    let secondarySvgGroupNames = thisClass.svgGroupsData.secondaryNames
-
-    let newPrimaryGroup = new SvgGroup(thisClass.documentSvgD3, primarySvgGroupName, 'fakeId_primary')
-    thisClass.svgGroups.primarySvgGroupElement = newPrimaryGroup.newSvgGroup
-    secondarySvgGroupNames.forEach((className) => {
-        let newSecondaryGroup = new SvgGroup(thisClass.svgGroups.primarySvgGroupElement, className, 'fakeId_secondary')
-        thisClass.svgGroups.secondarySvgGroupElements.push(newSecondaryGroup.newSvgGroup)
+function createSecondaryGroups(thisClass) {
+    return thisClass.SVGGROUPSDATA.SECONDARYNAMES.map(className => {
+        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_figureElement')
+        return newSecondaryGroup.newSvgGroup
     })
+}
 
-
-    // className.forEach((name) => {
-    //     let newGroup = new SvgGroup(thisClass.svgGroups.primarySvgGroupElement, name, 'fakeId_secondary')
-    //     thisClass.svgGroups.secondarySvgGroupElements.push(newSecondaryGroup.newSvgGroup)
-    // })
+SvgFigure.prototype.figure_updateSvg = function() {
+    updateSVG_thisSvgFigure(this)
 }
 
 SvgFigure.prototype.createPathData_newData = function(x, y) {
@@ -113,18 +107,13 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
     this.svgEndPoints.splice(index, 0, newEndPoint_curve)
 }
 
-SvgFigure.prototype.figure_updateSvg = function() {
-    updateSVG_thisSvgFigure(this)
+SvgFigure.prototype.createParallelFigure = function() {
+    let newParallelFigure = new ParallelFigure()
+    newParallelFigure.svgFigure = this
+    this.parallelFigures = newParallelFigure
+
+    return newParallelFigure
 }
-
-SvgFigure.prototype.createPath_parallel = function(figure, parentElement, index) {
-    let newPath_primary = new SvgPathPrimary(figure, parentElement, this.actionStates, index)
-    this.svgPaths.primaryPath = newPath_primary
-
-    return newPath_primary
-}
-
-
 
 export {
     SvgFigure

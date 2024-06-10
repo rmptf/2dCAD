@@ -1,6 +1,7 @@
 // import {removeEndPointFunction} from '../../../DocumentSvg_functions/endPoint_functions/addEndPoint_NEW.js'
 import {dragEndPoint} from '../SvgElement_functions/dragSvgElements_NEW.js'
 
+// TODO: make this more generic and endpint primary more specific. (ex: more drag on create to primary child)
 function SvgEndPoint(parentFigure, parentElement, actionStates, pathData, index) {
     this.ELEMENT = 'circle'
     this.CLASSNAME = 'endPoint'
@@ -8,10 +9,10 @@ function SvgEndPoint(parentFigure, parentElement, actionStates, pathData, index)
     this.parentFigure = parentFigure
     this.parentElement = parentElement
     this.actionStates = actionStates
-    this.adjoiningSecondaryPaths = {
-        first: null,
-        second: null
-    }
+    // this.adjoiningSecondaryPaths = {
+    //     first: null,
+    //     second: null
+    // }
     this.pathData = pathData
     this.svgElementObject = this.createSvgEndPoint(index)
 }
