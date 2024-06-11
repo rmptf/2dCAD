@@ -60,6 +60,14 @@ svg{
 .parallelEndPoint:nth-child(even) {
   fill: hotpink;
 }
+.paralellEndPoint_curve {
+  r: 5;
+  /* fill: var(--dusk-500); */
+  fill: rgb(234, 159, 159);
+  opacity: 1;
+  /* stroke-width: 0; */
+  /* stroke: black; */
+}
 
 
 /* TESTER ELEMENTS */

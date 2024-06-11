@@ -2,17 +2,12 @@
 import {dragEndPoint} from '../SvgElement_functions/dragSvgElements_NEW.js'
 
 // TODO: make this more generic and endpint primary more specific. (ex: more drag on create to primary child)
-function SvgEndPoint(parentFigure, parentElement, actionStates, pathData, index) {
+function SvgEndPoint(parentFigure, parentElement, pathData, index) {
     this.ELEMENT = 'circle'
     this.CLASSNAME = 'endPoint'
 
     this.parentFigure = parentFigure
     this.parentElement = parentElement
-    this.actionStates = actionStates
-    // this.adjoiningSecondaryPaths = {
-    //     first: null,
-    //     second: null
-    // }
     this.pathData = pathData
     this.svgElementObject = this.createSvgEndPoint(index)
 }
@@ -22,14 +17,14 @@ SvgEndPoint.prototype.createSvgEndPoint = function(index) {
     // let newEndPoint = this.parentElement.append(this.ELEMENT)
         .attr('class', this.CLASSNAME)
         // .on("click", (event) => this.elementClick(event, this.actionStates, this.parentFigure, this.pathData))
-        .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
+        // .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
     return newEndPoint
 }
 
-SvgEndPoint.prototype.elementDrag = function(event, parentFigure, pathData, actionStates) {
-    // console.log('EndPoint dragging.')
-    dragEndPoint(event, parentFigure, pathData)
-}
+// SvgEndPoint.prototype.elementDrag = function(event, parentFigure, pathData, actionStates) {
+//     // console.log('EndPoint dragging.')
+//     dragEndPoint(event, parentFigure, pathData)
+// }
 
 // SvgEndPoint.prototype.elementClick = function(event, actionStates, parentFigure, pathData,) {
 //     if(actionStates.addEndPointActive === false && actionStates.addEndPointActive_curve === false && actionStates.removeEndPointActive === false && actionStates.drawParallelPathAcive === false && actionStates.measurePathActive === false) {

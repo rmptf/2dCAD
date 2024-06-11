@@ -1,16 +1,20 @@
-function ParallelFigure() {
-    this.SvgFigure = null
+function ParallelFigure(svgFigure) {
+    this.SvgFigure = svgFigure
+
+    console.log('this.SvgFigure')
+    console.log(this.SvgFigure)
 
     // Figure Data
     // let parallelPathDatas_globalRef = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
     // let parallelPathDatasCopyForPerpendicular = transformData(parallelPathDatas_globalRef)
     // let basePathDatasCopy = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
     // let basePathDatasCopySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
     this.parallelPathDatas_globalRef = this.SvgFigure.svgPathDatas // ?might be wring?
-    this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
-    this.basePathDatasCopy = makeDeepCopy(this.originalFigurePathDatas)
-    this.basePathDatasCopySecondary = makeDeepCopy(this.originalFigurePathDatas)
+    // this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
+    // this.basePathDatasCopy = makeDeepCopy(this.originalFigurePathDatas)
+    // this.basePathDatasCopySecondary = makeDeepCopy(this.originalFigurePathDatas)
     // Figure Data
 
     // Svg Elements

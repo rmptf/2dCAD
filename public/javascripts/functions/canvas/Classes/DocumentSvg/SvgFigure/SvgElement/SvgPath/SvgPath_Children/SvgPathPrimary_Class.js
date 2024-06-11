@@ -4,7 +4,9 @@ import {SvgPath} from '../SvgPath_Class.js'
 // Child class using "Inheritance"
 function SvgPathPrimary(thisFigure, parentElement, actionStates, index) {
     // Call the constructor of the parent class
-    SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    SvgPath.call(this, thisFigure, parentElement, index)
+    this.actionStates = actionStates
 }
 
 // Inherit methods from the parent class

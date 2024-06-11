@@ -1,10 +1,11 @@
-function SvgPath(thisFigure, parentElement, actionStates, index) {
+// function SvgPath(thisFigure, parentElement, actionStates, index) {
+function SvgPath(thisFigure, parentElement, index) {
     this.ELEMENT = 'path'
     this.CLASSNAME = 'path'
 
     this.thisFigure = thisFigure
     this.parentElement = parentElement
-    this.actionStates = actionStates
+    // this.actionStates = actionStates
     this.svgElementObject = this.createSvgPath(index)
 }
 

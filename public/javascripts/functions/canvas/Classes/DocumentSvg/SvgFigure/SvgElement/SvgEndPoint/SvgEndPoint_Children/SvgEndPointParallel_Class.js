@@ -1,7 +1,7 @@
-function SvgEndPointParallel(parentFigure, parentElement, actionStates, pathData, index) {
+function SvgEndPointParallel(parentFigure, parentElement, pathData, index) {
     this.ENDPOINT_CLASS = 'paralellEndPoint'
     this.ENDPOINT_CURVE_CLASS = 'paralellEndPoint_curve'
-    SvgEndPoint.call(this, parentFigure, parentElement, actionStates, pathData, index)
+    SvgEndPoint.call(this, parentFigure, parentElement, pathData, index)
 }
 
 SvgEndPointParallel.prototype = Object.create(SvgEndPoint.prototype)

@@ -9,8 +9,8 @@
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
 // function drawParallelPathFunction_NEW(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
 function drawParallelPathFunction_NEW(event, thisFigure) {
-    console.log("DRAW_PARALLEL")
-    let newParallalFigure = thisFigure.createParallelFigure
+    console.log("DRAW_PARALLEL_NEWNENWENWENWNEWNEWN_newnewnenwnwenw")
+    let newParallalFigure = thisFigure.createParallelFigure()
 
     // // Check if drawing parallel is not initiated
     // if (!isDownDrawParellelInitiated) {

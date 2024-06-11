@@ -1,7 +1,9 @@
 // Child class using "Inheritance"
-function SvgPathParallel(thisFigure, parentElement, actionStates, index) {
+// function SvgPathParallel(thisFigure, parentElement, actionStates, index) {
+function SvgPathParallel(thisFigure, parentElement, index) {
     // Call the constructor of the parent class
-    SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    SvgPath.call(this, thisFigure, parentElement, index)
 }
 
 // Inherit methods from the parent class
