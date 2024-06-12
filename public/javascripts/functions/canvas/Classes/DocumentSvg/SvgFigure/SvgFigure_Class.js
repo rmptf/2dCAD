@@ -10,7 +10,8 @@ import {ParallelFigure} from './ParallelFigure/ParallelFigure_Class.js'
 function SvgFigure(DocSvg) {
     this.SVGGROUPSDATA = {
         PRIMARYNAME: "figureGROUP_001",
-        SECONDARYNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001", "parallelPathGROUP_001","endPointGROUP_001", "testEndpointGROUP_001"],
+        //TODO: put in order and in an object (will affect other files)
+        SECONDARYNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "parallelFigureGROUP_001", "testEndpointGROUP_001"],
     }
     this.documentSvgD3 = DocSvg.D3Element
     this.actionStates = DocSvg.actionStates
@@ -107,12 +108,9 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
     this.svgEndPoints.splice(index, 0, newEndPoint_curve)
 }
 
-//TODO: take a look at this and figure
 SvgFigure.prototype.createParallelFigure = function() {
-    console.log(this)
     let newParallelFigure = new ParallelFigure(this)
-    newParallelFigure.SvgFigure = this
-    this.parallelFigures = newParallelFigure
+    this.parallelFigure = newParallelFigure
 
     return newParallelFigure
 }

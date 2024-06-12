@@ -1,4 +1,6 @@
 // Child class using "Inheritance"
+import {SvgPath} from '../SvgPath_Class.js'
+
 // function SvgPathParallel(thisFigure, parentElement, actionStates, index) {
 function SvgPathParallel(thisFigure, parentElement, index) {
     // Call the constructor of the parent class
@@ -17,4 +19,8 @@ SvgPathParallel.prototype.createSvgPath = function(index) {
         // .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.thisFigure, this.actionStates)))
         newPathParallel.node().classList.add('parallelPath')
     return newPathParallel
+}
+
+export {
+    SvgPathParallel
 }

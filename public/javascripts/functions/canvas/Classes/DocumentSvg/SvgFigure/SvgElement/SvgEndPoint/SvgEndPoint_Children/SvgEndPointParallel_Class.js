@@ -1,3 +1,5 @@
+import {SvgEndPoint} from '../SvgEndPoint_Class.js'
+
 function SvgEndPointParallel(parentFigure, parentElement, pathData, index) {
     this.ENDPOINT_CLASS = 'paralellEndPoint'
     this.ENDPOINT_CURVE_CLASS = 'paralellEndPoint_curve'
