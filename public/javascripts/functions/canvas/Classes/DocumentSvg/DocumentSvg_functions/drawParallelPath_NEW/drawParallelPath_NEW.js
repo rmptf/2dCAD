@@ -11,6 +11,7 @@
 function drawParallelPathFunction_NEW(event, thisFigure) {
     console.log("DRAW_PARALLEL_NEWNENWENWENWNEWNEWN_newnewnenwnwenw")
     let newParallalFigure = thisFigure.createParallelFigure()
+    newParallalFigure.createParallelPathElementsANDdatasNAMEBETTER() // can prob call directly from each new object
 
     // // Check if drawing parallel is not initiated
     // if (!isDownDrawParellelInitiated) {

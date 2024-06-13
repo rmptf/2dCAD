@@ -1,6 +1,9 @@
 import {SvgGroup} from '../SvgElement/SvgGroup/SvgGroup_Class.js'
 import {SvgEndPointParallel} from '../SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointParallel_Class.js'
 import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Parallel_Class.js'
+import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
+import {makeDeepCopy, transformData} from './parallelFigure_functions/handleData_NEW.js'
+import {createParallelPathElementsANDdatas_NEW} from './parallelFigure_functions/createParallelPathElements_NEW.js'
 
 function ParallelFigure(svgFigure) {
     console.log("Asss")
@@ -18,7 +21,7 @@ function ParallelFigure(svgFigure) {
     // let basePathDatasCopySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    this.parallelPathDatas_globalRef = this.SvgFigure.svgPathDatas // ?might be wrong?
+    // this.parallelPathDatas_globalRef = makeDeepCopy(this.originalFigurePathDatas) // ?might be wrong? needs to be handled like from "createParallelPathElements-old"
     // this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
     // this.basePathDatasCopy = makeDeepCopy(this.originalFigurePathDatas)
     // this.basePathDatasCopySecondary = makeDeepCopy(this.originalFigurePathDatas)
@@ -33,7 +36,7 @@ function ParallelFigure(svgFigure) {
     }
 
     this.svgPaths = {
-        primaryPaths: [],
+        parallelPaths: [],
     }
 
     this.svgEndPoints = []
@@ -71,22 +74,25 @@ function createSecondaryGroups(thisClass) {
     })
 }
 
+ParallelFigure.prototype.createParallelPathElementsANDdatasNAMEBETTER = function() {
+    createParallelPathElementsANDdatas_NEW(this)
+}
+
 ParallelFigure.prototype.setParallelFigureClickEvents = function() {
     // a_canvas_globalVars.svgD3.on("mousemove", mouseMoveDrawParallel)
     // a_canvas_globalVars.svgD3.on('click', mouseDownDrawParallel)
 }
 
 ParallelFigure.prototype.parallelFigure_updateSvg = function() {
-    // updateSVG_thisSvgFigure(this)
+    updateSVG_thisSvgParallelFigure(this)
 }
 
-ParallelFigure.prototype.deepCopyPathDatas = function() {
-    
-}
+// ParallelFigure.prototype.deepCopyPathDatas = function() {
+// }
 
 ParallelFigure.prototype.createParallelPath = function() {
     let newParallelPath = new SvgPathParallel()
-    this.svgPaths.primaryPaths.push(newParallelPath)
+    this.svgPaths.parallelPaths.push(newParallelPath)
     
     return newParallelPath
 
