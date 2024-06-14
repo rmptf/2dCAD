@@ -6,7 +6,6 @@ import {makeDeepCopy, transformData} from './parallelFigure_functions/handleData
 import {createParallelPathElementsANDdatas_NEW} from './parallelFigure_functions/createParallelPathElements_NEW.js'
 
 function ParallelFigure(svgFigure) {
-    console.log("Asss")
     this.SVGGROUPSDATA = {
         //TODO: put in order and in an object (will affect other files)
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
@@ -21,10 +20,18 @@ function ParallelFigure(svgFigure) {
     // let basePathDatasCopySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
 
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    // this.parallelPathDatas_globalRef = makeDeepCopy(this.originalFigurePathDatas) // ?might be wrong? needs to be handled like from "createParallelPathElements-old"
-    // this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
-    // this.basePathDatasCopy = makeDeepCopy(this.originalFigurePathDatas)
-    // this.basePathDatasCopySecondary = makeDeepCopy(this.originalFigurePathDatas)
+    this.parallelPathDatas_globalRef = createParallelPathElementsANDdatas_NEW(this.originalFigurePathDatas) // i think this is correct now but I still have to make sure it doesnt need to be in a parent array [[...]]
+    this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
+    this.basePathDatasCopy = makeDeepCopy(this.originalFigurePathDatas)
+    this.basePathDatasCopySecondary = makeDeepCopy(this.originalFigurePathDatas)
+
+    console.log("dick")
+    console.log(this.originalFigurePathDatas)
+    console.log(this.parallelPathDatas_globalRef)
+    console.log(this.parallelPathDatasCopyForPerpendicular)
+    console.log(this.basePathDatasCopy)
+    console.log(this.basePathDatasCopySecondary)
+
     // Figure Data
 
     // Svg Elements
@@ -74,9 +81,9 @@ function createSecondaryGroups(thisClass) {
     })
 }
 
-ParallelFigure.prototype.createParallelPathElementsANDdatasNAMEBETTER = function() {
-    createParallelPathElementsANDdatas_NEW(this)
-}
+// ParallelFigure.prototype.createParallelPathElementsANDdatasNAMEBETTER = function() {
+//     createParallelPathElementsANDdatas_NEW(this)
+// }
 
 ParallelFigure.prototype.setParallelFigureClickEvents = function() {
     // a_canvas_globalVars.svgD3.on("mousemove", mouseMoveDrawParallel)
