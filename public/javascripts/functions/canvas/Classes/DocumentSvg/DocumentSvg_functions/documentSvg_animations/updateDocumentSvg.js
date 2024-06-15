@@ -30,8 +30,7 @@ function updateSVG_thisSvgFigure(figure) {
 
 function updateSVG_thisSvgParallelFigure(figure) {
     let parallelPathDatas = figure.parallelPathDatas_globalRef
-    let parallelPaths = figure.svgPath.primaryPaths
-    // console.log(pathDatas)
+    let parallelPaths = figure.svgPaths.parallelPaths
 
     // PARALLEL PATH
     for (let i = 0; i < parallelPaths.length; i++) {
@@ -47,40 +46,13 @@ function updateSVG_thisSvgParallelFigure(figure) {
         for (let j = 0; j < parallelPathDatas[i].length; j++) {
             k = k + 1
             endPoints[k].svgElementObject
-                attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
+                .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
         }
     }
     // PARALLEL END POINTS
 }
 
-// OLDOLD
-// // keep around until working on parallel path
-// function updateSVG_thisSvgParallelFigure(parallelEndPointsArray, parallelPathsArray, parallelPathData) {
-//     // PARALLEL END POINTS
-//     let k = -1
-//     for (let i = 0; i < parallelPathsArray.length; i++) {
-//         for (let j = 0; j < parallelPathData[i].length; j++) {
-//             k = k + 1
-//             let endPoint1 = d3.select(parallelEndPointsArray[k]._groups[0][0])
-//             endPoint1.attr('cx', parallelPathData[i][j].coords.x).attr('cy', parallelPathData[i][j].coords.y)
-//                 // .style('r', 5)
-//         }
-//     }
-//     // PARALLEL END POINTS
-
-//     // PARALLEL PATH
-//     for (let i = 0; i < parallelPathsArray.length; i++) {
-//         let parallelPath = d3.select(parallelPathsArray[i]._groups[0][0])
-//             // parallelPath.attr('d', calculateArcAndDescribePath([parallelPathData[i][0], parallelPathData[i][1]]))
-//             parallelPath.attr('d', describeComplexPath([parallelPathData[i][0], parallelPathData[i][1]]))
-//     }
-//     // PARALLEL PATH
-// }
-
 export {
     updateSVG_thisSvgFigure,
     updateSVG_thisSvgParallelFigure,
-    
-    // updateSVG_mainPathAndPoints,
-    // updateSVG_parallelPathAndPoints
 }

@@ -1,8 +1,6 @@
 // import {updateSVG_parallelPathAndPoints} from '../../../animate/updateSvg.js'
 
 function createParallelPathElementsANDdatas_NEW(origFigurePathDatas) {
-    console.log("creating objects and transforming data")
-
     let parallelFigurePathDatasGroup = []
 
     // for (let i = 0; i < a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].length - 1; i++) {
@@ -47,8 +45,8 @@ function createParallelPathElementsANDdatas_NEW(origFigurePathDatas) {
         // updateSVG_parallelPathAndPoints(a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
 }
 
-// original
-// function createParallelPathElementsANDdatas_NEW(self, originalFigure_counter_groupCount_GLOBAL) {
+// // original
+// function createParallelPathElementsANDdatas_old(self, originalFigure_counter_groupCount_GLOBAL) {
 //     // Create SVG groups for parallel endpoints and paths
 //     self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup');
 //     self.parallelPathGroup = self.group.append('g').attr('class', 'parallelPathGroup');

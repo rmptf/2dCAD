@@ -7,6 +7,7 @@ function SvgPath(thisFigure, parentElement, index) {
     this.parentElement = parentElement
     // this.actionStates = actionStates
     this.svgElementObject = this.createSvgPath(index)
+    
 }
 
 SvgPath.prototype.createSvgPath = function(index) {
