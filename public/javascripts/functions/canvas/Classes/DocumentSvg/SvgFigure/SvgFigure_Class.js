@@ -14,6 +14,7 @@ function SvgFigure(DocSvg) {
         SECONDARYNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "parallelFigureGROUP_001", "testEndpointGROUP_001"],
     }
     this.documentSvgD3 = DocSvg.D3Element
+    this.documentSvgHTML = DocSvg.HtmlElement
     this.actionStates = DocSvg.actionStates
     this.docSvgGroup = DocSvg.documentSvgGroup
 
@@ -109,7 +110,7 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
 }
 
 SvgFigure.prototype.createParallelFigure = function() {
-    let newParallelFigure = new ParallelFigure(this)
+    let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML)
     this.parallelFigure = newParallelFigure
 
     return newParallelFigure

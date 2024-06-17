@@ -9,7 +9,7 @@
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
 // function drawParallelPathFunction_NEW(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
 function drawParallelPathFunction_NEW(event, thisFigure) {
-    console.log("DRAW_PARALLEL_NEWNENWENWENWNEWNEWN_newnewnenwnwenw")
+    console.log("start_drawing_parallel_path")
     let newParallalFigure = thisFigure.createParallelFigure()
     newParallalFigure.parallelFigure_updateSvg()
 
@@ -192,24 +192,24 @@ export{
 
 
 
-function setPointClickedOnOrigPath(event) {
-    let m1P = d3.pointer(event)
-    const path = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[0]._groups[0][0] // can this be passed?
-    const centerPoint = getCenterPointAlongPath(path, m1P[0], m1P[1])
-    return centerPoint
+// function setPointClickedOnOrigPath(event) {
+//     let m1P = d3.pointer(event)
+//     const path = a_canvas_globalVars.originalFigure_svgElements_paths_array_GLOBAL[0]._groups[0][0] // can this be passed?
+//     const centerPoint = getCenterPointAlongPath(path, m1P[0], m1P[1])
+//     return centerPoint
 
-    function getCenterPointAlongPath(path, clickX, clickY) {
-      const pathLength = path.getTotalLength()
-      let closestPoint = null
-      let minDistance = Number.MAX_SAFE_INTEGER
-      for (let distance = 0; distance < pathLength; distance += 0.1) {
-        const point = path.getPointAtLength(distance)
-        const distanceToClick = Math.sqrt((point.x - clickX) ** 2 + (point.y - clickY) ** 2)
-        if (distanceToClick < minDistance) {
-          minDistance = distanceToClick
-          closestPoint = point
-        }
-      }
-      return closestPoint
-    }
-}
+//     function getCenterPointAlongPath(path, clickX, clickY) {
+//       const pathLength = path.getTotalLength()
+//       let closestPoint = null
+//       let minDistance = Number.MAX_SAFE_INTEGER
+//       for (let distance = 0; distance < pathLength; distance += 0.1) {
+//         const point = path.getPointAtLength(distance)
+//         const distanceToClick = Math.sqrt((point.x - clickX) ** 2 + (point.y - clickY) ** 2)
+//         if (distanceToClick < minDistance) {
+//           minDistance = distanceToClick
+//           closestPoint = point
+//         }
+//       }
+//       return closestPoint
+//     }
+// }

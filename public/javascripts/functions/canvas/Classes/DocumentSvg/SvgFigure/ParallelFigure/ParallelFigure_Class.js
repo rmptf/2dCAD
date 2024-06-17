@@ -5,7 +5,7 @@ import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/docum
 import {makeDeepCopy, transformData} from './parallelFigure_functions/handleData_NEW.js'
 import {createParallelPathElementsANDdatas_NEW} from './parallelFigure_functions/createParallelPathElements_NEW.js'
 
-function ParallelFigure(svgFigure) {
+function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
     this.SVGGROUPSDATA = {
         //TODO: put in order and in an object (will affect other files)
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
@@ -72,9 +72,11 @@ function ParallelFigure(svgFigure) {
         setThisArcFlag_atFinal_from1Joiner: null,
         setPrevArcFlag_atFinal_from3Joiner: null
     }
+    this.isDownDrawParallelActive = false
 
     addPaths(this.originalFigurePathDatas, this)
     addEndPoints(this.originalFigurePathDatas, this)
+    this.setParallelFigureClickEvents(docSvgD3)
 }
 
 function createSecondaryGroups(thisClass) {
@@ -101,10 +103,30 @@ function addEndPoints(orig, thisFigure) {
 //     createParallelPathElementsANDdatas_NEW(this)
 // }
 
-// ParallelFigure.prototype.setParallelFigureClickEvents = function() {
-//     // a_canvas_globalVars.svgD3.on("mousemove", mouseMoveDrawParallel)
-//     // a_canvas_globalVars.svgD3.on('click', mouseDownDrawParallel)
-// }
+
+ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
+    docSvgD3.on("mousemove", mouseMoveDrawParallel('move'))
+    docSvgD3.on("click", mouseDownDrawParallel('click', docSvgD3, this.isDownDrawParallelActive))
+}
+
+function mouseMoveDrawParallel(msg) {
+    return function() {
+        console.log(msg)
+    }
+}
+
+function mouseDownDrawParallel(msg, docSvgD3, flag) {
+    return function() {
+        console.log(msg)
+        if (flag === false) {
+            flag = true
+        } else {
+            flag = false
+            docSvgD3.on("mousemove", null)
+            docSvgD3.on('click', null)
+        }
+    }
+}
 
 ParallelFigure.prototype.parallelFigure_updateSvg = function() {
     updateSVG_thisSvgParallelFigure(this)

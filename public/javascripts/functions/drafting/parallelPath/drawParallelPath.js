@@ -9,6 +9,7 @@ import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/in
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
 function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
     console.log("DRAW_PARALLEL")
+    console.log(isDownDrawParellelInitiated)
 
     // Check if drawing parallel is not initiated
     if (!isDownDrawParellelInitiated) {

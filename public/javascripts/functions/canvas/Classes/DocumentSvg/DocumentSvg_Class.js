@@ -4,6 +4,7 @@ import {SvgFigure} from './SvgFigure/SvgFigure_Class.js'
 
 function DocumentSvg(CanvDoc) {
     this.D3Element = CanvDoc.documentSvg_D3Element
+    this.HtmlElement = CanvDoc.documentSvg_htmlElement
     this.actionStates = CanvDoc.actionStates
     this.documentSvgGroup = new SvgGroup(this.D3Element, 'documentGROUP_001', 'fakeId_document')
     this.documentSvgFigures = []
