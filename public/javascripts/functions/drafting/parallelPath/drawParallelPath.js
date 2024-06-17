@@ -76,6 +76,9 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     // // parallelPathObject.thisConnection = [] add this later
 
     console.log("STARTED")
+    console.log("okskfosdfosdkfoskfosfkosdkfsodkf")
+    console.log(parallelPathDatas_globalRef)
+    console.log(parallelPathDatasCopyForPerpendicular)
 
     function mouseDownDrawParallel() {
         if (isDownDrawParallelActive === false) {

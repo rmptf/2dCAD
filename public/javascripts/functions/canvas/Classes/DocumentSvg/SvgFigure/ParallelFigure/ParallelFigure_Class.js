@@ -105,19 +105,61 @@ function addEndPoints(orig, thisFigure) {
 
 
 ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
-    docSvgD3.on("mousemove", mouseMoveDrawParallel('move'))
-    docSvgD3.on("click", mouseDownDrawParallel('click', docSvgD3, this.isDownDrawParallelActive))
+    docSvgD3.on("mousemove", mouseMoveDrawParallel('move_IT', this))
+    docSvgD3.on("click", mouseDownDrawParallel('click_IT', docSvgD3, this.isDownDrawParallelActive, this))
 }
 
-function mouseMoveDrawParallel(msg) {
+function mouseMoveDrawParallel(msg, this) {
     return function() {
         console.log(msg)
+        console.log("START SHAPE")
+
+        this.parallelPathObject.counterOfArcsAsTheyArrive = -1
+        this.parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
+        this.parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
+        this.parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
+        this.parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
+
+        if(isDownDrawParellelInitiated === true) {
+            this.parallelPathObject.iterationCounter = this.parallelPathObject.iterationCounter + 1
+            if(this.parallelPathObject.iterationCounter === 1) {
+                this.parallelPathObject.parallelDistance = 0
+            } else {
+                // this.parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
+                this.parallelPathObject.parallelDistance = 0
+            }
+
+
+            for (let i = 0; i < this.parallelPathDatas_globalRef.length; i++) {
+                console.log("i: " + i)
+                let skipperCheckers = []
+                skipperCheckers.skipperChecker_Path = false
+                skipperCheckers.skipperChecker_Arc = false
+
+                if(i < this.parallelPathDatas_globalRef.length) {
+                    sortEndpoints(
+                        this.parallelPathDatas_globalRef,
+                        this.parallelPathDatasCopyForPerpendicular,
+                        this.basePathDatasCopy,
+                        originalFigure_counter_groupCount_GLOBAL,
+                        self,
+                        i,
+                        this.parallelPathObject,
+                        skipperCheckers
+                    )
+                }
+            }
+        }
     }
 }
 
-function mouseDownDrawParallel(msg, docSvgD3, flag) {
+function mouseDownDrawParallel(msg, docSvgD3, flag, thisFigure) {
     return function() {
         console.log(msg)
+        console.log("HEREHREHRERHEHR")
+        console.log(thisFigure.originalFigurePathDatas)
+        console.log(thisFigure.parallelPathDatas_globalRef)
+        console.log(thisFigure.parallelPathDatasCopyForPerpendicular)
         if (flag === false) {
             flag = true
         } else {
