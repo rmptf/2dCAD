@@ -42,6 +42,22 @@ function createParallelPathDatas(originalFigurePathDatas) {
         // updateSVG_parallelPathAndPoints(a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
 }
 
+// Define a function to transform data from one array to a new one
+function transformData(oldArrayWithOriginalData) {
+    // Initialize a new array to store the transformed data
+    let newArrayWithTransformedData
+    // Map through the oldArrayWithOriginalData and transform each element
+    newArrayWithTransformedData = oldArrayWithOriginalData.map(([point1, point2]) => (
+        [
+            // Create an object for the first and second points with x and y coordinates
+            { x: point1.coords.x, y: point1.coords.y },
+            { x: point2.coords.x, y: point2.coords.y }
+        ]
+    ))
+    return newArrayWithTransformedData
+}
+
 export{
-    createParallelPathDatas
+    createParallelPathDatas,
+    transformData
 }
