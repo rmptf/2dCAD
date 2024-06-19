@@ -55,7 +55,14 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
         setThisArcFlag_at2Joiner_from1Joiner: null,
         setThisArcFlag_at4Joiner_from3Joiner: null,
         setThisArcFlag_atFinal_from1Joiner: null,
-        setPrevArcFlag_atFinal_from3Joiner: null
+        setPrevArcFlag_atFinal_from3Joiner: null,
+
+        // each counter
+        skipperCheckers: {
+            skipperChecker_Path: false,
+            skipperChecker_Arc: false
+        },
+        index: null
     }
     this.isDownDrawParallelActive = false
 
@@ -115,41 +122,67 @@ function mouseMoveDrawParallel(thisFigure) {
     return function() {
         console.log("START SHAPE")
 
-        // thisFigure.parallelPathObject.counterOfArcsAsTheyArrive = -1
-        // thisFigure.parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
-        // thisFigure.parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
-        // thisFigure.parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
-        // thisFigure.parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
+        thisFigure.parallelPathObject.counterOfArcsAsTheyArrive = -1
+        thisFigure.parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
+        thisFigure.parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
+        thisFigure.parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
+        thisFigure.parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
 
-        // // if(isDownDrawParellelInitiated === true) {
-        //     thisFigure.parallelPathObject.iterationCounter = thisFigure.parallelPathObject.iterationCounter + 1
-        //     if(thisFigure.parallelPathObject.iterationCounter === 1) {
-        //         thisFigure.parallelPathObject.parallelDistance = 0
-        //     } else {
-        //         // thisFigure.parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
-        //         thisFigure.parallelPathObject.parallelDistance = 0
-        //     }
+        // if(isDownDrawParellelInitiated === true) {
+            thisFigure.parallelPathObject.iterationCounter = thisFigure.parallelPathObject.iterationCounter + 1
+            if(thisFigure.parallelPathObject.iterationCounter === 1) {
+                thisFigure.parallelPathObject.parallelDistance = 0
+            } else {
+                // thisFigure.parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
+                thisFigure.parallelPathObject.parallelDistance = 0
+            }
 
-        //     for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
-        //         console.log("i: " + i)
-        //         let skipperCheckers = []
-        //         skipperCheckers.skipperChecker_Path = false
-        //         skipperCheckers.skipperChecker_Arc = false
+            // for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
+            //     console.log("i: " + i)
+            //     let skipperCheckers = []
+            //     skipperCheckers.skipperChecker_Path = false
+            //     skipperCheckers.skipperChecker_Arc = false
 
-        //         if(i < thisFigure.parallelPathDatas_globalRef.length) {
-        //             sortEndpoints(
-        //                 thisFigure.parallelPathDatas_globalRef,
-        //                 thisFigure.parallelPathDatasCopyForPerpendicular,
-        //                 thisFigure.basePathDatasCopy,
-        //                 originalFigure_counter_groupCount_GLOBAL,
-        //                 self,
-        //                 i,
-        //                 thisFigure.parallelPathObject,
-        //                 skipperCheckers
-        //             )
-        //         }
-        //     }
-        // // }
+            //     if(i < thisFigure.parallelPathDatas_globalRef.length) {
+            //         sortEndpoints(
+            //             thisFigure.parallelPathDatas_globalRef,
+            //             thisFigure.parallelPathDatasCopyForPerpendicular,
+            //             thisFigure.basePathDatasCopy,
+            //             originalFigure_counter_groupCount_GLOBAL,
+            //             self,
+            //             i,
+            //             thisFigure.parallelPathObject,
+            //             skipperCheckers
+            //         )
+            //     }
+            // }
+
+            // function sortEndpoints(
+            //     targetEndPoints,
+            //     refEndPointsPerp,
+            //     refEndPointsBase,
+            //     documentFigureCount,
+            //     self,
+            //     index,
+            //     parallelPathObject, / parPathObj,
+            //     skipperCheckers
+            // )
+
+
+            for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
+                console.log("i: " + i)
+                thisFigure.index = i
+                if(i < thisFigure.parallelPathDatas_globalRef.length) {
+                    // sortEndpoints(thisFigure)
+
+                    if (thisFigure.parallelPathDatas_globalRef[i][1].arc.exist === true) {
+                        sort_endPoint_withArc(thisFigure)
+                    } else {
+                        sort_endPoint_noArc(thisFigure)
+                    }
+                }
+            }
+        // }
     }
 }
 
