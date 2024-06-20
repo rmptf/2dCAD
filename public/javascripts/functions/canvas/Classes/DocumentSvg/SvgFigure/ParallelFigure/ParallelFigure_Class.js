@@ -4,7 +4,8 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathData} from '../SvgData/PathData_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
-import {ParallelFigure_SortEndPoint_WithArc} from './ParallelFigure_Helpers/ParallelFigure_Helper_Class.js'
+import {SortEndPoint_WithArc} from './ParallelFigure_Helpers/SortEndPoint_WithArc.js'
+import {SortEndPoint_NoArc} from './ParallelFigure_Helpers/SortEndPoint_NoArc.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
@@ -13,7 +14,8 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
     this.SvgFigure = svgFigure
-    this.ParallelFigure_SortEndPoints_WithArc = new ParallelFigure_SortEndPoint_WithArc(this)
+    this.SortEndPoint_WithArc = new SortEndPoint_WithArc(this)
+    this.SortEndPoint_NoArc = new SortEndPoint_NoArc(this)
     
 
     // Figure Data
@@ -180,10 +182,10 @@ function mouseMoveDrawParallel(thisFigure) {
 
                     if (thisFigure.parallelPathDatas_globalRef[i][1].arc.exist === true) {
                         // sort_endPoint_withArc(thisFigure)
-                        thisFigure.ParallelFigure_SortEndPoints_WithArc.sortEndPoints_withArc()
+                        thisFigure.SortEndPoint_WithArc.sortEndPoints_withArc()
                     } else {
                         // sort_endPoint_noArc(thisFigure)
-                        thisFigure.ParallelFigure_SortEndPoints_NoArc.sortEndPoints_noArc()
+                        thisFigure.SortEndPoint_NoArc.sortEndPoints_noArc()
                     }
                 }
             }
