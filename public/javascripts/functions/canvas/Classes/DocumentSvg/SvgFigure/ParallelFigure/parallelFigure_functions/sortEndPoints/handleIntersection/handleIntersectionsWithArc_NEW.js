@@ -159,6 +159,16 @@ function disconnectedArcIntersection_skipThisIndex(parPathObj) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, flag) {
     if(flag === "arcFlag_finalAll") {
         if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
