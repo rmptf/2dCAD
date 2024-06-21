@@ -4,8 +4,8 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathData} from '../SvgData/PathData_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
-import {SortEndPoint_WithArc} from './ParallelFigure_Helpers/SortEndPoint_WithArc.js'
-import {SortEndPoint_NoArc} from './ParallelFigure_Helpers/SortEndPoint_NoArc.js'
+import {SortEndPoint_WithArc} from './ParallelFigure_Helper_Classes/SortEndPoints/SortEndPoint_WithArc_Class.js'
+import {SortEndPoint_NoArc} from './ParallelFigure_Helper_Classes/SortEndPoints/SortEndPoint_NoArc_Class.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 

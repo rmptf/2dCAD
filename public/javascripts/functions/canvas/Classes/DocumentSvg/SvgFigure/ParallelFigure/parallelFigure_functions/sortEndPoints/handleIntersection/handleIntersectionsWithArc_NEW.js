@@ -86,7 +86,6 @@ function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPoint
     // 10
     console.log("10_seg2")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index + 1, index + 1, arcRadiusObject, 1, false)
-
 }
 // done
 function arcIntersection_secondArcSegment_everyIndex_lastAction(targetEndPoints, parPathObj, index, self) {

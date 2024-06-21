@@ -221,7 +221,7 @@
 
 function sort_endPoint_withArc(figure) {
     let thisIndex = figure.parallelPathObject.index
-    let parallelPathDatas = thisFigure.parallelPathDatas_globalRef
+    let parallelPathDatas = figure.parallelPathDatas_globalRef
 
     const isJoiner = (targetIndex) => parallelPathDatas[targetIndex][1].arc.joiner === true
     const joinerType = (targetIndex, code) => parallelPathDatas[targetIndex][1].arc.joiner === true && parallelPathDatas[targetIndex][1].arc.joinerSide === code
