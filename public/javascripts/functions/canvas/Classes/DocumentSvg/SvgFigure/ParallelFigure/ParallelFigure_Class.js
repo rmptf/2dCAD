@@ -4,8 +4,8 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathData} from '../SvgData/PathData_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
-import {SortEndPoint_WithArc} from './ParallelFigure_Helper_Classes/SortEndPoints/SortEndPoint_WithArc_Class.js'
-import {SortEndPoint_NoArc} from './ParallelFigure_Helper_Classes/SortEndPoints/SortEndPoint_NoArc_Class.js'
+import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter/IntersectionsSorter_WithArc_Class.js'
+import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter/IntersectionsSorter_NoArc_Class.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
@@ -14,9 +14,6 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
     this.SvgFigure = svgFigure
-    this.SortEndPoint_WithArc = new SortEndPoint_WithArc(this)
-    this.SortEndPoint_NoArc = new SortEndPoint_NoArc(this)
-    
 
     // Figure Data
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
@@ -66,27 +63,37 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
         skipperCheckers: {
             skipperChecker_Path: false,
             skipperChecker_Arc: false
-        },
-        index: null
+        }
     }
     this.isDownDrawParallelActive = false
+
+    this.IntersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this)
+    this.IntersectionsSorter_NoArc = new IntersectionsSorter_NoArc(this)
 
     addPaths(this.originalFigurePathDatas, this)
     addEndPoints(this.originalFigurePathDatas, this)
     this.setParallelFigureClickEvents(docSvgD3)
 }
 
+// PASSED
+// parallelPathDatas_globalRef,
+// parallelPathDatasCopyForPerpendicular,
+// basePathDatasCopy,
+// originalFigure_counter_groupCount_GLOBAL,
+// self,
+// i,
+// parallelPathObject,
+// skipperCheckers
 
-
-
-
-
-
-
-
-
-
-
+// RECIEVED
+// targetEndPoints,
+// refEndPointsPerp,
+// refEndPointsBase,
+// documentFigureCount,
+// self,
+// index,
+// parPathObj,
+// skipperCheckers
 
 function createSecondaryGroups(thisClass) {
     return thisClass.SVGGROUPSDATA.SECONDARYNAMES.map(className => {
@@ -126,7 +133,6 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 function mouseMoveDrawParallel(thisFigure) {
     return function() {
         console.log("START SHAPE")
-
         thisFigure.parallelPathObject.counterOfArcsAsTheyArrive = -1
         thisFigure.parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
         thisFigure.parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
@@ -142,50 +148,15 @@ function mouseMoveDrawParallel(thisFigure) {
                 thisFigure.parallelPathObject.parallelDistance = 0
             }
 
-            // for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
-            //     console.log("i: " + i)
-            //     let skipperCheckers = []
-            //     skipperCheckers.skipperChecker_Path = false
-            //     skipperCheckers.skipperChecker_Arc = false
-
-            //     if(i < thisFigure.parallelPathDatas_globalRef.length) {
-            //         sortEndpoints(
-            //             thisFigure.parallelPathDatas_globalRef,
-            //             thisFigure.parallelPathDatasCopyForPerpendicular,
-            //             thisFigure.basePathDatasCopy,
-            //             originalFigure_counter_groupCount_GLOBAL,
-            //             self,
-            //             i,
-            //             thisFigure.parallelPathObject,
-            //             skipperCheckers
-            //         )
-            //     }
-            // }
-
-            // function sortEndpoints(
-            //     targetEndPoints,
-            //     refEndPointsPerp,
-            //     refEndPointsBase,
-            //     documentFigureCount,
-            //     self,
-            //     index,
-            //     parallelPathObject, / parPathObj,
-            //     skipperCheckers
-            // )
-
-
             for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
                 console.log("i: " + i)
-                thisFigure.index = i
+                thisFigure.IntersectionsSorter_WithArc.intersectionObject.index = i
+                thisFigure.IntersectionsSorter_NoArc.intersectionObject.index = i
                 if(i < thisFigure.parallelPathDatas_globalRef.length) {
-                    // sortEndpoints(thisFigure)
-
                     if (thisFigure.parallelPathDatas_globalRef[i][1].arc.exist === true) {
-                        // sort_endPoint_withArc(thisFigure)
-                        thisFigure.SortEndPoint_WithArc.sortEndPoints_withArc()
+                        thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
-                        // sort_endPoint_noArc(thisFigure)
-                        thisFigure.SortEndPoint_NoArc.sortEndPoints_noArc()
+                        thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
             }
@@ -195,11 +166,6 @@ function mouseMoveDrawParallel(thisFigure) {
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
     return function() {
-        console.log("HEREHREHRERHEHR")
-        console.log(thisFigure.originalFigurePathDatas)
-        console.log(thisFigure.parallelPathDatas_globalRef)
-        console.log(thisFigure.parallelPathDatasCopyForPerpendicular)
-        console.log(thisFigure.basePathDatasCopy)
         if (flag === false) {
             flag = true
         } else {
