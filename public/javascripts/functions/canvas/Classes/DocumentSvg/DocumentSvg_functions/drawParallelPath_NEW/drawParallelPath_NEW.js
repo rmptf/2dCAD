@@ -50,35 +50,35 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
     // // let centerPoint
 
 
-    // let parallelPathDatas_globalRef = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
-    // let parallelPathDatasCopyForPerpendicular = transformData(parallelPathDatas_globalRef)
-    // let basePathDatasCopy = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    // let basePathDatasCopySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    // let parallelPathObject = []
-    // parallelPathObject.pathToArcCounter = -1
-    // parallelPathObject.arcToPathCounter = -1
-    // parallelPathObject.arcToArcCounter = -1
-    // parallelPathObject.pathToArchIndexArray = []
-    // parallelPathObject.arcToPathIndexArray = []
-    // parallelPathObject.arcToArcIndexArray = []
-    // parallelPathObject.collectIndicesOfIntersections = true
-    // parallelPathObject.removeornot_allParData = true
-    // parallelPathObject.parallelPathSegmentCounter_FIRST = -1
-    // parallelPathObject.parallelPathSegmentCounter_SECOND = 0
-    // parallelPathObject.removeStartIndex
-    // parallelPathObject.parallelDistance
-    // parallelPathObject.iterationCounter = 0
+    // let parallelFigurePathDatas = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
+    // let parallelFigurePathDatas_transformed = transformData(parallelFigurePathDatas)
+    // let originalFigurePathDatas_copy = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    // let originalFigurePathDatas_copySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    // let parallelFigureObject = []
+    // parallelFigureObject.pathToArcCounter = -1
+    // parallelFigureObject.arcToPathCounter = -1
+    // parallelFigureObject.arcToArcCounter = -1
+    // parallelFigureObject.pathToArchIndexArray = []
+    // parallelFigureObject.arcToPathIndexArray = []
+    // parallelFigureObject.arcToArcIndexArray = []
+    // parallelFigureObject.collectIndicesOfIntersections = true
+    // parallelFigureObject.removeornot_allParData = true
+    // parallelFigureObject.parallelPathSegmentCounter_FIRST = -1
+    // parallelFigureObject.parallelPathSegmentCounter_SECOND = 0
+    // parallelFigureObject.removeStartIndex
+    // parallelFigureObject.parallelDistance
+    // parallelFigureObject.iterationCounter = 0
 
     // // arc flag stuff
-    // parallelPathObject.arrayOfArcFlagsInitPos = []
-    // parallelPathObject.counterOfArcsAsTheyArrive = 0
-    // parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner
-    // parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner
-    // parallelPathObject.setThisArcFlag_atFinal_from1Joiner
-    // parallelPathObject.setPrevArcFlag_atFinal_from3Joiner
+    // parallelFigureObject.arrayOfArcFlagsInitPos = []
+    // parallelFigureObject.counterOfArcsAsTheyArrive = 0
+    // parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner
+    // parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner
+    // parallelFigureObject.setThisArcFlag_atFinal_from1Joiner
+    // parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner
 
     // // // Set Large Arc Flag of each arc stuff:
-    // // // parallelPathObject.thisConnection = [] add this later
+    // // // parallelFigureObject.thisConnection = [] add this later
 
     // console.log("STARTED")
 
@@ -105,19 +105,19 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
     //     console.log(" ")
     //     console.log("START SHAPE")
 
-    //     parallelPathObject.counterOfArcsAsTheyArrive = -1
-    //     parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
-    //     parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
-    //     parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
-    //     parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
+    //     parallelFigureObject.counterOfArcsAsTheyArrive = -1
+    //     parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
+    //     parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
+    //     parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = false
+    //     parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
 
     //     if(isDownDrawParellelInitiated === true) {
-    //         parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
-    //         if(parallelPathObject.iterationCounter === 1) {
-    //             parallelPathObject.parallelDistance = 0
+    //         parallelFigureObject.iterationCounter = parallelFigureObject.iterationCounter + 1
+    //         if(parallelFigureObject.iterationCounter === 1) {
+    //             parallelFigureObject.parallelDistance = 0
     //         } else {
-    //             parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
-    //             // parallelPathObject.parallelDistance = 25
+    //             parallelFigureObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)    
+    //             // parallelFigureObject.parallelDistance = 25
     //         }
 
 
@@ -129,15 +129,15 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
 
     //         // handleIntersectingParallelPaths_testing(
     //         //     self,
-    //         //     parallelPathDatas_globalRef,
-    //         //     basePathDatasCopySecondary,
-    //         //     parallelPathDatasCopyForPerpendicular,
-    //         //     basePathDatasCopy,
+    //         //     parallelFigurePathDatas,
+    //         //     originalFigurePathDatas_copySecondary,
+    //         //     parallelFigurePathDatas_transformed,
+    //         //     originalFigurePathDatas_copy,
     //         //     originalFigure_counter_groupCount_GLOBAL,
-    //         //     parallelPathObject
+    //         //     parallelFigureObject
     //         // )
 
-    //         for (let i = 0; i < parallelPathDatas_globalRef.length; i++) {
+    //         for (let i = 0; i < parallelFigurePathDatas.length; i++) {
     //             console.log("i: " + i)
     //             let skipperCheckers = [] // these have to do with adding and eliminating paths based on parallel intersections (not in use right now)
     //             skipperCheckers.skipperChecker_Path = false
@@ -145,25 +145,25 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
 
     //             // checkForIntersectingPaths(
     //             //     self,
-    //             //     parallelPathDatas_globalRef,
-    //             //     basePathDatasCopySecondary,
-    //             //     parallelPathDatasCopyForPerpendicular,
-    //             //     basePathDatasCopy,
+    //             //     parallelFigurePathDatas,
+    //             //     originalFigurePathDatas_copySecondary,
+    //             //     parallelFigurePathDatas_transformed,
+    //             //     originalFigurePathDatas_copy,
     //             //     i,
     //             //     originalFigure_counter_groupCount_GLOBAL,
-    //             //     parallelPathObject,
+    //             //     parallelFigureObject,
     //             //     skipperCheckers
     //             // )
 
-    //             if(i < parallelPathDatas_globalRef.length) {
+    //             if(i < parallelFigurePathDatas.length) {
     //                 sortEndpoints(
-    //                     parallelPathDatas_globalRef,
-    //                     parallelPathDatasCopyForPerpendicular,
-    //                     basePathDatasCopy,
+    //                     parallelFigurePathDatas,
+    //                     parallelFigurePathDatas_transformed,
+    //                     originalFigurePathDatas_copy,
     //                     originalFigure_counter_groupCount_GLOBAL,
     //                     self,
     //                     i,
-    //                     parallelPathObject,
+    //                     parallelFigureObject,
     //                     skipperCheckers
     //                 )
     //             }
@@ -172,10 +172,10 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
     //         }
     //     }
     //     // Reset 
-    //     parallelPathObject.collectIndicesOfIntersections = false
-    //     parallelPathObject.pathToArcCounter = -1
-    //     parallelPathObject.arcToPathCounter = -1
-    //     parallelPathObject.arcToArcCounter = -1
+    //     parallelFigureObject.collectIndicesOfIntersections = false
+    //     parallelFigureObject.pathToArcCounter = -1
+    //     parallelFigureObject.arcToPathCounter = -1
+    //     parallelFigureObject.arcToArcCounter = -1
 
     //     console.log("ENDSHAPE")
     //     console.log(" ")

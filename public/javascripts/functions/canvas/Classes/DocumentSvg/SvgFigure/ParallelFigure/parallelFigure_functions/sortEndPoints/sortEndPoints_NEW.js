@@ -51,7 +51,7 @@
 //     documentFigureCount,
 //     self,
 //     index,
-//     parallelPathObject,
+//     parallelFigureObject,
 //     skipperCheckers
 // ) {
 //     if (targetEndPoints[index][1].arc.exist === true) {
@@ -62,7 +62,7 @@
 //             documentFigureCount,
 //             self,
 //             index,
-//             parallelPathObject,
+//             parallelFigureObject,
 //             skipperCheckers
 //         )
 //     } else {
@@ -72,7 +72,7 @@
 //             refEndPointsBase,
 //             self,
 //             index,
-//             parallelPathObject
+//             parallelFigureObject
 //         )
 //     }
 // }
@@ -220,8 +220,8 @@
 // }
 
 function sort_endPoint_withArc(figure) {
-    let thisIndex = figure.parallelPathObject.index
-    let parallelPathDatas = figure.parallelPathDatas_globalRef
+    let thisIndex = figure.parallelFigureObject.index
+    let parallelPathDatas = figure.parallelFigurePathDatas
 
     const isJoiner = (targetIndex) => parallelPathDatas[targetIndex][1].arc.joiner === true
     const joinerType = (targetIndex, code) => parallelPathDatas[targetIndex][1].arc.joiner === true && parallelPathDatas[targetIndex][1].arc.joinerSide === code

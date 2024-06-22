@@ -15,12 +15,21 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
     }
     this.SvgFigure = svgFigure
 
+    
+
+    // OLD NAMES
+    // this.originalFigurePathDatas
+    // this.basePathDatasCopy
+    // this.parallelPathDatas_globalRef
+    // this.parallelPathDatasCopyForPerpendicular
+    // // this.basePathDatasCopySecondary
+
     // Figure Data
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    this.parallelPathDatas_globalRef = createParallelPathDatas(this.originalFigurePathDatas)
-    this.parallelPathDatasCopyForPerpendicular = transformData(this.parallelPathDatas_globalRef)
-    this.basePathDatasCopy = copyPathDatas(this.originalFigurePathDatas)
-    this.basePathDatasCopySecondary = copyPathDatas(this.originalFigurePathDatas)
+    this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas)
+    this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
+    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+    // this.originalFigurePathDatas_copySecondary = copyPathDatas(this.originalFigurePathDatas)
     // Figure Data
 
     // Svg Elements
@@ -37,7 +46,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
     this.svgEndPoints = []
     // Svg Elements
 
-    this.parallelPathObject = {
+    this.parallelFigureObject = {
         pathToArcCounter: -1,
         arcToPathCounter: -1,
         arcToArcCounter: -1,
@@ -76,13 +85,13 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
 }
 
 // PASSED
-// parallelPathDatas_globalRef,
-// parallelPathDatasCopyForPerpendicular,
-// basePathDatasCopy,
+// parallelFigurePathDatas,
+// parallelFigurePathDatas_transformed,
+// originalFigurePathDatas_copy,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
 // i,
-// parallelPathObject,
+// parallelFigureObject,
 // skipperCheckers
 
 // RECIEVED
@@ -133,27 +142,27 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 function mouseMoveDrawParallel(thisFigure) {
     return function() {
         console.log("START SHAPE")
-        thisFigure.parallelPathObject.counterOfArcsAsTheyArrive = -1
-        thisFigure.parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
-        thisFigure.parallelPathObject.setThisArcFlag_at4Joiner_from3Joiner = false
-        thisFigure.parallelPathObject.setThisArcFlag_atFinal_from1Joiner = false
-        thisFigure.parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
+        thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
+        thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
+        thisFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
+        thisFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = false
+        thisFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         // if(isDownDrawParellelInitiated === true) {
-            thisFigure.parallelPathObject.iterationCounter = thisFigure.parallelPathObject.iterationCounter + 1
-            if(thisFigure.parallelPathObject.iterationCounter === 1) {
-                thisFigure.parallelPathObject.parallelDistance = 0
+            thisFigure.parallelFigureObject.iterationCounter = thisFigure.parallelFigureObject.iterationCounter + 1
+            if(thisFigure.parallelFigureObject.iterationCounter === 1) {
+                thisFigure.parallelFigureObject.parallelDistance = 0
             } else {
-                // thisFigure.parallelPathObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
-                thisFigure.parallelPathObject.parallelDistance = 0
+                // thisFigure.parallelFigureObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
+                thisFigure.parallelFigureObject.parallelDistance = 0
             }
 
-            for (let i = 0; i < thisFigure.parallelPathDatas_globalRef.length; i++) {
+            for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
                 console.log("i: " + i)
                 thisFigure.IntersectionsSorter_WithArc.intersectionObject.index = i
                 thisFigure.IntersectionsSorter_NoArc.intersectionObject.index = i
-                if(i < thisFigure.parallelPathDatas_globalRef.length) {
-                    if (thisFigure.parallelPathDatas_globalRef[i][1].arc.exist === true) {
+                if(i < thisFigure.parallelFigurePathDatas.length) {
+                    if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()

@@ -19,7 +19,7 @@ thisConnection.connected = true
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_firstAction = function() {
     // 1
     console.log("1_all")
-    this.ParFigure.parallelPathObject.parallelPathSegmentCounter_FIRST = this.ParFigure.parallelPathObject.parallelPathSegmentCounter_FIRST + 1
+    this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST + 1
     setArcRadius(this.ParFigure, "arcRad_1") // TODO: (Set_arcRad)
 // function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // // 1
@@ -31,11 +31,14 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
 
 
 
-// done
+// WORKING
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
+        // Final
+        console.log("FINAL_all")
+        handleLargeArcFlag(this.ParFigure, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
 // function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
-    // Final
-    console.log("FINAL_all")
+    // // Final
+    // console.log("FINAL_all")
     // handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
 }
 // done
@@ -202,13 +205,13 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 
 
 // PASSED
-// parallelPathDatas_globalRef,
-// parallelPathDatasCopyForPerpendicular,
-// basePathDatasCopy,
+// parallelFigurePathDatas,
+// parallelFigurePathDatas_transformed,
+// originalFigurePathDatas_copy,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
 // i,
-// parallelPathObject,
+// parallelFigureObject,
 // skipperCheckers
 
 // RECIEVED
@@ -220,7 +223,57 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 // index,
 // parPathObj,
 // skipperCheckers
-function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, flag) {
+
+
+//old
+// function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, flag) {
+//     if(flag === "arcFlag_finalAll") {
+//         if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
+//             // console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+//             parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
+//             parPathObj.setThisArcFlag_atFinal_from1Joiner = false
+//         }
+
+//         if(parPathObj.setPrevArcFlag_atFinal_from3Joiner === true) {
+//             // console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
+//             parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
+//             parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
+//         }
+
+//         if(thisConnection.connected === true) {
+//             // console.log("CONNECTED")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+//         } else {
+//             // console.log("NOT_CONNECTED")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+//             thisConnection.connected = true
+//         }
+//     }
+
+//     if(flag === "arcFlag_2AJ") {
+//         if(parPathObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
+//             // console.log("running_skip_arcFlagSet_from_1j_in_2j")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+//             parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
+//             parPathObj.setThisArcFlag_atFinal_from1Joiner = false
+//         }
+//     }
+
+//     if(flag === "arcFlag_4J") {
+//         if(parPathObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
+//             // console.log("running_skip_arcFlagSet_from_3j_in_4j")
+//             setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+//             parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
+//             parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
+//         }
+//     }
+// }
+//new
+function handleLargeArcFlag(parFigure, thisConnection, flag) {
+    let parPathObj = parFigure.parallelFigureObject
+
     if(flag === "arcFlag_finalAll") {
         if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
             // console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
@@ -265,12 +318,14 @@ function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnec
     }
 }
 
+//old
 // function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, logId) {
     // // console.log(logId)
     // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+//new
 function setArcRadius(parFigure, logId) {
     console.log(logId)
-    let targetArray = parFigure.parallelPathDatas_globalRef
+    let targetArray = parFigure.parallelFigurePathDatas
     let index = parFigure.IntersectionsSorter_WithArc.intersectionObject.index
     let targetArcRadius = targetArray[index][1].arc.radius
 
@@ -405,8 +460,8 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 function calcArcParDistance(parFigure) {
     let index = parFigure.IntersectionsSorter_WithArc.intersectionObject.index
     let arcRadiusObject = parFigure.IntersectionsSorter_WithArc.arcRadiusObject
-    let nextRefEndPointBase = parFigure.basePathDatasCopy[index + 1]
-    let distance = parFigure.parallelPathObject.parallelDistance
+    let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index + 1]
+    let distance = parFigure.parallelFigureObject.parallelDistance
 
     arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)

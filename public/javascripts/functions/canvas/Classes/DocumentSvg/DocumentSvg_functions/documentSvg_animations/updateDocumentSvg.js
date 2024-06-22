@@ -29,7 +29,7 @@ function updateSVG_thisSvgFigure(figure) {
 }
 
 function updateSVG_thisSvgParallelFigure(figure) {
-    let parallelPathDatas = figure.parallelPathDatas_globalRef
+    let parallelPathDatas = figure.parallelFigurePathDatas
     let parallelPaths = figure.svgPaths.parallelPaths
 
     // PARALLEL PATH
