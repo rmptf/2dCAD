@@ -1,11 +1,11 @@
-import {IntersectionHandler_NoArc} from './IntersectionsSorter_Helper_Classes/HandleIntersections/IntersectionHandler_NoArc_Class.js'
+import {IntersectionHandler_NoArc} from './IntersectionHandler_NoArc_Class.js'
 
 function IntersectionsSorter_NoArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_NoArc(this.ParFigure)
 
 
-    this.intersectionObject = {
+    this.intersectionSorterObject = {
         index: null,
     }
 }

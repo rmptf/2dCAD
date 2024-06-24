@@ -1,16 +1,19 @@
-import {getDistance} from '../../../../../../../../../math/mathFunctions.js' // OLD LOC
+import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
+import { LargeArcFlagSetter } from './LargeArcFlagSetter_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
+    this.ArcFlagSetter = new LargeArcFlagSetter(this.ParFigure)
+    this.intersectionHandlerObject = {
+        isIntersectionConnected: null,
+    }
 }
 
 IntersectionHandler_WithArc.prototype.handleIntersection = function() {
     console.log("HANDLE_INTERSECTION")
 }
-
-
-let thisConnection = []
-thisConnection.connected = true
+// let thisConnection = []
+// thisConnection.connected = true
 
 
 
@@ -20,7 +23,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST + 1
-    setArcRadius(this.ParFigure, "arcRad_1") // TODO: (Set_arcRad)
+    setArcRadius(this.ParFigure, 0, "arcRad_1") // TODO: (Set_arcRad)
 // function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // // 1
     // console.log("1_all")
@@ -29,18 +32,18 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
 }
 
 
-
-
 // WORKING
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
         // Final
         console.log("FINAL_all")
-        handleLargeArcFlag(this.ParFigure, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
+        handleLargeArcFlag(this.ParFigure, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
 // function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // // Final
     // console.log("FINAL_all")
     // handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
 }
+
+
 // done
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex_firstAction = function() {
 // function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
@@ -138,15 +141,27 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     // parPathObj.setThisArcFlag_at2Joiner_from1Joiner = true // TODO: (Set_largeArcFag)
     // parPathObj.setThisArcFlag_atFinal_from1Joiner = true // TODO: (Set_largeArcFag)
 }
-// done
+
+
+// working
+//new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc = function() {
-// function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
+    this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
+    setArcRadius(this.ParFigure, 0, "arcRad_2AJ") // TODO: (Set_arcRad)
+    handleLargeArcFlag(this.ParFigure, "arcFlag_2AJ") // TODO: (Set_largeArcFag)
+
+//old
+// function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
+    // // 2_A_Joiner
+    // console.log("2_A_Joiner_ooo")
     // parPathObj.parallelPathSegmentCounter_FIRST = 0
     // setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_2AJ") // TODO: (Set_arcRad)
     // handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_2AJ") // TODO: (Set_largeArcFag)
 }
+
+
 // done
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc = function() {
 // function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -155,11 +170,24 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 1)
     // handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
 }
-// done
+
+
+// working
+//new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function() {
-// function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // 3_Joiner
     console.log("3_Joiner_ooo")
+    this.ParFigure.parallelFigureObject.arcToArcCounter += 1
+    setArcRadius(this.ParFigure, 1, "arcRad_4J") // TODO: (Set_arcRad)
+    // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1) (HAVENT STARTED TO FIX)
+    this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
+    this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
+    this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
+
+//old
+// function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+    // // 3_Joiner
+    // console.log("3_Joiner_ooo")
     // parPathObj.arcToArcCounter += 1
     // setArcRadius(targetEndPoints, refEndPointsBase, index + 1, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
     // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
@@ -168,15 +196,27 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // parPathObj.setPrevArcFlag_atFinal_from3Joiner = true // TODO: (Set_largeArcFag)
 }
 
-// done
+
+
+
+// working
+//new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArcToArc = function() {
-// function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // 4_Joiner
     console.log("4_Joiner_ooo")
+    this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
+    handleLargeArcFlag(this.ParFigure, "arcFlag_4J") // TODO: (Set_largeArcFag)
+    
+//old
+// function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
+    // // 4_Joiner
+    // console.log("4_Joiner_ooo")
     // parPathObj.parallelPathSegmentCounter_FIRST = 0
     // handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_4J") // TODO: (Set_largeArcFag)
 
 }
+
+
 // done
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArcToPath = function() {
 // function disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -271,49 +311,49 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 //     }
 // }
 //new
-function handleLargeArcFlag(parFigure, thisConnection, flag) {
-    let parPathObj = parFigure.parallelFigureObject
+function handleLargeArcFlag(parFigure, flag) {
+    let parFigObj = parFigure.parallelFigureObject
 
     if(flag === "arcFlag_finalAll") {
-        if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
+        if(parFigObj.setThisArcFlag_atFinal_from1Joiner === true) {
             // console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
-            parPathObj.setThisArcFlag_atFinal_from1Joiner = false
+            setLargeArcFlag(parFigure, 0, false)
+            parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
+            parFigObj.setThisArcFlag_atFinal_from1Joiner = false
         }
 
-        if(parPathObj.setPrevArcFlag_atFinal_from3Joiner === true) {
+        if(parFigObj.setPrevArcFlag_atFinal_from3Joiner === true) {
             // console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
-            setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
-            parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
-            parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
+            setLargeArcFlag(parFigure, -1, false)
+            parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
+            parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
 
-        if(thisConnection.connected === true) {
+        if(parFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected === true) {
             // console.log("CONNECTED")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+            setLargeArcFlag(parFigure, 0, true)
         } else {
             // console.log("NOT_CONNECTED")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
-            thisConnection.connected = true
+            setLargeArcFlag(parFigure, 0, false)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = true
         }
     }
 
     if(flag === "arcFlag_2AJ") {
-        if(parPathObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
+        if(parFigObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
             // console.log("running_skip_arcFlagSet_from_1j_in_2j")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-            parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
-            parPathObj.setThisArcFlag_atFinal_from1Joiner = false
+            setLargeArcFlag(parFigure, 0, true)
+            parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
+            parFigObj.setThisArcFlag_atFinal_from1Joiner = false
         }
     }
 
     if(flag === "arcFlag_4J") {
-        if(parPathObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
+        if(parFigObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
             // console.log("running_skip_arcFlagSet_from_3j_in_4j")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
-            parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
-            parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
+            setLargeArcFlag(parFigure, 0, true)
+            parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
+            parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
     }
 }
@@ -323,14 +363,12 @@ function handleLargeArcFlag(parFigure, thisConnection, flag) {
     // // console.log(logId)
     // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
 //new
-function setArcRadius(parFigure, logId) {
+function setArcRadius(parFigure, indexModifier, logId) {
     console.log(logId)
     let targetArray = parFigure.parallelFigurePathDatas
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionObject.index
-    let targetArcRadius = targetArray[index][1].arc.radius
+    let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier)
+    let targetArcRadius = targetArray[index][1].arc.arcRadiusObject
 
-    // console.log("-----------------------------------------------")
-    // console.log(calcArcParDistance(parFigure))
     targetArcRadius = calcArcParDistance(parFigure)
 }
 
@@ -451,21 +489,23 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
     }
 }
 
+//old
 // TODO: (in two places at once rn, find a place for it)
 // function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 //     arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
 //     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
 //     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
 //     return nextArcToCenterMinusPointerToArcFromArc1
+//new
 function calcArcParDistance(parFigure) {
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionObject.index
-    let arcRadiusObject = parFigure.IntersectionsSorter_WithArc.arcRadiusObject
+    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
+    let arcRadiusParDistAndDir = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir
     let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index + 1]
     let distance = parFigure.parallelFigureObject.parallelDistance
 
-    arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+    arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
-    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
+    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
     return nextArcToCenterMinusPointerToArcFromArc1
 }
 

@@ -4,8 +4,8 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathData} from '../SvgData/PathData_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
-import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter/IntersectionsSorter_WithArc_Class.js'
-import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter/IntersectionsSorter_NoArc_Class.js'
+import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
+import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
@@ -159,8 +159,8 @@ function mouseMoveDrawParallel(thisFigure) {
 
             for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
                 console.log("i: " + i)
-                thisFigure.IntersectionsSorter_WithArc.intersectionObject.index = i
-                thisFigure.IntersectionsSorter_NoArc.intersectionObject.index = i
+                thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
+                thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
                 if(i < thisFigure.parallelFigurePathDatas.length) {
                     if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()

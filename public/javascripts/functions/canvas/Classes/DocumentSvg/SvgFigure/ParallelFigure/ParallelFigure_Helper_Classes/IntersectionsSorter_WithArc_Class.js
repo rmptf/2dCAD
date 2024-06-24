@@ -1,4 +1,4 @@
-import {IntersectionHandler_WithArc} from './IntersectionsSorter_Helper_Classes/HandleIntersections/IntersectionHandler_WithArc_Class.js'
+import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
 function IntersectionsSorter_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
@@ -12,12 +12,14 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
     this.includes = (list, targetIndex) => list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
 
-    this.intersectionObject = {
+    this.intersectionSorterObject = {
         index: null,
+        // parDistAndDir: null,
+        arcRadiusParDistAndDir: null
     }
-    this.arcRadiusObject = {
-        parDistAndDir: null
-    }
+    // this.arcRadiusObject = {
+    //     parDistAndDir: null
+    // }
 }
 
 // targetEndPoints,
@@ -31,7 +33,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
 
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
     // TODO: Orgnazine Better
-    let index = this.intersectionObject.index
+    let index = this.intersectionSorterObject.index
     if(!this.firstPosition(index)) {
         switch(true) {
             case this.isJoiner(index):
@@ -74,7 +76,7 @@ function handleDefaultArcIntersection(parFigure) {
 }
 
 function handleFirctArcSegment(thisSorter) {
-    let index = thisSorter.intersectionObject.index
+    let index = thisSorter.intersectionSorterObject.index
     // 2
     thisSorter.intersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
     switch(true) {
@@ -99,7 +101,7 @@ function handleFirctArcSegment(thisSorter) {
 }
 
 function handleSecondArcSegment(thisSorter) {
-    let index = thisSorter.intersectionObject.index
+    let index = thisSorter.intersectionSorterObject.index
     // 7
     thisSorter.intersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject, parPathObj, self)
     switch(true) {
@@ -125,7 +127,7 @@ function handleSecondArcSegment(thisSorter) {
 }
 
 function handleDisconnectedArcIntersection(thisSorter) {
-    let index = thisSorter.intersectionObject.index
+    let index = thisSorter.intersectionSorterObject.index
     switch(true) {
         // 1_Joiner
         case this.joinerType(index, "AAA"): thisSorter.intersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
