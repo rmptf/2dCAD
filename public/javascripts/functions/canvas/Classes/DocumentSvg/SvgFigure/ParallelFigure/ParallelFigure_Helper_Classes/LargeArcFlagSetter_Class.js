@@ -1,4 +1,5 @@
 // import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
+import {findLineMidpoint, isGreaterThan} from '../../../../../../math/mathFunctions.js'
 
 function LargeArcFlagSetter(parallelFigure) {
     this.ParFigure = parallelFigure
@@ -6,6 +7,7 @@ function LargeArcFlagSetter(parallelFigure) {
     this.arcFlagSetterObject = {
         // isIntersectionConnected: null,
     }
+    console.log("99999999999999999999999999999999")
 }
 
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier, runOrNot) {
@@ -64,6 +66,9 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let currentPos_x1GreaterThanX2 = isGreaterThan(x1, x2)
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
+
+    console.log("009090909090909090909090909090909") // needs checking but have to finishres first
+    console.log(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive])
 
     if(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         // console.log("CROSSED")

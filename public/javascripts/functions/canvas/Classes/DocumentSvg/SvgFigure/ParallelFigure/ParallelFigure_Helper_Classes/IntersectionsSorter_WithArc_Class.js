@@ -38,23 +38,23 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
         switch(true) {
             case this.isJoiner(index):
             case this.isJoiner(index - 1):
+                console.log('1___')
                 // handleDisconnectedArcIntersection(this.ParFigure)
-                console.log(1)
                 break
             default:
+                console.log('2___')
                 handleDefaultArcIntersection(this.ParFigure)
-                console.log(2)
         }
     } else if (this.firstPosition(index)) {
         switch(true) {
             case this.isJoiner(index):
             // case this.isJoiner(index - 1):
+                console.log('3___')
                 // handleDisconnectedArcIntersection(this.ParFigure)
-                console.log(3)
                 break
             default:
+                console.log('4___')
                 handleDefaultArcIntersection(this.ParFigure)
-                console.log(4)
         }
     }
 }
@@ -62,23 +62,31 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
 function handleDefaultArcIntersection(parFigure) {
     // 1
     // arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
+    console.log("A___1")
     parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {
-        case parPathObj.parallelPathSegmentCounter_FIRST === 0:
+        // case parPathObj.parallelPathSegmentCounter_FIRST === 0:
+        case parFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST === 0:
+            console.log("A___2")
             handleFirctArcSegment(parFigure)
             break
         default:
-            handleSecondArcSegment(parFigure)
+            console.log("A___3")
+            // handleSecondArcSegment(parFigure)
     }
     // Final
+    console.log("A___4")
     // arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
     parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 }
 
-function handleFirctArcSegment(thisSorter) {
-    let index = thisSorter.intersectionSorterObject.index
+function handleFirctArcSegment(parFigure) {
+    // let index = thisSorter.intersectionSorterObject.index
+    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
     // 2
-    thisSorter.intersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
+    // thisSorter.intersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj)
+    parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction(parFigure)
+    
     switch(true) {
         case !this.firstPosition(index):
             this.arcExist(index - 1) ?
