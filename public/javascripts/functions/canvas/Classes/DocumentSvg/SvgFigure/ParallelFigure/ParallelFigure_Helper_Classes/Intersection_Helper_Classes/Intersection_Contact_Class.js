@@ -1,8 +1,81 @@
-import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
-import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
-// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
-// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
-import {findLineMidpoint} from '../../../../math/mathFunctions.js'
+// import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
+// import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
+// // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+// // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
+// import {findLineMidpoint} from '../../../../math/mathFunctions.js'
+
+function Intersection_Contact(parallelFigure) {
+    this.ParFigure = parallelFigure
+
+    this.intersection_contactObject = {
+        fakeVar: null,
+    }
+}
+
+// function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection) {
+Intersection_Contact.prototype.handleArcToArcIntersection = function() { // FIXME: right here, create and add vars
+    console.log("HANDLING_INTERSECTION_CONTACT")
+
+
+    // let indexArray = parPathObj.arcToArcIndexArray
+    // let shapeCount = parPathObj.arcToArcCounter
+
+    // let shape = 'a2a'
+    // let prevPrevIndex = index - 2 // new
+    // let prevIndex = index - 1
+    // let thisIndex = index
+    // let nextIndex = index + 1
+    // let prevPrevParallelPathData = targetEndPointsParallelFull[prevPrevIndex] // new
+    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    // let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
+    // let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
+    // let origPathDataIndex = indexArray[shapeCount]
+    // let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    // // old
+    // // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
+    // // new
+    // let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self, index)
+
+
+    // if(intersectPoint) {
+    //     if(intersectPoint[0].doesIntersect === false) {
+    //         thisConnection.connected = false
+    //         // old
+    //         // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+    //         // new
+    //         createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+
+    //     } else {
+    //         // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
+    //         // old
+    //         // placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+    //         // new
+    //         placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+    //     }
+    // }
+
+
+
+}
+
+export {
+    Intersection_Contact
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, indexArray, shapeCount) {
 function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection) {

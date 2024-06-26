@@ -91,9 +91,11 @@ function handleFirctArcSegment(parFigure) {
         case !this.firstPosition(index):
             this.arcExist(index - 1) ?
                 // 3
-                thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
+                // thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
+                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() : // FIXME: right here
                 // 4
-                thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
+                // thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
+                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(); // FIXME: right here
             break
         // 5
         default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)

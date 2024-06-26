@@ -1,14 +1,16 @@
+import {LargeArcFlagSetter} from './LargeArcFlagSetter_Class.js'
+import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
 import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
-import { LargeArcFlagSetter } from './LargeArcFlagSetter_Class.js'
+
 
 function IntersectionHandler_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.ArcFlagSetter = new LargeArcFlagSetter(this.ParFigure)
+    this.Intersection_Contact = new Intersection_Contact(this.ParFigure)
+    
     this.intersectionHandlerObject = {
         isIntersectionConnected: null,
     }
-
-    console.log("88888888888888888888888888888888")
 }
 
 IntersectionHandler_WithArc.prototype.handleIntersection = function() {
@@ -61,12 +63,12 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
 }
 
 
-// WORKING
+// WORKING //FIXME: righthere
 //new
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
     // 3
     console.log("3_seg1")
-    handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection)
+    handleArcIntersectionArcToArc(this.ParFigure)
 //old
 // function arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
     // // 3
@@ -478,15 +480,16 @@ function handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEn
 //     handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection)
 // }
 //new
-function handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection) {
-    parPathObj.arcToArcCounter += 1
+function handleArcIntersectionArcToArc(parFigure) { //FIXME: righthere
+    // parPathObj.arcToArcCounter += 1
 
-    if (parPathObj.collectIndicesOfIntersections === true) {
-        parPathObj.arcToArcIndexArray.push(index);
-    }
+    // if (parPathObj.collectIndicesOfIntersections === true) {
+    //     parPathObj.arcToArcIndexArray.push(index);
+    // }
 
-    // handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj.arcToArcIndexArray, parPathObj.arcToArcCounter)
-    handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection)
+    // // handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj.arcToArcIndexArray, parPathObj.arcToArcCounter)
+    // handleArcToArcIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection)
+    this.Intersection_Contact.handleArcToArcIntersection()
 }
 
 
