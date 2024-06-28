@@ -17,42 +17,42 @@ Intersection_Contact.prototype.handleArcToArcIntersection = function() { // FIXM
     console.log("HANDLING_INTERSECTION_CONTACT")
 
 
-    // let indexArray = parPathObj.arcToArcIndexArray
-    // let shapeCount = parPathObj.arcToArcCounter
+    let indexArray = parPathObj.arcToArcIndexArray
+    let shapeCount = parPathObj.arcToArcCounter
 
-    // let shape = 'a2a'
-    // let prevPrevIndex = index - 2 // new
-    // let prevIndex = index - 1
-    // let thisIndex = index
-    // let nextIndex = index + 1
-    // let prevPrevParallelPathData = targetEndPointsParallelFull[prevPrevIndex] // new
-    // let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
-    // let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
-    // let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
-    // let origPathDataIndex = indexArray[shapeCount]
-    // let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
-    // // old
-    // // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
-    // // new
-    // let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self, index)
+    let shape = 'a2a'
+    let prevPrevIndex = index - 2 // new
+    let prevIndex = index - 1
+    let thisIndex = index
+    let nextIndex = index + 1
+    let prevPrevParallelPathData = targetEndPointsParallelFull[prevPrevIndex] // new
+    let prevParallelPathData = targetEndPointsParallelFull[prevIndex]
+    let thisParallelPathData = targetEndPointsParallelFull[thisIndex]
+    let nextParallelPathData = targetEndPointsParallelFull[nextIndex]
+    let origPathDataIndex = indexArray[shapeCount]
+    let thisOriginalPathData = a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[documentFigureCount][origPathDataIndex]
+    // old
+    // let intersectPoint = getArcToArcIntersections(thisParallelPathData[1], nextParallelPathData[1], thisOriginalPathData, self)
+    // new
+    let intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, self, index)
 
 
-    // if(intersectPoint) {
-    //     if(intersectPoint[0].doesIntersect === false) {
-    //         thisConnection.connected = false
-    //         // old
-    //         // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
-    //         // new
-    //         createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+    if(intersectPoint) {
+        if(intersectPoint[0].doesIntersect === false) {
+            thisConnection.connected = false
+            // old
+            // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
+            // new
+            createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
 
-    //     } else {
-    //         // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
-    //         // old
-    //         // placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
-    //         // new
-    //         placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
-    //     }
-    // }
+        } else {
+            // updateSVG_arcToArcIntersect_01(thisParallelPathData, nextParallelPathData, intersectPoint, thisOriginalPathData)
+            // old
+            // placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+            // new
+            placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+        }
+    }
 
 
 
