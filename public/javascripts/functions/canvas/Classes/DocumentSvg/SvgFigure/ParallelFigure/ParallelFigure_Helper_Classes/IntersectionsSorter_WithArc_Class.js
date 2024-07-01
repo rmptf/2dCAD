@@ -61,14 +61,14 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
 
 function handleDefaultArcIntersection(parFigure) {
     // 1
-    // arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
     console.log("A___1")
+    // arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
     parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {
         // case parPathObj.parallelPathSegmentCounter_FIRST === 0:
         case parFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST === 0:
             console.log("A___2")
-            handleFirctArcSegment(parFigure)
+            handleFirctArcSegment(parFigure) // FIXME: right here
             break
         default:
             console.log("A___3")
@@ -92,20 +92,23 @@ function handleFirctArcSegment(parFigure) {
             this.arcExist(index - 1) ?
                 // 3
                 // thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) :
-                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() : // FIXME: right here
+                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
                 // 4
                 // thisSorter.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj);
-                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(); // FIXME: right here
+                parFigure.IntersectionsSorter_WithArc.intersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc();
             break
         // 5
-        default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
+        // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
+        default: parFigure.IntersectionsSorter_WithArc.arcIntersection_firstArcSegment_fistIndex() //FIXME: right here
     }
     if(!this.firstPosition(index)) {
         switch(true) {
             // 6_A
-            case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
+            // // case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
+            // case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
             // 6_B
-            default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+            // // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+            // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
         }
     }
 }

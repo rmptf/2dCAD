@@ -1,51 +1,90 @@
-import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_point_03, updateSVG_highlight_1_point_04} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
+// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_point_03, updateSVG_highlight_1_point_04} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 
-function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, passedIndex, shape) {
-    let index
-    let indexer
-    let sideCode
-    if(shape === 'p2a'){
-        index = passedIndex
-        indexer = index
-        sideCode = "AAA"
-    }else if(shape === 'a2p'){
-        index = passedIndex
-        indexer = index + 1
-        sideCode = "BBB"
-    }else if(shape === 'a2a'){
-        index = passedIndex - 1
-        indexer = index + 1
-        sideCode = "CCC"
-    }
 
-    let thisSvgEndPointIndex = (index * 2) + 1
-    let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-    let thisSvgPathIndex = index + 1
-    let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
-    let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
-    let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + index + '_'))
 
-    self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
-    self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
-    self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')')
 
-    let doubleIndex = index * 2
-    a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2)
-    a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(index, 0, newParallelPath)
+// targetEndPoints,
+// refEndPointsPerp,
+// refEndPointsBase,
+// documentFigureCount,
+// self,
+// index,
+// parPathObj,
+// thisConnection
 
-    let parallelPathDataGLOBAL = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
-    let thisParPathData = parallelPathDataGLOBAL[index][0]
+// targetEndPointsParallelFull,
+// referenceEndPointsParallelPerpendicular,
+// referenceEndPointsBaseAndFillers,
+// documentFigureCount,
+// self,
+// index,
+// parPathObj,
+// thisConnection
 
-    parallelPathDataGLOBAL.splice(index, 0, [
-        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
-        {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
-    ])
 
-    referenceEndPointsParallelPerpendicular.splice(index, 0, [
-        {x: parallelPathDataGLOBAL[index][0].coords.x, y: parallelPathDataGLOBAL[index][0].coords.y},
-        {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
-    ])
-    referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
+// function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, passedIndex, shape) {
+    // referenceEndPointsParallelPerpendicular,   ==>       parallelFigurePathDatas_transformed
+    // referenceEndPointsBaseAndFillers,          ==>       originalFigurePathDatas_copy
+    // documentFigureCount,                       ==>       xxx
+    // self,                                      ==>       xxx
+
+function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, shape) {
+    console.log("createAndAddSvgElementAndUpdateDataArrays")
+    let parallelFigure = parallelFigure
+    let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_transformed
+    let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_copy
+    // let parallelEndPointGroup = parallelFigure.
+    // let parallelPathGroup = parallelFigure.
+
+
+
+    // let index
+    // let indexer
+    // let sideCode
+    // if(shape === 'p2a'){
+    //     index = passedIndex
+    //     indexer = index
+    //     sideCode = "AAA"
+    // }else if(shape === 'a2p'){
+    //     index = passedIndex
+    //     indexer = index + 1
+    //     sideCode = "BBB"
+    // }else if(shape === 'a2a'){
+    //     index = passedIndex - 1
+    //     indexer = index + 1
+    //     sideCode = "CCC"
+    // }
+
+    // let thisSvgEndPointIndex = (index * 2) + 1
+    // let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
+    // let thisSvgPathIndex = index + 1
+
+
+    // let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
+    // let newParallelEndPoint2 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
+    // let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + index + '_'))
+
+    // self.parallelEndPointGroup.insert(() => newParallelEndPoint1.node(), ':nth-child(' + thisSvgEndPointIndex + ')')
+    // self.parallelEndPointGroup.insert(() => newParallelEndPoint2.node(), ':nth-child(' + nextSvgEndPointIndex + ')')
+    // self.parallelPathGroup.insert(() => newParallelPath.node(), ':nth-child(' + thisSvgPathIndex + ')')
+
+    // let doubleIndex = index * 2
+    // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2)
+    // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(index, 0, newParallelPath)
+
+    // let parallelPathDataGLOBAL = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
+    // let thisParPathData = parallelPathDataGLOBAL[index][0]
+
+    // parallelPathDataGLOBAL.splice(index, 0, [
+    //     {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
+    //     {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}},
+    // ])
+
+    // referenceEndPointsParallelPerpendicular.splice(index, 0, [
+    //     {x: parallelPathDataGLOBAL[index][0].coords.x, y: parallelPathDataGLOBAL[index][0].coords.y},
+    //     {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
+    // ])
+    // referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 }
 
 export {
