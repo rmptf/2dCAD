@@ -99,16 +99,16 @@ function handleFirctArcSegment(parFigure) {
             break
         // 5
         // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject)
-        default: parFigure.IntersectionsSorter_WithArc.arcIntersection_firstArcSegment_fistIndex() //FIXME: right here
+        default: parFigure.IntersectionsSorter_WithArc.arcIntersection_firstArcSegment_fistIndex()
     }
     if(!this.firstPosition(index)) {
         switch(true) {
             // 6_A
-            // // case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
             // case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(targetEndPoints, parPathObj, index, self); break
+            case this.arcExist(index + 1): thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
             // 6_B
-            // // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
             // default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+            default: thisSorter.intersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc() //FIXME: right here
         }
     }
 }
