@@ -144,10 +144,11 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 function mouseMoveDrawParallel(thisFigure) {
     return function() {
         console.log("")
+        console.log("")
+        console.log("")
         console.log("START_SHAPE")
         console.log("")
-        console.log("")
-        console.log("")
+
         thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
         thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
         thisFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
