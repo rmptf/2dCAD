@@ -72,7 +72,9 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
         skipperCheckers: {
             skipperChecker_Path: false,
             skipperChecker_Arc: false
-        }
+        },
+
+        PARALLELPATHINITIATED: false
     }
     this.isDownDrawParallelActive = false
 
@@ -141,7 +143,11 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 
 function mouseMoveDrawParallel(thisFigure) {
     return function() {
-        console.log("START SHAPE")
+        console.log("")
+        console.log("START_SHAPE")
+        console.log("")
+        console.log("")
+        console.log("")
         thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
         thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
         thisFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
@@ -168,6 +174,7 @@ function mouseMoveDrawParallel(thisFigure) {
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
+                thisFigure.parallelFigure_updateSvg()
             }
         // }
     }
@@ -177,10 +184,19 @@ function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
     return function() {
         if (flag === false) {
             flag = true
+            console.log(thisFigure.parallelFigurePathDatas)
         } else {
+            console.log("")
+            console.log("FINISH_SHAPE")
+            console.log("")
+            
+            // isDownDrawParellelInitiated = false
             flag = false
             docSvgD3.on("mousemove", null)
             docSvgD3.on('click', null)
+            
+            // console.log(thisFigure.parallelFigurePathDatas)
+            // thisFigure.parallelFigure_updateSvg()
         }
     }
 }

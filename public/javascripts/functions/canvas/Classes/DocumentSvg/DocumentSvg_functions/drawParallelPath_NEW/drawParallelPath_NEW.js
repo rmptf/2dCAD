@@ -13,6 +13,10 @@ function drawParallelPathFunction_NEW(event, thisFigure) {
     let newParallalFigure = thisFigure.createParallelFigure()
     newParallalFigure.parallelFigure_updateSvg()
 
+    // parFigure.parallelFigurePathDatas[0][0].coords.x = 300
+    // parFigure.parallelFigurePathDatas[0][0].coords.y = 100
+    // parFigure.parallelFigure_updateSvg()
+
 
 
     

@@ -110,6 +110,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         if(isDownDrawParellelInitiated === true) {
+            console.log("adding_iterationCounter")
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
             if(parallelPathObject.iterationCounter === 1) {
                 parallelPathObject.parallelDistance = 0
