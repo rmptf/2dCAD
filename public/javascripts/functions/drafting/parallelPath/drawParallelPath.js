@@ -102,6 +102,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log(" ")
         console.log(" ")
         console.log("START SHAPE")
+        console.log(parallelPathObject.parallelDistance)
 
         parallelPathObject.counterOfArcsAsTheyArrive = -1
         parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false

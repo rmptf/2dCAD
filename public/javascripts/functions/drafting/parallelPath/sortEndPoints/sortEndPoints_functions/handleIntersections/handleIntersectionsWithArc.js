@@ -213,9 +213,10 @@ function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnec
 function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, logId) {
     // console.log(logId)
     let var1 = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+    targetEndPoints[index][1].arc.radius = var1
+
     console.log("okokokokok_1")
     console.log(var1)
-    targetEndPoints[index][1].arc.radius = var1
 }
 
 function setPerpendicularPoints(targetEndPoints, refEndPointsBase, targetIndex, refIndex, arcRefIndex, arcRadiusObject, target, setPrevious) {
