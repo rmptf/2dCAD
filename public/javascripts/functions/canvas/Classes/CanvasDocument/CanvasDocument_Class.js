@@ -92,19 +92,19 @@ function CanvasDocument(footer) {
     this.setActions()
     this.setClickEvents()
 
-    // OLD WAY OF DRAW
-    // OLD WAY OF DRAW
-    this.drawPathObj = {
-        self: [], // moving
-        m1: '',
-        isDown: false,
-        isDown2: false,
-        originalFigureCount: 0,
-        secondaryPathCount: 0,
-        previousDrawPathObj: null
-    }
-    // OLD WAY OF DRAW
-    // OLD WAY OF DRAW
+    // // OLD WAY OF DRAW
+    // // OLD WAY OF DRAW
+    // this.drawPathObj = {
+    //     self: [], // moving
+    //     m1: '',
+    //     isDown: false,
+    //     isDown2: false,
+    //     originalFigureCount: 0,
+    //     secondaryPathCount: 0,
+    //     previousDrawPathObj: null
+    // }
+    // // OLD WAY OF DRAW
+    // // OLD WAY OF DRAW
 }
 
 CanvasDocument.prototype.iterateCounters = function(vars){
@@ -138,10 +138,10 @@ CanvasDocument.prototype.setClickEvents = function() {
     }
 
     this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
-        NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
+        // NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
 
-        // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-        // thisCanvasDoc.actionStates.drawPathActive = true // NEW DRAW
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.drawPathActive = true // NEW DRAW
     }
     this.canvasDocActionBar01_btn069_htmlElement.onclick = function() {
         Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
@@ -149,24 +149,24 @@ CanvasDocument.prototype.setClickEvents = function() {
     }
     this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
         // console.log(this)
-        NEWselectAddCurvePoint() // OLD
+        // NEWselectAddCurvePoint() // OLD
 
-        // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-        // thisCanvasDoc.actionStates.addEndPointActive_curve = true // NEW
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.addEndPointActive_curve = true // NEW
     }
     this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
         // console.log(this)
-        NEWselectDrawParallelPath() // OLD
+        // NEWselectDrawParallelPath() // OLD
 
-        // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-        // thisCanvasDoc.actionStates.drawParallelPathAcive = true // NEW
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.drawParallelPathAcive = true // NEW
     }
     this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
         // console.log(this)
-        NEWselectMeasurePath() // OLD
+        // NEWselectMeasurePath() // OLD
 
-        // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-        // thisCanvasDoc.actionStates.measurePathActive = true // NEW
+        Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+        thisCanvasDoc.actionStates.measurePathActive = true // NEW
     }
     this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
         // console.log(this)
