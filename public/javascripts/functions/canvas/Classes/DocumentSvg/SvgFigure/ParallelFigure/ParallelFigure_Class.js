@@ -6,6 +6,7 @@ import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/docum
 import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
+import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
@@ -137,18 +138,21 @@ function addEndPoints(orig, thisFigure) {
 }
 
 ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
-    docSvgD3.on("mousemove", mouseMoveDrawParallel(this))
+    // docSvgD3.on("mousemove", mouseMoveDrawParallel(event, this))
+    let thisFigure = this
+    docSvgD3.on("mousemove", function(event) {
+        mouseMoveDrawParallel(event, thisFigure)
+    })
     docSvgD3.on("click", mouseDownDrawParallel(docSvgD3, this.isDownDrawParallelActive, this))
 }
 
-function mouseMoveDrawParallel(thisFigure) {
-    return function() {
+function mouseMoveDrawParallel(event, thisFigure) {
+    // return function() {
         console.log("")
         console.log("")
         console.log("")
         console.log("START_SHAPE")
         console.log("")
-        console.log(thisFigure.parallelFigureObject.parallelDistance)
 
         thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
         thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -163,7 +167,13 @@ function mouseMoveDrawParallel(thisFigure) {
             } else {
                 // thisFigure.parallelFigureObject.parallelDistance = findParallelDistance(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL], secondaryPathClicked, event)
                 // thisFigure.parallelFigureObject.parallelDistance = 0
-                thisFigure.parallelFigureObject.parallelDistance = 50
+
+                // findParallelDistance(thisFigure.originalFigurePathDatas, 0, event)
+                let parallelDistance = findParallelDistance(thisFigure.originalFigurePathDatas, 0, event)  //FIXME: find correct secondaryPathIndex (currently hardset to "0")
+                thisFigure.parallelFigureObject.parallelDistance = parallelDistance
+                // console.log("okokokokokokokok")
+                // console.log(parallelDistance)
+                // thisFigure.parallelFigureObject.parallelDistance = -100
             }
 
             for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
@@ -180,7 +190,19 @@ function mouseMoveDrawParallel(thisFigure) {
                 thisFigure.parallelFigure_updateSvg()
             }
         // }
-    }
+
+        // Reset 
+        thisFigure.parallelFigureObject.collectIndicesOfIntersections = false
+        thisFigure.parallelFigureObject.pathToArcCounter = -1
+        thisFigure.parallelFigureObject.arcToPathCounter = -1
+        thisFigure.parallelFigureObject.arcToArcCounter = -1
+
+        console.log("ENDSHAPE")
+        console.log(" ")
+        console.log(" ")
+        console.log(" ")
+
+    // }
 }
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {

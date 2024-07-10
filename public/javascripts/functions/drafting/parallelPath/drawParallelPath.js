@@ -177,7 +177,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.arcToPathCounter = -1
         parallelPathObject.arcToArcCounter = -1
 
-        console.log("ENDSHAPE")
+        console.log("ENDSHAPEererere")
         console.log(" ")
         console.log(" ")
         console.log(" ")

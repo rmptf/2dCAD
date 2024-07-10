@@ -9,7 +9,6 @@ thisConnection.connected = true
 
 // done
 function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
-    //FIXME:
     // 1
     console.log("1_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
@@ -22,7 +21,6 @@ function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, r
 }
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
-    //FIXME:
     // 2
     console.log("2_seg1_first_all")
     parPathObj.parallelPathSegmentCounter_FIRST = parPathObj.parallelPathSegmentCounter_FIRST + 1
@@ -41,7 +39,6 @@ function arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc(targetEn
 }
 // done
 function arcIntersection_firstArcSegment_fistIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
-    //FIXME:
     // 5
     console.log("5_seg1")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index, index + 1, arcRadiusObject, 0, false)
@@ -61,7 +58,6 @@ function arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc(targetEndPoin
 }
 // done
 function arcIntersection_secondArcSegment_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, arcRadiusObject, parPathObj, self) {
-    //FIXME:
     // 7
     console.log("7_seg2_first_all")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index, index + 1, arcRadiusObject, 0, true)
@@ -87,7 +83,6 @@ function arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc(targetEn
 }
 // done
 function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPointsBase, index, arcRadiusObject) {
-    //FIXME:
     // 10
     console.log("10_seg2")
     setPerpendicularPoints(targetEndPoints, refEndPointsBase, index, index + 1, index + 1, arcRadiusObject, 1, false)
@@ -95,7 +90,6 @@ function arcIntersection_secondArcSegment_lastIndex(targetEndPoints, refEndPoint
 }
 // done
 function arcIntersection_secondArcSegment_everyIndex_lastAction(targetEndPoints, parPathObj, index, self) {
-    //FIXME:
     // 11
     console.log("11_seg2_last_all")
     parPathObj.parallelPathSegmentCounter_FIRST = -1
@@ -214,9 +208,6 @@ function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcR
     // console.log(logId)
     let var1 = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
     targetEndPoints[index][1].arc.radius = var1
-
-    console.log("okokokokok_1")
-    console.log(var1)
 }
 
 function setPerpendicularPoints(targetEndPoints, refEndPointsBase, targetIndex, refIndex, arcRefIndex, arcRadiusObject, target, setPrevious) {
@@ -227,11 +218,6 @@ function setPerpendicularPoints(targetEndPoints, refEndPointsBase, targetIndex, 
     let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusObject.parDistAndDir)
     targetPathData.coords.x = newParallelPosition[0]
     targetPathData.coords.y = newParallelPosition[1]
-    // targetPathData.coords.x = 100
-    // targetPathData.coords.y = 200
-
-    console.log("okokokokok_2")
-    console.log(newParallelPosition)
 
     if (setPrevious) {
         let prevParallelPathData = targetEndPoints[targetIndex - 1][1]

@@ -501,16 +501,12 @@ function handleLargeArcFlag(parFigure, flag) {
     // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
 //new
 function setArcRadius(parFigure, indexModifier, logId) {
-    console.log(logId)
+    // console.log(logId)
     let targetArray = parFigure.parallelFigurePathDatas
     let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier)
-    let targetArcRadius = targetArray[index][1].arc.arcRadiusObject
+    let parallelDistance = calcArcParDistance(parFigure)
 
-    let var1 = calcArcParDistance(parFigure)
-    console.log("okokokokok_1")
-    console.log(var1)
-
-    targetArcRadius = var1
+    targetArray[index][1].arc.radius = parallelDistance
 }
 
 
@@ -556,11 +552,6 @@ function setPerpendicularPoints(parFigure, indicators, setPrevious) { // change 
     let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusData)
     targetPathData.coords.x = newParallelPosition[0]
     targetPathData.coords.y = newParallelPosition[1]
-    // targetPathData.coords.x = 100
-    // targetPathData.coords.y = 200
-
-    console.log("okokokokok_2")
-    console.log(newParallelPosition)
 
     if (setPrevious) {
         let prevParallelPathData = parallelPathDatas[targetIndex - 1][1]
@@ -780,24 +771,16 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 //new
 function calcArcParDistance(parFigure) {
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
-    let arcRadiusParDistAndDir = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir
     let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index + 1]
     let distance = parFigure.parallelFigureObject.parallelDistance
 
-    arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+    parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+
+    let arcRadiusParDistAndDir = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
     return nextArcToCenterMinusPointerToArcFromArc1
 }
-
-
-
-
-
-
-
-
-
 
 export {
     IntersectionHandler_WithArc
