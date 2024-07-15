@@ -109,8 +109,8 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
     this.svgEndPoints.splice(index, 0, newEndPoint_curve)
 }
 
-SvgFigure.prototype.createParallelFigure = function() {
-    let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML)
+SvgFigure.prototype.createParallelFigure = function(sectionIndex) {
+    let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML, sectionIndex)
     this.parallelFigure = newParallelFigure
 
     return newParallelFigure

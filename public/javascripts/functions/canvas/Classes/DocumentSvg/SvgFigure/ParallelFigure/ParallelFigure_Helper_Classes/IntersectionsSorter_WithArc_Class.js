@@ -39,7 +39,7 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
             case this.isJoiner(index):
             case this.isJoiner(index - 1):
                 console.log('1___')
-                // handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
+                handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
                 break
             default:
                 console.log('2___')
@@ -147,28 +147,36 @@ function handleSecondArcSegment(parFigure, intXSorter) {
 
 //FIXME: right here
 function handleDisconnectedArcIntersection(parFigure, intXSorter) {
-    let index = thisSorter.intersectionSorterObject.index
+    // let index = thisSorter.intersectionSorterObject.index
+    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
     switch(true) {
         // 1_Joiner
-        case this.joinerType(index, "AAA"): thisSorter.intersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
-        case this.joinerType(index - 1, "AAA"): 
-            this.arcExist(index + 1) ?
+        // case this.joinerType(index, "AAA"): thisSorter.intersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
+        case intXSorter.joinerType(index, "AAA"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
+        case intXSorter.joinerType(index - 1, "AAA"): 
+        intXSorter.arcExist(index + 1) ?
                 // 2_A_Joiner
-                thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
+                // thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
+                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() // TODO: (Set_arcRad)
                 :
                 // 2_B_Joiner
-                thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+                // thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj)
+                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
             break
         // 3_Joiner
-        case this.joinerType(index, "CCC"): thisSorter.intersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); break
+        // case this.joinerType(index, "CCC"): thisSorter.intersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); break
+        case intXSorter.joinerType(index, "CCC"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
         // 4_Joiner
-        case this.joinerType(index - 1, "CCC"):
-            thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); // TODO: (Set_arcRad)
+        case intXSorter.joinerType(index - 1, "CCC"):
+            // thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject); // TODO: (Set_arcRad)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); // TODO: (Set_arcRad)
             break
         // 5_Joiner
-        case this.joinerType(index, "BBB"): thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
+        // case this.joinerType(index, "BBB"): thisSorter.intersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj); break
+        case intXSorter.joinerType(index, "BBB"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         // 6_Joiner
-        case skipperCheckers.skipperChecker_Arc: thisSorter.intersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj)
+        // case skipperCheckers.skipperChecker_Arc: thisSorter.intersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj)
+        case parFigure.skipperCheckers.skipperChecker_Arc: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
     }
 }
 

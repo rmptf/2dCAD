@@ -26,6 +26,7 @@ SvgPathSecondary.prototype.createSvgPath = function(index) {
 }
 
 SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
+    let clickedIndex = this.thisFigure.svgPaths.secondaryPaths.indexOf(this)
     if(
         actionStates.addEndPointActive === false &&
         actionStates.addEndPointActive_curve === false &&
@@ -46,7 +47,7 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')
 
-        drawParallelPathFunction_NEW(event, this.thisFigure)
+        drawParallelPathFunction_NEW(event, this.thisFigure, clickedIndex)
 
         actionStates.drawParallelPathAcive = false
     } else if(actionStates.measurePathActive === true) {

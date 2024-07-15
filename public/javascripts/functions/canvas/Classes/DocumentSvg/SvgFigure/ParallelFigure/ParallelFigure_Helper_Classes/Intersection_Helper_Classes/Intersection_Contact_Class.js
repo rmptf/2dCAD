@@ -1,8 +1,16 @@
 // import {createAndAddSvgElementAndUpdateDataArrays} from './addSvgElement.js'
 // import {getPathToArcIntersections, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
+// import {findLineMidpoint} from '../../../../math/mathFunctions.js'
+
 // // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
 // // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
-// import {findLineMidpoint} from '../../../../math/mathFunctions.js'
+
+
+import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_functions/createParallelPathCornerElements_NEW.js'
+import {getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
+
+
+
 
 function Intersection_Contact(parallelFigure) {
     this.ParFigure = parallelFigure

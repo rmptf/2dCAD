@@ -10,7 +10,7 @@ import {findParallelDistance} from './parallelFigure_functions/parallelPathFunct
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
-function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
+function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.SVGGROUPSDATA = {
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
@@ -48,6 +48,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml) {
     // Svg Elements
 
     this.parallelFigureObject = {
+        sectionClickedIndex: sectionIndex,
         pathToArcCounter: -1,
         arcToPathCounter: -1,
         arcToArcCounter: -1,
@@ -169,7 +170,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // thisFigure.parallelFigureObject.parallelDistance = 0
 
                 // findParallelDistance(thisFigure.originalFigurePathDatas, 0, event)
-                let parallelDistance = findParallelDistance(thisFigure.originalFigurePathDatas, 0, event)  //FIXME: find correct secondaryPathIndex (currently hardset to "0")
+                let parallelDistance = findParallelDistance(thisFigure.originalFigurePathDatas, thisFigure.parallelFigureObject.sectionClickedIndex, event)
                 thisFigure.parallelFigureObject.parallelDistance = parallelDistance
                 // console.log("okokokokokokokok")
                 // console.log(parallelDistance)
@@ -230,16 +231,27 @@ ParallelFigure.prototype.parallelFigure_updateSvg = function() {
     updateSVG_thisSvgParallelFigure(this)
 }
 
+
+ParallelFigure.prototype.createParallelPathData = function(passedPathData, index) {
+    let pathDatas = []
+    for (let i = 0; i < passedPathData.length; i++) {
+        let newPathData = new PathData()
+        newPathData.setAllData(passedPathData[i])
+        pathDatas.push(newPathData)
+    }
+    this.parallelFigurePathDatas.splice(index, 0, pathDatas)
+}
+
 ParallelFigure.prototype.createParallelPath = function(index) {
     let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index)
-    this.svgPaths.parallelPaths.push(newParallelPath)
-    
-    return newParallelPath
+    // this.svgPaths.parallelPaths.push(newParallelPath)
+    this.svgPaths.parallelPaths.splice(index, 0, newParallelPath)
 }
 
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
     let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index)
-    this.svgEndPoints.push(newEndPointParallel)
+    // this.svgEndPoints.push(newEndPointParallel)
+    this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }
 
 export {
