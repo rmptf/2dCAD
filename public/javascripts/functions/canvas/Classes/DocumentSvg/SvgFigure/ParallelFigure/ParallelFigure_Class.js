@@ -243,15 +243,27 @@ ParallelFigure.prototype.createParallelPathData = function(passedPathData, index
 }
 
 ParallelFigure.prototype.createParallelPath = function(index) {
-    let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index)
+    let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index, false)
     // this.svgPaths.parallelPaths.push(newParallelPath)
     this.svgPaths.parallelPaths.splice(index, 0, newParallelPath)
 }
 
+ParallelFigure.prototype.createFillerParallelPath = function(index, index2) {
+    let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index, true)
+    // this.svgPaths.parallelPaths.push(newParallelPath)
+    this.svgPaths.parallelPaths.splice(index2, 0, newParallelPath)
+}
+
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
-    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index)
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false)
     // this.svgEndPoints.push(newEndPointParallel)
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
+}
+
+ParallelFigure.prototype.createFillerParallelEndPoint = function(pathData, index, index2) {
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true)
+    // this.svgEndPoints.push(newEndPointParallel)
+    this.svgEndPoints.splice(index2, 0, newEndPointParallel)
 }
 
 export {

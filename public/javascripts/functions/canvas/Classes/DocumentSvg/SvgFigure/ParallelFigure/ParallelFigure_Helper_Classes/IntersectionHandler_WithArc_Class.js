@@ -783,6 +783,9 @@ function calcArcParDistance(parFigure) {
     let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index + 1]
     let distance = parFigure.parallelFigureObject.parallelDistance
 
+    console.log("okokokplplpl")
+    console.log(nextRefEndPointBase)
+
     parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
 
     let arcRadiusParDistAndDir = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir

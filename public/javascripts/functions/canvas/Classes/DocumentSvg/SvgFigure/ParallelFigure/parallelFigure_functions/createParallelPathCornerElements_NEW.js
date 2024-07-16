@@ -69,6 +69,10 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     // let parallelPathDataGLOBAL = parallelFigurePathDatas
     // let thisParPathData = parallelFigurePathDatas[index][0]
 
+
+    //TODO: 
+    // issues might be here
+    
     // // parallelFigurePathDatas
     let thisParPathData = parallelFigurePathDatas[index][0]
     let data1 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode, pooper: 'poop'}}
@@ -101,10 +105,14 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     //TODO:
     // find way to add joiner classes
     // maybe make sure index are correct
+    // these seem corrent now, maybe check above
 
     //FIXME: righthere
-    parallelFigure.createParallelEndPoint(data1, thisSvgEndPointIndex)
-    parallelFigure.createParallelEndPoint(data2, nextSvgEndPointIndex)
+    let doubleIndex = index * 2
+    console.log("ewewewew")
+    console.log(thisSvgEndPointIndex, nextSvgEndPointIndex, doubleIndex)
+    parallelFigure.createFillerParallelEndPoint(data1, thisSvgEndPointIndex - 1, doubleIndex)
+    parallelFigure.createFillerParallelEndPoint(data2, nextSvgEndPointIndex - 1, doubleIndex)
     //FIXME: righthere
 
     // let newParallelEndPoint1 = (self.parallelEndPointGroup.append('circle').attr('class', 'endPoint parallelEndPoint joiner_' + index + '_'))
@@ -117,7 +125,9 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
 
     //FIXME: righthere
-    parallelFigure.createParallelPath(thisSvgPathIndex)
+    console.log("ewewewew")
+    console.log(thisSvgPathIndex, index)
+    parallelFigure.createFillerParallelPath(thisSvgPathIndex - 1, index)
     //FIXME: righthere
 
     // let newParallelPath = (self.parallelPathGroup.append('path').attr('class', 'path parallelPath joiner_' + index + '_'))
