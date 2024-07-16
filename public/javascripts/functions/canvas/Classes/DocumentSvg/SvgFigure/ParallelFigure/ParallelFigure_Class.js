@@ -88,6 +88,8 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.setParallelFigureClickEvents(docSvgD3)
 }
 
+// targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount
+
 // PASSED
 // parallelFigurePathDatas,
 // parallelFigurePathDatas_transformed,

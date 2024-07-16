@@ -206,6 +206,9 @@ function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnec
 
 function setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, logId) {
     // console.log(logId)
+    console.log('oksofksdof')
+    console.log(index + 1)
+    console.log(refEndPointsBase)
     let var1 = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
     targetEndPoints[index][1].arc.radius = var1
 }
@@ -329,6 +332,8 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 
 // TODO: (in two places at once rn, find a place for it)
 function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
+    console.log('odfodfkdkfdofkd')
+    console.log(nextRefEndPointBase)
     arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir

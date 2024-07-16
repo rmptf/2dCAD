@@ -2,6 +2,7 @@ import {LargeArcFlagSetter} from './LargeArcFlagSetter_Class.js'
 import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
 import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
+import {handleArcToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -301,10 +302,12 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     this.ParFigure.parallelFigureObject.arcToArcCounter += 1
     setArcRadius(this.ParFigure, 1, "arcRad_4J") // TODO: (Set_arcRad)
     // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1) (HAVENT STARTED TO FIX)
+    
+    handleArcToArcIntersectionNoContact(this.ParFigure, -1)
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
     this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
     this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
-
+}
 //old
 // function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
     // // 3_Joiner
@@ -315,7 +318,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // parPathObj.parallelPathSegmentCounter_FIRST = 0
     // parPathObj.setThisArcFlag_at4Joiner_from3Joiner = true // TODO: (Set_largeArcFag)
     // parPathObj.setPrevArcFlag_atFinal_from3Joiner = true // TODO: (Set_largeArcFag)
-}
+// }
 
 
 
@@ -511,7 +514,7 @@ function setArcRadius(parFigure, indexModifier, logId) {
     // console.log(logId)
     let targetArray = parFigure.parallelFigurePathDatas
     let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier)
-    let parallelDistance = calcArcParDistance(parFigure)
+    let parallelDistance = calcArcParDistance(parFigure, index)
 
     targetArray[index][1].arc.radius = parallelDistance
 }
@@ -778,13 +781,10 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 //     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
 //     return nextArcToCenterMinusPointerToArcFromArc1
 //new
-function calcArcParDistance(parFigure) {
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
-    let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index + 1]
+function calcArcParDistance(parFigure, modifiedIdex) {
+    let index = modifiedIdex + 1
+    let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index]
     let distance = parFigure.parallelFigureObject.parallelDistance
-
-    console.log("okokokplplpl")
-    console.log(nextRefEndPointBase)
 
     parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
 

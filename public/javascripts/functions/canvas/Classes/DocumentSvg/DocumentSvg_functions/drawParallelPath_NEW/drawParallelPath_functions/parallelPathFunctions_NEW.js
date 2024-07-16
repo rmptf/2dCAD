@@ -316,7 +316,8 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
     return newPoint
 }
 
-function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData, self) {
+// function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData, self) {
+function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData) {
     let x1 = firstParallelPathData.arc.center.x
     let y1 = firstParallelPathData.arc.center.y
     let r1 = firstParallelPathData.arc.radius

@@ -33,6 +33,7 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
     a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 0, newParallelEndPoint1, newParallelEndPoint2)
     a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(index, 0, newParallelPath)
 
+
     let parallelPathDataGLOBAL = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
     let thisParPathData = parallelPathDataGLOBAL[index][0]
 
@@ -46,6 +47,23 @@ function createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPer
         {x: parallelPathDataGLOBAL[index][1].coords.x, y: parallelPathDataGLOBAL[index][1].coords.y}
     ])
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
+
+
+    // console.log("dfsdfsdfsdfsdfsdf")
+    // console.log(a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
+    // console.log(a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
+
+    // console.log('okokkokokdsfsdfok')
+    // console.log(parallelPathDataGLOBAL)
+    // console.log(referenceEndPointsParallelPerpendicular)
+    // console.log(referenceEndPointsBaseAndFillers)
+    // console.log('index')
+    // console.log(passedIndex)
+    // console.log(index)
+    // console.log(indexer)
+    // console.log(thisSvgEndPointIndex)
+    // console.log(nextSvgEndPointIndex)
+    // console.log(thisSvgPathIndex)
 }
 
 export {

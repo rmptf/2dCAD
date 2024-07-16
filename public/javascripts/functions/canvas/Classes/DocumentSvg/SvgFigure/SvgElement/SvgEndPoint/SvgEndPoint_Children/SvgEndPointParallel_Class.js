@@ -28,7 +28,6 @@ SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {
     console.log('parallelEndPoint clicked.')
 }
 
-
 export {
     SvgEndPointParallel
 }
