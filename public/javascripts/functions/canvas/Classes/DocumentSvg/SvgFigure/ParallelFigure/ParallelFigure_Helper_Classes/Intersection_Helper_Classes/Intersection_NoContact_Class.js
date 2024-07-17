@@ -187,23 +187,58 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
         let nextIndex = index + 2
         let doubleIndex = thisIndex * 2
 
-        // Remove elements from various arrays
-        a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-        a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
-        referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
 
-        let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-        let svgPathGroup = self.parallelPathGroup._groups[0][0]
-        let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-        let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-        let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+        // Remove elements from various arrays ???
+        // referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
+        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
 
         // Remove SVG elements from the DOM
-        firstAddedSvgEndPoint.remove()
-        secondAddedSvgEndPoint.remove()
-        addedSvgPath.remove()
+        // Select Elements
+        let parGroupsGroup = parFigure.svgGroups.secondarySvgGroupElements
+        let svgEndPointGroup = parFigure.svgEndPoints
+        let svgPathGroup = parFigure.svgPaths.parallelPaths
+
+        let firstAddedSvgEndPoint = svgEndPointGroup[doubleIndex + 1]
+        let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
+        let addedSvgPath = svgPathGroup[thisIndex]
+
+        // console.log("sdfsdfs")
+        // console.log(firstAddedSvgEndPoint)
+        // console.log(secondAddedSvgEndPoint)
+        // console.log(addedSvgPath)
+
+        // Remove Elements
+        firstAddedSvgEndPoint.svgElementObject.remove()
+        secondAddedSvgEndPoint.svgElementObject.remove()
+        addedSvgPath.svgElementObject.remove()
+        // Remove Classes???
+        // svgEndPointGroup.splice(doubleIndex + 1, 1)
+        // svgEndPointGroup.splice(doubleIndex, 1)
+        // svgPathGroup.splice(thisIndex, 1)
+
+
+
+
+
+
+
+        // // Remove elements from various arrays
+        // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
+        // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+        // a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
+        // referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
+        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
+
+        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
+        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
+        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
+        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
+        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
+
+        // // Remove SVG elements from the DOM
+        // firstAddedSvgEndPoint.remove()
+        // secondAddedSvgEndPoint.remove()
+        // addedSvgPath.remove()
     }
 }
 
