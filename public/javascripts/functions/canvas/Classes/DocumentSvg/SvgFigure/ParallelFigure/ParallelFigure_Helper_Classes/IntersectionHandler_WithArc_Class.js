@@ -294,15 +294,13 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT / done_ithink
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function() {
     // 3_Joiner
     console.log("3_Joiner_ooo")
     this.ParFigure.parallelFigureObject.arcToArcCounter += 1
     setArcRadius(this.ParFigure, 1, "arcRad_4J") // TODO: (Set_arcRad)
-    // handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1) (HAVENT STARTED TO FIX)
-    
     handleArcToArcIntersectionNoContact(this.ParFigure, -1)
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
     this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
@@ -690,7 +688,7 @@ function handleArcIntersectionPathToArc(parFigure, intHandler) {
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT /  / done_ithink
 // //old
 // function handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection) {
 //     parPathObj.arcToArcCounter += 1

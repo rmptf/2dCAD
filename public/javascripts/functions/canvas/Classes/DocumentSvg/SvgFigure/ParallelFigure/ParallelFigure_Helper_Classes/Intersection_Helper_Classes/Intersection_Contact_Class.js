@@ -60,7 +60,7 @@ Intersection_Contact.prototype.handleArcToArcIntersection = function() {
             // thisConnection.connected = false
             intersectionHandler.intersectionHandlerObject.isIntersectionConnected = false
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
-            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, nextIndex, shape) // FIXME: not finishing yet
+            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, nextIndex, shape) // FIXME: not finishing yet / done_ithink
         } else {
             placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
         }
