@@ -50,7 +50,7 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
             case this.isJoiner(index):
             // case this.isJoiner(index - 1):
                 console.log('3___')
-                // handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
+                handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
                 break
             default:
                 console.log('4___')
