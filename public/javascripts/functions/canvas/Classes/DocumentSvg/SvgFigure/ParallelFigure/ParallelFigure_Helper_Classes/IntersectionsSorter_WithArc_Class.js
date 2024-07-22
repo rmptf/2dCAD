@@ -3,8 +3,8 @@ import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.j
 function IntersectionsSorter_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_WithArc(this.ParFigure)
-
     this.parallelPathDatas = this.ParFigure.parallelFigurePathDatas
+    
     this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
     this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true

@@ -305,6 +305,8 @@ function sort_endPoint_noArc(
                 noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
             }
         }
+    } else {
+        console.log("oksfoksfoksfoksdofksdofksdofk")
     }
 }
 

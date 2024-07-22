@@ -22,6 +22,10 @@ IntersectionHandler_WithArc.prototype.handleIntersection = function() {
 // thisConnection.connected = true
 
 
+export {
+    IntersectionHandler_WithArc
+}
+
 
 
 // WORKING / needschecking
@@ -790,8 +794,4 @@ function calcArcParDistance(parFigure, modifiedIdex) {
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
     return nextArcToCenterMinusPointerToArcFromArc1
-}
-
-export {
-    IntersectionHandler_WithArc
 }
