@@ -67,9 +67,12 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
 
         //FIXME:
         // let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
-        this.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
+        this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js //FIXME: double check
         // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
-        this.parallelProjections = calcParallelProjections(this.ParFigure)
+        this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure) //FIXME: not working
+
+        console.log("okoskfokdsfoksok")
+        console.log(this.intersectionSorterObject.pathDatasOutside)
 
 
         // AA_FIRST_ALL
@@ -149,9 +152,9 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
 
 // function getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) {
 function getRefPointAtIndexIfNotFiller(parFigure) {
-    let refEndPointsBase = null
-    let index = null
-    let parPathObj = null
+    let refEndPointsBase = parFigure.originalFigurePathDatas_copy
+    let index = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
+    let parPathObj = parFigure.parallelFigureObject
 
     let thisPathDataOutside
     let nextPathDataOutside
@@ -199,9 +202,10 @@ function getRefPointAtIndexIfNotFiller(parFigure) {
 // Write a good comment to describe this function
 // function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, parallelDistance) {
 function calcParallelProjections(parFigure) {
-    let thisPathDataCoords = null
-    let nextPathDataCoords = null
-    let parallelDistance = null
+    
+    let thisPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside
+    let nextPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.parallelProjections
+    let parallelDistance = parFigure.parallelFigureObject.parallelDistance
 
     let thisPathDataCoordsX = thisPathDataCoords.x
     let thisPathDataCoordsY = thisPathDataCoords.y
