@@ -64,34 +64,29 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         // const firstPosition = (newIndex) => (newIndex) === 0
         // const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
 
-
-        //FIXME:
         // let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
-        this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js //FIXME: double check
+        this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
         // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
-        this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure) //FIXME: not working
-
-        console.log("okoskfokdsfoksok")
-        console.log(this.intersectionSorterObject.pathDatasOutside)
-
+        this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure)
 
         // AA_FIRST_ALL
         // noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
-        // this.IntersectionHandler.noArcIntersection_setPerpRefEndPointsToParallelProjections()
+        this.IntersectionHandler.noArcIntersection_setPerpRefEndPointsToParallelProjections()
 
-        // if (this.firstPosition(index)) {
-        //     // A
-        //     // noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
-        //     // this.IntersectionHandler.noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
-        //     // if(targetEndPoints.length !== 1) {
-        //     if(parallelPathDatas.length !== 1) {
-        //         if(this.arcExist(index + 1)) {
-        //             // B
-        //             // noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        //             this.IntersectionHandler.noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        //         }
-        //     }
-        // }
+        if (this.firstPosition(index)) {
+            // A
+            // noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
+            this.IntersectionHandler.noArcIntersection_firstPos()
+
+            // if(targetEndPoints.length !== 1) {
+            if(this.parallelPathDatas.length !== 1) {
+                if(this.arcExist(index + 1)) {
+                    // B
+                    // noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+                    this.IntersectionHandler.noArcIntersection_firstPos_nextIndexIsArc()
+                }
+            }
+        }
 
         // if (!this.firstPosition(index) && !this.lastPosition(index)) {
         //     if(!this.arcExist(index - 1)) {
@@ -202,9 +197,8 @@ function getRefPointAtIndexIfNotFiller(parFigure) {
 // Write a good comment to describe this function
 // function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, parallelDistance) {
 function calcParallelProjections(parFigure) {
-    
-    let thisPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside
-    let nextPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.parallelProjections
+    let thisPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[0]
+    let nextPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[1]
     let parallelDistance = parFigure.parallelFigureObject.parallelDistance
 
     let thisPathDataCoordsX = thisPathDataCoords.x
