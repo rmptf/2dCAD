@@ -68,6 +68,8 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
         // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
         this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure)
+        console.log("09090909909")
+        console.log(this.intersectionSorterObject.parallelProjections)
 
         // AA_FIRST_ALL
         // noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
@@ -93,24 +95,24 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
                 if(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
                     // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
+                    this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
                 } else {
                     // D (C+)
                     // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
-                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
+                    this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
                 }
                 // E (DC After)
                 // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
+                this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
             } else {
                 // F (E)
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
+                this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
                 // empty
             }
             if(this.arcExist(index + 1) && !this.arcExist(index - 1)) {
                 // G (F)
                 // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc()
+                this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc()
             }
         }
     
@@ -118,38 +120,38 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         //FIXME: needs works
         //FIXME: needs works
         // TODO: Orgnazine Better
-        checkForAndRunLastPosition()
-        function checkForAndRunLastPosition() {
-            if (this.lastPosition(index)) {
-                if(!this.firstPosition(index)) {
-                    if(!this.arcExist(index - 1)) {
+        checkForAndRunLastPosition(this)
+        function checkForAndRunLastPosition(thisFigure) {
+            if (thisFigure.lastPosition(index)) {
+                if(!thisFigure.firstPosition(index)) {
+                    if(!thisFigure.arcExist(index - 1)) {
                         // if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-                        if(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
+                        if(thisFigure.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
                             // H (Ga)
                             // noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
+                            thisFigure.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
                         } else {
                             // J (G+)
                             // noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
-                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment()
+                            thisFigure.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment()
                         }
                         // K (G After)
-                        noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments()
+                        thisFigure.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments()
                     } else {
                         // L (H)
                         // TODO: fix this
                         let prevJoiner = false
-                        if(this.isJoiner(index - 1)) {
+                        if(thisFigure.isJoiner(index - 1)) {
                             prevJoiner = true
                         }
                         // noArcIntersection_notFirstPos_lastPos_prevIndexIsArc(targetEndPoints, parPathObj, index, self, prevJoiner) // empty
-                        noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
+                        thisFigure.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
                         return;
                     }
                 }
                 // M (Ia)
                 // noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-                noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction()
+                thisFigure.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction()
             }
         }
     }
@@ -226,6 +228,15 @@ function calcParallelProjections(parFigure) {
     // Function to calculate projected anchor points based on input coordinates and parallel distance
     let calcProjection = (coordVal, trigRatio, distance, subtract) => subtract ? coordVal - (distance * trigRatio) : coordVal + (distance * trigRatio)
 
+    console.log("23232131")
+    console.log(
+        {
+            thisPointX: calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true),
+            thisPointY: calcProjection(thisPathDataCoordsY, cosValue, parallelDistance, false),
+            nextPointX: calcProjection(nextPathDataCoordsX, sinValue, parallelDistance, true),
+            nextPointY: calcProjection(nextPathDataCoordsY, cosValue, parallelDistance, false)
+        }
+    )
     // Calculate the anchor points
     return {
         thisPointX: calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true),
