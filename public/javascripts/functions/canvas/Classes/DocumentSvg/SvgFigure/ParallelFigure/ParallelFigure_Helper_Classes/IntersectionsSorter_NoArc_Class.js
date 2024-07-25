@@ -90,7 +90,7 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
 
         if (!this.firstPosition(index) && !this.lastPosition(index)) {
             if(!this.arcExist(index - 1)) {
-                if( this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
+                if(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
                     // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
                     noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
@@ -114,36 +114,44 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
             }
         }
     
-        // // TODO: Orgnazine Better
-        // checkForAndRunLastPosition()
-        // function checkForAndRunLastPosition() {
-        //     if (this.lastPosition(index)) {
-        //         if(!this.firstPosition(index)) {
-        //             if(!this.arcExist(index - 1)) {
-        //                 if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-        //                     // H (Ga)
-        //                     noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-        //                 } else {
-        //                     // J (G+)
-        //                     noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
-        //                 }
-        //                 // K (G After)
-        //                 noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-        //             } else {
-        //                 // L (H)
-        //                 // TODO: fix this
-        //                 let prevJoiner = false
-        //                 if(this.isJoiner(index - 1)) {
-        //                     prevJoiner = true
-        //                 }
-        //                 noArcIntersection_notFirstPos_lastPos_prevIndexIsArc(targetEndPoints, parPathObj, index, self, prevJoiner) // empty
-        //                 return;
-        //             }
-        //         }
-        //         // M (Ia)
-        //         noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        //     }
-        // }
+        //FIXME: needs works
+        //FIXME: needs works
+        //FIXME: needs works
+        // TODO: Orgnazine Better
+        checkForAndRunLastPosition()
+        function checkForAndRunLastPosition() {
+            if (this.lastPosition(index)) {
+                if(!this.firstPosition(index)) {
+                    if(!this.arcExist(index - 1)) {
+                        // if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
+                        if(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
+                            // H (Ga)
+                            // noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
+                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
+                        } else {
+                            // J (G+)
+                            // noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
+                            noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment()
+                        }
+                        // K (G After)
+                        noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments()
+                    } else {
+                        // L (H)
+                        // TODO: fix this
+                        let prevJoiner = false
+                        if(this.isJoiner(index - 1)) {
+                            prevJoiner = true
+                        }
+                        // noArcIntersection_notFirstPos_lastPos_prevIndexIsArc(targetEndPoints, parPathObj, index, self, prevJoiner) // empty
+                        noArcIntersection_notFirstPos_lastPos_prevIndexIsArc()
+                        return;
+                    }
+                }
+                // M (Ia)
+                // noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+                noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction()
+            }
+        }
     }
 }
 

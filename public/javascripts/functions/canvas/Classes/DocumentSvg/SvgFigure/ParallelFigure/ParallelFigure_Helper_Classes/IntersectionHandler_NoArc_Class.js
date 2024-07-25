@@ -163,9 +163,9 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 
 //new
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {
-    // // K
-    // console.log("K_ooo")
-    // parPathObj.parallelPathSegmentCounter_SECOND = 0
+    // K
+    console.log("K_ooo")
+    this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND = 0
 }
 //old
 // function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments(parPathObj) {
@@ -176,9 +176,9 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 
 //new
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsArc = function() {
-    // // L
-    // console.log("L_ooo")
-    // // Empty
+    // L
+    console.log("L_ooo")
+    // Empty
 }
 //old
 // function noArcIntersection_notFirstPos_lastPos_prevIndexIsArc(targetEndPoints, parPathObj, index, self, prevJoiner) {
