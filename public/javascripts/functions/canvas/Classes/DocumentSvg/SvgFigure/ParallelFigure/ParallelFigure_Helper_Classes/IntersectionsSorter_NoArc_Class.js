@@ -88,27 +88,31 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
             }
         }
 
-        // if (!this.firstPosition(index) && !this.lastPosition(index)) {
-        //     if(!this.arcExist(index - 1)) {
-        //         if( parPathObj.parallelPathSegmentCounter_SECOND === 0) {
-        //             // C (DC)
-        //             noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
-        //         } else {
-        //             // D (C+)
-        //             noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
-        //         }
-        //         // E (DC After)
-        //         noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
-        //     } else {
-        //         // F (E)
-        //         noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
-        //         // empty
-        //     }
-        //     if(this.arcExist(index + 1) && !this.arcExist(index - 1)) {
-        //         // G (F)
-        //         noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
-        //     }
-        // }
+        if (!this.firstPosition(index) && !this.lastPosition(index)) {
+            if(!this.arcExist(index - 1)) {
+                if( this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
+                    // C (DC)
+                    // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
+                } else {
+                    // D (C+)
+                    // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
+                    noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
+                }
+                // E (DC After)
+                // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
+            } else {
+                // F (E)
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
+                // empty
+            }
+            if(this.arcExist(index + 1) && !this.arcExist(index - 1)) {
+                // G (F)
+                // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
+                noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc()
+            }
+        }
     
         // // TODO: Orgnazine Better
         // checkForAndRunLastPosition()
