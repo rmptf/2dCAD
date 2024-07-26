@@ -68,8 +68,6 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
         // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
         this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure)
-        console.log("09090909909")
-        console.log(this.intersectionSorterObject.parallelProjections)
 
         // AA_FIRST_ALL
         // noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
@@ -211,8 +209,8 @@ function getRefPointAtIndexIfNotFiller(parFigure) {
 // Write a good comment to describe this function
 // function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, parallelDistance) {
 function calcParallelProjections(parFigure) {
-    let thisPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[0]
-    let nextPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[1]
+    let thisPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[0].coords
+    let nextPathDataCoords = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.pathDatasOutside[1].coords
     let parallelDistance = parFigure.parallelFigureObject.parallelDistance
 
     let thisPathDataCoordsX = thisPathDataCoords.x
@@ -228,15 +226,6 @@ function calcParallelProjections(parFigure) {
     // Function to calculate projected anchor points based on input coordinates and parallel distance
     let calcProjection = (coordVal, trigRatio, distance, subtract) => subtract ? coordVal - (distance * trigRatio) : coordVal + (distance * trigRatio)
 
-    console.log("23232131")
-    console.log(
-        {
-            thisPointX: calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true),
-            thisPointY: calcProjection(thisPathDataCoordsY, cosValue, parallelDistance, false),
-            nextPointX: calcProjection(nextPathDataCoordsX, sinValue, parallelDistance, true),
-            nextPointY: calcProjection(nextPathDataCoordsY, cosValue, parallelDistance, false)
-        }
-    )
     // Calculate the anchor points
     return {
         thisPointX: calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true),

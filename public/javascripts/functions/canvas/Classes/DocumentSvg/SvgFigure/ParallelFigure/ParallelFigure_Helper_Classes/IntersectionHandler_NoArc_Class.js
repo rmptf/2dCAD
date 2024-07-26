@@ -1,7 +1,6 @@
 // import {findIntersectingPointTwoFormats, findIntersectingPointSIMPLER} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
-    console.log("heyhehyehyehyehyehy")
     this.ParFigure = parallelFigure
 
     this.intersectionHandlerObject = {
@@ -263,9 +262,6 @@ function setTargetEndPoints(parFigure, side1) {
     let referenceCoords = {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY}
     let side = side1
 
-    console.log("okokdfoksofkfoskf")
-    console.log(parallelProjections)
-    console.log(referenceCoords)
     targetData[index][side].coords.x = referenceCoords.x
     targetData[index][side].coords.y = referenceCoords.y
 }
