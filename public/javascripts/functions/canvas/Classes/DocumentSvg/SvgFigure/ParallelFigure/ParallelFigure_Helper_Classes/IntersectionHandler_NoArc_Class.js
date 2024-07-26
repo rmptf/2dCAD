@@ -262,6 +262,9 @@ function setTargetEndPoints(parFigure, side1) {
     let referenceCoords = {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY}
     let side = side1
 
+    console.log("oksdofksodkfso")
+    console.log(referenceCoords)
+
     targetData[index][side].coords.x = referenceCoords.x
     targetData[index][side].coords.y = referenceCoords.y
 }

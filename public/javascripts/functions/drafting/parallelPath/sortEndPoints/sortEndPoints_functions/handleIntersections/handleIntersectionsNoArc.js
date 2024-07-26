@@ -83,6 +83,10 @@ function calculateAndSetIntersectionPoints(targetData, index, parallelEndPointsI
 }
 // A, B, G, M
 function setTargetEndPoints(targetData, index, referenceCoords, side) {
+
+    console.log("oksdofksodkfso")
+    console.log(referenceCoords)
+    
     targetData[index][side].coords.x = referenceCoords.x
     targetData[index][side].coords.y = referenceCoords.y
 }
