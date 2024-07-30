@@ -2,7 +2,7 @@ import {LargeArcFlagSetter} from './LargeArcFlagSetter_Class.js'
 import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
 import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
-import {handleArcToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
+import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -127,7 +127,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_n
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc = function() {
     // 6_B
@@ -190,7 +190,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIn
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc = function() {
     // 9
@@ -237,13 +237,13 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (started but not wokring / can handle disconect but not reconect)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPathToArc = function() {
     // 1_Joiner
     console.log("1_Joiner_ooo")
     this.ParFigure.parallelFigureObject.pathToArcCounter += 1
-    // handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
+    handlePathToArcIntersectionNoContact(this.ParFigure, 0)
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
     this.ParFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = true // TODO: (Set_largeArcFag)
     this.ParFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = true // TODO: (Set_largeArcFag)
@@ -279,7 +279,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc = function() {
     // 2_B_Joiner
@@ -298,7 +298,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT / done_ithink
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function() {
     // 3_Joiner
@@ -343,14 +343,19 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (done but not working?)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArcToPath = function() {
     // 5_Joiner
     console.log("5_Joiner_ooo")
     // skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, 0)
     skipFillersAndSetParallelProjections(this.ParFigure, 0)
+
+    //other
+    // handlePathToArcIntersectionNoContact(this.ParFigure, 0)
+    //this
     // handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) // FIXME: didnt do this yet
+    handleNOIntersection(this.ParFigure)
 
     // parPathObj.parallelPathSegmentCounter_SECOND = 1
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND = 1
@@ -627,11 +632,12 @@ function skipFillersAndSetParallelProjections(parFigure, offset) {
 
     // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
 
-    parPathObj.arcToPathCounter += 1
+    // parPathObj.arcToPathCounter += 1
+    parFigObj.arcToPathCounter += 1
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT  (done i think)
 // //old
 // // TODO: can these three be one?
 // function handleIntersectionArcToPath(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount1, self, index, parPathObj, thisConnection3) {
@@ -692,7 +698,7 @@ function handleArcIntersectionPathToArc(parFigure, intHandler) {
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT /  / done_ithink
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 // //old
 // function handleArcIntersectionArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection) {
 //     parPathObj.arcToArcCounter += 1
@@ -718,9 +724,11 @@ function handleArcIntersectionArcToArc(parFigure, intHandler) {
 }
 
 
-// FIXME: finish NO_CONTACT
-function handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) {
-    handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)
+// FIXME: finish NO_CONTACT (done but not working?)
+// function handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) {
+function handleNOIntersection(parFigure) {
+    // handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)
+    handleArcToPathIntersectionNoContact(parFigure, -1)
 }
 
 

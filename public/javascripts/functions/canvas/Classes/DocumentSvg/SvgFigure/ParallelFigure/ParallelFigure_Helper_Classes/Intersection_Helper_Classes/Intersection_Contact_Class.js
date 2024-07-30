@@ -7,7 +7,7 @@
 
 
 import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_functions/createParallelPathCornerElements_NEW.js'
-import {getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
+import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 
 
@@ -168,7 +168,7 @@ Intersection_Contact.prototype.handleArcToPathIntersection = function() {
             // thisConnection3.connected = false
             intersectionHandler.intersectionHandlerObject.isIntersectionConnected = false
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
-            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, thisIndex, shape) // FIXME: not finishing yet
+            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, thisIndex, shape) // FIXME: not finishing yet (done i think)
         } else {
             placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
         }

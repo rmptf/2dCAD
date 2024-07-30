@@ -1,4 +1,5 @@
 // import {findIntersectingPointTwoFormats, findIntersectingPointSIMPLER} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
+import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
     this.ParFigure = parallelFigure
@@ -238,6 +239,7 @@ function calculateAndSetIntersectionPoints(parFigure, flag1, flag2) {
     let parallelEndPointsII = [parFigure.parallelFigurePathDatas_transformed[index + flag2[0]], flag2[1]]
 
     let intersectionPoint =  findIntersectingPointTwoFormats(parallelEndPointsI, parallelEndPointsII)
+    // findIntersectingPointTwoFormats
     targetData[index - 1][1].coords.x = intersectionPoint.x
     targetData[index - 1][1].coords.y = intersectionPoint.y
     targetData[index][0].coords.x = intersectionPoint.x
@@ -259,11 +261,11 @@ function setTargetEndPoints(parFigure, side1) {
     let targetData = parFigure.parallelFigurePathDatas
     let index = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
     let parallelProjections = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.parallelProjections
-    let referenceCoords = {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY}
     let side = side1
-
-    console.log("oksdofksodkfso")
-    console.log(referenceCoords)
+    let referenceCoords = {
+        x: (side === 0) ? parallelProjections.thisPointX : parallelProjections.nextPointX,
+        y: (side === 0) ? parallelProjections.thisPointY : parallelProjections.nextPointY
+    }
 
     targetData[index][side].coords.x = referenceCoords.x
     targetData[index][side].coords.y = referenceCoords.y

@@ -4,7 +4,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_WithArc(this.ParFigure)
     this.parallelPathDatas = this.ParFigure.parallelFigurePathDatas
-    
+
     this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
     this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
@@ -176,7 +176,7 @@ function handleDisconnectedArcIntersection(parFigure, intXSorter) {
         case intXSorter.joinerType(index, "BBB"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         // 6_Joiner
         // case skipperCheckers.skipperChecker_Arc: thisSorter.intersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj)
-        case parFigure.skipperCheckers.skipperChecker_Arc: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
+        case parFigure.parallelFigureObject.skipperCheckers.skipperChecker_Arc: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
     }
 }
 
