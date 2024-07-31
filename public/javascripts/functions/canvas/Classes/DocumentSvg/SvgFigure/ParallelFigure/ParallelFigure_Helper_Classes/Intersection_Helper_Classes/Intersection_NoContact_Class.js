@@ -64,9 +64,10 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
         // sixthParPath.coords.y = seventhParPath.coords.y
 
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
+        console.log("Remove_Points_and_Paths")
         // //this
         //new
-        let thisIndex = index + 1
+        let thisIndex = index + 0
         let nextIndex = index + 2
         let doubleIndex = thisIndex * 2
 
@@ -203,8 +204,9 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
         svgEndPointGroup.splice(doubleIndex + 1, 1)
         svgEndPointGroup.splice(doubleIndex, 1)
         svgPathGroup.splice(thisIndex, 1)
+        
 
-        //old
+        // old
         // console.log("Remove_Points_and_Paths")
         // // Remove Points and paths
         // let thisIndex = index + 1
@@ -228,8 +230,12 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
         // secondAddedSvgEndPoint.remove()
         // addedSvgPath.remove()
 
-        //other
-        //old
+        // other
+        // old
+        // console.log("Remove_Points_and_Paths")
+        // let thisIndex = index + 1
+        // let nextIndex = index + 2
+        // let doubleIndex = thisIndex * 2
         // // Remove elements from various arrays
         // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
         // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
