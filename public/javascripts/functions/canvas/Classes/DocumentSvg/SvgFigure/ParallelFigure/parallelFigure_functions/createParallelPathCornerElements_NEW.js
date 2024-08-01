@@ -48,17 +48,19 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     parallelFigure.createFillerParallelPath(thisSvgPathIndex - 1, index)
     
-    // console.log("dfsdfsdfsdfsdfsdf")
-    // console.log(parallelFigurePathDatas)
-    // console.log(referenceEndPointsParallelPerpendicular)
-    // console.log(referenceEndPointsBaseAndFillers)
-    // console.log('index')
-    // console.log(passedIndex)
-    // console.log(index)
-    // console.log(indexer)
-    // console.log(thisSvgEndPointIndex)
-    // console.log(nextSvgEndPointIndex)
-    // console.log(thisSvgPathIndex)
+    console.log("dfsdfsdfsdfsdfsdf")
+    console.log(parallelFigurePathDatas)
+    console.log(referenceEndPointsParallelPerpendicular)
+    console.log(referenceEndPointsBaseAndFillers)
+    console.log('index')
+    console.log(passedIndex)
+    console.log(index)
+    console.log(indexer)
+    console.log(thisSvgEndPointIndex)
+    console.log(nextSvgEndPointIndex)
+    console.log(thisSvgPathIndex)
+    console.log("code")
+    console.log(sideCode)
 }
 
 export {
