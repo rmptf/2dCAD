@@ -168,7 +168,7 @@ Intersection_Contact.prototype.handleArcToPathIntersection = function() {
             // thisConnection3.connected = false
             intersectionHandler.intersectionHandlerObject.isIntersectionConnected = false
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
-            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, thisIndex, shape) // FIXME: not finishing yet (done i think)
+            createAndAddSvgElementAndUpdateDataArrays(parallelFigure, nextIndex, shape) // FIXME: not finishing yet (done i think)
         } else {
             placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
         }

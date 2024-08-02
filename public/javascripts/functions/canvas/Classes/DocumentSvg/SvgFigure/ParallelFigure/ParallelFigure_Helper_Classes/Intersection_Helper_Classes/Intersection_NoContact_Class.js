@@ -45,6 +45,10 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
     // fix later
     let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([sixthParPath.arc.center.x,sixthParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], sixthParPath.arc.radius)
+
+    console.log("boobssssdfdsf")
+    console.log(pathToArcIntPoint)
+
     if(pathToArcIntPoint[0].doesIntersect === false) {
 
         secondParPath.coords.x = pathToArcIntPoint[0].x
@@ -136,9 +140,19 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
 
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
+
+    console.log("boobs123123")
+    console.log(indexModifier)
+    console.log(index)
+    console.log(prevIndex)
+    
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_copy
+
+    console.log(targetEndPointsParallelFull)
+    console.log(referenceEndPointsParallelPerpendicular)
+    console.log(referenceEndPointsBaseAndFillers)
 
     let zeroParPath = targetEndPointsParallelFull[prevIndex + 1][0]
     let firstParPath = targetEndPointsParallelFull[prevIndex + 1][1]
@@ -153,6 +167,10 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
     // fix later
     let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
+
+    console.log("boobssssdfdsf")
+    console.log(pathToArcIntPoint)
+
     if(pathToArcIntPoint[0].doesIntersect === false) {
         
         // before first point
@@ -272,6 +290,9 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
     let fifthParPath = targetEndPointsParallelFull[prevIndex + 3][1]
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
+
+    // console.log("boobssssdfdsf")
+    // console.log(pathToArcIntPoint)
 
     if(arcToArcIntPoint[0].doesIntersect === false) {
 

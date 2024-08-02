@@ -237,7 +237,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
 // }
 
 
-// WORKING / FIXME: finish NO_CONTACT (started but not wokring / can handle disconect but not reconect)
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPathToArc = function() {
     // 1_Joiner
@@ -343,7 +343,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT (done but not working?)
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //new
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArcToPath = function() {
     // 5_Joiner
@@ -672,7 +672,7 @@ function handleIntersectionArcToPath(parFigure, intHandler) {
 }
 
 
-// WORKING / FIXME: finish NO_CONTACT
+// WORKING / FIXME: finish NO_CONTACT (done i think)
 //old
 // function handleArcIntersectionPathToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, thisConnection2) {
 //     parPathObj.pathToArcCounter += 1
@@ -724,7 +724,7 @@ function handleArcIntersectionArcToArc(parFigure, intHandler) {
 }
 
 
-// FIXME: finish NO_CONTACT (done but not working?)
+// FIXME: finish NO_CONTACT (done i think)
 // function handleNOIntersection(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index) {
 function handleNOIntersection(parFigure) {
     // handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)

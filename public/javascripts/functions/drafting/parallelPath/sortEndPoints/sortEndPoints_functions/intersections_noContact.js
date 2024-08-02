@@ -65,6 +65,15 @@ function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, refer
 function handleArcToPathIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
     let prevIndex = index - 1
 
+    console.log("boobs123123")
+    console.log(index)
+    console.log(prevIndex)
+
+    console.log(targetEndPointsParallelFull)
+    console.log(referenceEndPointsParallelPerpendicular)
+    console.log(referenceEndPointsBaseAndFillers)
+
+    
     let zeroParPath = targetEndPointsParallelFull[prevIndex + 1][0]
     let firstParPath = targetEndPointsParallelFull[prevIndex + 1][1]
     let secondParPath = targetEndPointsParallelFull[prevIndex + 2][0]
@@ -78,6 +87,10 @@ function handleArcToPathIntersectionNoContact(targetEndPointsParallelFull, refer
     // fix later
     let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
+
+    console.log("boobssssdfdsf")
+    console.log(pathToArcIntPoint)
+
     if(pathToArcIntPoint[0].doesIntersect === false) {
         
         // before first point
