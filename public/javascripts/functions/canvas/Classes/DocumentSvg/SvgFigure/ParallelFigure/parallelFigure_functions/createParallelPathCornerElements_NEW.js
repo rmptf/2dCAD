@@ -69,7 +69,7 @@ export {
 
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
-    // console.log("starter")
+    console.log("starter___")
     let newSweepFlag
     let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
     let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
@@ -81,12 +81,12 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let thisBaseRefCoords = thisBaseRefNoFiller.coords
     let nextBaseRefCoords = nextBaseRefNoFiller.coords
 
-    // console.log(referenceEndPointsBaseAndFillers[index - 1])
-    // console.log(referenceEndPointsBaseAndFillers[index])
-    // console.log(referenceEndPointsBaseAndFillers[index + 1])
-    // console.log(prevBaseRefNoFiller)
-    // console.log(thisBaseRefNoFiller)
-    // console.log(nextBaseRefNoFiller)
+    console.log(referenceEndPointsBaseAndFillers[index - 1])
+    console.log(referenceEndPointsBaseAndFillers[index])
+    console.log(referenceEndPointsBaseAndFillers[index + 1])
+    console.log(prevBaseRefNoFiller)
+    console.log(thisBaseRefNoFiller)
+    console.log(nextBaseRefNoFiller)
     // updateSVG_highlight_1_point_01([prevBaseRefCoords.x, prevBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_02([thisBaseRefCoords.x, thisBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_03([nextBaseRefCoords.x, nextBaseRefCoords.y], self)
@@ -95,7 +95,7 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     // both arcs exist
     // if(prevBaseRefArc.exist && nextBaseRefArc.exist) {
     if(thisBaseRefArc.exist && nextBaseRefArc.exist) {
-        // console.log(111)
+        console.log(111)
         // both arcs have different sweep flags
         // if(prevBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
         if(thisBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
@@ -144,15 +144,19 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     // only one arc; prev index is arc
     // if(prevBaseRefArc.exist && !nextBaseRefArc.exist) {
     if(thisBaseRefArc.exist && !nextBaseRefArc.exist) {
+        console.log(222)
         // prevBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
         thisBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
     // only one arc; next index is arc
     // if(!prevBaseRefArc.exist && nextBaseRefArc.exist) {
     if(!thisBaseRefArc.exist && nextBaseRefArc.exist) {
+        console.log(333)
         nextBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
 
+    console.log("oskfosdkfoskdf")
+    console.log(newSweepFlag)
     return newSweepFlag
 }
 

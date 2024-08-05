@@ -45,6 +45,8 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
         const flipFlagAndFunction = (flipFlag, endPOINT) => {
             if (flipFlag) {
                 endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
+                console.log("AAAAA_BBBBB_")
+                console.log(endPOINT.arc.arcFlag)
             }
         }
 
@@ -68,13 +70,13 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let flipFlag = false
 
     if(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
-        // console.log("CROSSED")
+        console.log("AAAAA_CROSSED")
         flipFlag = true
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
         return flipFlag
     } else {
-        // console.log("NO_CROSS")
+        console.log("AAAAA_NO_CROSS")
     }
     return flipFlag
 }

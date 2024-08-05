@@ -72,7 +72,7 @@ export {
 
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
-    // console.log("starter")
+    console.log("starter")
     let newSweepFlag
     let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
     let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
@@ -84,12 +84,12 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let thisBaseRefCoords = thisBaseRefNoFiller.coords
     let nextBaseRefCoords = nextBaseRefNoFiller.coords
 
-    // console.log(referenceEndPointsBaseAndFillers[index - 1])
-    // console.log(referenceEndPointsBaseAndFillers[index])
-    // console.log(referenceEndPointsBaseAndFillers[index + 1])
-    // console.log(prevBaseRefNoFiller)
-    // console.log(thisBaseRefNoFiller)
-    // console.log(nextBaseRefNoFiller)
+    console.log(referenceEndPointsBaseAndFillers[index - 1])
+    console.log(referenceEndPointsBaseAndFillers[index])
+    console.log(referenceEndPointsBaseAndFillers[index + 1])
+    console.log(prevBaseRefNoFiller)
+    console.log(thisBaseRefNoFiller)
+    console.log(nextBaseRefNoFiller)
     // updateSVG_highlight_1_point_01([prevBaseRefCoords.x, prevBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_02([thisBaseRefCoords.x, thisBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_03([nextBaseRefCoords.x, nextBaseRefCoords.y], self)

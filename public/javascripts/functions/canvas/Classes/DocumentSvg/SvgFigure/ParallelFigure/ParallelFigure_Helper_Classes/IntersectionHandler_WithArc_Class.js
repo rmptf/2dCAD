@@ -466,48 +466,69 @@ function handleLargeArcFlag(parFigure, flag) {
     let parFigObj = parFigure.parallelFigureObject
     let ArcFlagSetter = parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter
     if(flag === "arcFlag_finalAll") {
-        if(parFigObj.setThisArcFlag_atFinal_from1Joiner === true) {
+        // if(parFigObj.setThisArcFlag_atFinal_from1Joiner === true) {
+        if(parFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
-            ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
-            parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
-            parFigObj.setThisArcFlag_atFinal_from1Joiner = false
+            // ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
+            // parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
+            // parFigObj.setThisArcFlag_atFinal_from1Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = false
         }
 
-        if(parFigObj.setPrevArcFlag_atFinal_from3Joiner === true) {
+        // if(parFigObj.setPrevArcFlag_atFinal_from3Joiner === true) {
+        if(parFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
-            ArcFlagSetter.setLargeArcFlag(parFigure, -1, false)
-            parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
-            parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
+            // ArcFlagSetter.setLargeArcFlag(parFigure, -1, false)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, -1, false)
+            // parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
+            // parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
+            parFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
         }
 
         if(parFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected === true) {
             console.log("CONNECTED")
-            ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            // ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
         } else {
             console.log("NOT_CONNECTED")
-            ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
+            // ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, 0, false)
             parFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = true
         }
     }
 
     if(flag === "arcFlag_2AJ") {
-        if(parFigObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
+        // if(parFigObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
+        if(parFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_2j")
-            ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
-            parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
-            parFigObj.setThisArcFlag_atFinal_from1Joiner = false
+            // ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            // parFigObj.setThisArcFlag_at2Joiner_from1Joiner = false
+            // parFigObj.setThisArcFlag_atFinal_from1Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = false
         }
     }
 
     if(flag === "arcFlag_4J") {
-        if(parFigObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
+        // if(parFigObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
+        if(parFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_4j")
-            ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
-            parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
-            parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
+            // ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.ArcFlagSetter.setLargeArcFlag(parFigure, 0, true)
+            // parFigObj.setThisArcFlag_at4Joiner_from3Joiner = false
+            // parFigObj.setPrevArcFlag_atFinal_from3Joiner = false
+            parFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
+            parFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
         }
     }
 }
+
+
+// [[{"coords":{"x":51.00000762939453,"y":276.2480239868164},"arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},{"coords":{"x":199.75,"y":39.75000762939453},"arc":{"exist":true,"radius":201.0372976484869,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":247.75435800744887,"y":234.97187284458758},"startAngle":1.5364700287506718,"joiner":false}},{"coords":{"x":432.25,"y":182.50001525878906},"arc":{"exist":true,"radius":191.70357298599427,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":245.5256200295604,"y":225.90814606686857},"startAngle":1.583494467859758,"joiner":false}},{"coords":{"x":188.5,"y":243.5},"arc":{"exist":true,"radius":139.42339620693753,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":325.0522651948479,"y":271.6489303532587},"startAngle":2.244567418116927,"joiner":false}},{"coords":{"x":373.5,"y":467.5000305175781},"arc":{"exist":true,"radius":186.38575540194665,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":371.047533574729,"y":281.1304106081433},"startAngle":1.7872474215382959,"joiner":false}}]]
 
 
 
