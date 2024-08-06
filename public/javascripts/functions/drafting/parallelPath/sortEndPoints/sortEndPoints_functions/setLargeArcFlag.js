@@ -24,6 +24,8 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
     console.log(" ")
     console.log("ARCFLAG_FLIPPER_running")
 
+    console.log(index)
+
     // let prevTargetEndPoint = targetEndPoints[index - 1][1]
     let prevTargetEndPoint = targetEndPoints[index][0] //TODO: test that this works 100%
     let thisTargetEndPoint = targetEndPoints[index][1]
