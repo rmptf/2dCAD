@@ -64,6 +64,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
         const flipFlagAndFunction = (flipFlag, endPOINT) => {
             if (flipFlag) {
                 endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
+                // endPOINT.arc.exist = false
                 console.log("AAAAA_BBBBB_")
                 console.log(endPOINT.arc.arcFlag)
             }

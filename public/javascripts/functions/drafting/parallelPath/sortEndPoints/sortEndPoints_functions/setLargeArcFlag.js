@@ -52,7 +52,7 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
         const flipFlagAndFunction = (flipFlag, endPOINT) => {
             if (flipFlag) {
                 endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
-
+                // endPOINT.arc.exist = false
                 console.log("AAAAAAAAAAA")
                 console.log(endPOINT.arc.arcFlag)
             }

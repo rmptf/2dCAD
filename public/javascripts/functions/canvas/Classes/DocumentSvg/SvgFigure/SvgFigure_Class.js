@@ -23,6 +23,7 @@ function SvgFigure(DocSvg) {
     // Figure Data
 
     // Svg Elements
+    // this.primaryFigureGroup =  new SvgGroup(this.docSvgGroup.newSvgGroup, this.SVGGROUPSDATA.PRIMARYNAME, 'fakeId_figure').newSvgGroup
     this.primaryFigureGroup =  new SvgGroup(this.docSvgGroup.newSvgGroup, this.SVGGROUPSDATA.PRIMARYNAME, 'fakeId_figure').newSvgGroup
     this.secondaryFigureGroups = createSecondaryGroups(this)
     this.svgGroups = {
