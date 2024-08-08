@@ -42,9 +42,9 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
     }
 }
 
-//TODO: fix after changing how to create new figure
-function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actionStates) {
-    let newFigure = new SvgFigure(documentSvgD3, actionStates)
+function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates) {
+    let documentSvgFigures = documentSvg.documentSvgFigures
+    let newFigure = new SvgFigure(documentSvg)
     let pathDatas = JSON.parse(figureData)
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
@@ -58,11 +58,11 @@ function drawFigureFromData(figureData, documentSvgFigures, documentSvgD3, actio
     newFigure.figure_updateSvg()
 }
 
-//TODO: fix after changing how to create new figure
-function drawDocumentSvgAllFiguresFromData(figuresData, documentSvgFigures, documentSvgD3, actionStates) {
+function drawDocumentSvgAllFiguresFromData(figuresData, documentSvg, documentSvgD3, actionStates) {
+    let documentSvgFigures = documentSvg.documentSvgFigures
     let figures = JSON.parse(figuresData)
     for (let i = 0; i < figures.length; i++) {
-        let newFigure = new SvgFigure(documentSvgD3, actionStates)
+        let newFigure = new SvgFigure(documentSvg)
         let pathDatas = figures[i]
         documentSvgFigures.push(newFigure)
         newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
