@@ -65,9 +65,55 @@ export {
 
 
 
+// // NEW DRAW FIGURE
 // [[
 //     {"coords":{"x":147.2500457763672,"y":155.74998474121094},
 //         "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},
 //     {"coords":{"x":329.7500305175781,"y":304.5},
 //         "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}}
 // ]]
+
+// // NEW DRAW SVG
+// [
+//     [
+//         {"coords":{"x":159.7500457763672,"y":153.24998474121094},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},
+//         {"coords":{"x":383.5000305175781,"y":121.99999237060547},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},
+//         {"coords":{"x":434.7500305175781,"y":224.49998474121094},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}}
+//     ],
+//     [
+//         {"coords":{"x":162.2500457763672,"y":304.5},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},
+//         {"coords":{"x":301.0000305175781,"y":374.5},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},
+//         {"coords":{"x":419.7500305175781,"y":344.5},
+//             "arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}}
+//     ]
+// ]
+
+
+
+
+
+
+
+// // OLD DRAW FIGURE
+// {
+//     "shapeData":
+//         [
+//             {"coords":{"x":267,"y":132},
+//                 "arc":{"exist":false}},
+//             {"coords":{"x":547,"y":100},
+//                 "arc":{"exist":false}},
+//             {"coords":{"x":569,"y":264},
+//                 "arc":{"exist":false}},
+//             {"coords":{"x":100,"y":205},
+//                 "arc":{"exist":false}}
+//         ],
+//     "svgDocPosition":
+//         {"dragDivTop":"2161px","dragDivLeft":"2151px"},
+//     "svgDimensions":
+//         {"x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515}
+// }
