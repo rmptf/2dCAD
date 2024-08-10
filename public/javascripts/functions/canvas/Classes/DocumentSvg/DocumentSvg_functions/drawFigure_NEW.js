@@ -45,7 +45,16 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
 function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates) {
     let documentSvgFigures = documentSvg.documentSvgFigures
     let newFigure = new SvgFigure(documentSvg)
-    let pathDatas = JSON.parse(figureData)
+
+    let passedDatas = JSON.parse(figureData)
+    let pathDatas
+    // check if the passed data is in the "old" saved shape form or the new
+    if (passedDatas?.shapeData) {
+        pathDatas = passedDatas.shapeData
+    } else {
+        pathDatas = passedDatas
+    }
+
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
     for (let i = 0; i < pathDatas.length; i++) {
