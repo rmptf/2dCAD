@@ -43,17 +43,52 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
 }
 
 function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates) {
+    let scaleValue = documentSvg.scaleValue.scaleLevel
+    let panElement = documentSvg.panElement
+    let canvDocHtmlElement = documentSvg.canvDocHtmlElement
+    let documentSvgElement = documentSvg.HtmlElement
     let documentSvgFigures = documentSvg.documentSvgFigures
     let newFigure = new SvgFigure(documentSvg)
+
+    console.log(canvDocHtmlElement)
+
+
+
+
+
 
     let passedDatas = JSON.parse(figureData)
     let pathDatas
     // check if the passed data is in the "old" saved shape form or the new
     if (passedDatas?.shapeData) {
         pathDatas = passedDatas.shapeData
+
+
+        // // GRAB DATA FROM SAVED FIGURE
+        // let mainPathData = passedDatas.shapeData
+        // let svgDocPosition = passedDatas.svgDocPosition
+        // let svgDimensions = passedDatas.svgDimensions
+
+        // // SET HTML ELEMENTS POSITION & DIMENSIONS
+        // // Set dragDiv position on canvas
+        // // documentSvgElement.style.top = svgDocPosition.dragDivTop
+        // // documentSvgElement.style.left = svgDocPosition.dragDivLeft
+        // // canvDocHtmlElement.style.top = svgDocPosition.dragDivTop
+        // // canvDocHtmlElement.style.left = svgDocPosition.dragDivLeft
+        // canvDocHtmlElement.style.top = '2000px'
+        // canvDocHtmlElement.style.left = '2000px'
+        // // Set SVG dimensions
+        // documentSvgElement.style.height = svgDimensions.height
+        // documentSvgElement.style.width = svgDimensions.width
+
+
+
     } else {
         pathDatas = passedDatas
     }
+
+
+
 
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
@@ -64,7 +99,51 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
             newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
         }
     }
+
     newFigure.figure_updateSvg()
+
+
+
+
+
+
+    // Set docSvg size to fit the Primary Svg Group
+    // Get the Svg Group Size
+    let documentGroup = documentSvg.documentSvgGroup.newSvgGroup
+    let docGroupBBox = documentGroup.node().getBBox()
+    // Set extra area around Group
+    let svgGroupBubble = 200
+    // Set the Svg Element to the new Size
+    documentSvgElement.style.height = docGroupBBox.height + svgGroupBubble
+    documentSvgElement.style.width = docGroupBBox.width + svgGroupBubble
+
+    // Place canvasDocument in center of CanvPan
+    // Get the Pant Canvas' bounding rectangle
+    let panElementBounds = panElement.getBoundingClientRect()
+    // Calculate the Pan Element Width according to the ScaleValue (Zoom Level) then divide by 2 to find center
+    let panCanvasScaledWidth = (panElementBounds.width / scaleValue) / 2
+    let panCanvasScaledHeight = (panElementBounds.height / scaleValue) / 2
+    // Calculate the Svg Element Width according to the ScaleValue (Zoom Level) then divide by 2 to find center
+    let docGroupRectHeightCenter = (docGroupBBox.height + svgGroupBubble) / 2
+    let docGroupRectWidthCenter = (docGroupBBox.width + svgGroupBubble) / 2
+
+    // Find the amount to move the Canv Document by subtracting the width
+    let movetotop = panCanvasScaledWidth - docGroupRectHeightCenter
+    let movetoleft = panCanvasScaledHeight - docGroupRectWidthCenter
+
+    // Set the Svg Element to the new Size
+    canvDocHtmlElement.style.top = movetotop + 'px'
+    canvDocHtmlElement.style.left = movetoleft + 'px'
+
+    console.log("check13123123")
+    console.log(docGroupBBox.height)
+    console.log(panCanvasScaledWidth, panCanvasScaledHeight)
+    console.log(scaleValue)
+
+
+
+
+
 }
 
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvg, documentSvgD3, actionStates) {

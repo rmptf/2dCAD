@@ -1,7 +1,7 @@
 .a-artboard {
     overflow: auto;
     /* outline: solid 1pt black; */
-    /* background-color: red; */
+    background-color: red;
   }
 
   .a-artboard__container {

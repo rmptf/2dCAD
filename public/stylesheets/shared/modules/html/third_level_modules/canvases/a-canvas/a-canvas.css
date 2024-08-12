@@ -10,11 +10,13 @@
 }
 
 .a-canvas__zoomLayer {
+    /* background-color: red; */
     width: 100vw;
     height: 100vh;
 }
 
 .a-canvas__panLayer{
+    /* background-color: green; */
     height: 500rem;
     width: 500rem;
     position: absolute;

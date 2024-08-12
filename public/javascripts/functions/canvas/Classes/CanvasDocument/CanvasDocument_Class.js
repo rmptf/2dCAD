@@ -43,6 +43,8 @@ function CanvasDocument(footer) {
         DOC_SVG: 'aDocumentSvg',
         DOC_BTN_01: 'aDoc_btn_01_',
     }
+    this.scaleValue = footer.scaleClass_scaleObject
+    this.panElement = footer.panElement
     this.scaleClass_scaleObject = footer.scaleClass_scaleObject
     this.stringIncrementCount = footer.vars.stringIncrement
     this.cloneAndAppendTemplate(footer.documentTemplate, footer.panElement)

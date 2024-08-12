@@ -48,19 +48,19 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     parallelFigure.createFillerParallelPath(thisSvgPathIndex - 1, index)
     
-    console.log("dfsdfsdfsdfsdfsdf")
-    console.log(parallelFigurePathDatas)
-    console.log(referenceEndPointsParallelPerpendicular)
-    console.log(referenceEndPointsBaseAndFillers)
-    console.log('index')
-    console.log(passedIndex)
-    console.log(index)
-    console.log(indexer)
-    console.log(thisSvgEndPointIndex)
-    console.log(nextSvgEndPointIndex)
-    console.log(thisSvgPathIndex)
-    console.log("code")
-    console.log(sideCode)
+    // console.log("dfsdfsdfsdfsdfsdf")
+    // console.log(parallelFigurePathDatas)
+    // console.log(referenceEndPointsParallelPerpendicular)
+    // console.log(referenceEndPointsBaseAndFillers)
+    // console.log('index')
+    // console.log(passedIndex)
+    // console.log(index)
+    // console.log(indexer)
+    // console.log(thisSvgEndPointIndex)
+    // console.log(nextSvgEndPointIndex)
+    // console.log(thisSvgPathIndex)
+    // console.log("code")
+    // console.log(sideCode)
 }
 
 export {
@@ -81,12 +81,12 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let thisBaseRefCoords = thisBaseRefNoFiller.coords
     let nextBaseRefCoords = nextBaseRefNoFiller.coords
 
-    console.log(referenceEndPointsBaseAndFillers[index - 1])
-    console.log(referenceEndPointsBaseAndFillers[index])
-    console.log(referenceEndPointsBaseAndFillers[index + 1])
-    console.log(prevBaseRefNoFiller)
-    console.log(thisBaseRefNoFiller)
-    console.log(nextBaseRefNoFiller)
+    // console.log(referenceEndPointsBaseAndFillers[index - 1])
+    // console.log(referenceEndPointsBaseAndFillers[index])
+    // console.log(referenceEndPointsBaseAndFillers[index + 1])
+    // console.log(prevBaseRefNoFiller)
+    // console.log(thisBaseRefNoFiller)
+    // console.log(nextBaseRefNoFiller)
     // updateSVG_highlight_1_point_01([prevBaseRefCoords.x, prevBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_02([thisBaseRefCoords.x, thisBaseRefCoords.y], self)
     // updateSVG_highlight_1_point_03([nextBaseRefCoords.x, nextBaseRefCoords.y], self)

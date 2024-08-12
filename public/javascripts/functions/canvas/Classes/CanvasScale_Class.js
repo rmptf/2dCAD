@@ -2,6 +2,7 @@ function CanvasScale(canvasScaleElment, btn01, btn02, btn03) {
     this.canvasScaleElment = canvasScaleElment
     this.scaleObject = {
         scaleLevel: 0.8
+        // scaleLevel: 1
     }
     this.scaleSettings = {
         endPointClass: ".primaryEndPoint",
