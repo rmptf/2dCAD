@@ -1,7 +1,5 @@
 
 function saveFigureData(thisFigure) {
-
-
     //old
     // {"shapeData":
     //     [
@@ -35,18 +33,21 @@ function saveFigureData(thisFigure) {
 
 
     //new
-    let canvasDocumentHtmlEle = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
-    let canvDocDimensions = canvasDocumentHtmlEle.getBoundingClientRect() //might need to scale these figures
-    console.log("sdfidsjfsij")
+    let scaleValue = thisFigure.DocumentSvg.scaleValue
+    let canvasDocumentHtmlElement = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
+    let canvDocDimensions = canvasDocumentHtmlElement.getBoundingClientRect() //might need to scale these figures
+    let documentSvgHtmlElement = thisFigure.DocumentSvg.HtmlElement
+    let docSvgDimensions = documentSvgHtmlElement.getBoundingClientRect()
     let shapeDataObject = {
         shapeData: thisFigure.svgPathDatas,
-        canvasDocumentPosition: {canvDocTop: null, canvDocLeft: null},
-        documentSvgDimensions: null,
-        canvasDocumentHtmlEle123: canvDocDimensions,
+        svgDocPosition: {canvDocTop: canvDocDimensions.top, canvDocLeft: canvDocDimensions.left},
+        svgDimensions: docSvgDimensions,
+        scaleValue: scaleValue
     }
 
     let pathDataStringNEW = JSON.stringify(shapeDataObject)
     console.log(pathDataStringNEW)
+    console.log(shapeDataObject)
     //new
 
 
