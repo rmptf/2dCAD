@@ -13,6 +13,7 @@ function SvgFigure(DocSvg) {
         //TODO: put in order and in an object (will affect other files)
         SECONDARYNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "parallelFigureGROUP_001", "testEndpointGROUP_001"],
     }
+    this.DocumentSvg = DocSvg
     this.documentSvgD3 = DocSvg.D3Element
     this.documentSvgHTML = DocSvg.HtmlElement
     this.actionStates = DocSvg.actionStates

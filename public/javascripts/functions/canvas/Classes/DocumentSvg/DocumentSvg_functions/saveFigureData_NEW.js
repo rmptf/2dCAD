@@ -1,11 +1,63 @@
 
 function saveFigureData(thisFigure) {
-    // let 
-    let pathDataString = JSON.stringify(thisFigure.svgPathDatas)
-    console.log(pathDataString)
+
+
+    //old
+    // {"shapeData":
+    //     [
+    //         {"coords":{"x":267,"y":132},"arc":{"exist":false}},
+    //         {"coords":{"x":547,"y":100},"arc":{"exist":false}},
+    //         {"coords":{"x":569,"y":264},"arc":{"exist":false}},
+    //         {"coords":{"x":100,"y":205},"arc":{"exist":false}}
+    //     ],
+    // "svgDocPosition":
+    //     {
+    //         "dragDivTop":"2161px","dragDivLeft":"2151px"
+    //     },
+    // "svgDimensions":
+    //     {
+    //         "x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515
+    //     }
+    // }
+
+
+    // let shapeDataObject = {
+    //     shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+    //     svgDocPosition : {svgDocTop: a_canvas_globalVars.svgDocHTML.style.top, svgDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
+    //     svgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+    // }
+
+
+    // let mainPathData = passedDatas.shapeData
+    // let svgDocPosition = passedDatas.svgDocPosition
+    // let svgDimensions = passedDatas.svgDimensions
+    //old
+
+
+    //new
+    let canvasDocumentHtmlEle = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
+    let canvDocDimensions = canvasDocumentHtmlEle.getBoundingClientRect() //might need to scale these figures
+    console.log("sdfidsjfsij")
+    let shapeDataObject = {
+        shapeData: thisFigure.svgPathDatas,
+        canvasDocumentPosition: {canvDocTop: null, canvDocLeft: null},
+        documentSvgDimensions: null,
+        canvasDocumentHtmlEle123: canvDocDimensions,
+    }
+
+    let pathDataStringNEW = JSON.stringify(shapeDataObject)
+    console.log(pathDataStringNEW)
+    //new
+
+
+    // //current
+    // let pathDataString = JSON.stringify(thisFigure.svgPathDatas)
+    // console.log(pathDataString)
+    // //current
 }
 
 function saveSvgData(theseFigures) {
+    console.log("sdfidsjfsij")
     // console.log(theseFigures)
     let figuresPathDatas = []
     theseFigures.forEach(figure => {

@@ -42,54 +42,32 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
     }
 }
 
-function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates) {
-    let scaleValue = documentSvg.scaleValue.scaleLevel
-    let panCanvas = documentSvg.panElement
-    let canvasDocument = documentSvg.canvDocHtmlElement
-    let documentSvgElement = documentSvg.HtmlElement
+function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates, CanvDoc) {
     let documentSvgFigures = documentSvg.documentSvgFigures
-    let documentGroup = documentSvg.documentSvgGroup.newSvgGroup
     let newFigure = new SvgFigure(documentSvg)
-
-    console.log(canvasDocument)
-
-
-
-
-
-
     let passedDatas = JSON.parse(figureData)
     let pathDatas
     // check if the passed data is in the "old" saved shape form or the new
     if (passedDatas?.shapeData) {
         pathDatas = passedDatas.shapeData
-
-
         // // GRAB DATA FROM SAVED FIGURE
         // let mainPathData = passedDatas.shapeData
         // let svgDocPosition = passedDatas.svgDocPosition
         // let svgDimensions = passedDatas.svgDimensions
 
+        // let canvasDocument = documentSvg.canvDocHtmlElement
+        // let documentSvgElement = documentSvg.HtmlElement
+
         // // SET HTML ELEMENTS POSITION & DIMENSIONS
         // // Set dragDiv position on canvas
-        // // documentSvgElement.style.top = svgDocPosition.dragDivTop
-        // // documentSvgElement.style.left = svgDocPosition.dragDivLeft
-        // // canvDocHtmlElement.style.top = svgDocPosition.dragDivTop
-        // // canvDocHtmlElement.style.left = svgDocPosition.dragDivLeft
-        // canvDocHtmlElement.style.top = '2000px'
-        // canvDocHtmlElement.style.left = '2000px'
+        // canvasDocument.style.top = svgDocPosition.dragDivTop
+        // canvasDocument.style.left = svgDocPosition.dragDivLeft
         // // Set SVG dimensions
         // documentSvgElement.style.height = svgDimensions.height
         // documentSvgElement.style.width = svgDimensions.width
-
-
-
     } else {
         pathDatas = passedDatas
     }
-
-
-
 
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
@@ -100,72 +78,9 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
             newFigure.createPath_secondary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[1], i)
         }
     }
-
     newFigure.figure_updateSvg()
-
-
-
-
-
-
-    // Set documentSvgElement size to fit the PrimarySvgGroup
-    // Get the documentGroup bounding box
-    let documentGroupBBox = documentGroup.node().getBBox()
-    // Set extra area around documentGroup
-    let svgGroupBubble = 200
-    // Set the documentSvgElement to the new size
-    documentSvgElement.style.height = documentGroupBBox.height + svgGroupBubble
-    documentSvgElement.style.width = documentGroupBBox.width + svgGroupBubble
-
-    // Place canvasDocument in center of panCanvas
-    // Get the panCanvas bounding rectangle
-    let panCanvasRect = panCanvas.getBoundingClientRect()
-    // Get the canvasDocument bounding rectangle
-    let canvasDocRect = canvasDocument.getBoundingClientRect()
-    // Calculate the panCanvas dimensions according to the ScaleValue (Zoom Level) then divide by 2 to find center
-    let panCanvasScaledWidthCenter = (panCanvasRect.width / scaleValue) / 2
-    let panCanvasScaledHeightCenter = (panCanvasRect.height / scaleValue) / 2
-    // Calculate the canvasDocument dimensions according to the ScaleValue (Zoom Level) then divide by 2 to find center
-    let canvDocScaledWidthCenter = (canvasDocRect.width / scaleValue) / 2
-    let canvDocScaledHeightCenter =  (canvasDocRect.height / scaleValue) / 2
-
-
-
-
-
-    //If panCanvas has been panned, find the amount needed to offset the canvasDoc to keep it in the center of the window
-    let topPosition = panCanvas.offsetTop
-    let leftPosition = panCanvas.offsetLeft
-    let offsettop = 0
-    let offsetleft = 0
-    // let offsettop = (topPosition + (2500 * scaleValue)) / 2
-    // let offsetleft = (leftPosition + (2500 * scaleValue)) / 2
-    // let offsettop = ((topPosition / scaleValue) + 2500) / 2
-    // let offsetleft = ((leftPosition / scaleValue) + 2500) / 2
-    // let offsettop = topPosition + (2500 * scaleValue)
-    // let offsetleft = leftPosition + (2500 * scaleValue)
-    // let offsettop = topPosition + 2500
-    // let offsetleft = leftPosition + 2500
-    
-
-
-    console.log("oskdfosdkfoskf")
-    console.log(offsettop)
-    console.log(offsetleft)
-    console.log(scaleValue)
-
-
-
-
-
-    // Find the distance to move the canvasDocument by subtracting its center dimensions from the panCanvas dimensions
-    let movetoleft = panCanvasScaledWidthCenter - canvDocScaledWidthCenter - offsetleft
-    let movetotop = panCanvasScaledHeightCenter - canvDocScaledHeightCenter - offsettop
-    // Set the Svg Element to the new Size
-    canvasDocument.style.top = movetotop + 'px'
-    canvasDocument.style.left = movetoleft + 'px'
-
-
+    //Center CanvDoc in PanCanv after loading saved figure
+    CanvDoc.centerDocument()
 }
 
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvg, documentSvgD3, actionStates) {
