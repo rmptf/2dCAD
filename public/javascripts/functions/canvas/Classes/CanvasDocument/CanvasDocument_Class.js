@@ -194,7 +194,7 @@ CanvasDocument.prototype.setClickEvents = function() {
     }
 }
 
-CanvasDocument.prototype.centerDocument = function() {
+CanvasDocument.prototype.resizeAndCenterDocument = function() {
     let scaleValue = this.scaleValue.scaleLevel
     let panCanvas = this.panElement
     let canvasDocument = this.documentSvg.canvDocHtmlElement

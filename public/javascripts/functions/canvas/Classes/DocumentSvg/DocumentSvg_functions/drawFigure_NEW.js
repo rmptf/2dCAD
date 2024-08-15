@@ -49,6 +49,7 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
     let pathDatas
     // check if the passed data is in the "old" saved shape form or the new
     if (passedDatas?.shapeData) {
+        console.log('osdkfosdkfoskfoksd')
         pathDatas = passedDatas.shapeData
         // // GRAB DATA FROM SAVED FIGURE
         // let mainPathData = passedDatas.shapeData
@@ -80,7 +81,7 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
     }
     newFigure.figure_updateSvg()
     //Center CanvDoc in PanCanv after loading saved figure
-    CanvDoc.centerDocument()
+    CanvDoc.resizeAndCenterDocument()
 }
 
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvg, documentSvgD3, actionStates) {
