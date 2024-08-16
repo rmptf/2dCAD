@@ -8,11 +8,11 @@ function saveFigureData(thisFigure) {
     //         {"coords":{"x":569,"y":264},"arc":{"exist":false}},
     //         {"coords":{"x":100,"y":205},"arc":{"exist":false}}
     //     ],
-    // "svgDocPosition":
+    // "canvasDocumentPosition":
     //     {
     //         "dragDivTop":"2161px","dragDivLeft":"2151px"
     //     },
-    // "svgDimensions":
+    // "documentSvgDimensions":
     //     {
     //         "x":515,"y":154,"width":669,"height":589,"top":154,"right":1184,"bottom":743,"left":515
     //     }
@@ -21,27 +21,27 @@ function saveFigureData(thisFigure) {
 
     // let shapeDataObject = {
     //     shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-    //     svgDocPosition : {svgDocTop: a_canvas_globalVars.svgDocHTML.style.top, svgDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
-    //     svgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+    //     canvasDocumentPosition : {svgDocTop: a_canvas_globalVars.svgDocHTML.style.top, svgDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
+    //     documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
     // }
 
 
     // let mainPathData = passedDatas.shapeData
-    // let svgDocPosition = passedDatas.svgDocPosition
-    // let svgDimensions = passedDatas.svgDimensions
+    // let canvasDocumentPosition = passedDatas.canvasDocumentPosition
+    // let documentSvgDimensions = passedDatas.documentSvgDimensions
     //old
 
 
     //new
     let scaleValue = thisFigure.DocumentSvg.scaleValue
     let canvasDocumentHtmlElement = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
-    let canvDocDimensions = canvasDocumentHtmlElement.getBoundingClientRect() //might need to scale these figures
+    let canvDocDimensions = canvasDocumentHtmlElement.getBoundingClientRect() //might need to scale these figures // also calculate a new way
     let documentSvgHtmlElement = thisFigure.DocumentSvg.HtmlElement
     let docSvgDimensions = documentSvgHtmlElement.getBoundingClientRect()
     let shapeDataObject = {
         shapeData: thisFigure.svgPathDatas,
-        svgDocPosition: {canvDocTop: canvDocDimensions.top, canvDocLeft: canvDocDimensions.left},
-        svgDimensions: docSvgDimensions,
+        canvasDocumentPosition: {canvDocTop: canvDocDimensions.top, canvDocLeft: canvDocDimensions.left},
+        documentSvgDimensions: docSvgDimensions,
         scaleValue: scaleValue
     }
 

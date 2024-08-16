@@ -46,29 +46,36 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
     let documentSvgFigures = documentSvg.documentSvgFigures
     let newFigure = new SvgFigure(documentSvg)
     let passedDatas = JSON.parse(figureData)
-    let pathDatas
-    // check if the passed data is in the "old" saved shape form or the new
-    if (passedDatas?.shapeData) {
-        console.log('osdkfosdkfoskfoksd')
-        pathDatas = passedDatas.shapeData
-        // // GRAB DATA FROM SAVED FIGURE
-        // let mainPathData = passedDatas.shapeData
-        // let svgDocPosition = passedDatas.svgDocPosition
-        // let svgDimensions = passedDatas.svgDimensions
 
-        // let canvasDocument = documentSvg.canvDocHtmlElement
-        // let documentSvgElement = documentSvg.HtmlElement
 
-        // // SET HTML ELEMENTS POSITION & DIMENSIONS
-        // // Set dragDiv position on canvas
-        // canvasDocument.style.top = svgDocPosition.dragDivTop
-        // canvasDocument.style.left = svgDocPosition.dragDivLeft
-        // // Set SVG dimensions
-        // documentSvgElement.style.height = svgDimensions.height
-        // documentSvgElement.style.width = svgDimensions.width
-    } else {
-        pathDatas = passedDatas
-    }
+
+
+    console.log('osdkfosdkfoskfoksd')
+
+    // GRAB DATA FROM SAVED FIGURE
+    let pathDatas = passedDatas.shapeData //oldway
+    let canvasDocumentPosition = passedDatas.canvasDocumentPosition
+    let documentSvgDimensions = passedDatas.documentSvgDimensions
+
+    let canvasDocument = documentSvg.canvDocHtmlElement
+    let documentSvgElement = documentSvg.HtmlElement
+
+    // SET HTML ELEMENTS POSITION & DIMENSIONS
+    // Set dragDiv position on canvas
+    canvasDocument.style.top = canvasDocumentPosition.canvDocTop + 'px'
+    canvasDocument.style.left = canvasDocumentPosition.canvDocLeft + 'px'
+    // Set SVG dimensions
+    documentSvgElement.style.height = documentSvgDimensions.height
+    documentSvgElement.style.width = documentSvgDimensions.width
+
+    console.log(canvasDocumentPosition)
+    console.log(documentSvgDimensions)
+    console.log(canvasDocument)
+    console.log(documentSvgElement)
+
+
+
+
 
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
@@ -81,7 +88,7 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
     }
     newFigure.figure_updateSvg()
     //Center CanvDoc in PanCanv after loading saved figure
-    CanvDoc.resizeAndCenterDocument()
+    // CanvDoc.resizeAndCenterDocument()
 }
 
 function drawDocumentSvgAllFiguresFromData(figuresData, documentSvg, documentSvgD3, actionStates) {

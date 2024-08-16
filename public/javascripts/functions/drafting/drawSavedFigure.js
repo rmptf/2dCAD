@@ -18,17 +18,17 @@ function drawSavedFigure(index, obj) {
     // GRAB DATA FROM SAVED FIGURE
     let figureData = JSON.parse(SAVED_FIGURE_DATA[index])
     let mainPathData = figureData.shapeData
-    let svgDocPosition = figureData.svgDocPosition
-    let svgDimensions = figureData.svgDimensions
+    let canvasDocumentPosition = figureData.canvasDocumentPosition
+    let documentSvgDimensions = figureData.documentSvgDimensions
     // GRAB DATA FROM SAVED FIGURE
     
     // SET HTML ELEMENTS POSITION & DIMENSIONS
     // Set dragDiv position on canvas
-    a_canvas_globalVars.svgDocHTML.style.top = svgDocPosition.dragDivTop
-    a_canvas_globalVars.svgDocHTML.style.left = svgDocPosition.dragDivLeft
+    a_canvas_globalVars.svgDocHTML.style.top = canvasDocumentPosition.canvDocTop
+    a_canvas_globalVars.svgDocHTML.style.left = canvasDocumentPosition.canvDocLeft
     // Set SVG dimensions
-    a_canvas_globalVars.svgHTML.style.height = svgDimensions.height
-    a_canvas_globalVars.svgHTML.style.width = svgDimensions.width
+    a_canvas_globalVars.svgHTML.style.height = documentSvgDimensions.height
+    a_canvas_globalVars.svgHTML.style.width = documentSvgDimensions.width
     // SET HTML ELEMENTS POSITION & DIMENSIONS
 
     // ADD SVG GROUPS

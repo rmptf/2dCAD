@@ -136,13 +136,18 @@ function NEWselectMeasurePath() {
 
 
 
-function placeElement(svgDocElement) {
-    svgDocElement.style.top = 'calc(50% - 250px)'
-    svgDocElement.style.left = 'calc(50% - 250px)'
-    let toPixelWidth = svgDocElement.offsetTop
-    let toPixelHeight = svgDocElement.offsetTop
-    svgDocElement.style.top = toPixelWidth + 'px'
-    svgDocElement.style.left = toPixelHeight + 'px'
+function placeElement(canvDocumentElement) {
+    canvDocumentElement.style.top = 'calc(50% - 250px)'
+    canvDocumentElement.style.left = 'calc(50% - 250px)'
+    let toPixelWidth = canvDocumentElement.offsetTop
+    let toPixelHeight = canvDocumentElement.offsetTop
+
+    console.log("okoksdf")
+    console.log(canvDocumentElement)
+    console.log(canvDocumentElement.offsetTop)
+
+    canvDocumentElement.style.top = toPixelWidth + 'px'
+    canvDocumentElement.style.left = toPixelHeight + 'px'
 }
 
 function changeStringIncrementally(origString, stringIncrement123) {
