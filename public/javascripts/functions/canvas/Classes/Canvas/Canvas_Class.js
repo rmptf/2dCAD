@@ -22,3 +22,4 @@ export {
 
 console.log("ORIGIN BRANCH")
 console.log("PROJECT-ORGANIZATION BRANCH")
+console.log("'git checkout main' to get back to origin")
