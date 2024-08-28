@@ -1,4 +1,4 @@
-import {CanvasDocument} from '../Classes/CanvasDocument/CanvasDocument_Class.js'
+import {CanvasDocument} from '../CanvasDocument/CanvasDocument_Class.js'
 
 function Footer(topLevelParentClass_canvasElement, topLevelParentClass_canvasDocuments, topLevelParentClass_scaleClass, topLevelParentClass_panClass, footer, button) {
     this.DOCUMENT_TEMPLATE_ID = 'aCanvasTemplate'

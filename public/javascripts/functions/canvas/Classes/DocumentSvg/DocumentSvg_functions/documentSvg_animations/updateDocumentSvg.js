@@ -1,4 +1,4 @@
-import {calculateArcAndDescribePath, describeComplexPath} from '../documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
+import {calculateArcAndDescribePath, describeComplexPath} from './animation_functions/svgElementCalculationsNEW.js'
 
 function updateSVG_thisSvgFigure(figure) {
     let pathDatas = figure.svgPathDatas

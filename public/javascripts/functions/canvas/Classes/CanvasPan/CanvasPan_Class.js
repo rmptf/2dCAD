@@ -1,4 +1,4 @@
-import {dragElement} from '../htmlElementFunctions.js'
+import {dragElement} from '../../htmlElementFunctions.js'
 
 function CanvasPan(scaleObject, canvasPanElement) {
     this.scaleClass_scaleObject = scaleObject

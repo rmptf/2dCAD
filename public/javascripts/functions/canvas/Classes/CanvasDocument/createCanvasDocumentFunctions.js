@@ -142,9 +142,9 @@ function placeElement(canvDocumentElement) {
     let toPixelWidth = canvDocumentElement.offsetTop
     let toPixelHeight = canvDocumentElement.offsetTop
 
-    console.log("okoksdf")
-    console.log(canvDocumentElement)
-    console.log(canvDocumentElement.offsetTop)
+    // console.log("okoksdf")
+    // console.log(canvDocumentElement)
+    // console.log(canvDocumentElement.offsetTop)
 
     canvDocumentElement.style.top = toPixelWidth + 'px'
     canvDocumentElement.style.left = toPixelHeight + 'px'

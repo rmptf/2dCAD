@@ -1,5 +1,5 @@
-import {Canvas} from '../functions/canvas/Classes/Canvas_Class.js'
-import {Footer} from '../functions/canvas/Classes/Footer_Class.js'
+import {Canvas} from '../functions/canvas/Classes/Canvas/Canvas_Class.js'
+import {Footer} from '../functions/canvas/Classes/Footer/Footer_Class.js'
 
 let aArtboardElementIdsArray = JSON.parse(document.getElementById("aArtboard_scriptId").dataset.json)
 let aCanvas_element = document.getElementById(aArtboardElementIdsArray[0])
@@ -14,3 +14,6 @@ let bFooterActions_button_05 = document.getElementById(aArtboardElementIdsArray[
 
 let newCanvas = new Canvas(aCanvas_element, aCanvas_scale_element, aCanvas_pan_element, bFooterActions_button_02, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05)
 let newFooter = new Footer(newCanvas.canvasElement, newCanvas.canvasDocuments, newCanvas.canvScaleClass, newCanvas.canvasPanClass, bFooter_element, bFooterActions_button_02)
+
+// i think this eventually needs to be turned into a class. It wasnt because it is outside of the 'canvas' scope
+// but i want to go further than that now

@@ -18,12 +18,14 @@ function dragElement(element, scaleObject) {
     }
 
     function elementDrag(event) {
+        console.log("sfsfok")
         event.preventDefault()
         let dragScaler = 1 / scaleObject.scaleLevel
         pos1 = (pos3 - event.clientX) * dragScaler
         pos2 = (pos4 - event.clientY) * dragScaler
         pos3 = event.clientX
         pos4 = event.clientY
+
         element.style.top = (element.offsetTop - pos2) + "px"
         element.style.left = (element.offsetLeft - pos1) + "px"
     }

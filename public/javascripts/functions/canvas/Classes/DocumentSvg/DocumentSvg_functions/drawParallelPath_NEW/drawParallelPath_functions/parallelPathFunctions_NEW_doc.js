@@ -473,3 +473,12 @@ export{
     findPointAlongSlopeAtDistance,
     getArcToArcIntersections,
 }
+
+    // makeDeepCopy,
+    // transformData,
+    // findParallelDistance,
+    // findIntersectingPointSIMPLER,
+    // findIntersectingPointTwoFormats,
+    // getPathToArcIntersections,
+    // findPointAlongSlopeAtDistance,
+    // getArcToArcIntersections,

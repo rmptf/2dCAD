@@ -1,5 +1,5 @@
-import {CanvasScale} from '../Classes/CanvasScale_Class.js'
-import {CanvasPan} from '../Classes/CanvasPan_Class.js'
+import {CanvasScale} from '../CanvasScale/CanvasScale_Class.js'
+import {CanvasPan} from '../CanvasPan/CanvasPan_Class.js'
 
 function Canvas(canvasElement, aCanvas_scale_element, aCanvas_pan_element, bFooterActions_button_02, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05) {
     this.canvasElement = canvasElement
@@ -19,3 +19,5 @@ function Canvas(canvasElement, aCanvas_scale_element, aCanvas_pan_element, bFoot
 export {
     Canvas
 }
+
+console.log("ORIGIN BRANCH")

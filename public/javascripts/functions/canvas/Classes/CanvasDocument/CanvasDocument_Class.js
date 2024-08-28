@@ -1,4 +1,4 @@
-import {ActionButton} from '../ActionButton_Class.js'
+import {ActionButton} from '../ActionButton/ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
 import {SvgGroup} from '../DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
 import {SvgPath} from '../DocumentSvg/SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
@@ -134,7 +134,7 @@ CanvasDocument.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
     activateSvgDoc(this.canvasDocument_htmlElement)
     setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
-    dragElement(this)
+    dragElement(this.canvasDocument_htmlElement, this.scaleValue)
 }
 
 CanvasDocument.prototype.setClickEvents = function() {

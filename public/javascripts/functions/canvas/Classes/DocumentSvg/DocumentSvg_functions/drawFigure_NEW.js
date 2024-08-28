@@ -49,31 +49,20 @@ function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates
 
 
 
-
-    console.log('osdkfosdkfoskfoksd')
-
     // GRAB DATA FROM SAVED FIGURE
-    let pathDatas = passedDatas.shapeData //oldway
+    let pathDatas = passedDatas.shapeData
     let canvasDocumentPosition = passedDatas.canvasDocumentPosition
     let documentSvgDimensions = passedDatas.documentSvgDimensions
 
+    // SET HTML ELEMENTS POSITION & DIMENSIONS
     let canvasDocument = documentSvg.canvDocHtmlElement
     let documentSvgElement = documentSvg.HtmlElement
-
-    // SET HTML ELEMENTS POSITION & DIMENSIONS
     // Set dragDiv position on canvas
     canvasDocument.style.top = canvasDocumentPosition.canvDocTop + 'px'
     canvasDocument.style.left = canvasDocumentPosition.canvDocLeft + 'px'
     // Set SVG dimensions
     documentSvgElement.style.height = documentSvgDimensions.height
     documentSvgElement.style.width = documentSvgDimensions.width
-
-    console.log(canvasDocumentPosition)
-    console.log(documentSvgDimensions)
-    console.log(canvasDocument)
-    console.log(documentSvgElement)
-
-
 
 
 
