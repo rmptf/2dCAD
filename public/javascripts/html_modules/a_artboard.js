@@ -1,5 +1,5 @@
-import {Canvas} from '../functions/canvas/Classes/Canvas/Canvas_Class.js'
-import {Footer} from '../functions/canvas/Classes/Footer/Footer_Class.js'
+import {Canvas} from '../classes/components/Canvas/Canvas_Class.js'
+import {Footer} from '../classes/components/Footer/Footer_Class.js'
 
 let aArtboardElementIdsArray = JSON.parse(document.getElementById("aArtboard_scriptId").dataset.json)
 let aCanvas_element = document.getElementById(aArtboardElementIdsArray[0])

@@ -1,9 +1,9 @@
-import {drawPathFunction} from '../drafting/drawPath.js'
-import {addCurvePointFunction} from '../drafting/addCurvePoint.js'
-import {drawParallelPathFunction} from '../drafting/parallelPath/drawParallelPath.js'
-import {measurePathFunction} from '../drafting/measurePath.js'
-import {dragPath, dragEndPoint} from '../drafting/dragSvgElements.js'
-import {expandSvgElementOnMouseMove} from '../drafting/resizeSvg.js'
+import {drawPathFunction} from '../../functions/drafting/drawPath.js'
+import {addCurvePointFunction} from '../../functions/drafting/addCurvePoint.js'
+import {drawParallelPathFunction} from '../../functions/drafting/parallelPath/drawParallelPath.js'
+import {measurePathFunction} from '../../functions/drafting/measurePath.js'
+import {dragPath, dragEndPoint} from '../../functions/drafting/dragSvgElements.js'
+import {expandSvgElementOnMouseMove} from '../../functions/drafting/resizeSvg.js'
 import {Path} from '../../tests/classes_test/newClass_test.js'
 
 // let drawPathObj = {}

@@ -1,5 +1,5 @@
-import {drawPathFunction, finishDrawPath} from '../../../drafting/drawPath.js'
-import {dragElement} from '../../htmlElementFunctions.js'
+import {drawPathFunction, finishDrawPath} from '../../../functions/drafting/drawPath.js'
+import {dragElement} from '../../utils/htmlElementFunctions.js'
 
 // handle these in Canvas Class
 // handle these in Canvas Class

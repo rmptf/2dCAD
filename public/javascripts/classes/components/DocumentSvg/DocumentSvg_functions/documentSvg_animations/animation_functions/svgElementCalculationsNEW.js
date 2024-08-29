@@ -1,4 +1,4 @@
-import {findLineMidpoint, findPerpendicularFromPoint, findRightTriangle, findIntersectingPoint, getDistance, solveForAngleOfRightTriangle, inRange} from  '../../../../../../math/mathFunctions.js'
+import {findLineMidpoint, findPerpendicularFromPoint, findRightTriangle, findIntersectingPoint, getDistance, solveForAngleOfRightTriangle, inRange} from  '../../../../../../functions/math/mathFunctions.js'
 
 function calculateArcAndDescribePath(pathDataPass) {
     let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')

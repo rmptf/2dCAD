@@ -1,6 +1,6 @@
 // import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
 // import {findLineMidpoint, isGreaterThan} from '../../../../../../math/mathFunctions.js'
-import {findLineMidpoint, isGreaterThan} from "../../../../../../math/mathFunctions.js"
+import {findLineMidpoint, isGreaterThan} from "../../../../../../functions/math/mathFunctions.js"
 
 function LargeArcFlagSetter(parallelFigure) {
     this.ParFigure = parallelFigure

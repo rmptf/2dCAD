@@ -1,7 +1,7 @@
 import {LargeArcFlagSetter} from './LargeArcFlagSetter_Class.js'
 import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
-import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
-import {findPointAlongSlopeAtDistance} from '../../../../../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
+import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
+import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 

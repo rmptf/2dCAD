@@ -1,4 +1,4 @@
-import {getDistance} from '../../../../../../math/mathFunctions.js'
+import {getDistance} from '../../../../../../functions/math/mathFunctions.js'
 
 function makeDeepCopy(obj) {
     if (obj === null || typeof obj !== 'object') {

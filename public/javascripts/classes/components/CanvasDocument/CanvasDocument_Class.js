@@ -3,7 +3,7 @@ import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
 import {SvgGroup} from '../DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
 import {SvgPath} from '../DocumentSvg/SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
 import {createSvgDocument} from './createCanvasDocumentFunctions.js'
-import {dragElement} from '../../htmlElementFunctions.js'
+import {dragElement} from '../../utils/htmlElementFunctions.js'
 import {
     changeStringIncrementally,
     activateSvgDoc,
@@ -18,7 +18,6 @@ import {
 // import {saveFigureData} from '../../../tools/saveFigureData.js'
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
-
 
 function CanvasDocument(footer) {
     this.DOCUMENT_ACTIONBAR_BTN_CONTS = {

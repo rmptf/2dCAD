@@ -1,5 +1,5 @@
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
-import {handleSecondaryPathClick, handleEndPointDrag} from '../canvas/svgDocument_actions.js'
+import {handleSecondaryPathClick, handleEndPointDrag} from '../../classes/utils/svgDocument_actions.js'
 
 function addCurvePointFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount, m1) {
     let newEndPoint = selfGroup.endPointGroup
