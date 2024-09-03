@@ -1,3 +1,5 @@
+console.log("artboard.js old")
+
 import {Canvas} from '../classes/components/Canvas/Canvas_Class.js'
 import {Footer} from '../classes/components/Footer/Footer_Class.js'
 

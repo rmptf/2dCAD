@@ -1,3 +1,5 @@
+console.log("canvas.js old")
+
 // import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/createCanvasDocumentFunctions.js'
 // import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
 import {hotKeyPress} from '../functions/tools/hotKeys.js'

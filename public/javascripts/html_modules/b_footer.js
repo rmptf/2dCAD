@@ -1,3 +1,5 @@
+console.log("footer.js old")
+
 // // old
 // // old
 
