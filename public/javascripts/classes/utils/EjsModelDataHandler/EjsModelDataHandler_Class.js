@@ -18,7 +18,19 @@ EjsModelDataHandler.prototype.grabModelDataFromAPI = async function() {
 }
 
 function processData(data) {
-    let processedData = data.ARTBOARDMODEL.model.MODULE_NAME
+    let processedData_DATA = {
+        actions: null,
+
+    }
+
+    let processedData = data.artBoardModel.model.MODULE_NAME
+    
+
+
+
+
+
+
     return processedData  // Return the fetched data
 }
 

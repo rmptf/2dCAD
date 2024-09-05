@@ -1,14 +1,5 @@
 const {MODULE_LOCATIONS} = require('../../../../../public/reference_files/module_locations')
 const {COLORVARS, WIDTHVARS, BTNVARS} = require('../../../../../public/reference_files/theme_class_data')
-// const {ARTBOARDMODEL} = require('./artBoardModelBuilder')
-
-
-const MODEL_OBJECT_01 = 'B_PANE'
-const MODEL_OBJECT_02 = 'A_ARTBOARD'
-const MODEL_OBJECT_03 = 'B_HEADER'
-const MODEL_OBJECT_04 = 'A_CANVAS'
-const MODEL_OBJECT_05 = 'A_DOCUMENT'
-const MODEL_OBJECT_06 = 'B_FOOTER'
 
 const MODEL_OBJECTS = {
     // MODEL_GLOBAL_VARIABLES: {
@@ -16,27 +7,8 @@ const MODEL_OBJECTS = {
     //     MODULE_THEME: COLORVARS.THEMECLASS.defaultThemeClass,
     // },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    MODEL_OBJECT_01: {
-        MODULE_NAME: MODEL_OBJECT_01,
+    B_PANE: {
+        MODULE_NAME: 'B_PANE',
         MODULE_LOCATION: MODULE_LOCATIONS.B_PANE,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.accentPrimaryFill,
@@ -79,30 +51,12 @@ const MODEL_OBJECTS = {
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    MODEL_OBJECT_02: {
-        MODULE_NAME: MODEL_OBJECT_02,
+    A_ARTBOARD: {
+        MODULE_NAME: 'A_ARTBOARD',
         MODULE_LOCATION: MODULE_LOCATIONS.A_ARTBOARD,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
@@ -139,35 +93,17 @@ const MODEL_OBJECTS = {
             ],
         },
         MODULE_PARENT_DATA: {
-            PARENT_NAME: MODEL_OBJECT_01,
+            PARENT_NAME: null,
         },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    MODEL_OBJECT_03: {
-        MODULE_NAME: MODEL_OBJECT_03,
+    B_HEADER: {
+        MODULE_NAME: 'B_HEADER',
         MODULE_LOCATION: MODULE_LOCATIONS.B_HEADER,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainMuted,
@@ -233,35 +169,17 @@ const MODEL_OBJECTS = {
             ],
         },
         MODULE_PARENT_DATA: {
-            PARENT_NAME: MODEL_OBJECT_02,
+            PARENT_NAME: null,
         },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    MODEL_OBJECT_04: {
-        MODULE_NAME: MODEL_OBJECT_04,
+    A_CANVAS: {
+        MODULE_NAME: 'A_CANVAS',
         MODULE_LOCATION: MODULE_LOCATIONS.A_CANVAS,
         MODULE_THEMES: {
             THEME_ContainerFill: COLORVARS.FILLS.mainFill,
@@ -298,21 +216,17 @@ const MODEL_OBJECTS = {
             ],
         },
         MODULE_PARENT_DATA: {
-            PARENT_NAME: MODEL_OBJECT_02,
+            PARENT_NAME: null,
         },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
 
-
-
-
-
-
-    MODEL_OBJECT_05: {
-        MODULE_NAME: MODEL_OBJECT_05,
+    A_DOCUMENT: {
+        MODULE_NAME: 'A_DOCUMENT',
         MODULE_LOCATION: MODULE_LOCATIONS.A_DOCUMENT,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
@@ -484,37 +398,17 @@ const MODEL_OBJECTS = {
             ],
         },
         MODULE_PARENT_DATA: {
-            PARENT_NAME: MODEL_OBJECT_04,
+            PARENT_NAME: null,
         },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    MODEL_OBJECT_06: {
-        MODULE_NAME: MODEL_OBJECT_06,
+    B_FOOTER: {
+        MODULE_NAME: 'B_FOOTER',
         MODULE_LOCATION: MODULE_LOCATIONS.B_FOOTER,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainMuted,
@@ -609,18 +503,14 @@ const MODEL_OBJECTS = {
             ],
         },
         MODULE_PARENT_DATA: {
-            PARENT_NAME: MODEL_OBJECT_02,
+            PARENT_NAME: null,
         },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [],
             CHILDREN: [],
+            CHILDREN_MOD_LOC: []
         }
     },
-
-
-
-
-
 }
 
 module.exports = { 

@@ -16,7 +16,7 @@ const {
 
 // EJS MODEL
 const {
-    ARTBOARDMODEL,
+    artBoardModel,
 } = require('./utils/ejsModels/ejsModelBuilder/artBoardmodel/artBoardModelBuilder')
 // EJS MODEL
 
@@ -28,13 +28,13 @@ router.get('/', (req,res) => {
         widthVars: WIDTHVARS,
         btnVars: BTNVARS,
 
-        artBoardModel: ARTBOARDMODEL,
+        artBoardModel: artBoardModel,
     })
 })
 
 // API endpoint to send modelData
 router.get('/api/data', (req, res) => {
-    const data = {ARTBOARDMODEL}
+    const data = {artBoardModel}
     res.json(data)
 })
 

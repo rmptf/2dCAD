@@ -1,58 +1,18 @@
 function Ejs_Model(object) {
     this.model = object
-    this.children = this.model.children
 }
 
-Ejs_Model.prototype.injectChildObjIntoParentObj = function(childObject) {
-    this.model.MODULE_CHILDREN_DATA.CHILDREN = childObject
-    this.model.MODULE_CHILDREN_DATA.CHILDREN_NAMES = childObject.MODULE_NAME
-    // console.log(this.model)
+// Recursive function to inject children into parents
+Ejs_Model.prototype.injectChildren = function(structure, objects) {
+  structure.forEach(({parent, child}) => {
+      if (objects[parent] && objects[child]) {
+          objects[parent].MODULE_CHILDREN_DATA.CHILDREN.push(objects[child])
+          objects[parent].MODULE_CHILDREN_DATA.CHILDREN_MOD_LOC.push(objects[child].MODULE_LOCATION)
+          objects[parent].MODULE_CHILDREN_DATA.CHILDREN_NAMES.push(objects[child].MODULE_NAME)
+          objects[child].MODULE_PARENT_DATA.PARENT_NAME = objects[parent].MODULE_NAME
+      }
+  })
 }
-
-
-Ejs_Model.prototype.inject = function(parentObject, childObject) {
-    parentObject.MODULE_CHILDREN_DATA.CHILDREN = childObject
-    parentObject.MODULE_CHILDREN_DATA.CHILDREN_NAMES = childObject.MODULE_NAME
-    // console.log(this.model)
-    return parentObject.MODULE_CHILDREN_DATA.CHILDREN
-}
-
-
-Ejs_Model.prototype.inject02 = function buildTree(data) {
-    
-        // Step 1: Group objects by id for easy lookup
-        const lookup = {};
-        data.forEach(item => {
-          item.children = []; // Initialize children array for each object
-          lookup[item.id] = item; // Use id as the key
-        });
-      
-        let root = null; // To hold the root element
-      
-        // Step 2: Populate children and identify the root
-        data.forEach(item => {
-          if (item.parentId === null) {
-            root = item; // Root object is the one with no parent
-          } else {
-            // Step 3: Find parent and add current item to its children
-            const parent = lookup[item.parentId];
-            if (parent) {
-              parent.children.push(item);
-            }
-          }
-        });
-      
-        
-    //   }
-
-      
-      // Example usage:
-      const result = buildTree(data);
-      console.log(JSON.stringify(result, null, 2));
-
-      return root; // Return the root of the tree
-}
-
 
 module.exports = {Ejs_Model}
 

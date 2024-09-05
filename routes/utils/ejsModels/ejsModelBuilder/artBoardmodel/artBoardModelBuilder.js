@@ -1,35 +1,27 @@
 const {Ejs_Model} = require('../../EjsModel_Class/EjsModel_Class.js')
 const {MODEL_OBJECTS} = require('./artBoardModelObjects.js')
 
-let ARTBOARDMODEL = new Ejs_Model(MODEL_OBJECTS.MODEL_OBJECT_01)
+// Store objects in an object for easy lookup
+let objects = {
+  "B_PANE": MODEL_OBJECTS.B_PANE,
+  "A_ARTBOARD": MODEL_OBJECTS.A_ARTBOARD,
+  "B_HEADER": MODEL_OBJECTS.B_HEADER,
+  "A_CANVAS": MODEL_OBJECTS.A_CANVAS,
+  "A_DOCUMENT": MODEL_OBJECTS.A_DOCUMENT,
+  "B_FOOTER": MODEL_OBJECTS.B_FOOTER
+}
 
-ARTBOARDMODEL.model.MODULE_CHILDREN_DATA.CHILDREN.push(MODEL_OBJECTS.MODEL_OBJECT_02)
-// ARTBOARDMODEL.model.MODULE_CHILDREN_DATA.CHILDREN.push(MODEL_OBJECTS.MODEL_OBJECT_03)
-// ARTBOARDMODEL.model.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN.push(MODEL_OBJECTS.MODEL_OBJECT_04)
-// ARTBOARDMODEL.model.MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_CHILDREN_DATA.CHILDREN.push(MODEL_OBJECTS.MODEL_OBJECT_05)
+// Array of objects and their relationships
+let modelStructure = [
+  { parent: "B_PANE", child: "A_ARTBOARD" },
+  { parent: "A_ARTBOARD", child: "B_HEADER" },
+  { parent: "A_ARTBOARD", child: "A_CANVAS" },
+  { parent: "A_CANVAS", child: "A_DOCUMENT" },
+  { parent: "A_ARTBOARD", child: "B_FOOTER" }
+]
 
-// console.log(ARTBOARDMODEL.model.MODULE_CHILDREN_DATA)
+// Create new ModelClass and call function to inject children
+let artBoardModel = new Ejs_Model(MODEL_OBJECTS.B_PANE)
+artBoardModel.injectChildren(modelStructure, objects)
 
-
-
-
-const data = [
-    MODEL_OBJECTS
-  ]
-
-console.log(data)
-  
-// ARTBOARDMODEL.model.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN.push(MODEL_OBJECTS.MODEL_OBJECT_03)
-
-
-// ARTBOARDMODEL.injectChildObjIntoParentObj(MODEL_OBJECTS.MODEL_OBJECT_02)
-
-// let parent = ARTBOARDMODEL.inject(MODEL_OBJECTS.MODEL_OBJECT_02, MODEL_OBJECTS.MODEL_OBJECT_03)
-
-// console.log("newthing")
-// console.log(ARTBOARDMODEL)
-// console.log("parent")
-// console.log(parent)
-// // console.log(child)
-
-module.exports = {ARTBOARDMODEL}
+module.exports = {artBoardModel}
