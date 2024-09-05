@@ -11,10 +11,10 @@ const MODEL_OBJECT_05 = 'A_DOCUMENT'
 const MODEL_OBJECT_06 = 'B_FOOTER'
 
 const MODEL_OBJECTS = {
-    MODEL_GLOBAL_VARIABLES: {
-        GLOBAL_MODE: global.globalModeClass,
-        MODULE_THEME: COLORVARS.THEMECLASS.defaultThemeClass,
-    },
+    // MODEL_GLOBAL_VARIABLES: {
+    //     GLOBAL_MODE: global.globalModeClass,
+    //     MODULE_THEME: COLORVARS.THEMECLASS.defaultThemeClass,
+    // },
 
 
 
@@ -73,13 +73,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: null,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 
@@ -139,13 +138,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: MODEL_OBJECT_01,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 
@@ -234,13 +232,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: MODEL_OBJECT_02,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 
@@ -300,13 +297,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: MODEL_OBJECT_02,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 
@@ -487,13 +483,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: MODEL_OBJECT_04,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 
@@ -613,13 +608,12 @@ const MODEL_OBJECTS = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: MODEL_OBJECT_02,
+        },
         MODULE_CHILDREN_DATA: {
-            CHILDREN_NAMES: [
-                null
-            ],
-            CHILDREN: [
-                null
-            ],
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
         }
     },
 

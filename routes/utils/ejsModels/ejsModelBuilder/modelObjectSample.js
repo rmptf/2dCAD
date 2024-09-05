@@ -36,6 +36,10 @@ const SAMPLEMODULE = {
                 },
             ],
         },
+        MODULE_PARENT_DATA: {
+            CHILDREN_NAMES: [
+            ],
+        },
         MODULE_CHILDREN_DATA: {
             CHILDREN_NAMES: [
                 null
