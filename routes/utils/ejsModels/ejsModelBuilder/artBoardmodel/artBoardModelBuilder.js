@@ -17,7 +17,7 @@ let modelStructure = [
   { parent: "A_ARTBOARD", child: "B_HEADER" },
   { parent: "A_ARTBOARD", child: "A_CANVAS" },
   { parent: "A_CANVAS", child: "A_DOCUMENT" },
-  { parent: "A_ARTBOARD", child: "B_FOOTER" }
+  { parent: "A_ARTBOARD", child: "B_FOOTER" },
 ]
 
 // Create new ModelClass and call function to inject children

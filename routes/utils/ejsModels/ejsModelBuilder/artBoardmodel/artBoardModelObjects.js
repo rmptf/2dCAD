@@ -14,11 +14,13 @@ const MODEL_OBJECTS = {
             THEME_containerFill: COLORVARS.FILLS.accentPrimaryFill,
             THEME_maxWidth: WIDTHVARS.MAXWIDTHS.maxWidthUnset,
         },
-        MODULE_CONTENT: {
-            CONTENT_module_content: null,
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: []
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -61,11 +63,13 @@ const MODEL_OBJECTS = {
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
         },
-        MODULE_CONTENT: {
-            CONTENT_module_content: null,
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: []
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -110,14 +114,17 @@ const MODEL_OBJECTS = {
             THEME_logoIconColor: COLORVARS.COLORS.hl50,
             THEME_logoTextColor: COLORVARS.COLORS.hl10,
         },
-        MODULE_CONTENT: {
-            CONTENT_logo_cont: {
-                icon: "®",
-                text: "NOTCHER",
-            },
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: [],
+                    CONTENT_LOGO_CONTAINER: {
+                        ICON: '@',
+                        TEXT: 'NOTCHER'
+                    }
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -184,11 +191,16 @@ const MODEL_OBJECTS = {
         MODULE_THEMES: {
             THEME_ContainerFill: COLORVARS.FILLS.mainFill,
         },
-        MODULE_CONTENT: {
-            CONTENT_module_content: null,
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: 'aCanvas_01',
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: [
+                        {CONTENT_ID_ACANVAS_ZOOM_ID: 'aCanvasZoomLayer'},
+                        {CONTENT_ID_ACANVAS_PAN_ID: 'aCanvasPanLayer'},
+                    ]
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -234,11 +246,13 @@ const MODEL_OBJECTS = {
             THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
             THEME_svgFill: COLORVARS.FILLS.mainMuted,
         },
-        MODULE_CONTENT: {
-            CONTENT_module_content: null,
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: []
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -311,17 +325,15 @@ const MODEL_OBJECTS = {
                             },
                             {
                                 BUTTON: {
-                                    btn_04: {
-                                        btnExist: true,
-                                        btnType: "button",
-                                        btnText: "Measure",
-                                        btnId: "aDoc_btnCont01_btn04",
-                                        btnTheme_class: BTNVARS.BTNCLASS.aButton,
-                                        btnTheme_type: BTNVARS.BTNTYPES.default,
-                                        btnTheme_size: BTNVARS.BTNSIZES.small,
-                                        btnTheme_status: BTNVARS.BTNSTATUS.disabled,
-                                        btnTheme_style: BTNVARS.BTNSTYLE.contained,
-                                    },
+                                    btnExist: true,
+                                    btnType: "button",
+                                    btnText: "Measure",
+                                    btnId: "aDoc_btnCont01_btn04",
+                                    btnTheme_class: BTNVARS.BTNCLASS.aButton,
+                                    btnTheme_type: BTNVARS.BTNTYPES.default,
+                                    btnTheme_size: BTNVARS.BTNSIZES.small,
+                                    btnTheme_status: BTNVARS.BTNSTATUS.disabled,
+                                    btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
                             },
                         ]
@@ -413,11 +425,13 @@ const MODEL_OBJECTS = {
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainMuted,
         },
-        MODULE_CONTENT: {
-            CONTENT_module_content: null,
-        },
         MODULE_DATA: {
-            DATA_module_data: null,
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_IDS: []
+                },
+            },
         },
         MODULE_ACTIONS: {
             BUTTONS: [
@@ -448,6 +462,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -460,6 +476,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -472,6 +490,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -484,6 +504,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",

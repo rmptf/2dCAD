@@ -14,6 +14,10 @@ let bFooterActions_button_03 = document.getElementById(aArtboardElementIdsArray[
 let bFooterActions_button_04 = document.getElementById(aArtboardElementIdsArray[7])
 let bFooterActions_button_05 = document.getElementById(aArtboardElementIdsArray[8])
 
+console.log("sofjsdijfsdijfsodifjaidfjoasifjaosij")
+console.log(aArtboardElementIdsArray[5])
+// console.log(document.getElementById("aDoc_btnCont02_btn03"))
+
 let newCanvas = new Canvas(aCanvas_element, aCanvas_scale_element, aCanvas_pan_element, bFooterActions_button_02, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05)
 let newFooter = new Footer(newCanvas.canvasElement, newCanvas.canvasDocuments, newCanvas.canvScaleClass, newCanvas.canvasPanClass, bFooter_element, bFooterActions_button_02)
 
