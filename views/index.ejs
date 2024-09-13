@@ -29,8 +29,22 @@
 
 <%- include(moduleLocationVARS.B_TESTER, {
     ALL_MODULE_DATA: [
-        artBoardModel
+        ejsModels.ArtBoardModel
     ]
+})%>
+
+
+<%#- include(moduleLocationVARS.B_PANE_REFAC, {
+    MODEL_GLOBAL_VARIABLES: {
+        GLOBAL_MODE: global.globalModeClass,
+        MODULE_THEME: colorVars.THEMECLASS.defaultThemeClass,
+    },
+    B_PANE: ejsModels.ArtBoardModel.ejsModel,
+    A_ARTBOARD: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0],
+    B_HEADER: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[0],
+    A_CANVAS: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[1],
+    A_DOCUMENT: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_CHILDREN_DATA.CHILDREN[0],
+    B_FOOTER: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[2],
 })%>
 
 

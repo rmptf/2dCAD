@@ -13,7 +13,16 @@ function ArtBoard(fakeVar) {
     this.processedData = this.dataHandler.ready.then(() => {
         console.log("2222")
         console.log(this.dataHandler.processedData)
-        return this.dataHandler.processedData
+        console.log(this.dataHandler.findModuleDataFromProcessedData('A_CANVAS', this.dataHandler.processedData))
+
+        // return this.dataHandler.processedData
+
+
+        let aCanvasData = this.dataHandler.findModuleDataFromProcessedData('A_CANVAS', this.dataHandler.processedData)
+        let aFooterData = this.dataHandler.findModuleDataFromProcessedData('B_FOOTER', this.dataHandler.processedData)
+        let aDocumentData = this.dataHandler.findModuleDataFromProcessedData('A_DOCUMENT', this.dataHandler.processedData)
+        let canvas = new Canvas(aCanvasData, aFooterData)
+        new Footer(canvas, aCanvasData, aFooterData, aDocumentData)
     })
 
     console.log('3333')

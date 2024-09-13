@@ -19,107 +19,236 @@ import {
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 
+
+
+
+
+
 function CanvasDocument(footer) {
-    this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
-        BTN_CONT_01: {
-            BTN_01:'aDoc_btnCont01_btn01',
-            BTN_069:'aDoc_btnCont01_btn069',
-            BTN_02:'aDoc_btnCont01_btn02',
-            BTN_03:'aDoc_btnCont01_btn03',
-            BTN_04:'aDoc_btnCont01_btn04'
-        }, 
-        BTN_CONT_02: {
-            BTN_01:'aDoc_btnCont02_btn01',
-            BTN_069:'aDoc_btnCont02_btn069',
-            BTN_02:'aDoc_btnCont02_btn02',
-            BTN_03:'aDoc_btnCont02_btn03',
-            BTN_04:'aDoc_btnCont02_btn04',
+    // function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
+        this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
+            BTN_CONT_01: {
+                BTN_01:'aDoc_btnCont01_btn01',
+                BTN_069:'aDoc_btnCont01_btn069',
+                BTN_02:'aDoc_btnCont01_btn02',
+                BTN_03:'aDoc_btnCont01_btn03',
+                BTN_04:'aDoc_btnCont01_btn04'
+            }, 
+            BTN_CONT_02: {
+                BTN_01:'aDoc_btnCont02_btn01',
+                BTN_069:'aDoc_btnCont02_btn069',
+                BTN_02:'aDoc_btnCont02_btn02',
+                BTN_03:'aDoc_btnCont02_btn03',
+                BTN_04:'aDoc_btnCont02_btn04',
+            }
         }
+        this.DOCUMENT_ELEMENT_NEWNAMES = {
+            CANV_DOC: 'aDocument',
+            HEADING: 'Pattern_Pc_',
+            DOC_SVG: 'aDocumentSvg',
+            DOC_BTN_01: 'aDoc_btn_01_',
+        }
+        this.scaleValue = footer.scaleClass_scaleObject
+        this.panElement = footer.panElement
+        this.scaleClass_scaleObject = footer.scaleClass_scaleObject
+        this.stringIncrementCount = footer.vars.stringIncrement
+        this.cloneAndAppendTemplate(footer.documentTemplate, footer.panElement)
+        this.canvasDocument_htmlElement = document.getElementById(footer.DOCUMENT_CONTAINER_ID) //FIXME: find a beter way using 'documentData'
+        this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.children[0]
+        this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
+        this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
+    
+    
+        this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_01)
+        this.canvasDocActionBar01_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_069)
+        this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_02)
+        this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
+        this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
+        this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
+        this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
+        this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
+        this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
+        this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
+        this.setElementIds( // only really used in the old way. (can remover later)
+            this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
+            this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
+            this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG,
+            this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
+            )
+    
+            
+        this.actionStates = {
+            // documentSvgActionStates: {
+            //     drawPathActive: false,
+            // },
+            // secondaryPathActionStates: {
+            //     addEndPointActive: false,
+            //     addEndPointActive_curve: false,
+            //     drawParallelPathAcive: false,
+            //     measurePathActive: false,
+            //     saveFigureDataActive: false,
+            // },
+            // endPointActionStates: {
+            //     removeEndPointActive: false,
+            // },
+            drawPathActive: false,
+            addEndPointActive: false,
+            addEndPointActive_curve: false,
+            removeEndPointActive: false,
+            drawParallelPathAcive: false,
+            measurePathActive: false,
+            saveFigureDataActive: false,
+        }
+        this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+        this.setActions()
+        this.setClickEvents()
+    
+        // // OLD WAY OF DRAW
+        // // OLD WAY OF DRAW
+        // this.drawPathObj = {
+        //     self: [], // moving
+        //     m1: '',
+        //     isDown: false,
+        //     isDown2: false,
+        //     originalFigureCount: 0,
+        //     secondaryPathCount: 0,
+        //     previousDrawPathObj: null
+        // }
+        // // OLD WAY OF DRAW
+        // // OLD WAY OF DRAW
     }
-    this.DOCUMENT_ELEMENT_NEWNAMES = {
-        CANV_DOC: 'aDocument',
-        HEADING: 'Pattern_Pc_',
-        DOC_SVG: 'aDocumentSvg',
-        DOC_BTN_01: 'aDoc_btn_01_',
+
+    CanvasDocument.prototype.iterateCounters = function(vars){
+        vars.stringIncrement++
+        this.stringIncrementCount = vars.stringIncrement
     }
-    this.scaleValue = footer.scaleClass_scaleObject
-    this.panElement = footer.panElement
-    this.scaleClass_scaleObject = footer.scaleClass_scaleObject
-    this.stringIncrementCount = footer.vars.stringIncrement
-    this.cloneAndAppendTemplate(footer.documentTemplate, footer.panElement)
-    this.canvasDocument_htmlElement = document.getElementById(footer.DOCUMENT_CONTAINER_ID)
-    this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.children[0]
-    this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
-    this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
+
+    CanvasDocument.prototype.cloneAndAppendTemplate = function(templateId, targetId) {
+        targetId.appendChild(document.importNode(templateId, true))
+    }
 
 
-    this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_01)
-    this.canvasDocActionBar01_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_069)
-    this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_02)
-    this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
-    this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
-    this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
-    this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
-    this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
-    this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
-    this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
-    this.setElementIds( // only really used in the old way. (can remover later)
-        this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
-        this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
-        this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG,
-        this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
-        )
+
+
+
+
+// function CanvasDocument(footer) {
+// // function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
+//     this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
+//         BTN_CONT_01: {
+//             BTN_01:'aDoc_btnCont01_btn01',
+//             BTN_069:'aDoc_btnCont01_btn069',
+//             BTN_02:'aDoc_btnCont01_btn02',
+//             BTN_03:'aDoc_btnCont01_btn03',
+//             BTN_04:'aDoc_btnCont01_btn04'
+//         }, 
+//         BTN_CONT_02: {
+//             BTN_01:'aDoc_btnCont02_btn01',
+//             BTN_069:'aDoc_btnCont02_btn069',
+//             BTN_02:'aDoc_btnCont02_btn02',
+//             BTN_03:'aDoc_btnCont02_btn03',
+//             BTN_04:'aDoc_btnCont02_btn04',
+//         }
+//     }
+//     this.DOCUMENT_ELEMENT_NEWNAMES = {
+//         CANV_DOC: 'aDocument',
+//         HEADING: 'Pattern_Pc_',
+//         DOC_SVG: 'aDocumentSvg',
+//         DOC_BTN_01: 'aDoc_btn_01_',
+//     }
+
+//     this.scaleValue = footer.scaleClass_scaleObject // fine
+//     this.panElement = footer.panElement // fine
+//     this.scaleClass_scaleObject = footer.scaleClass_scaleObject // fine
+//     this.stringIncrementCount = footer.vars.stringIncrement // fine
+//     this.cloneAndAppendTemplate(footer.documentTemplateContent, document.getElementById(footer.DOCUMENT_CONTAINER_ID))
+//     // this.cloneAndAppendTemplate(footer.documentTemplateContent, footer.panElement)
+
+//     this.canvasDocument_htmlElement = document.getElementById(footer.canvasClass_canvasElement)
+//     // this.canvasDocument_htmlElement = document.getElementById(documentData.A_DOCUMENT.elements.contentElementsData[0].id) //FIXME: find a beter way using 'documentData'
+
+//     // console.log("fsfsdfsf")
+//     // console.log(this.canvasDocument_htmlElement)
+//     // console.log(documentData.A_DOCUMENT.elements.contentElementsData[0].id)
+
+//     this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.children[0]
+//     this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
+//     this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
+
+
+//     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_01)
+//     this.canvasDocActionBar01_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_069)
+//     this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_02)
+//     this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
+//     this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
+//     this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
+//     this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
+//     this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
+//     this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
+//     this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
+//     this.setElementIds( // only really used in the old way. (can remover later)
+//         this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
+//         this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
+//         this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG,
+//         this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
+//         )
 
         
-    this.actionStates = {
-        // documentSvgActionStates: {
-        //     drawPathActive: false,
-        // },
-        // secondaryPathActionStates: {
-        //     addEndPointActive: false,
-        //     addEndPointActive_curve: false,
-        //     drawParallelPathAcive: false,
-        //     measurePathActive: false,
-        //     saveFigureDataActive: false,
-        // },
-        // endPointActionStates: {
-        //     removeEndPointActive: false,
-        // },
-        drawPathActive: false,
-        addEndPointActive: false,
-        addEndPointActive_curve: false,
-        removeEndPointActive: false,
-        drawParallelPathAcive: false,
-        measurePathActive: false,
-        saveFigureDataActive: false,
-    }
-    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
-    this.setActions()
-    this.setClickEvents()
+//     this.actionStates = {
+//         // documentSvgActionStates: {
+//         //     drawPathActive: false,
+//         // },
+//         // secondaryPathActionStates: {
+//         //     addEndPointActive: false,
+//         //     addEndPointActive_curve: false,
+//         //     drawParallelPathAcive: false,
+//         //     measurePathActive: false,
+//         //     saveFigureDataActive: false,
+//         // },
+//         // endPointActionStates: {
+//         //     removeEndPointActive: false,
+//         // },
+//         drawPathActive: false,
+//         addEndPointActive: false,
+//         addEndPointActive_curve: false,
+//         removeEndPointActive: false,
+//         drawParallelPathAcive: false,
+//         measurePathActive: false,
+//         saveFigureDataActive: false,
+//     }
+//     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+//     this.setActions()
+//     this.setClickEvents()
 
-    // // OLD WAY OF DRAW
-    // // OLD WAY OF DRAW
-    // this.drawPathObj = {
-    //     self: [], // moving
-    //     m1: '',
-    //     isDown: false,
-    //     isDown2: false,
-    //     originalFigureCount: 0,
-    //     secondaryPathCount: 0,
-    //     previousDrawPathObj: null
-    // }
-    // // OLD WAY OF DRAW
-    // // OLD WAY OF DRAW
-}
+//     // // OLD WAY OF DRAW
+//     // // OLD WAY OF DRAW
+//     // this.drawPathObj = {
+//     //     self: [], // moving
+//     //     m1: '',
+//     //     isDown: false,
+//     //     isDown2: false,
+//     //     originalFigureCount: 0,
+//     //     secondaryPathCount: 0,
+//     //     previousDrawPathObj: null
+//     // }
+//     // // OLD WAY OF DRAW
+//     // // OLD WAY OF DRAW
+// }
 
-CanvasDocument.prototype.iterateCounters = function(vars){
-    vars.stringIncrement++
-    this.stringIncrementCount = vars.stringIncrement
-}
+// CanvasDocument.prototype.iterateCounters = function(vars){
+//     vars.stringIncrement++
+//     this.stringIncrementCount = vars.stringIncrement
+// }
 
-CanvasDocument.prototype.cloneAndAppendTemplate = function(templateId, targetId) {
-    targetId.appendChild(document.importNode(templateId, true))
-}
+// CanvasDocument.prototype.cloneAndAppendTemplate = function(templateIElement, targetElement) {
+//     targetElement.appendChild(document.importNode(templateIElement, true))
+// }
+
+
+
+
+
+
 
 // only really used in the old way. (can remover later)
 CanvasDocument.prototype.setElementIds = function(canvDocId, headerInnerTxt, docSvgId, btn01Id) { // can place this in an existing method

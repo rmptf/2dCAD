@@ -1,0 +1,18 @@
+<div class="b-pane <%= MODEL_GLOBAL_VARIABLES.GLOBAL_MODE %> <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %> <%= B_PANE.MODULE_THEMES.THEME_containerFill %>">
+    <div class="b-pane__vertical-margins">
+        <div class="b-pane__vertical-padding">
+            <div class="b-pane__horizontal-padding">
+                <div class="b-pane__horizontal-margins <%= B_PANE.MODULE_THEMES.THEME_maxWidth %>">
+                    <div class="b-pane__flex-direction">
+                        <div class="b-pane__slot">
+                            <% if (B_PANE.MODULE_CHILDREN_DATA.CHILDREN[0]) { %>
+                                <%#= B_PANE.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION %>
+                                <%- include(B_PANE.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION) %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

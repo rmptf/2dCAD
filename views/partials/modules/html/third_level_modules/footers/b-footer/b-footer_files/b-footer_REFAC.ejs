@@ -1,0 +1,88 @@
+<div class="b-footer <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>" id=<%= B_FOOTER.MODULE_DATA.MODULE_ID %>>
+    <div class="b-footer__container <%= B_FOOTER.MODULE_THEMES.THEME_containerFill %>">
+        <div class="b-footer__sidebar b-footer__sidebar--left">
+            <div class="b-footer__button-cont">
+                <% if(B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText) { %>
+                    <div class="a-document__subHeader body_3"><%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText %></div>
+                <% } %>
+
+                <div class="<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnDirection %> <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnAlign %>">
+                    <%# for (let i = 0; i < B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS.length; i++) { %>
+                    <% for (let i = 0; i < 1; i++) { %>
+                        <button
+                        class="
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_class %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_type %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_size %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_status %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_style %>
+                        "
+                        id=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnId %>
+                        type=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnType %>
+                        onclick=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnOnClick %>>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnText %>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="b-footer__sidebar b-footer__sidebar--mid">
+            <div class="b-footer__button-cont">
+                <% if(B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText) { %>
+                    <div class="a-document__subHeader body_3"><%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText %></div>
+                <% } %>
+
+                <div class="<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnDirection %> <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnAlign %>">
+                    <%# for (let i = 0; i < B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS.length; i++) { %>
+                    <% for (let i = 1; i < 2; i++) { %>
+                        <button
+                        class="
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_class %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_type %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_size %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_status %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_style %>
+                        "
+                        id=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnId %>
+                        type=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnType %>
+                        onclick=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnOnClick %>>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnText %>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="b-footer__sidebar b-footer__sidebar--right">
+            <div class="b-footer__button-cont">
+                <% if(B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText) { %>
+                    <div class="a-document__subHeader body_3"><%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText %></div>
+                <% } %>
+
+                <div class="<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnDirection %> <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnAlign %>">
+                    <%# for (let i = 0; i < B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS.length; i++) { %>
+                    <% for (let i = 2; i < 5; i++) { %>
+                        <button
+                        class="
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_class %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_type %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_size %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_status %>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_style %>
+                        "
+                        id=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnId %>
+                        type=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnType %>
+                        onclick=<%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnOnClick %>>
+                            <%= B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnText %>
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- not using this at all (but test first to check) -->
+<!-- <script id='bFooter_scriptId' type='module' data-json='["<%#= ID_bFooter_id %>", "<%#= ACTIONS_bFooter_btn.btn_02.btnId %>"]' src='./javascripts/html_modules/b_footer.js'></script> -->

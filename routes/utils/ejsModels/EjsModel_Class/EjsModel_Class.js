@@ -1,17 +1,17 @@
 function Ejs_Model(object) {
-    this.model = object
+    this.ejsModel = object
 }
 
 // Recursive function to inject children into parents
 Ejs_Model.prototype.injectChildren = function(structure, objects) {
-  structure.forEach(({parent, child}) => {
-      if (objects[parent] && objects[child]) {
-          objects[parent].MODULE_CHILDREN_DATA.CHILDREN.push(objects[child])
-          objects[parent].MODULE_CHILDREN_DATA.CHILDREN_MOD_LOC.push(objects[child].MODULE_LOCATION)
-          objects[parent].MODULE_CHILDREN_DATA.CHILDREN_NAMES.push(objects[child].MODULE_NAME)
-          objects[child].MODULE_PARENT_DATA.PARENT_NAME = objects[parent].MODULE_NAME
-      }
-  })
+    structure.forEach(({parent, child}) => {
+        if (objects[parent] && objects[child]) {
+            objects[parent].MODULE_CHILDREN_DATA.CHILDREN.push(objects[child]) // push child object into parent object
+            objects[parent].MODULE_CHILDREN_DATA.CHILDREN_MOD_LOC.push(objects[child].MODULE_LOCATION) // push child module loc into parent object
+            objects[parent].MODULE_CHILDREN_DATA.CHILDREN_NAMES.push(objects[child].MODULE_NAME) // push child module name into parent pbject
+            objects[child].MODULE_PARENT_DATA.PARENT_NAME = objects[parent].MODULE_NAME // push parent module name into child object
+        }
+    })
 }
 
 module.exports = {Ejs_Model}

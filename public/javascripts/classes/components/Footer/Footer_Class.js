@@ -1,4 +1,5 @@
 import {CanvasDocument} from '../CanvasDocument/CanvasDocument_Class.js'
+import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 
 function Footer(topLevelParentClass_canvasElement, topLevelParentClass_canvasDocuments, topLevelParentClass_scaleClass, topLevelParentClass_panClass, footer, button) {
     this.DOCUMENT_TEMPLATE_ID = 'aCanvasTemplate'
@@ -31,6 +32,38 @@ Footer.prototype.setClickEvents = function(element) {
         thisClass.canvasClass_canvasDocuments.push(newCanvasDoc)
     }
 }
+
+// function Footer(canvasClass, canvasData, footerData, documentData) {
+//     this.DOCUMENT_CONTAINER_ID = 'aDocumentContainer' //FIXME: canvas document is using but maybe find better way
+//     this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[2].element.content
+//     this.canvasClass_canvasDocuments = canvasClass.canvasDocuments
+//     this.scaleClass_scaleObject = canvasClass.scaleObject
+//     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
+//     this.footerElement = footerData.B_FOOTER.elements.elementData.element
+//     this.footerActionElements = EjsModelDataHandler.grabModuleActions(footerData, "B_FOOTER")
+
+//     this.vars = {
+//         stringIncrement: -1,
+//         previousDrawPathObj: undefined
+//     }
+
+//     this.setClickEvents(this.footerActionElements[0][1], documentData)
+// }
+
+// Footer.prototype.iterateCounters = function(){
+//     this.vars.stringIncrement++
+// }
+
+// // old way, call from within the class
+// Footer.prototype.setClickEvents = function(element, documentData) {
+//     let thisClass = this
+//     element.onclick = function() {
+//         // console.log("turned_off_for_now_refactor_CanvasDocument_Class")
+//         thisClass.iterateCounters()
+//         let newCanvasDoc = new CanvasDocument(documentData, thisClass)
+//         thisClass.canvasClass_canvasDocuments.push(newCanvasDoc)
+//     }
+// }
 
 export {
     Footer

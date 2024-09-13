@@ -18,7 +18,7 @@ const MODEL_OBJECTS = {
             MODULE_ID: null,
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: []
+                    CONTENT_ELEMENT_IDS: []
                 },
             },
         },
@@ -59,7 +59,7 @@ const MODEL_OBJECTS = {
 
     A_ARTBOARD: {
         MODULE_NAME: 'A_ARTBOARD',
-        MODULE_LOCATION: MODULE_LOCATIONS.A_ARTBOARD,
+        MODULE_LOCATION: MODULE_LOCATIONS.A_ARTBOARD_REFAC,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
         },
@@ -67,7 +67,7 @@ const MODEL_OBJECTS = {
             MODULE_ID: null,
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: []
+                    CONTENT_ELEMENT_IDS: []
                 },
             },
         },
@@ -108,7 +108,7 @@ const MODEL_OBJECTS = {
 
     B_HEADER: {
         MODULE_NAME: 'B_HEADER',
-        MODULE_LOCATION: MODULE_LOCATIONS.B_HEADER,
+        MODULE_LOCATION: MODULE_LOCATIONS.B_HEADER_REFAC,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainMuted,
             THEME_logoIconColor: COLORVARS.COLORS.hl50,
@@ -118,7 +118,7 @@ const MODEL_OBJECTS = {
             MODULE_ID: null,
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: [],
+                    CONTENT_ELEMENT_IDS: [],
                     CONTENT_LOGO_CONTAINER: {
                         ICON: '@',
                         TEXT: 'NOTCHER'
@@ -138,6 +138,7 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
+                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--center",
                         },
@@ -187,17 +188,19 @@ const MODEL_OBJECTS = {
 
     A_CANVAS: {
         MODULE_NAME: 'A_CANVAS',
-        MODULE_LOCATION: MODULE_LOCATIONS.A_CANVAS,
+        MODULE_LOCATION: MODULE_LOCATIONS.A_CANVAS_REFAC,
         MODULE_THEMES: {
             THEME_ContainerFill: COLORVARS.FILLS.mainFill,
+            THEME_PanLayerFill: COLORVARS.FILLS.mainFill,
         },
         MODULE_DATA: {
             MODULE_ID: 'aCanvas_01',
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: [
-                        {CONTENT_ID_ACANVAS_ZOOM_ID: 'aCanvasZoomLayer'},
-                        {CONTENT_ID_ACANVAS_PAN_ID: 'aCanvasPanLayer'},
+                    CONTENT_ELEMENT_IDS: [
+                        {CONTENT_ID_ACANVAS_ZOOM: 'aCanvasZoomLayer'},
+                        {CONTENT_ID_ACANVAS_PAN: 'aCanvasPanLayer'},
+                        {CONTENT_ID_ACANVAS_DOCTEMPLATE: 'aCanvasTemplate'},
                     ]
                 },
             },
@@ -239,7 +242,7 @@ const MODEL_OBJECTS = {
 
     A_DOCUMENT: {
         MODULE_NAME: 'A_DOCUMENT',
-        MODULE_LOCATION: MODULE_LOCATIONS.A_DOCUMENT,
+        MODULE_LOCATION: MODULE_LOCATIONS.A_DOCUMENT_REFAC,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
             THEME_containerColor: COLORVARS.COLORS.main,
@@ -250,7 +253,9 @@ const MODEL_OBJECTS = {
             MODULE_ID: null,
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: []
+                    CONTENT_ELEMENT_IDS: [
+                        {CONTENT_ID_ADOCUMENT_CONTAINER_ID: 'aDocumentContainer'}, //FIXME: impliment this (currently hardcoded into ejs module)
+                    ]
                 },
             },
         },
@@ -266,7 +271,7 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
-                            headerText: "",
+                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--center",
                             },
@@ -359,6 +364,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -370,6 +377,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -381,6 +390,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -392,6 +403,8 @@ const MODEL_OBJECTS = {
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
+                            },
+                            {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
@@ -421,15 +434,15 @@ const MODEL_OBJECTS = {
 
     B_FOOTER: {
         MODULE_NAME: 'B_FOOTER',
-        MODULE_LOCATION: MODULE_LOCATIONS.B_FOOTER,
+        MODULE_LOCATION: MODULE_LOCATIONS.B_FOOTER_REFAC,
         MODULE_THEMES: {
             THEME_containerFill: COLORVARS.FILLS.mainMuted,
         },
         MODULE_DATA: {
-            MODULE_ID: null,
+            MODULE_ID: "bFooter_01",
             MODULE_CONTENT: {
                 CONTENT_DATA: {
-                    CONTENT_IDS: []
+                    CONTENT_ELEMENT_IDS: []
                 },
             },
         },
@@ -445,6 +458,7 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
+                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--left",
                         },

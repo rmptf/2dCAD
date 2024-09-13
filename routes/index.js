@@ -16,9 +16,13 @@ const {
 
 // EJS MODEL
 const {
-    artBoardModel,
+    ArtBoardModel,
 } = require('./utils/ejsModels/ejsModelBuilder/artBoardmodel/artBoardModelBuilder')
 // EJS MODEL
+
+let ejsModels = {
+    ArtBoardModel: ArtBoardModel,
+}
 
 router.get('/', (req,res) => {
     res.render('index',{
@@ -27,14 +31,13 @@ router.get('/', (req,res) => {
         colorVars: COLORVARS,
         widthVars: WIDTHVARS,
         btnVars: BTNVARS,
-
-        artBoardModel: artBoardModel,
+        ejsModels,
     })
 })
 
 // API endpoint to send modelData
 router.get('/api/data', (req, res) => {
-    const data = {artBoardModel}
+    const data = {ejsModels}
     res.json(data)
 })
 

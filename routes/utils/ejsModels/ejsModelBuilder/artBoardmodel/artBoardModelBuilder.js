@@ -21,7 +21,7 @@ let modelStructure = [
 ]
 
 // Create new ModelClass and call function to inject children
-let artBoardModel = new Ejs_Model(MODEL_OBJECTS.B_PANE)
-artBoardModel.injectChildren(modelStructure, objects)
+let ArtBoardModel = new Ejs_Model(MODEL_OBJECTS.B_PANE)
+ArtBoardModel.injectChildren(modelStructure, objects)
 
-module.exports = {artBoardModel}
+module.exports = {ArtBoardModel}

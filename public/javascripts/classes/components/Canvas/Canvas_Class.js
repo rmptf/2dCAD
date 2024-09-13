@@ -9,12 +9,36 @@ function Canvas(canvasElement, aCanvas_scale_element, aCanvas_pan_element, bFoot
     }
     this.scaleObject = {}
     this.panObject = {}
+
     this.canvScaleClass = new CanvasScale(aCanvas_scale_element, bFooterActions_button_03, bFooterActions_button_04, bFooterActions_button_05)
     this.canvScaleClass.setClickEvents()
+
     this.canvasPanClass = new CanvasPan(this.canvScaleClass.scaleObject, aCanvas_pan_element)
     this.canvasPanClass.setEvents(aCanvas_pan_element)
+
     this.canvasDocuments = []
 }
+
+// function Canvas(canvasData, footerData) {
+//     this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
+//     this.vars = {
+//         stringIncrement: -1,
+//         previousDrawPathObj: undefined
+//     }
+
+//     this.scaleObject = {}
+//     this.panObject = {}
+
+//     this.scaleElement = canvasData.A_CANVAS.elements.contentElementsData[0].element
+//     this.canvScaleClass = new CanvasScale(this.scaleElement, footerData)
+//     this.canvScaleClass.setClickEvents()
+
+//     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
+//     this.canvasPanClass = new CanvasPan(this.panElement, this.canvScaleClass.scaleObject)
+//     this.canvasPanClass.setEvents(this.panElement)
+
+//     this.canvasDocuments = []
+// }
 
 export {
     Canvas
