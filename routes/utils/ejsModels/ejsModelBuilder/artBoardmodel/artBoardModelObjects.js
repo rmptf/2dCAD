@@ -415,6 +415,18 @@ const MODEL_OBJECTS = {
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
+
+                                    // btnExist: true,
+                                    // btnType: "button",
+                                    // btnText: "About",
+                                    // btnOnClick: "window.location.href='/'",
+                                    // btnId: "bFooter01_actons_btn01",
+                                    // btnTheme_class: BTNVARS.BTNCLASS.aButton,
+                                    // btnTheme_type: BTNVARS.BTNTYPES.default,
+                                    // btnTheme_size: BTNVARS.BTNSIZES.small,
+                                    // btnTheme_status: BTNVARS.BTNSTATUS.disabled,
+                                    // btnTheme_style: BTNVARS.BTNSTYLE.contained,
+
                                 },
                             },
                         ]
@@ -481,9 +493,23 @@ const MODEL_OBJECTS = {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
-                                    btnText: "New Svg",
+                                    btnText: "New_Svg NEWWAY",
                                     btnOnClick: "",
                                     btnId: "bFooter01_actons_btn02",
+                                    btnTheme_class: BTNVARS.BTNCLASS.aButton,
+                                    btnTheme_type: BTNVARS.BTNTYPES.default,
+                                    btnTheme_size: BTNVARS.BTNSIZES.small,
+                                    btnTheme_status: BTNVARS.BTNSTATUS.disabled,
+                                    btnTheme_style: BTNVARS.BTNSTYLE.contained,
+                                },
+                            },
+                            {
+                                BUTTON: {
+                                    btnExist: true,
+                                    btnType: "button",
+                                    btnText: "New_Svg OLDWAY",
+                                    btnOnClick: "",
+                                    btnId: "bFooter01_actons_btn02b",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,

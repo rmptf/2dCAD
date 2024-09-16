@@ -1,51 +1,4 @@
-function CanvasScale(canvasScaleElment, btn01, btn02, btn03) {
-    this.canvasScaleElment = canvasScaleElment
-    this.scaleObject = {
-        scaleLevel: 0.8
-        // scaleLevel: 1
-    }
-    this.scaleSettings = {
-        endPointClass: ".primaryEndPoint",
-        pathClass: ".mainPath",
-        baseRadius: 7,
-        minRadius: 0,
-        baseWidth: 4,
-        minWidth: 2,
-        minScaleLimit: 0.5
-    }
-    this.button_01 = btn01
-    this.button_02 = btn02
-    this.button_03 = btn03
-
-    setCanvasScale(this.scaleObject.scaleLevel, this.canvasScaleElment)
-    setSvgElmntsScale(this.scaleObject.scaleLevel, this.scaleSettings)
-}
-
-CanvasScale.prototype.setClickEvents = function() {
-    let thisClass = this
-    this.button_01.onclick = function() {
-        console.log("Zoom in: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
-        thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel + (thisClass.scaleObject.scaleLevel * .1)
-        setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-        setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-    }
-    this.button_02.onclick = function() {
-        console.log("Zoom 100%. Scale: " + thisClass.scaleObject.scaleLevel)
-        thisClass.scaleObject.scaleLevel = 1
-        setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-        setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-    }
-    this.button_03.onclick = function() {
-        console.log("Zoom out: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
-        thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel - (thisClass.scaleObject.scaleLevel * .1)
-        setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-        setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-    }
-}
-
-// import {EjsModelDataHandler} from "../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js"
-
-// function CanvasScale(canvasScaleElment, footerActions) {
+// function CanvasScale(canvasScaleElment) {
 //     this.canvasScaleElment = canvasScaleElment
 //     this.scaleObject = {
 //         scaleLevel: 0.8
@@ -61,33 +14,79 @@ CanvasScale.prototype.setClickEvents = function() {
 //         minScaleLimit: 0.5
 //     }
 
-//     this.footerActionElements = EjsModelDataHandler.grabModuleActions(footerActions, "B_FOOTER")
-
 //     setCanvasScale(this.scaleObject.scaleLevel, this.canvasScaleElment)
 //     setSvgElmntsScale(this.scaleObject.scaleLevel, this.scaleSettings)
 // }
 
-// CanvasScale.prototype.setClickEvents = function() {
+// CanvasScale.prototype.increaseCanvasScale = function() {
 //     let thisClass = this
-//     this.footerActionElements[0][2].onclick = function() {
-//         console.log("Zoom in: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
-//         thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel + (thisClass.scaleObject.scaleLevel * .1)
-//         setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-//         setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-//     }
-//     this.footerActionElements[0][3].onclick = function() {
-//         console.log("Zoom 100%. Scale: " + thisClass.scaleObject.scaleLevel)
-//         thisClass.scaleObject.scaleLevel = 1
-//         setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-//         setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-//     }
-//     this.footerActionElements[0][4].onclick = function() {
-//         console.log("Zoom out: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
-//         thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel - (thisClass.scaleObject.scaleLevel * .1)
-//         setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
-//         setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
-//     }
+//     console.log("Zoom in: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
+//     thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel + (thisClass.scaleObject.scaleLevel * .1)
+//     setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+//     setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
 // }
+// CanvasScale.prototype.resetCanvasScale = function() {
+//     let thisClass = this
+//     console.log("Zoom 100%. Scale: " + thisClass.scaleObject.scaleLevel)
+//     thisClass.scaleObject.scaleLevel = 1
+//     setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+//     setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
+// }
+// CanvasScale.prototype.decreaseCanvasScale = function() {
+//     let thisClass = this
+//     console.log("Zoom out: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
+//     thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel - (thisClass.scaleObject.scaleLevel * .1)
+//     setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+//     setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
+// }
+
+
+
+
+
+
+// import {EjsModelDataHandler} from "../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js"
+function CanvasScale(canvasScaleElment) {
+    this.canvasScaleElment = canvasScaleElment
+    this.scaleObject = {
+        scaleLevel: 0.8
+        // scaleLevel: 1
+    }
+    this.scaleSettings = {
+        endPointClass: ".primaryEndPoint",
+        pathClass: ".mainPath",
+        baseRadius: 7,
+        minRadius: 0,
+        baseWidth: 4,
+        minWidth: 2,
+        minScaleLimit: 0.5
+    }
+
+    setCanvasScale(this.scaleObject.scaleLevel, this.canvasScaleElment)
+    setSvgElmntsScale(this.scaleObject.scaleLevel, this.scaleSettings)
+}
+
+CanvasScale.prototype.increaseCanvasScale = function() {
+    let thisClass = this
+    console.log("Zoom in: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
+    thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel + (thisClass.scaleObject.scaleLevel * .1)
+    setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+    setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
+}
+CanvasScale.prototype.resetCanvasScale = function() {
+    let thisClass = this
+    console.log("Zoom 100%. Scale: " + thisClass.scaleObject.scaleLevel)
+    thisClass.scaleObject.scaleLevel = 1
+    setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+    setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
+}
+CanvasScale.prototype.decreaseCanvasScale = function() {
+    let thisClass = this
+    console.log("Zoom out: 10%. Scale: " + thisClass.scaleObject.scaleLevel)
+    thisClass.scaleObject.scaleLevel = thisClass.scaleObject.scaleLevel - (thisClass.scaleObject.scaleLevel * .1)
+    setCanvasScale(thisClass.scaleObject.scaleLevel, thisClass.canvasScaleElment)
+    setSvgElmntsScale(thisClass.scaleObject.scaleLevel, thisClass.scaleSettings)
+}
 
 
 

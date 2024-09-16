@@ -1,6 +1,4 @@
 function dragElement(element, scaleObject) {
-    console.log("drags")
-    console.log(element)
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if(document.getElementById(element.id + "Header")) {
         // if present, the header is where you move the DIV from:
@@ -11,8 +9,6 @@ function dragElement(element, scaleObject) {
     }
 
     function dragMouseDown(event) {
-        console.log('md')
-        console.log(element)
         event.stopPropagation()
         event.preventDefault()
         pos3 = event.clientX
@@ -22,7 +18,9 @@ function dragElement(element, scaleObject) {
     }
 
     function elementDrag(event) {
-        console.log("sfsfok")
+        console.log("draggin")
+        console.log(element)
+        console.log(scaleObject)
         event.preventDefault()
         let dragScaler = 1 / scaleObject.scaleLevel
         pos1 = (pos3 - event.clientX) * dragScaler

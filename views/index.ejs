@@ -34,7 +34,7 @@
 })%>
 
 
-<%#- include(moduleLocationVARS.B_PANE_REFAC, {
+<%- include(moduleLocationVARS.B_PANE_REFAC, {
     MODEL_GLOBAL_VARIABLES: {
         GLOBAL_MODE: global.globalModeClass,
         MODULE_THEME: colorVars.THEMECLASS.defaultThemeClass,
@@ -58,7 +58,7 @@
 
 
 
-<%- include(moduleLocationVARS.B_PANE, {
+<%#- include(moduleLocationVARS.B_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,
     // MODULE Theme Class
@@ -421,12 +421,27 @@
                                     btn_02: {
                                         btnExist: true,
                                         btnType: "button",
-                                        btnText: "New Svg",
+                                        btnText: "New_Svg NEWWAY",
                                         // btnOnClick: "a_canvas_functions.createSvgDocument()",
                                         // btnOnClick: "cloneDragDivs()",
                                         // btnOnClick: createSvgDoc,
                                         btnOnClick: "",
                                         btnId: "bFooter01_actons_btn02",
+                                        btnTheme_class: btnVars.BTNCLASS.aButton,
+                                        btnTheme_type: btnVars.BTNTYPES.default,
+                                        btnTheme_size: btnVars.BTNSIZES.small,
+                                        btnTheme_status: btnVars.BTNSTATUS.disabled,
+                                        btnTheme_style: btnVars.BTNSTYLE.contained,
+                                    },
+                                    btn_02b: {
+                                        btnExist: true,
+                                        btnType: "button",
+                                        btnText: "New_Svg OLDWAY",
+                                        // btnOnClick: "a_canvas_functions.createSvgDocument()",
+                                        // btnOnClick: "cloneDragDivs()",
+                                        // btnOnClick: createSvgDoc,
+                                        btnOnClick: "",
+                                        btnId: "bFooter01_actons_btn02b",
                                         btnTheme_class: btnVars.BTNCLASS.aButton,
                                         btnTheme_type: btnVars.BTNTYPES.default,
                                         btnTheme_size: btnVars.BTNSIZES.small,
