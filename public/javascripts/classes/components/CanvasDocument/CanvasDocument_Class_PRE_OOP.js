@@ -19,7 +19,7 @@ import {
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 
-function CanvasDocument_PRE_OOP(footer) {
+function CanvasDocument_PRE_OOP(fallerData, footer) {
         this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
             BTN_CONT_01: {
                 BTN_01:'aDoc_btnCont01_btn01',
@@ -42,9 +42,12 @@ function CanvasDocument_PRE_OOP(footer) {
             DOC_SVG: 'aDocumentSvg',
             DOC_BTN_01: 'aDoc_btn_01_',
         }
-        this.scaleValue = footer.scaleClass_scaleObject
+
+        console.log("ass")
+        console.log(footer)
+        this.scaleValue = footer.scaleObject
         this.panElement = footer.panElement
-        this.scaleClass_scaleObject = footer.scaleClass_scaleObject
+        this.scaleObject = footer.scaleObject
         this.stringIncrementCount = footer.vars.stringIncrement
         this.cloneAndAppendTemplate(footer.documentTemplate, footer.panElement)
         this.canvasDocument_htmlElement = document.getElementById(footer.DOCUMENT_CONTAINER_ID) //FIXME: find a beter way using 'documentData'

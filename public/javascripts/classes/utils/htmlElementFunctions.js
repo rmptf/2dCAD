@@ -18,9 +18,6 @@ function dragElement(element, scaleObject) {
     }
 
     function elementDrag(event) {
-        console.log("draggin")
-        console.log(element)
-        console.log(scaleObject)
         event.preventDefault()
         let dragScaler = 1 / scaleObject.scaleLevel
         pos1 = (pos3 - event.clientX) * dragScaler
