@@ -36,6 +36,19 @@ EjsModelDataHandler.grabModuleActions = function(data, modelName) {
     return actionElements
 }
 
+// Static Function: dont need to create new instance of Class to use
+EjsModelDataHandler.grabModuleActionIds = function(data, modelName) {
+    let actionElements = []
+    data[modelName].actions.forEach((container) => {
+        let actionContainers = []
+        container.forEach((actionElement) => {
+            actionContainers.push(actionElement.id)
+        })
+        actionElements.push(actionContainers)
+    })
+    return actionElements
+}
+
 function processData(data) {
     // Loop through all models and grab processedData from each
     let allModels = data
