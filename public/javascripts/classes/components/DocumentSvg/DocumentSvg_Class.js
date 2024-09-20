@@ -25,7 +25,8 @@ function DocumentSvg(CanvDoc) {
     this.actionButton01 = CanvDoc.canvasDocActionBar02_btn03_htmlElement
     this.actionButton02 = CanvDoc.canvasDocActionBar02_btn04_htmlElement
 
-    this.setClickEvents(CanvDoc, this)
+    // FIXME:
+    // this.setClickEvents(CanvDoc, this)
 }
 
 DocumentSvg.prototype.setClickEvents = function(CanvDoc, thisSvg) {

@@ -81,22 +81,6 @@ import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataH
 // }
 
 function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
-    this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
-        BTN_CONT_01: {
-            BTN_01:'aDoc_btnCont01_btn01',
-            BTN_069:'aDoc_btnCont01_btn069',
-            BTN_02:'aDoc_btnCont01_btn02',
-            BTN_03:'aDoc_btnCont01_btn03',
-            BTN_04:'aDoc_btnCont01_btn04'
-        }, 
-        BTN_CONT_02: {
-            BTN_01:'aDoc_btnCont02_btn01',
-            BTN_069:'aDoc_btnCont02_btn069',
-            BTN_02:'aDoc_btnCont02_btn02',
-            BTN_03:'aDoc_btnCont02_btn03',
-            BTN_04:'aDoc_btnCont02_btn04',
-        }
-    }
     this.DOCUMENT_ELEMENT_NEWNAMES = {
         CANV_DOC: 'aDocument',
         HEADING: 'Pattern_Pc_',
@@ -115,33 +99,18 @@ function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
     this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
     this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
 
-
-    this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_01)
-    this.canvasDocActionBar01_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_069)
-    this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_02)
-    this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
-    this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
-
-    this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
-    this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
-    this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
-    this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
-    this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
-
-
     // // works just put butons in order
-    // this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
-    // this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
-    // this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][1])
-    // this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][2])
-    // this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][3])
-    // this.canvasDocActionBar01_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][4])
-
-    // this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][0])
-    // this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][1])
-    // this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][2])
-    // this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][3])
-    // this.canvasDocActionBar02_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][4])
+    this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
+    this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
+    this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][1])
+    this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][2])
+    this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][3])
+    this.canvasDocActionBar01_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][4])
+    this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][0])
+    this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][1])
+    this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][2])
+    this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][3])
+    this.canvasDocActionBar02_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][4])
 
     this.setElementIds( // only really used in the old way. (can remover later)
         this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
@@ -150,7 +119,6 @@ function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
         this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
         )
 
-        
     this.actionStates = {
         drawPathActive: false,
         addEndPointActive: false,
@@ -160,38 +128,22 @@ function CanvasDocument(documentData, footer) { // FIXME: use later when fixing
         measurePathActive: false,
         saveFigureDataActive: false,
     }
+
     this.documentSvg = new DocumentSvg(this)
     this.setActions()
     // this.setClickEvents()
 
-    // Bind event listeners to methods
     this.canvasDocActionBar01_btn01_htmlElement.addEventListener('click', this.activateDrawPath.bind(this))
-    this.canvasDocActionBar01_btn069_htmlElement.addEventListener('click', this.activateAddEndPoint.bind(this))
-    this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', this.activateAddEndPoint_curve.bind(this))
-    this.canvasDocActionBar01_btn03_htmlElement.addEventListener('click', this.activateDrawParallelPath.bind(this))
-    this.canvasDocActionBar01_btn04_htmlElement.addEventListener('click', this.activateMeasurePath.bind(this))
+    this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', this.activateAddEndPoint.bind(this))
+    this.canvasDocActionBar01_btn03_htmlElement.addEventListener('click', this.activateAddEndPoint_curve.bind(this))
+    this.canvasDocActionBar01_btn04_htmlElement.addEventListener('click', this.activateDrawParallelPath.bind(this))
+    this.canvasDocActionBar01_btn05_htmlElement.addEventListener('click', this.activateMeasurePath.bind(this))
     this.canvasDocActionBar02_btn01_htmlElement.addEventListener('click', this.activateSaveFigureData.bind(this))
-    this.canvasDocActionBar02_btn069_htmlElement.addEventListener('click', this.saveSvgData.bind(this))
-    this.canvasDocActionBar02_btn02_htmlElement.addEventListener('click', this.activateRemoveEndPoint.bind(this))
-    
-
-    // this.canvasDocActionBar01_btn01_htmlElement.addEventListener('click', this.activateDrawPath.bind(this))
-    // this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', this.activateAddEndPoint.bind(this))
-    // this.canvasDocActionBar01_btn03_htmlElement.addEventListener('click', this.activateAddEndPoint_curve.bind(this))
-    // this.canvasDocActionBar01_btn04_htmlElement.addEventListener('click', this.activateDrawParallelPath.bind(this))
-    // this.canvasDocActionBar01_btn05_htmlElement.addEventListener('click', this.activateMeasurePath.bind(this))
-    // this.canvasDocActionBar02_btn01_htmlElement.addEventListener('click', this.activateSaveFigureData.bind(this))
-    // this.canvasDocActionBar02_btn02_htmlElement.addEventListener('click', this.saveSvgData.bind(this))
-    // this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', this.activateRemoveEndPoint.bind(this))
+    this.canvasDocActionBar02_btn02_htmlElement.addEventListener('click', this.saveSvgData.bind(this))
+    this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', this.activateRemoveEndPoint.bind(this))
     // // FIXME: add draw figure here (remove from current loc)
     // // FIXME: add draw svg here (remove from curent loc)
 }
-
-
-
-
-
-
 
 CanvasDocument.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement, true))
@@ -237,16 +189,9 @@ CanvasDocument.prototype.activateMeasurePath = function() {
     thisCanvasDoc.actionStates.measurePathActive = true // NEW
 }
 
-CanvasDocument.prototype.activateRemoveEndPoint = function() {
-    console.log(6)
-    console.log('activateRemoveEndPoint')
-    let thisCanvasDoc = this
-    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-    thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
-}
 
 CanvasDocument.prototype.activateSaveFigureData = function() {
-    console.log(7)
+    console.log(6)
     console.log('activateSaveFigureData')
     let thisCanvasDoc = this
     // console.log("Click figure to save.")
@@ -256,11 +201,25 @@ CanvasDocument.prototype.activateSaveFigureData = function() {
 }
 
 CanvasDocument.prototype.saveSvgData = function() {
-    console.log(8)
+    console.log(7)
     console.log('saveSvgData')
     let thisCanvasDoc = this
     saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
 }
+
+CanvasDocument.prototype.activateRemoveEndPoint = function() {
+    console.log(8)
+    console.log('activateRemoveEndPoint')
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
+}
+
+
+
+
+
+
 
 CanvasDocument.prototype.iterateCounters = function(vars){
     vars.stringIncrement++
