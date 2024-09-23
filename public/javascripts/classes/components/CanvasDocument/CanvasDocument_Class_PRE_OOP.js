@@ -18,147 +18,162 @@ import {
 // import {saveFigureData} from '../../../tools/saveFigureData.js'
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
+import { EjsModelDataHandler } from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 
-function CanvasDocument_PRE_OOP(fallerData, footer) {
-        this.DOCUMENT_ACTIONBAR_BTN_CONTS = {
-            BTN_CONT_01: {
-                BTN_01:'aDoc_btnCont01_btn01',
-                BTN_069:'aDoc_btnCont01_btn069',
-                BTN_02:'aDoc_btnCont01_btn02',
-                BTN_03:'aDoc_btnCont01_btn03',
-                BTN_04:'aDoc_btnCont01_btn04'
-            }, 
-            BTN_CONT_02: {
-                BTN_01:'aDoc_btnCont02_btn01',
-                BTN_069:'aDoc_btnCont02_btn069',
-                BTN_02:'aDoc_btnCont02_btn02',
-                BTN_03:'aDoc_btnCont02_btn03',
-                BTN_04:'aDoc_btnCont02_btn04',
-            }
-        }
-        this.DOCUMENT_ELEMENT_NEWNAMES = {
-            CANV_DOC: 'aDocument',
-            HEADING: 'Pattern_Pc_',
-            DOC_SVG: 'aDocumentSvg',
-            DOC_BTN_01: 'aDoc_btn_01_',
-        }
-
-        console.log("ass")
-        console.log(footer)
-        this.scaleValue = footer.scaleObject
-        this.panElement = footer.panElement
-        this.scaleObject = footer.scaleObject
-        this.stringIncrementCount = footer.vars.stringIncrement
-        this.cloneAndAppendTemplate(footer.documentTemplate, footer.panElement)
-        this.canvasDocument_htmlElement = document.getElementById(footer.DOCUMENT_CONTAINER_ID) //FIXME: find a beter way using 'documentData'
-        this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.children[0]
-        this.documentSvg_htmlElement = this.canvasDocument_htmlElement.children[4]
-        this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
-    
-    
-        this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_01)
-        this.canvasDocActionBar01_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_069)
-        this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_02)
-        this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_03)
-        this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_01.BTN_04)
-        this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_01)
-        this.canvasDocActionBar02_btn069_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_069)
-        this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_02)
-        this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_03)
-        this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.DOCUMENT_ACTIONBAR_BTN_CONTS.BTN_CONT_02.BTN_04)
-        this.setElementIds( // only really used in the old way. (can remover later) FIXME: also used in new way for new canvDocs (but only necisary for canvDocumentId)
-            this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC,
-            this.DOCUMENT_ELEMENT_NEWNAMES.HEADING,
-            this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG,
-            this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01
-            )
-    
-            
-        this.actionStates = {
-            drawPathActive: false,
-            addEndPointActive: false,
-            addEndPointActive_curve: false,
-            removeEndPointActive: false,
-            drawParallelPathAcive: false,
-            measurePathActive: false,
-            saveFigureDataActive: false,
-        }
-        this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
-        this.setActions()
-        this.setClickEvents()
-    
-        // OLD WAY OF DRAW
-        // OLD WAY OF DRAW
-        this.drawPathObj = {
-            self: [], // moving
-            m1: '',
-            isDown: false,
-            isDown2: false,
-            originalFigureCount: 0,
-            secondaryPathCount: 0,
-            previousDrawPathObj: null
-        }
-        // OLD WAY OF DRAW
-        // OLD WAY OF DRAW
+function CanvasDocument_PRE_OOP(documentData, footer) {
+    this.DOCUMENT_ELEMENT_NEWNAMES = {
+        CANV_DOC: 'aDocument',
+        HEADING: 'Pattern_Pc_',
+        DOC_SVG: 'aDocumentSvg',
+        // DOC_BTN_01: 'aDoc_btn_01_',
     }
-
-    CanvasDocument_PRE_OOP.prototype.iterateCounters = function(vars){
-        vars.stringIncrement++
-        this.stringIncrementCount = vars.stringIncrement
+    this.scaleValue = footer.scaleObject
+    this.panElement = footer.panElement
+    this.scaleObject = footer.scaleObject
+    this.stringIncrementCount = footer.vars.stringIncrement
+    this.cloneAndAppendTemplate(footer.documentTemplateContent, footer.panElement)
+    this.canvasDocument_htmlElement = document.getElementById(documentData.A_DOCUMENT.elements.contentElementsData[0].id)
+    this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + documentData.A_DOCUMENT.elements.contentElementsData[1].id)
+    this.documentSvg_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + documentData.A_DOCUMENT.elements.contentElementsData[2].id)
+    this.documentSvg_D3Element = d3.select(this.documentSvg_htmlElement)
+    this.actionStates = {
+        drawPathActive: false,
+        addEndPointActive: false,
+        addEndPointActive_curve: false,
+        removeEndPointActive: false,
+        drawParallelPathAcive: false,
+        measurePathActive: false,
+        saveFigureDataActive: false,
     }
-
-    CanvasDocument_PRE_OOP.prototype.cloneAndAppendTemplate = function(templateId, targetId) {
-        targetId.appendChild(document.importNode(templateId, true))
+    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+    this.setActions()
+    // OLD WAY OF DRAW
+    this.drawPathObj = {
+        self: [], // moving
+        m1: '',
+        isDown: false,
+        isDown2: false,
+        originalFigureCount: 0,
+        secondaryPathCount: 0,
+        previousDrawPathObj: null
     }
+    // OLD WAY OF DRAW
+
+    this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
+    this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
+    this.canvasDocActionBar01_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][1])
+    this.canvasDocActionBar01_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][2])
+    this.canvasDocActionBar01_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][3])
+    this.canvasDocActionBar01_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][4])
+    this.canvasDocActionBar02_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][0])
+    this.canvasDocActionBar02_btn02_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][1])
+    this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][2])
+    this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][3])
+    this.canvasDocActionBar02_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][4])
+
+
+    this.canvasDocument_htmlElement.addEventListener('click', () => {this.canvDocClick()})
+    this.canvasDocActionBar01_btn01_htmlElement.addEventListener('click', () => {this.activateDrawPath()})
+    this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', () => {this.activateAddEndPoint()})
+    this.canvasDocActionBar01_btn03_htmlElement.addEventListener('click', () => {this.activateAddEndPoint_curve()})
+    this.canvasDocActionBar01_btn04_htmlElement.addEventListener('click', () => {this.activateDrawParallelPath()})
+    this.canvasDocActionBar01_btn05_htmlElement.addEventListener('click', () => {this.activateMeasurePath()})
+    this.canvasDocActionBar02_btn01_htmlElement.addEventListener('click', () => {this.activateSaveFigureData()})
+    this.canvasDocActionBar02_btn02_htmlElement.addEventListener('click', () => {this.saveSvgData()})
+    this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', () => {this.activateRemoveEndPoint()})
+    this.canvasDocActionBar02_btn04_htmlElement.addEventListener('click', () => {this.drawFigure(this.documentSvg)})
+    this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
+}
+
+
+
+CanvasDocument_PRE_OOP.prototype.canvDocClick = function() {
+    console.log("a")
+    let thisCanvasDoc = this
+    NEWselectSvgDocument(thisCanvasDoc)
+}
+CanvasDocument_PRE_OOP.prototype.activateDrawPath = function() {
+    console.log(1)
+    NEWselectDrawPath(this) // OLD DRAW
+}
+CanvasDocument_PRE_OOP.prototype.activateAddEndPoint = function() {
+    console.log(2)
+    // let thisCanvasDoc = this
+    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    // thisCanvasDoc.actionStates.addEndPointActive = true
+
+    console.log("Not currently in use.")
+}
+CanvasDocument_PRE_OOP.prototype.activateAddEndPoint_curve = function() {
+    console.log(3)
+    NEWselectAddCurvePoint() // OLD
+}
+CanvasDocument_PRE_OOP.prototype.activateDrawParallelPath = function() {
+    console.log(4)
+    NEWselectDrawParallelPath() // OLD
+}
+CanvasDocument_PRE_OOP.prototype.activateMeasurePath = function() {
+    console.log(5)
+    NEWselectMeasurePath() // OLD
+}
+CanvasDocument_PRE_OOP.prototype.activateSaveFigureData = function() {
+    console.log(6)
+    // let thisCanvasDoc = this
+    // console.log("Click figure to save.")
+    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    // thisCanvasDoc.actionStates.saveFigureDataActive = true // NEW
+
+    console.log("Not currently in use.")
+}
+CanvasDocument_PRE_OOP.prototype.saveSvgData = function() {
+    console.log(7)
+    // let thisCanvasDoc = this
+    // saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
+
+    saveSvgData(this.documentSvg.documentSvgFigures) // NEW //TODO: this was set with new way already... needs attention
+}
+CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
+    console.log(8)
+    // let thisCanvasDoc = this
+    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    // thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
+
+    console.log("Not currently in use.")
+}
+CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
+    console.log(9)
+    this.documentSvg.drawSavedFigure(this, docSvg)
+}
+CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
+    console.log(10)
+    this.documentSvg.drawSavedSvg(this, docSvg)
+}
+// BTN ACTIONS
+
+CanvasDocument_PRE_OOP.prototype.iterateCounters = function(vars){
+    vars.stringIncrement++
+    this.stringIncrementCount = vars.stringIncrement
+}
+
+CanvasDocument_PRE_OOP.prototype.cloneAndAppendTemplate = function(templateId, targetId) {
+    targetId.appendChild(document.importNode(templateId, true))
+}
 
 // only really used in the old way. (can remover later)
 CanvasDocument_PRE_OOP.prototype.setElementIds = function(canvDocId, headerInnerTxt, docSvgId, btn01Id) { // can place this in an existing method
     this.canvasDocument_htmlElement.id = changeStringIncrementally(canvDocId, this.stringIncrementCount)
     this.canvasDocumentHeader_htmlElement.innerText = changeStringIncrementally(headerInnerTxt, this.stringIncrementCount)
     this.documentSvg_htmlElement.id = changeStringIncrementally(docSvgId, this.stringIncrementCount)
-    this.canvasDocActionBar01_btn01_htmlElement.id = changeStringIncrementally(btn01Id, this.stringIncrementCount)
+    // this.canvasDocActionBar01_btn01_htmlElement.id = changeStringIncrementally(btn01Id, this.stringIncrementCount)
 }
 
 CanvasDocument_PRE_OOP.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
+    // this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01)
+    this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG)
     activateSvgDoc(this.canvasDocument_htmlElement)
     setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount) //FIXME: this might be OLDDRAW
     dragElement(this.canvasDocument_htmlElement, this.scaleValue)
-}
-
-CanvasDocument_PRE_OOP.prototype.setClickEvents = function() {
-    let thisCanvasDoc = this
-
-    this.canvasDocument_htmlElement.onclick = function() {
-        NEWselectSvgDocument(thisCanvasDoc)
-    }
-    this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
-        NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
-    }
-    this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectAddCurvePoint() // OLD
-    }
-    this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectDrawParallelPath() // OLD
-    }
-    this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
-        console.log(this)
-        NEWselectMeasurePath() // OLD
-    }
-    this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
-        console.log(this)
-    }
-    this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
-        console.log(this)
-        console.log("Click figure to save.")
-    }
-    this.canvasDocActionBar02_btn069_htmlElement.onclick = function() {
-        console.log(this)
-
-        saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
-    }
 }
 
 CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
@@ -201,6 +216,41 @@ CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
     canvasDocument.style.top = movetotop + 'px'
     canvasDocument.style.left = movetoleft + 'px'
 }
+
+// CanvasDocument_PRE_OOP.prototype.setClickEvents = function() {
+//     let thisCanvasDoc = this
+
+//     this.canvasDocument_htmlElement.onclick = function() {
+//         NEWselectSvgDocument(thisCanvasDoc)
+//     }
+//     this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
+//         NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
+//     }
+//     this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
+//         console.log(this)
+//         NEWselectAddCurvePoint() // OLD
+//     }
+//     this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
+//         console.log(this)
+//         NEWselectDrawParallelPath() // OLD
+//     }
+//     this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
+//         console.log(this)
+//         NEWselectMeasurePath() // OLD
+//     }
+//     this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
+//         console.log(this)
+//     }
+//     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
+//         console.log(this)
+//         console.log("Click figure to save.")
+//     }
+//     this.canvasDocActionBar02_btn069_htmlElement.onclick = function() {
+//         console.log(this)
+
+//         saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
+//     }
+// }
 
 export {
     CanvasDocument_PRE_OOP

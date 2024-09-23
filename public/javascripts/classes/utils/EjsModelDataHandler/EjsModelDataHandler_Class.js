@@ -62,10 +62,7 @@ function processData(data) {
         })
       })
 
-    console.log('DATA: processedData')
-    console.log(processedData)
     return processedData 
-
 
     function traverseModel(model) {
         // Perform any operation on the current object

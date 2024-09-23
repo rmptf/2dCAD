@@ -1,0 +1,11 @@
+<div class="<%= thisContainer.CONTAINER.CONTAINER_DATA.btnDirection %> <%= thisContainer.CONTAINER.CONTAINER_DATA.btnAlign %>">
+<% thisContainer.CONTAINER.BUTTONS.forEach(button => { %>
+    <button
+    class="<%= button.BUTTON.btnTheme_class %> <%= button.BUTTON.btnTheme_type %> <%= button.BUTTON.btnTheme_size %> <%= button.BUTTON.btnTheme_status %> <%= button.BUTTON.btnTheme_style %>"
+    id="<%= button.BUTTON.btnId %>"
+    type="<%= button.BUTTON.btnType %>"
+    onclick="<%= button.BUTTON.btnOnClick %>">
+        <%= button.BUTTON.btnText %>
+    </button>
+<% }) %>
+</div>

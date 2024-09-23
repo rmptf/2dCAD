@@ -1,21 +1,6 @@
 import {CanvasScale} from '../CanvasScale/CanvasScale_Class.js'
 import {CanvasPan} from '../CanvasPan/CanvasPan_Class.js'
 
-// function Canvas(canvasElement, aCanvas_scale_element, aCanvas_pan_element) {
-//     this.canvasElement = canvasElement
-//     this.vars = {
-//         stringIncrement: -1,
-//         previousDrawPathObj: undefined
-//     }
-//     this.scaleObject = {}
-//     this.panObject = {}
-//     this.scaleElement = aCanvas_scale_element
-//     this.panElement = aCanvas_pan_element
-//     this.canvScaleClass = new CanvasScale(this.scaleElement)
-//     this.canvasPanClass = new CanvasPan(this.panElement, this.canvScaleClass.scaleObject)
-//     this.canvasDocuments = []
-// }
-
 function Canvas(canvasData) {
     this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
     this.vars = {
@@ -34,6 +19,30 @@ function Canvas(canvasData) {
 export {
     Canvas
 }
+
+
+
+
+
+//OLD WAY OF DOING EJS
+// function Canvas(canvasElement, aCanvas_scale_element, aCanvas_pan_element) {
+//     this.canvasElement = canvasElement
+//     this.vars = {
+//         stringIncrement: -1,
+//         previousDrawPathObj: undefined
+//     }
+//     this.scaleObject = {}
+//     this.panObject = {}
+//     this.scaleElement = aCanvas_scale_element
+//     this.panElement = aCanvas_pan_element
+//     this.canvScaleClass = new CanvasScale(this.scaleElement)
+//     this.canvasPanClass = new CanvasPan(this.panElement, this.canvScaleClass.scaleObject)
+//     this.canvasDocuments = []
+// }
+
+
+
+
 
 console.log("*not* ORIGIN BRANCH")
 console.log("PROJECT-ORGANIZATION BRANCH")

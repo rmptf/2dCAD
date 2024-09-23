@@ -28,6 +28,10 @@ const MODULE_LOCATIONS = {
 
     A_TESTER: '../views/partials/modules/html/third_level_modules/testers/a-tester/a-tester_files/a-tester.ejs',
     B_TESTER: '../views/partials/modules/html/third_level_modules/testers/b-tester/b-tester_files/b-tester.ejs', 
+
+    // FOURTH LEVEL
+    A_BUTTONCONTAINER: '../../../../../../../../views/partials/modules/html/fourth_level_modules/buttonContainer/a-buttonContainer/a-buttonContainer.ejs',
+
 }
 
 module.exports = { 

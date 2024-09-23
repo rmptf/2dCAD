@@ -9,7 +9,9 @@
                 </div>
             </div>
             <div class="b-header__sidebar b-header__sidebar--right">
-
+                <% if (B_HEADER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]) { %>
+                    <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: B_HEADER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]}) %>
+                <% } %>
             </div>
     </div>
 </div>

@@ -1,47 +1,16 @@
 <div class="a-document <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>">
     <div class="a-document__container <%= A_DOCUMENT.MODULE_THEMES.THEME_containerFill %> <%= A_DOCUMENT.MODULE_THEMES.THEME_containerColor %> <%= A_DOCUMENT.MODULE_THEMES.THEME_containerBorderColor %>" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[0].CONTENT_ID_ADOCUMENT_CONTAINER_ID %>>
-        <div class="a-document__header body_1"></div>
-        <% if(A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText) { %>
-            <div class="a-document__subHeader body_3"><%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.headerText %></div>
+        <div class="a-document__header body_1" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_ADOCUMENT_HEADER %>></div>
+        <% if (A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0]) { %>
+            <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0]}) %>
         <% } %>
-        <div class="<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnDirection %> <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.CONTAINER_DATA.btnAlign %>">
-            <% for (let i = 0; i < A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS.length; i++) { %>
-                <button
-                class="
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_class %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_type %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_size %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_status %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnTheme_style %>
-                "
-                id=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnId %>
-                type=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnType %>
-                onclick=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnOnClick %>>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0].CONTAINER.BUTTONS[i].BUTTON.btnText %>
-                </button>
-            <% } %>
-        </div>
-        <% if(A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.CONTAINER_DATA.headerText) { %>
-            <div class="a-document__subHeader body_3"><%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.CONTAINER_DATA.headerText %></div>
+        <% if(A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_TEXT.HEADER_TEXT) { %>
+            <div class="a-document__subHeader body_3"><%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_TEXT.HEADER_TEXT %></div>
         <% } %>
-        <div class="<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.CONTAINER_DATA.btnDirection %> <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.CONTAINER_DATA.btnAlign %>">
-            <% for (let i = 0; i < A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS.length; i++) { %>
-                <button
-                class="
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnTheme_class %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnTheme_type %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnTheme_size %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnTheme_status %>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnTheme_style %>
-                "
-                id=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnId %>
-                type=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnType %>
-                onclick=<%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnOnClick %>>
-                    <%= A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1].CONTAINER.BUTTONS[i].BUTTON.btnText %>
-                </button>
-            <% } %>
-        </div>
-        <svg class="a-document__svg <%= A_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id="aDocumentSvg00"></svg>
+        <% if (A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1]) { %>
+            <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1]}) %>
+        <% } %>
+        <svg class="a-document__svg <%= A_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[2].CONTENT_ID_ADOCUMENT_SVG %>></svg>
     </div>
 </div>
 

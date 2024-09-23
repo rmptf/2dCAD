@@ -1,43 +1,8 @@
-<%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
-
-<%#
-// let drawPath = "a_canvas_functions.selectDrawPath(this)"
-// let addCurvePoint = "a_canvas_functions.selectAddCurvePoint()"
-// let drawParellel = "a_canvas_functions.selectDrawParallelPath()"
-// let measurePath = "a_canvas_functions.selectMeasurePath()"
-// let saveFigure = "a_canvas_functions.saveFigureData()"
-// let createSvgDoc = "a_canvas_functions.createSvgDocument()"
-// let increaseScale = "a_canvas_functions.increaseScale()"
-// let resetScale = "a_canvas_functions.resetScale()"
-// let decreaseScale = "a_canvas_functions.decreaseScale()"
-
-// let drawPath = "drawPath()"
-// let addCurvePoint = "addCurvePoint()"
-// let drawParellel = "addParallelPath()"
-// let measurePath = "measurePath()"
-// let saveFigure = "printFigureData()"
-// let createSvgDoc = "cloneDragDivs()"
-// let increaseScale = "increaseScale()"
-// let resetScale = "resetScale()"
-// let decreaseScale = "decreaseScale()"
-%>
-
-
-
-
-
-
-<%- include(moduleLocationVARS.B_TESTER, {
-    ALL_MODULE_DATA: [
-        ejsModels.ArtBoardModel
-    ]
-})%>
-
-
 <%- include(moduleLocationVARS.B_PANE_REFAC, {
     MODEL_GLOBAL_VARIABLES: {
         GLOBAL_MODE: global.globalModeClass,
         MODULE_THEME: colorVars.THEMECLASS.defaultThemeClass,
+        BUTTONCONTAINER_MODULE_LOC: moduleLocationVARS.A_BUTTONCONTAINER
     },
     B_PANE: ejsModels.ArtBoardModel.ejsModel,
     A_ARTBOARD: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0],
@@ -47,17 +12,17 @@
     B_FOOTER: ejsModels.ArtBoardModel.ejsModel.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[2],
 })%>
 
+<!-- OLD OLD WAY -->
+<%#- include('../views/partials/modules/svg/first_level_modules/svgs/a-svg/a-svg.ejs', {}) %>
 
+<!-- TESTER TESTSER -->
+<%#- include(moduleLocationVARS.B_TESTER, {
+    ALL_MODULE_DATA: [
+        ejsModels.ArtBoardModel
+    ]
+})%>
 
-
-
-
-
-
-
-
-
-
+<!-- OLD EJS WAY -->
 <%#- include(moduleLocationVARS.B_PANE, {
     // GLOBAL Mode Class
         THEME_globalMode: globalModeClass,

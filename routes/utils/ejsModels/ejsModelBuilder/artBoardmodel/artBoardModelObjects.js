@@ -2,11 +2,6 @@ const {MODULE_LOCATIONS} = require('../../../../../public/reference_files/module
 const {COLORVARS, WIDTHVARS, BTNVARS} = require('../../../../../public/reference_files/theme_class_data')
 
 const MODEL_OBJECTS = {
-    // MODEL_GLOBAL_VARIABLES: {
-    //     GLOBAL_MODE: global.globalModeClass,
-    //     MODULE_THEME: COLORVARS.THEMECLASS.defaultThemeClass,
-    // },
-
     B_PANE: {
         MODULE_NAME: 'B_PANE',
         MODULE_LOCATION: MODULE_LOCATIONS.B_PANE,
@@ -138,7 +133,6 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
-                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--center",
                         },
@@ -247,7 +241,7 @@ const MODEL_OBJECTS = {
             THEME_containerFill: COLORVARS.FILLS.mainFill,
             THEME_containerColor: COLORVARS.COLORS.main,
             THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
-            THEME_svgFill: COLORVARS.FILLS.mainMuted,
+            THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
         },
         MODULE_DATA: {
             MODULE_ID: null,
@@ -255,7 +249,12 @@ const MODEL_OBJECTS = {
                 CONTENT_DATA: {
                     CONTENT_ELEMENT_IDS: [
                         {CONTENT_ID_ADOCUMENT_CONTAINER_ID: 'aDocumentContainer'}, //FIXME: impliment this (currently hardcoded into ejs module)
-                    ]
+                        {CONTENT_ID_ADOCUMENT_HEADER: 'aDocumentHeader'},
+                        {CONTENT_ID_ADOCUMENT_SVG: 'aDocumentSvg'},
+                    ],
+                    CONTENT_TEXT: {
+                        HEADER_TEXT: "DRAW FIGURE",
+                    }
                 },
             },
         },
@@ -271,7 +270,6 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
-                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--center",
                             },
@@ -347,7 +345,6 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
-                            headerText: "DRAW FIGURE",
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--center",
                         },
@@ -415,18 +412,6 @@ const MODEL_OBJECTS = {
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
                                     btnTheme_status: BTNVARS.BTNSTATUS.disabled,
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
-
-                                    // btnExist: true,
-                                    // btnType: "button",
-                                    // btnText: "About",
-                                    // btnOnClick: "window.location.href='/'",
-                                    // btnId: "bFooter01_actons_btn01",
-                                    // btnTheme_class: BTNVARS.BTNCLASS.aButton,
-                                    // btnTheme_type: BTNVARS.BTNTYPES.default,
-                                    // btnTheme_size: BTNVARS.BTNSIZES.small,
-                                    // btnTheme_status: BTNVARS.BTNSTATUS.disabled,
-                                    // btnTheme_style: BTNVARS.BTNSTYLE.contained,
-
                                 },
                             },
                         ]
@@ -470,7 +455,6 @@ const MODEL_OBJECTS = {
                 {
                     CONTAINER: {
                         CONTAINER_DATA: {
-                            headerText: null,
                             btnDirection: "btn-container--row",
                             btnAlign: "btn-align--left",
                         },
@@ -481,7 +465,7 @@ const MODEL_OBJECTS = {
                                     btnType: "button",
                                     btnText: "About",
                                     btnOnClick: "window.location.href='/'",
-                                    btnId: "bFooter01_actons_btn01",
+                                    btnId: "bFooter_btnCont01_btn01",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
@@ -489,13 +473,23 @@ const MODEL_OBJECTS = {
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
                             },
+                        ]
+                    },
+                },
+                {
+                    CONTAINER: {
+                        CONTAINER_DATA: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--left",
+                        },
+                        BUTTONS: [
                             {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
                                     btnText: "New_Svg NEWWAY",
                                     btnOnClick: "",
-                                    btnId: "bFooter01_actons_btn02",
+                                    btnId: "bFooter_btnCont02_btn01",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
@@ -509,7 +503,7 @@ const MODEL_OBJECTS = {
                                     btnType: "button",
                                     btnText: "New_Svg OLDWAY",
                                     btnOnClick: "",
-                                    btnId: "bFooter01_actons_btn02b",
+                                    btnId: "bFooter_btnCont02_btn02",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
@@ -517,13 +511,23 @@ const MODEL_OBJECTS = {
                                     btnTheme_style: BTNVARS.BTNSTYLE.contained,
                                 },
                             },
+                        ]
+                    },
+                },
+                {
+                    CONTAINER: {
+                        CONTAINER_DATA: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--left",
+                        },
+                        BUTTONS: [
                             {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
                                     btnText: "+",
                                     btnOnClick: "",
-                                    btnId: "bFooter01_actons_btn03",
+                                    btnId: "bFooter_btnCont03_btn01",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
@@ -537,7 +541,7 @@ const MODEL_OBJECTS = {
                                     btnType: "button",
                                     btnText: "100%", 
                                     btnOnClick: "",
-                                    btnId: "bFooter01_actons_btn04",
+                                    btnId: "bFooter_btnCont03_btn02",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
@@ -551,7 +555,7 @@ const MODEL_OBJECTS = {
                                     btnType: "button",
                                     btnText: "-",
                                     btnOnClick: "",
-                                    btnId: "bFooter01_actons_btn05",
+                                    btnId: "bFooter_btnCont03_btn03",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,

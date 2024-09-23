@@ -16,17 +16,6 @@ Ejs_Model.prototype.injectChildren = function(structure, objects) {
 
 module.exports = {Ejs_Model}
 
-
-
-
-
-
-
-
-
-
-
-
 // main layout (body)
     // arboard layout (was old ejs thing, inside index.ejs)
         // artboardModel: model? / layout? (built in js then injected into artboard layout)

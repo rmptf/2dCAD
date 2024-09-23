@@ -5,12 +5,9 @@
         </div>
     </div>
 </div>
-
-<!-- MAKE THIS YNAMIC FROM MODEL OBEJCT -->
 <template id="aCanvasTemplate">
     <div class="a-canvas__slot">
         <% if (A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[0]) { %>
-            <%# console.log(A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION) %>
             <%- include(A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION, {}) %>
         <% } %>
     </div>
