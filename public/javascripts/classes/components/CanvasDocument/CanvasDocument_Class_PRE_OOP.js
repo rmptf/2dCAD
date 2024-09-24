@@ -18,6 +18,7 @@ import {
 import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
+import {drawSavedFigure} from '../../../functions/drafting/drawSavedFigure.js'
 
 function CanvasDocument_PRE_OOP(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -46,6 +47,7 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     }
     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
     this.setActions()
+
     // OLD WAY OF DRAW
     this.drawPathObj = {
         self: [], // moving
@@ -57,6 +59,7 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         previousDrawPathObj: null
     }
     // OLD WAY OF DRAW
+
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
@@ -126,7 +129,9 @@ CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
 }
 CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
     // console.log(9)
-    this.documentSvg.drawSavedFigure(this, docSvg)
+
+    // this.documentSvg.drawSavedFigure(this, docSvg) // this will draw new way (hardcoded way)
+    drawSavedFigure(1, this.drawPathObj) // this will draw old way (f-key way)
 }
 CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
     // console.log(10)

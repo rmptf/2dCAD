@@ -17,6 +17,7 @@ function drawSavedFigure(index, obj) {
 
     // GRAB DATA FROM SAVED FIGURE
     let figureData = JSON.parse(SAVED_FIGURE_DATA[index])
+    // let figureData = JSON.parse('{"shapeData":[{"coords":{"x":112.87500762939453,"y":203.87498474121094},"arc":{"exist":false}},{"coords":{"x":207.875,"y":320.125},"arc":{"exist":false}},{"coords":{"x":399.125,"y":232.62498474121094},"arc":{"exist":false}},{"coords":{"x":569.125,"y":298.875},"arc":{"exist":false}}],"canvasDocumentPosition":{"canvDocTop":"2250px","canvDocLeft":"2250px"},"documentSvgDimensions":{"x":404.8999938964844,"y":433.1000061035156,"width":535.300048828125,"height":319.1000061035156,"top":433.1000061035156,"right":940.2000427246094,"bottom":752.2000122070312,"left":404.8999938964844}}')
     let mainPathData = figureData.shapeData
     let canvasDocumentPosition = figureData.canvasDocumentPosition
     let documentSvgDimensions = figureData.documentSvgDimensions

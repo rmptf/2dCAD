@@ -1,5 +1,6 @@
 import {CanvasScale} from '../CanvasScale/CanvasScale_Class.js'
 import {CanvasPan} from '../CanvasPan/CanvasPan_Class.js'
+import {hotKeyPress} from '../../utils/hotKeys_NEW.js'
 
 function Canvas(canvasData) {
     this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
@@ -14,6 +15,10 @@ function Canvas(canvasData) {
     this.canvScaleClass = new CanvasScale(this.scaleElement)
     this.canvasPanClass = new CanvasPan(this.panElement, this.canvScaleClass.scaleObject)
     this.canvasDocuments = []
+
+    // hotKeyPress()
+    document.addEventListener("keydown", (event) => hotKeyPress(event))
+    console.log("HotKeys Ativated.")
 }
 
 export {
