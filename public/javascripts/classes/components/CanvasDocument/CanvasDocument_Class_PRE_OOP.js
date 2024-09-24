@@ -15,10 +15,9 @@ import {
     NEWselectDrawParallelPath,
     NEWselectMeasurePath,
 } from './createCanvasDocumentFunctions.js'
-// import {saveFigureData} from '../../../tools/saveFigureData.js'
-import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
+import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
-import { EjsModelDataHandler } from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
+import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 
 function CanvasDocument_PRE_OOP(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -88,64 +87,49 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
 
 
 CanvasDocument_PRE_OOP.prototype.canvDocClick = function() {
-    console.log("a")
+    // console.log("a")
     let thisCanvasDoc = this
     NEWselectSvgDocument(thisCanvasDoc)
 }
 CanvasDocument_PRE_OOP.prototype.activateDrawPath = function() {
-    console.log(1)
-    NEWselectDrawPath(this) // OLD DRAW
+    // console.log(1)
+    NEWselectDrawPath(this)
 }
 CanvasDocument_PRE_OOP.prototype.activateAddEndPoint = function() {
-    console.log(2)
-    // let thisCanvasDoc = this
-    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-    // thisCanvasDoc.actionStates.addEndPointActive = true
-
+    // console.log(2)
     console.log("Not currently in use.")
 }
 CanvasDocument_PRE_OOP.prototype.activateAddEndPoint_curve = function() {
-    console.log(3)
-    NEWselectAddCurvePoint() // OLD
+    // console.log(3)
+    NEWselectAddCurvePoint()
 }
 CanvasDocument_PRE_OOP.prototype.activateDrawParallelPath = function() {
-    console.log(4)
-    NEWselectDrawParallelPath() // OLD
+    // console.log(4)
+    NEWselectDrawParallelPath()
 }
 CanvasDocument_PRE_OOP.prototype.activateMeasurePath = function() {
-    console.log(5)
-    NEWselectMeasurePath() // OLD
+    // console.log(5)
+    NEWselectMeasurePath()
 }
 CanvasDocument_PRE_OOP.prototype.activateSaveFigureData = function() {
-    console.log(6)
-    // let thisCanvasDoc = this
-    // console.log("Click figure to save.")
-    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-    // thisCanvasDoc.actionStates.saveFigureDataActive = true // NEW
-
-    console.log("Not currently in use.")
+    // console.log(6)
+    saveFigureData(this.documentSvg.scaleValue)
+    console.log("In this 'older' version of things, the save figure function will save the most recently drawn figure on Svg.")
 }
 CanvasDocument_PRE_OOP.prototype.saveSvgData = function() {
-    console.log(7)
-    // let thisCanvasDoc = this
-    // saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
-
-    saveSvgData(this.documentSvg.documentSvgFigures) // NEW //TODO: this was set with new way already... needs attention
+    // console.log(7)
+    console.log("Not currently in use.")
 }
 CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
-    console.log(8)
-    // let thisCanvasDoc = this
-    // Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
-    // thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
-
+    // console.log(8)
     console.log("Not currently in use.")
 }
 CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
-    console.log(9)
+    // console.log(9)
     this.documentSvg.drawSavedFigure(this, docSvg)
 }
 CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
-    console.log(10)
+    // console.log(10)
     this.documentSvg.drawSavedSvg(this, docSvg)
 }
 // BTN ACTIONS
@@ -172,7 +156,7 @@ CanvasDocument_PRE_OOP.prototype.setActions = function() {
     // this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01)
     this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG)
     activateSvgDoc(this.canvasDocument_htmlElement)
-    setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount) //FIXME: this might be OLDDRAW
+    setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
     dragElement(this.canvasDocument_htmlElement, this.scaleValue)
 }
 

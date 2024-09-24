@@ -8,7 +8,11 @@ function saveFigureData(thisFigure) {
         shapeData: thisFigure.svgPathDatas,
         canvasDocumentPosition: {canvDocTop: canvasDocumentHtmlElement.offsetTop, canvDocLeft: canvasDocumentHtmlElement.offsetLeft},
         documentSvgDimensions: docSvgDimensions,
-        scaleValue: scaleValue
+        scaleValue: scaleValue,
+
+        // shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+        // canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.style.top, canvDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
+        // documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
     }
 
     let pathDataStringNEW = JSON.stringify(shapeDataObject)

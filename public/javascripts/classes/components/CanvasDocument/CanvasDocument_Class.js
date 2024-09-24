@@ -102,8 +102,9 @@ CanvasDocument.prototype.activateSaveFigureData = function() {
     thisCanvasDoc.actionStates.saveFigureDataActive = true // NEW
 }
 CanvasDocument.prototype.saveSvgData = function() {
-    // console.log(7)
+    console.log(7)
     let thisCanvasDoc = this
+    console.log(thisCanvasDoc.documentSvg.documentSvgFigures)
     saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
 }
 CanvasDocument.prototype.activateRemoveEndPoint = function() {
