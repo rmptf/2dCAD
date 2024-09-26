@@ -1,8 +1,4 @@
-import {ActionButton} from '../ActionButton/ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
-import {SvgGroup} from '../DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
-import {SvgPath} from '../DocumentSvg/SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
-import {createSvgDocument} from './createCanvasDocumentFunctions.js'
 import {dragElement} from '../../utils/htmlElementFunctions.js'
 import {
     changeStringIncrementally,
@@ -16,7 +12,6 @@ import {
     NEWselectMeasurePath,
 } from './createCanvasDocumentFunctions.js'
 import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
-import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {drawSavedFigure} from '../../../functions/drafting/drawSavedFigure.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
@@ -26,7 +21,6 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         CANV_DOC: 'aDocument',
         HEADING: 'Pattern_Pc_',
         DOC_SVG: 'aDocumentSvg',
-        // DOC_BTN_01: 'aDoc_btn_01_',
     }
     this.allCanvasDocs = footer.canvasDocumentClasses
     this.scaleValue = footer.scaleObject
@@ -47,57 +41,6 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         measurePathActive: false,
         saveFigureDataActive: false,
     }
-    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
-
-
-
-
-
-
-    //FIXME: currently always drawing to last canvDoc in array
-    let hotkeyManager = new HotkeyManager(this)
-    this.initializeHotkeys = function() {
-        console.log('init_hotkeys_OLD')
-        hotkeyManager.registerHotkey('F1', this.f1)
-        hotkeyManager.registerHotkey('F2', this.f2)
-        hotkeyManager.registerHotkey('F3', this.f3)
-        hotkeyManager.registerHotkey('F4', this.f4)
-        hotkeyManager.registerHotkey('F5', this.f5)
-        // hotkeyManager.registerHotkey('Ctrl+t', this.test)
-        // hotkeyManager.registerHotkey('Ctrl+n', this.newTest)
-    }
-    this.f1 = () => {
-        console.log("F1_OLD")
-        console.log(this.canvasDocument_htmlElement)
-        drawSavedFigure(0, this.drawPathObj)
-    }
-    this.f2 = () => {
-        console.log("F2_OLD")
-        drawSavedFigure(1, this.drawPathObj)
-    }
-    this.f3 = () => {
-        console.log("F3_OLD")
-        drawSavedFigure(2, this.drawPathObj)
-    }
-    this.f4 = () => {
-        console.log("F4_OLD")
-        drawSavedFigure(3, this.drawPathObj)
-    }
-    this.f5 = () => {
-        console.log("F5_OLD")
-        drawSavedFigure(4, this.drawPathObj)
-    }
-    this.initializeHotkeys()
-    this.cleanup = () => {hotkeyManager.cleanup()}
-    this.restore = () => {hotkeyManager.restore()}
-
-
-
-
-
-
-
-    this.setActions()
     // OLD WAY OF DRAW
     this.drawPathObj = {
         self: [], // moving
@@ -110,6 +53,12 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     }
     // OLD WAY OF DRAW
 
+    this.hotkeyManager = new HotkeyManager(this)
+    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
+    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
+    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
+    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
+    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
@@ -123,7 +72,6 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][3])
     this.canvasDocActionBar02_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][4])
 
-
     this.canvasDocument_htmlElement.addEventListener('click', () => {this.canvDocClick()})
     this.canvasDocActionBar01_btn01_htmlElement.addEventListener('click', () => {this.activateDrawPath()})
     this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', () => {this.activateAddEndPoint()})
@@ -135,10 +83,35 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', () => {this.activateRemoveEndPoint()})
     this.canvasDocActionBar02_btn04_htmlElement.addEventListener('click', () => {this.drawFigure(this.documentSvg)})
     this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
+
+    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+    this.setActions()
 }
 
+// HOTKEY ACTIONS
+CanvasDocument_PRE_OOP.prototype.f1 = function () {
+    // console.log("F1_OLD")
+    this.documentSvg.drawSavedFigure(0, this.drawPathObj)
+}
+CanvasDocument_PRE_OOP.prototype.f2 = function () {
+    // console.log("F2_OLD")
+    this.documentSvg.drawSavedFigure(1, this.drawPathObj)
+}
+CanvasDocument_PRE_OOP.prototype.f3 = function () {
+    // console.log("F3_OLD")
+    this.documentSvg.drawSavedFigure(2, this.drawPathObj)
+}
+CanvasDocument_PRE_OOP.prototype.f4 = function () {
+    // console.log("F4_OLD")
+    this.documentSvg.drawSavedFigure(3, this.drawPathObj)
+}
+CanvasDocument_PRE_OOP.prototype.f5 = function () {
+    // console.log("F5_OLD")
+    this.documentSvg.drawSavedFigure(4, this.drawPathObj)
+}
+// HOTKEY ACTIONS
 
-
+// BTN ACTIONS
 CanvasDocument_PRE_OOP.prototype.canvDocClick = function() {
     // console.log("a")
     let thisCanvasDoc = this
@@ -180,10 +153,6 @@ CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
 }
 CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
     // console.log(9)
-
-    // this.documentSvg.drawSavedFigure(1)
-    // this.documentSvg.drawSavedFigure(this, docSvg) // this will draw new way (hardcoded way)
-    //FIXME: currently always drawing to last canvDoc in array
     drawSavedFigure(1, this.drawPathObj) // this will draw old way (f-key way)
 }
 CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
@@ -202,16 +171,14 @@ CanvasDocument_PRE_OOP.prototype.cloneAndAppendTemplate = function(templateId, t
 }
 
 // only really used in the old way. (can remover later)
-CanvasDocument_PRE_OOP.prototype.setElementIds = function(canvDocId, headerInnerTxt, docSvgId, btn01Id) { // can place this in an existing method
+CanvasDocument_PRE_OOP.prototype.setElementIds = function(canvDocId, headerInnerTxt, docSvgId) { // can place this in an existing method
     this.canvasDocument_htmlElement.id = changeStringIncrementally(canvDocId, this.stringIncrementCount)
     this.canvasDocumentHeader_htmlElement.innerText = changeStringIncrementally(headerInnerTxt, this.stringIncrementCount)
     this.documentSvg_htmlElement.id = changeStringIncrementally(docSvgId, this.stringIncrementCount)
-    // this.canvasDocActionBar01_btn01_htmlElement.id = changeStringIncrementally(btn01Id, this.stringIncrementCount)
 }
 
 CanvasDocument_PRE_OOP.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
-    // this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01)
     this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG)
     // activateSvgDoc(this.canvasDocument_htmlElement) / old
     changeActiveStatus(this.canvasDocument_htmlElement)
@@ -278,6 +245,7 @@ function selectSvgDocument(thisCanvasDoc) {
             finishDrawPath(thisCanvasDoc.drawPathObj.previousDrawPathObj, thisCanvasDoc.documentSvg_D3Element, thisCanvasDoc.stringIncrementCount, false)
         }
         // activate current svgDocument
+        setGlobalSvgElementVars(thisCanvasDoc.canvasDocument_htmlElement.id, thisCanvasDoc.documentSvg_htmlElement.id, thisCanvasDoc.stringIncrementCount)
         changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc)
         setHotKeys(thisCanvasDoc.allCanvasDocs, thisCanvasDoc)
     } else {
@@ -291,46 +259,10 @@ function selectSvgDocument(thisCanvasDoc) {
 
 function setHotKeys(canvDocs, thisDoc) {
     canvDocs.forEach(function(canvDoc) {
-        canvDoc.cleanup()
+        canvDoc.hotkeyManager.cleanup()
     })
-    thisDoc.restore()
+    thisDoc.hotkeyManager.restore()
 }
-
-
-// CanvasDocument_PRE_OOP.prototype.setClickEvents = function() {
-//     let thisCanvasDoc = this
-
-//     this.canvasDocument_htmlElement.onclick = function() {
-//         NEWselectSvgDocument(thisCanvasDoc)
-//     }
-//     this.canvasDocActionBar01_btn01_htmlElement.onclick = function() {
-//         NEWselectDrawPath(thisCanvasDoc) // OLD DRAW
-//     }
-//     this.canvasDocActionBar01_btn02_htmlElement.onclick = function() {
-//         console.log(this)
-//         NEWselectAddCurvePoint() // OLD
-//     }
-//     this.canvasDocActionBar01_btn03_htmlElement.onclick = function() {
-//         console.log(this)
-//         NEWselectDrawParallelPath() // OLD
-//     }
-//     this.canvasDocActionBar01_btn04_htmlElement.onclick = function() {
-//         console.log(this)
-//         NEWselectMeasurePath() // OLD
-//     }
-//     this.canvasDocActionBar02_btn02_htmlElement.onclick = function() {
-//         console.log(this)
-//     }
-//     this.canvasDocActionBar02_btn01_htmlElement.onclick = function() {
-//         console.log(this)
-//         console.log("Click figure to save.")
-//     }
-//     this.canvasDocActionBar02_btn069_htmlElement.onclick = function() {
-//         console.log(this)
-
-//         saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
-//     }
-// }
 
 export {
     CanvasDocument_PRE_OOP

@@ -17,25 +17,9 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
         previousDrawPathObj: undefined
     }
 
-
-    // let hotkeyManager = new HotkeyManager(this)
-    // this.initializeHotkeys = function() {
-    //     console.log('init_hotkeys_FOOTER')
-    //     hotkeyManager.registerHotkey('Ctrl+n', this.newCanvDoc_NEW)
-    //     hotkeyManager.registerHotkey('Ctrl+m', this.newCanvDoc_OLD)
-    // }
-    // this.newCanvDoc_NEW = () => {
-    //     console.log("new_CANV_DOC_NEW")
-    //     this.createCanvasDocument()
-    // }
-    // this.newCanvDoc_OLD = () => {
-    //     console.log("new_CANV_DOC_OLD")
-    //     this.createCanvasDocument_PRE_OOP()
-    // }
-    // this.initializeHotkeys()
-    // this.cleanup = () => {hotkeyManager.cleanup()}
-    // this.restore = () => {hotkeyManager.restore()}
-
+    this.hotkeyManager = new HotkeyManager(this)
+    this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW(this))
+    this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_OLD(this))
 
     this.footerActionBar01_btn01_htmlElement = this.footerActionElements[0][0]
     this.footerActionBar02_btn01_htmlElement = this.footerActionElements[1][0]
@@ -52,34 +36,44 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.footerActionBar03_btn03_htmlElement.addEventListener('click', () => {this.decreaseCanvasScale()})
 }
 
-Footer.prototype.test = function() {
-    // EJS element has 'onclick' value set
-    console.log("test")
+// HOTKEY ACTIONS
+Footer.prototype.newCanvDoc_NEW = function() {
+    console.log("new_CANV_DOC_NEW")
+    this.createCanvasDocument()
 }
+Footer.prototype.newCanvDoc_OLD = function() {
+    console.log("new_CANV_DOC_OLD")
+    this.createCanvasDocument_PRE_OOP()
+}
+// HOTKEY ACTIONS
+
+// BTN ACTIONS
 Footer.prototype.createCanvasDocument = function() {
-    console.log("2")
+    // console.log("2")
     this.iterateCounters()
     let newCanvasDoc = new CanvasDocument(this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)
 }
 Footer.prototype.createCanvasDocument_PRE_OOP = function() {
-    console.log("3")
+    // console.log("3")
     this.iterateCounters()
     let newCanvasDoc = new CanvasDocument_PRE_OOP(this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)
 }
 Footer.prototype.increaseCanvasScale = function() {
-    console.log("4")
+    // console.log("4")
     this.canvasScaleClass.increaseCanvasScale()
 }
 Footer.prototype.resetCanvasScale = function() {
-    console.log("5")
+    // console.log("5")
     this.canvasScaleClass.resetCanvasScale()
 }
 Footer.prototype.decreaseCanvasScale = function() {
-    console.log("6")
+    // console.log("6")
     this.canvasScaleClass.decreaseCanvasScale()
 }
+// BTN ACTIONS
+
 Footer.prototype.iterateCounters = function(){
     this.vars.stringIncrement++
 }
@@ -87,44 +81,6 @@ Footer.prototype.iterateCounters = function(){
 export {
     Footer
 }
-
-
-
-// // Component function that uses HotkeyManager
-// function Component() {
-//     const hotkeyManager = new HotkeyManager();
-
-//     this.initializeHotkeys = function() {
-//         hotkeyManager.registerHotkey('Ctrl', this.save);
-//         // hotkeyManager.registerHotkey('Ctrl+S', this.save);
-//         hotkeyManager.registerHotkey('Ctrl+P', this.print);
-//     };
-
-//     this.save = function() {
-//         console.log('Saving document...');
-//     };
-
-//     this.print = function() {
-//         console.log('Printing document...');
-//     };
-
-//     this.initializeHotkeys();
-
-//     this.cleanup = function() {
-//         hotkeyManager.cleanup();
-//     };
-// }
-
-// // Example usage
-// const component = new Component();
-
-// // // Simulate Ctrl+S and Ctrl+P keypresses
-// // document.dispatchEvent(new KeyboardEvent('keydown', { key: 'S', ctrlKey: true }));  // Should log 'Saving document...'
-// // document.dispatchEvent(new KeyboardEvent('keydown', { key: 'P', ctrlKey: true }));  // Should log 'Printing document...'
-
-// // Cleanup when finished
-// component.cleanup();
-
 
 
 

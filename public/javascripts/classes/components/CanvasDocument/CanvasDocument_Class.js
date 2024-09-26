@@ -1,13 +1,8 @@
-import {ActionButton} from '../ActionButton/ActionButton_Class.js'
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
-import {SvgGroup} from '../DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
-import {SvgPath} from '../DocumentSvg/SvgFigure/SvgElement/SvgPath/SvgPath_Class.js'
-import {createSvgDocument} from './createCanvasDocumentFunctions.js'
-import {dragElement} from '../../utils/htmlElementFunctions.js'
-import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
-import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
+import {dragElement} from '../../utils/htmlElementFunctions.js'
+import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 
 function CanvasDocument(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -33,54 +28,6 @@ function CanvasDocument(documentData, footer) {
         measurePathActive: false,
         saveFigureDataActive: false,
     }
-    this.documentSvg = new DocumentSvg(this)
-
-
-    let hotkeyManager = new HotkeyManager(this)
-    this.initializeHotkeys = function() {
-        console.log('init_hotkeys_CANVDOC_NEW')
-        hotkeyManager.registerHotkey('F1', this.f1)
-        hotkeyManager.registerHotkey('F2', this.f2)
-        hotkeyManager.registerHotkey('F3', this.f3)
-        hotkeyManager.registerHotkey('F4', this.f4)
-        hotkeyManager.registerHotkey('F5', this.f5)
-        // hotkeyManager.registerHotkey('Ctrl+t', this.test)
-        // hotkeyManager.registerHotkey('Ctrl+n', this.newTest)
-    }
-    this.f1 = () => {
-        console.log("F1_NEW")
-        this.documentSvg.drawSavedFigure(0)
-    }
-    this.f2 = () => {
-        console.log("F2_NEW")
-        this.documentSvg.drawSavedFigure(1)
-    }
-    this.f3 = () => {
-        console.log("F3_NEW")
-        this.documentSvg.drawSavedFigure(2)
-    }
-    this.f4 = () => {
-        console.log("F4_NEW")
-        this.documentSvg.drawSavedFigure(3)
-    }
-    this.f5 = () => {
-        console.log("F5_NEW")
-        this.documentSvg.drawSavedFigure(4)
-    }
-    this.initializeHotkeys()
-    this.cleanup = () => {hotkeyManager.cleanup()}
-    this.restore = () => {hotkeyManager.restore()}
-
-
-
-
-
-
-
-
-
-
-    this.setActions()
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
@@ -105,15 +52,46 @@ function CanvasDocument(documentData, footer) {
     this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', () => {this.activateRemoveEndPoint()})
     this.canvasDocActionBar02_btn04_htmlElement.addEventListener('click', () => {this.drawFigure(this.documentSvg)})
     this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
+
+    this.hotkeyManager = new HotkeyManager(this)
+    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
+    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
+    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
+    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
+    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
+
+    this.documentSvg = new DocumentSvg(this)
+    this.setActions()
 }
 
+// HOTKEY ACTIONS
+CanvasDocument.prototype.f1 = function () {
+    // console.log("F1_NEW")
+    this.documentSvg.drawSavedFigure(0)
+}
+CanvasDocument.prototype.f2 = function () {
+    // console.log("F2_NEW")
+    this.documentSvg.drawSavedFigure(1)
+}
+CanvasDocument.prototype.f3 = function () {
+    // console.log("F3_NEW")
+    this.documentSvg.drawSavedFigure(2)
+}
+CanvasDocument.prototype.f4 = function () {
+    // console.log("F4_NEW")
+    this.documentSvg.drawSavedFigure(3)
+}
+CanvasDocument.prototype.f5 = function () {
+    // console.log("F5_NEW")
+    this.documentSvg.drawSavedFigure(4)
+}
+// HOTKEY ACTIONS
 
 // BTN ACTIONS
 CanvasDocument.prototype.canvDocClick = function() {
     // console.log("a")
     selectSvgDocument(this)
 }
-
 CanvasDocument.prototype.activateDrawPath = function() {
     // console.log(1)
     let thisCanvasDoc = this
@@ -259,20 +237,13 @@ function changeActiveStatus(element) {
 function selectSvgDocument(thisCanvasDoc) {
     if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
         console.log("Activating.")
-
         deactivateAllActionsOnPreviouslyActiveCanvDoc() //TODO: Will eventually need to build new way to handle if previously Active canvDoc had an active action
-        // // finish draw path on previously active svgElement if drawPath was active
-        // if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
-        //     finishDrawPath(thisCanvasDoc.drawPathObj.previousDrawPathObj, thisCanvasDoc.documentSvg_D3Element, thisCanvasDoc.stringIncrementCount, false)
-        // }
-
         // activate current svgDocument
         changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc)
         changeHotKeyActivation(thisCanvasDoc)
     } else {
         console.log("Already active.")
     }
-
     function deactivateAllActionsOnPreviouslyActiveCanvDoc() {
         console.log("Unfinished Build: deactivate actions of previously active canvDoc")
     }
@@ -281,9 +252,9 @@ function selectSvgDocument(thisCanvasDoc) {
 function changeHotKeyActivation(thisDoc) {
     let allCanvDocs = thisDoc.allCanvasDocs
     allCanvDocs.forEach(function(canvDoc) {
-        canvDoc.cleanup()
+        canvDoc.hotkeyManager.cleanup()
     })
-    thisDoc.restore()
+    thisDoc.hotkeyManager.restore()
 }
 
 function changeStringIncrementally(origString, stringIncrementCount) {
