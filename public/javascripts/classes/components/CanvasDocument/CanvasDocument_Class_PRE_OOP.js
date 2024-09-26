@@ -19,6 +19,7 @@ import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {drawSavedFigure} from '../../../functions/drafting/drawSavedFigure.js'
+import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
 
 function CanvasDocument_PRE_OOP(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -27,6 +28,7 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         DOC_SVG: 'aDocumentSvg',
         // DOC_BTN_01: 'aDoc_btn_01_',
     }
+    this.allCanvasDocs = footer.canvasDocumentClasses
     this.scaleValue = footer.scaleObject
     this.panElement = footer.panElement
     this.scaleObject = footer.scaleObject
@@ -46,8 +48,56 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         saveFigureDataActive: false,
     }
     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
-    this.setActions()
 
+
+
+
+
+
+    //FIXME: currently always drawing to last canvDoc in array
+    let hotkeyManager = new HotkeyManager(this)
+    this.initializeHotkeys = function() {
+        console.log('init_hotkeys_OLD')
+        hotkeyManager.registerHotkey('F1', this.f1)
+        hotkeyManager.registerHotkey('F2', this.f2)
+        hotkeyManager.registerHotkey('F3', this.f3)
+        hotkeyManager.registerHotkey('F4', this.f4)
+        hotkeyManager.registerHotkey('F5', this.f5)
+        // hotkeyManager.registerHotkey('Ctrl+t', this.test)
+        // hotkeyManager.registerHotkey('Ctrl+n', this.newTest)
+    }
+    this.f1 = () => {
+        console.log("F1_OLD")
+        console.log(this.canvasDocument_htmlElement)
+        drawSavedFigure(0, this.drawPathObj)
+    }
+    this.f2 = () => {
+        console.log("F2_OLD")
+        drawSavedFigure(1, this.drawPathObj)
+    }
+    this.f3 = () => {
+        console.log("F3_OLD")
+        drawSavedFigure(2, this.drawPathObj)
+    }
+    this.f4 = () => {
+        console.log("F4_OLD")
+        drawSavedFigure(3, this.drawPathObj)
+    }
+    this.f5 = () => {
+        console.log("F5_OLD")
+        drawSavedFigure(4, this.drawPathObj)
+    }
+    this.initializeHotkeys()
+    this.cleanup = () => {hotkeyManager.cleanup()}
+    this.restore = () => {hotkeyManager.restore()}
+
+
+
+
+
+
+
+    this.setActions()
     // OLD WAY OF DRAW
     this.drawPathObj = {
         self: [], // moving
@@ -92,7 +142,8 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
 CanvasDocument_PRE_OOP.prototype.canvDocClick = function() {
     // console.log("a")
     let thisCanvasDoc = this
-    NEWselectSvgDocument(thisCanvasDoc)
+    // NEWselectSvgDocument(thisCanvasDoc) // old
+    selectSvgDocument(thisCanvasDoc)
 }
 CanvasDocument_PRE_OOP.prototype.activateDrawPath = function() {
     // console.log(1)
@@ -130,7 +181,9 @@ CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
 CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
     // console.log(9)
 
+    // this.documentSvg.drawSavedFigure(1)
     // this.documentSvg.drawSavedFigure(this, docSvg) // this will draw new way (hardcoded way)
+    //FIXME: currently always drawing to last canvDoc in array
     drawSavedFigure(1, this.drawPathObj) // this will draw old way (f-key way)
 }
 CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
@@ -160,9 +213,11 @@ CanvasDocument_PRE_OOP.prototype.setActions = function() {
     placeElement(this.canvasDocument_htmlElement)
     // this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_BTN_01)
     this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG)
-    activateSvgDoc(this.canvasDocument_htmlElement)
+    // activateSvgDoc(this.canvasDocument_htmlElement) / old
+    changeActiveStatus(this.canvasDocument_htmlElement)
     setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
     dragElement(this.canvasDocument_htmlElement, this.scaleValue)
+    setHotKeys(this.allCanvasDocs, this)
 }
 
 CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
@@ -205,6 +260,42 @@ CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
     canvasDocument.style.top = movetotop + 'px'
     canvasDocument.style.left = movetoleft + 'px'
 }
+
+function changeActiveStatus(element) {
+    let activeClass = "a-document__container--active"
+    document.querySelectorAll(".a-document__container").forEach(container => {
+        container.classList.remove(activeClass)
+    })
+    element.classList.add(activeClass)
+}
+
+function selectSvgDocument(thisCanvasDoc) {
+    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
+        console.log("Activating.")
+        deactivateAllActionsOnPreviouslyActiveCanvDoc() //TODO: Will eventually need to build new way to handle if previously Active canvDoc had an active action
+        // // finish draw path on previously active svgElement if drawPath was active
+        if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
+            finishDrawPath(thisCanvasDoc.drawPathObj.previousDrawPathObj, thisCanvasDoc.documentSvg_D3Element, thisCanvasDoc.stringIncrementCount, false)
+        }
+        // activate current svgDocument
+        changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc)
+        setHotKeys(thisCanvasDoc.allCanvasDocs, thisCanvasDoc)
+    } else {
+        console.log("Already active.")
+    }
+
+    function deactivateAllActionsOnPreviouslyActiveCanvDoc() {
+        console.log("Unfinished Build: deactivate actions of previously active canvDoc")
+    }
+}
+
+function setHotKeys(canvDocs, thisDoc) {
+    canvDocs.forEach(function(canvDoc) {
+        canvDoc.cleanup()
+    })
+    thisDoc.restore()
+}
+
 
 // CanvasDocument_PRE_OOP.prototype.setClickEvents = function() {
 //     let thisCanvasDoc = this

@@ -1,6 +1,7 @@
 import {CanvasDocument} from '../CanvasDocument/CanvasDocument_Class.js'
-import { CanvasDocument_PRE_OOP } from '../CanvasDocument/CanvasDocument_Class_PRE_OOP.js'
+import {CanvasDocument_PRE_OOP} from '../CanvasDocument/CanvasDocument_Class_PRE_OOP.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
+import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
 
 function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[2].element.content
@@ -15,6 +16,26 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
         stringIncrement: -1,
         previousDrawPathObj: undefined
     }
+
+
+    // let hotkeyManager = new HotkeyManager(this)
+    // this.initializeHotkeys = function() {
+    //     console.log('init_hotkeys_FOOTER')
+    //     hotkeyManager.registerHotkey('Ctrl+n', this.newCanvDoc_NEW)
+    //     hotkeyManager.registerHotkey('Ctrl+m', this.newCanvDoc_OLD)
+    // }
+    // this.newCanvDoc_NEW = () => {
+    //     console.log("new_CANV_DOC_NEW")
+    //     this.createCanvasDocument()
+    // }
+    // this.newCanvDoc_OLD = () => {
+    //     console.log("new_CANV_DOC_OLD")
+    //     this.createCanvasDocument_PRE_OOP()
+    // }
+    // this.initializeHotkeys()
+    // this.cleanup = () => {hotkeyManager.cleanup()}
+    // this.restore = () => {hotkeyManager.restore()}
+
 
     this.footerActionBar01_btn01_htmlElement = this.footerActionElements[0][0]
     this.footerActionBar02_btn01_htmlElement = this.footerActionElements[1][0]
@@ -66,6 +87,46 @@ Footer.prototype.iterateCounters = function(){
 export {
     Footer
 }
+
+
+
+// // Component function that uses HotkeyManager
+// function Component() {
+//     const hotkeyManager = new HotkeyManager();
+
+//     this.initializeHotkeys = function() {
+//         hotkeyManager.registerHotkey('Ctrl', this.save);
+//         // hotkeyManager.registerHotkey('Ctrl+S', this.save);
+//         hotkeyManager.registerHotkey('Ctrl+P', this.print);
+//     };
+
+//     this.save = function() {
+//         console.log('Saving document...');
+//     };
+
+//     this.print = function() {
+//         console.log('Printing document...');
+//     };
+
+//     this.initializeHotkeys();
+
+//     this.cleanup = function() {
+//         hotkeyManager.cleanup();
+//     };
+// }
+
+// // Example usage
+// const component = new Component();
+
+// // // Simulate Ctrl+S and Ctrl+P keypresses
+// // document.dispatchEvent(new KeyboardEvent('keydown', { key: 'S', ctrlKey: true }));  // Should log 'Saving document...'
+// // document.dispatchEvent(new KeyboardEvent('keydown', { key: 'P', ctrlKey: true }));  // Should log 'Printing document...'
+
+// // Cleanup when finished
+// component.cleanup();
+
+
+
 
 
 

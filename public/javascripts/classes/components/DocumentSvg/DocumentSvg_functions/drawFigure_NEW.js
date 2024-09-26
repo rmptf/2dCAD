@@ -1,3 +1,4 @@
+import {SAVED_FIGURE_DATA} from '../../../../../reference_files/data/savedFigureData.js'
 import {DocumentSvg} from '../DocumentSvg_Class.js'
 import {SvgFigure} from '../SvgFigure/SvgFigure_Class.js'
 import {svg_expandSvgElementOnMouseMove_NEW, getElementPositionDataNEW} from './resizeSvg_NEW.js'
@@ -42,17 +43,29 @@ function drawNewFigure(event, DocSvg, CanvDoc) {
     }
 }
 
-function drawFigureFromData(figureData, documentSvg, documentSvgD3, actionStates, CanvDoc) {
+function drawFigureFromData(index, documentSvg) {
+    console.log("Draw Figure: " + (index + 1))
+
     let documentSvgFigures = documentSvg.documentSvgFigures
     let newFigure = new SvgFigure(documentSvg)
+    let figureData = SAVED_FIGURE_DATA[index]
     let passedDatas = JSON.parse(figureData)
 
-
-
     // GRAB DATA FROM SAVED FIGURE
-    let pathDatas = passedDatas.shapeData
-    let canvasDocumentPosition = passedDatas.canvasDocumentPosition
-    let documentSvgDimensions = passedDatas.documentSvgDimensions
+    let pathDatas
+    let canvasDocumentPosition
+    let documentSvgDimensions
+    if(passedDatas.duelSave){
+        console.log("OOP 'OFFSET' SAVE")
+        pathDatas = passedDatas.duelSave.offset_save.shapeData
+        canvasDocumentPosition = passedDatas.duelSave.offset_save.canvasDocumentPosition
+        documentSvgDimensions = passedDatas.duelSave.offset_save.documentSvgDimensions
+    } else {
+        console.log("PRE-OOP SAVE: loaded from newway")
+        pathDatas = passedDatas.shapeData
+        canvasDocumentPosition = passedDatas.canvasDocumentPosition
+        documentSvgDimensions = passedDatas.documentSvgDimensions
+    }
 
     // SET HTML ELEMENTS POSITION & DIMENSIONS
     let canvasDocument = documentSvg.canvDocHtmlElement

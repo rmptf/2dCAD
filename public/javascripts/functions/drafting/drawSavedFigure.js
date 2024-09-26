@@ -12,15 +12,22 @@ function drawSavedFigure(index, obj) {
     let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
     // SET VARS FROM GLOBAL
 
-    // if using svgElementcounters
-    // let figureCount222 = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL[a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL]
-
     // GRAB DATA FROM SAVED FIGURE
     let figureData = JSON.parse(SAVED_FIGURE_DATA[index])
-    // let figureData = JSON.parse('{"shapeData":[{"coords":{"x":112.87500762939453,"y":203.87498474121094},"arc":{"exist":false}},{"coords":{"x":207.875,"y":320.125},"arc":{"exist":false}},{"coords":{"x":399.125,"y":232.62498474121094},"arc":{"exist":false}},{"coords":{"x":569.125,"y":298.875},"arc":{"exist":false}}],"canvasDocumentPosition":{"canvDocTop":"2250px","canvDocLeft":"2250px"},"documentSvgDimensions":{"x":404.8999938964844,"y":433.1000061035156,"width":535.300048828125,"height":319.1000061035156,"top":433.1000061035156,"right":940.2000427246094,"bottom":752.2000122070312,"left":404.8999938964844}}')
-    let mainPathData = figureData.shapeData
-    let canvasDocumentPosition = figureData.canvasDocumentPosition
-    let documentSvgDimensions = figureData.documentSvgDimensions
+    let mainPathData
+    let canvasDocumentPosition
+    let documentSvgDimensions
+    if(figureData.duelSave){
+        console.log("OOP 'STYLE' SAVE")
+        mainPathData = figureData.duelSave.style_save.shapeData
+        canvasDocumentPosition = figureData.duelSave.style_save.canvasDocumentPosition
+        documentSvgDimensions = figureData.duelSave.style_save.documentSvgDimensions
+    } else {
+        console.log("PRE-OOP SAVE; loaded from oldway")
+        mainPathData = figureData.shapeData
+        canvasDocumentPosition = figureData.canvasDocumentPosition
+        documentSvgDimensions = figureData.documentSvgDimensions
+    }
     // GRAB DATA FROM SAVED FIGURE
     
     // SET HTML ELEMENTS POSITION & DIMENSIONS

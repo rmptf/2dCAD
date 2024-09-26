@@ -5,11 +5,18 @@ function saveFigureData(scaleValue) {
     console.log(scaleValue)
     // Get raw data and place in an object
     let shapeDataObject = {
-        shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
-        canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.style.top, canvDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
-        // canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.offsetTop, canvDocLeft: a_canvas_globalVars.svgDocHTML.offsetLeft}, // new stuff (not incorporated yet
-        documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
-        // scaleValue: scaleValue, // new stuff (not incorporated yet)
+        duelSave: {
+            offset_save: {
+                shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+                canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.offsetTop, canvDocLeft: a_canvas_globalVars.svgDocHTML.offsetLeft},
+                documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+            },
+            style_save: {
+                shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
+                canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.style.top, canvDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
+                documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+            }
+        }
     }
     // Convert the object into a string (so that it's easy to copy & past)
     let shapeDataString = JSON.stringify(shapeDataObject)
@@ -17,7 +24,6 @@ function saveFigureData(scaleValue) {
     console.log(JSON.parse(shapeDataString))
     // Console log the stringified object (to copy & paste)
     console.log("'" + shapeDataString + "'")
-    console.log(a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL)
 }
 
 export {

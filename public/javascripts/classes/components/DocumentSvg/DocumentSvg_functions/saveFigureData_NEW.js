@@ -4,16 +4,30 @@ function saveFigureData(thisFigure) {
     let canvasDocumentHtmlElement = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
     let documentSvgHtmlElement = thisFigure.DocumentSvg.HtmlElement
     let docSvgDimensions = documentSvgHtmlElement.getBoundingClientRect()
+    
     let shapeDataObject = {
-        shapeData: thisFigure.svgPathDatas,
-        canvasDocumentPosition: {canvDocTop: canvasDocumentHtmlElement.offsetTop, canvDocLeft: canvasDocumentHtmlElement.offsetLeft},
-        documentSvgDimensions: docSvgDimensions,
-        scaleValue: scaleValue,
+        duelSave: {
+            offset_save: {
+                shapeData: thisFigure.svgPathDatas,
+                canvasDocumentPosition: {canvDocTop: canvasDocumentHtmlElement.offsetTop, canvDocLeft: canvasDocumentHtmlElement.offsetLeft},
+                documentSvgDimensions: docSvgDimensions,
+                scaleValue: scaleValue
+            },
+            style_save: {
+                shapeData: thisFigure.svgPathDatas,
+                canvasDocumentPosition: {canvDocTop: canvasDocumentHtmlElement.style.top, canvDocLeft: canvasDocumentHtmlElement.style.left},
+                documentSvgDimensions: docSvgDimensions,
+                scaleValue: scaleValue
+            }
+        }
     }
 
-    let pathDataStringNEW = JSON.stringify(shapeDataObject)
-    console.log(pathDataStringNEW)
+    // Convert the object into a string (so that it's easy to copy & past)
+    let shapeDataString = JSON.stringify(shapeDataObject)
+    // Console log the parsed stringified object (for testing purposes)
     console.log(shapeDataObject)
+    // Console log the stringified object (to copy & paste)
+    console.log("'" + shapeDataString + "'")
 }
 
 function saveSvgData(theseFigures) {

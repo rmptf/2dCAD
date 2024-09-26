@@ -17,8 +17,8 @@ function Canvas(canvasData) {
     this.canvasDocuments = []
 
     // hotKeyPress()
-    document.addEventListener("keydown", (event) => hotKeyPress(event))
-    console.log("HotKeys Ativated.")
+    // document.addEventListener("keydown", (event) => hotKeyPress(event))
+    // console.log("HotKeys Ativated.")
 }
 
 export {

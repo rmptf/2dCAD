@@ -7,12 +7,14 @@ import {dragElement} from '../../utils/htmlElementFunctions.js'
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 import {drawFigureFromData} from '../DocumentSvg/DocumentSvg_functions/drawFigure_NEW.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
+import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
 
 function CanvasDocument(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
         CANV_DOC: 'aDocument_',
         HEADING: 'Pattern_Pc_',
     }
+    this.allCanvasDocs = footer.canvasDocumentClasses
     this.scaleValue = footer.scaleObject
     this.panElement = footer.panElement
     this.scaleObject = footer.scaleObject
@@ -32,6 +34,52 @@ function CanvasDocument(documentData, footer) {
         saveFigureDataActive: false,
     }
     this.documentSvg = new DocumentSvg(this)
+
+
+    let hotkeyManager = new HotkeyManager(this)
+    this.initializeHotkeys = function() {
+        console.log('init_hotkeys_CANVDOC_NEW')
+        hotkeyManager.registerHotkey('F1', this.f1)
+        hotkeyManager.registerHotkey('F2', this.f2)
+        hotkeyManager.registerHotkey('F3', this.f3)
+        hotkeyManager.registerHotkey('F4', this.f4)
+        hotkeyManager.registerHotkey('F5', this.f5)
+        // hotkeyManager.registerHotkey('Ctrl+t', this.test)
+        // hotkeyManager.registerHotkey('Ctrl+n', this.newTest)
+    }
+    this.f1 = () => {
+        console.log("F1_NEW")
+        this.documentSvg.drawSavedFigure(0)
+    }
+    this.f2 = () => {
+        console.log("F2_NEW")
+        this.documentSvg.drawSavedFigure(1)
+    }
+    this.f3 = () => {
+        console.log("F3_NEW")
+        this.documentSvg.drawSavedFigure(2)
+    }
+    this.f4 = () => {
+        console.log("F4_NEW")
+        this.documentSvg.drawSavedFigure(3)
+    }
+    this.f5 = () => {
+        console.log("F5_NEW")
+        this.documentSvg.drawSavedFigure(4)
+    }
+    this.initializeHotkeys()
+    this.cleanup = () => {hotkeyManager.cleanup()}
+    this.restore = () => {hotkeyManager.restore()}
+
+
+
+
+
+
+
+
+
+
     this.setActions()
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
@@ -59,11 +107,13 @@ function CanvasDocument(documentData, footer) {
     this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
 }
 
+
 // BTN ACTIONS
 CanvasDocument.prototype.canvDocClick = function() {
     // console.log("a")
     selectSvgDocument(this)
 }
+
 CanvasDocument.prototype.activateDrawPath = function() {
     // console.log(1)
     let thisCanvasDoc = this
@@ -113,17 +163,15 @@ CanvasDocument.prototype.activateRemoveEndPoint = function() {
     Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
     thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
 }
-CanvasDocument.prototype.drawFigure = function(docSvg) {
+CanvasDocument.prototype.drawFigure = function() {
     // console.log(9)
-    this.documentSvg.drawSavedFigure(this, docSvg)
+    this.documentSvg.drawSavedFigure(1)
 }
 CanvasDocument.prototype.drawSvg = function(docSvg) {
     // console.log(10)
     this.documentSvg.drawSavedSvg(this, docSvg)
 }
 // BTN ACTIONS
-
-
 
 CanvasDocument.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement, true))
@@ -133,8 +181,9 @@ CanvasDocument.prototype.setActions = function() {
     // placeElement(this.canvasDocument_htmlElement) // Dont need
     this.setElementIdAndData(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING)
     this.resizeAndCenterDocument()
-    changeActiveStatus(this.canvasDocument_htmlElement)
+    changeActiveStatus(this.canvasDocument_htmlElement, this)
     dragElement(this.canvasDocument_htmlElement, this.scaleValue)
+    changeHotKeyActivation(this)
 }
 
 CanvasDocument.prototype.setElementIdAndData = function(canvDocId, headerInnerTxt) {
@@ -200,7 +249,7 @@ CanvasDocument.prototype.resizeAndCenterDocument = function() {
 }
 
 function changeActiveStatus(element) {
-    let activeClass = "a-document__container--active";
+    let activeClass = "a-document__container--active"
     document.querySelectorAll(".a-document__container").forEach(container => {
         container.classList.remove(activeClass)
     })
@@ -218,7 +267,8 @@ function selectSvgDocument(thisCanvasDoc) {
         // }
 
         // activate current svgDocument
-        changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement)
+        changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc)
+        changeHotKeyActivation(thisCanvasDoc)
     } else {
         console.log("Already active.")
     }
@@ -226,6 +276,14 @@ function selectSvgDocument(thisCanvasDoc) {
     function deactivateAllActionsOnPreviouslyActiveCanvDoc() {
         console.log("Unfinished Build: deactivate actions of previously active canvDoc")
     }
+}
+
+function changeHotKeyActivation(thisDoc) {
+    let allCanvDocs = thisDoc.allCanvasDocs
+    allCanvDocs.forEach(function(canvDoc) {
+        canvDoc.cleanup()
+    })
+    thisDoc.restore()
 }
 
 function changeStringIncrementally(origString, stringIncrementCount) {
@@ -236,6 +294,22 @@ function changeStringIncrementally(origString, stringIncrementCount) {
 export {
     CanvasDocument
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
