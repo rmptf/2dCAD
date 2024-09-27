@@ -41,7 +41,6 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         measurePathActive: false,
         saveFigureDataActive: false,
     }
-    // OLD WAY OF DRAW
     this.drawPathObj = {
         self: [], // moving
         m1: '',
@@ -51,14 +50,6 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         secondaryPathCount: 0,
         previousDrawPathObj: null
     }
-    // OLD WAY OF DRAW
-
-    this.hotkeyManager = new HotkeyManager(this)
-    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
-    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
-    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
-    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
-    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
@@ -83,6 +74,14 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', () => {this.activateRemoveEndPoint()})
     this.canvasDocActionBar02_btn04_htmlElement.addEventListener('click', () => {this.drawFigure(this.documentSvg)})
     this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
+
+
+    this.hotkeyManager = new HotkeyManager(this)
+    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
+    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
+    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
+    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
+    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
 
     this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
     this.setActions()

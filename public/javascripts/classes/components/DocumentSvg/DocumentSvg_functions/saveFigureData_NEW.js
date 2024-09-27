@@ -3,8 +3,9 @@ function saveFigureData(thisFigure) {
     let scaleValue = thisFigure.DocumentSvg.scaleValue
     let canvasDocumentHtmlElement = thisFigure.DocumentSvg.CanvasDocument.canvasDocument_htmlElement
     let documentSvgHtmlElement = thisFigure.DocumentSvg.HtmlElement
-    let docSvgDimensions = documentSvgHtmlElement.getBoundingClientRect()
-    
+    let style = window.getComputedStyle(documentSvgHtmlElement)
+    let docSvgDimensions = {height: parseFloat(style.height), width: parseFloat(style.width)}
+
     let shapeDataObject = {
         duelSave: {
             offset_save: {

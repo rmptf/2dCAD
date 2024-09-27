@@ -1,20 +1,23 @@
 
 function saveFigureData(scaleValue) {
-    // let scaleValue = thisFigure.DocumentSvg.scaleValue
-    console.log('scaleValue')
-    console.log(scaleValue)
+    let documentSvgHtmlElement = a_canvas_globalVars.svgHTML
+    let style = window.getComputedStyle(documentSvgHtmlElement)
+    let docSvgDimensions = {height: parseFloat(style.height), width: parseFloat(style.width)}
+    
     // Get raw data and place in an object
     let shapeDataObject = {
         duelSave: {
             offset_save: {
                 shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
                 canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.offsetTop, canvDocLeft: a_canvas_globalVars.svgDocHTML.offsetLeft},
-                documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+                documentSvgDimensions: docSvgDimensions,
+                scaleValue: scaleValue
             },
             style_save: {
                 shapeData: a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL],
                 canvasDocumentPosition : {canvDocTop: a_canvas_globalVars.svgDocHTML.style.top, canvDocLeft: a_canvas_globalVars.svgDocHTML.style.left},
-                documentSvgDimensions: a_canvas_globalVars.svgHTML.getBoundingClientRect(),
+                documentSvgDimensions: docSvgDimensions,
+                scaleValue: scaleValue
             }
         }
     }

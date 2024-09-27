@@ -77,8 +77,6 @@ function drawFigureFromData(index, documentSvg) {
     documentSvgElement.style.height = documentSvgDimensions.height
     documentSvgElement.style.width = documentSvgDimensions.width
 
-
-
     documentSvgFigures.push(newFigure)
     newFigure.createPath_primary(newFigure, newFigure.svgGroups.secondarySvgGroupElements[0], 0)
     for (let i = 0; i < pathDatas.length; i++) {
