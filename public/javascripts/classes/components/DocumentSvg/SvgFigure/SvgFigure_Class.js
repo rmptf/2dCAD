@@ -40,6 +40,8 @@ function SvgFigure(DocSvg) {
     this.parallelFigure = null
 }
 
+
+
 function createSecondaryGroups(thisClass) {
     return thisClass.SVGGROUPSDATA.SECONDARYNAMES.map(className => {
         let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_figureElement')
@@ -47,9 +49,16 @@ function createSecondaryGroups(thisClass) {
     })
 }
 
+
+
 SvgFigure.prototype.figure_updateSvg = function() {
     updateSVG_thisSvgFigure(this)
 }
+
+
+
+
+
 
 SvgFigure.prototype.createPathData_newData = function(x, y) {
     let newPathData_additional = new PathData()
@@ -74,12 +83,24 @@ SvgFigure.prototype.createPathData_splice = function(x, y, index) {
     return newPathData_additional
 }
 
+
+
+
+
+
+
 SvgFigure.prototype.createPath_primary = function(figure, parentElement, index) {
     let newPath_primary = new SvgPathPrimary(figure, parentElement, this.actionStates, index)
     this.svgPaths.primaryPath = newPath_primary
 
     return newPath_primary
 }
+
+
+
+
+
+
 
 SvgFigure.prototype.createPath_secondary = function(figure, parentElement, index) {
     let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates, index)
@@ -94,6 +115,11 @@ SvgFigure.prototype.createPath_secondary_splice = function(figure, parentElement
 
     return newPath_secondary
 }
+
+
+
+
+
 
 SvgFigure.prototype.createPrimaryEndPoint = function(figure, parentElement, pathData, index) {
     let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData, index)
@@ -110,12 +136,23 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
     this.svgEndPoints.splice(index, 0, newEndPoint_curve)
 }
 
+
+
+
+
+
 SvgFigure.prototype.createParallelFigure = function(sectionIndex) {
     let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML, sectionIndex)
     this.parallelFigure = newParallelFigure
 
     return newParallelFigure
 }
+
+
+
+
+
+
 
 export {
     SvgFigure

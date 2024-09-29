@@ -1,20 +1,21 @@
 import {DocumentSvg} from '../DocumentSvg/DocumentSvg_Class.js'
 import {dragElement} from '../../utils/htmlElementFunctions.js'
-import {
-    changeStringIncrementally,
-    activateSvgDoc,
-    setGlobalSvgElementVars,
-    placeElement,
-    NEWselectSvgDocument,
-    NEWselectDrawPath,
-    NEWselectAddCurvePoint,
-    NEWselectDrawParallelPath,
-    NEWselectMeasurePath,
-} from './createCanvasDocumentFunctions.js'
+// import {
+    // changeStringIncrementally,
+    // activateSvgDoc,
+    // setGlobalSvgElementVars,
+    // placeElement,
+    // NEWselectSvgDocument,
+    // NEWselectDrawPath,
+    // NEWselectAddCurvePoint,
+    // NEWselectDrawParallelPath,
+    // NEWselectMeasurePath,
+// } from './createCanvasDocumentFunctions.js'
 import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {drawSavedFigure} from '../../../functions/drafting/drawSavedFigure.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
+import {drawPathFunction} from '../../../functions/drafting/drawPath.js'
 
 function CanvasDocument_PRE_OOP(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
@@ -50,6 +51,16 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         secondaryPathCount: 0,
         previousDrawPathObj: null
     }
+    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+
+    this.hotkeyManager = new HotkeyManager(this)
+    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
+    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
+    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
+    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
+    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
+
+    this.setActions()
 
     this.canvDocumentActionElements = EjsModelDataHandler.grabModuleActionIds(documentData, "A_DOCUMENT")
     this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
@@ -74,39 +85,28 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     this.canvasDocActionBar02_btn03_htmlElement.addEventListener('click', () => {this.activateRemoveEndPoint()})
     this.canvasDocActionBar02_btn04_htmlElement.addEventListener('click', () => {this.drawFigure(this.documentSvg)})
     this.canvasDocActionBar02_btn05_htmlElement.addEventListener('click', () => {this.drawSvg(this.documentSvg)})
-
-
-    this.hotkeyManager = new HotkeyManager(this)
-    this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
-    this.hotkeyManager.registerHotkey('F2', () => this.f2(this))
-    this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
-    this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
-    this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
-
-    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
-    this.setActions()
 }
 
 // HOTKEY ACTIONS
 CanvasDocument_PRE_OOP.prototype.f1 = function () {
     // console.log("F1_OLD")
-    this.documentSvg.drawSavedFigure(0, this.drawPathObj)
+    drawSavedFigure(0, this.drawPathObj)
 }
 CanvasDocument_PRE_OOP.prototype.f2 = function () {
     // console.log("F2_OLD")
-    this.documentSvg.drawSavedFigure(1, this.drawPathObj)
+    drawSavedFigure(1, this.drawPathObj)
 }
 CanvasDocument_PRE_OOP.prototype.f3 = function () {
     // console.log("F3_OLD")
-    this.documentSvg.drawSavedFigure(2, this.drawPathObj)
+    drawSavedFigure(2, this.drawPathObj)
 }
 CanvasDocument_PRE_OOP.prototype.f4 = function () {
     // console.log("F4_OLD")
-    this.documentSvg.drawSavedFigure(3, this.drawPathObj)
+    drawSavedFigure(3, this.drawPathObj)
 }
 CanvasDocument_PRE_OOP.prototype.f5 = function () {
     // console.log("F5_OLD")
-    this.documentSvg.drawSavedFigure(4, this.drawPathObj)
+    drawSavedFigure(4, this.drawPathObj)
 }
 // HOTKEY ACTIONS
 
@@ -261,6 +261,65 @@ function setHotKeys(canvDocs, thisDoc) {
         canvDoc.hotkeyManager.cleanup()
     })
     thisDoc.hotkeyManager.restore()
+}
+
+function placeElement(canvDocumentElement) {
+    canvDocumentElement.style.top = 'calc(50% - 250px)'
+    canvDocumentElement.style.left = 'calc(50% - 250px)'
+    let toPixelWidth = canvDocumentElement.offsetTop
+    let toPixelHeight = canvDocumentElement.offsetTop
+
+    // console.log("okoksdf")
+    // console.log(canvDocumentElement)
+    // console.log(canvDocumentElement.offsetTop)
+
+    canvDocumentElement.style.top = toPixelWidth + 'px'
+    canvDocumentElement.style.left = toPixelHeight + 'px'
+}
+
+function setGlobalSvgElementVars(documentId, svgId, thisSvgElemCount) {
+    a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL = thisSvgElemCount
+    a_canvas_globalVars.svgDocHTML = document.getElementById(documentId)
+    // a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
+    a_canvas_globalVars.svgD3 = d3.select('#' + svgId)
+    a_canvas_globalVars.svgHTML = document.getElementById(svgId)
+}
+
+function changeStringIncrementally(origString, stringIncrement123) {
+    let newString = origString + stringIncrement123
+    return newString
+}
+
+
+
+
+
+
+function NEWselectDrawPath(thisCanvasDoc) {
+    a_canvas_globalVars.pressSvgElement = true
+    thisCanvasDoc.drawPathObj.previousDrawPathObj = thisCanvasDoc.drawPathObj
+    thisCanvasDoc.documentSvg_D3Element.on("click", (event) => NEWsvgClick(event, thisCanvasDoc))
+}
+
+function NEWsvgClick(event, thisCanvasDoc) {
+    if (a_canvas_globalVars.pressSvgElement === true) {
+        a_canvas_globalVars.pressAddCurveButton = false
+        a_canvas_globalVars.pressAddParallelButton = false
+        a_canvas_globalVars.pressMeasurePathButton = false
+        drawPathFunction(event, thisCanvasDoc.drawPathObj, thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc.documentSvg_htmlElement, thisCanvasDoc.documentSvg_D3Element)
+    }
+}
+
+function NEWselectAddCurvePoint() {
+    a_canvas_globalVars.pressAddCurveButton = true
+}
+
+function NEWselectDrawParallelPath() {
+    a_canvas_globalVars.pressAddParallelButton = true
+}
+
+function NEWselectMeasurePath() {
+    a_canvas_globalVars.pressMeasurePathButton = true
 }
 
 export {

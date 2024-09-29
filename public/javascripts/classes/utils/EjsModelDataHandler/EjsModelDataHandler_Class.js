@@ -24,7 +24,7 @@ EjsModelDataHandler.prototype.findModuleDataFromProcessedData = function(key, da
 }
 
 // Static Function: dont need to create new instance of Class to use
-EjsModelDataHandler.grabModuleActions = function(data, modelName) {
+EjsModelDataHandler.grabModuleActionElements = function(data, modelName) {
     let actionElements = []
     data[modelName].actions.forEach((container) => {
         let actionContainers = []

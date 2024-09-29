@@ -1,34 +1,25 @@
-<div class="b-footer <%= THEME_moduleTheme %>" id=<%= ID_bFooter_id %>>
-    <div class="b-footer__container <%= THEME_bFooterContainerFill %>">
+<div class="b-footer <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>" id=<%= B_FOOTER.MODULE_DATA.MODULE_ID %>>
+    <div class="b-footer__container <%= B_FOOTER.MODULE_THEMES.THEME_containerFill %>">
         <div class="b-footer__sidebar b-footer__sidebar--left">
             <div class="b-footer__button-cont">
-                <div class="<%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnAlign %>">
-                    <button class="<%= ACTIONS_bFooter_btn.btn_01.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_01.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_01.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_01.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_01.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_01.btnId %> type=<%= ACTIONS_bFooter_btn.btn_01.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_01.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_01.btnText %></button>
-                </div>
+                <% if (B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]) { %>
+                    <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]}) %>
+                <% } %>
             </div>
         </div>
         <div class="b-footer__sidebar b-footer__sidebar--mid">
             <div class="b-footer__button-cont">
-                <div class="<%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnAlign %>">
-                    <button class="<%= ACTIONS_bFooter_btn.btn_02.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_02.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_02.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_02.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_02.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_02.btnId %> type=<%= ACTIONS_bFooter_btn.btn_02.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_02.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_02.btnText %></button>
-                    <button class="<%= ACTIONS_bFooter_btn.btn_02b.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_02b.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_02b.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_02b.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_02b.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_02b.btnId %> type=<%= ACTIONS_bFooter_btn.btn_02b.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_02b.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_02b.btnText %></button>
-                </div>
+                <% if (B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[1]) { %>
+                    <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[1]}) %>
+                <% } %>
             </div>
         </div>
         <div class="b-footer__sidebar b-footer__sidebar--right">
             <div class="b-footer__button-cont">
-                <div class="<%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_bFooter_btn_cont.btn_cont_01.btnAlign %>">
-                    <button class="<%= ACTIONS_bFooter_btn.btn_03.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_03.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_03.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_03.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_03.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_03.btnId %> type=<%= ACTIONS_bFooter_btn.btn_03.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_03.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_03.btnText %></button>
-                    <button class="<%= ACTIONS_bFooter_btn.btn_04.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_04.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_04.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_04.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_04.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_04.btnId %> type=<%= ACTIONS_bFooter_btn.btn_04.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_04.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_04.btnText %></button>
-                    <button class="<%= ACTIONS_bFooter_btn.btn_05.btnTheme_class %> <%= ACTIONS_bFooter_btn.btn_05.btnTheme_type %> <%= ACTIONS_bFooter_btn.btn_05.btnTheme_size %> <%= ACTIONS_bFooter_btn.btn_05.btnTheme_status %> <%= ACTIONS_bFooter_btn.btn_05.btnTheme_style %>" id=<%= ACTIONS_bFooter_btn.btn_05.btnId %> type=<%= ACTIONS_bFooter_btn.btn_05.btnType %> onclick=<%= ACTIONS_bFooter_btn.btn_05.btnOnClick %>><%= ACTIONS_bFooter_btn.btn_05.btnText %></button>
-                </div>
+                <% if (B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[2]) { %>
+                    <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: B_FOOTER.MODULE_ACTIONS.BUTTON_CONTAINERS[2]}) %>
+                <% } %>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- not using this at all (but test first to check) -->
-<!-- <script id='bFooter_scriptId' type='module' data-json='["<%= ID_bFooter_id %>", "<%= ACTIONS_bFooter_btn.btn_02.btnId %>"]' src='./javascripts/html_modules/b_footer.js'></script> -->
-
-

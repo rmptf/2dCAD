@@ -24,7 +24,7 @@ function HotkeyManager(poop) {
         if (event.altKey) key.push('Alt')
         key.push(event.key)
         return key.join('+')
-    };
+    }
 
     document.addEventListener('keydown', handleKeydown)
 

@@ -10,7 +10,7 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.scaleObject = scaleClass.scaleObject
     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
     this.footerElement = footerData.B_FOOTER.elements.elementData.element
-    this.footerActionElements = EjsModelDataHandler.grabModuleActions(footerData, "B_FOOTER")
+    this.footerActionElements = EjsModelDataHandler.grabModuleActionElements(footerData, "B_FOOTER")
     this.documentData = documentData
     this.vars = {
         stringIncrement: -1,
@@ -81,64 +81,6 @@ Footer.prototype.iterateCounters = function(){
 export {
     Footer
 }
-
-
-
-
-
-
-// OLD EJS WAY
-// function Footer(canvasElement, canvasDocument, scaleClass, panClass, footerElement, actionButtons) {
-//     this.DOCUMENT_TEMPLATE_ID = 'aCanvasTemplate'
-//     this.DOCUMENT_CONTAINER_ID = 'aDocumentContainer'
-//     this.canvasClass_canvasElement = canvasElement
-//     this.documentTemplate = document.getElementById(this.DOCUMENT_TEMPLATE_ID).content
-//     this.canvasDocumentClasses = canvasDocument
-//     this.canvasScaleClass = scaleClass
-//     this.scaleObject = scaleClass.scaleObject
-//     this.panElement = panClass.canvasPanElement
-//     this.footerElement = footerElement
-//     this.documentData = "fillerData" // filler data
-
-//     this.vars = {
-//         stringIncrement: -1,
-//         previousDrawPathObj: undefined
-//     }
-
-//     this.footerActionBar01_btn01_htmlElement = actionButtons[0]
-//     this.footerActionBar01_btn02_htmlElement = actionButtons[1]
-//     this.footerActionBar01_btn03_htmlElement = actionButtons[2]
-//     this.footerActionBar01_btn04_htmlElement = actionButtons[3]
-//     this.footerActionBar01_btn05_htmlElement = actionButtons[4]
-//     this.footerActionBar01_btn02b_htmlElement = actionButtons[5]
-
-//     this.footerActionBar01_btn01_htmlElement.addEventListener('click', this.test.bind(this))
-//     this.footerActionBar01_btn02_htmlElement.addEventListener('click', this.createCanvasDocument.bind(this))
-//     this.footerActionBar01_btn03_htmlElement.addEventListener('click', this.increaseCanvasScale.bind(this))
-//     this.footerActionBar01_btn04_htmlElement.addEventListener('click', this.resetCanvasScale.bind(this))
-//     this.footerActionBar01_btn05_htmlElement.addEventListener('click', this.decreaseCanvasScale.bind(this))
-//     this.footerActionBar01_btn02b_htmlElement.addEventListener('click', this.createCanvasDocument_PRE_OOP.bind(this))
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 1 cropped jacket
 // - pinstriped
