@@ -1,5 +1,5 @@
 import {findIntersectingPointTwoFormats, findIntersectingPointSIMPLER} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
-
+console.log("OPEN_24")
 function noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index) {
     // AA_First_All
     calculateAndSetParallelProjectionPoints(refEndPointsPerp, parallelProjections, index)

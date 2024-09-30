@@ -5,7 +5,7 @@ import {createParallelPathElements} from './createParallelPathElements/createPar
 import {checkForIntersectingPaths} from './intersectingParPaths/intersectingParPaths.js'
 import {handleIntersectingParallelPaths_testing} from './intersectingParPaths/intPathsTests.js'
 // import {updateSVG_highlight_1_point_02} from '../../animate/updateSvg_forTesting/updateSvg_forTests.js'
-
+console.log("OPEN_21")
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
 function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
     console.log("DRAW_PARALLEL")

@@ -135,6 +135,8 @@ function addPaths(orig, thisFigure) {
 
 function addEndPoints(orig, thisFigure) {
     for (let i = 0; i < orig.length - 1; i++) {
+        console.log("Tester_31")
+        console.log(orig)
         thisFigure.createParallelEndPoint(orig[i], i)
         thisFigure.createParallelEndPoint(orig[i], i)
     }
@@ -257,6 +259,7 @@ ParallelFigure.prototype.createFillerParallelPath = function(index, index2) {
 }
 
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
+    console.log('tester_41')
     let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false)
     // this.svgEndPoints.push(newEndPointParallel)
     this.svgEndPoints.splice(index, 0, newEndPointParallel)

@@ -3,7 +3,7 @@ import {handlePathToArcIntersectionNoContact, handleArcToPathIntersectionNoConta
 import {setLargeArcFlag} from '../setLargeArcFlag.js'
 import {findPointAlongSlopeAtDistance} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
 import {getDistance} from '../../../../../math/mathFunctions.js'
-
+console.log("OPEN_25")
 let thisConnection = []
 thisConnection.connected = true
 

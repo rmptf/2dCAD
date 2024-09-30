@@ -1,5 +1,5 @@
 import {updateSVG_parallelPathAndPoints} from '../../../animate/updateSvg.js'
-
+console.log("OPEN_22")
 function createParallelPathElements(self, originalFigure_counter_groupCount_GLOBAL) {
     // Create SVG groups for parallel endpoints and paths
     self.parallelEndPointGroup = self.group.append('g').attr('class', 'parallelEndPointGroup');
@@ -52,6 +52,10 @@ function createParallelPathElements(self, originalFigure_counter_groupCount_GLOB
                 thisPlugItIn,
                 nextPlugItIn,
             ])
+
+            console.log("testing_01")
+            console.log(thisPlugItIn)
+            console.log(nextPlugItIn)
         }
         // Push endpoint groups, path groups, and path data to respective arrays
         a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL].push(parallelFigureEndPointsGroup)

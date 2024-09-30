@@ -1,5 +1,5 @@
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
-
+console.log("OPEN_14")
 function IntersectionsSorter_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_WithArc(this.ParFigure)
@@ -38,22 +38,22 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
         switch(true) {
             case this.isJoiner(index):
             case this.isJoiner(index - 1):
-                console.log('1___')
+                // console.log('1___')
                 handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
                 break
             default:
-                console.log('2___')
+                // console.log('2___')
                 handleDefaultArcIntersection(this.ParFigure, this)
         }
     } else if (this.firstPosition(index)) {
         switch(true) {
             case this.isJoiner(index):
             // case this.isJoiner(index - 1):
-                console.log('3___')
+                // console.log('3___')
                 handleDisconnectedArcIntersection(this.ParFigure, this)  // FIXME: right here
                 break
             default:
-                console.log('4___')
+                // console.log('4___')
                 handleDefaultArcIntersection(this.ParFigure, this)
         }
     }
@@ -61,21 +61,21 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
 
 function handleDefaultArcIntersection(parFigure, intXSorter) {
     // 1
-    console.log("A___1")
+    // console.log("A___1")
     // arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) // TODO: (Set_arcRad)
     parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {
         // case parPathObj.parallelPathSegmentCounter_FIRST === 0:
         case parFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST === 0:
-            console.log("A___2")
+            // console.log("A___2")
             handleFirctArcSegment(parFigure, intXSorter)
             break
         default:
-            console.log("A___3")
+            // console.log("A___3")
             handleSecondArcSegment(parFigure, intXSorter)
     }
     // Final
-    console.log("A___4")
+    // console.log("A___4")
     // arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self)
     parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 }

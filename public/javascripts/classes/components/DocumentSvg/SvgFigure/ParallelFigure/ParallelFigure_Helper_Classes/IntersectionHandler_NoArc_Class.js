@@ -1,6 +1,6 @@
 // import {findIntersectingPointTwoFormats, findIntersectingPointSIMPLER} from '../../../drawParallelPath_functions/parallelPathFunctions.js'
 import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
-
+console.log("OPEN_13")
 function IntersectionHandler_NoArc(parallelFigure) {
     this.ParFigure = parallelFigure
 

@@ -38,12 +38,10 @@ import {
     noArcIntersection_notFirstPos_lastPos_prevIndexIsArc,
     noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction
 } from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc.js'
-
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 // import {findLineMidpoint} from '../../../math/mathFunctions.js'
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
-
-
+console.log("OPEN_23")
 function sortEndpoints(
     targetEndPoints,
     refEndPointsPerp,
