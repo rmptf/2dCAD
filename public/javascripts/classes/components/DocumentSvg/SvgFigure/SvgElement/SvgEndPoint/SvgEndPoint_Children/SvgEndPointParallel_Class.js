@@ -12,22 +12,27 @@ SvgEndPointParallel.prototype = Object.create(SvgEndPoint.prototype)
 SvgEndPointParallel.prototype.constructor = SvgEndPointParallel
 
 SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
-    console.log("tester_12")
-    console.log(this.pathData)
-    console.log(index)
     let newEndPointParallel = SvgEndPoint.prototype.createSvgEndPoint.call(this, index)
         .on("click", (event) => this.elementClick(event, this.actionStates))
-
-
-
     newEndPointParallel.node().classList.add(this.ENDPOINT_CLASS)
+
+    // console.log("test_svgEndPoint.arc")
+    // console.log(this.pathData.arc)
+
+
+
     if(this.joinerFlag === true) {
         newEndPointParallel.node().classList.add(this.ENDPOINT_JOINER_CLASS)
     }
     if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
+        console.log("CLASS ADDED")
         newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_CLASS)
     }
+
     return newEndPointParallel
+
+
+
 }
 
 SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {

@@ -3,7 +3,7 @@ import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_C
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
-console.log("OPEN_15")
+
 function IntersectionHandler_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.ArcFlagSetter = new LargeArcFlagSetter(this.ParFigure)

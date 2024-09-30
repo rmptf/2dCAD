@@ -1,4 +1,3 @@
-console.log("OPEN_26")
 const SAVED_FIGURE_DATA = [
     // // DELETE PATH STUFF
     // // shape 1:

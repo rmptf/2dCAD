@@ -1,5 +1,5 @@
 import {IntersectionHandler_NoArc} from './IntersectionHandler_NoArc_Class.js'
-console.log("OPEN_12")
+
 function IntersectionsSorter_NoArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_NoArc(this.ParFigure)

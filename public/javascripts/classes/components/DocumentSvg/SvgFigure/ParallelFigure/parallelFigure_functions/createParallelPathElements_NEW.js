@@ -1,5 +1,5 @@
 import {PathData} from '../../SvgData/PathData_Class.js'
-console.log("OPEN_11")
+
 function createParallelPathDatas(originalFigurePathDatas) {
     let parallelFigurePathDatas = []
 
@@ -29,9 +29,11 @@ function createParallelPathDatas(originalFigurePathDatas) {
                 }
             }
 
-            console.log("testing_01")
-            console.log(thisPlugItIn)
-            console.log(nextPlugItIn)
+            // console.log("test_creating_pathData_forparallel")
+            // console.log(thisPlugItIn)
+            // console.log(nextPlugItIn)
+
+            
             let newPathData01 = new PathData()
             let newPathData02 = new PathData()
             newPathData01.setAllData(thisPlugItIn)
@@ -39,8 +41,6 @@ function createParallelPathDatas(originalFigurePathDatas) {
             parallelFigurePathDatas.push([newPathData01, newPathData02])
         }
 
-        console.log("testing_02")
-        console.log(parallelFigurePathDatas)
         return parallelFigurePathDatas
 
         // Update the SVG using the updated data

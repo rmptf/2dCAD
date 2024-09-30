@@ -1,5 +1,5 @@
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
-console.log("OPEN_14")
+
 function IntersectionsSorter_WithArc(parallelFigure) {
     this.ParFigure = parallelFigure
     this.IntersectionHandler = new IntersectionHandler_WithArc(this.ParFigure)
