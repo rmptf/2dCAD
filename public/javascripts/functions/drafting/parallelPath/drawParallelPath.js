@@ -75,7 +75,10 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     // // Set Large Arc Flag of each arc stuff:
     // // parallelPathObject.thisConnection = [] add this later
 
-    console.log("STARTED")
+    console.log("")
+    console.log("")
+    console.log("")
+    console.log("PARPATH_STARTED")
     console.log(parallelPathDatas_globalRef)
     console.log(parallelPathDatasCopyForPerpendicular)
 
@@ -87,6 +90,11 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
             // centerPoint = setPointClickedOnOrigPath(event)
             // updateSVG_highlight_1_point_02([centerPoint.x, centerPoint.y], self)
         } else {
+
+            console.log("")
+            console.log("FINISH_SHAPE")
+            console.log("")
+            
             isDownDrawParellelInitiated = false
             a_canvas_globalVars.svgD3.on("mousemove", null)
             a_canvas_globalVars.svgD3.on('click', null)

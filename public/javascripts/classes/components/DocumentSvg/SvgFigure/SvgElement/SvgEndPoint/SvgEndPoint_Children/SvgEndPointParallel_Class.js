@@ -16,9 +16,6 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
         .on("click", (event) => this.elementClick(event, this.actionStates))
     newEndPointParallel.node().classList.add(this.ENDPOINT_CLASS)
 
-    // console.log("test_svgEndPoint.arc")
-    // console.log(this.pathData.arc)
-
 
 
     if(this.joinerFlag === true) {

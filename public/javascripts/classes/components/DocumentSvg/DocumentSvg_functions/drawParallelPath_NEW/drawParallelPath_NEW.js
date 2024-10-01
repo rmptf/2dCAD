@@ -9,8 +9,13 @@
 // drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBAL, isDown2, selfGroup, pathCount, figureCount)
 // function drawParallelPathFunction_NEW(event, originalFigure_counter_groupCount_GLOBAL, isDownDrawParellelInitiated, self, secondaryPathClicked, figureCount) {
 function drawParallelPathFunction_NEW(event, thisFigure, sectionIndex) {
-    console.log("start_drawing_parallel_path")
     let newParallalFigure = thisFigure.createParallelFigure(sectionIndex)
+    console.log("")
+    console.log("")
+    console.log("")
+    console.log("PARPATH_STARTED")
+    console.log(newParallalFigure.parallelFigurePathDatas)
+    console.log(newParallalFigure.parallelFigurePathDatas_transformed)
     newParallalFigure.parallelFigure_updateSvg()
 
     // parFigure.parallelFigurePathDatas[0][0].coords.x = 300

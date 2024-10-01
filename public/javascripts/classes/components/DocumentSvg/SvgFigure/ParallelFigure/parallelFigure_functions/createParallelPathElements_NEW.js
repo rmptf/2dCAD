@@ -29,11 +29,6 @@ function createParallelPathDatas(originalFigurePathDatas) {
                 }
             }
 
-            // console.log("test_creating_pathData_forparallel")
-            // console.log(thisPlugItIn)
-            // console.log(nextPlugItIn)
-
-            
             let newPathData01 = new PathData()
             let newPathData02 = new PathData()
             newPathData01.setAllData(thisPlugItIn)

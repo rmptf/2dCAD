@@ -88,9 +88,9 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.setParallelFigureClickEvents(docSvgD3)
 
 
-    console.log("why different?")
-    console.log(this.parallelFigurePathDatas)
-    console.log(this.svgEndPoints)
+    // console.log("why different?")
+    // console.log(this.parallelFigurePathDatas)
+    // console.log(this.svgEndPoints)
 }
 
 // targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount
@@ -139,11 +139,7 @@ function addPaths(orig, thisFigure) {
 }
 
 function addEndPoints(orig, thisFigure) {
-    console.log("test_origPathDatas")
-    console.log(orig)
     for (let i = 0; i < orig.length - 1; i++) {
-        console.log("test_addEndPoints")
-        console.log(i)
         thisFigure.createParallelEndPoint(orig[i], i)
         thisFigure.createParallelEndPoint(orig[i], i)
     }
@@ -221,7 +217,6 @@ function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
     return function() {
         if (flag === false) {
             flag = true
-            console.log(thisFigure.parallelFigurePathDatas)
         } else {
             console.log("")
             console.log("FINISH_SHAPE")
