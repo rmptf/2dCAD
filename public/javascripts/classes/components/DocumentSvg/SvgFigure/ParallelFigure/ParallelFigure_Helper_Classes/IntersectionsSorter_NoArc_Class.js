@@ -20,9 +20,9 @@ function IntersectionsSorter_NoArc(parallelFigure) {
     }
 }
 
-IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
-    console.log('SORTENDPOINTS_NOARC')
-}
+// IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
+//     console.log('SORTENDPOINTS_NOARC')
+// }
 
 export {
     IntersectionsSorter_NoArc
@@ -68,7 +68,8 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
         // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
         this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure)
-
+        console.log('PARALLEL_PROJECTIONS')
+        console.log(this.intersectionSorterObject.parallelProjections)
         // AA_FIRST_ALL
         // noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
         this.IntersectionHandler.noArcIntersection_setPerpRefEndPointsToParallelProjections()

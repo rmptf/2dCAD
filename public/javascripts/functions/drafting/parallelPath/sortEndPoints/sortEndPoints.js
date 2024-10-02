@@ -231,12 +231,12 @@ function sort_endPoint_noArc(
     } 
     
     if(thisIsArcToPath === false) {
-        console.log("startastartstart")
         const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
         const firstPosition = (newIndex) => (newIndex) === 0
         const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
         let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
         let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
+        console.log('PARALLEL_PROJECTIONS')
         console.log(parallelProjections)
     
         // AA_FIRST_ALL

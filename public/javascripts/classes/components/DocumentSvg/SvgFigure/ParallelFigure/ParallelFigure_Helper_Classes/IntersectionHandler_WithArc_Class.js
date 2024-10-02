@@ -538,10 +538,31 @@ function handleLargeArcFlag(parFigure, flag) {
     // targetEndPoints[index][1].arc.radius = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
 //new
 function setArcRadius(parFigure, indexModifier, logId) {
-    // console.log(logId)
     let targetArray = parFigure.parallelFigurePathDatas
-    let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier)
+    let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier) //TODO: (NEW) OLDWAY
+    // let index = (parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier + 1) //TODO: (NEW) NEWAY?
+
+    //TODO: (NEW) THESE CONSOLE LOGS SHOULD BE THE SAME CONSOLE LOGS AS OLD WAY BUT WRITTEN DIFF: Double check
+    // console.log(logId)
+    console.log('SET_ARC_RADIUS')
+    console.log(index)
+    console.log(parFigure.originalFigurePathDatas_copy)
+
+
     let parallelDistance = calcArcParDistance(parFigure, index)
+    
+
+    // let poop1 = parFigure.originalFigurePathDatas_copy[index]
+    // let poop2 = parFigure.parallelFigureObject.parallelDistanceparFigure.parallelFigureObject.parallelDistance
+
+    // let parallelDistance = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
+
+    // // function calcArcParDistance(parFigure, modifiedIdex) {
+    // // let index = modifiedIdex + 1
+    // // let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index]
+    // // let distance = parFigure.parallelFigureObject.parallelDistance
+
+
 
     targetArray[index][1].arc.radius = parallelDistance
 }
@@ -817,6 +838,9 @@ function calcArcParDistance(parFigure, modifiedIdex) {
     let distance = parFigure.parallelFigureObject.parallelDistance
 
     parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+
+    console.log('CALC_ACR_PAR_DIST_nextrefendptbase')
+    console.log(nextRefEndPointBase)
 
     let arcRadiusParDistAndDir = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir
     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)

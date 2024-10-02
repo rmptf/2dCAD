@@ -2,6 +2,7 @@ import {findIntersectingPointTwoFormats, findIntersectingPointSIMPLER} from '../
 
 function noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index) {
     // AA_First_All
+    console.log("AA_All")
     calculateAndSetParallelProjectionPoints(refEndPointsPerp, parallelProjections, index)
 }
 function noArcIntersection_firstPos(targetEndPoints, index, parallelProjections) {
@@ -84,7 +85,7 @@ function calculateAndSetIntersectionPoints(targetData, index, parallelEndPointsI
 // A, B, G, M
 function setTargetEndPoints(targetData, index, referenceCoords, side) {
 
-    console.log("oksdofksodkfso")
+    console.log("REF_COORDS")
     console.log(referenceCoords)
     
     targetData[index][side].coords.x = referenceCoords.x
