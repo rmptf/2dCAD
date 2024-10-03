@@ -41,6 +41,10 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
 
+            console.log(midPointBetweenInts)
+            console.log(thisTargetEndPoint.arc.center)
+            console.log(pooper1, pooper2)
+
             parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive] = {
                 startPos_x1GreaterThanX2: pooper1,
                 startPos_y1GreaterThanY2: pooper2
@@ -53,7 +57,7 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
             if (flipFlag) {
                 endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
                 // endPOINT.arc.exist = false
-                console.log("AAAAAAAAAAA")
+                console.log("AAAAA_BBBBB_")
                 console.log(endPOINT.arc.arcFlag)
             }
         }

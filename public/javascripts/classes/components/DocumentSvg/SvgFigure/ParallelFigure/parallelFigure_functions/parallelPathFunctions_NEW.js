@@ -250,8 +250,7 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
 
 // let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData, self)
 function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
-    console.log("okokok")
-    console.log("22222")
+    console.log("p2a_INT")
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}
     let circleCenter = {x: circ.arc.center.x, y: circ.arc.center.y}
@@ -314,13 +313,17 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, sel
         //     { x: intersection2X, y: intersection2Y, doesIntersect: true }
         // ]
 
+        console.log(length0)
+        console.log(length1)
         // Choose the closest int point to OPD
         if(length0 < length1) {
+            console.log('GREATER_THAN')
             return [
                 { x: intersection1X, y: intersection1Y, doesIntersect: true },
                 { x: intersection2X, y: intersection2Y, doesIntersect: true }
             ]
         } else {
+            console.log('LESS_THAN')
             return [
                 { x: intersection2X, y: intersection2Y, doesIntersect: true },
                 { x: intersection1X, y: intersection1Y, doesIntersect: true }

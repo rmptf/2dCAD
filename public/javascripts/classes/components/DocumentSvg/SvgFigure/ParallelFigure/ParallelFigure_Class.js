@@ -169,7 +169,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         // if(isDownDrawParellelInitiated === true) {
-            console.log("adding_iterationCounter")
+            console.log("ITERATION_COUNTER")
+            console.log("COUNT: " + thisFigure.parallelFigureObject.iterationCounter)
+            console.log("")
             thisFigure.parallelFigureObject.iterationCounter = thisFigure.parallelFigureObject.iterationCounter + 1
             if(thisFigure.parallelFigureObject.iterationCounter === 1) {
                 thisFigure.parallelFigureObject.parallelDistance = 0
@@ -206,7 +208,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.parallelFigureObject.arcToPathCounter = -1
         thisFigure.parallelFigureObject.arcToArcCounter = -1
 
-        console.log("ENDSHAPE")
+        console.log("END_SHAPE")
         console.log(" ")
         console.log(" ")
         console.log(" ")

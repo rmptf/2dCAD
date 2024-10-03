@@ -108,7 +108,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         console.log("")
         console.log("")
         console.log("")
-        console.log("START SHAPE")
+        console.log("START_SHAPE")
         console.log("")
         // console.log(parallelPathObject.parallelDistance)
 
@@ -119,7 +119,9 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         if(isDownDrawParellelInitiated === true) {
-            console.log("adding_iterationCounter")
+            console.log("SHAPE_ITERATION_COUNTER")
+            console.log("SHAPE_COUNT: " + parallelPathObject.iterationCounter)
+            console.log("")
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
             if(parallelPathObject.iterationCounter === 1) {
                 parallelPathObject.parallelDistance = 0
@@ -185,7 +187,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.arcToPathCounter = -1
         parallelPathObject.arcToArcCounter = -1
 
-        console.log("ENDSHAPEererere")
+        console.log("END_SHAPE")
         console.log(" ")
         console.log(" ")
         console.log(" ")

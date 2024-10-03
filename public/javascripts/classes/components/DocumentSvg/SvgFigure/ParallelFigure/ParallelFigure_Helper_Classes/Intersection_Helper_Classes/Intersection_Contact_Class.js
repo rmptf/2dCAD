@@ -22,7 +22,7 @@ function Intersection_Contact(parallelFigure) {
 
 // function handleArcToArcIntersection(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index, parPathObj, thisConnection) {
 Intersection_Contact.prototype.handleArcToArcIntersection = function() {
-    console.log("000_000")
+    // console.log("000_000")
     let parallelFigure = this.ParFigure
     let intersectionSorter = parallelFigure.IntersectionsSorter_WithArc
     let intersectionHandler = intersectionSorter.IntersectionHandler

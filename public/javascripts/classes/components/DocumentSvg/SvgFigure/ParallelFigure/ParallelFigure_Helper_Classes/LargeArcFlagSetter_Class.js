@@ -43,7 +43,6 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
         console.log(index)
 
         if(parFigureObj.iterationCounter === 1) {
-            console.log('okokokokok_2')
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
 
