@@ -169,8 +169,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         // if(isDownDrawParellelInitiated === true) {
-            console.log("ITERATION_COUNTER")
-            console.log("COUNT: " + thisFigure.parallelFigureObject.iterationCounter)
+            console.log("SHAPE_ITERATION_COUNTER")
+            console.log("SHAPE_COUNT: " + thisFigure.parallelFigureObject.iterationCounter)
             console.log("")
             thisFigure.parallelFigureObject.iterationCounter = thisFigure.parallelFigureObject.iterationCounter + 1
             if(thisFigure.parallelFigureObject.iterationCounter === 1) {
