@@ -13,6 +13,7 @@ import {findParallelDistance} from './parallelFigure_functions/parallelPathFunct
 function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.SVGGROUPSDATA = {
         SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
+        TESTINGNAMES: ["testingPathGROUP_001","testingEndPointGROUP_001"],
     }
     this.SvgFigure = svgFigure
 
@@ -35,7 +36,8 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 
     // Svg Elements
     this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements[3]
-    this.secondaryFigureGroups = createSecondaryGroups(this)
+    this.secondaryFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.SECONDARYNAMES)
+    // this.testFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.TESTINGNAMES)
     this.svgGroups = {
         secondarySvgGroupElements: this.secondaryFigureGroups,
     }
@@ -115,9 +117,9 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 // parPathObj,
 // skipperCheckers
 
-function createSecondaryGroups(thisClass) {
-    return thisClass.SVGGROUPSDATA.SECONDARYNAMES.map(className => {
-        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_parallelfigureElement')
+function createSecondaryGroups(thisClass, data) {
+    return data.map(className => {
+        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_svgElement')
         return newSecondaryGroup.newSvgGroup
     })
 }

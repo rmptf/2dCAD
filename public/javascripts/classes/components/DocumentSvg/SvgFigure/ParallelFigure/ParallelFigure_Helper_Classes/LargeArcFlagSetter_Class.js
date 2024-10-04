@@ -1,6 +1,27 @@
 // import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
 // import {findLineMidpoint, isGreaterThan} from '../../../../../../math/mathFunctions.js'
 import {findLineMidpoint, isGreaterThan} from "../../../../../../functions/math/mathFunctions.js"
+import {
+    updateSVG_highlight_1_point_01,
+    updateSVG_highlight_1_point_02,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01,
+    updateSVG_highlight_2_points_1_line_01_A,
+    updateSVG_highlight_2_points_1_line_01_B,
+    
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
+    updateSVG_highlight_2_points_1_line_02_A,
+    updateSVG_highlight_2_points_1_line_02_B,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03,
+    updateSVG_highlight_2_points_1_line_03_A,
+    updateSVG_highlight_2_points_1_line_03_B,
+
+    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04,
+    updateSVG_highlight_2_points_1_line_04_A,
+    updateSVG_highlight_2_points_1_line_04_B,
+} from "../../../../../../functions/animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js"
+
 
 function LargeArcFlagSetter(parallelFigure) {
     this.ParFigure = parallelFigure
@@ -99,6 +120,32 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     }
     return flipFlag
 }
+
+// function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self) {
+//     // if(index === 1) {
+//     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
+//     //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+//     //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+//     // }
+
+//     if(index === 2) {
+//         updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+//         updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+//         updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+//     }
+
+//     if(index === 3) {
+//         updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
+//         updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+//         updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+//     }
+
+//     // if(index === 4) {
+//     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
+//     //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+//     //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+//     // }
+// }
 
 export {
     LargeArcFlagSetter

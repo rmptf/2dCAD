@@ -64,7 +64,7 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
 
-        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self)
+        updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)

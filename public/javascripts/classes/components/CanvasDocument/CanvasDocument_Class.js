@@ -37,6 +37,7 @@ function CanvasDocument(documentData, footer) {
     this.hotkeyManager.registerHotkey('F3', () => this.f3(this))
     this.hotkeyManager.registerHotkey('F4', () => this.f4(this))
     this.hotkeyManager.registerHotkey('F5', () => this.f5(this))
+    this.hotkeyManager.registerHotkey('Ctrl+,', () => this.ctrlComma(this))
 
     this.setActions()
 
@@ -85,6 +86,10 @@ CanvasDocument.prototype.f4 = function () {
 CanvasDocument.prototype.f5 = function () {
     // console.log("F5_NEW")
     this.documentSvg.drawSavedFigure(4)
+}
+CanvasDocument.prototype.ctrlComma = function () {
+    // console.log("Ctrl+Comma_NEW")
+    this.activateDrawParallelPath()
 }
 // HOTKEY ACTIONS
 
