@@ -1,3 +1,5 @@
+// import {makeDeepCopy} from '../ParallelFigure/parallelFigure_functions/parallelPathFunctions_NEW.js'
+// import {makeDeepCopy} from '../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js'
 import {SvgGroup} from '../SvgElement/SvgGroup/SvgGroup_Class.js'
 
 function TestFigure(svgFigure, parFigure, id, doRun) {
@@ -90,6 +92,7 @@ TestFigure.prototype.updateTestFigure_333 = function(pathData) {
         // rect.attr("x", bbox.x - 0).attr("y", bbox.y - 0).attr("width", bbox.width).attr("height", bbox.height)
 
 
+        
         // GREEN
         let pathData1 = makeDeepCopy(pathData)
         pathData1[1].arc.arcFlag = 1
