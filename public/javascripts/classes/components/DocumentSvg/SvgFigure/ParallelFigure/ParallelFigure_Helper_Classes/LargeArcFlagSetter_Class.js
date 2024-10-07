@@ -11,7 +11,9 @@ import {
     
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
     updateSVG_highlight_2_points_1_line_02_A,
+    updateSVG_highlight_2_points_1_line_02_A_NEW,
     updateSVG_highlight_2_points_1_line_02_B,
+    updateSVG_highlight_2_points_1_line_02_B_NEW,
 
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03,
     updateSVG_highlight_2_points_1_line_03_A,
@@ -25,6 +27,11 @@ import {
 
 function LargeArcFlagSetter(parallelFigure) {
     this.ParFigure = parallelFigure
+    this.testFigure01 = this.ParFigure.testFigure_01
+    this.testFigure02 = this.ParFigure.testFigure_02
+    this.testFigure03 = this.ParFigure.testFigure_03
+    this.svgTestElementsGroup = this.ParFigure.SvgFigure.svgGroups.secondarySvgGroupElements[4]
+    this.svgFigure = this.ParFigure.SvgFigure
 
     this.arcFlagSetterObject = {
         fakeVar: null,
@@ -92,7 +99,9 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
 
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
 
-        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self)
+        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts)
+        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.svgTestElementsGroup)
+        updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.testFigure01, this.testFigure02, this.testFigure03)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)
@@ -121,31 +130,41 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     return flipFlag
 }
 
-// function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self) {
-//     // if(index === 1) {
-//     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
-//     //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-//     //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-//     // }
+// function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, svgGroup) {
+function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, TESTFIGURE_01, TESTFIGURE_02, TESTFIGURE_03) {
+    // if(index === 1) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
+    // }
 
-//     if(index === 2) {
-//         updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-//         updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-//         updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-//     }
+    if(index === 2) {
+        // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
+        TESTFIGURE_03.updateTestFigure_333([prevTargetEndPoint, thisTargetEndPoint])
 
-//     if(index === 3) {
-//         updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
-//         updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-//         updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-//     }
+        // updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
+        // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup, thisThing)
+        // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgFigure)
+        TESTFIGURE_01.updateTestFigure_111([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y])
 
-//     // if(index === 4) {
-//     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
-//     //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-//     //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-//     // }
-// }
+        // updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
+        // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup, thisThing)
+        // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgFigure)
+        TESTFIGURE_02.updateTestFigure_111(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y])
+    }
+
+    // if(index === 3) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
+    // }
+
+    // if(index === 4) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
+    //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
+    // }
+}
 
 export {
     LargeArcFlagSetter

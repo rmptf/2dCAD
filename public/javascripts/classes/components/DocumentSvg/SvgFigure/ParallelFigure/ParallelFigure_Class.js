@@ -7,17 +7,35 @@ import {createParallelPathDatas, transformData} from './parallelFigure_functions
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
+import {TestFigure} from '../TestFigure/TestFigure_Class.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
 function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.SVGGROUPSDATA = {
-        SECONDARYNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
-        TESTINGNAMES: ["testingPathGROUP_001","testingEndPointGROUP_001"],
+        PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
     this.SvgFigure = svgFigure
 
+    this.testFigure_01 = new TestFigure(this.SvgFigure, this, "01", true)
+    this.testFigure_01.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_')
+    this.testFigure_01.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_')
+    this.testFigure_01.addPath('visualTest--path--largeArcFlag-IDTAG_')
+
+    this.testFigure_02 = new TestFigure(this.SvgFigure, this, "02", true)
+    this.testFigure_02.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_')
+    this.testFigure_02.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_')
+    this.testFigure_02.addPath('visualTest--path--largeArcFlag-IDTAG_')
+
+    this.testFigure_03 = new TestFigure(this.SvgFigure, this, "03", false)
+    this.testFigure_03.addPath('intArcTEST--path1--largeArcFlag-IDTAG_')
+    this.testFigure_03.addPath('intArcTEST--path2--largeArcFlag-IDTAG_')
+    this.testFigure_03.addPath('intArcTEST--path3--largeArcFlag-IDTAG_')
+
+    // self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path1--largeArcFlag-IDTAG_08')
+    // let path1 = d3.select("#intArcTEST--path1--largeArcFlag-IDTAG_08")
     
+
 
     // OLD NAMES
     // this.originalFigurePathDatas
@@ -36,8 +54,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 
     // Svg Elements
     this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements[3]
-    this.secondaryFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.SECONDARYNAMES)
-    // this.testFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.TESTINGNAMES)
+    this.secondaryFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.PARFIGUREGROUPNAMES)
     this.svgGroups = {
         secondarySvgGroupElements: this.secondaryFigureGroups,
     }
@@ -117,9 +134,9 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 // parPathObj,
 // skipperCheckers
 
-function createSecondaryGroups(thisClass, data) {
-    return data.map(className => {
-        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_svgElement')
+function createSecondaryGroups(thisClass, nameData) {
+    return nameData.map(className => {
+        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_figureElement')
         return newSecondaryGroup.newSvgGroup
     })
 }

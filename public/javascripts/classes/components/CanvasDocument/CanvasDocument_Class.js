@@ -88,7 +88,8 @@ CanvasDocument.prototype.f5 = function () {
     this.documentSvg.drawSavedFigure(4)
 }
 CanvasDocument.prototype.ctrlComma = function () {
-    // console.log("Ctrl+Comma_NEW")
+    console.log("Ctrl+Comma_NEW")
+    console.log("Click figure to star drawing parallel line.")
     this.activateDrawParallelPath()
 }
 // HOTKEY ACTIONS

@@ -111,6 +111,7 @@ CanvasDocument_PRE_OOP.prototype.f5 = function () {
 }
 CanvasDocument_PRE_OOP.prototype.ctrlComma = function () {
     // console.log("Ctrl+Comma_OLD")
+    console.log("Click figure to star drawing parallel line.")
     this.activateDrawParallelPath()
 }
 // HOTKEY ACTIONS
