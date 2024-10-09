@@ -18,20 +18,20 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.SvgFigure = svgFigure
 
     this.testFigure_01 = new TestFigure(this.SvgFigure, this, "01", true)
-    this.testFigure_01.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 1, circRad: 10, fillClr: 2})
-    this.testFigure_01.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 2, circRad: 10, fillClr: 2})
+    this.testFigure_01.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 1, circRad: 10, fillClr: 2}, 1)
+    this.testFigure_01.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 2, circRad: 10, fillClr: 2}, 2)
     this.testFigure_01.addLine('visualTest--path--largeArcFlag-IDTAG_', {palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
     this.testFigure_02 = new TestFigure(this.SvgFigure, this, "02", true)
-    this.testFigure_02.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 3, circRad: 10, fillClr: 2})
-    this.testFigure_02.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 4, circRad: 10, fillClr: 2})
+    this.testFigure_02.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.testFigure_02.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 4, circRad: 10, fillClr: 2}, 2)
     this.testFigure_02.addLine('visualTest--path--largeArcFlag-IDTAG_', {palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
     this.testFigure_03 = new TestFigure(this.SvgFigure, this, "03", true)
-    this.testFigure_03.addPath('intArcTEST--path1--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 1, dshArray: 'none'})
-    this.testFigure_03.addPath('intArcTEST--path2--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 1, strkClr: 1, dshArray: 'none'})
-    this.testFigure_03.addPath('intArcTEST--path3--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 2, dshArray: 'none'})
-    this.testFigure_03.addPath('intArcTEST--path4--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 3, strkClr: 2, dshArray: 'none'})
+    this.testFigure_03.addPath('intArcTEST--path1--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 1, dshArray: 'none'}, 1)
+    this.testFigure_03.addPath('intArcTEST--path2--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 1, strkClr: 1, dshArray: 'none'}, 2)
+    this.testFigure_03.addPath('intArcTEST--path3--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 2, dshArray: 'none'}, 3)
+    this.testFigure_03.addPath('intArcTEST--path4--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 3, strkClr: 2, dshArray: 'none'}, 4)
 
 
     // OLD NAMES

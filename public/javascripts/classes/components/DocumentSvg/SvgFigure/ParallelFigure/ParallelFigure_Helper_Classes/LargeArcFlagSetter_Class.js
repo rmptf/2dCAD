@@ -140,17 +140,22 @@ function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPoi
 
     if(index === 2) {
         // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
-        TESTFIGURE_03.updateTestFigure_333([prevTargetEndPoint, thisTargetEndPoint])
+        // TESTFIGURE_03.updateTestFigure_333([prevTargetEndPoint, thisTargetEndPoint])
+        // TESTFIGURE_03.updateTestFigure_functionBuilder_02([prevTargetEndPoint, thisTargetEndPoint])
+        TESTFIGURE_03.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
 
         // updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
         // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup, thisThing)
         // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgFigure)
-        TESTFIGURE_01.updateTestFigure_111([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y])
+        // TESTFIGURE_01.updateTestFigure_111([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y])
+        // TESTFIGURE_01.updateTestFigure_functionBuilder_01([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
+        TESTFIGURE_01.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
 
         // updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
         // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup, thisThing)
         // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgFigure)
-        TESTFIGURE_02.updateTestFigure_111(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y])
+        // TESTFIGURE_02.updateTestFigure_functionBuilder_01([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
+        TESTFIGURE_02.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
     }
 
     // if(index === 3) {
