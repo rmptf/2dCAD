@@ -113,16 +113,8 @@ TestFigure.prototype.addPath = function(elemId, visObj, counter) {
 
         // BUILD FUNCTION
         let movePathsFunction = function(pathData) {
-            let flag = []
-            if(counter === 1){
-                flag = [1,0]
-            } else if(counter === 2) {
-                flag = [1,1]
-            } else if(counter === 3) {
-                flag = [0,1]
-            } else if(counter === 4) {
-                flag = [0,0]
-            }
+            let flags = [[0, 0], [1, 0], [1, 1], [0, 1]]
+            let flag = flags[counter - 1]
 
             let pathData1 = makeDeepCopy(pathData)
             pathData1[1].arc.arcFlag = flag[0]

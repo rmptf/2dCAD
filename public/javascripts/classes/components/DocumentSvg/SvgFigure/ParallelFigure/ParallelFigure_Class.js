@@ -27,7 +27,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.testFigure_02.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 4, circRad: 10, fillClr: 2}, 2)
     this.testFigure_02.addLine('visualTest--path--largeArcFlag-IDTAG_', {palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.testFigure_03 = new TestFigure(this.SvgFigure, this, "03", true)
+    this.testFigure_03 = new TestFigure(this.SvgFigure, this, "03", false)
     this.testFigure_03.addPath('intArcTEST--path1--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 1, dshArray: 'none'}, 1)
     this.testFigure_03.addPath('intArcTEST--path2--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 1, strkClr: 1, dshArray: 'none'}, 2)
     this.testFigure_03.addPath('intArcTEST--path3--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 2, dshArray: 'none'}, 3)
@@ -43,7 +43,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 
     // Figure Data
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas)
+    this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
     this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
     // this.originalFigurePathDatas_copySecondary = copyPathDatas(this.originalFigurePathDatas)
@@ -205,6 +205,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
             for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
                 console.log("i: " + i)
+                console.log(thisFigure.parallelFigurePathDatas[i])
                 thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
                 thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
                 if(i < thisFigure.parallelFigurePathDatas.length) {
