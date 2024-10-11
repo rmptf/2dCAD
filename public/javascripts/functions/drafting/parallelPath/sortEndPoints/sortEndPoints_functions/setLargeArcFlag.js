@@ -26,6 +26,11 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
     console.log(index)
 
+    // // NEW WAY OF CHECKING FOR FILLERS 
+    // // - only tested for 1 & 2 fillers behind (for test figure drawing)
+    // let fillerCounter = originalFigurePathDatas_W_FILLERS.slice(0, index + 1).filter(x => x === 'filler').length
+
+
     // let prevTargetEndPoint = targetEndPoints[index - 1][1]
     let prevTargetEndPoint = targetEndPoints[index][0] //TODO: test that this works 100%
     let thisTargetEndPoint = targetEndPoints[index][1]

@@ -11,9 +11,9 @@ import {
     
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
     updateSVG_highlight_2_points_1_line_02_A,
-    updateSVG_highlight_2_points_1_line_02_A_NEW,
+    // updateSVG_highlight_2_points_1_line_02_A_NEW,
     updateSVG_highlight_2_points_1_line_02_B,
-    updateSVG_highlight_2_points_1_line_02_B_NEW,
+    // updateSVG_highlight_2_points_1_line_02_B_NEW,
 
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03,
     updateSVG_highlight_2_points_1_line_03_A,
@@ -73,9 +73,9 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
 
-            console.log(midPointBetweenInts)
-            console.log(thisTargetEndPoint.arc.center)
-            console.log(pooper1, pooper2)
+            // console.log(midPointBetweenInts)
+            // console.log(thisTargetEndPoint.arc.center)
+            // console.log(pooper1, pooper2)
 
             // FIXME: right here, checking if the following number carries all tht way through
 

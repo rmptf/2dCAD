@@ -20,10 +20,10 @@ function TestFigure(svgFigure, parFigure, id, doRun) {
         this.id = id
         this.svgFigure = svgFigure
         this.parallelFigure = parFigure
-        this.testFigureGroup = this.svgFigure.secondaryFigureGroups[4]
+        this.testFigureGroup = this.svgFigure.secondaryFigureGroups[3]
         this.testGroup = new SvgGroup(this.testFigureGroup, 'NEWTESTSUBGROUP_' + this.id, 'fakeId_group').newSvgGroup
         this.testRectGroup = new SvgGroup(this.testFigureGroup, 'NEWTESTSUBGROUP_' + this.id, 'fakeId_group').newSvgGroup
-        addRect(this.testRectGroup, this.testGroup, this.rectElements, this.functionHolder)
+        // addRect(this.testRectGroup, this.testGroup, this.rectElements, this.functionHolder)
     }
 }
 

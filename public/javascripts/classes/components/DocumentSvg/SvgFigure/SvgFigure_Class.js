@@ -11,7 +11,7 @@ function SvgFigure(DocSvg) {
     this.SVGGROUPSDATA = {
         PRIMARYGROUPNAME: "figureGROUP_001",
         //TODO: put in order and in an object (will affect other files)
-        SECONDARYGROUPNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "parallelFigureGROUP_001", "testElementsGROUP_001"],
+        SECONDARYGROUPNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "testElementsGROUP_001", "parallelFigureGROUP_001"],
     }
     this.DocumentSvg = DocSvg
     this.documentSvgD3 = DocSvg.D3Element

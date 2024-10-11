@@ -8,9 +8,7 @@ let updateSVG_highlight_2_points_1_line_01_A_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_01_B_switches = [1,0]
 let updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_02_A_switches = [1,0]
-let updateSVG_highlight_2_points_1_line_02_A_switches_02 = [1,0]
 let updateSVG_highlight_2_points_1_line_02_B_switches = [1,0]
-let updateSVG_highlight_2_points_1_line_02_B_switches_02 = [1,0]
 let updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_03_A_switches = [1,0]
 let updateSVG_highlight_2_points_1_line_03_B_switches = [1,0]
@@ -193,30 +191,6 @@ function updateSVG_highlight_2_points_1_line_02_A(coords1, coords2, self) {
     }
 }
 
-function updateSVG_highlight_2_points_1_line_02_A_NEW(coords1, coords2, elementGroup, thisThing) {
-    if(updateSVG_highlight_2_points_1_line_02_A_switches_02[0] === 1) {
-        if(updateSVG_highlight_2_points_1_line_02_A_switches_02[1] < 1) {
-            let poopAss =  new SvgGroup(elementGroup, "NEWTESTGROUP_ASS_01", 'fakeId_group').newSvgGroup
-            poopAss.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_06_B')
-            poopAss.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_06_B')
-            poopAss.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--1 testElem-stroke-color--2 testElem-dashArray--5').attr('id', 'visualTest--path--largeArcFlag-IDTAG_06_B')
-            updateSVG_highlight_2_points_1_line_02_A_switches_02[1] = 1
-            thisThing.ParFigure.testGroup1 = poopAss
-        }
-
-        // let point1 = d3.select("#visualTest--intersectPt1--largeArcFlag-IDTAG_06_B")
-        let point1 = thisThing.ParFigure.testGroup1.select('#visualTest--intersectPt1--largeArcFlag-IDTAG_06_B')
-        // let point2 = d3.select("#visualTest--intersectPt2--largeArcFlag-IDTAG_06_B")
-        let point2 = thisThing.ParFigure.testGroup1.select("#visualTest--intersectPt2--largeArcFlag-IDTAG_06_B")
-        // let path = d3.select("#visualTest--path--largeArcFlag-IDTAG_06_B")
-        let path = thisThing.ParFigure.testGroup1.select("#visualTest--path--largeArcFlag-IDTAG_06_B")
-
-        point1.attr('cx', coords1[0]).attr('cy', coords1[1])
-        point2.attr('cx', coords2[0]).attr('cy', coords2[1])
-        path.attr("x1", coords1[0]).attr("y1", coords1[1]).attr("x2", coords2[0]).attr("y2", coords2[1])
-    }
-}
-
 
 function updateSVG_highlight_2_points_1_line_02_B(coords1, coords2, self) {
     if(updateSVG_highlight_2_points_1_line_02_B_switches[0] === 1) {
@@ -230,31 +204,6 @@ function updateSVG_highlight_2_points_1_line_02_B(coords1, coords2, self) {
         let point1 = d3.select("#visualTest--intersectPt1--largeArcFlag-IDTAG_07")
         let point2 = d3.select("#visualTest--intersectPt2--largeArcFlag-IDTAG_07")
         let path = d3.select("#visualTest--path--largeArcFlag-IDTAG_07")
-
-        point1.attr('cx', coords1[0]).attr('cy', coords1[1])
-        point2.attr('cx', coords2[0]).attr('cy', coords2[1])
-        path.attr("x1", coords1[0]).attr("y1", coords1[1]).attr("x2", coords2[0]).attr("y2", coords2[1])
-    }
-}
-
-function updateSVG_highlight_2_points_1_line_02_B_NEW(coords1, coords2, elementGroup, thisThing) {
-    if(updateSVG_highlight_2_points_1_line_02_B_switches_02[0] === 1) {
-        if(updateSVG_highlight_2_points_1_line_02_B_switches_02[1] < 1) {
-
-            let poopAss =  new SvgGroup(elementGroup, "NEWTESTGROUP_ASS_02", 'fakeId_group').newSvgGroup
-            poopAss.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_07_B')
-            poopAss.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--10 testElem-fill-color--2').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_07_B')
-            poopAss.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--1 testElem-stroke-color--2 testElem-dashArray--5').attr('id', 'visualTest--path--largeArcFlag-IDTAG_07_B')
-            updateSVG_highlight_2_points_1_line_02_B_switches_02[1] = 1
-            thisThing.ParFigure.testGroup2 = poopAss
-        }
-        
-        // let point1 = d3.select("#visualTest--intersectPt1--largeArcFlag-IDTAG_07_B")
-        let point1 = thisThing.ParFigure.testGroup2.select('#visualTest--intersectPt1--largeArcFlag-IDTAG_07_B')
-        // let point2 = d3.select("#visualTest--intersectPt2--largeArcFlag-IDTAG_07_B")
-        let point2 = thisThing.ParFigure.testGroup2.select("#visualTest--intersectPt2--largeArcFlag-IDTAG_07_B")
-        // let path = d3.select("#visualTest--path--largeArcFlag-IDTAG_07_B")
-        let path = thisThing.ParFigure.testGroup2.select("#visualTest--path--largeArcFlag-IDTAG_07_B")
 
         point1.attr('cx', coords1[0]).attr('cy', coords1[1])
         point2.attr('cx', coords2[0]).attr('cy', coords2[1])
@@ -301,45 +250,6 @@ function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02(pathDa
         path4.attr('d', describeComplexPath([pathData4[0], pathData4[1]]))
     }
 }
-
-// function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02(pathData, self) {
-//     if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02_switches[0] === 1) {
-//         if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02_switches[1] < 1) {
-//             self.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path1--largeArcFlag-IDTAG_08')
-//             self.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path2--largeArcFlag-IDTAG_08')
-//             self.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--2 testElem-dashArray--none').attr('id', 'intArcTEST--path3--largeArcFlag-IDTAG_08')
-//             self.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--3 testElem-stroke-color--2 testElem-dashArray--none').attr('id', 'intArcTEST--path4--largeArcFlag-IDTAG_08')
-//             updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02_switches[1] = 1
-//         }
-
-//         // GREEN
-//         let pathData1 = makeDeepCopy(pathData)
-//         pathData1[1].arc.arcFlag = 1
-//         pathData1[1].arc.sweepFlag = 0
-//         // PINK
-//         let pathData2 = makeDeepCopy(pathData)
-//         pathData2[1].arc.arcFlag = 1
-//         pathData2[1].arc.sweepFlag = 1
-//         // NAVY
-//         let pathData3 = makeDeepCopy(pathData)
-//         pathData3[1].arc.arcFlag = 0
-//         pathData3[1].arc.sweepFlag = 1
-//         // 
-//         let pathData4 = makeDeepCopy(pathData)
-//         pathData4[1].arc.arcFlag = 0
-//         pathData4[1].arc.sweepFlag = 0
-
-//         let path1 = d3.select("#intArcTEST--path1--largeArcFlag-IDTAG_08")
-//         let path2 = d3.select("#intArcTEST--path2--largeArcFlag-IDTAG_08")
-//         let path3 = d3.select("#intArcTEST--path3--largeArcFlag-IDTAG_08")
-//         let path4 = d3.select("#intArcTEST--path4--largeArcFlag-IDTAG_08")
-
-//         path1.attr('d', describeComplexPath([pathData1[0], pathData1[1]]))
-//         path2.attr('d', describeComplexPath([pathData2[0], pathData2[1]]))
-//         path3.attr('d', describeComplexPath([pathData3[0], pathData3[1]]))
-//         path4.attr('d', describeComplexPath([pathData4[0], pathData4[1]]))
-//     }
-// }
 
 
 
@@ -563,9 +473,7 @@ export {
     updateSVG_highlight_2_points_1_line_01_B,
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01,
     updateSVG_highlight_2_points_1_line_02_A,
-    updateSVG_highlight_2_points_1_line_02_A_NEW,
     updateSVG_highlight_2_points_1_line_02_B,
-    updateSVG_highlight_2_points_1_line_02_B_NEW,
     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
     updateSVG_highlight_2_points_1_line_03_A,
     updateSVG_highlight_2_points_1_line_03_B,

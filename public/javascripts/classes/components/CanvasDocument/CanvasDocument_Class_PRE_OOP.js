@@ -234,7 +234,8 @@ CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
 }
 
 function changeActiveStatus(element) {
-    let activeClass = "a-document__container--active"
+    // let activeClass = "a-document__container--active"
+    let activeClass = "a-document__container--active--PRE-OOP"
     document.querySelectorAll(".a-document__container").forEach(container => {
         container.classList.remove(activeClass)
     })
@@ -242,7 +243,8 @@ function changeActiveStatus(element) {
 }
 
 function selectSvgDocument(thisCanvasDoc) {
-    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
+    // if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
+    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active--PRE-OOP")) {
         console.log("Activating.")
         deactivateAllActionsOnPreviouslyActiveCanvDoc() //TODO: Will eventually need to build new way to handle if previously Active canvDoc had an active action
         // // finish draw path on previously active svgElement if drawPath was active
