@@ -1,5 +1,6 @@
 import {LargeArcFlagSetter} from './LargeArcFlagSetter_Class.js'
-import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
+// import {Intersection_Contact} from './Intersection_Helper_Classes/intersection_Contact_Class.js'
+import {Intersection_Contact} from './Intersection_Helper_Classes/Intersection_Contact_Class.js'
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
@@ -305,9 +306,11 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     this.ParFigure.parallelFigureObject.arcToArcCounter += 1
     setArcRadius(this.ParFigure, 1, "arcRad_4J") // TODO: (Set_arcRad)
     handleArcToArcIntersectionNoContact(this.ParFigure, -1)
+    console.log(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST)
     this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST = 0
+    console.log(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST)
     this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
-    this.ParFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = true
+    this.ParFigure.parallelFigureObject.setPrevArcFlag_atFinal_from3Joiner = true
 }
 //old
 // function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj, arcRadiusObject) {
@@ -527,6 +530,52 @@ function handleLargeArcFlag(parFigure, flag) {
 }
 
 
+
+
+
+
+// targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
+// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
+// refEndPointsBase         ===         basePathDatasCopy                               ===         originalFigurePathDatas_copy
+
+    // OLD NAMES ORDER PASSED
+    // parallelPathDatas_globalRef,
+    // parallelPathDatasCopyForPerpendicular,
+    // basePathDatasCopy,
+    // originalFigure_counter_groupCount_GLOBAL,
+    // self,
+    // i,
+    // parallelPathObject,
+    // skipperCheckers
+
+    // OLD NAMES with new anmes ORDER RECIEVED
+    // targetEndPoints,
+    // refEndPointsPerp,
+    // refEndPointsBase,
+    // documentFigureCount,
+    // self,
+    // index,
+    // parallelPathObject,
+    // skipperCheckers
+
+    // OLD NAMES
+    // this.originalFigurePathDatas
+    // this.basePathDatasCopy
+    // this.parallelPathDatas_globalRef
+    // this.parallelPathDatasCopyForPerpendicular
+
+    //NEW NAMES
+    // // Figure Data
+    // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
+    // this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
+    // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
+    // this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+
+
+
+
+
+
 // [[{"coords":{"x":51.00000762939453,"y":276.2480239868164},"arc":{"exist":false,"radius":null,"rotation":null,"arcFlag":null,"sweepFlag":null,"center":{"x":null,"y":null},"startAngle":null,"joiner":null}},{"coords":{"x":199.75,"y":39.75000762939453},"arc":{"exist":true,"radius":201.0372976484869,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"east","center":{"x":247.75435800744887,"y":234.97187284458758},"startAngle":1.5364700287506718,"joiner":false}},{"coords":{"x":432.25,"y":182.50001525878906},"arc":{"exist":true,"radius":191.70357298599427,"rotation":0,"arcFlag":0,"sweepFlag":1,"side":"west","center":{"x":245.5256200295604,"y":225.90814606686857},"startAngle":1.583494467859758,"joiner":false}},{"coords":{"x":188.5,"y":243.5},"arc":{"exist":true,"radius":139.42339620693753,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"east","center":{"x":325.0522651948479,"y":271.6489303532587},"startAngle":2.244567418116927,"joiner":false}},{"coords":{"x":373.5,"y":467.5000305175781},"arc":{"exist":true,"radius":186.38575540194665,"rotation":0,"arcFlag":0,"sweepFlag":0,"side":"west","center":{"x":371.047533574729,"y":281.1304106081433},"startAngle":1.7872474215382959,"joiner":false}}]]
 
 
@@ -648,10 +697,10 @@ function setPerpendicularPoints(parFigure, indicators, setPrevious) { // change 
 //new
 // function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, offset) {
 function skipFillersAndSetParallelProjections(parFigure, offset) {
-    let parallelPathDatas = parFigure.parallelFigurePathDatas
+    // let parallelPathDatas = parFigure.parallelFigurePathDatas //use orig
     let originalFigurePathDatas = parFigure.originalFigurePathDatas_copy
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
-    let parFigObj = parFigure.parallelFigureObject
+    // let parFigObj = parFigure.parallelFigureObject //use orig
 
     let fillerAdder = 0
     let nextFillerAdder = 0
@@ -664,17 +713,24 @@ function skipFillersAndSetParallelProjections(parFigure, offset) {
     let thisPathDataOutside = originalFigurePathDatas[index + offset + fillerAdder]
     let nextPathDataOutside = originalFigurePathDatas[index + 2 + nextFillerAdder]
 
-    let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parFigObj.parallelDistance)
+    // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parFigObj.parallelDistance) //use orig
+    let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, parFigure.parallelFigureObject.parallelDistance)//use orig
+    
 
-    parallelPathDatas[index + 1][0].coords.x = parallelProjections.thisPointX
-    parallelPathDatas[index + 1][0].coords.y = parallelProjections.thisPointY
-    parallelPathDatas[index + 1][1].coords.x = parallelProjections.nextPointX
-    parallelPathDatas[index + 1][1].coords.y = parallelProjections.nextPointY
+    // parallelPathDatas[index + 1][0].coords.x = parallelProjections.thisPointX //use orig
+    // parallelPathDatas[index + 1][0].coords.y = parallelProjections.thisPointY
+    // parallelPathDatas[index + 1][1].coords.x = parallelProjections.nextPointX
+    // parallelPathDatas[index + 1][1].coords.y = parallelProjections.nextPointY
+    parFigure.parallelFigurePathDatas[index + 1][0].coords.x = parallelProjections.thisPointX //use orig
+    parFigure.parallelFigurePathDatas[index + 1][0].coords.y = parallelProjections.thisPointY
+    parFigure.parallelFigurePathDatas[index + 1][1].coords.x = parallelProjections.nextPointX
+    parFigure.parallelFigurePathDatas[index + 1][1].coords.y = parallelProjections.nextPointY
 
     // console.log("run function: handleArcToPathIntersection() (Shape 2: Part 2)")
 
     // parPathObj.arcToPathCounter += 1
-    parFigObj.arcToPathCounter += 1
+    // parFigObj.arcToPathCounter += 1 //use orig
+    parFigure.parallelFigureObject.arcToPathCounter += 1 //use orig
 }
 
 

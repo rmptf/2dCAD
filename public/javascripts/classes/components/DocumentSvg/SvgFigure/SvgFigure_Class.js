@@ -9,9 +9,9 @@ import {ParallelFigure} from './ParallelFigure/ParallelFigure_Class.js'
 // function SvgFigure(documentSvgD3, actionStates, docSvgGroup) {
 function SvgFigure(DocSvg) {
     this.SVGGROUPSDATA = {
-        PRIMARYGROUPNAME: "figureGROUP_001",
+        PRIMARYGROUPNAME: {className: "figureGROUP_001", id: "figure_groupId"},
         //TODO: put in order and in an object (will affect other files)
-        SECONDARYGROUPNAMES: ["mainPathGROUP_001", "secondaryPathGROUP_001","endPointGROUP_001", "testElementsGROUP_001", "parallelFigureGROUP_001"],
+        SECONDARYGROUPNAMES: [{className: "mainPathGROUP_001", id: "mainPath_groupId"}, {className: "secondaryPathGROUP_001", id: "secondaryPath_groupId"}, {className: "endPointGROUP_001", id: "endPoint_groupId"}, {className: "testElementsGROUP_001", id: "testElement_groupId"}, {className:  "parallelFigureGROUP_001", id: "parallelFigure_groupId"}],
     }
     this.DocumentSvg = DocSvg
     this.documentSvgD3 = DocSvg.D3Element
@@ -24,7 +24,7 @@ function SvgFigure(DocSvg) {
     // Figure Data
 
     // Svg Elements
-    this.primaryFigureGroup =  new SvgGroup(this.docSvgGroup.newSvgGroup, this.SVGGROUPSDATA.PRIMARYGROUPNAME, 'fakeId_figure').newSvgGroup
+    this.primaryFigureGroup =  new SvgGroup(this.docSvgGroup.newSvgGroup, this.SVGGROUPSDATA.PRIMARYGROUPNAME.className, this.SVGGROUPSDATA.PRIMARYGROUPNAME.id).newSvgGroup
     this.secondaryFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.SECONDARYGROUPNAMES)
     this.svgGroups = {
         primarySvgGroupElement: this.primaryFigureGroup,
@@ -43,8 +43,8 @@ function SvgFigure(DocSvg) {
 
 
 function createSecondaryGroups(thisClass, nameData) {
-    return nameData.map(className => {
-        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, className, 'fakeId_figureElement')
+    return nameData.map(data => {
+        let newSecondaryGroup = new SvgGroup(thisClass.primaryFigureGroup, data.className, data.id)
         return newSecondaryGroup.newSvgGroup
     })
 }

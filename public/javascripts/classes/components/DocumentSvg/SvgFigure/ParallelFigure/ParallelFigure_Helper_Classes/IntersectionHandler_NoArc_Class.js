@@ -73,8 +73,11 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_firstPos_nextIndexIsArc = 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment = function() {
     // C
     console.log("C_ooo")
+    
     // calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
-    calculateAndSetIntersectionPoints(this.ParFigure, [-1, false], [0, false])
+    // calculateAndSetIntersectionPoints(this.ParFigure, [-1, false], [0, false])
+    let index = this.ParFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
+    calculateAndSetIntersectionPoints(this.ParFigure, index, [this.ParFigure.parallelFigurePathDatas_transformed[index-1], false], [this.ParFigure.parallelFigurePathDatas_transformed[index], false])
 }
 //old
 // function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
@@ -87,7 +90,10 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // D
     console.log("D_ooo")
-    calculateAndSetIntersectionPoints(this.ParFigure, [-1, true], [0, false])
+    // calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+    // calculateAndSetIntersectionPoints(this.ParFigure, [-1, true], [0, false])
+    let index = this.ParFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
+    calculateAndSetIntersectionPoints(this.ParFigure, index, [this.ParFigure.parallelFigurePathDatas[index-1], true], [this.ParFigure.parallelFigurePathDatas_transformed[index], false])
 }
 //old
 // function noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
@@ -139,7 +145,10 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment = function() {
     // H
     console.log("H_ooo")
-    calculateAndSetIntersectionPoints(this.ParFigure, [-1, false], [0, false])
+    // calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
+    // calculateAndSetIntersectionPoints(this.ParFigure, [-1, false], [0, false])
+    let index = this.ParFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
+    calculateAndSetIntersectionPoints(this.ParFigure, index, [this.ParFigure.parallelFigurePathDatas_transformed[index-1], false], [this.ParFigure.parallelFigurePathDatas_transformed[index], false])
 }
 //old
 // function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp) {
@@ -152,7 +161,10 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // J
     console.log("J_ooo")
-    calculateAndSetIntersectionPoints(this.ParFigure, [-1, true], [0, false])
+    // calculateAndSetIntersectionPoints(targetEndPoints, index, [targetEndPoints[index - 1], true], [refEndPointsPerp[index], false])
+    // calculateAndSetIntersectionPoints(this.ParFigure, [-1, true], [0, false])
+    let index = this.ParFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
+    calculateAndSetIntersectionPoints(this.ParFigure, index, [this.ParFigure.parallelFigurePathDatas[index-1], true], [this.ParFigure.parallelFigurePathDatas_transformed[index], false])
 }
 //old
 // function noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp) {
@@ -227,17 +239,60 @@ function calculateAndSetParallelProjectionPoints(parFigure) {
 //     refEndPointsPerp[index][1].y = parallelProjections.nextPointY
 // }
 
+
+
+
+
+
+
+
+
+    // targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
+    // refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
+
+    // OLD NAMES ORDER PASSED
+    // parallelPathDatas_globalRef,
+    // parallelPathDatasCopyForPerpendicular,
+    // basePathDatasCopy,
+    // originalFigure_counter_groupCount_GLOBAL,
+    // self,
+    // i,
+    // parallelPathObject,
+    // skipperCheckers
+
+    // OLD NAMES with new anmes ORDER RECIEVED
+    // targetEndPoints,
+    // refEndPointsPerp,
+    // refEndPointsBase,
+    // documentFigureCount,
+    // self,
+    // index,
+    // parallelPathObject,
+    // skipperCheckers
+
+    // OLD NAMES
+    // this.originalFigurePathDatas
+    // this.basePathDatasCopy
+    // this.parallelPathDatas_globalRef
+    // this.parallelPathDatasCopyForPerpendicular
+
+    //NEW NAMES
+    // // Figure Data
+    // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
+    // this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
+    // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
+    // this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+
+
+
+
+
 // C, D, H, J
 //new
-function calculateAndSetIntersectionPoints(parFigure, flag1, flag2) {
-
-    // calculateAndSetIntersectionPoints(targetEndPoints, index, [refEndPointsPerp[index - 1], false], [refEndPointsPerp[index], false])
-
+function calculateAndSetIntersectionPoints(parFigure, index, data1, data2) {
     let targetData = parFigure.parallelFigurePathDatas
-    let index = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
-    let parallelEndPointsI = [parFigure.parallelFigurePathDatas_transformed[index + flag1[0]], flag1[1]]
-    let parallelEndPointsII = [parFigure.parallelFigurePathDatas_transformed[index + flag2[0]], flag2[1]]
-
+    let parallelEndPointsI = [data1[0], data1[1]]
+    let parallelEndPointsII = [data2[0], data2[1]]
     let intersectionPoint =  findIntersectingPointTwoFormats(parallelEndPointsI, parallelEndPointsII)
     // findIntersectingPointTwoFormats
     targetData[index - 1][1].coords.x = intersectionPoint.x

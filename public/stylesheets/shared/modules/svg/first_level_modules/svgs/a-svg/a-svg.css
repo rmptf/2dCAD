@@ -175,11 +175,23 @@ svg{
     .testElem-dashArray--none{
       stroke-dasharray: none;
     }
+    .testElem-dashArray--1{
+      stroke-dasharray: 1 2;
+    }
+    .testElem-dashArray--2{
+      stroke-dasharray: 2 2;
+    }
+    .testElem-dashArray--3{
+      stroke-dasharray: 3 2;
+    }
+    .testElem-dashArray--4{
+      stroke-dasharray: 4 2;
+    }
     .testElem-dashArray--5{
-      stroke-dasharray: 5;
+      stroke-dasharray: 5 2;
     }
     .testElem-dashArray--10{
-      stroke-dasharray: 10;
+      stroke-dasharray: 10 2;
     }
   /* dashArray */
 

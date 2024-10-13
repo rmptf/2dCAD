@@ -4,22 +4,15 @@ import {describeComplexPath} from '../../../../../functions/math/svgElementCalcu
 import {makeDeepCopy} from '../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js'
 import {SvgGroup} from '../SvgElement/SvgGroup/SvgGroup_Class.js'
 
-function TestFigure(svgFigure, parFigure, id, doRun) {
-    // updateSVG_highlight_2_points_1_line_02_B_NEW
+// function TestFigure(svgFigure, parFigure, id, doRun) {
+function TestFigure(parFigure, doRun) {
     this.doRun = doRun
     this.testGroup = null
-
-    // this.circleElements = []
-    // this.lineElements = []
-    // this.pathElements = []
-    // this.rectElements = []
-
     this.functionHolder = []
 
     if(this.doRun){
-        this.id = id
-        this.svgFigure = svgFigure
         this.parallelFigure = parFigure
+        this.svgFigure = parFigure.SvgFigure
         this.testFigureGroup = this.svgFigure.secondaryFigureGroups[3]
         this.testGroup = new SvgGroup(this.testFigureGroup, 'NEWTESTSUBGROUP_' + this.id, 'fakeId_group').newSvgGroup
         this.testRectGroup = new SvgGroup(this.testFigureGroup, 'NEWTESTSUBGROUP_' + this.id, 'fakeId_group').newSvgGroup
@@ -53,9 +46,6 @@ function addRect(rectGroup, figureGroup, rectElements, funcHolder) {
         }
     })
 
-    // rectElements.push(rect)
-
-
     // BUILD FUNCTION
     let moveRectFunction = function() {
         let bbox = figureGroup.node().getBBox()
@@ -65,13 +55,12 @@ function addRect(rectGroup, figureGroup, rectElements, funcHolder) {
     // BUILD FUNCTION
 }
 
-TestFigure.prototype.addCircle = function(elemId, visObj, counter) {
+// TestFigure.prototype.addCircle = function(elemId, visObj, counter) {
+TestFigure.prototype.addCircle = function(visObj, counter) {
     if(this.doRun) {
         let newCircle = this.testGroup.append('circle')
         .attr('class','testElement-endpoint testElement-palette--'+[visObj.palette]+' testElem-radius--'+[visObj.circRad]+' testElem-fill-color--'+[visObj.fillClr]+'')
-        .attr('id', elemId + this.id)
-
-        // this.circleElements.push(newCircle)
+        // .attr('id', elemId + this.id)
 
         // BUILD FUNCTION
         let moveCircleFunction = function(coords1, coords2) {
@@ -86,13 +75,12 @@ TestFigure.prototype.addCircle = function(elemId, visObj, counter) {
     }
 }
 
-TestFigure.prototype.addLine = function(elemId, visObj) {
+// TestFigure.prototype.addLine = function(elemId, visObj) {
+TestFigure.prototype.addLine = function(visObj) {
     if(this.doRun) {
         let newLine = this.testGroup.append('line')
         .attr('class', 'testElement-path testElement-palette--'+[visObj.palette]+' testElem-strokeWidth--'+[visObj.strkWdth]+' testElem-stroke-color--'+[visObj.strkClr]+' testElem-dashArray--'+[visObj.dshArray]+'')
-        .attr('id', elemId + this.id)
-
-        // this.lineElements.push(newLine)
+        // .attr('id', elemId + this.id)
 
         // BUILD FUNCTION
         let moveLineFunction = function(coords1, coords2) {
@@ -103,17 +91,16 @@ TestFigure.prototype.addLine = function(elemId, visObj) {
     }
 }
 
-TestFigure.prototype.addPath = function(elemId, visObj, counter) {
+// TestFigure.prototype.addPath = function(elemId, visObj, counter) {
+TestFigure.prototype.addPath = function(visObj, counter) {
     if(this.doRun) {
         let newPath = this.testGroup.append('path')
         .attr('class', 'testElement-path testElement-palette--'+[visObj.palette]+' testElem-strokeWidth--'+[visObj.strkWdth]+' testElem-stroke-color--'+[visObj.strkClr]+' testElem-dashArray--'+[visObj.dshArray]+'')
-        .attr('id', elemId + this.id)
-
-        // this.pathElements.push(newPath)
+        // .attr('id', elemId + this.id)
 
         // BUILD FUNCTION
         let movePathsFunction = function(pathData) {
-            let flags = [[0, 0], [1, 0], [1, 1], [0, 1]]
+            let flags = [[1, 0], [1, 1], [0, 1], [0, 0]]
             let flag = flags[counter - 1]
 
             let pathData1 = makeDeepCopy(pathData)

@@ -17,21 +17,37 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     }
     this.SvgFigure = svgFigure
 
-    this.testFigure_01 = new TestFigure(this.SvgFigure, this, "01", true)
-    this.testFigure_01.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 1, circRad: 10, fillClr: 2}, 1)
-    this.testFigure_01.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 1, circRad: 10, fillClr: 2}, 2)
-    this.testFigure_01.addLine('visualTest--path--largeArcFlag-IDTAG_', {palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
+    this.testFigure_01 = new TestFigure(this, false)
+    this.testFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    this.testFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
+    this.testFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.testFigure_02 = new TestFigure(this.SvgFigure, this, "02", true)
-    this.testFigure_02.addCircle('visualTest--intersectPt1--largeArcFlag-IDTAG_', {palette: 2, circRad: 5, fillClr: 2}, 1)
-    this.testFigure_02.addCircle('visualTest--intersectPt2--largeArcFlag-IDTAG_', {palette: 2, circRad: 5, fillClr: 2}, 2)
-    this.testFigure_02.addLine('visualTest--path--largeArcFlag-IDTAG_', {palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
+    this.testFigure_02 = new TestFigure(this, false)
+    this.testFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
+    this.testFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
+    this.testFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
 
-    this.testFigure_03 = new TestFigure(this.SvgFigure, this, "03", true)
-    this.testFigure_03.addPath('intArcTEST--path1--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 10, strkClr: 1, dshArray: 'none'}, 1)
-    this.testFigure_03.addPath('intArcTEST--path2--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 1, strkClr: 1, dshArray: 5}, 2)
-    this.testFigure_03.addPath('intArcTEST--path3--largeArcFlag-IDTAG_', {palette: 2, strkWdth: 1, strkClr: 2, dshArray: 5}, 3)
-    this.testFigure_03.addPath('intArcTEST--path4--largeArcFlag-IDTAG_', {palette: 1, strkWdth: 2, strkClr: 2, dshArray: 'none'}, 4)
+    this.testFigure_03 = new TestFigure(this, false)
+    this.testFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.testFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.testFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.testFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+
+    this.testFigure_04 = new TestFigure(this, false)
+    this.testFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.testFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
+    this.testFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
+
+    this.testFigure_05 = new TestFigure(this, false)
+    this.testFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
+    this.testFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
+    this.testFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
+
+    this.testFigure_06 = new TestFigure(this, false)
+    this.testFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.testFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.testFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.testFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 
 
     // OLD NAMES
@@ -50,7 +66,12 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     // Figure Data
 
     // Svg Elements
-    this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements[3]
+    this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements[4]
+    // this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements.querySelector('#parallelFigure_groupId')
+    // secondaryPath_groupId
+    // this.canvasDocActionBar01_btn01_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[0][0])
+
+
     this.secondaryFigureGroups = createSecondaryGroups(this, this.SVGGROUPSDATA.PARFIGUREGROUPNAMES)
     this.svgGroups = {
         secondarySvgGroupElements: this.secondaryFigureGroups,

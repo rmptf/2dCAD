@@ -30,6 +30,9 @@ function LargeArcFlagSetter(parallelFigure) {
     this.testFigure01 = this.ParFigure.testFigure_01
     this.testFigure02 = this.ParFigure.testFigure_02
     this.testFigure03 = this.ParFigure.testFigure_03
+    this.testFigure04 = this.ParFigure.testFigure_04
+    this.testFigure05 = this.ParFigure.testFigure_05
+    this.testFigure06 = this.ParFigure.testFigure_06
     this.svgTestElementsGroup = this.ParFigure.SvgFigure.svgGroups.secondarySvgGroupElements[4]
     this.svgFigure = this.ParFigure.SvgFigure
 
@@ -50,6 +53,12 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
     let targetIntersectionPoints = parFigure.parallelFigurePathDatas
     let parFigureObj = parFigure.parallelFigureObject
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
+
+    console.log("poooooper")
+    console.log(index)
+    // console.log(refEndPointsBase)
+
+    
     // NEW WAY OF CHECKING FOR FILLERS
     // - only tested for 1 & 2 fillers behind (for test figure drawing)
     let fillerCounter = originalFigurePathDatas_W_FILLERS.slice(0, index + 1).filter(x => x === 'filler').length
@@ -68,6 +77,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
     if(runOrNot === true) {
         console.log("FLIPPER__set")
         console.log(index)
+        console.log(indexModifier)
 
         if(parFigureObj.iterationCounter === 1) {
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
@@ -100,13 +110,22 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
 
         // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts)
         // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.svgTestElementsGroup)
-        updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.testFigure01, this.testFigure02, this.testFigure03)
+        updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.testFigure01, this.testFigure02, this.testFigure03, this.testFigure04, this.testFigure05, this.testFigure06)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)
     }
     console.log(" ")
 }
+
+// clothes
+// bottles
+// breast pump
+
+// outside
+// formula
+// downstairs packages
+
 
 function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let x1 = movingPoint[0]
@@ -117,8 +136,17 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
+    // if(parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
     if(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         console.log("AAAAA_CROSSED")
+        console.log(parFigureObj.arrayOfArcFlagsInitPos)
+        console.log(parFigureObj.counterOfArcsAsTheyArrive)
+        console.log(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2, "1_a")
+        console.log(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2, "2_a")
+        console.log(currentPos_x1GreaterThanX2, "1_b")
+        console.log(currentPos_Y1GreaterThanY2, "2_b")
+
+
         flipFlag = true
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
@@ -130,11 +158,16 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
 }
 
 // function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, svgGroup) {
-function updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, TESTFIGURE_01, TESTFIGURE_02, TESTFIGURE_03) {
-    if(index === 3 + fillerCounter) {
+function updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, TESTFIGURE_01, TESTFIGURE_02, TESTFIGURE_03, TESTFIGURE_04, TESTFIGURE_05, TESTFIGURE_06) {
+    if(index === 2 + fillerCounter) {
         TESTFIGURE_01.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
         TESTFIGURE_02.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
         TESTFIGURE_03.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
+    }
+    if(index === 3 + fillerCounter) {
+        TESTFIGURE_04.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
+        TESTFIGURE_05.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
+        TESTFIGURE_06.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
     }
     // if(index === 1) {
     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], svgGroup)

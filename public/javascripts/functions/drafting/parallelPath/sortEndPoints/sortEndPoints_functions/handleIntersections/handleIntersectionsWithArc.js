@@ -17,7 +17,7 @@ function arcIntersection_allArcSegments_everyIndex_firstAction(targetEndPoints, 
 function arcIntersection_allArcSegments_everyIndex_lastAction(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, self) {
     // Final
     console.log("FINAL_all")
-    handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
+    handleLargeArcFlag(parPathObj, targetEndPoints, refEndPointsBase, index, self, thisConnection, "arcFlag_finalAll") // TODO: (Set_largeArcFag)
 }
 // done
 function arcIntersection_firstArcSegment_everyIndex_firstAction(parPathObj) {
@@ -110,7 +110,7 @@ function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc(targetE
     console.log("2_A_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
     setArcRadius(targetEndPoints, refEndPointsBase, index, parPathObj, arcRadiusObject, "arcRad_2AJ") // TODO: (Set_arcRad)
-    handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_2AJ") // TODO: (Set_largeArcFag)
+    handleLargeArcFlag(parPathObj, targetEndPoints, refEndPointsBase, index, self, thisConnection, "arcFlag_2AJ") // TODO: (Set_largeArcFag)
 }
 // done
 function disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index, parPathObj) {
@@ -126,7 +126,9 @@ function disconnectedArcIntersection_thisIndexIsArcToArc(targetEndPoints, refEnd
     parPathObj.arcToArcCounter += 1
     setArcRadius(targetEndPoints, refEndPointsBase, index + 1, parPathObj, arcRadiusObject, "arcRad_4J") // TODO: (Set_arcRad)
     handleArcToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index-1)
+    console.log(parPathObj.parallelPathSegmentCounter_FIRST)
     parPathObj.parallelPathSegmentCounter_FIRST = 0
+    console.log(parPathObj.parallelPathSegmentCounter_FIRST)
     parPathObj.setThisArcFlag_at4Joiner_from3Joiner = true // TODO: (Set_largeArcFag)
     parPathObj.setPrevArcFlag_atFinal_from3Joiner = true // TODO: (Set_largeArcFag)
 }
@@ -136,7 +138,7 @@ function disconnectedArcIntersection_prevIndexIsArcToArc(targetEndPoints, refEnd
     // 4_Joiner
     console.log("4_Joiner_ooo")
     parPathObj.parallelPathSegmentCounter_FIRST = 0
-    handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, "arcFlag_4J") // TODO: (Set_largeArcFag)
+    handleLargeArcFlag(parPathObj, targetEndPoints, refEndPointsBase, index, self, thisConnection, "arcFlag_4J") // TODO: (Set_largeArcFag)
 
 }
 // done
@@ -159,28 +161,28 @@ function disconnectedArcIntersection_skipThisIndex(parPathObj) {
 
 
 
-function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnection, flag) {
+function handleLargeArcFlag(parPathObj, targetEndPoints, refEndPointsBase, index, self, thisConnection, flag) {
     if(flag === "arcFlag_finalAll") {
         if(parPathObj.setThisArcFlag_atFinal_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, false)
             parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
             parPathObj.setThisArcFlag_atFinal_from1Joiner = false
         }
 
         if(parPathObj.setPrevArcFlag_atFinal_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
-            setLargeArcFlag(targetEndPoints, parPathObj, index - 1, self, false)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index - 1, self, false)
             parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
             parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
 
         if(thisConnection.connected === true) {
             console.log("CONNECTED")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, true)
         } else {
             console.log("NOT_CONNECTED")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, false)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, false)
             thisConnection.connected = true
         }
     }
@@ -188,7 +190,7 @@ function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnec
     if(flag === "arcFlag_2AJ") {
         if(parPathObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_2j")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, true)
             parPathObj.setThisArcFlag_at2Joiner_from1Joiner = false
             parPathObj.setThisArcFlag_atFinal_from1Joiner = false
         }
@@ -197,7 +199,7 @@ function handleLargeArcFlag(parPathObj, targetEndPoints, index, self, thisConnec
     if(flag === "arcFlag_4J") {
         if(parPathObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_4j")
-            setLargeArcFlag(targetEndPoints, parPathObj, index, self, true)
+            setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, true)
             parPathObj.setThisArcFlag_at4Joiner_from3Joiner = false
             parPathObj.setPrevArcFlag_atFinal_from3Joiner = false
         }

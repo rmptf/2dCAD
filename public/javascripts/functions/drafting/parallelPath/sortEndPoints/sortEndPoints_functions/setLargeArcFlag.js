@@ -20,15 +20,17 @@ import {
     updateSVG_highlight_2_points_1_line_04_B,
 } from '../../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 
-function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
+function setLargeArcFlag(targetEndPoints, refEndPointsBase, parPathObj, index, self, runOrNot) {
     console.log(" ")
     console.log("ARCFLAG_FLIPPER_running")
 
+    console.log("poooooper")
     console.log(index)
+    // console.log(refEndPointsBase)
 
-    // // NEW WAY OF CHECKING FOR FILLERS 
-    // // - only tested for 1 & 2 fillers behind (for test figure drawing)
-    // let fillerCounter = originalFigurePathDatas_W_FILLERS.slice(0, index + 1).filter(x => x === 'filler').length
+    // NEW WAY OF CHECKING FOR FILLERS 
+    // - only tested for 1 & 2 fillers behind (for test figure drawing)
+    let fillerCounter = refEndPointsBase.slice(0, index + 1).filter(x => x === 'filler').length
 
 
     // let prevTargetEndPoint = targetEndPoints[index - 1][1]
@@ -69,7 +71,7 @@ function setLargeArcFlag(targetEndPoints, parPathObj, index, self, runOrNot) {
 
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
 
-        updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self)
+        updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)
@@ -97,24 +99,24 @@ function detectCrossover(movingPoint, stationaryPoint, parPathObj, index) {
     return flipFlag
 }
 
-function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self) {
+function updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, self) {
     // if(index === 1) {
     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], self)
     //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
     //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
     // }
 
-    if(index === 2) {
-        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
-        updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-        updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
-    }
-
-    // if(index === 3) {
-    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
-    //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
-    //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    // if(index === 2) {
+    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], self)
+    //     updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+    //     updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
     // }
+
+    if(index === 3 + fillerCounter) {
+        updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], self)
+        updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], self)
+        updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], self)
+    }
 
     // if(index === 4) {
     //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], self)
