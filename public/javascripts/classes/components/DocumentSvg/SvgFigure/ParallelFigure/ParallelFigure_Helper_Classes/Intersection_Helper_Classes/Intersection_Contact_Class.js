@@ -165,7 +165,6 @@ Intersection_Contact.prototype.handleArcToPathIntersection = function() {
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
-            console.log("ASSSSS")
             // thisConnection3.connected = false
             intersectionHandler.intersectionHandlerObject.isIntersectionConnected = false
             // createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)

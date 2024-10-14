@@ -171,7 +171,6 @@ function handleArcToPathIntersection(targetEndPointsParallelFull, referenceEndPo
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
-            console.log("ASSSSS")
             thisConnection3.connected = false
             createAndAddSvgElementAndUpdateDataArrays(referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, nextIndex, shape)
         } else {

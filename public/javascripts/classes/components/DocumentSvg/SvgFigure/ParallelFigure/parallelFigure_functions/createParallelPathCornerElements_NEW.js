@@ -155,8 +155,6 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
         nextBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
 
-    console.log("oskfosdkfoskdf")
-    console.log(newSweepFlag)
     return newSweepFlag
 }
 
