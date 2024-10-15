@@ -7,7 +7,6 @@ import {createParallelPathDatas, transformData} from './parallelFigure_functions
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
-import {TestFigure} from '../TestFigure/TestFigure_Class.js'
 // import {sortEndpoints} from './parallelFigure_functions/sortEndPoints/sortEndPoints_NEW.js'
 
 
@@ -16,39 +15,6 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
     this.SvgFigure = svgFigure
-
-    this.testFigure_01 = new TestFigure(this, false)
-    this.testFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
-    this.testFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
-    this.testFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
-
-    this.testFigure_02 = new TestFigure(this, false)
-    this.testFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
-    this.testFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
-    this.testFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
-
-    this.testFigure_03 = new TestFigure(this, false)
-    this.testFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
-    this.testFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
-    this.testFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
-    this.testFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
-
-    this.testFigure_04 = new TestFigure(this, false)
-    this.testFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.testFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
-    this.testFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
-
-    this.testFigure_05 = new TestFigure(this, false)
-    this.testFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
-    this.testFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
-    this.testFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
-
-    this.testFigure_06 = new TestFigure(this, false)
-    this.testFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
-    this.testFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
-    this.testFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
-    this.testFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
-
 
     // OLD NAMES
     // this.originalFigurePathDatas
@@ -59,10 +25,12 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 
     // Figure Data
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
+    this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
-    // this.originalFigurePathDatas_copySecondary = copyPathDatas(this.originalFigurePathDatas)
+    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is tranformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
+    // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places)
+
+    // this.originalFigurePathDatas_plusFillersSecondary = copyPathDatas(this.originalFigurePathDatas)
     // Figure Data
 
     // Svg Elements
@@ -135,7 +103,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 // PASSED
 // parallelFigurePathDatas,
 // parallelFigurePathDatas_transformed,
-// originalFigurePathDatas_copy,
+// originalFigurePathDatas_plusFillers,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
 // i,

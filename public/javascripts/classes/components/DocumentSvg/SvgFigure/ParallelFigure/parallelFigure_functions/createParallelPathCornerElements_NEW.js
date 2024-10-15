@@ -3,7 +3,7 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_transformed
-    let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_copy
+    let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
 
     let index
     let indexer
@@ -39,7 +39,7 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
         {x: parallelFigurePathDatas[index][1].coords.x, y: parallelFigurePathDatas[index][1].coords.y}
     ])
 
-    // originalFigurePathDatas_copy
+    // originalFigurePathDatas_plusFillers
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 
     let doubleIndex = index * 2

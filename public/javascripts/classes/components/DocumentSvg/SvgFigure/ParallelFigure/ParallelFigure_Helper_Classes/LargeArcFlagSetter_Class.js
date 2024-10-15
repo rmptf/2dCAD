@@ -1,44 +1,48 @@
-// import {getDistance} from '../../../../../../math/mathFunctions.js' // OLD LOC
-// import {findLineMidpoint, isGreaterThan} from '../../../../../../math/mathFunctions.js'
 import {findLineMidpoint, isGreaterThan} from "../../../../../../functions/math/mathFunctions.js"
-import {
-    updateSVG_highlight_1_point_01,
-    updateSVG_highlight_1_point_02,
-
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01,
-    updateSVG_highlight_2_points_1_line_01_A,
-    updateSVG_highlight_2_points_1_line_01_B,
-    
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02,
-    updateSVG_highlight_2_points_1_line_02_A,
-    // updateSVG_highlight_2_points_1_line_02_A_NEW,
-    updateSVG_highlight_2_points_1_line_02_B,
-    // updateSVG_highlight_2_points_1_line_02_B_NEW,
-
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03,
-    updateSVG_highlight_2_points_1_line_03_A,
-    updateSVG_highlight_2_points_1_line_03_B,
-
-    updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04,
-    updateSVG_highlight_2_points_1_line_04_A,
-    updateSVG_highlight_2_points_1_line_04_B,
-} from "../../../../../../functions/animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js"
-
+import {ReferenceFigure} from "../../ReferenceFigure/ReferenceFigure_Class.js"
 
 function LargeArcFlagSetter(parallelFigure) {
     this.ParFigure = parallelFigure
-    this.testFigure01 = this.ParFigure.testFigure_01
-    this.testFigure02 = this.ParFigure.testFigure_02
-    this.testFigure03 = this.ParFigure.testFigure_03
-    this.testFigure04 = this.ParFigure.testFigure_04
-    this.testFigure05 = this.ParFigure.testFigure_05
-    this.testFigure06 = this.ParFigure.testFigure_06
     this.svgTestElementsGroup = this.ParFigure.SvgFigure.svgGroups.secondarySvgGroupElements[4]
     this.svgFigure = this.ParFigure.SvgFigure
 
     this.arcFlagSetterObject = {
         fakeVar: null,
     }
+
+
+    this.referenceFigure_01 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
+    this.referenceFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
+
+    this.referenceFigure_02 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
+    this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
+    this.referenceFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
+
+    this.referenceFigure_03 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.referenceFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+
+    this.referenceFigure_04 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
+    this.referenceFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
+
+    this.referenceFigure_05 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
+    this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
+    this.referenceFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
+
+    this.referenceFigure_06 = new ReferenceFigure(parallelFigure, false)
+    this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.referenceFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.referenceFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+
 }
 
 // function setLargeArcFlag(targetIntersectionPoints, parFigureObj, index, self, runOrNot) {
@@ -49,7 +53,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
     // let targetIntersectionPoints = this.ParFigure.parallelFigurePathDatas
     // let parFigureObj = this.ParFigure.parallelFigureObject
     // let index = this.ParFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier    
-    let originalFigurePathDatas_W_FILLERS = parFigure.originalFigurePathDatas_copy
+    let originalFigurePathDatas_W_FILLERS = parFigure.originalFigurePathDatas_plusFillers
     let targetIntersectionPoints = parFigure.parallelFigurePathDatas
     let parFigureObj = parFigure.parallelFigureObject
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
@@ -58,7 +62,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
     console.log(index)
     // console.log(refEndPointsBase)
 
-    
+
     // NEW WAY OF CHECKING FOR FILLERS
     // - only tested for 1 & 2 fillers behind (for test figure drawing)
     let fillerCounter = originalFigurePathDatas_W_FILLERS.slice(0, index + 1).filter(x => x === 'filler').length
@@ -83,12 +87,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
 
-            // console.log(midPointBetweenInts)
-            // console.log(thisTargetEndPoint.arc.center)
-            // console.log(pooper1, pooper2)
-
             // FIXME: right here, checking if the following number carries all tht way through
-
             parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive] = {
                 startPos_x1GreaterThanX2: pooper1,
                 startPos_y1GreaterThanY2: pooper2
@@ -107,25 +106,13 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier
         }
 
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
-
-        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts)
-        // updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.svgTestElementsGroup)
-        updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this.testFigure01, this.testFigure02, this.testFigure03, this.testFigure04, this.testFigure05, this.testFigure06)
+        updateReferenceFigures(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this)
     } else {
         console.log("FLIPPER__dont_set")
         console.log(index)
     }
     console.log(" ")
 }
-
-// clothes
-// bottles
-// breast pump
-
-// outside
-// formula
-// downstairs packages
-
 
 function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let x1 = movingPoint[0]
@@ -136,17 +123,7 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    // if(parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parPathObj.arrayOfArcFlagsInitPos[parPathObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
     if(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
-        console.log("AAAAA_CROSSED")
-        console.log(parFigureObj.arrayOfArcFlagsInitPos)
-        console.log(parFigureObj.counterOfArcsAsTheyArrive)
-        console.log(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2, "1_a")
-        console.log(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2, "2_a")
-        console.log(currentPos_x1GreaterThanX2, "1_b")
-        console.log(currentPos_Y1GreaterThanY2, "2_b")
-
-
         flipFlag = true
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
         parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
@@ -157,59 +134,17 @@ function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     return flipFlag
 }
 
-// function updateSVGArcFlags(index, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, svgGroup) {
-function updateSVGArcFlags(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, TESTFIGURE_01, TESTFIGURE_02, TESTFIGURE_03, TESTFIGURE_04, TESTFIGURE_05, TESTFIGURE_06) {
+function updateReferenceFigures(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, thisClass) {
     if(index === 2 + fillerCounter) {
-        TESTFIGURE_01.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
-        TESTFIGURE_02.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
-        TESTFIGURE_03.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
+        thisClass.referenceFigure_01.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
+        thisClass.referenceFigure_02.runFunctions([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
+        thisClass.referenceFigure_03.runFunctions([[prevTargetEndPoint, thisTargetEndPoint]])
     }
     if(index === 3 + fillerCounter) {
-        TESTFIGURE_04.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
-        TESTFIGURE_05.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
-        TESTFIGURE_06.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
+        thisClass.referenceFigure_04.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
+        thisClass.referenceFigure_05.runFunctions([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
+        thisClass.referenceFigure_06.runFunctions([[prevTargetEndPoint, thisTargetEndPoint]])
     }
-    // if(index === 1) {
-    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
-    //     updateSVG_highlight_2_points_1_line_01_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
-    //     updateSVG_highlight_2_points_1_line_01_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
-    // }
-
-    // if(index === 2) {
-    //     // updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
-    //     // TESTFIGURE_03.updateTestFigure_333([prevTargetEndPoint, thisTargetEndPoint])
-    //     // TESTFIGURE_03.updateTestFigure_functionBuilder_02([prevTargetEndPoint, thisTargetEndPoint])
-    //     TESTFIGURE_03.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
-
-    //     // updateSVG_highlight_2_points_1_line_02_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
-    //     // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup, thisThing)
-    //     // updateSVG_highlight_2_points_1_line_02_A_NEW([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgFigure)
-    //     // TESTFIGURE_01.updateTestFigure_111([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y])
-    //     // TESTFIGURE_01.updateTestFigure_functionBuilder_01([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
-    //     TESTFIGURE_01.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
-
-    //     // updateSVG_highlight_2_points_1_line_02_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
-    //     // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup, thisThing)
-    //     // updateSVG_highlight_2_points_1_line_02_B_NEW(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgFigure)
-    //     // TESTFIGURE_02.updateTestFigure_functionBuilder_01([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
-    //     TESTFIGURE_02.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
-    // }
-
-    // if(index === 3) {
-    // //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
-    // //     updateSVG_highlight_2_points_1_line_03_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
-    // //     updateSVG_highlight_2_points_1_line_03_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
-
-    //     TESTFIGURE_03.functionHolder.forEach(func => func([prevTargetEndPoint, thisTargetEndPoint]))
-    //     TESTFIGURE_01.functionHolder.forEach(func => func([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]))
-    //     TESTFIGURE_02.functionHolder.forEach(func => func(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]))
-    // }
-
-    // if(index === 4) {
-    //     updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_04([prevTargetEndPoint, thisTargetEndPoint], svgGroup)
-    //     updateSVG_highlight_2_points_1_line_04_A([prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y], svgGroup)
-    //     updateSVG_highlight_2_points_1_line_04_B(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], svgGroup)
-    // }
 }
 
 export {

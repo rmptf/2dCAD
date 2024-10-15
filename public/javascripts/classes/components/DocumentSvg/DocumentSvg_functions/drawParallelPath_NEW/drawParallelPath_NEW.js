@@ -61,8 +61,8 @@ function drawParallelPathFunction_NEW(event, thisFigure, sectionIndex) {
 
     // let parallelFigurePathDatas = a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL]
     // let parallelFigurePathDatas_transformed = transformData(parallelFigurePathDatas)
-    // let originalFigurePathDatas_copy = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
-    // let originalFigurePathDatas_copySecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    // let originalFigurePathDatas_plusFillers = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
+    // let originalFigurePathDatas_plusFillersSecondary = makeDeepCopy(a_canvas_globalVars.originalFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL])
     // let parallelFigureObject = []
     // parallelFigureObject.pathToArcCounter = -1
     // parallelFigureObject.arcToPathCounter = -1
@@ -139,9 +139,9 @@ function drawParallelPathFunction_NEW(event, thisFigure, sectionIndex) {
     //         // handleIntersectingParallelPaths_testing(
     //         //     self,
     //         //     parallelFigurePathDatas,
-    //         //     originalFigurePathDatas_copySecondary,
+    //         //     originalFigurePathDatas_plusFillersSecondary,
     //         //     parallelFigurePathDatas_transformed,
-    //         //     originalFigurePathDatas_copy,
+    //         //     originalFigurePathDatas_plusFillers,
     //         //     originalFigure_counter_groupCount_GLOBAL,
     //         //     parallelFigureObject
     //         // )
@@ -155,9 +155,9 @@ function drawParallelPathFunction_NEW(event, thisFigure, sectionIndex) {
     //             // checkForIntersectingPaths(
     //             //     self,
     //             //     parallelFigurePathDatas,
-    //             //     originalFigurePathDatas_copySecondary,
+    //             //     originalFigurePathDatas_plusFillersSecondary,
     //             //     parallelFigurePathDatas_transformed,
-    //             //     originalFigurePathDatas_copy,
+    //             //     originalFigurePathDatas_plusFillers,
     //             //     i,
     //             //     originalFigure_counter_groupCount_GLOBAL,
     //             //     parallelFigureObject,
@@ -168,7 +168,7 @@ function drawParallelPathFunction_NEW(event, thisFigure, sectionIndex) {
     //                 sortEndpoints(
     //                     parallelFigurePathDatas,
     //                     parallelFigurePathDatas_transformed,
-    //                     originalFigurePathDatas_copy,
+    //                     originalFigurePathDatas_plusFillers,
     //                     originalFigure_counter_groupCount_GLOBAL,
     //                     self,
     //                     i,

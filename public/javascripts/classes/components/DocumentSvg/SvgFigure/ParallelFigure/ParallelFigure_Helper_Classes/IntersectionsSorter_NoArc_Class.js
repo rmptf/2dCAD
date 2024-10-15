@@ -160,7 +160,7 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
 
 // function getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) {
 function getRefPointAtIndexIfNotFiller(parFigure) {
-    let refEndPointsBase = parFigure.originalFigurePathDatas_copy
+    let refEndPointsBase = parFigure.originalFigurePathDatas_plusFillers
     let index = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
     let parPathObj = parFigure.parallelFigureObject
 

@@ -398,7 +398,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 // PASSED
 // parallelFigurePathDatas,
 // parallelFigurePathDatas_transformed,
-// originalFigurePathDatas_copy,
+// originalFigurePathDatas_plusFillers,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
 // i,
@@ -536,7 +536,7 @@ function handleLargeArcFlag(parFigure, flag) {
 
 // targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
 // refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
-// refEndPointsBase         ===         basePathDatasCopy                               ===         originalFigurePathDatas_copy
+// refEndPointsBase         ===         basePathDatasCopy                               ===         originalFigurePathDatas_plusFillers
 
     // OLD NAMES ORDER PASSED
     // parallelPathDatas_globalRef,
@@ -567,7 +567,7 @@ function handleLargeArcFlag(parFigure, flag) {
     //NEW NAMES
     // // Figure Data
     // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
-    // this.originalFigurePathDatas_copy = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
+    // this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
     // this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
 
@@ -595,20 +595,23 @@ function setArcRadius(parFigure, indexModifier, logId) {
     // console.log(logId)
     console.log('SET_ARC_RADIUS')
     console.log(index)
-    console.log(parFigure.originalFigurePathDatas_copy)
+    console.log(parFigure.originalFigurePathDatas_plusFillers)
+    console.log(parFigure.originalFigurePathDatas)
+    console.log(parFigure.parallelFigurePathDatas)
+    console.log(parFigure.parallelFigurePathDatas_transformed)
 
 
     let parallelDistance = calcArcParDistance(parFigure, index)
     
 
-    // let poop1 = parFigure.originalFigurePathDatas_copy[index]
+    // let poop1 = parFigure.originalFigurePathDatas_plusFillers[index]
     // let poop2 = parFigure.parallelFigureObject.parallelDistanceparFigure.parallelFigureObject.parallelDistance
 
     // let parallelDistance = calcArcParDistance(arcRadiusObject, refEndPointsBase[index + 1], parPathObj.parallelDistance)
 
     // // function calcArcParDistance(parFigure, modifiedIdex) {
     // // let index = modifiedIdex + 1
-    // // let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index]
+    // // let nextRefEndPointBase = parFigure.originalFigurePathDatas_plusFillers[index]
     // // let distance = parFigure.parallelFigureObject.parallelDistance
 
 
@@ -640,7 +643,7 @@ function setPerpendicularPoints(parFigure, indicators, setPrevious) { // change 
     // grab data from classes
     let intersectionSorter = parFigure.IntersectionsSorter_WithArc
     let parallelPathDatas = parFigure.parallelFigurePathDatas
-    let originalFigurePathDatas = parFigure.originalFigurePathDatas_copy
+    let originalFigurePathDatas = parFigure.originalFigurePathDatas_plusFillers
     let index = intersectionSorter.intersectionSorterObject.index
     let arcRadiusData = intersectionSorter.intersectionSorterObject.arcRadiusParDistAndDir
 
@@ -698,7 +701,7 @@ function setPerpendicularPoints(parFigure, indicators, setPrevious) { // change 
 // function skipFillersAndSetParallelProjections(targetEndPoints, refEndPointsBase, index, parPathObj, offset) {
 function skipFillersAndSetParallelProjections(parFigure, offset) {
     // let parallelPathDatas = parFigure.parallelFigurePathDatas //use orig
-    let originalFigurePathDatas = parFigure.originalFigurePathDatas_copy
+    let originalFigurePathDatas = parFigure.originalFigurePathDatas_plusFillers
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
     // let parFigObj = parFigure.parallelFigureObject //use orig
 
@@ -890,7 +893,7 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 //new
 function calcArcParDistance(parFigure, modifiedIdex) {
     let index = modifiedIdex + 1
-    let nextRefEndPointBase = parFigure.originalFigurePathDatas_copy[index]
+    let nextRefEndPointBase = parFigure.originalFigurePathDatas_plusFillers[index]
     let distance = parFigure.parallelFigureObject.parallelDistance
 
     parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
