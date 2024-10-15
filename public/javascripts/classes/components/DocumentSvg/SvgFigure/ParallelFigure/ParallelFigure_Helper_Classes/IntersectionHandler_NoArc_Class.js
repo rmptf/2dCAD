@@ -4,12 +4,15 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.parFigure_Class = parallelFigure
 
     this.intersectionHandlerObject = {
-        fakeVar: null
+        index: null,
     }
-    // this.refEndPointsPerp = parFigure.parallelFigurePathDatas_transformed
-    // this.parallelProjections = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.parallelProjections
-    // this.index = parFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index
-    // this.targetData = parFigure.parallelFigurePathDatas
+
+    this.refEndPointsPerp = parallelFigure.parallelFigurePathDatas_transformed
+    this.index = null
+    this.parallelProjections = null
+    this.targetData = parallelFigure.parallelFigurePathDatas
+
+
 
 
 
@@ -81,6 +84,8 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 
     let index = this.parFigure_Class.IntersectionsSorter_NoArc.intersectionSorterObject.index
     calculateAndSetIntersectionPoints(this.parFigure_Class, index, [this.parFigure_Class.parallelFigurePathDatas_transformed[index-1], false], [this.parFigure_Class.parallelFigurePathDatas_transformed[index], false])
+    console.log("popopopopopopop")
+    console.log(this.index)
     
     // calculateAndSetIntersectionPoints([this.parFigure_Class.parallelFigurePathDatas_transformed[this.index-1], false], [this.parFigure_Class.parallelFigurePathDatas_transformed[this.index], false])
 }
