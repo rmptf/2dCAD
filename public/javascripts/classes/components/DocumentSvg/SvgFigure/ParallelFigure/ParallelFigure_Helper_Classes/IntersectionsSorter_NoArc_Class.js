@@ -2,55 +2,29 @@ import {IntersectionHandler_NoArc} from './IntersectionHandler_NoArc_Class.js'
 
 function IntersectionsSorter_NoArc(parallelFigure) {
     this.ParFigure = parallelFigure
-    this.IntersectionHandler = new IntersectionHandler_NoArc(this.ParFigure)
-    this.parallelPathDatas = this.ParFigure.parallelFigurePathDatas
+    this.IntersectionHandler = new IntersectionHandler_NoArc(parallelFigure)
+    this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     
     this.isJoiner = (newIndex) => this.parallelPathDatas[newIndex][1].arc.joiner === true
     this.joinerType = (newIndex, code) => this.parallelPathDatas[newIndex][1].arc.joiner === true && this.parallelPathDatas[newIndex][1].arc.joinerSide === code
-    this.thisIsArcToPath = false
     this.arcExist = (newIndex) => this.parallelPathDatas[newIndex][1].arc.exist === true
     this.firstPosition = (newIndex) => (newIndex) === 0
     this.lastPosition = (newIndex) => newIndex === this.parallelPathDatas.length - 1
+    this.thisIsArcToPath = false
 
 
     this.intersectionSorterObject = {
         index: null,
         pathDatasOutside: null,
-        parallelProjections: null,
     }
 }
-
-// IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
-//     console.log('SORTENDPOINTS_NOARC')
-// }
 
 export {
     IntersectionsSorter_NoArc
 }
 
-
-
-
-
-// targetEndPoints,
-// refEndPointsPerp,
-// refEndPointsBase,
-// self,
-// index,
-// parPathObj
-
 IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
-// function sort_endPoint_noArc(targetEndPoints, refEndPointsPerp, refEndPointsBase, self, index, parPathObj) {
-    // const isJoiner = (newIndex) => targetEndPoints[newIndex][1].arc.joiner === true
-    // const joinerType = (newIndex, code) => targetEndPoints[newIndex][1].arc.joiner === true && targetEndPoints[newIndex][1].arc.joinerSide === code
-    // let thisIsArcToPath = false
-
     let index = this.intersectionSorterObject.index
-    // let pathData = this. //FIXME: add this
-    // console.log("sort_noArc")
-    // console.log(index)
-    // this.ParFigure
-
     if(index > 1) {
         if(this.isJoiner(index - 1) && this.joinerType(index, "BBB")) {
             this.thisIsArcToPath = true
@@ -60,31 +34,16 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
     } 
     
     if(this.thisIsArcToPath === false) {
-        // const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
-        // const firstPosition = (newIndex) => (newIndex) === 0
-        // const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
-
-        // let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
         this.intersectionSorterObject.pathDatasOutside = getRefPointAtIndexIfNotFiller(this.ParFigure) // TODO: Fix like fixed in addSvgElement.js
-        // let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
-        this.intersectionSorterObject.parallelProjections = calcParallelProjections(this.ParFigure)
         this.IntersectionHandler.parallelProjections = calcParallelProjections(this.ParFigure)
-        console.log('PARALLEL_PROJECTIONS')
-        console.log(this.intersectionSorterObject.parallelProjections)
         // AA_FIRST_ALL
-        // noArcIntersection_setPerpRefEndPointsToParallelProjections(refEndPointsPerp, parallelProjections, index)
         this.IntersectionHandler.noArcIntersection_setPerpRefEndPointsToParallelProjections()
-
         if (this.firstPosition(index)) {
             // A
-            // noArcIntersection_firstPos(targetEndPoints, index, {x: parallelProjections.thisPointX, y: parallelProjections.thisPointY})
             this.IntersectionHandler.noArcIntersection_firstPos()
-
-            // if(targetEndPoints.length !== 1) {
             if(this.parallelPathDatas.length !== 1) {
                 if(this.arcExist(index + 1)) {
                     // B
-                    // noArcIntersection_firstPos_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
                     this.IntersectionHandler.noArcIntersection_firstPos_nextIndexIsArc()
                 }
             }
@@ -94,15 +53,12 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
             if(!this.arcExist(index - 1)) {
                 if(this.ParFigure.parallelFigureObject.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
-                    // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment(targetEndPoints, index, refEndPointsPerp)
                     this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
                 } else {
                     // D (C+)
-                    // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment(targetEndPoints, index, refEndPointsPerp)
                     this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
                 }
                 // E (DC After)
-                // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments(parPathObj)
                 this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
             } else {
                 // F (E)
@@ -111,7 +67,6 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
             }
             if(this.arcExist(index + 1) && !this.arcExist(index - 1)) {
                 // G (F)
-                // noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc(targetEndPoints, index, {x: parallelProjections.nextPointX, y: parallelProjections.nextPointY})
                 this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArv_nextIndexIsArc()
             }
         }
@@ -119,7 +74,7 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         //FIXME: needs works
         //FIXME: needs works
         //FIXME: needs works
-        // TODO: Orgnazine Better
+        //TODO: Orgnazine Better
         checkForAndRunLastPosition(this)
         function checkForAndRunLastPosition(thisFigure) {
             if (thisFigure.lastPosition(index)) {
