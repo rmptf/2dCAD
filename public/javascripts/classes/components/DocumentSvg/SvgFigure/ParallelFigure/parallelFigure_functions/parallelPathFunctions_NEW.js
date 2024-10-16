@@ -218,6 +218,7 @@ function findIntersectingPointSIMPLER(x1, y1, x2, y2, x3, y3, x4, y4) {
     return result
 }
 
+// here
 function findIntersectingPointTwoFormats(coord1, coord2) {
     const getCoords = (coordinates, addCoordsKey, isCoord_X) => addCoordsKey ? (isCoord_X ? coordinates.coords.x : coordinates.coords.y) : (isCoord_X ? coordinates.x : coordinates.y);
 
