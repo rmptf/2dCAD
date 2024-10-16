@@ -883,13 +883,23 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 
 
 // WORKING / needs checking
-//old
 // TODO: (in two places at once rn, find a place for it)
 // function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
 //     arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
 //     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
 //     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
 //     return nextArcToCenterMinusPointerToArcFromArc1
+
+// waas in sorter no arc
+// TODO: keep here or move?
+// Working on this function (not 100% sure what it does)
+// function calcArcParDistance(arcRadiusObject, nextRefEndPointBase, distance) {
+//     arcRadiusObject.parDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
+//     let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
+//     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusObject.parDistAndDir
+//     return nextArcToCenterMinusPointerToArcFromArc1
+// }
+
 //new
 function calcArcParDistance(parFigure, modifiedIdex) {
     let index = modifiedIdex + 1

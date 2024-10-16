@@ -1,21 +1,21 @@
 import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
+    this.PARALLELFIGURE = parallelFigure
+    this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
     this.parallelFigureObj = parallelFigure.parallelFigureObject
+    this.pathDatasOutside = null
     this.index = null
-    this.parallelProjections = null //TODO: rename this but figure out what it does
-    // this.intersectionHandlerObject = {
-    //     index: null,
-    // }
 }
 
-//new
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
     // AA_First_All
     console.log("AA_All")
-    this.calculateAndSetParallelProjectionPoints()
+    this.getRefPointAtIndexIfNotFiller()
+    this.calcParallelProjections()
+    // this.calculateAndSetParallelProjectionPoints()
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_firstPos = function() {
@@ -90,13 +90,87 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_everyI
     this.setTargetEndPoints(1)
 }
 
-// AA_FIRST_ALL
-IntersectionHandler_NoArc.prototype.calculateAndSetParallelProjectionPoints = function () { //TODO: why do i have this and calcParallelProjections() in sorter?
-    this.parallelPathDatas_perpendicular[this.index][0].x = this.parallelProjections.thisPointX
-    this.parallelPathDatas_perpendicular[this.index][0].y = this.parallelProjections.thisPointY
-    this.parallelPathDatas_perpendicular[this.index][1].x = this.parallelProjections.nextPointX
-    this.parallelPathDatas_perpendicular[this.index][1].y = this.parallelProjections.nextPointY
 
+// // AA_FIRST_ALL
+// IntersectionHandler_NoArc.prototype.calculateAndSetParallelProjectionPoints = function () { //TODO: why do i have this and calcParallelProjections() in sorter?
+//     console.log("okokok_02")
+//     this.parallelPathDatas_perpendicular[this.index][0].x = this.parallelProjections.thisPointX
+//     this.parallelPathDatas_perpendicular[this.index][0].y = this.parallelProjections.thisPointY
+//     this.parallelPathDatas_perpendicular[this.index][1].x = this.parallelProjections.nextPointX
+//     this.parallelPathDatas_perpendicular[this.index][1].y = this.parallelProjections.nextPointY
+// }
+
+IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
+    let refEndPointsBase = this.originalPathDatasPlusFillers
+    let parPathObj = this.parallelFigureObj
+    let thisPathDataOutside
+    let nextPathDataOutside
+    let fillerAdder = 0
+    let nextFillerAdder = 0
+    const isFiller = (newIndex) => refEndPointsBase[newIndex] === "filler"
+
+    if (isFiller(this.index) && !isFiller(this.index + 1)){
+        fillerAdder = 1
+    }
+    if (isFiller(this.index) && isFiller(this.index + 1)){
+        fillerAdder = -1
+    }
+    if (isFiller(this.index + 1)){
+        nextFillerAdder = 1
+    }
+    if (parPathObj.removeornot_allParData === true) {
+        thisPathDataOutside = refEndPointsBase[this.index + fillerAdder]
+        nextPathDataOutside = refEndPointsBase[this.index + 1 + nextFillerAdder]
+    } else {
+        let thisRemoveIndex = parPathObj.removeStartIndex
+        let nextRemoveIndex = thisRemoveIndex + 1
+        if(this.index <= thisRemoveIndex) {
+            thisPathDataOutside = refEndPointsBase[this.index + fillerAdder]
+            nextPathDataOutside = refEndPointsBase[this.index + 1 + nextFillerAdder]
+        }
+        else if(this.index >= nextRemoveIndex) {
+            thisPathDataOutside = refEndPointsBase[this.index + 1 + fillerAdder]
+            nextPathDataOutside = refEndPointsBase[this.index + 2 + nextFillerAdder]
+        }
+        else {
+            console.log("Not_Handled_RemoveIndex")
+        }
+    }
+
+    this.pathDatasOutside = [thisPathDataOutside, nextPathDataOutside]
+}
+
+
+
+// TODO: (in two places at once rn, find a place for it)
+// Write a good comment to describe this function
+IntersectionHandler_NoArc.prototype.calcParallelProjections = function() {
+    let thisPathDataCoords = this.pathDatasOutside[0].coords
+    let nextPathDataCoords = this.pathDatasOutside[1].coords
+    let parallelDistance = this.PARALLELFIGURE.parallelFigureObject.parallelDistance
+
+    let thisPathDataCoordsX = thisPathDataCoords.x
+    let thisPathDataCoordsY = thisPathDataCoords.y
+    let nextPathDataCoordsX = nextPathDataCoords.x
+    let nextPathDataCoordsY = nextPathDataCoords.y
+
+    // Calculate the angle and sine/cosine values
+    const angle = Math.atan2(thisPathDataCoordsY - nextPathDataCoordsY, thisPathDataCoordsX - nextPathDataCoordsX)
+    const sinValue = Math.sin(angle)
+    const cosValue = Math.cos(angle)
+
+    // Function to calculate projected anchor points based on input coordinates and parallel distance
+    let calcProjection = (coordVal, trigRatio, distance, subtract) => subtract ? coordVal - (distance * trigRatio) : coordVal + (distance * trigRatio)
+
+    let thisPointX = calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true)
+    let thisPointY = calcProjection(thisPathDataCoordsY, cosValue, parallelDistance, false)
+    let nextPointX = calcProjection(nextPathDataCoordsX, sinValue, parallelDistance, true)
+    let nextPointY = calcProjection(nextPathDataCoordsY, cosValue, parallelDistance, false)
+    
+    this.parallelPathDatas_perpendicular[this.index][0].x = thisPointX
+    this.parallelPathDatas_perpendicular[this.index][0].y = thisPointY
+    this.parallelPathDatas_perpendicular[this.index][1].x = nextPointX
+    this.parallelPathDatas_perpendicular[this.index][1].y = nextPointY
 }
 
 // C, D, H, J
@@ -111,8 +185,8 @@ IntersectionHandler_NoArc.prototype.calculateAndSetIntersectionPoints = function
 // A, B, G, M
 IntersectionHandler_NoArc.prototype.setTargetEndPoints = function(side) { //TODO: rename this function once u figure out wht parallelProjections are (rename to smthng like: setParallelPathDatasToProjectedPathDatas())
     let referenceCoords = {
-        x: (side === 0) ? this.parallelProjections.thisPointX : this.parallelProjections.nextPointX,
-        y: (side === 0) ? this.parallelProjections.thisPointY : this.parallelProjections.nextPointY
+        x: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].x : this.parallelPathDatas_perpendicular[this.index][1].x,
+        y: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].y : this.parallelPathDatas_perpendicular[this.index][1].y
     }
     this.parallelPathDatas[this.index][side].coords.x = referenceCoords.x
     this.parallelPathDatas[this.index][side].coords.y = referenceCoords.y
