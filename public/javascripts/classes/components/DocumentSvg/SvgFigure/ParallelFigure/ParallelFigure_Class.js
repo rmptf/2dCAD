@@ -195,9 +195,19 @@ function mouseMoveDrawParallel(event, thisFigure) {
             for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
                 console.log("i: " + i)
                 console.log(thisFigure.parallelFigurePathDatas[i])
+
+
+                // ARC
                 thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
-                thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
-                thisFigure.IntersectionsSorter_NoArc.IntersectionHandler.index = i
+
+                // NO ARC
+                // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
+
+                // thisFigure.IntersectionsSorter_NoArc.index = i
+                // thisFigure.IntersectionsSorter_NoArc.IntersectionHandler.index = i
+                thisFigure.IntersectionsSorter_NoArc.setIndices(i)
+
+
                 if(i < thisFigure.parallelFigurePathDatas.length) {
                     if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()

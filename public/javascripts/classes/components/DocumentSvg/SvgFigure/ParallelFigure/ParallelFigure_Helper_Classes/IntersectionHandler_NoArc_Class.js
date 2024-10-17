@@ -1,7 +1,6 @@
 import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
-    this.PARALLELFIGURE = parallelFigure
     this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
@@ -15,7 +14,6 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParal
     console.log("AA_All")
     this.getRefPointAtIndexIfNotFiller()
     this.calcParallelProjections()
-    // this.calculateAndSetParallelProjectionPoints()
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_firstPos = function() {
@@ -91,15 +89,8 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_everyI
 }
 
 
-// // AA_FIRST_ALL
-// IntersectionHandler_NoArc.prototype.calculateAndSetParallelProjectionPoints = function () { //TODO: why do i have this and calcParallelProjections() in sorter?
-//     console.log("okokok_02")
-//     this.parallelPathDatas_perpendicular[this.index][0].x = this.parallelProjections.thisPointX
-//     this.parallelPathDatas_perpendicular[this.index][0].y = this.parallelProjections.thisPointY
-//     this.parallelPathDatas_perpendicular[this.index][1].x = this.parallelProjections.nextPointX
-//     this.parallelPathDatas_perpendicular[this.index][1].y = this.parallelProjections.nextPointY
-// }
-
+// AA_FIRST_ALL
+// Write a good comment to describe what this does: might need some refactoring (very old function)
 IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
     let refEndPointsBase = this.originalPathDatasPlusFillers
     let parPathObj = this.parallelFigureObj
@@ -140,14 +131,12 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
     this.pathDatasOutside = [thisPathDataOutside, nextPathDataOutside]
 }
 
-
-
-// TODO: (in two places at once rn, find a place for it)
-// Write a good comment to describe this function
+// Write a good comment to describe what this does: might need some refactoring (very old function)
+// (in two places at once rn, find a place for it) (i think does the same job differently and for diferent purposes)
 IntersectionHandler_NoArc.prototype.calcParallelProjections = function() {
     let thisPathDataCoords = this.pathDatasOutside[0].coords
     let nextPathDataCoords = this.pathDatasOutside[1].coords
-    let parallelDistance = this.PARALLELFIGURE.parallelFigureObject.parallelDistance
+    let parallelDistance = this.parallelFigureObj.parallelDistance
 
     let thisPathDataCoordsX = thisPathDataCoords.x
     let thisPathDataCoordsY = thisPathDataCoords.y
