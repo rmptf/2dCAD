@@ -5,7 +5,7 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
     this.parallelFigureObj = parallelFigure.parallelFigureObject
-    this.pathDatasOutside = null
+    this.origPathDataRefPointsForParPerpProj = null
     this.index = null
 }
 
@@ -90,15 +90,16 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_everyI
 
 
 // AA_FIRST_ALL
-// Write a good comment to describe what this does: might need some refactoring (very old function)
+// This function sorts through all the originalPathDatasPlusFillers and weeds out the fillers, then sets which
+// originalPathDatasPlusFillers should be used as a reference point to set the new Parallel Perpendicular Projected Points
 IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
-    let refEndPointsBase = this.originalPathDatasPlusFillers
+    let origPathDatasPlusFillers = this.originalPathDatasPlusFillers
     let parPathObj = this.parallelFigureObj
-    let thisPathDataOutside
-    let nextPathDataOutside
+    let thisOrigPathDataRefPtForParPerpProj
+    let nextOrigPathDataRefPtForParPerpProj
     let fillerAdder = 0
     let nextFillerAdder = 0
-    const isFiller = (newIndex) => refEndPointsBase[newIndex] === "filler"
+    const isFiller = (index) => origPathDatasPlusFillers[index] === "filler"
 
     if (isFiller(this.index) && !isFiller(this.index + 1)){
         fillerAdder = 1
@@ -110,51 +111,47 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
         nextFillerAdder = 1
     }
     if (parPathObj.removeornot_allParData === true) {
-        thisPathDataOutside = refEndPointsBase[this.index + fillerAdder]
-        nextPathDataOutside = refEndPointsBase[this.index + 1 + nextFillerAdder]
+        thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
+        nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
     } else {
         let thisRemoveIndex = parPathObj.removeStartIndex
         let nextRemoveIndex = thisRemoveIndex + 1
         if(this.index <= thisRemoveIndex) {
-            thisPathDataOutside = refEndPointsBase[this.index + fillerAdder]
-            nextPathDataOutside = refEndPointsBase[this.index + 1 + nextFillerAdder]
+            thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
+            nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
         }
         else if(this.index >= nextRemoveIndex) {
-            thisPathDataOutside = refEndPointsBase[this.index + 1 + fillerAdder]
-            nextPathDataOutside = refEndPointsBase[this.index + 2 + nextFillerAdder]
+            thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + fillerAdder]
+            nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 2 + nextFillerAdder]
         }
         else {
             console.log("Not_Handled_RemoveIndex")
         }
     }
 
-    this.pathDatasOutside = [thisPathDataOutside, nextPathDataOutside]
+    this.origPathDataRefPointsForParPerpProj = [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
 }
 
-// Write a good comment to describe what this does: might need some refactoring (very old function)
+// AA_FIRST_ALL
+// This takes the originalPathDataReferencePointsForParallelPerpendicularProjectionPoints and uses trig to set them AT the parallel perpendicular projection points
 // (in two places at once rn, find a place for it) (i think does the same job differently and for diferent purposes)
 IntersectionHandler_NoArc.prototype.calcParallelProjections = function() {
-    let thisPathDataCoords = this.pathDatasOutside[0].coords
-    let nextPathDataCoords = this.pathDatasOutside[1].coords
+    let thisPathDataCoords = this.origPathDataRefPointsForParPerpProj[0].coords
+    let nextPathDataCoords = this.origPathDataRefPointsForParPerpProj[1].coords
     let parallelDistance = this.parallelFigureObj.parallelDistance
 
-    let thisPathDataCoordsX = thisPathDataCoords.x
-    let thisPathDataCoordsY = thisPathDataCoords.y
-    let nextPathDataCoordsX = nextPathDataCoords.x
-    let nextPathDataCoordsY = nextPathDataCoords.y
-
     // Calculate the angle and sine/cosine values
-    const angle = Math.atan2(thisPathDataCoordsY - nextPathDataCoordsY, thisPathDataCoordsX - nextPathDataCoordsX)
+    const angle = Math.atan2(thisPathDataCoords.y - nextPathDataCoords.y, thisPathDataCoords.x - nextPathDataCoords.x)
     const sinValue = Math.sin(angle)
     const cosValue = Math.cos(angle)
 
     // Function to calculate projected anchor points based on input coordinates and parallel distance
     let calcProjection = (coordVal, trigRatio, distance, subtract) => subtract ? coordVal - (distance * trigRatio) : coordVal + (distance * trigRatio)
 
-    let thisPointX = calcProjection(thisPathDataCoordsX, sinValue, parallelDistance, true)
-    let thisPointY = calcProjection(thisPathDataCoordsY, cosValue, parallelDistance, false)
-    let nextPointX = calcProjection(nextPathDataCoordsX, sinValue, parallelDistance, true)
-    let nextPointY = calcProjection(nextPathDataCoordsY, cosValue, parallelDistance, false)
+    let thisPointX = calcProjection(thisPathDataCoords.x, sinValue, parallelDistance, true)
+    let thisPointY = calcProjection(thisPathDataCoords.y, cosValue, parallelDistance, false)
+    let nextPointX = calcProjection(nextPathDataCoords.x, sinValue, parallelDistance, true)
+    let nextPointY = calcProjection(nextPathDataCoords.y, cosValue, parallelDistance, false)
     
     this.parallelPathDatas_perpendicular[this.index][0].x = thisPointX
     this.parallelPathDatas_perpendicular[this.index][0].y = thisPointY

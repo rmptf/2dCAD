@@ -27,8 +27,8 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
     this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is tranformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
-    // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places)
+    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
+    // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
     // this.originalFigurePathDatas_plusFillersSecondary = copyPathDatas(this.originalFigurePathDatas)
     // Figure Data
@@ -195,19 +195,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
             for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
                 console.log("i: " + i)
                 console.log(thisFigure.parallelFigurePathDatas[i])
-
-
-                // ARC
-                thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
-
-                // NO ARC
+                thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i // change to function
                 // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
-
-                // thisFigure.IntersectionsSorter_NoArc.index = i
-                // thisFigure.IntersectionsSorter_NoArc.IntersectionHandler.index = i
                 thisFigure.IntersectionsSorter_NoArc.setIndices(i)
-
-
                 if(i < thisFigure.parallelFigurePathDatas.length) {
                     if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
