@@ -2,12 +2,17 @@ import {findLineMidpoint, isGreaterThan} from "../../../../../../functions/math/
 import {ReferenceFigure} from "../../ReferenceFigure/ReferenceFigure_Class.js"
 
 function LargeArcFlagSetter(parallelFigure) {
+    this.PARFIGURE = parallelFigure
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.index = null
 
-    // Add ReferenceFigures
+
+
+
+
+
     this.referenceFigure_01 = new ReferenceFigure(parallelFigure, false)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
@@ -42,39 +47,108 @@ function LargeArcFlagSetter(parallelFigure) {
 
 }
 
+// function setLargeArcFlag(targetIntersectionPoints, parFigureObj, index, self, runOrNot) {
+// LargeArcFlagSetter.prototype.setLargeArcFlag = function(parFigure, indexModifier, runOrNot, INDEX123) {
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot) {
+    console.log(" ")
     console.log("ARCFLAG_FLIPPER_running")
+
+    // let originalFigurePathDatas_W_FILLERS = parFigure.originalFigurePathDatas_plusFillers // elim
+    // let targetIntersectionPoints = parFigure.parallelFigurePathDatas
+    // let parFigureObj = parFigure.parallelFigureObject
+    // let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
+    // let index = INDEX123 + indexModifier
     let modifiedIndex = this.index + indexModifier
-    let fillerCounter = this.originalFigurePathDatas_plusFillers.slice(0, modifiedIndex + 1).filter(x => x === 'filler').length //FIXME: might be an easier way to acomplish this. (counts fillers behind)
-    let prevTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][0]
+
+    // console.log("poooooper")
+    // console.log(index)
+    // // console.log(refEndPointsBase)
+    console.log("poooooper")
+    console.log(modifiedIndex)
+    // console.log(refEndPointsBase)
+
+
+    // NEW WAY OF CHECKING FOR FILLERS
+    // - only tested for 1 & 2 fillers behind (for test figure drawing)
+    // let fillerCounter = originalFigurePathDatas_W_FILLERS.slice(0, index + 1).filter(x => x === 'filler').length //FIXME: find this in handler and pass to here
+    let fillerCounter = this.originalFigurePathDatas_plusFillers.slice(0, modifiedIndex + 1).filter(x => x === 'filler').length //FIXME: find this in handler and pass to here
+
+    // // let prevTargetEndPoint = targetIntersectionPoints[index - 1][1]
+    // let prevTargetEndPoint = targetIntersectionPoints[index][0] //TODO: test that this works 100%
+    // let thisTargetEndPoint = targetIntersectionPoints[index][1]
+    // let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    
+    console.log("assser")
+    console.log(this.index)
+    console.log(indexModifier)
+    console.log(modifiedIndex)
+    console.log(this.parallelFigurePathDatas)
+    let prevTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][0] //TODO: test that this works 100%
     let thisTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+
+    // // TEST //
+    // // good test to see if anything is atually running (this sets all arc flags to 1 which makes crazy shapes and is visually obvious)
+    // thisTargetEndPoint.arc.arcFlag = 1 //(seems to work rn, problem must be somewhere else)
+    // // TEST //
+    // parFigureObj.counterOfArcsAsTheyArrive = parFigureObj.counterOfArcsAsTheyArrive + 1
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
+
     if(runOrNot === true) {
+        // console.log("FLIPPER__set")
+        // console.log(index)
+        // console.log(indexModifier)
         console.log("FLIPPER__set")
+        console.log(modifiedIndex)
+        console.log(indexModifier)
+
+        // if(parFigureObj.iterationCounter === 1) {
+        //     let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+        //     let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+
+        //     // FIXME: right here, checking if the following number carries all tht way through
+        //     parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive] = {
+        //         startPos_x1GreaterThanX2: pooper1,
+        //         startPos_y1GreaterThanY2: pooper2
+        //     }
+        // }
         if(this.parallelFigureObj.iterationCounter === 1) {
             let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+
+            // FIXME: right here, checking if the following number carries all tht way through
             this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive] = {
                 startPos_x1GreaterThanX2: pooper1,
                 startPos_y1GreaterThanY2: pooper2
             }
         }
-        let flipFlag = this.detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], this.parallelFigureObj)
+
+        // let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], parFigureObj, index)
+        let flipFlag = detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], this.parallelFigureObj, modifiedIndex)
+
         const flipFlagAndFunction = (flipFlag, endPOINT) => {
             if (flipFlag) {
                 endPOINT.arc.arcFlag = +!endPOINT.arc.arcFlag
+                // endPOINT.arc.exist = false
                 console.log("AAAAA_BBBBB_")
+                console.log(endPOINT.arc.arcFlag)
             }
         }
+
+        // flipFlagAndFunction(flipFlag, thisTargetEndPoint)
+        // updateReferenceFigures(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this)
         flipFlagAndFunction(flipFlag, thisTargetEndPoint)
         updateReferenceFigures(modifiedIndex, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, this)
     } else {
+        // console.log("FLIPPER__dont_set")
+        // console.log(index)
         console.log("FLIPPER__dont_set")
+        console.log(modifiedIndex)
     }
+    console.log(" ")
 }
 
-LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryPoint) {
+function detectCrossover(movingPoint, stationaryPoint, parFigureObj, index) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]
     let x2 = stationaryPoint[0]
@@ -83,10 +157,10 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    if(this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+    if(parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         flipFlag = true
-        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
-        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
+        parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
+        parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !parFigureObj.arrayOfArcFlagsInitPos[parFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
         return flipFlag
     } else {
         console.log("AAAAA_NO_CROSS")

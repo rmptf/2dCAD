@@ -1,9 +1,11 @@
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
 function IntersectionsSorter_WithArc(parallelFigure) {
-    this.ParFigure = parallelFigure
-    this.IntersectionHandler = new IntersectionHandler_WithArc(this.ParFigure)
-    this.parallelPathDatas = this.ParFigure.parallelFigurePathDatas
+    // this.PARFIGURE = parallelFigure
+    this.parallelFigureObj = parallelFigure.parallelFigureObject
+    this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure)
+    this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
+    this.index = null
 
     this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
@@ -14,120 +16,123 @@ function IntersectionsSorter_WithArc(parallelFigure) {
 
     this.intersectionSorterObject = {
         index: null,
-        arcRadiusParDistAndDir: null
+        // arcRadiusParDistAndDir: null // maybe can go into handler? // MOVED
     }
+}
+
+IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
+    this.index = index
+    this.IntersectionHandler.index = index
+    this.IntersectionHandler.ArcFlagSetter.index = index
+    this.IntersectionHandler.Intersection_Contact.index = index
 }
 
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
-    let index = this.intersectionSorterObject.index
-    if(!this.firstPosition(index)) {
+    if(!this.firstPosition(this.index)) {
         switch(true) {
-            case this.isJoiner(index):
-            case this.isJoiner(index - 1):
-                handleDisconnectedArcIntersection(this.ParFigure, this)
+            case this.isJoiner(this.index):
+            case this.isJoiner(this.index - 1):
+                this.handleDisconnectedArcIntersection()
                 break
             default:
-                handleDefaultArcIntersection(this.ParFigure, this)
+                this.handleDefaultArcIntersection()
         }
-    } else if (this.firstPosition(index)) {
+    } else if (this.firstPosition(this.index)) {
         switch(true) {
-            case this.isJoiner(index):
-                handleDisconnectedArcIntersection(this.ParFigure, this)
+            case this.isJoiner(this.index):
+                this.handleDisconnectedArcIntersection()
                 break
             default:
-                handleDefaultArcIntersection(this.ParFigure, this)
+                this.handleDefaultArcIntersection()
         }
     }
 }
 
-function handleDefaultArcIntersection(parFigure, intXSorter) {
+IntersectionsSorter_WithArc.prototype.handleDefaultArcIntersection = function() {
     // 1
-    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {
-        case parFigure.parallelFigureObject.parallelPathSegmentCounter_FIRST === 0:
-            handleFirctArcSegment(parFigure, intXSorter)
+        case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
+            this.handleFirctArcSegment()
             break
         default:
-            handleSecondArcSegment(parFigure, intXSorter)
+            this.handleSecondArcSegment()
     }
     // Final
-    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 }
 
-function handleFirctArcSegment(parFigure, intXSorter) {
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
+IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {
     // 2
-    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction(parFigure)
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
     switch(true) {
-        case !intXSorter.firstPosition(index):
-            intXSorter.arcExist(index - 1) ?
+        case !this.firstPosition(this.index):
+            this.arcExist(this.index - 1) ?
                 // 3
-                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
+                this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() :
                 // 4
-                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc();
+                this.IntersectionHandler.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc();
             break
         // 5
-        default: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
+        default: this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     }
-    if(!intXSorter.firstPosition(index)) {
+    if(!this.firstPosition(this.index)) {
         switch(true) {
             // 6_A
-            case intXSorter.arcExist(index + 1): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
+            case this.arcExist(this.index + 1): this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
             // 6_B
-            default: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
+            default: this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
         }
     }
 }
 
-function handleSecondArcSegment(parFigure, intXSorter) {
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
+IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // 7
-    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
     switch(true) {
-        case !intXSorter.lastPosition(index):
-            if(intXSorter.arcExist(index + 1)) {
-                if(!intXSorter.includes(["AAA", "BBB", "CCC"], index + 1)) {
+        case !this.lastPosition(this.index):
+            if(this.arcExist(this.index + 1)) {
+                if(!this.includes(["AAA", "BBB", "CCC"], this.index + 1)) {
                     // 8_A
-                    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+                    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
                 } else {
                     // 8_B
-                    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected()
+                    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected()
                 }
             } else {
                 // 9
-                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+                this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
             }
             break
             // 10
-        default: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+        default: this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
     }
     // 11
-    parFigure.IntersectionsSorter_WithArc.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
 }
 
-function handleDisconnectedArcIntersection(parFigure, intXSorter) {
-    let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index
+IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function() {
     switch(true) {
         // 1_Joiner
-        case intXSorter.joinerType(index, "AAA"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
-        case intXSorter.joinerType(index - 1, "AAA"): 
-        intXSorter.arcExist(index + 1) ?
+        case this.joinerType(this.index, "AAA"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
+        case this.joinerType(this.index - 1, "AAA"): 
+        this.arcExist(this.index + 1) ?
                 // 2_A_Joiner
-                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() // TODO: (Set_arcRad)
+                this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() // TODO: (Set_arcRad)
                 :
                 // 2_B_Joiner
-                parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
+                this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
             break
         // 3_Joiner
-        case intXSorter.joinerType(index, "CCC"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
+        case this.joinerType(this.index, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
         // 4_Joiner
-        case intXSorter.joinerType(index - 1, "CCC"):
-            parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); // TODO: (Set_arcRad)
+        case this.joinerType(this.index - 1, "CCC"):
+            this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); // TODO: (Set_arcRad)
             break
         // 5_Joiner
-        case intXSorter.joinerType(index, "BBB"): parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
+        case this.joinerType(this.index, "BBB"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         // 6_Joiner
-        case parFigure.parallelFigureObject.skipperCheckers.skipperChecker_Arc: parFigure.IntersectionsSorter_WithArc.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
+        case this.parallelFigureObj.skipperCheckers.skipperChecker_Arc: this.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
     }
 }
 
