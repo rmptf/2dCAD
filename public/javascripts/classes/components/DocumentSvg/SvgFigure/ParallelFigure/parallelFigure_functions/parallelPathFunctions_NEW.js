@@ -250,7 +250,8 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
 
 
 // let intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData, self)
-function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
+// function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
+function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
     console.log("p2a_INT")
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}

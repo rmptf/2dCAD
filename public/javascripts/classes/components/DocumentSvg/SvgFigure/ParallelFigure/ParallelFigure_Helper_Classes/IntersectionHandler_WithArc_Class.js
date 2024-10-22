@@ -10,7 +10,7 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.intersectionHandlerObject = {
         isIntersectionConnected: true,
     }
-    
+
     this.ArcFlagSetter = new LargeArcFlagSetter(parallelFigure)
     this.Intersection_Contact = new Intersection_Contact(parallelFigure)
 
@@ -268,7 +268,8 @@ IntersectionHandler_WithArc.prototype.handleIntersectionArcToPath = function() {
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.arcToPathIndexArray.push(this.index + 1)
     }
-    this.Intersection_Contact.handleArcToPathIntersection()
+    // this.Intersection_Contact.handleArcToPathIntersection()
+    this.Intersection_Contact.handleAllIntersections('a2p')
     if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
         this.parallelFigureObj.arcToPathCounter -= 1
     }
@@ -279,7 +280,8 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionPathToArc = function(
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.pathToArchIndexArray.push(this.index);
     }
-    this.Intersection_Contact.handlePathToArcIntersection()
+    // this.Intersection_Contact.handlePathToArcIntersection()
+    this.Intersection_Contact.handleAllIntersections('p2a')
 }
 
 IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function() {
@@ -287,7 +289,8 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function()
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.arcToArcIndexArray.push(this.index);
     }
-    this.Intersection_Contact.handleArcToArcIntersection()
+    // this.Intersection_Contact.handleArcToArcIntersection()
+    this.Intersection_Contact.handleAllIntersections('a2a')
 }
 
 IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {

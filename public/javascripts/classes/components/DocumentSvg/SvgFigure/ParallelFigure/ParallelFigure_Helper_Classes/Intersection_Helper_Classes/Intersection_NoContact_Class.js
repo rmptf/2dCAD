@@ -1,29 +1,15 @@
-// import {getPathToArcIntersections, findPointAlongSlopeAtDistance, getArcToArcIntersections} from '../../drawParallelPath_functions/parallelPathFunctions.js'
-// import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../../animate/updateSvg_forTesting/updateSvg_forTests.js'
-// import {findLineMidpoint} from '../../../../math/mathFunctions.js'
 import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
-//FIXME: MAKE CLASS
-//FIXME: MAKE CLASS
-//FIXME: MAKE CLASS
+// function Intersection_NoContact(parallelFigure) {
+//     this.PARFIGURE = parallelFigure
+//     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+//     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+//     this.parFigureObject = parallelFigure.parallelFigureObject
+//     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
+//     this.index = null
+// }
 
-
-//other
-//new
-// function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
-//     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
-//     let prevIndex = index - 1
-//     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
-//     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
-//this
-//old
-// handlePathToArcIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index)
-// function handlePathToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
-//new
 function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
-    // let prevIndex = index - 1
-
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
@@ -39,10 +25,6 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
     let sixthParPath = targetEndPointsParallelFull[prevIndex + 2][1]
     let seventhParPath = targetEndPointsParallelFull[prevIndex + 3][0]
 
-    // old
-    // let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath)
-    // new
-    // fix later
     let pathToArcIntPoint = getPathToArcIntersections(firstParPath, secondParPath, sixthParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([sixthParPath.arc.center.x,sixthParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], sixthParPath.arc.radius)
 
@@ -66,8 +48,6 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
 
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
         console.log("Remove_Points_and_Paths")
-        // //this
-        //new
         let thisIndex = index + 0
         let nextIndex = index + 2
         let doubleIndex = thisIndex * 2
@@ -93,48 +73,10 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
         svgEndPointGroup.splice(doubleIndex + 1, 1)
         svgEndPointGroup.splice(doubleIndex, 1)
         svgPathGroup.splice(thisIndex, 1)
-
-        // //old
-        // // Remove Points and paths
-        // let thisIndex = index
-        // let doubleIndex = thisIndex * 2
-
-        // // Remove elements from various arrays
-        // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-        // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // referenceEndPointsBaseAndFillers.splice(thisIndex, 1)   //FIXME: (Difference from other here)
-        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
-
-        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
-        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
-
-        // // Remove SVG elements from the DOM
-        // firstAddedSvgEndPoint.remove()
-        // secondAddedSvgEndPoint.remove()
-        // addedSvgPath.remove()
     }
 }
 
-
-//other
-// function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
-//     // let prevIndex = index - 1
-
-//     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
-//     let prevIndex = index - 1
-//     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
-//     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
-
-// handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)
-// function handleArcToPathIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
 function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
-    // let prevIndex = index - 1
-
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
 
@@ -149,10 +91,6 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
     let fourthParPath = targetEndPointsParallelFull[prevIndex + 3][0]
     let fifthParPath = targetEndPointsParallelFull[prevIndex + 3][1]
 
-    // old
-    // let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath)
-    // new
-    // fix later
     let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
 
@@ -179,8 +117,6 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
         // fifthParPath.coords.y = 250
 
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
-        //this
-        //new
         console.log("Remove_Points_and_Paths")
         let thisIndex = index + 1
         let nextIndex = index + 2
@@ -207,59 +143,9 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
         svgEndPointGroup.splice(doubleIndex + 1, 1)
         svgEndPointGroup.splice(doubleIndex, 1)
         svgPathGroup.splice(thisIndex, 1)
-        
-
-        // old
-        // console.log("Remove_Points_and_Paths")
-        // // Remove Points and paths
-        // let thisIndex = index + 1
-        // let nextIndex = index + 2
-        // let doubleIndex = thisIndex * 2
-        // // Remove elements from various arrays
-        // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-        // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
-        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
-
-        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
-        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
-
-        // // Remove SVG elements from the DOM
-        // firstAddedSvgEndPoint.remove()
-        // secondAddedSvgEndPoint.remove()
-        // addedSvgPath.remove()
-
-        // other
-        // old
-        // console.log("Remove_Points_and_Paths")
-        // let thisIndex = index + 1
-        // let nextIndex = index + 2
-        // let doubleIndex = thisIndex * 2
-        // // Remove elements from various arrays
-        // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-        // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
-        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
-
-        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
-        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
-
-        // // Remove SVG elements from the DOM
-        // firstAddedSvgEndPoint.remove()
-        // secondAddedSvgEndPoint.remove()
-        // addedSvgPath.remove()
     }
 }
 
-// function handleArcToArcIntersectionNoContact(targetEndPointsParallelFull, referenceEndPointsParallelPerpendicular, referenceEndPointsBaseAndFillers, documentFigureCount, self, index) {
 function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
@@ -276,12 +162,7 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
-    // console.log("boobssssdfdsf")
-    // console.log(pathToArcIntPoint)
-
     if(arcToArcIntPoint[0].doesIntersect === false) {
-
-        // old
         // before first point
         // zeroParPath.coords.x = 100
         // zeroParPath.coords.y = 10
@@ -338,25 +219,6 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
         svgEndPointGroup.splice(doubleIndex + 1, 1)
         svgEndPointGroup.splice(doubleIndex, 1)
         svgPathGroup.splice(thisIndex, 1)
-
-        //old
-        // // Remove elements from various arrays
-        // a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(doubleIndex, 2)
-        // a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[documentFigureCount][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL].splice(thisIndex, 1)
-        // referenceEndPointsBaseAndFillers.splice(nextIndex, 1)
-        // referenceEndPointsParallelPerpendicular.splice(thisIndex, 1)
-
-        // let svgEndPointGroup = self.parallelEndPointGroup._groups[0][0]
-        // let svgPathGroup = self.parallelPathGroup._groups[0][0]
-        // let firstAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex + 1]
-        // let secondAddedSvgEndPoint = svgEndPointGroup.childNodes[doubleIndex]
-        // let addedSvgPath = svgPathGroup.childNodes[thisIndex]
-
-        // // Remove SVG elements from the DOM
-        // firstAddedSvgEndPoint.remove()
-        // secondAddedSvgEndPoint.remove()
-        // addedSvgPath.remove()
     }
 }
 
@@ -365,3 +227,7 @@ export {
     handleArcToPathIntersectionNoContact,
     handleArcToArcIntersectionNoContact
 }
+
+// export {
+//     Intersection_NoContact
+// }
