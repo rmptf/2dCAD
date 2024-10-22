@@ -25,6 +25,7 @@ IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
     this.IntersectionHandler.index = index
     this.IntersectionHandler.ArcFlagSetter.index = index
     this.IntersectionHandler.Intersection_Contact.index = index
+    this.IntersectionHandler.Intersection_NoContact.index = index
 }
 
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {

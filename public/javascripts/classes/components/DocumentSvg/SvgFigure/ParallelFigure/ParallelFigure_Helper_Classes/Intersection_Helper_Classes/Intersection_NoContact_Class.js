@@ -1,15 +1,17 @@
 import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
-// function Intersection_NoContact(parallelFigure) {
-//     this.PARFIGURE = parallelFigure
-//     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-//     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-//     this.parFigureObject = parallelFigure.parallelFigureObject
-//     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
-//     this.index = null
-// }
+function Intersection_NoContact(parallelFigure) {
+    this.PARFIGURE = parallelFigure
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+    this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    this.parFigureObject = parallelFigure.parallelFigureObject
+    // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
+    this.index = null
+}
 
-function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
+// function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
+Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function(indexModifier) {
+    let parFigure = this.PARFIGURE
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
@@ -76,7 +78,9 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
     }
 }
 
-function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
+// function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
+Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function(indexModifier) {
+    let parFigure = this.PARFIGURE
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
 
@@ -146,7 +150,9 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
     }
 }
 
-function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
+// function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
+Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(indexModifier) {
+    let parFigure = this.PARFIGURE
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
@@ -223,11 +229,5 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
 }
 
 export {
-    handlePathToArcIntersectionNoContact,
-    handleArcToPathIntersectionNoContact,
-    handleArcToArcIntersectionNoContact
+    Intersection_NoContact
 }
-
-// export {
-//     Intersection_NoContact
-// }
