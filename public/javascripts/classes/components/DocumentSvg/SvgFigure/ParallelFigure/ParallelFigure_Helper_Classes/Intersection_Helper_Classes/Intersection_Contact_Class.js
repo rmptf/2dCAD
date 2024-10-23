@@ -2,7 +2,7 @@ import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_fu
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function Intersection_Contact(parallelFigure) {
-    this.PARFIGURE = parallelFigure
+    this.PARFIGURE = parallelFigure // FIXME: still used
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parFigureObject = parallelFigure.parallelFigureObject

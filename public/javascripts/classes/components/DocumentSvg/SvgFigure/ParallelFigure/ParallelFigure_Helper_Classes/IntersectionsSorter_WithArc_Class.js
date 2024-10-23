@@ -26,6 +26,13 @@ IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
     this.IntersectionHandler.ArcFlagSetter.index = index
     this.IntersectionHandler.Intersection_Contact.index = index
     this.IntersectionHandler.Intersection_NoContact.index = index
+
+    // other things that might need updating:
+    // Contact:
+    // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
+    // NoContact:
+    // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
+    // this.parFigureSvgPaths = parallelFigure.svgPaths
 }
 
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
