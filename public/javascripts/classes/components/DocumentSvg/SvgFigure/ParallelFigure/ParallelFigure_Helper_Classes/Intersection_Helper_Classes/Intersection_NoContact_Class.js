@@ -1,7 +1,7 @@
 import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function Intersection_NoContact(parallelFigure) {
-    this.PARFIGURE = parallelFigure
+    this.PARFIGURE = parallelFigure //FIXME: still used
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
@@ -9,7 +9,7 @@ function Intersection_NoContact(parallelFigure) {
 
     this.index = null
 
-    // might have to update manually like index
+    // might have to update manually like index //FIXME:
     // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
     // this.parFigureSvgPaths = parallelFigure.svgPaths
 }

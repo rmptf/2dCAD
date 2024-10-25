@@ -40,7 +40,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let intersectPoint
     switch (shape) {
         case "a2a":
-            intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData, this.index)
+            intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
             break
         case "p2a":
             intersectPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
@@ -58,10 +58,10 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "p2a":
-                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, thisIndex, shape)
+                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, thisIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "a2p":
-                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape)
+                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
             }
         } else {

@@ -90,7 +90,7 @@ function ParallelFigure(svgFigure, docSvgD3, docSvgHtml, sectionIndex) {
 
     addPaths(this.originalFigurePathDatas, this)
     addEndPoints(this.originalFigurePathDatas, this)
-    this.setParallelFigureClickEvents(docSvgD3)
+    this.setParallelFigureClickEvents(svgFigure.documentSvgD3)
 
 
     // console.log("why different?")
@@ -248,6 +248,16 @@ ParallelFigure.prototype.parallelFigure_updateSvg = function() {
     updateSVG_thisSvgParallelFigure(this)
 }
 
+ParallelFigure.prototype.initiateFigure = function() {
+    this.SvgFigure.parallelFigure = this
+    console.log("")
+    console.log("")
+    console.log("")
+    console.log("PARPATH_STARTED")
+    console.log(this.parallelFigurePathDatas)
+    console.log(this.parallelFigurePathDatas_transformed)
+    this.parallelFigure_updateSvg()
+}
 
 ParallelFigure.prototype.createParallelPathData = function(passedPathData, index) {
     let pathDatas = []

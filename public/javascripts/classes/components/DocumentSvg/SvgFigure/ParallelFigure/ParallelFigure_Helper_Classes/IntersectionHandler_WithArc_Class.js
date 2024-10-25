@@ -6,7 +6,7 @@ import {findPointAlongSlopeAtDistance} from '../../../../../../functions/draftin
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
-    this.PARFIGURE = parallelFigure
+    // this.PARFIGURE = parallelFigure
     
     this.intersectionHandlerObject = {
         isIntersectionConnected: true,
@@ -115,7 +115,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     // 1_Joiner
     console.log("1_Joiner_ooo")
     this.parallelFigureObj.pathToArcCounter += 1
-    // handlePathToArcIntersectionNoContact(this.PARFIGURE, 0)
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
@@ -142,7 +141,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     console.log("3_Joiner_ooo")
     this.parallelFigureObj.arcToArcCounter += 1
     this.setArcRadius(1, "arcRad_4J")
-    // handleArcToArcIntersectionNoContact(this.PARFIGURE, -1)
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
@@ -298,7 +296,6 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function()
 }
 
 IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {
-    // handleArcToPathIntersectionNoContact(this.PARFIGURE, -1)
     this.Intersection_NoContact.handleArcToPathIntersectionNoContact(-1)
 }
 
