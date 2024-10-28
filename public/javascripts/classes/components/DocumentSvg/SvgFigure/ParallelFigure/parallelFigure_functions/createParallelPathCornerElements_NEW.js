@@ -26,6 +26,10 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let thisSvgEndPointIndex = (index * 2) + 1
     let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
     let thisSvgPathIndex = index + 1
+    // // // FIXME: remove the + 1 and remove the - 1 at 
+    // // let thisSvgEndPointIndex = (index * 2)
+    // // let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
+    // // let thisSvgPathIndex = index
 
     // parallelFigurePathDatas
     let thisParPathData = parallelFigurePathDatas[index][0]
@@ -45,22 +49,11 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let doubleIndex = index * 2
     parallelFigure.createFillerParallelEndPoint(data1, thisSvgEndPointIndex - 1, doubleIndex)
     parallelFigure.createFillerParallelEndPoint(data2, nextSvgEndPointIndex - 1, doubleIndex)
+    // parallelFigure.createFillerParallelEndPoint(data2, doubleIndex, 2)
+    // parallelFigure.createFillerParallelEndPoint(data1, doubleIndex, 1)
 
-    parallelFigure.createFillerParallelPath(thisSvgPathIndex - 1, index)
-    
-    // console.log("dfsdfsdfsdfsdfsdf")
-    // console.log(parallelFigurePathDatas)
-    // console.log(referenceEndPointsParallelPerpendicular)
-    // console.log(referenceEndPointsBaseAndFillers)
-    // console.log('index')
-    // console.log(passedIndex)
-    // console.log(index)
-    // console.log(indexer)
-    // console.log(thisSvgEndPointIndex)
-    // console.log(nextSvgEndPointIndex)
-    // console.log(thisSvgPathIndex)
-    // console.log("code")
-    // console.log(sideCode)
+    parallelFigure.createFillerParallelPath(thisSvgPathIndex, index)
+    // parallelFigure.createFillerParallelPath(index, index)
 }
 
 export {
@@ -81,23 +74,10 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let thisBaseRefCoords = thisBaseRefNoFiller.coords
     let nextBaseRefCoords = nextBaseRefNoFiller.coords
 
-    // console.log(referenceEndPointsBaseAndFillers[index - 1])
-    // console.log(referenceEndPointsBaseAndFillers[index])
-    // console.log(referenceEndPointsBaseAndFillers[index + 1])
-    // console.log(prevBaseRefNoFiller)
-    // console.log(thisBaseRefNoFiller)
-    // console.log(nextBaseRefNoFiller)
-    // updateSVG_highlight_1_point_01([prevBaseRefCoords.x, prevBaseRefCoords.y], self)
-    // updateSVG_highlight_1_point_02([thisBaseRefCoords.x, thisBaseRefCoords.y], self)
-    // updateSVG_highlight_1_point_03([nextBaseRefCoords.x, nextBaseRefCoords.y], self)
-    // updateSVG_highlight_1_point_04([thisBaseRefArc.center.x, thisBaseRefArc.center.y], self)
-
     // both arcs exist
-    // if(prevBaseRefArc.exist && nextBaseRefArc.exist) {
     if(thisBaseRefArc.exist && nextBaseRefArc.exist) {
         console.log(111)
         // both arcs have different sweep flags
-        // if(prevBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
         if(thisBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
             let direction
             if(thisBaseRefCoords.y > prevBaseRefCoords.y && thisBaseRefCoords.y > nextBaseRefCoords.y) {
@@ -135,21 +115,16 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
                 }
             }
         // both arcs have the same sweep flags
-        // } else if(prevBaseRefArc.sweepFlag === nextBaseRefArc.sweepFlag) {
         } else if(thisBaseRefArc.sweepFlag === nextBaseRefArc.sweepFlag) {
-            // prevBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
             nextBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
         }
     }
     // only one arc; prev index is arc
-    // if(prevBaseRefArc.exist && !nextBaseRefArc.exist) {
     if(thisBaseRefArc.exist && !nextBaseRefArc.exist) {
         console.log(222)
-        // prevBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
         thisBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
     // only one arc; next index is arc
-    // if(!prevBaseRefArc.exist && nextBaseRefArc.exist) {
     if(!thisBaseRefArc.exist && nextBaseRefArc.exist) {
         console.log(333)
         nextBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0

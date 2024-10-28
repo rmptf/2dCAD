@@ -141,12 +141,12 @@ SvgFigure.prototype.createPrimaryEndPoint_splice = function(figure, parentElemen
 
 
 
-SvgFigure.prototype.createParallelFigure = function(sectionIndex) {
-    let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML, sectionIndex)
-    this.parallelFigure = newParallelFigure
+// SvgFigure.prototype.createParallelFigure = function(sectionIndex) {
+//     let newParallelFigure = new ParallelFigure(this, this.documentSvgD3, this.documentSvgHTML, sectionIndex)
+//     this.parallelFigure = newParallelFigure
 
-    return newParallelFigure
-}
+//     return newParallelFigure
+// }
 
 
 

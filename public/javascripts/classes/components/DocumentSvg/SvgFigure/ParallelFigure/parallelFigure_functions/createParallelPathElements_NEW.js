@@ -34,12 +34,11 @@ function createParallelPathDatas(originalFigurePathDatas) {
             newPathData01.setAllData(thisPlugItIn)
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
+
+            console.log([newPathData01, newPathData02])
         }
 
         return parallelFigurePathDatas
-
-        // Update the SVG using the updated data
-        // updateSVG_parallelPathAndPoints(a_canvas_globalVars.parallelFigure_svgElements_endPoints_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_svgElements_paths_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL], a_canvas_globalVars.parallelFigure_data_pathDatas_array_GLOBAL[originalFigure_counter_groupCount_GLOBAL][a_canvas_globalVars.parallelFigure_counter_groupCount_GLOBAL])
 }
 
 // Define a function to transform data from one array to a new one

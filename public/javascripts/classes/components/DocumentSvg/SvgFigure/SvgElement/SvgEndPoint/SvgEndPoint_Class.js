@@ -13,11 +13,15 @@ function SvgEndPoint(parentFigure, parentElement, pathData, index) {
 }
 
 SvgEndPoint.prototype.createSvgEndPoint = function(index) {
+    console.log("asssssss_5555")
+    console.log(index)
     let newEndPoint = this.parentElement.insert(this.ELEMENT, ':nth-child(' + (index + 1) + ')') // D3.JS index's first pos as 1 (not 0) when using 'nth-child' so 1 is added to index
     // let newEndPoint = this.parentElement.append(this.ELEMENT)
         .attr('class', this.CLASSNAME)
         // .on("click", (event) => this.elementClick(event, this.actionStates, this.parentFigure, this.pathData))
         // .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
+    console.log('asssssss_5555_BBB')
+    console.log(newEndPoint)
     return newEndPoint
 }
 
