@@ -34,8 +34,7 @@ function createParallelPathDatas(originalFigurePathDatas) {
             newPathData01.setAllData(thisPlugItIn)
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
-
-            console.log([newPathData01, newPathData02])
+            // console.log([newPathData01, newPathData02])
         }
 
         return parallelFigurePathDatas

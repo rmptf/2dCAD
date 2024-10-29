@@ -42,56 +42,14 @@ function updateSVG_thisSvgParallelFigure(figure) {
     // PARALLEL END POINTS
     let endPoints = figure.svgEndPoints
     let k = -1
-    // let p = parallelPaths.length + 1
     for (let i = 0; i < parallelPaths.length; i++) {
         for (let j = 0; j < parallelPathDatas[i].length; j++) {
             k = k + 1
-            // p = p - 1
-            console.log('start')
-            console.log('length')
-            console.log(parallelPaths.length)
-            console.log('lenthcount')
-            console.log(i)
-            console.log('data count')
-            console.log(j)
-            console.log('endpoint')
-            console.log(k)
-            // console.log(p)
-            console.log('end')
             endPoints[k].svgElementObject
                 .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
-
-            console.log('coords')
-            console.log(parallelPathDatas[i][j].coords)
-            // if(!isEven(i)) {
-            //     // p = p - 1
-            //     endPoints[p].svgElementObject
-            //     .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
-            // } else {
-            //     // k = k + 1
-            //     endPoints[k].svgElementObject
-            //     .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
-            // }
         }
-
-
-        function isEven(number) {
-            return number % 2 === 0;
-          }
     }
     // PARALLEL END POINTS
-
-    // let k = -1
-    // for (let i = 0; i < parallelPathsArray.length; i++) {
-    //     for (let j = 0; j < parallelPathData[i].length; j++) {
-    //         k = k + 1
-    //         let endPoint1 = d3.select(parallelEndPointsArray[k]._groups[0][0])
-    //         endPoint1.attr('cx', parallelPathData[i][j].coords.x).attr('cy', parallelPathData[i][j].coords.y)
-    //             // .style('r', 5)
-    //     }
-    // }
-
-
 }
 
 export {
