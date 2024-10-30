@@ -132,6 +132,22 @@ ParallelFigure.prototype.addPaths = function() {
 }
 
 ParallelFigure.prototype.addEndPoints = function() {
+    // new new with switch
+    let m = -1
+    for (let i = 0; i < this.originalFigurePathDatas.length; i++) {
+        switch(true) {
+        case i !== 0 && i !== this.originalFigurePathDatas.length - 1:
+            m = m + 1
+            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+            m = m + 1
+            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+            break
+        default:
+            m = m + 1
+            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+        }
+    }
+
     // old old: wrong
     // for (let i = 0; i < this.originalFigurePathDatas.length - 1; i++) {
     //     console.log(this.originalFigurePathDatas[i])
@@ -156,51 +172,44 @@ ParallelFigure.prototype.addEndPoints = function() {
     // this.createParallelEndPoint(this.originalFigurePathDatas[4], 7)
     // // this.createParallelEndPoint(this.originalFigurePathDatas[4], 8)
 
-    console.log(this.svgEndPoints[0])
-    // new
-    let m = -1
-    console.log(this.originalFigurePathDatas.length - 1)
-    for (let i = 0; i < this.originalFigurePathDatas.length; i++) {
-        
-        // console.log(this.svgEndPoints[i].svgElementObject._groups[0][0])
-        // switch(true) {
-        //     case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
-        //         this.handleFirctArcSegment()
-        //         break
-        //     default:
-        //         this.handleSecondArcSegment()
-        // }
-        console.log("i: " + i)
-        if(i === 0) {
-            console.log('first')
-            m = m + 1
-            console.log(i)
-            console.log(m)
-            console.log(this.originalFigurePathDatas[i])
-            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
-        } if(i === this.originalFigurePathDatas.length - 1) {
-            console.log('last')
-            m = m + 1
-            console.log(i)
-            console.log(m)
-            console.log(this.originalFigurePathDatas[i])
-            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
-        } if(i !== 0 && i !== this.originalFigurePathDatas.length - 1) {
-            console.log('mid')
-            m = m + 1
-            console.log(i)
-            console.log(m)
-            console.log(this.originalFigurePathDatas[i])
-            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
-            m = m + 1
-            console.log(i)
-            console.log(m)
-            console.log(this.originalFigurePathDatas[i])
-            this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
-        }
-        console.log("end_round")
-    }
-    console.log('end_loop')
+    // // new
+    // let m = -1
+    // // console.log(this.originalFigurePathDatas.length - 1)
+    // for (let i = 0; i < this.originalFigurePathDatas.length; i++) {
+    //     // switch(true) {
+    //     //     case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
+    //     //         this.handleFirctArcSegment()
+    //     //         break
+    //     //     default:
+    //     //         this.handleSecondArcSegment()
+    //     // }
+    //     // console.log("i: " + i)
+    //     if(i === 0) {
+    //         // console.log('first')
+    //         m = m + 1
+    //         // console.log(i)
+    //         // console.log(m)
+    //         this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+    //     } if(i === this.originalFigurePathDatas.length - 1) {
+    //         // console.log('last')
+    //         m = m + 1
+    //         // console.log(i)
+    //         // console.log(m)
+    //         this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+    //     } if(i !== 0 && i !== this.originalFigurePathDatas.length - 1) {
+    //         // console.log('mid')
+    //         m = m + 1
+    //         // console.log(i)
+    //         // console.log(m)
+    //         this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+    //         m = m + 1
+    //         // console.log(i)
+    //         // console.log(m)
+    //         this.createParallelEndPoint(this.originalFigurePathDatas[i], m)
+    //     }
+    //     // console.log("end_round")
+    // }
+    // // console.log('end_loop')
 }
 
 ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
@@ -331,6 +340,7 @@ ParallelFigure.prototype.createFillerParallelPath = function(index, index2) {
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
     let newEndPointParallel1 = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false)
     // this.svgEndPoints.push(newEndPointParallel)
+    console.log(newEndPointParallel1.svgElementObject._groups[0][0])
     this.svgEndPoints.splice(index, 0, newEndPointParallel1)
 }
 
