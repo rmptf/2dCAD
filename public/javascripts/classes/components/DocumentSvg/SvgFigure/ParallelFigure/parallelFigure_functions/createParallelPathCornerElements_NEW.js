@@ -22,15 +22,6 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
         sideCode = "CCC"
     }
 
-    // FIXME: remove the + 1 and remove the - 1 at 
-    let thisSvgEndPointIndex = (index * 2) + 1
-    let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-    let thisSvgPathIndex = index + 1
-    // // // FIXME: remove the + 1 and remove the - 1 at 
-    // // let thisSvgEndPointIndex = (index * 2)
-    // // let nextSvgEndPointIndex = thisSvgEndPointIndex + 1
-    // // let thisSvgPathIndex = index
-
     // parallelFigurePathDatas
     let thisParPathData = parallelFigurePathDatas[index][0]
     let data1 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
@@ -47,13 +38,10 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 
     let doubleIndex = index * 2
-    parallelFigure.createFillerParallelEndPoint(data1, thisSvgEndPointIndex - 1, doubleIndex)
-    parallelFigure.createFillerParallelEndPoint(data2, nextSvgEndPointIndex - 1, doubleIndex)
-    // parallelFigure.createFillerParallelEndPoint(data2, doubleIndex, 2)
-    // parallelFigure.createFillerParallelEndPoint(data1, doubleIndex, 1)
+    parallelFigure.createFillerParallelEndPoint(data2, doubleIndex, 2)
+    parallelFigure.createFillerParallelEndPoint(data1, doubleIndex, 1)
 
-    parallelFigure.createFillerParallelPath(thisSvgPathIndex, index)
-    // parallelFigure.createFillerParallelPath(index, index)
+    parallelFigure.createFillerParallelPath(index)
 }
 
 export {
