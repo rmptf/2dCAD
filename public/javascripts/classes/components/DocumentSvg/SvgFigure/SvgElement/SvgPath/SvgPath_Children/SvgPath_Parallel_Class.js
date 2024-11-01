@@ -5,6 +5,8 @@ import {SvgPath} from '../SvgPath_Class.js'
 function SvgPathParallel(thisFigure, parentElement, index, joinerFlag) {
     // Call the constructor of the parent class
     // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    this.PATH_CLASS = 'parallelPath'
+    this.PATH_JOINER_CLASS = 'joiner_path'
     this.joinerFlag = joinerFlag
     SvgPath.call(this, thisFigure, parentElement, index)
 }
@@ -16,13 +18,18 @@ SvgPathParallel.prototype.constructor = SvgPathParallel
 // Override the createSvgPath method
 SvgPathParallel.prototype.createSvgPath = function(index) {
     let newPathParallel = SvgPath.prototype.createSvgPath.call(this, index) // Call parent method
-        // .on("click", (event) => this.elementClick(event, this.actionStates))
+        .on("click", (event) => this.elementClick(event, this.actionStates))
         // .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.thisFigure, this.actionStates)))
-        newPathParallel.node().classList.add('parallelPath')
+        newPathParallel.node().classList.add(this.PATH_CLASS)
         if(this.joinerFlag === true) {
-            newPathParallel.node().classList.add('joiner_')
+            newPathParallel.node().classList.add(this.PATH_JOINER_CLASS)
         }
     return newPathParallel
+}
+
+SvgPathParallel.prototype.elementClick = function(event, actionStates) {
+    console.log('parallelPath_clicked')
+    console.log(this)
 }
 
 export {
