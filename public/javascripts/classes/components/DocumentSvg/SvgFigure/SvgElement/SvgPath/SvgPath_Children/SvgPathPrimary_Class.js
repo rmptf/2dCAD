@@ -5,6 +5,7 @@ import {SvgPath} from '../SvgPath_Class.js'
 function SvgPathPrimary(thisFigure, parentElement, actionStates, index) {
     // Call the constructor of the parent class
     // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    this.PATH_CLASS = 'mainPath' // change to primaryPath sometime
     SvgPath.call(this, thisFigure, parentElement, index)
     this.actionStates = actionStates
 }
@@ -18,7 +19,7 @@ SvgPathPrimary.prototype.createSvgPath = function(index) {
     let newPathPrimary = SvgPath.prototype.createSvgPath.call(this, index) // Call parent method
         .on("click", (event) => this.elementClick(event, this.actionStates))
         .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.thisFigure, this.actionStates)))
-        newPathPrimary.node().classList.add('mainPath') // change to primaryPath sometime
+        newPathPrimary.node().classList.add(this.PATH_CLASS)
     return newPathPrimary
 }
 

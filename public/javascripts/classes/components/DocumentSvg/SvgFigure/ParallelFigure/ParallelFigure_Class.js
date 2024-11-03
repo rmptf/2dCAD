@@ -3,7 +3,6 @@ import {SvgEndPointParallel} from '../SvgElement/SvgEndPoint/SvgEndPoint_Childre
 import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Parallel_Class.js'
 import {PathData} from '../SvgData/PathData_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
-import {createParallelPathDatas, transformData} from './parallelFigure_functions/createParallelPathElements_NEW.js'
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
@@ -16,8 +15,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // Figure Data
     this.originalFigurePathDatas = svgFigure.svgPathDatas
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
+    this.parallelFigurePathDatas = PathData.createParallelPathDatas(this.originalFigurePathDatas)
+    this.parallelFigurePathDatas_transformed = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
 
@@ -242,6 +241,21 @@ function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
     }
 }
 
+// Define a function to transform data from one array to a new one
+ParallelFigure.prototype.transformData = function() {
+    // Initialize a new array to store the transformed data
+    // Map through the oldArrayWithOriginalData and transform each element
+    let newArrayWithTransformedData = this.parallelFigurePathDatas.map(([point1, point2]) => (
+        [
+            // Create an object for the first and second points with x and y coordinates
+            { x: point1.coords.x, y: point1.coords.y },
+            { x: point2.coords.x, y: point2.coords.y }
+        ]
+    ))
+    return newArrayWithTransformedData
+}
+
+
 ParallelFigure.prototype.parallelFigure_updateSvg = function() {
     updateSVG_thisSvgParallelFigure(this)
 }
@@ -280,9 +294,9 @@ ParallelFigure.prototype.createFillerParallelPath = function(index) {
 
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
-    let newEndPointParallel1 = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false)
+    let newEndPointParallel1 = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[index], this.parallelFigurePathDatas)
     // this.svgEndPoints.push(newEndPointParallel)
-    // console.log(newEndPointParallel1.svgElementObject._groups[0][0])
+    console.log(newEndPointParallel1.svgElementObject._groups[0][0])
     this.svgEndPoints.splice(index, 0, newEndPointParallel1)
 }
 

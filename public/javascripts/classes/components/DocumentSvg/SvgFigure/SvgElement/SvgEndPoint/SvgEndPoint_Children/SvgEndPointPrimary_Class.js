@@ -26,7 +26,7 @@ SvgEndPointPrimary.prototype.createSvgEndPoint = function(index) {
 SvgEndPointPrimary.prototype.elementClick = function(event, actionStates) {
     // console.log('primaryEndPoint clicked.')
     // this.changeEndPointCurveClass()
-    console.log(this.pathData.arc.exist)
+    // console.log(this.pathData.arc.exist)
     if(
         // actionStates.addEndPointActive === false &&
         // actionStates.addEndPointActive_curve === false &&

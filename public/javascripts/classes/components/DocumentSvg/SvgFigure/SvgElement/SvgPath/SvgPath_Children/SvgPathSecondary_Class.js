@@ -9,6 +9,7 @@ import {saveFigureData} from '../../../../DocumentSvg_functions/saveFigureData_N
 function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
     // Call the constructor of the parent class
     // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
+    this.PATH_CLASS = 'secondaryPath'
     SvgPath.call(this, thisFigure, parentElement, index)
     this.actionStates = actionStates
 }
@@ -22,7 +23,7 @@ SvgPathSecondary.prototype.createSvgPath = function(index) {
     let newPathSecondary = SvgPath.prototype.createSvgPath.call(this, index) // Call parent method
         .on("click", (event) => this.elementClick(event, this.actionStates))
         .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.thisFigure, this.actionStates)))
-        newPathSecondary.node().classList.add('secondaryPath')
+        newPathSecondary.node().classList.add(this.PATH_CLASS)
     return newPathSecondary
 }
 

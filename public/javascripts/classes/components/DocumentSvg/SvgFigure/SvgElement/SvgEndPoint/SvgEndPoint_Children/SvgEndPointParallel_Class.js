@@ -1,12 +1,14 @@
 import {SvgEndPoint} from '../SvgEndPoint_Class.js'
 
-function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joinerFlag) {
+function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joinerFlag, PARPATHDATA, PARPATHDADAS) {
     this.ENDPOINT_CLASS = 'parallelEndPoint'
     this.ENDPOINT_CURVE_EAST_CLASS = 'paralellEndPoint_curve_east'
     this.ENDPOINT_CURVE_WEST_CLASS = 'paralellEndPoint_curve_west'
     this.ENDPOINT_JOINER_CLASS = 'joiner_endpoint'
     this.joinerFlag = joinerFlag
-    SvgEndPoint.call(this, parentFigure, parentElement, pathData, index)
+    this.pathData123 = PARPATHDATA
+    this.pooper = PARPATHDADAS
+    SvgEndPoint.call(this, parentFigure, parentElement, 'poop', index)
 }
 
 SvgEndPointParallel.prototype = Object.create(SvgEndPoint.prototype)
@@ -22,13 +24,13 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
         newEndPointParallel.node().classList.add(this.ENDPOINT_JOINER_CLASS)
     }
 
-    if(this.pathData.arc.exist === true && this.pathData.arc.side === 'west') {
-        newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_WEST_CLASS)
-    }
+    // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'west') {
+    //     newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_WEST_CLASS)
+    // }
 
-    if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
-        newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_EAST_CLASS)
-    }
+    // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
+    //     newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_EAST_CLASS)
+    // }
 
     return newEndPointParallel
 }
@@ -40,7 +42,9 @@ SvgEndPointParallel.prototype.elementDrag = function(event, parentFigure, pathDa
 
 SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {
     console.log('parallelEndPoint_clicked')
-    console.log(this)
+    console.log(this.pathData)
+    console.log(this.pathData123)
+    console.log(this.pooper)
 }
 
 export {
