@@ -2,7 +2,7 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     console.log("createAndAddSvgElementAndUpdateDataArrays")
 
     let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_transformed
+    let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
 
     let index
@@ -28,7 +28,7 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let data2 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     parallelFigure.createParallelPathData([data1, data2], index)
 
-    // parallelFigurePathDatas_transformed
+    // parallelFigurePathDatas_perpendicularProjections
     referenceEndPointsParallelPerpendicular.splice(index, 0, [
         {x: parallelFigurePathDatas[index][0].coords.x, y: parallelFigurePathDatas[index][0].coords.y},
         {x: parallelFigurePathDatas[index][1].coords.x, y: parallelFigurePathDatas[index][1].coords.y}

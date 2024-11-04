@@ -397,7 +397,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 
 // PASSED
 // parallelFigurePathDatas,
-// parallelFigurePathDatas_transformed,
+// parallelFigurePathDatas_perpendicularProjections,
 // originalFigurePathDatas_plusFillers,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
@@ -535,7 +535,7 @@ function handleLargeArcFlag(parFigure, flag) {
 
 
 // targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
-// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
+// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_perpendicularProjections
 // refEndPointsBase         ===         basePathDatasCopy                               ===         originalFigurePathDatas_plusFillers
 
     // OLD NAMES ORDER PASSED
@@ -569,7 +569,7 @@ function handleLargeArcFlag(parFigure, flag) {
     // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
     // this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-    // this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+    // this.parallelFigurePathDatas_perpendicularProjections = transformData(this.parallelFigurePathDatas)
 
 
 
@@ -598,7 +598,7 @@ function setArcRadius(parFigure, indexModifier, logId) {
     console.log(parFigure.originalFigurePathDatas_plusFillers)
     console.log(parFigure.originalFigurePathDatas)
     console.log(parFigure.parallelFigurePathDatas)
-    console.log(parFigure.parallelFigurePathDatas_transformed)
+    console.log(parFigure.parallelFigurePathDatas_perpendicularProjections)
 
 
     let parallelDistance = calcArcParDistance(parFigure, index)

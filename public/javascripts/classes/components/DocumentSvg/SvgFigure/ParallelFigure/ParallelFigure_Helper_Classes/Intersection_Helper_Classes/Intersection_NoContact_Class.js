@@ -4,7 +4,7 @@ function Intersection_NoContact(parallelFigure) {
     this.PARFIGURE = parallelFigure //FIXME: still used
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
+    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     this.parFigureObject = parallelFigure.parallelFigureObject
 
     this.index = null

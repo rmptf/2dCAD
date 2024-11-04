@@ -3,7 +3,7 @@ import {IntersectionHandler_NoArc} from './IntersectionHandler_NoArc_Class.js'
 function IntersectionsSorter_NoArc(parallelFigure) {
     // if want to pass individual vars to handler: these r missing:
     // this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
-    // this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
+    // this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
 
     this.IntersectionHandler = new IntersectionHandler_NoArc(parallelFigure)
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas

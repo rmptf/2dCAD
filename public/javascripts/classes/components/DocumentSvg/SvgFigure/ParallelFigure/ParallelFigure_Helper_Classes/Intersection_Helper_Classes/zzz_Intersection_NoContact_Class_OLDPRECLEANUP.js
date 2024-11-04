@@ -14,7 +14,7 @@ import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcInt
 //     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
 //     let prevIndex = index - 1
 //     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
+//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_perpendicularProjections
 //     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
 //this
 //old
@@ -27,7 +27,7 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
+    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
 
 
@@ -127,7 +127,7 @@ function handlePathToArcIntersectionNoContact(parFigure, indexModifier) {
 //     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
 //     let prevIndex = index - 1
 //     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
+//     let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_perpendicularProjections
 //     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
 
 // handleArcToPathIntersectionNoContact(targetEndPoints, refEndPointsPerp, refEndPointsBase, documentFigureCount, self, index - 1)
@@ -139,7 +139,7 @@ function handleArcToPathIntersectionNoContact(parFigure, indexModifier) {
     let prevIndex = index - 1
 
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
+    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
 
     let zeroParPath = targetEndPointsParallelFull[prevIndex + 1][0]
@@ -264,7 +264,7 @@ function handleArcToArcIntersectionNoContact(parFigure, indexModifier) {
     let index = parFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index + indexModifier
     let prevIndex = index - 1
     let targetEndPointsParallelFull = parFigure.parallelFigurePathDatas
-    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_transformed
+    let referenceEndPointsParallelPerpendicular = parFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parFigure.originalFigurePathDatas_plusFillers
 
     let zeroParPath = targetEndPointsParallelFull[prevIndex + 1][0]

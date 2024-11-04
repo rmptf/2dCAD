@@ -16,9 +16,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.originalFigurePathDatas = svgFigure.svgPathDatas
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
     this.parallelFigurePathDatas = PathData.createParallelPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas_transformed = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
+    this.parallelFigurePathDatas_perpendicularProjections = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
-
 
     // Svg Elements
     this.primaryFigureGroup =  svgFigure.svgGroups.secondarySvgGroupElements[4]
@@ -48,10 +47,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
         arcToPathIndexArray: [],
         arcToArcIndexArray: [],
         collectIndicesOfIntersections: true,
-        removeornot_allParData: true,
         parallelPathSegmentCounter_FIRST: -1,
         parallelPathSegmentCounter_SECOND: 0,
-        removeStartIndex: null,
         parallelDistance: null,
         iterationCounter: 0,
         // arc flag stuff
@@ -68,7 +65,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
             skipperChecker_Arc: false
         },
 
-        PARALLELPATHINITIATED: false
+        PARALLELPATHINITIATED: false                // never called never used
     }
     this.isDownDrawParallelActive = false
 
@@ -89,7 +86,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
 // PASSED
 // parallelFigurePathDatas,
-// parallelFigurePathDatas_transformed,
+// parallelFigurePathDatas_perpendicularProjections,
 // originalFigurePathDatas_plusFillers,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,

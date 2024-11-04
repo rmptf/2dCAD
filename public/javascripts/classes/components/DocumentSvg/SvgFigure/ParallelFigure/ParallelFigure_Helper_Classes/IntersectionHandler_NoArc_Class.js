@@ -3,17 +3,16 @@ import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/paral
 function IntersectionHandler_NoArc(parallelFigure) {
     this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
-    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_transformed
+    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     this.parallelFigureObj = parallelFigure.parallelFigureObject
-    this.origPathDataRefPointsForParPerpProj = null
+    // this.origPathDataRefPointsForParPerpProj = null
     this.index = null
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
     // AA_First_All
     console.log("AA_All")
-    this.getRefPointAtIndexIfNotFiller()
-    this.calcParallelProjections()
+    this.calcParallelProjections(this.getRefPointAtIndexIfNotFiller())
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_firstPos = function() {
@@ -93,51 +92,80 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_everyI
 // This function sorts through all the originalPathDatasPlusFillers and weeds out the fillers, then sets which
 // originalPathDatasPlusFillers should be used as a reference point to set the new Parallel Perpendicular Projected Points
 IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
-    let origPathDatasPlusFillers = this.originalPathDatasPlusFillers
-    let parPathObj = this.parallelFigureObj
+    // let origPathDatasPlusFillers = this.originalPathDatasPlusFillers
+    // let parPathObj = this.parallelFigureObj
+    // let thisOrigPathDataRefPtForParPerpProj
+    // let nextOrigPathDataRefPtForParPerpProj
+    // let fillerAdder = 0
+    // let nextFillerAdder = 0
+    // const isFiller = (index) => origPathDatasPlusFillers[index] === "filler"
+
+    // const isFiller = (index) => this.originalPathDatasPlusFillers[index] === "filler"
+
+    // if (isFiller(this.index) && !isFiller(this.index + 1)){
+    //     fillerAdder = 1
+    // }
+    // if (isFiller(this.index) && isFiller(this.index + 1)){
+    //     fillerAdder = -1
+    // }
+    // if (isFiller(this.index + 1)){
+    //     nextFillerAdder = 1
+    // }
+
+    // if (parPathObj.removeornot_allParData === true) {
+    //     thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
+    //     nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
+    // } else {
+    //     console.log("ISDJFIODSJFOSDIJFOSIDJOFSIJFISJ")
+    //     let thisRemoveIndex = parPathObj.removeStartIndex
+    //     let nextRemoveIndex = thisRemoveIndex + 1
+    //     if(this.index <= thisRemoveIndex) {
+    //         thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
+    //         nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
+    //     }
+    //     else if(this.index >= nextRemoveIndex) {
+    //         thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + fillerAdder]
+    //         nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 2 + nextFillerAdder]
+    //     }
+    //     else {
+    //         console.log("Not_Handled_RemoveIndex")
+    //     }
+    // }
+
+    // this.origPathDataRefPointsForParPerpProj = [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
+
+
     let thisOrigPathDataRefPtForParPerpProj
     let nextOrigPathDataRefPtForParPerpProj
     let fillerAdder = 0
     let nextFillerAdder = 0
-    const isFiller = (index) => origPathDatasPlusFillers[index] === "filler"
+    const isFiller = (index) => this.originalPathDatasPlusFillers[index] === "filler"
 
     if (isFiller(this.index) && !isFiller(this.index + 1)){
+        // console.log("do_I_run_111")
         fillerAdder = 1
     }
     if (isFiller(this.index) && isFiller(this.index + 1)){
+        // console.log("do_I_run_222")
         fillerAdder = -1
     }
     if (isFiller(this.index + 1)){
+        // console.log("do_I_run_333")
         nextFillerAdder = 1
     }
-    if (parPathObj.removeornot_allParData === true) {
-        thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
-        nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
-    } else {
-        let thisRemoveIndex = parPathObj.removeStartIndex
-        let nextRemoveIndex = thisRemoveIndex + 1
-        if(this.index <= thisRemoveIndex) {
-            thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + fillerAdder]
-            nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
-        }
-        else if(this.index >= nextRemoveIndex) {
-            thisOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 1 + fillerAdder]
-            nextOrigPathDataRefPtForParPerpProj = origPathDatasPlusFillers[this.index + 2 + nextFillerAdder]
-        }
-        else {
-            console.log("Not_Handled_RemoveIndex")
-        }
-    }
 
-    this.origPathDataRefPointsForParPerpProj = [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
+    thisOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + fillerAdder]
+    nextOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
+
+    return [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
 }
 
 // AA_FIRST_ALL
 // This takes the originalPathDataReferencePointsForParallelPerpendicularProjectionPoints and uses trig to set them AT the parallel perpendicular projection points
 // (in two places at once rn, find a place for it) (i think does the same job differently and for diferent purposes)
-IntersectionHandler_NoArc.prototype.calcParallelProjections = function() {
-    let thisPathDataCoords = this.origPathDataRefPointsForParPerpProj[0].coords
-    let nextPathDataCoords = this.origPathDataRefPointsForParPerpProj[1].coords
+IntersectionHandler_NoArc.prototype.calcParallelProjections = function(origPathDataRefPointsForParPerpProj) {
+    let thisPathDataCoords = origPathDataRefPointsForParPerpProj[0].coords
+    let nextPathDataCoords = origPathDataRefPointsForParPerpProj[1].coords
     let parallelDistance = this.parallelFigureObj.parallelDistance
 
     // Calculate the angle and sine/cosine values
@@ -197,7 +225,7 @@ export {
 
 
 // targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
-// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
+// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_perpendicularProjections
 
 // OLD NAMES ORDER PASSED
 // parallelPathDatas_globalRef,
@@ -230,5 +258,5 @@ export {
 // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
 // this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
 // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-// this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+// this.parallelFigurePathDatas_perpendicularProjections = transformData(this.parallelFigurePathDatas)
 

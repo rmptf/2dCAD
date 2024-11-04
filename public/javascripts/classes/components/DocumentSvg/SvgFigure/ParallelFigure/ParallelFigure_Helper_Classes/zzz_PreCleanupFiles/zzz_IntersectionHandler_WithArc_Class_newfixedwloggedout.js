@@ -555,7 +555,7 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
 
 
 // targetEndPoints          ===         parallelPathDatas_globalRef                     ===         parallelFigurePathDatas
-// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_transformed
+// refEndPointsPerp         ===         parallelPathDatasCopyForPerpendicular           ===         parallelFigurePathDatas_perpendicularProjections
 // refEndPointsBase         ===         basePathDatasCopy                               ===         originalFigurePathDatas_plusFillers
 
     // OLD NAMES ORDER PASSED
@@ -589,12 +589,12 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
     // this.originalFigurePathDatas = this.SvgFigure.svgPathDatas
     // this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas) // maybe change the name to indicate that this is where "fillers" are placed.
     // this.parallelFigurePathDatas = createParallelPathDatas(this.originalFigurePathDatas)
-    // this.parallelFigurePathDatas_transformed = transformData(this.parallelFigurePathDatas)
+    // this.parallelFigurePathDatas_perpendicularProjections = transformData(this.parallelFigurePathDatas)
 
 
 // PASSED
 // parallelFigurePathDatas,
-// parallelFigurePathDatas_transformed,
+// parallelFigurePathDatas_perpendicularProjections,
 // originalFigurePathDatas_plusFillers,
 // originalFigure_counter_groupCount_GLOBAL,
 // self,
