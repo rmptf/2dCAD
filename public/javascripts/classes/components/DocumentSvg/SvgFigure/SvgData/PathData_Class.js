@@ -5,8 +5,7 @@ function PathData() {
     this.coords = {
         x: null,
         y: null
-    },
-    // could create arc as child element of PathData?
+    }
     this.arc = {
         exist: false,
         radius: null,
@@ -18,27 +17,47 @@ function PathData() {
             x: null,
             y: null
         },
-
         startAngle: null,
-
         joiner: null,
         joinerSide: undefined,
     }
+    // this.svgElement_secondaryPath_descriptionAttr = undefined
+    // this.svgElement_secondaryPath_descriptionAttr = undefined
 
-    // this.svgElements = [
 
-    // ]
+    // this.svgElements = []
     // this.associatedDatas = [
     //     parallelPathDatas = {
     //         east: "poop",
     //         west: "crap",
     //         corners: {
-
     //         }
     //     }
     // ]
-    // this.svgElement_secondaryPath_descriptionAttr = undefined
-    // this.svgElement_secondaryPath_descriptionAttr = undefined
+
+    this.childPathDatas = {
+        childCount: -1,
+        base: {
+            west: null,
+            east: null,
+        },
+        corner: null
+    }
+}
+
+PathData.prototype.consoleLogTest = function() {
+    console.log("OPD_TEST")
+    console.log(this)
+}
+
+PathData.prototype.addChildPathDataBase = function(side, pathData) {
+    this.childPathDatas[side] = pathData
+    this.childPathDatas.childCount = this.childPathDatas.childCount + 1
+}
+
+PathData.prototype.addChildPathDataCorner = function(pathData) {
+    this.childPathDatas.corner.push(pathData)
+    this.childPathDatas.childCount = this.childPathDatas.childCount + 1
 }
 
 PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
@@ -50,9 +69,6 @@ PathData.prototype.setAllData = function(data) {
     const { coords, arc } = data
     this.coords = { ...coords }
     this.arc = { ...arc }
-    // if (arc.center) {
-    //     this.arc.center = { ...arc.center }
-    // }
 }
 
 PathData.prototype.initiateCurvePoint = function(side) {
@@ -67,9 +83,7 @@ PathData.prototype.initiateCurvePoint = function(side) {
             x: 0,
             y: 0
         },
-
         startAngle: 0,
-
         joiner: false,
         joinerSide: undefined,
     }
@@ -87,17 +101,15 @@ PathData.prototype.terminateCurvePoint = function() {
             x: null,
             y: null
         },
-
         startAngle: null,
-
         joiner: null,
         joinerSide: undefined,
     }
 }
 
 // PathData.prototype.describeSvgAttribute_primaryPath = function () {
-//     // let svgElementAttr_d = calculateArcAndDescribePath()
-//     // this.
+//     let svgElementAttr_d = calculateArcAndDescribePath()
+//     this.
 // }
 
 // PathData.prototype.describeSvgAttribute_secondaryPath = function(prevPathData, thisPathData) {
@@ -161,8 +173,18 @@ PathData.createParallelPathDatas = function(originalFigurePathDatas) {
             newPathData01.setAllData(thisPlugItIn)
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
+
+            originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData01)
+            originalFigurePathDatas[i + 1].addChildPathDataBase('east', newPathData02)
+            originalFigurePathDatas[i + 1].consoleLogTest()
             // console.log([newPathData01, newPathData02])
         }
+
+
+        let snapshot = [...parallelFigurePathDatas]
+        console.log("hererere")
+        console.log(snapshot)
+        console.log(parallelFigurePathDatas)
 
         return parallelFigurePathDatas
 }

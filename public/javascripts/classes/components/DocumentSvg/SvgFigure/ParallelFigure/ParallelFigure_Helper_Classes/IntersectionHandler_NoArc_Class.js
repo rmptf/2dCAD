@@ -145,11 +145,11 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
         // console.log("do_I_run_111")
         fillerAdder = 1
     }
-    if (isFiller(this.index) && isFiller(this.index + 1)){
+    if (isFiller(this.index) && isFiller(this.index + 1)){  // FIXME: I dont think this ever runs (was built for removeParPaths)
         // console.log("do_I_run_222")
         fillerAdder = -1
     }
-    if (isFiller(this.index + 1)){
+    if (isFiller(this.index + 1)){  // FIXME: I dont think this ever runs (was built for removeParPaths)
         // console.log("do_I_run_333")
         nextFillerAdder = 1
     }

@@ -14,8 +14,12 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     // Figure Data
     this.originalFigurePathDatas = svgFigure.svgPathDatas
+    console.log("LENGTHHHHHH_111111")
+    console.log(this.originalFigurePathDatas)
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
     this.parallelFigurePathDatas = PathData.createParallelPathDatas(this.originalFigurePathDatas)
+    console.log("LENGTHHHHHH_222222")
+    console.log(this.parallelFigurePathDatas)
     this.parallelFigurePathDatas_perpendicularProjections = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
@@ -185,10 +189,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // thisFigure.parallelFigureObject.parallelDistance = -100
             }
 
-            for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) {
+            for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) { // eventually switch this to loop through origPathDatas and loop through eachs' children pds (skip fisrt opd)
                 console.log("i: " + i)
-                console.log(thisFigure.parallelFigurePathDatas[i])
-                thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i // change to function //FIXME: remove
+                // console.log(thisFigure.parallelFigurePathDatas[i])
+                // thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
                 // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
                 thisFigure.IntersectionsSorter_WithArc.setIndices(i)
                 thisFigure.IntersectionsSorter_NoArc.setIndices(i)
@@ -293,8 +297,9 @@ ParallelFigure.prototype.createFillerParallelPath = function(index) {
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index) {
     let newEndPointParallel1 = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[index], this.parallelFigurePathDatas)
     // this.svgEndPoints.push(newEndPointParallel)
-    console.log(newEndPointParallel1.svgElementObject._groups[0][0])
     this.svgEndPoints.splice(index, 0, newEndPointParallel1)
+
+    // console.log(newEndPointParallel1.svgElementObject._groups[0][0])
 }
 
 // move this to ParEndPoint_Class
