@@ -1,5 +1,4 @@
-// import {describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
-import {calculateArcAndDescribePath, describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
+// import {calculateArcAndDescribePath, describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
 
 function PathData() {
     this.coords = {
@@ -21,43 +20,14 @@ function PathData() {
         joiner: null,
         joinerSide: undefined,
     }
+
     // this.svgElement_secondaryPath_descriptionAttr = undefined
     // this.svgElement_secondaryPath_descriptionAttr = undefined
-
-
-    // this.svgElements = []
-    // this.associatedDatas = [
-    //     parallelPathDatas = {
-    //         east: "poop",
-    //         west: "crap",
-    //         corners: {
-    //         }
-    //     }
-    // ]
-
-    this.childPathDatas = {
-        childCount: -1,
-        base: {
-            west: null,
-            east: null,
-        },
-        corner: null
-    }
 }
 
 PathData.prototype.consoleLogTest = function() {
     console.log("OPD_TEST")
     console.log(this)
-}
-
-PathData.prototype.addChildPathDataBase = function(side, pathData) {
-    this.childPathDatas[side] = pathData
-    this.childPathDatas.childCount = this.childPathDatas.childCount + 1
-}
-
-PathData.prototype.addChildPathDataCorner = function(pathData) {
-    this.childPathDatas.corner.push(pathData)
-    this.childPathDatas.childCount = this.childPathDatas.childCount + 1
 }
 
 PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
@@ -174,9 +144,9 @@ PathData.createParallelPathDatas = function(originalFigurePathDatas) {
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
 
-            originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData01)
-            originalFigurePathDatas[i + 1].addChildPathDataBase('east', newPathData02)
-            originalFigurePathDatas[i + 1].consoleLogTest()
+            // originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData01)
+            // originalFigurePathDatas[i + 1].addChildPathDataBase('east', newPathData02)
+            // originalFigurePathDatas[i + 1].consoleLogTest()
             // console.log([newPathData01, newPathData02])
         }
 

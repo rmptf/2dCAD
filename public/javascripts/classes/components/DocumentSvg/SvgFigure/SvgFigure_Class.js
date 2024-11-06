@@ -1,5 +1,5 @@
 import {SvgGroup} from './SvgElement/SvgGroup/SvgGroup_Class.js'
-import {PathData} from './SvgData/PathData_Class.js'
+import {PathData} from './SvgData/SvgData_Class.js'
 import {SvgPathPrimary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathPrimary_Class.js'
 import {SvgPathSecondary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathSecondary_Class.js'
 import {SvgEndPointPrimary} from './SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointPrimary_Class.js'
