@@ -26,14 +26,15 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
         newEndPointParallel.node().classList.add(this.ENDPOINT_JOINER_CLASS)
     }
 
-    // console.log(this.parallelPathData)
     // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'west') {
-    //     newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_WEST_CLASS)
-    // }
+    if(this.parallelPathData.arc.exist === true && this.parallelPathData.arc.side === 'west') {
+        newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_WEST_CLASS)
+    }
 
     // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
-    //     newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_EAST_CLASS)
-    // }
+    if(this.parallelPathData.arc.exist === true && this.parallelPathData.arc.side === 'east') {
+        newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_EAST_CLASS)
+    }
 
     return newEndPointParallel
 }

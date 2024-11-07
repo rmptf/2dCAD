@@ -151,12 +151,26 @@ PathData.createParallelPathDatas = function(originalFigurePathDatas) {
         }
 
 
-        let snapshot = [...parallelFigurePathDatas]
-        console.log("hererere")
-        console.log(snapshot)
-        console.log(parallelFigurePathDatas)
+        // let snapshot = [...parallelFigurePathDatas]
+        // console.log("hererere")
+        // console.log(snapshot)
+        // console.log(parallelFigurePathDatas)
 
         return parallelFigurePathDatas
+}
+
+PathData.createParallelPathData = function(parallelFigure, passedPathData, index) {
+    let pathDatas = []
+    // for (let i = 0; i < passedPathData.length; i++) {
+        let newPathData1 = new PathData()
+        newPathData1.setAllData(passedPathData[0])
+        pathDatas.push(newPathData1)
+
+        let newPathData2 = new PathData()
+        newPathData2.setAllData(passedPathData[1])
+        pathDatas.push(newPathData2)
+    // }
+    parallelFigure.parallelFigurePathDatas.splice(index, 0, pathDatas)
 }
 
 
