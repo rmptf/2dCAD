@@ -1,4 +1,5 @@
-import {PathData} from "../../SvgData/SvgData_Class.js"
+import {PathDataParallel} from "../../SvgData/SvgData_Children/SvgData_Parallel_Class.js"
+// import {PathData} from "../../SvgData/SvgData_Class.js"
 
 // FIXME: Eventually move to parallegFigure?
 function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, shape) {
@@ -30,7 +31,7 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let data1 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     let data2 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     // parallelFigure.createParallelPathData([data1, data2], index)
-    PathData.createParallelPathData(parallelFigure, [data1, data2], index)
+    PathDataParallel.createParallelPathData(parallelFigure, [data1, data2], index)
 
     // parallelFigurePathDatas_perpendicularProjections
     referenceEndPointsParallelPerpendicular.splice(index, 0, [

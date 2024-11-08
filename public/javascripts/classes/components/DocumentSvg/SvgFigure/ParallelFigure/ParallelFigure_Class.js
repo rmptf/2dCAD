@@ -1,11 +1,14 @@
 import {SvgGroup} from '../SvgElement/SvgGroup/SvgGroup_Class.js'
 import {SvgEndPointParallel} from '../SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointParallel_Class.js'
 import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Parallel_Class.js'
-import {PathData} from '../SvgData/SvgData_Class.js'
+// import {PathData} from '../SvgData/SvgData_Class.js'
+import {PathDataParallel} from '../SvgData/SvgData_Children/SvgData_Parallel_Class.js'
+import {PathDataPrimary} from '../SvgData/SvgData_Children/SvgData_Primary_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
+
 
 function ParallelFigure(svgFigure, sectionIndex) {
     this.SVGGROUPSDATA = {
@@ -17,7 +20,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // console.log("LENGTHHHHHH_111111")
     // console.log(this.originalFigurePathDatas)
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas = PathData.createParallelPathDatas(this.originalFigurePathDatas)
+    this.parallelFigurePathDatas = PathDataParallel.createParallelPathDatas(this.originalFigurePathDatas)
     // console.log("LENGTHHHHHH_222222")
     // console.log(this.parallelFigurePathDatas)
     this.parallelFigurePathDatas_perpendicularProjections = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
@@ -118,7 +121,8 @@ function createSecondaryGroups(thisClass, nameData) {
 function copyPathDatas(originalFigurePathDatas) {
     let pathDatas = []
     for (let i = 0; i < originalFigurePathDatas.length; i++) {
-        let newPathData = new PathData()
+        // let newPathData = new PathData()
+        let newPathData = new PathDataPrimary()
         newPathData.setAllData(originalFigurePathDatas[i])
         pathDatas.push(newPathData)
     }
@@ -132,6 +136,7 @@ ParallelFigure.prototype.addPaths = function() {
 }
 
 ParallelFigure.prototype.addEndPoints = function() {
+    console.log(this.originalFigurePathDatas)
     // initiate a counter that iterates every time a pathData is created
     let endPointCount = 0
     // handle edge case: set first point

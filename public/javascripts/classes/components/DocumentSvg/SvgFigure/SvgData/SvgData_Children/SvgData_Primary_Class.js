@@ -2,9 +2,6 @@
 import {PathData} from '../SvgData_Class.js'
 
 function PathDataPrimary() {
-    // Call the constructor of the parent class
-    PathData.call()
-
     this.children = {
         parallelPathDatas: {
             childCount: -1,
@@ -14,10 +11,13 @@ function PathDataPrimary() {
             }
         }
     }
+
+    // Call the constructor of the parent class
+    PathData.call(this)
 }
 
 // Inherit methods from the parent class
-PathDataPrimary.prototype = Object.create(SvgPath.prototype)
+PathDataPrimary.prototype = Object.create(PathData.prototype)
 PathDataPrimary.prototype.constructor = PathDataPrimary
 
 // // Override the createSvgPath method

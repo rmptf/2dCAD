@@ -36,9 +36,9 @@ PathData.prototype.setCoordinateData = function(xCoord, yCoord) {
 }
 
 PathData.prototype.setAllData = function(data) {
-    const { coords, arc } = data
-    this.coords = { ...coords }
-    this.arc = { ...arc }
+    const {coords, arc} = data
+    this.coords = {...coords}
+    this.arc = {...arc}
 }
 
 PathData.prototype.initiateCurvePoint = function(side) {
@@ -100,85 +100,6 @@ PathData.prototype.terminateCurvePoint = function() {
 //     })
 //     return actionElements
 // }
-
-
-
-
-
-
-
-// FIXME: this might be in the wrong place, and might need cleaning up. I just removed it from a sep file
-// Static Function: dont need to create new instance of Class to use
-// function createParallelPathDatas(originalFigurePathDatas) {
-PathData.createParallelPathDatas = function(originalFigurePathDatas) {
-    let parallelFigurePathDatas = []
-
-    for (let i = 0; i < originalFigurePathDatas.length - 1; i++) {
-            // Retrieve coordinates for the current and next path data
-            let thisOriginalFigurePathData = originalFigurePathDatas[i]
-            let nextOriginalFigurePathData = originalFigurePathDatas[i + 1]
-            let thisPlugItIn = {coords: { x: thisOriginalFigurePathData.coords.x, y: thisOriginalFigurePathData.coords.y }, arc: { ...thisOriginalFigurePathData.arc }}
-            let nextPlugItIn = {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }}
-
-            // Assign correct direction to pathData
-            // This currently works perfectly but its possible the originalFigure_data_pathData...'s arc.side is calculated incorrectly. (Might need to change this if I fix that)
-            // It might be correct above because it calculates correctly. Maybe I forgot how west and east works, might need to figure that out and set the below accordingly
-            if (!thisOriginalFigurePathData.arc.exist) {
-                if (nextOriginalFigurePathData.arc.exist) {
-                    nextPlugItIn.arc.side = "west";
-                    thisPlugItIn.arc = { ...nextPlugItIn.arc }
-                    nextPlugItIn.arc.side = "east";
-                }
-            } else {
-                if (!nextOriginalFigurePathData.arc.exist) {
-                    thisPlugItIn.arc = { ...nextPlugItIn.arc }
-                } else {
-                    thisPlugItIn.arc.side = "west";
-                    nextPlugItIn.arc.side = "east";
-                }
-            }
-
-            let newPathData01 = new PathData()
-            let newPathData02 = new PathData()
-            newPathData01.setAllData(thisPlugItIn)
-            newPathData02.setAllData(nextPlugItIn)
-            parallelFigurePathDatas.push([newPathData01, newPathData02])
-
-            // originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData01)
-            // originalFigurePathDatas[i + 1].addChildPathDataBase('east', newPathData02)
-            // originalFigurePathDatas[i + 1].consoleLogTest()
-            // console.log([newPathData01, newPathData02])
-        }
-
-
-        // let snapshot = [...parallelFigurePathDatas]
-        // console.log("hererere")
-        // console.log(snapshot)
-        // console.log(parallelFigurePathDatas)
-
-        return parallelFigurePathDatas
-}
-
-PathData.createParallelPathData = function(parallelFigure, passedPathData, index) {
-    let pathDatas = []
-    // for (let i = 0; i < passedPathData.length; i++) {
-        let newPathData1 = new PathData()
-        newPathData1.setAllData(passedPathData[0])
-        pathDatas.push(newPathData1)
-
-        let newPathData2 = new PathData()
-        newPathData2.setAllData(passedPathData[1])
-        pathDatas.push(newPathData2)
-    // }
-    parallelFigure.parallelFigurePathDatas.splice(index, 0, pathDatas)
-}
-
-
-
-
-
-
-
 
 export {
     PathData

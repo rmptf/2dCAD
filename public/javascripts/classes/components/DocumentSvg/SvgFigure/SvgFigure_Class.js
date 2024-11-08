@@ -5,6 +5,7 @@ import {SvgPathSecondary} from './SvgElement/SvgPath/SvgPath_Children/SvgPathSec
 import {SvgEndPointPrimary} from './SvgElement/SvgEndPoint/SvgEndPoint_Children/SvgEndPointPrimary_Class.js'
 import {updateSVG_thisSvgFigure} from '../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {ParallelFigure} from './ParallelFigure/ParallelFigure_Class.js'
+import {PathDataPrimary} from './SvgData/SvgData_Children/SvgData_Primary_Class.js'
 
 // function SvgFigure(documentSvgD3, actionStates, docSvgGroup) {
 function SvgFigure(DocSvg) {
@@ -61,7 +62,8 @@ SvgFigure.prototype.figure_updateSvg = function() {
 
 
 SvgFigure.prototype.createPathData_newData = function(x, y) {
-    let newPathData_additional = new PathData()
+    // let newPathData_additional = new PathData()
+    let newPathData_additional = new PathDataPrimary()
     newPathData_additional.setCoordinateData(x, y)
     this.svgPathDatas.push(newPathData_additional)
     // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
@@ -69,7 +71,8 @@ SvgFigure.prototype.createPathData_newData = function(x, y) {
 }
 
 SvgFigure.prototype.createPathData_savedData = function(pathData) {
-    let newPathData_additional = new PathData()
+    // let newPathData_additional = new PathData()
+    let newPathData_additional = new PathDataPrimary()
     newPathData_additional.setAllData(pathData)
     this.svgPathDatas.push(newPathData_additional)
     // newPathData_additional.describeSvgAttribute_secondaryPath(this.svgPathDatas[svgDataCount - 1], this.svgPathDatas[svgDataCount])
@@ -77,7 +80,8 @@ SvgFigure.prototype.createPathData_savedData = function(pathData) {
 }
 
 SvgFigure.prototype.createPathData_splice = function(x, y, index) {
-    let newPathData_additional = new PathData()
+    // let newPathData_additional = new PathData()
+    let newPathData_additional = new PathDataPrimary()
     newPathData_additional.setCoordinateData(x, y)
     this.svgPathDatas.splice(index, 0, newPathData_additional)
     return newPathData_additional

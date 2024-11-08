@@ -9,8 +9,6 @@ function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joine
     this.parallelPathData = parallelPathData
 
     SvgEndPoint.call(this, parentFigure, parentElement, pathData, index)
-    console.log("ASSSDFSDF")
-    console.log(this)
 }
 
 SvgEndPointParallel.prototype = Object.create(SvgEndPoint.prototype)
