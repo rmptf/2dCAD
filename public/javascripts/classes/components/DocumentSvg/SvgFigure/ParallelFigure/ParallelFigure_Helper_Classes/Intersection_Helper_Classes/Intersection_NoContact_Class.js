@@ -2,6 +2,7 @@ import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcInt
 
 function Intersection_NoContact(parallelFigure) {
     this.PARFIGURE = parallelFigure //FIXME: still used
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
@@ -118,6 +119,13 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     this.parallelFigurePathDatas.splice(thisIndex, 1)
     this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
     this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
+
+    // TODO: RIght ehre
+    // Remove Corners from ParallelPathDatas
+    this.originalFigurePathDatas[thisIndexModded].children.parallelPathDatas.east.removeChildPathDataCorner()
+    this.originalFigurePathDatas[thisIndexModded].children.parallelPathDatas.west.removeChildPathDataCorner()
+
+
     // Remove SVG Elements and Classes
     // Select Elements
     let svgEndPointGroup = this.PARFIGURE.svgEndPoints

@@ -2,13 +2,11 @@
 import {PathData} from '../SvgData_Class.js'
 
 function PathDataParallel() {
+    this.endPointElement = null
+
     this.children = {
-        parallelPathDatasCorners: {
-            childCount: -1,
-            corner: {
-                corner_NAME: null,
-            }
-        }
+        childCount: 0,
+        pathData_corner: null
     }
 
     // Call the constructor of the parent class
@@ -24,8 +22,14 @@ PathDataParallel.prototype.constructor = PathDataParallel
 // }
 
 PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
-    this.children.parallelPathDatas.corner.push(pathData)
-    this.children.parallelPathDatas.childCount = this.children.parallelPathDatas.childCount + 1
+    this.children.corner = pathData
+    this.children.childCount = this.children.childCount + 1
+}
+
+PathDataParallel.prototype.removeChildPathDataCorner = function() {
+    console.log("Nigger")
+    this.children.corner = null
+    this.children.childCount = this.children.childCount - 1
 }
 
 
@@ -66,8 +70,8 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
 
-            originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData01)
-            originalFigurePathDatas[i + 1].addChildPathDataBase('east', newPathData02)
+            originalFigurePathDatas[i].addChildPathDataBase('east', newPathData01)
+            originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData02)
             originalFigurePathDatas[i + 1].consoleLogTest()
             // console.log([newPathData01, newPathData02])
         }
@@ -81,16 +85,32 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
         return parallelFigurePathDatas
 }
 
-//FIXME: right here: about to add corners to parpathdata obj
-PathDataParallel.createParallelPathData = function(parallelFigure, passedPathData, index) {
-    let pathData1 = new PathDataParallel()
-    pathData1.setAllData(passedPathData[0])
+// //FIXME: right here: about to add corners to parpathdata obj
+// PathDataParallel.createParallelPathData = function(parallelFigure, passedPathData, index) {
+//     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
 
-    let pathData2 = new PathDataParallel()
-    pathData2.setAllData(passedPathData[1])
+//     let pathData1 = new PathDataParallel()
+//     pathData1.setAllData(passedPathData[0])
 
-    parallelFigure.parallelFigurePathDatas.splice(index, 0, [pathData1, pathData2])
-}
+
+//     let pathData2 = new PathDataParallel()
+//     pathData2.setAllData(passedPathData[1])
+
+
+//     parallelFigure.parallelFigurePathDatas.splice(index, 0, [pathData1, pathData2])
+
+
+//     // TODO: RIght ehre - not correct order
+//     // parallelFigure.parallelFigurePathDatas[index - 0][0].addChildPathDataCorner(pathData1)
+//     // parallelFigure.parallelFigurePathDatas[index - 0][1].addChildPathDataCorner(pathData2)
+//     originalFigurePathDatas[index].children.parallelPathDatas.east.addChildPathDataCorner(pathData1)
+//     originalFigurePathDatas[index].children.parallelPathDatas.west.addChildPathDataCorner(pathData2)
+//     console.log("ioajsfoijsofisdjfois")
+//     console.log(originalFigurePathDatas[index].children.parallelPathDatas.west)
+//     console.log(originalFigurePathDatas[index].children.parallelPathDatas.east)
+
+//     return [pathData1, pathData2]
+// }
 
 export {
     PathDataParallel

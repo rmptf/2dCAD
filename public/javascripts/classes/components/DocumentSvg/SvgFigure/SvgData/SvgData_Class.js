@@ -1,4 +1,5 @@
 // import {calculateArcAndDescribePath, describeComplexPath} from '../../DocumentSvg_functions/documentSvg_animations/animation_functions/svgElementCalculationsNEW.js'
+import {ReferenceFigure} from '../ReferenceFigure/ReferenceFigure_Class.js'
 
 function PathData() {
     this.coords = {
@@ -20,9 +21,7 @@ function PathData() {
         joiner: null,
         joinerSide: undefined,
     }
-
-    // this.svgElement_secondaryPath_descriptionAttr = undefined
-    // this.svgElement_secondaryPath_descriptionAttr = undefined
+    this.dataChangeChecker = "Intitially_Set"
 }
 
 PathData.prototype.consoleLogTest = function() {
