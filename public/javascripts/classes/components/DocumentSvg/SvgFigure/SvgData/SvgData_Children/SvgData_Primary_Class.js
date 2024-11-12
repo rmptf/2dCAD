@@ -5,19 +5,11 @@ function PathDataPrimary() {
     this.endPointElement = null
 
     this.children = {
-        parallelPathDatas: {
-            childCount: 0,
-            base: {
-                west: null,
-                east: null,
-            }
+        childCount: 0,
+        parallel_pathDatas: {
+            pathData_west: null,
+            pathData_east: null,
         }
-    }
-
-    this.childCount2 = 0
-    this.children2 = {
-        pathData_west: null,
-        pathData_east: null,
     }
 
     // Call the constructor of the parent class
@@ -34,8 +26,8 @@ PathDataPrimary.prototype.constructor = PathDataPrimary
 // }
 
 PathDataPrimary.prototype.addChildPathDataBase = function(side, pathData) {
-    this.children.parallelPathDatas[side] = pathData
-    this.children.parallelPathDatas.childCount = this.children.parallelPathDatas.childCount + 1
+    this.children.parallel_pathDatas[side] = pathData
+    this.children.childCount = this.children.childCount + 1
 }
 
 export {

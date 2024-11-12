@@ -39,12 +39,12 @@ PathDataCorner.createParallelPathDataCorner = function(parallelFigure, passedPat
     // TODO: RIght ehre - not correct order (have to fix later when using originalPathData to loop at draw parallel)
     // parallelFigure.parallelFigurePathDatas[index - 0][0].addChildPathDataCorner(pathData1)
     // parallelFigure.parallelFigurePathDatas[index - 0][1].addChildPathDataCorner(pathData2)
-    originalFigurePathDatas[index].children.parallelPathDatas.east.addChildPathDataCorner(pathData1)
-    originalFigurePathDatas[index].children.parallelPathDatas.west.addChildPathDataCorner(pathData2)
+    originalFigurePathDatas[index].children.parallel_pathDatas.pathData_west.addChildPathDataCorner(pathData1)
+    originalFigurePathDatas[index].children.parallel_pathDatas.pathData_west.addChildPathDataCorner(pathData2)
     
     // console.log("ioajsfoijsofisdjfois")
-    // console.log(originalFigurePathDatas[index].children.parallelPathDatas.west)
-    // console.log(originalFigurePathDatas[index].children.parallelPathDatas.east)
+    // console.log(originalFigurePathDatas[index].children.parallel_pathDatas.pathData_west)
+    // console.log(originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east)
 
     return [pathData1, pathData2]
 }

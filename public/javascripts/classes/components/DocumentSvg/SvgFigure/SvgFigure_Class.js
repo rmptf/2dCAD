@@ -127,7 +127,6 @@ SvgFigure.prototype.createPath_secondary_splice = function(figure, parentElement
 
 SvgFigure.prototype.createPrimaryEndPoint = function(figure, parentElement, pathData, index) {
     let newEndPoint_additional = new SvgEndPointPrimary(figure, parentElement, this.actionStates, pathData, index)
-    // pathData.children.parallelPathDatas[side].endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     pathData.endPointElement = newEndPoint_additional.svgElementObject._groups[0][0]
     
     // newEndPoint_additional.pathData = pathData

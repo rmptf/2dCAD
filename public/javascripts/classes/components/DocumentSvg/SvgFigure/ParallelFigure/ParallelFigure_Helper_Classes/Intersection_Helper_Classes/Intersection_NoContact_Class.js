@@ -122,8 +122,8 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
 
     // TODO: RIght ehre
     // Remove Corners from ParallelPathDatas
-    this.originalFigurePathDatas[thisIndexModded].children.parallelPathDatas.east.removeChildPathDataCorner()
-    this.originalFigurePathDatas[thisIndexModded].children.parallelPathDatas.west.removeChildPathDataCorner()
+    this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
+    this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
 
 
     // Remove SVG Elements and Classes

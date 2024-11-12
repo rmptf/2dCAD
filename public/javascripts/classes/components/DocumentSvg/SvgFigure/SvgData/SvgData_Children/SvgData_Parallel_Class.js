@@ -6,7 +6,7 @@ function PathDataParallel() {
 
     this.children = {
         childCount: 0,
-        pathData_corner: null
+        corner_pathDatas: []
     }
 
     // Call the constructor of the parent class
@@ -22,20 +22,16 @@ PathDataParallel.prototype.constructor = PathDataParallel
 // }
 
 PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
-    this.children.corner = pathData
+    this.children.corner_pathDatas.push(pathData)
     this.children.childCount = this.children.childCount + 1
 }
 
 PathDataParallel.prototype.removeChildPathDataCorner = function() {
-    console.log("Nigger")
-    this.children.corner = null
+    this.children.corner_pathDatas.shift()
     this.children.childCount = this.children.childCount - 1
 }
 
-
-// FIXME: this might be in the wrong place, and might need cleaning up. I just removed it from a sep file
 // Static Function: dont need to create new instance of Class to use
-// function createParallelPathDatas(originalFigurePathDatas) {
 PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
     let parallelFigurePathDatas = []
 
@@ -47,8 +43,6 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
             let nextPlugItIn = {coords: { x: nextOriginalFigurePathData.coords.x, y: nextOriginalFigurePathData.coords.y }, arc: { ...nextOriginalFigurePathData.arc }}
 
             // Assign correct direction to pathData
-            // This currently works perfectly but its possible the originalFigure_data_pathData...'s arc.side is calculated incorrectly. (Might need to change this if I fix that)
-            // It might be correct above because it calculates correctly. Maybe I forgot how west and east works, might need to figure that out and set the below accordingly
             if (!thisOriginalFigurePathData.arc.exist) {
                 if (nextOriginalFigurePathData.arc.exist) {
                     nextPlugItIn.arc.side = "west";
@@ -70,47 +64,15 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
 
-            originalFigurePathDatas[i].addChildPathDataBase('east', newPathData01)
-            originalFigurePathDatas[i + 1].addChildPathDataBase('west', newPathData02)
-            originalFigurePathDatas[i + 1].consoleLogTest()
+            originalFigurePathDatas[i].addChildPathDataBase('pathData_east', newPathData01)
+            originalFigurePathDatas[i + 1].addChildPathDataBase('pathData_west', newPathData02)
+
+            // originalFigurePathDatas[i + 1].consoleLogTest()
             // console.log([newPathData01, newPathData02])
         }
 
-
-        // let snapshot = [...parallelFigurePathDatas]
-        // console.log("hererere")
-        // console.log(snapshot)
-        // console.log(parallelFigurePathDatas)
-
         return parallelFigurePathDatas
 }
-
-// //FIXME: right here: about to add corners to parpathdata obj
-// PathDataParallel.createParallelPathData = function(parallelFigure, passedPathData, index) {
-//     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-
-//     let pathData1 = new PathDataParallel()
-//     pathData1.setAllData(passedPathData[0])
-
-
-//     let pathData2 = new PathDataParallel()
-//     pathData2.setAllData(passedPathData[1])
-
-
-//     parallelFigure.parallelFigurePathDatas.splice(index, 0, [pathData1, pathData2])
-
-
-//     // TODO: RIght ehre - not correct order
-//     // parallelFigure.parallelFigurePathDatas[index - 0][0].addChildPathDataCorner(pathData1)
-//     // parallelFigure.parallelFigurePathDatas[index - 0][1].addChildPathDataCorner(pathData2)
-//     originalFigurePathDatas[index].children.parallelPathDatas.east.addChildPathDataCorner(pathData1)
-//     originalFigurePathDatas[index].children.parallelPathDatas.west.addChildPathDataCorner(pathData2)
-//     console.log("ioajsfoijsofisdjfois")
-//     console.log(originalFigurePathDatas[index].children.parallelPathDatas.west)
-//     console.log(originalFigurePathDatas[index].children.parallelPathDatas.east)
-
-//     return [pathData1, pathData2]
-// }
 
 export {
     PathDataParallel
