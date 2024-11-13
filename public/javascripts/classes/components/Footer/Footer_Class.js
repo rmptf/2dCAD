@@ -1,4 +1,5 @@
 import {CanvasDocument} from '../CanvasDocument/CanvasDocument_Class.js'
+import {CanvasDocument_PRE_REORG} from '../CanvasDocument/CanvasDocument_Class_PRE_REORG.js'
 import {CanvasDocument_PRE_OOP} from '../CanvasDocument/CanvasDocument_Class_PRE_OOP.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
@@ -24,13 +25,15 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.footerActionBar01_btn01_htmlElement = this.footerActionElements[0][0]
     this.footerActionBar02_btn01_htmlElement = this.footerActionElements[1][0]
     this.footerActionBar02_btn02_htmlElement = this.footerActionElements[1][1]
+    this.footerActionBar02_btn03_htmlElement = this.footerActionElements[1][2]
     this.footerActionBar03_btn01_htmlElement = this.footerActionElements[2][0]
     this.footerActionBar03_btn02_htmlElement = this.footerActionElements[2][1]
     this.footerActionBar03_btn03_htmlElement = this.footerActionElements[2][2]
 
     this.footerActionBar01_btn01_htmlElement.addEventListener('click', () => {this.test()})
     this.footerActionBar02_btn01_htmlElement.addEventListener('click', () => {this.createCanvasDocument()})
-    this.footerActionBar02_btn02_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_OOP()})
+    this.footerActionBar02_btn02_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_REORG()})
+    this.footerActionBar02_btn03_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_OOP()})
     this.footerActionBar03_btn01_htmlElement.addEventListener('click', () => {this.increaseCanvasScale()})
     this.footerActionBar03_btn02_htmlElement.addEventListener('click', () => {this.resetCanvasScale()})
     this.footerActionBar03_btn03_htmlElement.addEventListener('click', () => {this.decreaseCanvasScale()})
@@ -49,13 +52,22 @@ Footer.prototype.newCanvDoc_OLD = function() {
 
 // BTN ACTIONS
 Footer.prototype.createCanvasDocument = function() {
-    // console.log("2")
+    // console.log("3")
+    console.log("NEW_WAY")
     this.iterateCounters()
     let newCanvasDoc = new CanvasDocument(this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)
 }
+Footer.prototype.createCanvasDocument_PRE_REORG = function() {
+    // console.log("2")
+    console.log("PRE_REORG")
+    this.iterateCounters()
+    let newCanvasDoc = new CanvasDocument_PRE_REORG(this.documentData, this)
+    this.canvasDocumentClasses.push(newCanvasDoc)
+}
 Footer.prototype.createCanvasDocument_PRE_OOP = function() {
     // console.log("3")
+    console.log("PRE_OOP")
     this.iterateCounters()
     let newCanvasDoc = new CanvasDocument_PRE_OOP(this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)

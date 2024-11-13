@@ -1,27 +1,13 @@
 import {DocumentSvg} from '../DocumentSvg_PRE_REORG/DocumentSvg_Class.js'
-import {dragElement} from '../../utils/htmlElementFunctions.js'
-// import {
-    // changeStringIncrementally,
-    // activateSvgDoc,
-    // setGlobalSvgElementVars,
-    // placeElement,
-    // NEWselectSvgDocument,
-    // NEWselectDrawPath,
-    // NEWselectAddCurvePoint,
-    // NEWselectDrawParallelPath,
-    // NEWselectMeasurePath,
-// } from './createCanvasDocumentFunctions.js'
-import {saveFigureData} from '../../../functions/tools/saveFigureData.js'
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
-import {drawSavedFigure} from '../../../functions/drafting/drawSavedFigure.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
-import {drawPathFunction} from '../../../functions/drafting/drawPath.js'
+import {dragElement} from '../../utils/htmlElementFunctions.js'
+import {saveFigureData, saveSvgData} from '../DocumentSvg_PRE_REORG/DocumentSvg_functions/saveFigureData_NEW.js'
 
-function CanvasDocument_PRE_OOP(documentData, footer) {
+function CanvasDocument_PRE_REORG(documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
-        CANV_DOC: 'aDocument',
+        CANV_DOC: 'aDocument_',
         HEADING: 'Pattern_Pc_',
-        DOC_SVG: 'aDocumentSvg',
     }
     this.allCanvasDocs = footer.canvasDocumentClasses
     this.scaleValue = footer.scaleObject
@@ -42,16 +28,8 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
         measurePathActive: false,
         saveFigureDataActive: false,
     }
-    this.drawPathObj = {
-        self: [], // moving
-        m1: '',
-        isDown: false,
-        isDown2: false,
-        originalFigureCount: 0,
-        secondaryPathCount: 0,
-        previousDrawPathObj: null
-    }
-    this.documentSvg = new DocumentSvg(this, this.documentSvg_D3Element, this.documentSvg_htmlElement, this.actionStates)
+
+    this.documentSvg = new DocumentSvg(this)
 
     this.hotkeyManager = new HotkeyManager(this)
     this.hotkeyManager.registerHotkey('F1', () => this.f1(this))
@@ -74,7 +52,7 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
     this.canvasDocActionBar02_btn03_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][2])
     this.canvasDocActionBar02_btn04_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][3])
     this.canvasDocActionBar02_btn05_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + this.canvDocumentActionElements[1][4])
-
+    
     this.canvasDocument_htmlElement.addEventListener('click', () => {this.canvDocClick()})
     this.canvasDocActionBar01_btn01_htmlElement.addEventListener('click', () => {this.activateDrawPath()})
     this.canvasDocActionBar01_btn02_htmlElement.addEventListener('click', () => {this.activateAddEndPoint()})
@@ -89,121 +67,128 @@ function CanvasDocument_PRE_OOP(documentData, footer) {
 }
 
 // HOTKEY ACTIONS
-CanvasDocument_PRE_OOP.prototype.f1 = function () {
-    // console.log("F1_OLD")
-    drawSavedFigure(0, this.drawPathObj)
+CanvasDocument_PRE_REORG.prototype.f1 = function () {
+    // console.log("F1_NEW")
+    this.documentSvg.drawSavedFigure(0)
 }
-CanvasDocument_PRE_OOP.prototype.f2 = function () {
-    // console.log("F2_OLD")
-    drawSavedFigure(1, this.drawPathObj)
+CanvasDocument_PRE_REORG.prototype.f2 = function () {
+    // console.log("F2_NEW")
+    this.documentSvg.drawSavedFigure(1)
 }
-CanvasDocument_PRE_OOP.prototype.f3 = function () {
-    // console.log("F3_OLD")
-    drawSavedFigure(2, this.drawPathObj)
+CanvasDocument_PRE_REORG.prototype.f3 = function () {
+    // console.log("F3_NEW")
+    this.documentSvg.drawSavedFigure(2)
 }
-CanvasDocument_PRE_OOP.prototype.f4 = function () {
-    // console.log("F4_OLD")
-    drawSavedFigure(3, this.drawPathObj)
+CanvasDocument_PRE_REORG.prototype.f4 = function () {
+    // console.log("F4_NEW")
+    this.documentSvg.drawSavedFigure(3)
 }
-CanvasDocument_PRE_OOP.prototype.f5 = function () {
-    // console.log("F5_OLD")
-    drawSavedFigure(4, this.drawPathObj)
+CanvasDocument_PRE_REORG.prototype.f5 = function () {
+    // console.log("F5_NEW")
+    this.documentSvg.drawSavedFigure(4)
 }
-CanvasDocument_PRE_OOP.prototype.ctrlComma = function () {
-    // console.log("Ctrl+Comma_OLD")
+CanvasDocument_PRE_REORG.prototype.ctrlComma = function () {
+    console.log("Ctrl+Comma_NEW")
     console.log("Click figure to star drawing parallel line.")
     this.activateDrawParallelPath()
 }
 // HOTKEY ACTIONS
 
 // BTN ACTIONS
-CanvasDocument_PRE_OOP.prototype.canvDocClick = function() {
+CanvasDocument_PRE_REORG.prototype.canvDocClick = function() {
     // console.log("a")
-    let thisCanvasDoc = this
-    // NEWselectSvgDocument(thisCanvasDoc) // old
-    selectSvgDocument(thisCanvasDoc)
+    selectSvgDocument(this)
 }
-CanvasDocument_PRE_OOP.prototype.activateDrawPath = function() {
+CanvasDocument_PRE_REORG.prototype.activateDrawPath = function() {
     // console.log(1)
-    NEWselectDrawPath(this)
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.drawPathActive = true
 }
-CanvasDocument_PRE_OOP.prototype.activateAddEndPoint = function() {
+CanvasDocument_PRE_REORG.prototype.activateAddEndPoint = function() {
     // console.log(2)
-    console.log("Not currently in use.")
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.addEndPointActive = true
 }
-CanvasDocument_PRE_OOP.prototype.activateAddEndPoint_curve = function() {
+CanvasDocument_PRE_REORG.prototype.activateAddEndPoint_curve = function() {
     // console.log(3)
-    NEWselectAddCurvePoint()
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.addEndPointActive_curve = true
 }
-CanvasDocument_PRE_OOP.prototype.activateDrawParallelPath = function() {
+CanvasDocument_PRE_REORG.prototype.activateDrawParallelPath = function() {
     // console.log(4)
-    NEWselectDrawParallelPath()
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.drawParallelPathAcive = true // NEW
 }
-CanvasDocument_PRE_OOP.prototype.activateMeasurePath = function() {
+CanvasDocument_PRE_REORG.prototype.activateMeasurePath = function() {
     // console.log(5)
-    NEWselectMeasurePath()
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.measurePathActive = true // NEW
 }
-CanvasDocument_PRE_OOP.prototype.activateSaveFigureData = function() {
+CanvasDocument_PRE_REORG.prototype.activateSaveFigureData = function() {
     // console.log(6)
-    saveFigureData(this.documentSvg.scaleValue)
-    console.log("In this 'older' version of things, the save figure function will save the most recently drawn figure on Svg.")
+    let thisCanvasDoc = this
+    console.log("Click figure to save.")
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.saveFigureDataActive = true // NEW
 }
-CanvasDocument_PRE_OOP.prototype.saveSvgData = function() {
-    // console.log(7)
-    console.log("Not currently in use.")
+CanvasDocument_PRE_REORG.prototype.saveSvgData = function() {
+    console.log(7)
+    let thisCanvasDoc = this
+    console.log(thisCanvasDoc.documentSvg.documentSvgFigures)
+    saveSvgData(thisCanvasDoc.documentSvg.documentSvgFigures) // NEW
 }
-CanvasDocument_PRE_OOP.prototype.activateRemoveEndPoint = function() {
+CanvasDocument_PRE_REORG.prototype.activateRemoveEndPoint = function() {
     // console.log(8)
-    console.log("Not currently in use.")
+    let thisCanvasDoc = this
+    Object.keys(thisCanvasDoc.actionStates).forEach(function(state){ thisCanvasDoc.actionStates[state] = false })
+    thisCanvasDoc.actionStates.removeEndPointActive = true // NEW
 }
-CanvasDocument_PRE_OOP.prototype.drawFigure = function(docSvg) {
+CanvasDocument_PRE_REORG.prototype.drawFigure = function() {
     // console.log(9)
-    drawSavedFigure(1, this.drawPathObj) // this will draw old way (f-key way)
+    this.documentSvg.drawSavedFigure(1)
 }
-CanvasDocument_PRE_OOP.prototype.drawSvg = function(docSvg) {
+CanvasDocument_PRE_REORG.prototype.drawSvg = function(docSvg) {
     // console.log(10)
     this.documentSvg.drawSavedSvg(this, docSvg)
 }
 // BTN ACTIONS
 
-CanvasDocument_PRE_OOP.prototype.iterateCounters = function(vars){
-    vars.stringIncrement++
-    this.stringIncrementCount = vars.stringIncrement
+CanvasDocument_PRE_REORG.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
+    targetElement.appendChild(document.importNode(templateElement, true))
 }
 
-CanvasDocument_PRE_OOP.prototype.cloneAndAppendTemplate = function(templateId, targetId) {
-    targetId.appendChild(document.importNode(templateId, true))
-}
-
-// only really used in the old way. (can remover later)
-CanvasDocument_PRE_OOP.prototype.setElementIds = function(canvDocId, headerInnerTxt, docSvgId) { // can place this in an existing method
-    this.canvasDocument_htmlElement.id = changeStringIncrementally(canvDocId, this.stringIncrementCount)
-    this.canvasDocumentHeader_htmlElement.innerText = changeStringIncrementally(headerInnerTxt, this.stringIncrementCount)
-    this.documentSvg_htmlElement.id = changeStringIncrementally(docSvgId, this.stringIncrementCount)
-}
-
-CanvasDocument_PRE_OOP.prototype.setActions = function() {
-    placeElement(this.canvasDocument_htmlElement)
-    this.setElementIds(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING, this.DOCUMENT_ELEMENT_NEWNAMES.DOC_SVG)
-    // activateSvgDoc(this.canvasDocument_htmlElement) / old
-    changeActiveStatus(this.canvasDocument_htmlElement)
-    setGlobalSvgElementVars(this.canvasDocument_htmlElement.id, this.documentSvg_htmlElement.id, this.stringIncrementCount)
+CanvasDocument_PRE_REORG.prototype.setActions = function() {
+    // placeElement(this.canvasDocument_htmlElement) // Dont need
+    this.setElementIdAndData(this.DOCUMENT_ELEMENT_NEWNAMES.CANV_DOC, this.DOCUMENT_ELEMENT_NEWNAMES.HEADING)
+    this.resizeAndCenterDocument()
+    changeActiveStatus(this.canvasDocument_htmlElement, this)
     dragElement(this.canvasDocument_htmlElement, this.scaleValue)
-    setHotKeys(this.allCanvasDocs, this)
+    changeHotKeyActivation(this)
 }
 
-CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
+CanvasDocument_PRE_REORG.prototype.setElementIdAndData = function(canvDocId, headerInnerTxt) {
+    this.canvasDocument_htmlElement.id = changeStringIncrementally(canvDocId, this.stringIncrementCount) // The incrimental change isn't necessary for functionality, but doest help with maintaining unique Id's
+    this.canvasDocumentHeader_htmlElement.innerText = changeStringIncrementally(headerInnerTxt, this.stringIncrementCount)
+}
+
+CanvasDocument_PRE_REORG.prototype.resizeAndCenterDocument = function() {
     let scaleValue = this.scaleValue.scaleLevel
     let panCanvas = this.panElement
     let canvasDocument = this.documentSvg.canvDocHtmlElement
     let documentSvgElement = this.documentSvg.HtmlElement
     let documentGroup = this.documentSvg.documentSvgGroup.newSvgGroup
 
+
     // Set documentSvgElement size to fit the PrimarySvgGroup
     // Get the documentGroup bounding box
     let documentGroupBBox = documentGroup.node().getBBox()
     // Set extra area around documentGroup
-    let svgGroupBubble = 200
+    let svgGroupBubble = 500
     // Set the documentSvgElement to the new size
     documentSvgElement.style.height = documentGroupBBox.height + svgGroupBubble
     documentSvgElement.style.width = documentGroupBBox.width + svgGroupBubble
@@ -220,11 +205,26 @@ CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
     let canvDocScaledWidthCenter = (canvasDocRect.width / scaleValue) / 2
     let canvDocScaledHeightCenter =  (canvasDocRect.height / scaleValue) / 2
 
+
     //If panCanvas has been panned, find the amount needed to offset the canvasDoc to keep it in the center of the window
     let topPosition = panCanvas.offsetTop
     let leftPosition = panCanvas.offsetLeft
     let offsettop = 0
     let offsetleft = 0
+    // let offsettop = (topPosition + (2500 * scaleValue)) / 2
+    // let offsetleft = (leftPosition + (2500 * scaleValue)) / 2
+    // let offsettop = ((topPosition / scaleValue) + 2500) / 2
+    // let offsetleft = ((leftPosition / scaleValue) + 2500) / 2
+    // let offsettop = topPosition + (2500 * scaleValue)
+    // let offsetleft = leftPosition + (2500 * scaleValue)
+    // let offsettop = topPosition + 2500
+    // let offsetleft = leftPosition + 2500
+
+    // console.log("oskdfosdkfoskf")
+    // console.log(offsettop)
+    // console.log(offsetleft)
+    // console.log(scaleValue)
+
     // Find the distance to move the canvasDocument by subtracting its center dimensions from the panCanvas dimensions
     let movetoleft = panCanvasScaledWidthCenter - canvDocScaledWidthCenter - offsetleft
     let movetotop = panCanvasScaledHeightCenter - canvDocScaledHeightCenter - offsettop
@@ -234,8 +234,7 @@ CanvasDocument_PRE_OOP.prototype.resizeAndCenterDocument = function() {
 }
 
 function changeActiveStatus(element) {
-    // let activeClass = "a-document__container--active"
-    let activeClass = "a-document__container--active--PRE-OOP"
+    let activeClass = "a-document__container--active"
     document.querySelectorAll(".a-document__container").forEach(container => {
         container.classList.remove(activeClass)
     })
@@ -243,93 +242,43 @@ function changeActiveStatus(element) {
 }
 
 function selectSvgDocument(thisCanvasDoc) {
-    // if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
-    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active--PRE-OOP")) {
+    if(!thisCanvasDoc.canvasDocument_htmlElement.classList.contains("a-document__container--active")) {
         console.log("Activating.")
         deactivateAllActionsOnPreviouslyActiveCanvDoc() //TODO: Will eventually need to build new way to handle if previously Active canvDoc had an active action
-        // // finish draw path on previously active svgElement if drawPath was active
-        if(a_canvas_globalVars.pressSvgElement) { // maybe find better trigger variable
-            finishDrawPath(thisCanvasDoc.drawPathObj.previousDrawPathObj, thisCanvasDoc.documentSvg_D3Element, thisCanvasDoc.stringIncrementCount, false)
-        }
         // activate current svgDocument
-        setGlobalSvgElementVars(thisCanvasDoc.canvasDocument_htmlElement.id, thisCanvasDoc.documentSvg_htmlElement.id, thisCanvasDoc.stringIncrementCount)
         changeActiveStatus(thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc)
-        setHotKeys(thisCanvasDoc.allCanvasDocs, thisCanvasDoc)
+        changeHotKeyActivation(thisCanvasDoc)
     } else {
         console.log("Already active.")
     }
-
     function deactivateAllActionsOnPreviouslyActiveCanvDoc() {
         console.log("Unfinished Build: deactivate actions of previously active canvDoc")
     }
 }
 
-function setHotKeys(canvDocs, thisDoc) {
-    canvDocs.forEach(function(canvDoc) {
+function changeHotKeyActivation(thisDoc) {
+    let allCanvDocs = thisDoc.allCanvasDocs
+    allCanvDocs.forEach(function(canvDoc) {
         canvDoc.hotkeyManager.cleanup()
     })
     thisDoc.hotkeyManager.restore()
 }
 
-function placeElement(canvDocumentElement) {
-    canvDocumentElement.style.top = 'calc(50% - 250px)'
-    canvDocumentElement.style.left = 'calc(50% - 250px)'
-    let toPixelWidth = canvDocumentElement.offsetTop
-    let toPixelHeight = canvDocumentElement.offsetTop
-
-    // console.log("okoksdf")
-    // console.log(canvDocumentElement)
-    // console.log(canvDocumentElement.offsetTop)
-
-    canvDocumentElement.style.top = toPixelWidth + 'px'
-    canvDocumentElement.style.left = toPixelHeight + 'px'
-}
-
-function setGlobalSvgElementVars(documentId, svgId, thisSvgElemCount) {
-    a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL = thisSvgElemCount
-    a_canvas_globalVars.svgDocHTML = document.getElementById(documentId)
-    // a_canvas_globalVars.svgD3 = d3.select('#' + svgId).on('click', svgClick)
-    a_canvas_globalVars.svgD3 = d3.select('#' + svgId)
-    a_canvas_globalVars.svgHTML = document.getElementById(svgId)
-}
-
-function changeStringIncrementally(origString, stringIncrement123) {
-    let newString = origString + stringIncrement123
+function changeStringIncrementally(origString, stringIncrementCount) {
+    let newString = origString + stringIncrementCount
     return newString
 }
 
-
-
-
-
-
-function NEWselectDrawPath(thisCanvasDoc) {
-    a_canvas_globalVars.pressSvgElement = true
-    thisCanvasDoc.drawPathObj.previousDrawPathObj = thisCanvasDoc.drawPathObj
-    thisCanvasDoc.documentSvg_D3Element.on("click", (event) => NEWsvgClick(event, thisCanvasDoc))
-}
-
-function NEWsvgClick(event, thisCanvasDoc) {
-    if (a_canvas_globalVars.pressSvgElement === true) {
-        a_canvas_globalVars.pressAddCurveButton = false
-        a_canvas_globalVars.pressAddParallelButton = false
-        a_canvas_globalVars.pressMeasurePathButton = false
-        drawPathFunction(event, thisCanvasDoc.drawPathObj, thisCanvasDoc.canvasDocument_htmlElement, thisCanvasDoc.documentSvg_htmlElement, thisCanvasDoc.documentSvg_D3Element)
-    }
-}
-
-function NEWselectAddCurvePoint() {
-    a_canvas_globalVars.pressAddCurveButton = true
-}
-
-function NEWselectDrawParallelPath() {
-    a_canvas_globalVars.pressAddParallelButton = true
-}
-
-function NEWselectMeasurePath() {
-    a_canvas_globalVars.pressMeasurePathButton = true
-}
-
 export {
-    CanvasDocument_PRE_OOP
+    CanvasDocument_PRE_REORG
 }
+
+// Dont use any more
+// function placeElement(canvDocumentElement) {
+//     canvDocumentElement.style.top = 'calc(50% - 250px)'
+//     canvDocumentElement.style.left = 'calc(50% - 250px)'
+//     let toPixelWidth = canvDocumentElement.offsetTop
+//     let toPixelHeight = canvDocumentElement.offsetTop
+//     canvDocumentElement.style.top = toPixelWidth + 'px'
+//     canvDocumentElement.style.left = toPixelHeight + 'px'
+// }

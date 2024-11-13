@@ -1,6 +1,5 @@
 import {calculateArcAndDescribePath, describeComplexPath} from '../../math/svgElementCalculations.js'
 import {makeDeepCopy, transformData, findParallelDistance} from '../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js'
-import {SvgGroup} from '../../../classes/components/DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
 
 let updateSVG_highlight_1_point_01_switches = [1,0]
 let updateSVG_highlight_1_point_02_switches = [1,0]

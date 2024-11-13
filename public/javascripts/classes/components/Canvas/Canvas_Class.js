@@ -21,6 +21,7 @@ export {
 }
 
 console.log("*not* ORIGIN BRANCH")
+console.log("last merged into main on 11-13-24")
 console.log("PROJECT-ORGANIZATION BRANCH")
 console.log("'git checkout main' to get back to main branch")
 

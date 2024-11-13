@@ -24,6 +24,12 @@
     border: 3px solid var(--highlight-70);
 }
 
+.a-document__container--active--REORG {
+    z-index: 2;
+    color: var(--highlight-30);
+    border: 3px solid var(--highlight-30);
+}
+
 .a-document__header {
     z-index: 1;
     padding: 10px;

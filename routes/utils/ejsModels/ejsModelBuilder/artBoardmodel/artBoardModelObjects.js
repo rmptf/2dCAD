@@ -487,7 +487,7 @@ const MODEL_OBJECTS = {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
-                                    btnText: "New_Svg NEWWAY",
+                                    btnText: "New_Svg NEW_WAY",
                                     btnOnClick: "",
                                     btnId: "bFooter_btnCont02_btn01",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
@@ -501,9 +501,23 @@ const MODEL_OBJECTS = {
                                 BUTTON: {
                                     btnExist: true,
                                     btnType: "button",
-                                    btnText: "New_Svg OLDWAY",
+                                    btnText: "New_Svg PRE_REORG",
                                     btnOnClick: "",
                                     btnId: "bFooter_btnCont02_btn02",
+                                    btnTheme_class: BTNVARS.BTNCLASS.aButton,
+                                    btnTheme_type: BTNVARS.BTNTYPES.default,
+                                    btnTheme_size: BTNVARS.BTNSIZES.small,
+                                    btnTheme_status: BTNVARS.BTNSTATUS.disabled,
+                                    btnTheme_style: BTNVARS.BTNSTYLE.contained,
+                                },
+                            },
+                            {
+                                BUTTON: {
+                                    btnExist: true,
+                                    btnType: "button",
+                                    btnText: "New_Svg PRE_OOP",
+                                    btnOnClick: "",
+                                    btnId: "bFooter_btnCont02_btn03",
                                     btnTheme_class: BTNVARS.BTNCLASS.aButton,
                                     btnTheme_type: BTNVARS.BTNTYPES.default,
                                     btnTheme_size: BTNVARS.BTNSIZES.small,
