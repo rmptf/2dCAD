@@ -20,9 +20,10 @@ export {
     Canvas
 }
 
-console.log("*not* ORIGIN BRANCH")
-console.log("PROJECT-ORGANIZATION BRANCH")
-console.log("'git checkout main' to get back to main branch")
+console.log("ORIGIN BRANCH")
+console.log("-merged project-org on 11-13")
+console.log("MAIN BRANCH")
+console.log("'git checkout project-organization' to get back to proj-org branch")
 
 
 // Starting a new branch on GitHub involves both creating the branch locally on your computer and then pushing it to the remote GitHub repository. Here's a step-by-step guide:

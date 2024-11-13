@@ -20,6 +20,11 @@ export {
     Canvas
 }
 
-console.log("*not* ORIGIN BRANCH")
-console.log("PROJECT-ORGANIZATION BRANCH")
-console.log("'git checkout main' to get back to main branch")
+//TODO: / FIXME:
+// THIS FILES NOT USED AFTER MERGE FROM PROJECT ORG ON 11-13
+// NOW USED IN JSs - classes - components - Canvas - Canvas_Class.js
+// can prog delete this file now?
+console.log("MAIN BRANCH")
+console.log("-merged project-org on 11-13")
+console.log("MAIN BRANCH")
+console.log("'git checkout project-organization' to get back to proj-org branch")
