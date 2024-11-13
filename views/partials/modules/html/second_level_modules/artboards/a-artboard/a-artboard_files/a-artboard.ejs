@@ -1,36 +1,29 @@
-<div class="a-artboard <%= THEME_moduleTheme %> ">
-    <div class="a-artboard__container" <%= THEME_artboardContainerFill %>>
+<div class="a-artboard <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %> ">
+    <div class="a-artboard__container" <%= A_ARTBOARD.MODULE_THEMES.THEME_containerFill %>>
         <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_first) { %>
-                <%- include(MODULE_aArtboard_first, {}) %>
+            <% if (A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[0]) { %>
+                <%- include(A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION, {}) %>
             <% } %>
         </div>
         <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_second) { %>
-                <%- include(MODULE_aArtboard_second, {}) %>
+            <% if (A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[1]) { %>
+                <%- include(A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_LOCATION, {}) %>
             <% } %>
         </div>
         <div class="a-artboard__slot">
-            <% if (MODULE_aArtboard_third) { %>
-                <%- include(MODULE_aArtboard_third, {}) %>
+            <% if (A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[2]) { %>
+                <%- include(A_ARTBOARD.MODULE_CHILDREN_DATA.CHILDREN[2].MODULE_LOCATION, {}) %>
             <% } %>
         </div>
     </div>
 </div>
 
+
 <script
     id='aArtboard_scriptId'
     type='module'
     data-json='[
-        "<%= ID_aCanvas_id %>",
-        "<%=CONTENT_ID_aCanvas_zoom_id%>",
-        "<%=CONTENT_ID_aCanvas_pan_id%>",
-        "<%= ID_bFooter_id %>",
-        "<%= ACTIONS_bFooter_btn.btn_01.btnId %>",
-        "<%= ACTIONS_bFooter_btn.btn_02.btnId %>",
-        "<%= ACTIONS_bFooter_btn.btn_03.btnId %>",
-        "<%= ACTIONS_bFooter_btn.btn_04.btnId %>",
-        "<%= ACTIONS_bFooter_btn.btn_05.btnId %>"
+    "<%#= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>",
     ]'
-    src='./javascripts/html_modules/a_artboard.js'
+    src='./javascripts/app/app.js'
 ></script>

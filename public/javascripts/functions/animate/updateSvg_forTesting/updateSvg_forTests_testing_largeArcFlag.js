@@ -1,5 +1,6 @@
 import {calculateArcAndDescribePath, describeComplexPath} from '../../math/svgElementCalculations.js'
 import {makeDeepCopy, transformData, findParallelDistance} from '../../drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js'
+import {SvgGroup} from '../../../classes/components/DocumentSvg/SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
 
 let updateSVG_highlight_1_point_01_switches = [1,0]
 let updateSVG_highlight_1_point_02_switches = [1,0]
@@ -267,8 +268,7 @@ function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_02(pathDa
 
 
 
-
-
+//vv
 function updateSVG_highlight_2_points_1_line_03_A(coords1, coords2, self) {
     if(updateSVG_highlight_2_points_1_line_03_A_switches[0] === 1) {
         if(updateSVG_highlight_2_points_1_line_03_A_switches[1] < 1) {
@@ -288,12 +288,12 @@ function updateSVG_highlight_2_points_1_line_03_A(coords1, coords2, self) {
     }
 }
 
-
+//vvv
 function updateSVG_highlight_2_points_1_line_03_B(coords1, coords2, self) {
     if(updateSVG_highlight_2_points_1_line_03_B_switches[0] === 1) {
         if(updateSVG_highlight_2_points_1_line_03_B_switches[1] < 1) {
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_10')
-            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--2 testElem-fill-color--3').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_10')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--5 testElem-fill-color--3').attr('id', 'visualTest--intersectPt1--largeArcFlag-IDTAG_10')
+            self.testEndPointGroup.append('circle').attr('class', 'testElement-endpoint testElement-palette--4 testElem-radius--5 testElem-fill-color--3').attr('id', 'visualTest--intersectPt2--largeArcFlag-IDTAG_10')
             self.testEndPointGroup.append('line').attr('class', 'testElement-path testElement-palette--4 testElem-strokeWidth--1 testElem-stroke-color--3 testElem-dashArray--5').attr('id', 'visualTest--path--largeArcFlag-IDTAG_10')
             updateSVG_highlight_2_points_1_line_03_B_switches[1] = 1
         }
@@ -308,14 +308,14 @@ function updateSVG_highlight_2_points_1_line_03_B(coords1, coords2, self) {
     }
 }
 
-
+//vvvv
 function updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03(pathData, self) {
     if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03_switches[0] === 1) {
         if(updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03_switches[1] < 1) {
-            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path1--largeArcFlag-IDTAG_11')
-            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--none').attr('id', 'intArcTEST--path2--largeArcFlag-IDTAG_11')
-            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--1 testElem-stroke-color--2 testElem-dashArray--none').attr('id', 'intArcTEST--path3--largeArcFlag-IDTAG_11')
-            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--3 testElem-stroke-color--2 testElem-dashArray--none').attr('id', 'intArcTEST--path4--largeArcFlag-IDTAG_11')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--2').attr('id', 'intArcTEST--path1--largeArcFlag-IDTAG_11')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--2 testElem-stroke-color--2 testElem-dashArray--5').attr('id', 'intArcTEST--path2--largeArcFlag-IDTAG_11')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--1 testElem-strokeWidth--1 testElem-stroke-color--1 testElem-dashArray--5').attr('id', 'intArcTEST--path3--largeArcFlag-IDTAG_11')
+            self.testEndPointGroup.append('path').attr('class', 'testElement-path testElement-palette--2 testElem-strokeWidth--5 testElem-stroke-color--2 testElem-dashArray--none').attr('id', 'intArcTEST--path4--largeArcFlag-IDTAG_11')
             updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_03_switches[1] = 1
         }
 

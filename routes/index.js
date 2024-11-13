@@ -14,6 +14,16 @@ const {
 } = require('../public/reference_files/theme_class_data')
 // Data
 
+// EJS MODEL
+const {
+    ArtBoardModel,
+} = require('./utils/ejsModels/ejsModelBuilder/artBoardmodel/artBoardModelBuilder')
+// EJS MODEL
+
+let ejsModels = {
+    ArtBoardModel: ArtBoardModel,
+}
+
 router.get('/', (req,res) => {
     res.render('index',{
         // MODULE DATA
@@ -21,7 +31,14 @@ router.get('/', (req,res) => {
         colorVars: COLORVARS,
         widthVars: WIDTHVARS,
         btnVars: BTNVARS,
+        ejsModels,
     })
+})
+
+// API endpoint to send modelData
+router.get('/api/data', (req, res) => {
+    const data = {ejsModels}
+    res.json(data)
 })
 
 module.exports = router

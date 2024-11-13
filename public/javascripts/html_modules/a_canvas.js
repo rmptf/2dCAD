@@ -1,6 +1,8 @@
+console.log("canvas.js old")
+
 // import {createSvgDocument} from '../functions/canvas/Classes/CanvasDocument/createCanvasDocumentFunctions.js'
 // import {increaseScale, resetScale, decreaseScale} from '../functions/canvas/canvas_scale.js'
-import {hotKeyPress} from '../functions/tools/hotKeys.js'
+// import {hotKeyPress} from '../functions/tools/hotKeys.js'
 
 a_canvas_globalVars.scale = 1
 a_canvas_globalVars.pressAddCurveButton = false
@@ -38,7 +40,7 @@ a_canvas_globalVars.parallelFigure_counter_groups_array_GLOBAL = []             
 // a_canvas_functions.resetScale = resetScale
 // a_canvas_functions.decreaseScale = decreaseScale
 
-document.addEventListener("keydown", (event) => hotKeyPress(event))
+// document.addEventListener("keydown", (event) => hotKeyPress(event))
 
 
 

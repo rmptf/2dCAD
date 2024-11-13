@@ -75,8 +75,10 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
     // // Set Large Arc Flag of each arc stuff:
     // // parallelPathObject.thisConnection = [] add this later
 
-    console.log("STARTED")
-    console.log("okskfosdfosdkfoskfosfkosdkfsodkf")
+    console.log("")
+    console.log("")
+    console.log("")
+    console.log("PARPATH_STARTED")
     console.log(parallelPathDatas_globalRef)
     console.log(parallelPathDatasCopyForPerpendicular)
 
@@ -88,6 +90,11 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
             // centerPoint = setPointClickedOnOrigPath(event)
             // updateSVG_highlight_1_point_02([centerPoint.x, centerPoint.y], self)
         } else {
+
+            console.log("")
+            console.log("FINISH_SHAPE")
+            console.log("")
+            
             isDownDrawParellelInitiated = false
             a_canvas_globalVars.svgD3.on("mousemove", null)
             a_canvas_globalVars.svgD3.on('click', null)
@@ -98,11 +105,12 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
 
 
     function mouseMoveDrawParallel(event) {
-        console.log(" ")
-        console.log(" ")
-        console.log(" ")
-        console.log("START SHAPE")
-        console.log(parallelPathObject.parallelDistance)
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("START_SHAPE")
+        console.log("")
+        // console.log(parallelPathObject.parallelDistance)
 
         parallelPathObject.counterOfArcsAsTheyArrive = -1
         parallelPathObject.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -111,7 +119,9 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.setPrevArcFlag_atFinal_from3Joiner = false
 
         if(isDownDrawParellelInitiated === true) {
-            console.log("adding_iterationCounter")
+            console.log("SHAPE_ITERATION_COUNTER")
+            console.log("SHAPE_COUNT: " + parallelPathObject.iterationCounter)
+            console.log("")
             parallelPathObject.iterationCounter = parallelPathObject.iterationCounter + 1
             if(parallelPathObject.iterationCounter === 1) {
                 parallelPathObject.parallelDistance = 0
@@ -139,6 +149,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
 
             for (let i = 0; i < parallelPathDatas_globalRef.length; i++) {
                 console.log("i: " + i)
+                console.log(parallelPathDatas_globalRef[i])
                 let skipperCheckers = [] // these have to do with adding and eliminating paths based on parallel intersections (not in use right now)
                 skipperCheckers.skipperChecker_Path = false
                 skipperCheckers.skipperChecker_Arc = false
@@ -177,7 +188,7 @@ function drawParallelPathFunction(event, originalFigure_counter_groupCount_GLOBA
         parallelPathObject.arcToPathCounter = -1
         parallelPathObject.arcToArcCounter = -1
 
-        console.log("ENDSHAPEererere")
+        console.log("END_SHAPE")
         console.log(" ")
         console.log(" ")
         console.log(" ")

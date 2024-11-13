@@ -1,5 +1,5 @@
 import {SAVED_FIGURE_DATA} from '../../../reference_files/data/savedFigureData.js'
-import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../canvas/svgDocument_actions.js'
+import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../../classes/utils/svgDocument_actions.js'
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 import {createSvgGroups} from '../drafting/drawPath.js'
 
@@ -12,14 +12,22 @@ function drawSavedFigure(index, obj) {
     let figureCount = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL
     // SET VARS FROM GLOBAL
 
-    // if using svgElementcounters
-    // let figureCount222 = a_canvas_globalVars.originalFigure_counter_groupCount_GLOBAL[a_canvas_globalVars.svgElement_counter_currentCount_GLOBAL]
-
     // GRAB DATA FROM SAVED FIGURE
     let figureData = JSON.parse(SAVED_FIGURE_DATA[index])
-    let mainPathData = figureData.shapeData
-    let canvasDocumentPosition = figureData.canvasDocumentPosition
-    let documentSvgDimensions = figureData.documentSvgDimensions
+    let mainPathData
+    let canvasDocumentPosition
+    let documentSvgDimensions
+    if(figureData.duelSave){
+        console.log("OOP 'STYLE' SAVE")
+        mainPathData = figureData.duelSave.style_save.shapeData
+        canvasDocumentPosition = figureData.duelSave.style_save.canvasDocumentPosition
+        documentSvgDimensions = figureData.duelSave.style_save.documentSvgDimensions
+    } else {
+        console.log("PRE-OOP SAVE; loaded from oldway")
+        mainPathData = figureData.shapeData
+        canvasDocumentPosition = figureData.canvasDocumentPosition
+        documentSvgDimensions = figureData.documentSvgDimensions
+    }
     // GRAB DATA FROM SAVED FIGURE
     
     // SET HTML ELEMENTS POSITION & DIMENSIONS

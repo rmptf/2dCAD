@@ -38,11 +38,9 @@ import {
     noArcIntersection_notFirstPos_lastPos_prevIndexIsArc,
     noArcIntersection_notFirstPos_lastPos_everyIndex_lastAction
 } from './sortEndPoints_functions/handleIntersections/handleIntersectionsNoArc.js'
-
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02, updateSVG_highlight_1_path_3ways_arcFlag_sweepFlag_variations_01, updateSVG_highlight_2_points_1_line_01, updateSVG_highlight_2_points_1_line_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
 // import {findLineMidpoint} from '../../../math/mathFunctions.js'
 // import {updateSVG_highlight_1_point_01, updateSVG_highlight_1_point_02} from '../../../animate/updateSvg_forTesting/updateSvg_forTests_testing_largeArcFlag.js'
-
 
 function sortEndpoints(
     targetEndPoints,
@@ -233,12 +231,12 @@ function sort_endPoint_noArc(
     } 
     
     if(thisIsArcToPath === false) {
-        console.log("startastartstart")
         const arcExist = (newIndex) => targetEndPoints[newIndex][1].arc.exist === true
         const firstPosition = (newIndex) => (newIndex) === 0
         const lastPosition = (newIndex) => newIndex === targetEndPoints.length - 1
         let pathDatasOutside = getRefPointAtIndexIfNotFiller(refEndPointsBase, index, parPathObj) // TODO: Fix like fixed in addSvgElement.js
         let parallelProjections = calcParallelProjections(pathDatasOutside[0].coords, pathDatasOutside[1].coords, parPathObj.parallelDistance)
+        console.log('PARALLEL_PROJECTIONS')
         console.log(parallelProjections)
     
         // AA_FIRST_ALL

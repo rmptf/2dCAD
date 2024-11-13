@@ -1,4 +1,4 @@
-import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../canvas/svgDocument_actions.js'
+import {handleMainPathClick, handleSecondaryPathClick, handleMainPathDrag, handleEndPointDrag, handleExpandSvg} from '../../classes/utils/svgDocument_actions.js'
 import {updateSVG_mainPathAndPoints} from '../animate/updateSvg.js'
 import {getElementPositionData} from '../drafting/resizeSvg.js'
 import {updateSVG_highlight_1_point_01} from '../animate/updateSvg_forTesting/updateSvg_forTests.js'

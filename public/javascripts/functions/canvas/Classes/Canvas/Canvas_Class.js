@@ -20,5 +20,6 @@ export {
     Canvas
 }
 
-console.log("ORIGIN BRANCH")
-console.log("'git checkout project-organization' to get back to organization branch")
+console.log("*not* ORIGIN BRANCH")
+console.log("PROJECT-ORGANIZATION BRANCH")
+console.log("'git checkout main' to get back to main branch")

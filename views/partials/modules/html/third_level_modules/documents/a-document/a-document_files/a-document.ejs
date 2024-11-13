@@ -1,30 +1,15 @@
-<div class="a-document <%= THEME_moduleTheme %>">
-    <div class="a-document__container <%= THEME_aDocumentContainerFill %> <%= THEME_aDocumentContainerColor %> <%= THEME_aDocumentContainerBorderColor %>" id="aDocumentContainer">
-    <!-- <div class="a-document__container <%= THEME_aDocumentContainerFill %> <%= THEME_aDocumentContainerColor %> <%= THEME_aDocumentContainerBorderColor %>" id="aDocumentContainer" onclick="<%= ACTIONS_aDocument_element_btn.element_01.elementBtnOnClick %>"> -->
-        <div class="a-document__header body_1"></div>
-        <% if(ACTIONS_aDocument_btn_cont.btn_cont_01.headerText) { %>
-            <div class="a-document__subHeader body_3"><%= ACTIONS_aDocument_btn_cont.btn_cont_01.headerText %></div>
+<div class="a-document <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>">
+    <div class="a-document__container <%= A_DOCUMENT.MODULE_THEMES.THEME_containerFill %> <%= A_DOCUMENT.MODULE_THEMES.THEME_containerColor %> <%= A_DOCUMENT.MODULE_THEMES.THEME_containerBorderColor %>" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[0].CONTENT_ID_ADOCUMENT_CONTAINER_ID %>>
+        <div class="a-document__header body_1" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_ADOCUMENT_HEADER %>></div>
+        <% if (A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0]) { %>
+            <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[0]}) %>
         <% } %>
-        <div class="<%= ACTIONS_aDocument_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_aDocument_btn_cont.btn_cont_01.btnAlign %>">
-            <button class="<%= ACTIONS_aDocument_btnCont_01.btn_01.btnTheme_class %> <%= ACTIONS_aDocument_btnCont_01.btn_01.btnTheme_type %> <%= ACTIONS_aDocument_btnCont_01.btn_01.btnTheme_size %> <%= ACTIONS_aDocument_btnCont_01.btn_01.btnTheme_status %> <%= ACTIONS_aDocument_btnCont_01.btn_01.btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_01.btn_01.btnId %> type=<%= ACTIONS_aDocument_btnCont_01.btn_01.btnType %> onclick=<%= ACTIONS_aDocument_btnCont_01.btn_01.btnOnClick %>><%= ACTIONS_aDocument_btnCont_01.btn_01.btnText %></button>
-            <button class="<%= ACTIONS_aDocument_btnCont_01.btn_069.btnTheme_class %> <%= ACTIONS_aDocument_btnCont_01.btn_069.btnTheme_type %> <%= ACTIONS_aDocument_btnCont_01.btn_069.btnTheme_size %> <%= ACTIONS_aDocument_btnCont_01.btn_069.btnTheme_status %> <%= ACTIONS_aDocument_btnCont_01.btn_069.btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_01.btn_069.btnId %> type=<%= ACTIONS_aDocument_btnCont_01.btn_069.btnType %> onclick=<%= ACTIONS_aDocument_btnCont_01.btn_069.btnOnClick %>><%= ACTIONS_aDocument_btnCont_01.btn_069.btnText %></button>
-            <button class="<%= ACTIONS_aDocument_btnCont_01.btn_02.btnTheme_class %> <%= ACTIONS_aDocument_btnCont_01.btn_02.btnTheme_type %> <%= ACTIONS_aDocument_btnCont_01.btn_02.btnTheme_size %> <%= ACTIONS_aDocument_btnCont_01.btn_02.btnTheme_status %> <%= ACTIONS_aDocument_btnCont_01.btn_02.btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_01.btn_02.btnId %> type=<%= ACTIONS_aDocument_btnCont_01.btn_02.btnType %> onclick=<%= ACTIONS_aDocument_btnCont_01.btn_02.btnOnClick %>><%= ACTIONS_aDocument_btnCont_01.btn_02.btnText %></button>
-            <button class="<%= ACTIONS_aDocument_btnCont_01.btn_03.btnTheme_class %> <%= ACTIONS_aDocument_btnCont_01.btn_03.btnTheme_type %> <%= ACTIONS_aDocument_btnCont_01.btn_03.btnTheme_size %> <%= ACTIONS_aDocument_btnCont_01.btn_03.btnTheme_status %> <%= ACTIONS_aDocument_btnCont_01.btn_03.btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_01.btn_03.btnId %> type=<%= ACTIONS_aDocument_btnCont_01.btn_03.btnType %> onclick=<%= ACTIONS_aDocument_btnCont_01.btn_03.btnOnClick %>><%= ACTIONS_aDocument_btnCont_01.btn_03.btnText %></button>
-            <button class="<%= ACTIONS_aDocument_btnCont_01.btn_04.btnTheme_class %> <%= ACTIONS_aDocument_btnCont_01.btn_04.btnTheme_type %> <%= ACTIONS_aDocument_btnCont_01.btn_04.btnTheme_size %> <%= ACTIONS_aDocument_btnCont_01.btn_04.btnTheme_status %> <%= ACTIONS_aDocument_btnCont_01.btn_04.btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_01.btn_04.btnId %> type=<%= ACTIONS_aDocument_btnCont_01.btn_04.btnType %> onclick=<%= ACTIONS_aDocument_btnCont_01.btn_04.btnOnClick %>><%= ACTIONS_aDocument_btnCont_01.btn_04.btnText %></button>
-        </div>
-        <% if(ACTIONS_aDocument_btn_cont.btn_cont_02.headerText) { %>
-            <div class="a-document__subHeader body_3"><%= ACTIONS_aDocument_btn_cont.btn_cont_02.headerText %></div>
+        <% if(A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_TEXT.HEADER_TEXT) { %>
+            <div class="a-document__subHeader body_3"><%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_TEXT.HEADER_TEXT %></div>
         <% } %>
-        <div class="<%= ACTIONS_aDocument_btn_cont.btn_cont_02.btnDirection %> <%= ACTIONS_aDocument_btn_cont.btn_cont_02.btnAlign %>">
-            <% for (let i = 0; i < ACTIONS_aDocument_btnCont_02.length; i++) { %>
-                <button class="<%= ACTIONS_aDocument_btnCont_02[i].btnTheme_class %> <%= ACTIONS_aDocument_btnCont_02[i].btnTheme_type %> <%= ACTIONS_aDocument_btnCont_02[i].btnTheme_size %> <%= ACTIONS_aDocument_btnCont_02[i].btnTheme_status %> <%= ACTIONS_aDocument_btnCont_02[i].btnTheme_style %>" id=<%= ACTIONS_aDocument_btnCont_02[i].btnId %> type=<%= ACTIONS_aDocument_btnCont_02[i].btnType %> onclick=<%= ACTIONS_aDocument_btnCont_02[i].btnOnClick %>><%= ACTIONS_aDocument_btnCont_02[i].btnText %></button>
-            <% } %>
-        </div>
-        <svg class="a-document__svg <%= THEME_aDocumentSvgFill %>" id="aDocumentSvg00"></svg>
+        <% if (A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1]) { %>
+            <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: A_DOCUMENT.MODULE_ACTIONS.BUTTON_CONTAINERS[1]}) %>
+        <% } %>
+        <svg class="a-document__svg <%= A_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id=<%= A_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[2].CONTENT_ID_ADOCUMENT_SVG %>></svg>
     </div>
 </div>
-
-<script>
-    // const a_document_object = {}
-</script>
-<script type='module' src='./javascripts/html_modules/a_document.js'></script>

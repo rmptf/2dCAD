@@ -1,18 +1,17 @@
-<div class="b-header <%= THEME_moduleTheme %>">
-    <div class="b-header__container <%= THEME_bHeaderContainerFill %>">
+<div class="b-header <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>">
+    <div class="b-header__container <%= B_HEADER.MODULE_THEMES.THEME_containerFill %>">
             <div class="b-header__sidebar b-header__sidebar--left">
-                <div class="heading_3 b-header__logo-container <%= THEME_bHeaderLogoIconColor %>">
-                    <%= CONTENT_bHeader_logo_cont.icon %>
+                <div class="heading_3 b-header__logo-container <%= B_HEADER.MODULE_THEMES.THEME_logoIconColor %>">
+                    <%= B_HEADER.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_LOGO_CONTAINER.ICON %>
                 </div>
-                <div class="heading_3 b-header__logo-container <%= THEME_bHeaderLogoTextColor %>">
-                    <%= CONTENT_bHeader_logo_cont.text %>
+                <div class="heading_3 b-header__logo-container <%= B_HEADER.MODULE_THEMES.THEME_logoTextColor %>">
+                    <%= B_HEADER.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_LOGO_CONTAINER.TEXT %>
                 </div>
             </div>
             <div class="b-header__sidebar b-header__sidebar--right">
-                <div class="<%= ACTIONS_bHeader_btn_cont.btn_cont_01.btnDirection %> <%= ACTIONS_bHeader_btn_cont.btn_cont_01.btnAlign %>">
-                    <button class="<%= ACTIONS_bHeader_btn.btn_01.btnTheme_class %> <%= ACTIONS_bHeader_btn.btn_01.btnTheme_type %> <%= ACTIONS_bHeader_btn.btn_01.btnTheme_size %> <%= ACTIONS_bHeader_btn.btn_01.btnTheme_status %> <%= ACTIONS_bHeader_btn.btn_01.btnTheme_style %>" id=<%= ACTIONS_bHeader_btn.btn_01.btnId %> type=<%= ACTIONS_bHeader_btn.btn_01.btnType %> onclick=<%= ACTIONS_bHeader_btn.btn_01.btnOnClick %>><%= ACTIONS_bHeader_btn.btn_01.btnText %></button>
-                    <button class="<%= ACTIONS_bHeader_btn.btn_02.btnTheme_class %> <%= ACTIONS_bHeader_btn.btn_02.btnTheme_type %> <%= ACTIONS_bHeader_btn.btn_02.btnTheme_size %> <%= ACTIONS_bHeader_btn.btn_02.btnTheme_status %> <%= ACTIONS_bHeader_btn.btn_02.btnTheme_style %>" id=<%= ACTIONS_bHeader_btn.btn_02.btnId %> type=<%= ACTIONS_bHeader_btn.btn_02.btnType %> onclick=<%= ACTIONS_bHeader_btn.btn_02.btnOnClick %>><%= ACTIONS_bHeader_btn.btn_02.btnText %></button>
-                </div>
+                <% if (B_HEADER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]) { %>
+                    <%- include(MODEL_GLOBAL_VARIABLES.BUTTONCONTAINER_MODULE_LOC, {thisContainer: B_HEADER.MODULE_ACTIONS.BUTTON_CONTAINERS[0]}) %>
+                <% } %>
             </div>
     </div>
 </div>
