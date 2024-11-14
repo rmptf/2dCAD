@@ -4,7 +4,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     // this.PARFIGURE = parallelFigure
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure)
-    this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
+    this.parallelPathDatas = parallelFigure.parallelFigurePathDatas // TODO: I think you can pass this child PathData and Prev Chid PathData as one array (they are only used in the following if checks)
     this.index = null
 
     this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
@@ -43,7 +43,7 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
                 this.handleDisconnectedArcIntersection()
                 break
             default:
-                this.handleDefaultArcIntersection()
+                this.handleConnectedArcIntersection()
         }
     } else if (this.firstPosition(this.index)) {
         switch(true) {
@@ -51,12 +51,12 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
                 this.handleDisconnectedArcIntersection()
                 break
             default:
-                this.handleDefaultArcIntersection()
+                this.handleConnectedArcIntersection()
         }
     }
 }
 
-IntersectionsSorter_WithArc.prototype.handleDefaultArcIntersection = function() {
+IntersectionsSorter_WithArc.prototype.handleConnectedArcIntersection = function() { //TODO: Is there a way to just know which segments we r on rather than setting a flag?
     // 1
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {

@@ -32,7 +32,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    this.setArcRadius(0, "arcRad_1")
+    this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
@@ -334,8 +334,8 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 }
 
 IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
-    let modIndex = index + 1
-    let nextRefEndPointBase = this.originalFigurePathDatas_plusFillers[modIndex]
+    // let modIndex = index + 1
+    let nextRefEndPointBase = this.originalFigurePathDatas_plusFillers[index + 1]
     let distance = this.parallelFigureObj.parallelDistance
     this.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let arcRadiusParDistAndDir = this.arcRadiusParDistAndDir
