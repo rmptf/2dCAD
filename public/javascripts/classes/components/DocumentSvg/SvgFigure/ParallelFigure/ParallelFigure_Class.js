@@ -230,7 +230,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
                 // thisFigure.IntersectionsSorter_WithArc.setIndices(i)
                 // thisFigure.IntersectionsSorter_NoArc.setIndices(i)
-                if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                if(i < thisFigure.originalFigurePathDatas.length) {
                     console.log(i)
                     console.log(thisFigure.originalFigurePathDatas[i].children)
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
