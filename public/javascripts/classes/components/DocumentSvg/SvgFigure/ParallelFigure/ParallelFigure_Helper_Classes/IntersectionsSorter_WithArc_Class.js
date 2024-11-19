@@ -17,8 +17,8 @@ function IntersectionsSorter_WithArc(parallelFigure) {
 
     // this.isWest123 = (targetIndex) => console.log("poopopopopoper", this.parallelPathDatas[targetIndex][1].arc.side)
     // this.isWest = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.side === 'west'
-    this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
-    this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
+    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
+    // this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
     // this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
     // this.firstPosition = (targetIndex) => (targetIndex) === 0
     // this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
@@ -48,18 +48,18 @@ IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
     if(!this.firstPosition(this.index)) {
         switch(true) {
-            case this.isJoiner(this.index):
-            case this.isJoiner(this.index - 1):
-                this.handleDisconnectedArcIntersection()
-                break
+            // case this.isJoiner(this.index):
+            // case this.isJoiner(this.index - 1):
+            //     this.handleDisconnectedArcIntersection()
+            //     break
             default:
                 this.handleConnectedArcIntersection()
         }
     } else if (this.firstPosition(this.index)) {
         switch(true) {
-            case this.isJoiner(this.index):
-                this.handleDisconnectedArcIntersection()
-                break
+            // case this.isJoiner(this.index):
+            //     this.handleDisconnectedArcIntersection()
+            //     break
             default:
                 this.handleConnectedArcIntersection()
         }

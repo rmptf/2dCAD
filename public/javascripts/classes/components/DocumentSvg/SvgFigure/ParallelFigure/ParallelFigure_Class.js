@@ -235,6 +235,40 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
                 thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
                 if(i < thisFigure.originalFigurePathDatas.length) {
+                    console.log("CURRENT_TESTER")
+                    console.log("CURRENT_Total_Length: " + thisFigure.originalFigurePathDatas.length)
+                    if(i > 1) {
+                        console.log("CURRENT_A: " + i)
+                        console.log("CURRENT_PD_A: " + thisFigure.originalFigurePathDatas[i - 1].children.parallel_pathDatas.pathData_west.children.childCount)
+                        if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                            console.log("CURRENT_B: " + i)
+                            // console.log("CURRENT_PD_B: " + thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount)
+                        }
+                    }
+                    if(i === 1) {
+                        console.log("CURRENT_C: " + i)
+                    }
+
+                    // if(!this.firstPosition(this.index)) {
+                    //     switch(true) {
+                    //         // case this.isJoiner(this.index):
+                    //         // case this.isJoiner(this.index - 1):
+                    //         //     this.handleDisconnectedArcIntersection()
+                    //         //     break
+                    //         default:
+                    //             this.handleConnectedArcIntersection()
+                    //     }
+                    // } else if (this.firstPosition(this.index)) {
+                    //     switch(true) {
+                    //         // case this.isJoiner(this.index):
+                    //         //     this.handleDisconnectedArcIntersection()
+                    //         //     break
+                    //         default:
+                    //             this.handleConnectedArcIntersection()
+                    //     }
+                    // }
+
+
                     // if(i > 1) {
                     //     // console.log("Poopopopopo")
                     //     // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount)
@@ -257,17 +291,15 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // // }
                     console.log(i)
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
-                        console.log("ARC")
+                        console.log("CURRENT_ARC")
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
-                        console.log("PATH")
+                        console.log("CURRENT_PATH")
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
                 thisFigure.parallelFigure_updateSvg()
             }
-
-
         // }
 
         // Reset 

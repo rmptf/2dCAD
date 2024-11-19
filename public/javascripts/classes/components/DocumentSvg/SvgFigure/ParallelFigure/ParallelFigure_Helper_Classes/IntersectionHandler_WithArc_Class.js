@@ -23,6 +23,9 @@ function IntersectionHandler_WithArc(parallelFigure) {
 
     this.index = null
     this.arcRadiusParDistAndDir = null
+
+    console.log("Ass")
+    console.log(this.originalFigurePathDatas_plusFillers)
 }
 
 export {
@@ -232,6 +235,10 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let arcRefIndex = this.index + indicators[2]
     let target = indicators[3]
 
+    // this.setPerpendicularPoints([0, 0, 1, 0], false)
+    // this.setPerpendicularPoints([0, 0, 1, 0], true)
+    // this.setPerpendicularPoints([0, 1, 1, 1], false)
+
 
 
     // set target datas
@@ -241,11 +248,34 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let prevGuy = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west
     let thisGuy = this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east
     let targetPathData = (target == 0) ? prevGuy : thisGuy;
-    let refPathData = this.originalFigurePathDatas_plusFillers[refIndex]
-    let refArcCenter = this.originalFigurePathDatas_plusFillers[arcRefIndex]
+    
+    //old
+    // let refPathData = this.originalFigurePathDatas_plusFillers[refIndex] //TODO: can we make this from orginalPathData
+    // let refArcCenter = this.originalFigurePathDatas_plusFillers[arcRefIndex]
+    //new
+    let refPathData01 = this.originalFigurePathDatas[targetIndex + indicators[1]] //TODO: can we make this from orginalPathData
+    let refArcCenter01 = this.originalFigurePathDatas[targetIndex + indicators[2]]
 
+    // console.log("CURRENT: OKOKOK")
+    // console.log(this.originalFigurePathDatas_plusFillers)
+    // console.log(this.originalFigurePathDatas_plusFillers[refIndex])
+    // console.log(this.originalFigurePathDatas_plusFillers[arcRefIndex])
+    // console.log(refIndex)
+    // console.log(arcRefIndex)
+    // console.log(targetIndex + indicators[1])
+    // console.log(targetIndex + indicators[2])
+    // console.log(refPathData)
+    // console.log(refArcCenter)
+    // console.log(refPathData01)
+    // console.log(refArcCenter01)
+    // console.log("CURRENT: OPD+ fillers length: " + this.originalFigurePathDatas_plusFillers.length)
+
+    
     // calculate positions and set data
-    let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusData)
+    //old
+    // let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusData)
+    //new
+    let newParallelPosition = findPointAlongSlopeAtDistance([refPathData01.coords.x, refPathData01.coords.y], [refArcCenter01.arc.center.x, refArcCenter01.arc.center.y], arcRadiusData)
     targetPathData.coords.x = newParallelPosition[0]
     targetPathData.coords.y = newParallelPosition[1]
 
@@ -353,7 +383,10 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
 
 IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
     // let modIndex = index + 1
-    let nextRefEndPointBase = this.originalFigurePathDatas_plusFillers[index + 1]
+    //old
+    // let nextRefEndPointBase = this.originalFigurePathDatas_plusFillers[index + 1]
+    //new
+    let nextRefEndPointBase = this.originalFigurePathDatas[index + 1]
     let distance = this.parallelFigureObj.parallelDistance
     this.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
     let arcRadiusParDistAndDir = this.arcRadiusParDistAndDir
