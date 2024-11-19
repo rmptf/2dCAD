@@ -16,6 +16,7 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.Intersection_Contact = new Intersection_Contact(parallelFigure)
     this.Intersection_NoContact = new Intersection_NoContact(parallelFigure)
 
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
@@ -217,7 +218,10 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 IntersectionHandler_WithArc.prototype.setArcRadius = function(indexModifier, logId) {
     let modifiedIndex = this.index + indexModifier
     let parallelDistance = this.calcArcParDistance(modifiedIndex)
-    this.parallelFigurePathDatas[modifiedIndex][1].arc.radius = parallelDistance
+    //old
+    // this.parallelFigurePathDatas[modifiedIndex][1].arc.radius = parallelDistance
+    //new
+    this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east.arc.radius = parallelDistance
 }
 
 IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicators, setPrevious) {
@@ -228,8 +232,15 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let arcRefIndex = this.index + indicators[2]
     let target = indicators[3]
 
+
+
     // set target datas
-    let targetPathData = this.parallelFigurePathDatas[targetIndex][target]
+    //old
+    // let targetPathData = this.parallelFigurePathDatas[targetIndex][target]
+    //new
+    let prevGuy = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west
+    let thisGuy = this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east
+    let targetPathData = (target == 0) ? prevGuy : thisGuy;
     let refPathData = this.originalFigurePathDatas_plusFillers[refIndex]
     let refArcCenter = this.originalFigurePathDatas_plusFillers[arcRefIndex]
 
@@ -239,7 +250,10 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     targetPathData.coords.y = newParallelPosition[1]
 
     if (setPrevious) {
-        let prevParallelPathData = this.parallelFigurePathDatas[targetIndex - 1][1]
+        //old
+        // let prevParallelPathData = this.parallelFigurePathDatas[targetIndex - 1][1]
+        //new
+        let prevParallelPathData = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_east
         prevParallelPathData.coords.x = newParallelPosition[0]
         prevParallelPathData.coords.y = newParallelPosition[1]
     }
@@ -300,8 +314,12 @@ IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {
 }
 
 IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData = function() {
-    let prevParallelPathData = this.parallelFigurePathDatas[this.index - 1][1]
-    let thisParallelPathData = this.parallelFigurePathDatas[this.index][1]
+    //old
+    // let prevParallelPathData = this.parallelFigurePathDatas[this.index - 1][1]
+    // let thisParallelPathData = this.parallelFigurePathDatas[this.index][1]
+    //new
+    let prevParallelPathData = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_east
+    let thisParallelPathData = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
     if(thisParallelPathData.arc.joiner) {
         thisParallelPathData.coords.x = prevParallelPathData.coords.x
         thisParallelPathData.coords.y = prevParallelPathData.coords.y

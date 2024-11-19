@@ -64,8 +64,8 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
             newPathData02.setAllData(nextPlugItIn)
             parallelFigurePathDatas.push([newPathData01, newPathData02])
 
-            originalFigurePathDatas[i].addChildPathDataBase('pathData_east', newPathData01)
-            originalFigurePathDatas[i + 1].addChildPathDataBase('pathData_west', newPathData02)
+            originalFigurePathDatas[i].addChildPathDataBase('pathData_west', newPathData01)
+            originalFigurePathDatas[i + 1].addChildPathDataBase('pathData_east', newPathData02)
 
             // originalFigurePathDatas[i + 1].consoleLogTest()
             // console.log([newPathData01, newPathData02])

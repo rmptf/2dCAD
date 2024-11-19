@@ -142,13 +142,16 @@ ParallelFigure.prototype.addEndPoints = function() {
     // initiate a counter that iterates every time a pathData is created
     let endPointCount = 0
     // handle edge case: set first point
-    let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_east')
-
+    console.log("here")
+    // let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_east')
+    let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_west')
+    console.log("avter_here")
     // find last iteration of pathData
     let lastEndPointCount = ((this.originalFigurePathDatas.length - 1) * 2) - 1
     let lastPDCount = this.originalFigurePathDatas.length - 2
     // handle edge case: set last point
-    let lastPooper  = this.createParallelEndPoint(this.originalFigurePathDatas[this.originalFigurePathDatas.length - 1], lastEndPointCount, lastPDCount, 1, 'pathData_west')
+    // let lastPooper  = this.createParallelEndPoint(this.originalFigurePathDatas[this.originalFigurePathDatas.length - 1], lastEndPointCount, lastPDCount, 1, 'pathData_west')
+    let lastPooper  = this.createParallelEndPoint(this.originalFigurePathDatas[this.originalFigurePathDatas.length - 1], lastEndPointCount, lastPDCount, 1, 'pathData_east')
 
     // loop through every path between first and last, create two endPoints
     for (let i = 1; i < this.originalFigurePathDatas.length - 1; i++) {
@@ -203,47 +206,68 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // console.log(thisFigure.parallelFigurePathDatas.length)
             // console.log(thisFigure.parallelFigurePathDatas)
 
+
+            // OLDWAY: PARALLELPathData
             // for (let i = 0; i < thisFigure.parallelFigurePathDatas.length; i++) { // eventually switch this to loop through origPathDatas and loop through eachs' children pds (skip fisrt opd)
             //     console.log("i: " + i)
             //     // // thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
             //     // // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
-            //     // thisFigure.IntersectionsSorter_WithArc.setIndices(i)
-            //     // thisFigure.IntersectionsSorter_NoArc.setIndices(i)
+            //     thisFigure.IntersectionsSorter_WithArc.setIndices(i)
+            //     thisFigure.IntersectionsSorter_NoArc.setIndices(i)
             //     if(i < thisFigure.parallelFigurePathDatas.length) {
             //         console.log(i)
-            //         console.log(thisFigure.originalFigurePathDatas[i].children)
             //         if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
-            //             console.log("poopa")
-            //             // thisFigure.IntersectionsSorter_WithArc.sortIntersections(parallelPathData)
+            //             console.log("ARC")
+            //             thisFigure.IntersectionsSorter_WithArc.sortIntersections()
             //         } else {
-            //             console.log("titta")
-            //             // thisFigure.IntersectionsSorter_NoArc.sortIntersections()
+            //             console.log("PATH")
+            //             thisFigure.IntersectionsSorter_NoArc.sortIntersections()
             //         }
             //     }
             //     thisFigure.parallelFigure_updateSvg()
             // }
 
-
+            // NEWWAY: ORIGINALPathData Children
             for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
                 console.log("i: " + i)
                 // // thisFigure.IntersectionsSorter_WithArc.intersectionSorterObject.index = i
                 // // thisFigure.IntersectionsSorter_NoArc.intersectionSorterObject.index = i
-                // thisFigure.IntersectionsSorter_WithArc.setIndices(i)
-                // thisFigure.IntersectionsSorter_NoArc.setIndices(i)
+                thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
+                thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
                 if(i < thisFigure.originalFigurePathDatas.length) {
+                    // if(i > 1) {
+                    //     // console.log("Poopopopopo")
+                    //     // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount)
+                    //     if(i < 4) {
+                    //         console.log("assser")
+                    //         // if(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 0 || thisFigure.originalFigurePathDatas[i - 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+                    //         if(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+                    //             console.log(i)
+                    //             console.log("DISCONNECTED: A_first")
+                    //             // thisFigure.IntersectionsSorter_WithArc.handleDisconnectedArcIntersection()
+                    //         }
+                    //     }
+                    // }
+                    // // } else if(i === 1) {
+                    // //     if(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+                    // //         console.log(i)
+                    // //         console.log("DISCONNECTED: B_first")
+                    // //         // thisFigure.IntersectionsSorter_WithArc.handleDisconnectedArcIntersection()
+                    // //     }
+                    // // }
                     console.log(i)
-                    console.log(thisFigure.originalFigurePathDatas[i].children)
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
-                        console.log("poopa")
-                        // let parallelPathData = [thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west, thisFigure.originalFigurePathDatas[i - 1].children.parallel_pathDatas.pathData_east]
-                        // thisFigure.IntersectionsSorter_WithArc.sortIntersections(parallelPathData)
+                        console.log("ARC")
+                        thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
-                        console.log("titta")
-                        // thisFigure.IntersectionsSorter_NoArc.sortIntersections()
+                        console.log("PATH")
+                        thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
                 thisFigure.parallelFigure_updateSvg()
             }
+
+
         // }
 
         // Reset 

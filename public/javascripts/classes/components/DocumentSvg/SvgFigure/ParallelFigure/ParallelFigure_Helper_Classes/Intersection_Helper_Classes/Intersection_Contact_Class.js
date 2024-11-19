@@ -4,7 +4,7 @@ import {getPathToArcIntersections, getArcToArcIntersections} from '../../paralle
 function Intersection_Contact(parallelFigure) {
     this.PARFIGURE = parallelFigure // FIXME: still used
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-    this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    // this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parFigureObject = parallelFigure.parallelFigureObject
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
     this.index = null
@@ -32,21 +32,44 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let prevIndex = this.index - 1
     let thisIndex = this.index
     let nextIndex = this.index + 1
-    let prevParallelPathData = this.parallelFigurePathDatas[prevIndex]
-    let thisParallelPathData = this.parallelFigurePathDatas[thisIndex]
-    let nextParallelPathData = this.parallelFigurePathDatas[nextIndex]
+
+    //old
+    // let prevParallelPathData = this.parallelFigurePathDatas[prevIndex]
+    // let thisParallelPathData = this.parallelFigurePathDatas[thisIndex]
+    // let nextParallelPathData = this.parallelFigurePathDatas[nextIndex]
+    //new
+    let prevParallelPathData_start = this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west
+    let thisParallelPathData_start = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west
+    let nextParallelPathData_start = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west
+    let prevParallelPathData_end = this.originalFigurePathDatas[prevIndex + 1].children.parallel_pathDatas.pathData_east
+    let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east
+    let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east
+
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
     let intersectPoint
+    //old
+    // switch (shape) {
+    //     case "a2a":
+    //         intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
+    //         break
+    //     case "p2a":
+    //         intersectPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
+    //         break
+    //     case "a2p":
+    //         intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
+    //         break
+    // }
+    //new
     switch (shape) {
         case "a2a":
-            intersectPoint = getArcToArcIntersections(prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
+            intersectPoint = getArcToArcIntersections(prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "p2a":
-            intersectPoint = getPathToArcIntersections(prevParallelPathData[0], prevParallelPathData[1], thisParallelPathData[1], thisOriginalPathData)
+            intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
-            intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
+            intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
             break
     }
 
@@ -65,15 +88,31 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
                     break
             }
         } else {
+            //old
+            // switch (shape) {
+            //     case "a2a":
+            //         placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+            //         break
+            //     case "p2a":
+            //         placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+            //         break
+            //     case "a2p":
+            //         placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+            //         break
+            // }
+            //new
+            // [prevParallelPathData_start, prevParallelPathData_end]
+            // [thisParallelPathData_start, thisParallelPathData_end]
+            // [nextParallelPathData_start, nextParallelPathData_end]
             switch (shape) {
                 case "a2a":
-                    placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+                    placeIntersectionPoints([prevParallelPathData_start, prevParallelPathData_end], [thisParallelPathData_start, thisParallelPathData_end], intersectPoint)
                     break
                 case "p2a":
-                    placeIntersectionPoints(prevParallelPathData, thisParallelPathData, intersectPoint)
+                    placeIntersectionPoints([prevParallelPathData_start, prevParallelPathData_end], [thisParallelPathData_start, thisParallelPathData_end], intersectPoint)
                     break
                 case "a2p":
-                    placeIntersectionPoints(thisParallelPathData, nextParallelPathData, intersectPoint)
+                    placeIntersectionPoints([thisParallelPathData_start, thisParallelPathData_end], [nextParallelPathData_start, nextParallelPathData_end], intersectPoint)
                     break
             }
         }

@@ -2,8 +2,9 @@ import {findLineMidpoint, isGreaterThan} from "../../../../../../functions/math/
 import {ReferenceFigure} from "../../ReferenceFigure/ReferenceFigure_Class.js"
 
 function LargeArcFlagSetter(parallelFigure) {
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
-    this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    // this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.index = null
     let svgFigure = parallelFigure.svgFigure
@@ -40,15 +41,20 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
     this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     this.referenceFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
-
 }
 
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot) {
     console.log("ARCFLAG_FLIPPER_running")
     let modifiedIndex = this.index + indexModifier
     let fillerCounter = this.originalFigurePathDatas_plusFillers.slice(0, modifiedIndex + 1).filter(x => x === 'filler').length //FIXME: might be an easier way to acomplish this. (counts fillers behind)
-    let prevTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][0]
-    let thisTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][1]
+
+    //old
+    // let prevTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][0]
+    // let thisTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][1]
+    //new
+    let prevTargetEndPoint = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
+    let thisTargetEndPoint = this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east
+
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
     if(runOrNot === true) {
