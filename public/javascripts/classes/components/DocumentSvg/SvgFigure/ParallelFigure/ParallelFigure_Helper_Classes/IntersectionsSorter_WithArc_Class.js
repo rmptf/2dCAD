@@ -8,8 +8,33 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas // TODO: I think you can pass this child PathData and Prev Chid PathData as one array (they are only used in the following if checks)
     this.index = null
 
-    // this.isJoiner = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true
-    // this.joinerType = (targetIndex, code) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true && thisFigure.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west.arc.joinerSide === code  //FIXME: Prob need to handle differently
+    // this.isJoiner = (targetIndex) => {
+    //     console.log("POOPER_01: ISJOINER_CHECKER")
+    //     // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west)
+    //     console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.children.childCount)
+    //     // this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true
+    //     // this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.children.childCount > 0
+    // }
+
+    this.joinerType = (targetIndex, code) => {
+        // this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true
+        // &&
+        // this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west.arc.joinerSide === code
+
+        console.log("POOPER_01: CHILDREN_FLAG")
+        if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+            console.log("POOPER_01: YESSSSSS_CORNER")
+            console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1])
+            console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1].arc.joiner)
+            console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1].arc.joinerSide)
+            this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
+        } else {
+            console.log("POOPER_01: NO_CORNER")
+        }
+    }
+
+    this.isJoiner = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0
+    // this.joinerType = (targetIndex, code) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
     this.arcExist = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
     this.firstPosition = (targetIndex) => (targetIndex + 1) === 1
     this.lastPosition = (targetIndex) => targetIndex + 1 === this.originalFigurePathDatas.length - 1
@@ -43,6 +68,36 @@ IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
     // NoContact:
     // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
     // this.parFigureSvgPaths = parallelFigure.svgPaths
+}
+
+// this.isJoiner = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true
+// this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true;
+IntersectionsSorter_WithArc.prototype.checkForJoiners = function() {
+    console.log("POOPER_01: CHECKING_FOR_JOINERS")
+    if (!this.firstPosition(this.index)) {
+        switch (true) {
+            // case this.isJoiner(this.index):
+            case (!this.lastPosition(this.index) && this.isJoiner(this.index)): // check if this "PD" = "Filler"
+                console.log("POOPER_01: YES_JOINER_01_A")
+            case this.isJoiner(this.index - 1):  // check if the previous "PD" = "Filler"
+                console.log("POOPER_01: YES_JOINER_01_B")
+                this.handleDisconnectedArcIntersection();
+                break;
+            default:
+        //         // this.handleConnectedArcIntersection();
+                console.log("POOPER_01: NO_JOINER_01")
+        }
+    } else if (this.firstPosition(this.index)) {
+        switch (true) {
+            case this.isJoiner(this.index):
+                console.log("POOPER_01: YES_JOINER_02")
+                this.handleDisconnectedArcIntersection();
+                break;
+            default:
+                // this.handleConnectedArcIntersection();
+                console.log("POOPER_01: NO_JOINER_02")
+        }
+    }
 }
 
 IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
@@ -148,6 +203,8 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
 
 IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function() {
     console.log("disconected")
+    console.log("POOPER_01: disconected")
+    console.log(this.index)
     switch(true) {
         // 1_Joiner
         case this.joinerType(this.index, "AAA"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
@@ -169,6 +226,7 @@ IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = functi
         case this.joinerType(this.index, "BBB"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         // 6_Joiner
         case this.parallelFigureObj.skipperCheckers.skipperChecker_Arc: this.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
+        // default: console.log("POOPER_01: testing_ass")
     }
 }
 

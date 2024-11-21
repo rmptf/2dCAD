@@ -235,39 +235,65 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
                 thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
                 if(i < thisFigure.originalFigurePathDatas.length) {
-                    console.log("CURRENT_TESTER")
-                    console.log("CURRENT_Total_Length: " + thisFigure.originalFigurePathDatas.length)
-                    if(i > 1) {
-                        console.log("CURRENT_A: " + i)
-                        console.log("CURRENT_PD_A: " + thisFigure.originalFigurePathDatas[i - 1].children.parallel_pathDatas.pathData_west.children.childCount)
-                        if(i < thisFigure.originalFigurePathDatas.length - 1) {
-                            console.log("CURRENT_B: " + i)
-                            // console.log("CURRENT_PD_B: " + thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount)
-                        }
-                    }
-                    if(i === 1) {
-                        console.log("CURRENT_C: " + i)
-                    }
+                    // console.log("CURRENT_TESTER")
+                    // console.log("CURRENT_Total_Length: " + thisFigure.originalFigurePathDatas.length)
+                    // if(i > 1) {
+                    //     console.log("CURRENT_A: " + i)
+                    //     console.log("CURRENT_PD_A: " + thisFigure.originalFigurePathDatas[i - 1].children.parallel_pathDatas.pathData_west.children.childCount)
+                    //     if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                    //         console.log("CURRENT_B: " + i)
+                    //         // console.log("CURRENT_PD_B: " + thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount)
+                    //     }
+                    // }
+                    // if(i === 1) {
+                    //     console.log("CURRENT_C: " + i)
+                    // }
 
+
+                    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
                     // if(!this.firstPosition(this.index)) {
                     //     switch(true) {
-                    //         // case this.isJoiner(this.index):
-                    //         // case this.isJoiner(this.index - 1):
-                    //         //     this.handleDisconnectedArcIntersection()
-                    //         //     break
+                    //         case this.isJoiner(this.index):
+                    //         case this.isJoiner(this.index - 1):
+                    //             this.handleDisconnectedArcIntersection()
+                    //             break
                     //         default:
                     //             this.handleConnectedArcIntersection()
                     //     }
                     // } else if (this.firstPosition(this.index)) {
                     //     switch(true) {
-                    //         // case this.isJoiner(this.index):
-                    //         //     this.handleDisconnectedArcIntersection()
-                    //         //     break
+                    //         case this.isJoiner(this.index):
+                    //             this.handleDisconnectedArcIntersection()
+                    //             break
                     //         default:
                     //             this.handleConnectedArcIntersection()
                     //     }
                     // }
 
+
+                    // this.isJoiner = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joiner === true
+                    // // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true;
+                    // if (!this.firstPosition(this.index)) {
+                    //     switch (true) {
+                    //         case this.isJoiner(this.index):
+                    //         // Run the next case only if this.index is not in the last position
+                    //         case (!this.lastPosition(this.index) && this.isJoiner(this.index - 1)):
+                    //             this.handleDisconnectedArcIntersection();
+                    //             break;
+                    //         default:
+                    //             // this.handleConnectedArcIntersection();
+                    //             console.log("POOPER_01: NO_JOINER_01")
+                    //     }
+                    // } else if (this.firstPosition(this.index)) {
+                    //     switch (true) {
+                    //         case this.isJoiner(this.index):
+                    //             this.handleDisconnectedArcIntersection();
+                    //             break;
+                    //         default:
+                    //             this.handleConnectedArcIntersection();
+                    //             console.log("POOPER_01: NO_JOINER_02")
+                    //     }
+                    // }
 
                     // if(i > 1) {
                     //     // console.log("Poopopopopo")
@@ -289,7 +315,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // //         // thisFigure.IntersectionsSorter_WithArc.handleDisconnectedArcIntersection()
                     // //     }
                     // // }
+
                     console.log(i)
+                    thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_ARC")
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
