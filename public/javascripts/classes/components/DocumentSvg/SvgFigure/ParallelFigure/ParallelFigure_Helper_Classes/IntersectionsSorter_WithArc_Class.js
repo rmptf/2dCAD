@@ -79,12 +79,15 @@ IntersectionsSorter_WithArc.prototype.checkForJoiners = function() {
             // case this.isJoiner(this.index):
             case (!this.lastPosition(this.index) && this.isJoiner(this.index)): // check if this "PD" = "Filler"
                 console.log("POOPER_01: YES_JOINER_01_A")
+                this.handleDisconnectedArcIntersection();
+                this.handleConnectedArcIntersection();
+                break;
             case this.isJoiner(this.index - 1):  // check if the previous "PD" = "Filler"
                 console.log("POOPER_01: YES_JOINER_01_B")
                 this.handleDisconnectedArcIntersection();
                 break;
             default:
-        //         // this.handleConnectedArcIntersection();
+                this.handleConnectedArcIntersection();
                 console.log("POOPER_01: NO_JOINER_01")
         }
     } else if (this.firstPosition(this.index)) {
@@ -94,7 +97,7 @@ IntersectionsSorter_WithArc.prototype.checkForJoiners = function() {
                 this.handleDisconnectedArcIntersection();
                 break;
             default:
-                // this.handleConnectedArcIntersection();
+                this.handleConnectedArcIntersection();
                 console.log("POOPER_01: NO_JOINER_02")
         }
     }

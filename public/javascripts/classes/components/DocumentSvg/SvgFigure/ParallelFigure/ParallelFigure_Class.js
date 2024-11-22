@@ -317,10 +317,11 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // // }
 
                     console.log(i)
-                    thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
+                    // thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_ARC")
-                        thisFigure.IntersectionsSorter_WithArc.sortIntersections()
+                        thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
+                        // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
                         console.log("CURRENT_PATH")
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()

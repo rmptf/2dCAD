@@ -39,18 +39,23 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
     if(!this.firstPosition(this.index)) {
         switch(true) {
             case this.isJoiner(this.index):
+                console.log("OKOKOKOKAY: 01")
             case this.isJoiner(this.index - 1):
+                console.log("OKOKOKOKAY: 02")
                 this.handleDisconnectedArcIntersection()
                 break
             default:
+                console.log("OKOKOKOKAY: 03")
                 this.handleDefaultArcIntersection()
         }
     } else if (this.firstPosition(this.index)) {
         switch(true) {
             case this.isJoiner(this.index):
+                console.log("OKOKOKOKAY: 04")
                 this.handleDisconnectedArcIntersection()
                 break
             default:
+                console.log("OKOKOKOKAY: 05")
                 this.handleDefaultArcIntersection()
         }
     }
