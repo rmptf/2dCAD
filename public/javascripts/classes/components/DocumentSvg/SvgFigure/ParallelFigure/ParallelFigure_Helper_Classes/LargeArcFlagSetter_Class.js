@@ -10,12 +10,12 @@ function LargeArcFlagSetter(parallelFigure) {
     let svgFigure = parallelFigure.svgFigure
 
     // Add ReferenceFigures
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
     this.referenceFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
     this.referenceFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
@@ -26,12 +26,12 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
     this.referenceFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.referenceFigure_05 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
     this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
     this.referenceFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
@@ -54,17 +54,17 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     //new
     let prevTargetEndPoint = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
     let thisTargetEndPoint = this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east
-
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
     if(runOrNot === true) {
         console.log("FLIPPER__set")
         if(this.parallelFigureObj.iterationCounter === 1) {
-            let pooper1 = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
-            let pooper2 = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+            let midPointX_isGreaterThan_arcCenterX = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
+            let midPointY_isGreaterThan_arcCenterY = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
             this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive] = {
-                startPos_x1GreaterThanX2: pooper1,
-                startPos_y1GreaterThanY2: pooper2
+                startPosX1_isGreaterThan_startPosX2: midPointX_isGreaterThan_arcCenterX,
+                startPosY1_isGreaterThan_startPosY2: midPointY_isGreaterThan_arcCenterY
             }
         }
         let flipFlag = this.detectCrossover(midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y], this.parallelFigureObj)
@@ -95,10 +95,10 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
-    if(this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
+    if(this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosX1_isGreaterThan_startPosX2 !== currentPos_x1GreaterThanX2 && this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosY1_isGreaterThan_startPosY2 !== currentPos_Y1GreaterThanY2) {
         flipFlag = true
-        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2
-        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2
+        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosX1_isGreaterThan_startPosX2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosX1_isGreaterThan_startPosX2
+        this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosY1_isGreaterThan_startPosY2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosY1_isGreaterThan_startPosY2
         return flipFlag
     } else {
         console.log("AAAAA_NO_CROSS")
@@ -106,6 +106,7 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
     return flipFlag
 }
 
+//FIXME: (also need to update this to new orginalPathData way)
 function updateReferenceFigures(index, fillerCounter, prevTargetEndPoint, thisTargetEndPoint, midPointBetweenInts, thisClass) {
     if(index === 2 + fillerCounter) {
         thisClass.referenceFigure_01.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
