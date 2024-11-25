@@ -81,11 +81,26 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
 Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(indexModifier) {  // mod: -1
     let index = this.index + indexModifier
 
-    let firstParPath = this.parallelFigurePathDatas[index + 0][1]
-    let secondParPath = this.parallelFigurePathDatas[index + 1][0]
-    let thirdParPath = this.parallelFigurePathDatas[index + 1][1]
-    let fourthParPath = this.parallelFigurePathDatas[index + 2][0]
-    let fifthParPath = this.parallelFigurePathDatas[index + 2][1]
+    // // separated pd_01
+    // let firstParPath = this.parallelFigurePathDatas[index + 0][1]
+    // // corner_01
+    // let secondParPath = this.parallelFigurePathDatas[index + 1][0]
+    // // corner_02
+    // let thirdParPath = this.parallelFigurePathDatas[index + 1][1]
+    // // separated pd_02
+    // let fourthParPath = this.parallelFigurePathDatas[index + 2][0]
+    // let fifthParPath = this.parallelFigurePathDatas[index + 2][1]
+
+    // separated pd_01
+    let firstParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_east
+    // corner_01
+    let secondParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+    // corner_02
+    let thirdParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+    // separated pd_02
+    let fourthParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west
+    // ??
+    let fifthParPath = this.originalFigurePathDatas[index + 2].children.parallel_pathDatas.pathData_east
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
@@ -105,6 +120,7 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         fourthParPath.coords.y = arcToArcIntPoint[1].y
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
+        console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }
@@ -120,7 +136,7 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
     this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
 
-    // TODO: RIght ehre
+    // TODO: RIght here
     // Remove Corners from ParallelPathDatas
     this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
     this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()

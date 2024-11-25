@@ -81,6 +81,11 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     }
 }
 
+//FIXME:
+//FIXME:
+//FIXME: Work on setting the flipFlags by checking the originalPathDatas rather than the parallelFigureObj
+//FIXME:
+//FIXME:
 LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryPoint) {
     let x1 = movingPoint[0]
     let y1 = movingPoint[1]

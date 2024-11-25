@@ -24,8 +24,8 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.index = null
     this.arcRadiusParDistAndDir = null
 
-    console.log("Ass")
-    console.log(this.originalFigurePathDatas_plusFillers)
+    // console.log("Ass")
+    // console.log(this.originalFigurePathDatas_plusFillers)
 }
 
 export {
@@ -115,6 +115,15 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
 }
 
+
+
+
+
+
+
+
+
+
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPathToArc = function() {
     // 1_Joiner
     console.log("1_Joiner_ooo")
@@ -145,7 +154,10 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     console.log("3_Joiner_ooo")
     this.parallelFigureObj.arcToArcCounter += 1
     this.setArcRadius(1, "arcRad_4J")
-    this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
+    //old
+    // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
+    //new
+    this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
@@ -178,22 +190,22 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
-            console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
+            // console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
             this.ArcFlagSetter.setLargeArcFlag(0, false)
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
         }
         if(this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner === true) {
-            console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
+            // console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
             this.ArcFlagSetter.setLargeArcFlag(-1, false)
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
         if(this.intersectionHandlerObject.isIntersectionConnected === true) {
-            console.log("CONNECTED")
+            // console.log("CONNECTED")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
         } else {
-            console.log("NOT_CONNECTED")
+            // console.log("NOT_CONNECTED")
             this.ArcFlagSetter.setLargeArcFlag(0, false)
             this.intersectionHandlerObject.isIntersectionConnected = true
         }
@@ -201,7 +213,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 
     if(flag === "arcFlag_2AJ") {
         if(this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
-            console.log("running_skip_arcFlagSet_from_1j_in_2j")
+            // console.log("running_skip_arcFlagSet_from_1j_in_2j")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
@@ -210,7 +222,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 
     if(flag === "arcFlag_4J") {
         if(this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
-            console.log("running_skip_arcFlagSet_from_3j_in_4j")
+            // console.log("running_skip_arcFlagSet_from_3j_in_4j")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false

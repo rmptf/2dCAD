@@ -105,6 +105,7 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         fourthParPath.coords.y = arcToArcIntPoint[1].y
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
+        console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }

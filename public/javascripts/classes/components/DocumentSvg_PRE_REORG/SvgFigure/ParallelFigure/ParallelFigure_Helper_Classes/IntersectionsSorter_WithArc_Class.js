@@ -39,23 +39,23 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
     if(!this.firstPosition(this.index)) {
         switch(true) {
             case this.isJoiner(this.index):
-                console.log("OKOKOKOKAY: 01")
+                console.log("CHECKER_01: YES_JOINER_01_A")
             case this.isJoiner(this.index - 1):
-                console.log("OKOKOKOKAY: 02")
+                console.log("CHECKER_01: YES_JOINER_01_B")
                 this.handleDisconnectedArcIntersection()
                 break
             default:
-                console.log("OKOKOKOKAY: 03")
+                console.log("CHECKER_01: NO_JOINER_01")
                 this.handleDefaultArcIntersection()
         }
     } else if (this.firstPosition(this.index)) {
         switch(true) {
             case this.isJoiner(this.index):
-                console.log("OKOKOKOKAY: 04")
+                console.log("CHECKER_01: YES_JOINER_02")
                 this.handleDisconnectedArcIntersection()
                 break
             default:
-                console.log("OKOKOKOKAY: 05")
+                console.log("CHECKER_01: NO_JOINER_02")
                 this.handleDefaultArcIntersection()
         }
     }
@@ -66,9 +66,11 @@ IntersectionsSorter_WithArc.prototype.handleDefaultArcIntersection = function() 
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     switch(true) {
         case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
+            console.log("1st_arcseg")
             this.handleFirctArcSegment()
             break
         default:
+            console.log("2nd_arcseg")
             this.handleSecondArcSegment()
     }
     // Final
@@ -102,29 +104,37 @@ IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {
 IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // 7
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    console.log("2ndAS_1")
     switch(true) {
         case !this.lastPosition(this.index):
             if(this.arcExist(this.index + 1)) {
                 if(!this.includes(["AAA", "BBB", "CCC"], this.index + 1)) {
                     // 8_A
+                    console.log("2ndAS_2")
                     this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
                 } else {
                     // 8_B
+                    console.log("2ndAS_3")
                     this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected()
                 }
             } else {
                 // 9
+                console.log("2ndAS_4")
                 this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
             }
             break
+        default: {
             // 10
-        default: this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+            console.log("2ndAS_5")
+            this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+        }
     }
     // 11
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
 }
 
 IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function() {
+    // console.log("CHECKER_01: disconected")
     switch(true) {
         // 1_Joiner
         case this.joinerType(this.index, "AAA"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break

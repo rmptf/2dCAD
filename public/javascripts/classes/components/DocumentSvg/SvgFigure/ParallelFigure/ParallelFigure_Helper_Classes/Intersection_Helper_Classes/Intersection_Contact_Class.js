@@ -11,6 +11,7 @@ function Intersection_Contact(parallelFigure) {
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
+    console.log("CHECK_RIGHT_HERE")
     // a2a, p2a, a2p
     let indexArray
     let shapeCount
@@ -45,8 +46,11 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east
     let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east
 
-    let origPathDataIndex = indexArray[shapeCount]
-    let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
+    //old
+    // let origPathDataIndex = indexArray[shapeCount]
+    // let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
+    //new  (TODO: not completely checked yet)
+    let thisOriginalPathData = this.originalFigurePathDatas[thisIndex]
     let intersectPoint
     //old
     // switch (shape) {
@@ -75,7 +79,13 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
+            console.log("")
+            console.log("")
+            console.log("")
             console.log("CURRENT_DISCONNECTING")
+            console.log("")
+            console.log("")
+            console.log("")
             this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
             switch (shape) {
                 case "a2a":

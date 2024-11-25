@@ -282,7 +282,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     //             break;
                     //         default:
                     //             // this.handleConnectedArcIntersection();
-                    //             console.log("POOPER_01: NO_JOINER_01")
+                    //             console.log("CHECKER_01: NO_JOINER_01")
                     //     }
                     // } else if (this.firstPosition(this.index)) {
                     //     switch (true) {
@@ -291,7 +291,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     //             break;
                     //         default:
                     //             this.handleConnectedArcIntersection();
-                    //             console.log("POOPER_01: NO_JOINER_02")
+                    //             console.log("CHECKER_01: NO_JOINER_02")
                     //     }
                     // }
 
