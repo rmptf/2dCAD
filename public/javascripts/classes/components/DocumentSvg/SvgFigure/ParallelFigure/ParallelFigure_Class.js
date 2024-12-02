@@ -320,7 +320,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_ARC")
-                        thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
+                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW()
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
                         console.log("CURRENT_PATH")

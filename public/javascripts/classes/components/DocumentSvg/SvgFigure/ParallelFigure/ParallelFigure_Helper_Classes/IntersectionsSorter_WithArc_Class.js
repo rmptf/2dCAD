@@ -43,7 +43,11 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.arcExist = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
     this.firstPosition = (targetIndex) => (targetIndex + 1) === 1
     this.lastPosition = (targetIndex) => {
-        // console.log("oksdofksdofksdokfoskfs")
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("Checking_If_LastPosition")
         // console.log(this.originalFigurePathDatas[targetIndex + 1])
         return targetIndex + 1 === this.originalFigurePathDatas.length - 1
     }
@@ -114,7 +118,7 @@ IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
 //     }
 // }
 
-IntersectionsSorter_WithArc.prototype.checkForJoiners = function() {
+IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function() {
     // console.log("CHECKER_01: CHECKING_FOR_JOINERS")
     if (!this.firstPosition(this.index)) {
         // switch (true) {

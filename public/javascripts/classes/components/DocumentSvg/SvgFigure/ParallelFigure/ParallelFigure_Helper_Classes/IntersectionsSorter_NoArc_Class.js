@@ -5,17 +5,69 @@ function IntersectionsSorter_NoArc(parallelFigure) {
     // this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     // this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
 
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.IntersectionHandler = new IntersectionHandler_NoArc(parallelFigure)
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.thisIsArcToPath = false
     this.index = null
+    
+    // //old
+    // this.isJoiner = (newIndex) => this.parallelPathDatas[newIndex][1].arc.joiner === true
+    // this.joinerType = (newIndex, code) => this.parallelPathDatas[newIndex][1].arc.joiner === true && this.parallelPathDatas[newIndex][1].arc.joinerSide === code
+    // this.arcExist = (newIndex) => this.parallelPathDatas[newIndex][1].arc.exist === true
+    // this.firstPosition = (newIndex) => (newIndex) === 0
+    // this.lastPosition = (newIndex) => newIndex === this.parallelPathDatas.length - 1
 
-    this.isJoiner = (newIndex) => this.parallelPathDatas[newIndex][1].arc.joiner === true
-    this.joinerType = (newIndex, code) => this.parallelPathDatas[newIndex][1].arc.joiner === true && this.parallelPathDatas[newIndex][1].arc.joinerSide === code
-    this.arcExist = (newIndex) => this.parallelPathDatas[newIndex][1].arc.exist === true
-    this.firstPosition = (newIndex) => (newIndex) === 0
-    this.lastPosition = (newIndex) => newIndex === this.parallelPathDatas.length - 1
+    //new
+    this.isJoiner = (targetIndex) => {
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("Checking_If_Corner")
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.endPointElement)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount)
+
+        return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0;
+    }
+    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
+    this.joinerType = (targetIndex, code) => {
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("Check_Corner_Type")
+        // console.log("FIRSTPART")
+        // console.log("Checking_for: " + code)
+        // console.log("Checking_index: " + (targetIndex + 1))
+        if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+            // console.log("SECOND_PART: yes_corner")
+            // console.log("This_corner_is: " + this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide)
+            // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children)
+            return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
+        } else {
+            // console.log("SECOND_PART: no_corner")
+            // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west)
+            return false
+        }
+    }
+    // this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
+    this.arcExist = (targetIndex) => this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
+    // this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
+    this.firstPosition = (targetIndex) => (targetIndex + 1) === 1
+    // this.firstPosition = (targetIndex) => (targetIndex) === 0
+    this.lastPosition = (targetIndex) => {
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("")
+        // console.log("Checking_If_LastPosition")
+        // console.log(this.originalFigurePathDatas[targetIndex + 1])
+        return targetIndex + 1 === this.originalFigurePathDatas.length - 1
+    }
+    // this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
 }
 
 IntersectionsSorter_NoArc.prototype.setIndices = function (index) {
