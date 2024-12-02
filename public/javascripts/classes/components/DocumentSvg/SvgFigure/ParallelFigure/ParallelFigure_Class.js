@@ -25,7 +25,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.parallelFigurePathDatas = PathDataParallel.createParallelPathDatas(this.originalFigurePathDatas, this.svgFigure)
     // console.log("LENGTHHHHHH_222222")
     // console.log(this.parallelFigurePathDatas)
-    this.parallelFigurePathDatas_perpendicularProjections = this.transformData() // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
+    this.parallelFigurePathDatas_perpendicularProjections = this.transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
     // Svg Elements
@@ -367,10 +367,10 @@ function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
 }
 
 // Define a function to transform data from one array to a new one
-ParallelFigure.prototype.transformData = function() {
+ParallelFigure.prototype.transformData = function(pathDatas) {
     // Initialize a new array to store the transformed data
     // Map through the oldArrayWithOriginalData and transform each element
-    let newArrayWithTransformedData = this.parallelFigurePathDatas.map(([point1, point2]) => (
+    let newArrayWithTransformedData = pathDatas.map(([point1, point2]) => (
         [
             // Create an object for the first and second points with x and y coordinates
             { x: point1.coords.x, y: point1.coords.y },

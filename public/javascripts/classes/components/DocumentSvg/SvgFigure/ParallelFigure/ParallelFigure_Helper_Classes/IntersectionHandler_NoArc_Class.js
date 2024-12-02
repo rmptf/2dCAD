@@ -12,7 +12,7 @@ function IntersectionHandler_NoArc(parallelFigure) {
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
     // AA_First_All
     console.log("AA_All")
-    this.calcParallelProjections(this.getRefPointAtIndexIfNotFiller())
+    this.calcParallelProjections(this.getRefPointAtIndexIfNotFiller()) //TODO: this is where parallelprojections are created
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_firstPos = function() {
@@ -36,7 +36,8 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // D
     console.log("D_ooo")
-    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
+    console.log("lspdlfpsdlfplspflspflsdpflsd")
+    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments = function() {
@@ -66,7 +67,8 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // J
     console.log("J_ooo")
-    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
+    console.log("lspdlfpsdlfplspflspflsdpflsd")
+    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {
@@ -91,6 +93,7 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_everyI
 // AA_FIRST_ALL
 // This function sorts through all the originalPathDatasPlusFillers and weeds out the fillers, then sets which
 // originalPathDatasPlusFillers should be used as a reference point to set the new Parallel Perpendicular Projected Points
+// FIXME: START HERE
 IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
     // let origPathDatasPlusFillers = this.originalPathDatasPlusFillers
     // let parPathObj = this.parallelFigureObj

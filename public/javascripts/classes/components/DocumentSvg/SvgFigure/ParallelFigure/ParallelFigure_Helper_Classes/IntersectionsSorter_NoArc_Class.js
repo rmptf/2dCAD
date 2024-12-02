@@ -89,7 +89,10 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         if (this.firstPosition(this.index)) {
             // A
             this.IntersectionHandler.noArcIntersection_firstPos()
-            if(this.parallelPathDatas.length !== 1) {
+            //old
+            // if(this.parallelPathDatas.length !== 1) {
+            //new
+            if(this.originalFigurePathDatas.length !== 2) {
                 if(this.arcExist(this.index + 1)) {
                     // B
                     this.IntersectionHandler.noArcIntersection_firstPos_nextIndexIsArc()
@@ -98,12 +101,15 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         }
         if (!this.firstPosition(this.index) && !this.lastPosition(this.index)) {
             if(!this.arcExist(this.index - 1)) {
+                console.log("okokokokokokokokokoko_11111")
                 if(this.parallelFigureObj.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
+                    console.log("gogogogogog_111111")
                     this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
                 } else {
                     // D (C+)
-                    this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment()
+                    console.log("gogogogogog_22222")
+                    this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment() //TODO: is this never used?
                 }
                 // E (DC After)
                 this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
@@ -122,12 +128,15 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         if (this.lastPosition(this.index)) {
             if(!this.firstPosition(this.index)) {
                 if(!this.arcExist(this.index - 1)) {
+                    console.log("okokokokokokokokokoko_22222")
                     if(this.parallelFigureObj.parallelPathSegmentCounter_SECOND === 0) {
                         // H (Ga)
+                        console.log("popopopopo_11111111")
                         this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
                     } else {
                         // J (G+)
-                        this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment()
+                        console.log("popopopopo_2222222")
+                        this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment() //TODO: is this never used?
                     }
                     // K (G After)
                     this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments()
