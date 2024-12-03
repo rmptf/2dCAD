@@ -1,12 +1,18 @@
 import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     // this.origPathDataRefPointsForParPerpProj = null
     this.index = null
+    let svgFigure = parallelFigure.svgFigure
+
+
+
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -157,8 +163,16 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
         nextFillerAdder = 1
     }
 
-    thisOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + fillerAdder]
-    nextOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
+    //old
+    // thisOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + fillerAdder]
+    // nextOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + 1 + nextFillerAdder]
+    //new
+    thisOrigPathDataRefPtForParPerpProj = this.originalFigurePathDatas[this.index + 0]
+    nextOrigPathDataRefPtForParPerpProj = this.originalFigurePathDatas[this.index + 1]
+
+    
+    // this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // thisClass.referenceFigure_01.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y]])
 
     return [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
 }
