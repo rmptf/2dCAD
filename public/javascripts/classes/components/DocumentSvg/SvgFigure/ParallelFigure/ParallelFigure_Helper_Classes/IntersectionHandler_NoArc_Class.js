@@ -1,3 +1,4 @@
+import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import {findIntersectingPointTwoFormats} from '../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function IntersectionHandler_NoArc(parallelFigure) {
@@ -8,11 +9,16 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     // this.origPathDataRefPointsForParPerpProj = null
     this.index = null
+
+
+
     let svgFigure = parallelFigure.svgFigure
-
-
-
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -37,13 +43,14 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
     // C
     console.log("C_ooo")
     this.calculateAndSetIntersectionPoints([this.parallelPathDatas_perpendicular[this.index-1], false], [this.parallelPathDatas_perpendicular[this.index], false])
+    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], false], [this.parallelPathDatas[this.index], false])
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // D
     console.log("D_ooo")
     console.log("lspdlfpsdlfplspflspflsdpflsd")
-    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
+    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments = function() {
@@ -68,13 +75,14 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
     // H
     console.log("H_ooo")
     this.calculateAndSetIntersectionPoints([this.parallelPathDatas_perpendicular[this.index-1], false], [this.parallelPathDatas_perpendicular[this.index], false])
+    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], false], [this.parallelPathDatas[this.index], false])
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // J
     console.log("J_ooo")
     console.log("lspdlfpsdlfplspflspflsdpflsd")
-    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
+    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {
@@ -170,9 +178,11 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
     thisOrigPathDataRefPtForParPerpProj = this.originalFigurePathDatas[this.index + 0]
     nextOrigPathDataRefPtForParPerpProj = this.originalFigurePathDatas[this.index + 1]
 
-    
-    // this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
-    // thisClass.referenceFigure_01.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y]])
+    // if(this.index === 1) {
+    //     this.referenceFigure_01.runFunctions([[thisOrigPathDataRefPtForParPerpProj.coords.x, thisOrigPathDataRefPtForParPerpProj.coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas[this.index + 1].coords.x, this.originalFigurePathDatas[this.index + 1].coords.y]])
+    //     this.referenceFigure_03.runFunctions([[this.originalFigurePathDatas[this.index + 2].coords.x, this.originalFigurePathDatas[this.index + 2].coords.y]])
+    // }
 
     return [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
 }
@@ -202,11 +212,17 @@ IntersectionHandler_NoArc.prototype.calcParallelProjections = function(origPathD
     this.parallelPathDatas_perpendicular[this.index][0].y = thisPointY
     this.parallelPathDatas_perpendicular[this.index][1].x = nextPointX
     this.parallelPathDatas_perpendicular[this.index][1].y = nextPointY
+
+    // this.parallelPathDatas[this.index][0].coords.x = thisPointX
+    // this.parallelPathDatas[this.index][0].coords.y = thisPointY
+    // this.parallelPathDatas[this.index][1].coords.x = nextPointX
+    // this.parallelPathDatas[this.index][1].coords.y = nextPointY
 }
 
 // C, D, H, J
 IntersectionHandler_NoArc.prototype.calculateAndSetIntersectionPoints = function(data1, data2) {
     let intersectionPoint =  findIntersectingPointTwoFormats([data1[0], data1[1]], [data2[0], data2[1]])
+    
     this.parallelPathDatas[this.index - 1][1].coords.x = intersectionPoint.x
     this.parallelPathDatas[this.index - 1][1].coords.y = intersectionPoint.y
     this.parallelPathDatas[this.index][0].coords.x = intersectionPoint.x
@@ -218,6 +234,8 @@ IntersectionHandler_NoArc.prototype.setTargetEndPoints = function(side) { //TODO
     let referenceCoords = {
         x: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].x : this.parallelPathDatas_perpendicular[this.index][1].x,
         y: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].y : this.parallelPathDatas_perpendicular[this.index][1].y
+        // x: (side === 0) ? this.parallelPathDatas[this.index][0].coords.x : this.parallelPathDatas[this.index][1].coords.x,
+        // y: (side === 0) ? this.parallelPathDatas[this.index][0].coords.y : this.parallelPathDatas[this.index][1].coords.y
     }
     this.parallelPathDatas[this.index][side].coords.x = referenceCoords.x
     this.parallelPathDatas[this.index][side].coords.y = referenceCoords.y
