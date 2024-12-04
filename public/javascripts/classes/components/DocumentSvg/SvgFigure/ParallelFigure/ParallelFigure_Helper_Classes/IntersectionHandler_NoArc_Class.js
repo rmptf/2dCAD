@@ -19,6 +19,8 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -230,15 +232,33 @@ IntersectionHandler_NoArc.prototype.calculateAndSetIntersectionPoints = function
 }
 
 // A, B, G, M
-IntersectionHandler_NoArc.prototype.setTargetEndPoints = function(side) { //TODO: rename this function once u figure out wht parallelProjections are (rename to smthng like: setParallelPathDatasToProjectedPathDatas())
+IntersectionHandler_NoArc.prototype.setTargetEndPoints = function(pdPos) { //TODO: rename this function once u figure out wht parallelProjections are (rename to smthng like: setParallelPathDatasToProjectedPathDatas())
     let referenceCoords = {
-        x: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].x : this.parallelPathDatas_perpendicular[this.index][1].x,
-        y: (side === 0) ? this.parallelPathDatas_perpendicular[this.index][0].y : this.parallelPathDatas_perpendicular[this.index][1].y
-        // x: (side === 0) ? this.parallelPathDatas[this.index][0].coords.x : this.parallelPathDatas[this.index][1].coords.x,
-        // y: (side === 0) ? this.parallelPathDatas[this.index][0].coords.y : this.parallelPathDatas[this.index][1].coords.y
+        x: (pdPos === 0) ? this.parallelPathDatas_perpendicular[this.index][0].x : this.parallelPathDatas_perpendicular[this.index][1].x,
+        y: (pdPos === 0) ? this.parallelPathDatas_perpendicular[this.index][0].y : this.parallelPathDatas_perpendicular[this.index][1].y
     }
-    this.parallelPathDatas[this.index][side].coords.x = referenceCoords.x
-    this.parallelPathDatas[this.index][side].coords.y = referenceCoords.y
+    //old
+    this.parallelPathDatas[this.index][pdPos].coords.x = referenceCoords.x
+    this.parallelPathDatas[this.index][pdPos].coords.y = referenceCoords.y
+    // // //new
+    // // //TODO: might have to set up new if else because east and west might be one index and previous index?
+    // if(side === 0) {
+    //     this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = referenceCoords.x
+    //     this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = referenceCoords.y
+    // }
+    // if(side === 1) {
+    //     this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.x = referenceCoords.x
+    //     this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.y = referenceCoords.y
+    // }
+    
+
+    // // if(this.index === 1) {
+    //     console.log("soijdfoisjfidsjfisdjfsidj")
+    //     console.log(this.parallelPathDatas[this.index])
+    //     this.referenceFigure_01.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.parallelPathDatas[this.index][1].coords.x, this.parallelPathDatas[this.index][1].coords.y]])
+    //     // this.referenceFigure_03.runFunctions([[this.originalFigurePathDatas[this.index + 2].coords.x, this.originalFigurePathDatas[this.index + 2].coords.y]])
+    // // }
 }
 
 // // E, K
