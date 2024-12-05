@@ -13,13 +13,13 @@ function IntersectionHandler_NoArc(parallelFigure) {
 
 
     let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
@@ -225,51 +225,31 @@ IntersectionHandler_NoArc.prototype.calcParallelProjections = function(origPathD
 IntersectionHandler_NoArc.prototype.calculateAndSetIntersectionPoints = function(data1, data2) {
     let intersectionPoint =  findIntersectingPointTwoFormats([data1[0], data1[1]], [data2[0], data2[1]])
     //old
-    this.parallelPathDatas[this.index - 1][1].coords.x = intersectionPoint.x
-    this.parallelPathDatas[this.index - 1][1].coords.y = intersectionPoint.y
-    this.parallelPathDatas[this.index][0].coords.x = intersectionPoint.x
-    this.parallelPathDatas[this.index][0].coords.y = intersectionPoint.y
-    // //new
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = intersectionPoint.x
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = intersectionPoint.y
+    // this.parallelPathDatas[this.index - 1][1].coords.x = intersectionPoint.x
+    // this.parallelPathDatas[this.index - 1][1].coords.y = intersectionPoint.y
+    // this.parallelPathDatas[this.index][0].coords.x = intersectionPoint.x
+    // this.parallelPathDatas[this.index][0].coords.y = intersectionPoint.y
+    //new
+    this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.x = intersectionPoint.x
+    this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.y = intersectionPoint.y
+    this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = intersectionPoint.x
+    this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = intersectionPoint.y
 
-    // this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.x = intersectionPoint.x
-    // this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.y = intersectionPoint.y
-
-
-
-    console.log("jshdfojsdofijsoijwerwerwrwrwerwerwerw")
-    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
-    console.log(this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas)
-
-
-
-    // if(this.index === 0) {
-    //     console.log("soijdfoisjfidsjfisdjfsidj")
-    //     // console.log(this.parallelPathDatas[this.index])
+    // // Testing to make sure old and new match
+    // // Log the new, draw the old: make sure they match
+    // // log the new PathDatas
+    // console.log("jshdfojsdofijsoijwerwerwrwrwerwerwerw")
+    // console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
+    // console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east)
+    // // draw the old PathDatas
+    // if(this.index === 1) {
     //     this.referenceFigure_01.runFunctions([[this.parallelPathDatas[this.index - 1][1].coords.x, this.parallelPathDatas[this.index - 1][1].coords.y]])
-    //     // this.referenceFigure_02.runFunctions([[this.parallelPathDatas[this.index - 1][1].coords.x, this.parallelPathDatas[this.index - 1][1].coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
     // }
-    if(this.index === 1) {
-        console.log("soijdfoisjfidsjfisdjfsidj")
-        // console.log(this.parallelPathDatas[this.index])
-        // this.referenceFigure_01.runFunctions([[this.parallelPathDatas[this.index - 1][1].coords.x, this.parallelPathDatas[this.index - 1][1].coords.y]])
-        this.referenceFigure_02.runFunctions([[this.parallelPathDatas[this.index - 1][1].coords.x, this.parallelPathDatas[this.index - 1][1].coords.y]])
-    }
-
-    if(this.index === 2) {
-        console.log("soijdfoisjfidsjfisdjfsidj")
-        // console.log(this.parallelPathDatas[this.index])
-        this.referenceFigure_03.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
-        // this.referenceFigure_04.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
-    }
-    // if(this.index === 3) {
-    //     console.log("soijdfoisjfidsjfisdjfsidj")
-    //     // console.log(this.parallelPathDatas[this.index])
-    //     // this.referenceFigure_03.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
+    // if(this.index === 2) {
+    //     this.referenceFigure_03.runFunctions([[this.parallelPathDatas[this.index - 1][1].coords.x, this.parallelPathDatas[this.index - 1][1].coords.y]])
     //     this.referenceFigure_04.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
     // }
-
 }
 
 // A, B, G, M
@@ -278,36 +258,32 @@ IntersectionHandler_NoArc.prototype.setTargetEndPoints = function(pdPos) { //TOD
         x: (pdPos === 0) ? this.parallelPathDatas_perpendicular[this.index][0].x : this.parallelPathDatas_perpendicular[this.index][1].x,
         y: (pdPos === 0) ? this.parallelPathDatas_perpendicular[this.index][0].y : this.parallelPathDatas_perpendicular[this.index][1].y
     }
-    //old
-    this.parallelPathDatas[this.index][pdPos].coords.x = referenceCoords.x
-    this.parallelPathDatas[this.index][pdPos].coords.y = referenceCoords.y
-    console.log("foijsdfoisjdfisjfidfdfdfdfsdfdsfdsfsfssdjf")
-    console.log(this.index)
-    console.log(pdPos)
-    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
-    console.log(this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east)
-    // //new
-    // //TODO: might have to set up new if else because east and west might be one index and previous index?
-    // if(pdPos === 0) {
-    //     this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = referenceCoords.x
-    //     this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = referenceCoords.y
-    // }
-    // if(pdPos === 1) {
-    //     this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.x = referenceCoords.x
-    //     this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.y = referenceCoords.y
-    // }
-    
+    // // //old
+    // this.parallelPathDatas[this.index][pdPos].coords.x = referenceCoords.x
+    // this.parallelPathDatas[this.index][pdPos].coords.y = referenceCoords.y
+    //new
+    if(pdPos === 0) {
+        this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = referenceCoords.x
+        this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = referenceCoords.y
+    }
+    if(pdPos === 1) {
+        this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.x = referenceCoords.x
+        this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.y = referenceCoords.y
+    }
 
+    // // Test to make sure it works: log the new, draw the old, and make sure they match.
+    // // log the new
+    // console.log("foijsdfoisjdfisjfidfdfdfdfsdfdsfdsfsfssdjf")
+    // console.log(this.index)
+    // console.log(pdPos)
+    // console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
+    // console.log(this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east)
+    // // draw the old
     // if(this.index === 0) {
-    //     console.log("soijdfoisjfidsjfisdjfsidj")
-    //     console.log(this.parallelPathDatas[this.index])
     //     this.referenceFigure_01.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
     //     this.referenceFigure_02.runFunctions([[this.parallelPathDatas[this.index][1].coords.x, this.parallelPathDatas[this.index][1].coords.y]])
     // }
-
-    // if(this.index === 1) {
-    //     console.log("soijdfoisjfidsjfisdjfsidj")
-    //     console.log(this.parallelPathDatas[this.index])
+    // if(this.index === 2) {
     //     this.referenceFigure_03.runFunctions([[this.parallelPathDatas[this.index][0].coords.x, this.parallelPathDatas[this.index][0].coords.y]])
     //     this.referenceFigure_04.runFunctions([[this.parallelPathDatas[this.index][1].coords.x, this.parallelPathDatas[this.index][1].coords.y]])
     // }
