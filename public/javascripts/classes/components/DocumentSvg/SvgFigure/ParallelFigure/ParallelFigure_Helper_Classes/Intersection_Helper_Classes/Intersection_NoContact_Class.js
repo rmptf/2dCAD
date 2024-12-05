@@ -18,9 +18,13 @@ function Intersection_NoContact(parallelFigure) {
 Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function(indexModifier) { // mod: 0
     let index = this.index + indexModifier
 
+    // separated pd_01
     let firstParPath = this.parallelFigurePathDatas[index - 1][0]
+    // corner_01
     let secondParPath = this.parallelFigurePathDatas[index - 1][1]
+    // corner_02
     let thirdParPath = this.parallelFigurePathDatas[index + 0][0]
+    // separated pd_02
     let fourthParPath = this.parallelFigurePathDatas[index + 0][1]
     let fifthParPath = this.parallelFigurePathDatas[index + 1][0]
     let sixthParPath = this.parallelFigurePathDatas[index + 1][1]
@@ -50,30 +54,49 @@ Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function
 Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function(indexModifier) { // mod: -1
     let index = this.index + indexModifier
 
+    //old
+    // separated pd_01
     let firstParPath = this.parallelFigurePathDatas[index + 0][1]
+    // corner_01
     let secondParPath = this.parallelFigurePathDatas[index + 1][0]
+    // corner_02
     let thirdParPath = this.parallelFigurePathDatas[index + 1][1]
+    // separated pd_02
     let fourthParPath = this.parallelFigurePathDatas[index + 2][0]
     let fifthParPath = this.parallelFigurePathDatas[index + 2][1]
+
+    // //new
+    // // separated pd_01
+    // let firstParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_east
+    // // corner_01
+    // let secondParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+    // // corner_02
+    // let thirdParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+    // // separated pd_02
+    // let fourthParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west
+    // // ??
+    // let fifthParPath = this.originalFigurePathDatas[index + 2].children.parallel_pathDatas.pathData_east
+
 
     let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
 
     if(pathToArcIntPoint[0].doesIntersect === false) {
-        // first point
+        // first point (joiner 1 parent)
         firstParPath.coords.x = circleRadiusPoint[0]
         firstParPath.coords.y = circleRadiusPoint[1]
-        // joiner 
+        // joiner 1
         secondParPath.coords.x = circleRadiusPoint[0]
         secondParPath.coords.y = circleRadiusPoint[1]
-        // joiner
+        // joiner 2
         thirdParPath.coords.x = pathToArcIntPoint[0].x
         thirdParPath.coords.y = pathToArcIntPoint[0].y
         thirdParPath.arc.radius = 1
-        // last point
+        // last point  (joiner 2 parent)
         fourthParPath.coords.x = pathToArcIntPoint[0].x
         fourthParPath.coords.y = pathToArcIntPoint[0].y
-    } else if(pathToArcIntPoint[0].doesIntersect === true) {
+    } 
+    else if(pathToArcIntPoint[0].doesIntersect === true) {
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }
@@ -120,7 +143,6 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         fourthParPath.coords.y = arcToArcIntPoint[1].y
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
-        console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }
