@@ -352,7 +352,11 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function()
 }
 
 IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {
-    this.Intersection_NoContact.handleArcToPathIntersectionNoContact(-1)
+    console.log("ASDOFJDSFSAASSSSSSSSS")
+    // //old
+    // this.Intersection_NoContact.handleArcToPathIntersectionNoContact(-1)
+    //new
+    this.Intersection_NoContact.handleArcToPathIntersectionNoContact(0)
 }
 
 IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData = function() {
