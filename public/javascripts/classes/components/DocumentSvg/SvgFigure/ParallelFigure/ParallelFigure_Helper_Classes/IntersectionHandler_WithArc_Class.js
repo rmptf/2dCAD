@@ -30,9 +30,9 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
@@ -310,22 +310,36 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
 }
 
 IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = function(offset) {
-    let fillerAdder = 0
-    let nextFillerAdder = 0
+    // //old
+    // let fillerAdder = 0
+    // let nextFillerAdder = 0
+    // if (this.originalFigurePathDatas_plusFillers[this.index + 2] === "filler") {
+    //     fillerAdder = fillerAdder + 0
+    //     nextFillerAdder = nextFillerAdder + 1
+    // }
+    //new (kinda working)
+    // (not needed)
 
-    if (this.originalFigurePathDatas_plusFillers[this.index + 2] === "filler") {
-        fillerAdder = fillerAdder + 0
-        nextFillerAdder = nextFillerAdder + 1
-    }
-
-    let thisPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder]
-    let nextPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder]
+    // //old
+    // let thisPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder]
+    // let nextPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder]
+    // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, this.parallelFigureObj.parallelDistance)//use orig
+    //new (kinda working)
+    let thisPathDataOutside = this.originalFigurePathDatas[this.index + 1]
+    let nextPathDataOutside = this.originalFigurePathDatas[this.index + 2]
     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, this.parallelFigureObj.parallelDistance)//use orig
 
-    this.parallelFigurePathDatas[this.index + 1][0].coords.x = parallelProjections.thisPointX //use orig
-    this.parallelFigurePathDatas[this.index + 1][0].coords.y = parallelProjections.thisPointY
-    this.parallelFigurePathDatas[this.index + 1][1].coords.x = parallelProjections.nextPointX
-    this.parallelFigurePathDatas[this.index + 1][1].coords.y = parallelProjections.nextPointY
+    // //old
+    // this.parallelFigurePathDatas[this.index + 1][0].coords.x = parallelProjections.thisPointX //use orig
+    // this.parallelFigurePathDatas[this.index + 1][0].coords.y = parallelProjections.thisPointY
+    // this.parallelFigurePathDatas[this.index + 1][1].coords.x = parallelProjections.nextPointX
+    // this.parallelFigurePathDatas[this.index + 1][1].coords.y = parallelProjections.nextPointY
+    // this.parallelFigureObj.arcToPathCounter += 1 //use orig
+    //new (kinda working)
+    this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.x = parallelProjections.thisPointX //use orig
+    this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.y = parallelProjections.thisPointY
+    this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x = parallelProjections.nextPointX
+    this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y = parallelProjections.nextPointY
     this.parallelFigureObj.arcToPathCounter += 1 //use orig
 
 
@@ -336,7 +350,6 @@ IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = fun
 
 
     // DATA VIS
-
     // // reference coords old way
     // // if(this.index === 1) {
     //     this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder].coords.x, this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder].coords.y]])
@@ -351,22 +364,23 @@ IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = fun
 
 
 
-    // finished coords: oldway
-    // if(this.index === 1) {
-        this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][0].coords.x, this.parallelFigurePathDatas[this.index + 1][0].coords.y]])
-        this.referenceFigure_02.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
-    // }
+    // // finished coords: oldway
+    // // if(this.index === 1) {
+    //     this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][0].coords.x, this.parallelFigurePathDatas[this.index + 1][0].coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
+    // // }
+    
     // // finished coords: oldway
     // // if(this.index === 1) {
     //     this.referenceFigure_01.runFunctions([[parallelProjections.thisPointX, parallelProjections.thisPointY]])
     //     this.referenceFigure_02.runFunctions([[parallelProjections.nextPointX, parallelProjections.nextPointY]])
     // // }
 
-    // finished coords new way
-    // if(this.index === 1) {
-        this.referenceFigure_03.runFunctions([[this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.x, this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east.coords.y]])
-        this.referenceFigure_04.runFunctions([[this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x, this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y]])
-    // }
+    // // finished coords new way
+    // // if(this.index === 1) {
+    //     this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.x, this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x, this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y]])
+    // // }
 }
 
 //FIXME: Can these all be one?
