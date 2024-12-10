@@ -3,6 +3,7 @@ import {Intersection_Contact} from './Intersection_Helper_Classes/Intersection_C
 import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
+import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -22,6 +23,11 @@ function IntersectionHandler_WithArc(parallelFigure) {
 
     this.index = null
     this.arcRadiusParDistAndDir = null
+
+
+    let svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
 }
 
 export {
@@ -270,9 +276,17 @@ IntersectionHandler_WithArc.prototype.handleIntersectionArcToPath = function() {
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.arcToPathIndexArray.push(this.index + 1)
     }
-    // this.Intersection_Contact.handleArcToPathIntersection()
     this.Intersection_Contact.handleAllIntersections('a2p')
     if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
+
+
+
+        this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
+        console.log("aojfoijsfijsdofjsdifjsdoifjsdofjdsoif3234234jdsofjdsoifjdsoifjsiod")
+        console.log(this.index)
+
+
+
         this.parallelFigureObj.arcToPathCounter -= 1
     }
 }

@@ -369,7 +369,7 @@ IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = fun
     //     this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][0].coords.x, this.parallelFigurePathDatas[this.index + 1][0].coords.y]])
     //     this.referenceFigure_02.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
     // // }
-    
+
     // // finished coords: oldway
     // // if(this.index === 1) {
     //     this.referenceFigure_01.runFunctions([[parallelProjections.thisPointX, parallelProjections.thisPointY]])
@@ -389,8 +389,30 @@ IntersectionHandler_WithArc.prototype.handleIntersectionArcToPath = function() {
         this.parallelFigureObj.arcToPathIndexArray.push(this.index + 1)
     }
     // this.Intersection_Contact.handleArcToPathIntersection()
+
+
+    // // if(this.index === 1) {
+        // this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
+        // this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.x, this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.y]])
+    // // }
+
+    // // if(this.index === 1) {
+    //     // this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.coords.x, this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.coords.y]])
+    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas[this.index + 1].coords.x, this.originalFigurePathDatas[this.index + 1].coords.y]])
+    //     console.log("oisjiowejoirwjeoriejwoirjw")
+    //     console.log(this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west)
+    //     // this.referenceFigure_02.runFunctions([[100, 100]])
+    //     // console.log("osijfodisjfoisdjfosdjfosdijfosdjfoisdjfosdjf")
+    //     // console.log(this.originalFigurePathDatas[this.index + 1].coords.x)
+    // // }
+
+
     this.Intersection_Contact.handleAllIntersections('a2p')
-    if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
+    // // old
+    // if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
+    //new
+    if (this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+        console.log("eirweoiruewoiruewoinvcmxnvxcnvmxn")
         this.parallelFigureObj.arcToPathCounter -= 1
     }
 }

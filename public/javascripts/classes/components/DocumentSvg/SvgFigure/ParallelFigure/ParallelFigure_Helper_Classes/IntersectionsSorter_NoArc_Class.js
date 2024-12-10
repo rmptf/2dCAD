@@ -34,14 +34,15 @@ function IntersectionsSorter_NoArc(parallelFigure) {
     }
     // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => {
-        // console.log("")
-        // console.log("")
-        // console.log("")
-        // console.log("")
-        // console.log("Check_Corner_Type")
-        // console.log("FIRSTPART")
-        // console.log("Checking_for: " + code)
-        // console.log("Checking_index: " + (targetIndex + 1))
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("Check_Corner_Type")
+        console.log("FIRSTPART")
+        console.log("Checking_for: " + code)
+        console.log("Checking_index: " + (targetIndex + 1))
+        console.log(this.originalFigurePathDatas[targetIndex + 1])
         if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
             // console.log("SECOND_PART: yes_corner")
             // console.log("This_corner_is: " + this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide)
