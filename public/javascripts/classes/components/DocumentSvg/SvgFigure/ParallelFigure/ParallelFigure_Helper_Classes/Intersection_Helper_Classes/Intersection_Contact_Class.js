@@ -1,3 +1,4 @@
+import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.js'
 import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_functions/createParallelPathCornerElements_NEW.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
@@ -8,6 +9,16 @@ function Intersection_Contact(parallelFigure) {
     this.parFigureObject = parallelFigure.parallelFigureObject
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
     this.index = null
+
+    let svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 100, fillClr: 2}, 1)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02.addCircle({palette: 2, circRad: 100, fillClr: 2}, 1)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_03.addCircle({palette: 3, circRad: 100, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -68,21 +79,32 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     switch (shape) {
         case "a2a":
             intersectPoint = getArcToArcIntersections(prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
+            this.referenceFigure_01.runFunctions([[prevParallelPathData_end.coords.x, prevParallelPathData_end.coords.y]])
+            this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
             break
         case "p2a":
             intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
+            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
+            this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
+            this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
             break
     }
 
     if(intersectPoint) {
+        // DATA VIS
+        // if(this.index === 1) {
+            // this.referenceFigure_01.runFunctions([[intersectPoint[0].x, intersectPoint[0].y]])
+            // this.referenceFigure_01.runFunctions([[100, 100]])
+        // }
         if(intersectPoint[0].doesIntersect === false) {
             console.log("")
             console.log("")
             console.log("")
             console.log("CURRENT_DISCONNECTING")
+            console.log(intersectPoint)
             console.log("")
             console.log("")
             console.log("")
