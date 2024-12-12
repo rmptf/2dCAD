@@ -270,6 +270,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
 }
 
 IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function() {
+    console.log("okay_okay_okay")
     // console.log(this.joinerType(this.index, "AAA"))
     // console.log(this.joinerType(this.index - 1, "AAA"))
     // console.log(this.joinerType(this.index, "CCC"))
