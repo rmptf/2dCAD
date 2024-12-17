@@ -79,17 +79,21 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     switch (shape) {
         case "a2a":
             intersectPoint = getArcToArcIntersections(prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
-            this.referenceFigure_01.runFunctions([[prevParallelPathData_end.coords.x, prevParallelPathData_end.coords.y]])
-            this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
+            // this.referenceFigure_01.runFunctions([[prevParallelPathData_end.coords.x, prevParallelPathData_end.coords.y]])
+            // this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
             break
         case "p2a":
             intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
+            console.log(nextParallelPathData_end)
+            console.log(nextParallelPathData_start)
+            console.log(thisParallelPathData_end)
+            console.log(thisOriginalPathData)
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
-            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
-            this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
+            // this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
+            // this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
             break
     }
 

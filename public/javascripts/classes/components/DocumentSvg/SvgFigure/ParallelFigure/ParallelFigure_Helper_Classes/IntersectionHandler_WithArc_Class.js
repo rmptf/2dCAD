@@ -427,6 +427,7 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionPathToArc = function(
 }
 
 IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function() {
+    console.log("A2Aaaaaaaaa")
     this.parallelFigureObj.arcToArcCounter += 1
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.arcToArcIndexArray.push(this.index);
