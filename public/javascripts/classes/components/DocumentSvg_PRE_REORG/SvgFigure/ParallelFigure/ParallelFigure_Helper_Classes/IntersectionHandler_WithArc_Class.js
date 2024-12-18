@@ -26,7 +26,7 @@ function IntersectionHandler_WithArc(parallelFigure) {
 
 
     let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
 }
 

@@ -17,8 +17,8 @@ function Intersection_Contact(parallelFigure) {
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -61,7 +61,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let origPathDataIndex = indexArray[shapeCount]
     // let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
     //new  (TODO: not completely checked yet)
-    let thisOriginalPathData = this.originalFigurePathDatas[thisIndex]
+    let thisOriginalPathData = this.originalFigurePathDatas[thisIndex + 1] //FIXME: changed (added + 1) while working on p2a, check if affects a2a
     let intersectPoint
     //old
     // switch (shape) {
@@ -86,14 +86,30 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
-            console.log(nextParallelPathData_end)
-            console.log(nextParallelPathData_start)
-            console.log(thisParallelPathData_end)
-            console.log(thisOriginalPathData)
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
+            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
+            this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
+            this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
+            this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+
+
+            // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, thisParallelPathData_end, nextParallelPathData_start, thisOriginalPathData)
             // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            // this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
-            // this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
+            // this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
+            // this.referenceFigure_03.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
+            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+
+            // console.log("sjfsjdflsjflksdjflksdjflksjkfs")
+            // console.log(nextParallelPathData_end)
+            // console.log(nextParallelPathData_start)
+            // console.log(thisParallelPathData_end)
+            // console.log(thisOriginalPathData)
+
+            console.log("sjfsjdflsjflksdjflksdjflksjkfs")
+            console.log(nextParallelPathData_end)
+            console.log(thisParallelPathData_end)
+            console.log(nextParallelPathData_start)
+            console.log(thisOriginalPathData)
             break
     }
 

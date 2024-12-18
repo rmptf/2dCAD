@@ -275,6 +275,7 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
 
     // Check if the line intersects the circle
     if (discriminant < 0) {
+        console.log("HERE_123: 01")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
@@ -282,12 +283,14 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
         return [{ x: intersectionX, y: intersectionY, doesIntersect: false }];
 
     } else if (discriminant === 0) {
+        console.log("HERE_123: 02")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
         return [{ x: intersectionX, y: intersectionY, doesIntersect: true }];
     } else {
+        console.log("HERE_123: 03")
         // Line intersects the circle at two points
         const t1 = (-B + Math.sqrt(discriminant)) / (2 * A);
         const t2 = (-B - Math.sqrt(discriminant)) / (2 * A);
