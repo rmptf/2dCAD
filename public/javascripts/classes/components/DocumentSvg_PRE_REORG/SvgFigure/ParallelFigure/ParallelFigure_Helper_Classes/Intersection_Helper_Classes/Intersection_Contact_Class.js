@@ -12,13 +12,13 @@ function Intersection_Contact(parallelFigure) {
 
     let svgFigure = parallelFigure.svgFigure
     this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
     this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -43,9 +43,12 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let prevIndex = this.index - 1
     let thisIndex = this.index
     let nextIndex = this.index + 1
-    let prevParallelPathData = this.parallelFigurePathDatas[prevIndex]
-    let thisParallelPathData = this.parallelFigurePathDatas[thisIndex]
-    let nextParallelPathData = this.parallelFigurePathDatas[nextIndex]
+    let prevParallelPathData = this.parallelFigurePathDatas[prevIndex] // [0] first 
+    // let prevParallelPathData = this.parallelFigurePathDatas[prevIndex] // [1] second 1st
+    let thisParallelPathData = this.parallelFigurePathDatas[thisIndex] // [0] // second 2nd
+    // let thisParallelPathData = this.parallelFigurePathDatas[thisIndex] // [1] third 1st
+    let nextParallelPathData = this.parallelFigurePathDatas[nextIndex] // [0] third 2nd
+    // let nextParallelPathData = this.parallelFigurePathDatas[nextIndex] // [1] last
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
     let intersectPoint
@@ -58,10 +61,15 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             break
         case "a2p":
             intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
-            this.referenceFigure_01.runFunctions([[nextParallelPathData[1].coords.x, nextParallelPathData[1].coords.y]])
-            this.referenceFigure_02.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]])
-            this.referenceFigure_03.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]])
-            this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData[1].coords.x, nextParallelPathData[1].coords.y]]) // last 
+            // this.referenceFigure_02.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]]) // third 2nd
+            // this.referenceFigure_03.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]]) // third 1st
+            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // opd a2p
+
+            this.referenceFigure_01.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]])
+            // this.referenceFigure_02.runFunctions([[prevParallelPathData[0].coords.x, prevParallelPathData[0].coords.y]])
+
+            
             console.log("POpopopopopopopopshjfjshjfshf")
             console.log(nextParallelPathData[1])
             console.log(nextParallelPathData[0])

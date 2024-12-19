@@ -12,13 +12,13 @@ function Intersection_Contact(parallelFigure) {
 
     let svgFigure = parallelFigure.svgFigure
     this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
     this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -50,12 +50,12 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let thisParallelPathData = this.parallelFigurePathDatas[thisIndex]
     // let nextParallelPathData = this.parallelFigurePathDatas[nextIndex]
     //new
-    let prevParallelPathData_start = this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west
-    let thisParallelPathData_start = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west
-    let nextParallelPathData_start = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west
-    let prevParallelPathData_end = this.originalFigurePathDatas[prevIndex + 1].children.parallel_pathDatas.pathData_east
-    let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east
-    let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east
+    let prevParallelPathData_start = this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west // first
+    let thisParallelPathData_start = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west // second
+    let nextParallelPathData_start = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west // third
+    let prevParallelPathData_end = this.originalFigurePathDatas[prevIndex + 1].children.parallel_pathDatas.pathData_east // second
+    let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east // third
+    let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east // last
 
     //old
     // let origPathDataIndex = indexArray[shapeCount]
@@ -87,10 +87,15 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             break
         case "a2p":
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
+            // FIXME: HAVE TO ADD PARALLEL PATH DATA CHILDREN TO FIX
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
+            // this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]]) // third 2nd
+            // this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]]) // third 2nd
+            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+
             this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
-            this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
-            this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+            // this.referenceFigure_02.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
+            
 
 
             // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, thisParallelPathData_end, nextParallelPathData_start, thisOriginalPathData)

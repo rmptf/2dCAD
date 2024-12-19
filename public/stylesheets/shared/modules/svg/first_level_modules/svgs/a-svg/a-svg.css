@@ -147,6 +147,9 @@ svg{
       .testElem-radius--10{
         r: 10;
       }
+      .testElem-radius--15{
+        r: 15;
+      }
       .testElem-radius--100{
         r: 100;
       }
