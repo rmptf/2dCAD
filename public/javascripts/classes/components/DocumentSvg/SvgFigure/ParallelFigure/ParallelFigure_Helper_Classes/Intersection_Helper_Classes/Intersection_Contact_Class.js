@@ -14,11 +14,11 @@ function Intersection_Contact(parallelFigure) {
     this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
     this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_02.addCircle({palette: 2, circRad: 15, fillClr: 2}, 1)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -57,6 +57,24 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east // third
     let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east // last
 
+    // let filler_01 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0] // third
+    // let filler_02 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1] // third
+
+    let filler_01_new
+    let filler_02_new
+    if(this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.childCount < 2) {
+        filler_01_new = thisParallelPathData_end  // second
+        filler_02_new = nextParallelPathData_start // second
+    } else {
+        filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+        filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+    }
+
+
+    // console.log("newskdfosdjfosdjf")
+    // console.log(filler_01_new)
+    // console.log(filler_02_new)
+
     //old
     // let origPathDataIndex = indexArray[shapeCount]
     // let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
@@ -86,14 +104,21 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
-            intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
+            intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData)
             // FIXME: HAVE TO ADD PARALLEL PATH DATA CHILDREN TO FIX
-            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
-            // this.referenceFigure_02.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]]) // third 2nd
-            // this.referenceFigure_03.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]]) // third 2nd
-            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
+            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
+            this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]]) // third 2nd
+            this.referenceFigure_03.runFunctions([[filler_01_new.coords.x, filler_01_new.coords.y]]) // third 2nd
+            this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
 
-            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
+
+            // this.referenceFigure_01.runFunctions([[filler_01_new.coords.x, filler_01_new.coords.y]])
+            // this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]])
+
+
+
+
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
             // this.referenceFigure_02.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
             
 

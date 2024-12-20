@@ -67,7 +67,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // opd a2p
 
             this.referenceFigure_01.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]])
-            // this.referenceFigure_02.runFunctions([[prevParallelPathData[0].coords.x, prevParallelPathData[0].coords.y]])
+            this.referenceFigure_02.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]])
 
             
             console.log("POpopopopopopopopshjfjshjfshf")
