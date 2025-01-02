@@ -51,6 +51,16 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount)
+        return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
+    }
+
+    this.arcExist_NEW = (targetIndex) => {
+        console.log("ARCEXIST_?")
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount)
         // return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.exist === true
 
 
@@ -61,7 +71,8 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         // NEW_001
         // NEW_001
         // NEW_001
-        console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
+        // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
+        console.log(this.originalFigurePathDatas[targetIndex + 0])
         console.log(this.originalFigurePathDatas[targetIndex + 1])
         return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
         // NEW_001
@@ -86,7 +97,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         console.log(targetIndex)
         console.log(this.originalFigurePathDatas.length - 1)
         console.log(this.originalFigurePathDatas[targetIndex + 1])
-        return targetIndex + 1 === this.originalFigurePathDatas.length - 1
+        return targetIndex + 1 >= this.originalFigurePathDatas.length - 1
     }
     this.includes = (list, targetIndex) => {
         // joiners:
@@ -322,13 +333,18 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
                 console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_NOT_CONNECTED")
                 this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected()
             } else {
-                if(this.arcExist(this.index + 1)) {
-                    console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_CONNECTED")
-                    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-                } else {
-                    console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_NOT_ARC")
-                    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
-                }
+                // if(!this.lastPosition(this.index + 1)) {
+                    if(this.arcExist_NEW(this.index + 1)) {
+                        console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_CONNECTED")
+                        this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+                    } else {
+                        console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_NOT_ARC")
+                        this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc()
+                    }
+                // } else {
+                //     console.log("okokokokokokokok")
+                // }
+
             }
             // NEW_001
             // NEW_001

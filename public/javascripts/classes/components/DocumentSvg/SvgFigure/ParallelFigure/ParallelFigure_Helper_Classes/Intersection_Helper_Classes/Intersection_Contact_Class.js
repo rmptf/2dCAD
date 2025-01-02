@@ -68,8 +68,8 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
         filler_01_new = thisParallelPathData_end  // second
         filler_02_new = nextParallelPathData_start // second
     } else {
-        filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
-        // filler_01_new = thisParallelPathData_end
+        // filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+        filler_01_new = thisParallelPathData_end
         // filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
         filler_02_new = nextParallelPathData_start
     }
