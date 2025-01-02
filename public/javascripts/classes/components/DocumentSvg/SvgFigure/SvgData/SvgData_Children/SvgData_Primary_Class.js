@@ -14,7 +14,7 @@ function PathDataPrimary() {
 
     // Call the constructor of the parent class
     PathData.call(this)
-    console.log(this)
+    // console.log(this)
 }
 
 // Inherit methods from the parent class

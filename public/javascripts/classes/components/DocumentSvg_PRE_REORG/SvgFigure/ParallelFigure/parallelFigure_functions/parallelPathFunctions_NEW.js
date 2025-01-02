@@ -275,7 +275,6 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
 
     // Check if the line intersects the circle
     if (discriminant < 0) {
-        console.log("HERE_123: 01")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
@@ -283,14 +282,12 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
         return [{ x: intersectionX, y: intersectionY, doesIntersect: false }];
 
     } else if (discriminant === 0) {
-        console.log("HERE_123: 02")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
         return [{ x: intersectionX, y: intersectionY, doesIntersect: true }];
     } else {
-        console.log("HERE_123: 03")
         // Line intersects the circle at two points
         const t1 = (-B + Math.sqrt(discriminant)) / (2 * A);
         const t2 = (-B - Math.sqrt(discriminant)) / (2 * A);
@@ -322,13 +319,11 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
         console.log(length1)
         // Choose the closest int point to OPD
         if(length0 < length1) {
-            console.log('GREATER_THAN')
             return [
                 { x: intersection1X, y: intersection1Y, doesIntersect: true },
                 { x: intersection2X, y: intersection2Y, doesIntersect: true }
             ]
         } else {
-            console.log('LESS_THAN')
             return [
                 { x: intersection2X, y: intersection2Y, doesIntersect: true },
                 { x: intersection1X, y: intersection1Y, doesIntersect: true }

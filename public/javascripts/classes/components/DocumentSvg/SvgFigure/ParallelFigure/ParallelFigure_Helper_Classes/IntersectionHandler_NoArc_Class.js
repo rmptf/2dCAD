@@ -12,15 +12,15 @@ function IntersectionHandler_NoArc(parallelFigure) {
 
 
 
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // let svgFigure = parallelFigure.svgFigure
+    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -51,7 +51,6 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // D
     console.log("D_ooo")
-    console.log("lspdlfpsdlfplspflspflsdpflsd")
     // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 
@@ -83,7 +82,6 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // J
     console.log("J_ooo")
-    console.log("lspdlfpsdlfplspflspflsdpflsd")
     // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
 }
 

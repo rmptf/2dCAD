@@ -13,7 +13,7 @@ function ReferenceFigure(svgFigure, doRun) {
         this.functionHolder = []
         this.svgElements = []
 
-        console.log(this)
+        // console.log(this)
     }
 }
 
@@ -38,6 +38,22 @@ ReferenceFigure.prototype.addCircle = function(visObj, counter) {
             }
         }
         this.functionHolder.push(moveCircleFunction)
+        // BUILD FUNCTIONthis.svgElements.push(newCircle)
+    }
+}
+
+ReferenceFigure.prototype.addRadial = function(visObj, counter) {
+    if(this.doRun) {
+        let newCircle = this.testGroup.append('circle')
+        .attr('class','testElement-endpoint testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+'')
+        this.svgElements.push(newCircle._groups[0][0])
+
+        // BUILD FUNCTION
+        let changeCircleCircFunction = function(coords1, radius) {
+            newCircle.attr('cx', coords1[0]).attr('cy', coords1[1])
+            newCircle.attr('r', radius)
+        }
+        this.functionHolder.push(changeCircleCircFunction)
         // BUILD FUNCTIONthis.svgElements.push(newCircle)
     }
 }

@@ -1,4 +1,4 @@
-import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.js'
+import {ReferenceFigure} from '../../../ReferenceFigure/ReferenceFigure_Class.js'
 import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_functions/createParallelPathCornerElements_NEW.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
@@ -10,15 +10,18 @@ function Intersection_Contact(parallelFigure) {
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
     this.index = null
 
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
+    // let svgFigure = parallelFigure.svgFigure
+    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
     // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
     // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
     // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
     // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+
+    // this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_05.addRadial({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
@@ -66,19 +69,15 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             // this.referenceFigure_03.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]]) // third 1st
             // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // opd a2p
 
-            this.referenceFigure_01.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]])
-            this.referenceFigure_02.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]])
-
-            
-            console.log("POpopopopopopopopshjfjshjfshf")
-            console.log(nextParallelPathData[1])
-            console.log(nextParallelPathData[0])
-            console.log(thisParallelPathData[1])
-            console.log(thisOriginalPathData)
+            // this.referenceFigure_05.runFunctions([[thisParallelPathData[1].arc.center.x, thisParallelPathData[1].arc.center.y], [thisParallelPathData[1].arc.radius]])
+            // this.referenceFigure_05.runFunctions([[nextParallelPathData[0].arc.center.x, nextParallelPathData[0].arc.center.y], [nextParallelPathData[0].arc.radius]])
+            // this.referenceFigure_05.runFunctions([[nextParallelPathData[1].arc.center.x, nextParallelPathData[1].arc.center.y], [nextParallelPathData[1].arc.radius]])
             break
     }
 
     if(intersectPoint) {
+        console.log("intersectPoint_DATA")
+        console.log(intersectPoint)
         if(intersectPoint[0].doesIntersect === false) {
             console.log("CURRENT_DISCONNECTING")
             this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated

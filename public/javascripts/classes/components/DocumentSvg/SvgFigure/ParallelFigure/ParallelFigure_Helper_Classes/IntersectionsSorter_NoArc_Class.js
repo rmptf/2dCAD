@@ -34,15 +34,10 @@ function IntersectionsSorter_NoArc(parallelFigure) {
     }
     // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => {
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("")
-        console.log("Check_Corner_Type")
-        console.log("FIRSTPART")
-        console.log("Checking_for: " + code)
-        console.log("Checking_index: " + (targetIndex + 1))
-        console.log(this.originalFigurePathDatas[targetIndex + 1])
+        // console.log("Check_Corner_Type")
+        // console.log("Checking_for: " + code)
+        // console.log("Checking_index: " + (targetIndex + 1))
+        // console.log(this.originalFigurePathDatas[targetIndex + 1])
         if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west !== null) {
             if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
                 // console.log("SECOND_PART: yes_corner")
@@ -84,6 +79,7 @@ IntersectionsSorter_NoArc.prototype.setIndices = function (index) {
 IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
     if(this.index > 1) {
         if(this.isJoiner(this.index - 1) && this.joinerType(this.index, "BBB")) {
+            // console.log("NA_AA_00")
             this.thisIsArcToPath = true
         } else {
             this.thisIsArcToPath = false
@@ -107,14 +103,11 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         }
         if (!this.firstPosition(this.index) && !this.lastPosition(this.index)) {
             if(!this.arcExist(this.index - 1)) {
-                console.log("okokokokokokokokokoko_11111")
                 if(this.parallelFigureObj.parallelPathSegmentCounter_SECOND === 0) {
                     // C (DC)
-                    console.log("gogogogogog_111111")
                     this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isFirstSegment()
                 } else {
                     // D (C+)
-                    console.log("gogogogogog_22222")
                     this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment() //TODO: is this never used?
                 }
                 // E (DC After)
@@ -134,14 +127,11 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
         if (this.lastPosition(this.index)) {
             if(!this.firstPosition(this.index)) {
                 if(!this.arcExist(this.index - 1)) {
-                    console.log("okokokokokokokokokoko_22222")
                     if(this.parallelFigureObj.parallelPathSegmentCounter_SECOND === 0) {
                         // H (Ga)
-                        console.log("popopopopo_11111111")
                         this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isFirstSegment()
                     } else {
                         // J (G+)
-                        console.log("popopopopo_2222222")
                         this.IntersectionHandler.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment() //TODO: is this never used?
                     }
                     // K (G After)

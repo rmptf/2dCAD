@@ -253,11 +253,6 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
 // function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
 function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
     console.log("p2a_INT")
-    console.log(linePt1)
-    console.log(linePt2)
-    console.log(circ)
-    console.log(originalPathData)
-
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}
     let circleCenter = {x: circ.arc.center.x, y: circ.arc.center.y}
@@ -280,22 +275,18 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
 
     // Check if the line intersects the circle
     if (discriminant < 0) {
-        console.log("HERE_123: 01")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
         return [{ x: intersectionX, y: intersectionY, doesIntersect: false }];
-
     } else if (discriminant === 0) {
-        console.log("HERE_123: 02")
         // Line is tangent to the circle
         const t = -B / (2 * A);
         const intersectionX = lineStart.x + t * dx;
         const intersectionY = lineStart.y + t * dy;
         return [{ x: intersectionX, y: intersectionY, doesIntersect: true }];
     } else {
-        console.log("HERE_123: 03")
         // Line intersects the circle at two points
         const t1 = (-B + Math.sqrt(discriminant)) / (2 * A);
         const t2 = (-B - Math.sqrt(discriminant)) / (2 * A);
@@ -323,17 +314,15 @@ function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
         //     { x: intersection2X, y: intersection2Y, doesIntersect: true }
         // ]
 
-        console.log(length0)
-        console.log(length1)
+        // console.log(length0)
+        // console.log(length1)
         // Choose the closest int point to OPD
         if(length0 < length1) {
-            console.log('GREATER_THAN')
             return [
                 { x: intersection1X, y: intersection1Y, doesIntersect: true },
                 { x: intersection2X, y: intersection2Y, doesIntersect: true }
             ]
         } else {
-            console.log('LESS_THAN')
             return [
                 { x: intersection2X, y: intersection2Y, doesIntersect: true },
                 { x: intersection1X, y: intersection1Y, doesIntersect: true }

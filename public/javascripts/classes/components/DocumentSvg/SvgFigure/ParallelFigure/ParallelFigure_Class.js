@@ -138,14 +138,12 @@ ParallelFigure.prototype.addPaths = function() {
 }
 
 ParallelFigure.prototype.addEndPoints = function() {
-    console.log(this.originalFigurePathDatas)
+    // console.log(this.originalFigurePathDatas)
     // initiate a counter that iterates every time a pathData is created
     let endPointCount = 0
     // handle edge case: set first point
-    console.log("here")
     // let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_east')
     let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_west')
-    console.log("avter_here")
     // find last iteration of pathData
     let lastEndPointCount = ((this.originalFigurePathDatas.length - 1) * 2) - 1
     let lastPDCount = this.originalFigurePathDatas.length - 2
@@ -319,29 +317,23 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     console.log(i)
                     // thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
-                        console.log("CURRENT_ARC")
-                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW()
+                        console.log("CURRENT_INDEX_IS_ARC")
+                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
+                        console.log("CHECKING_FOR_ARC_JOINER")
+                        // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children)
+                        if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                            console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                            thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                        }
                     } else {
-                        console.log("CURRENT_PATH")
+                        console.log("CURRENT_INDEX_IS_PATH")
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
                 thisFigure.parallelFigure_updateSvg()
             }
         // }
-
-        // Reset 
-        thisFigure.parallelFigureObject.collectIndicesOfIntersections = false
-        thisFigure.parallelFigureObject.pathToArcCounter = -1
-        thisFigure.parallelFigureObject.arcToPathCounter = -1
-        thisFigure.parallelFigureObject.arcToArcCounter = -1
-
-        console.log("END_SHAPE")
-        console.log(" ")
-        console.log(" ")
-        console.log(" ")
-
     // }
 }
 

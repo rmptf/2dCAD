@@ -5,7 +5,7 @@ import {getPathToArcIntersections, getArcToArcIntersections} from '../../paralle
 function Intersection_Contact(parallelFigure) {
     this.PARFIGURE = parallelFigure // FIXME: still used
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-    // this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parFigureObject = parallelFigure.parallelFigureObject
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
     this.index = null
@@ -19,10 +19,12 @@ function Intersection_Contact(parallelFigure) {
     this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+
+    this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_05.addRadial({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
-    console.log("CHECK_RIGHT_HERE")
     // a2a, p2a, a2p
     let indexArray
     let shapeCount
@@ -66,14 +68,11 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
         filler_01_new = thisParallelPathData_end  // second
         filler_02_new = nextParallelPathData_start // second
     } else {
-        filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
-        filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+        filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+        // filler_01_new = thisParallelPathData_end
+        // filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+        filler_02_new = nextParallelPathData_start
     }
-
-
-    // console.log("newskdfosdjfosdjf")
-    // console.log(filler_01_new)
-    // console.log(filler_02_new)
 
     //old
     // let origPathDataIndex = indexArray[shapeCount]
@@ -104,78 +103,43 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             intersectPoint = getPathToArcIntersections(prevParallelPathData_start, prevParallelPathData_end, thisParallelPathData_end, thisOriginalPathData)
             break
         case "a2p":
+            // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // first (end of straight line)
+            // this.referenceFigure_03.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]]) // second (start of straight line)
+            // this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]]) // third end of curve (that should intersect with straight line)
+            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // original path data
+
+            // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData, this.referenceFigure_01, this.referenceFigure_02, this.referenceFigure_03, this.referenceFigure_04)
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData)
             // FIXME: HAVE TO ADD PARALLEL PATH DATA CHILDREN TO FIX
-            this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
-            this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]]) // third 2nd
-            this.referenceFigure_03.runFunctions([[filler_01_new.coords.x, filler_01_new.coords.y]]) // third 2nd
-            this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
-
-
-            // this.referenceFigure_01.runFunctions([[filler_01_new.coords.x, filler_01_new.coords.y]])
-            // this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]])
-
-
-
-
-            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            // this.referenceFigure_02.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            
-
-
-            // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, thisParallelPathData_end, nextParallelPathData_start, thisOriginalPathData)
-            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]])
-            // this.referenceFigure_02.runFunctions([[thisParallelPathData_end.coords.x, thisParallelPathData_end.coords.y]])
-            // this.referenceFigure_03.runFunctions([[nextParallelPathData_start.coords.x, nextParallelPathData_start.coords.y]])
+            // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
+            // this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]]) // third 2nd
+            // this.referenceFigure_03.runFunctions([[filler_01_new.coords.x, filler_01_new.coords.y]]) // third 2nd
             // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
 
-            // console.log("sjfsjdflsjflksdjflksdjflksjkfs")
-            // console.log(nextParallelPathData_end)
-            // console.log(nextParallelPathData_start)
-            // console.log(thisParallelPathData_end)
-            // console.log(thisOriginalPathData)
+            // this.referenceFigure_05.runFunctions([[this.parallelFigurePathDatas[nextIndex][1].coords.x, this.parallelFigurePathDatas[nextIndex][1].coords.y], [this.parallelFigurePathDatas[thisIndex][1].arc.radius]])
 
-            console.log("sjfsjdflsjflksdjflksdjflksjkfs")
-            console.log(nextParallelPathData_end)
-            console.log(thisParallelPathData_end)
-            console.log(nextParallelPathData_start)
-            console.log(thisOriginalPathData)
+
             break
     }
 
     if(intersectPoint) {
-        console.log("okokokkokokoko")
+        console.log("intersectPoint_DATA")
         console.log(intersectPoint)
-        // DATA VIS
-        // if(this.index === 1) {
-            // this.referenceFigure_01.runFunctions([[intersectPoint[0].x, intersectPoint[0].y]])
-            // this.referenceFigure_01.runFunctions([[100, 100]])
-        // }
         if(intersectPoint[0].doesIntersect === false) {
-            console.log("")
-            console.log("")
-            console.log("")
             console.log("CURRENT_DISCONNECTING")
-            console.log("")
-            console.log("")
-            console.log("")
             this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
             switch (shape) {
                 case "a2a":
-                    console.log("plopper: A2A")
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "p2a":
-                    console.log("plopper: P2A")
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, thisIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "a2p":
-                    console.log("plopper: A2P")
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
             }
-            console.log("CURRENT_PD_A: " + this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.childCount)
-            console.log("CURRENT_PD_B: " + this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west.children.childCount)
         } else {
             //old
             // switch (shape) {

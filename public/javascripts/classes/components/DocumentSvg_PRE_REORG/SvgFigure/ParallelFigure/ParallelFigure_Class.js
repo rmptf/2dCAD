@@ -143,12 +143,14 @@ ParallelFigure.prototype.addEndPoints = function() {
     let endPointCount = 0
     // handle edge case: set first point
     let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_east')
+    // let firstPooper = this.createParallelEndPoint(this.originalFigurePathDatas[0], 0, 0, 0, 'pathData_west')
 
     // find last iteration of pathData
     let lastEndPointCount = ((this.originalFigurePathDatas.length - 1) * 2) - 1
     let lastPDCount = this.originalFigurePathDatas.length - 2
     // handle edge case: set last point
     let lastPooper  = this.createParallelEndPoint(this.originalFigurePathDatas[this.originalFigurePathDatas.length - 1], lastEndPointCount, lastPDCount, 1, 'pathData_west')
+    // let lastPooper  = this.createParallelEndPoint(this.originalFigurePathDatas[this.originalFigurePathDatas.length - 1], lastEndPointCount, lastPDCount, 1, 'pathData_east')
 
     // loop through every path between first and last, create two endPoints
     for (let i = 1; i < this.originalFigurePathDatas.length - 1; i++) {
@@ -217,8 +219,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // if(i < thisFigure.originalFigurePathDatas.length) {
                     if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                     // if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.arc.exist === true) { //FIXME: Tight herer
+                        console.log("CURRENT_INDEX_IS_ARC")
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
+                        console.log("CURRENT_INDEX_IS_PATH")
                         thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }

@@ -26,7 +26,7 @@ function PathData() {
 
 PathData.prototype.consoleLogTest = function() {
     console.log("OPD_TEST")
-    console.log(this)
+    // console.log(this)
 }
 
 PathData.prototype.setCoordinateData = function(xCoord, yCoord) {

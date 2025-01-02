@@ -3,7 +3,7 @@ import {Intersection_Contact} from './Intersection_Helper_Classes/Intersection_C
 import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
-import { ReferenceFigure } from '../../ReferenceFigure/ReferenceFigure_Class.js'
+import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -25,15 +25,15 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.index = null
     this.arcRadiusParDistAndDir = null
 
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // let svgFigure = parallelFigure.svgFigure
+    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 export {
@@ -44,6 +44,8 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
 }
 
@@ -57,6 +59,8 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
     // 2
     console.log("2_seg1_first_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
@@ -121,6 +125,8 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 
@@ -138,6 +144,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     this.parallelFigureObj.pathToArcCounter += 1
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
     this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = true // (Set_largeArcFag)
 }
@@ -146,6 +154,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_2AJ")
     this.handleLargeArcFlag("arcFlag_2AJ") // (Set_largeArcFag)
 }
@@ -167,6 +177,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     //new
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
 }
@@ -175,6 +187,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     // 4_Joiner
     console.log("4_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.handleLargeArcFlag("arcFlag_4J") // (Set_largeArcFag)
 }
 
@@ -190,6 +204,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
     // 6_Joiner
     console.log("6_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 
@@ -412,7 +428,7 @@ IntersectionHandler_WithArc.prototype.handleIntersectionArcToPath = function() {
     // if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
     //new
     if (this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
-        console.log("eirweoiruewoiruewoinvcmxnvxcnvmxn")
+        // console.log("handling_arc_to_path")
         this.parallelFigureObj.arcToPathCounter -= 1
     }
 }
@@ -427,7 +443,6 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionPathToArc = function(
 }
 
 IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function() {
-    console.log("A2Aaaaaaaaa")
     this.parallelFigureObj.arcToArcCounter += 1
     if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
         this.parallelFigureObj.arcToArcIndexArray.push(this.index);
@@ -437,7 +452,6 @@ IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function()
 }
 
 IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {
-    console.log("ASDOFJDSFSAASSSSSSSSS")
     // //old
     // this.Intersection_NoContact.handleArcToPathIntersectionNoContact(-1)
     //new
@@ -496,13 +510,3 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
 
     return nextArcToCenterMinusPointerToArcFromArc1
 }
-
-// morngin
-// 75
-
-// 71.5
-
-// test
-// 75
-
-// 73
