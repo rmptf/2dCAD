@@ -176,7 +176,10 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
     //new
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
-    this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    //old
+    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    //new (not 100% tested)
+    this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     console.log("SEG_COUNTER")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true

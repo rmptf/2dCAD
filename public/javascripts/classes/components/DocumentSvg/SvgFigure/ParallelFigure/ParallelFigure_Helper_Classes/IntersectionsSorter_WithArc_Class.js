@@ -188,7 +188,8 @@ IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
                 // this.handleConnectedArcIntersection()
                 break;
             // case this.isJoiner(this.index - 1):
-            case this.isJoiner(this.index - 1) && joiner === true:
+            // case this.isJoiner(this.index - 1) && joiner === true:
+            case this.isJoiner(this.index - 1):
                 console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
                 console.log(this.originalFigurePathDatas[this.index + 1])
                 this.handleDisconnectedArcIntersection()

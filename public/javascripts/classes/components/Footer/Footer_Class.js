@@ -20,7 +20,8 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
 
     this.hotkeyManager = new HotkeyManager(this)
     this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW(this))
-    this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_OLD(this))
+    this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_PRE_REORG(this))
+    this.hotkeyManager.registerHotkey("Ctrl+Enter", () => this.newCanvDoc_OLD(this))
 
     this.footerActionBar01_btn01_htmlElement = this.footerActionElements[0][0]
     this.footerActionBar02_btn01_htmlElement = this.footerActionElements[1][0]
@@ -43,6 +44,10 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
 Footer.prototype.newCanvDoc_NEW = function() {
     console.log("new_CANV_DOC_NEW")
     this.createCanvasDocument()
+}
+Footer.prototype.newCanvDoc_PRE_REORG = function() {
+    console.log("new_CANV_DOC_PRE_REORG")
+    this.createCanvasDocument_PRE_REORG()
 }
 Footer.prototype.newCanvDoc_OLD = function() {
     console.log("new_CANV_DOC_OLD")

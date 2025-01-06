@@ -318,13 +318,20 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_INDEX_IS_ARC")
+                        console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
-                        console.log("CHECKING_FOR_ARC_JOINER")
-                        // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children)
-                        if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                            console.log("CURRENT_INDEX_IS_ARC_JOINER")
-                            thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                        if(i < 4) {
+                            console.log("CHECKING_FOR_ARC_JOINER")
+                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                            console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1 || thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                                console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
+                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                            } else {
+                                console.log("NO_JOINER")
+                            }
                         }
                     } else {
                         console.log("CURRENT_INDEX_IS_PATH")

@@ -43,6 +43,7 @@ Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function
         fifthParPath.coords.x = circleRadiusPoint[0]
         fifthParPath.coords.y = circleRadiusPoint[1]
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
+        console.log("CURRENT_CONNECTING")
         this.removePointsAndPaths(index + 0, index + 0)
     }
 }
@@ -74,6 +75,7 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
         fourthParPath.coords.x = pathToArcIntPoint[0].x
         fourthParPath.coords.y = pathToArcIntPoint[0].y
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
+        console.log("CURRENT_CONNECTING")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }
@@ -105,7 +107,8 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         fourthParPath.coords.y = arcToArcIntPoint[1].y
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
-        console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
+        console.log("CURRENT_CONNECTING")
+        // console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }

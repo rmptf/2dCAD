@@ -220,6 +220,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     if (thisFigure.parallelFigurePathDatas[i][1].arc.exist === true) {
                     // if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_INDEX_IS_ARC")
+                        console.log(thisFigure.parallelFigurePathDatas[i][1])
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                     } else {
                         console.log("CURRENT_INDEX_IS_PATH")
