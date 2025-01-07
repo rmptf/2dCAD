@@ -416,6 +416,8 @@ ParallelFigure.prototype.createParallelEndPoint = function(pathData, index, epIn
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, order, parPathData) {
     let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData)
+    console.log("NEW_ENDPOINT")
+    console.log(newEndPointParallel)
     pathData.endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }

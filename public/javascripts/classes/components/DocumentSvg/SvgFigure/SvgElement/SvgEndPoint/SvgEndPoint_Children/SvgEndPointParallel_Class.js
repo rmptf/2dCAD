@@ -15,6 +15,7 @@ SvgEndPointParallel.prototype = Object.create(SvgEndPoint.prototype)
 SvgEndPointParallel.prototype.constructor = SvgEndPointParallel
 
 SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
+    // console.log("ADDIND_ENDPOINT_CHILD_02")
     let newEndPointParallel = SvgEndPoint.prototype.createSvgEndPoint.call(this, index)
         .on("click", (event) => this.elementClick(event, this.actionStates))
         .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
@@ -45,8 +46,6 @@ SvgEndPointParallel.prototype.elementDrag = function(event, parentFigure, pathDa
 SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {
     console.log('parallelEndPoint_clicked')
     console.log(this.pathData)
-    console.log(this.pathData123)
-    console.log(this.pooper)
 }
 
 export {

@@ -13,6 +13,7 @@ SvgEndPointPrimary.prototype = Object.create(SvgEndPoint.prototype)
 SvgEndPointPrimary.prototype.constructor = SvgEndPointPrimary
 
 SvgEndPointPrimary.prototype.createSvgEndPoint = function(index) {
+    // console.log("ADDIND_ENDPOINT_CHILD_01")
     let newEndPointPrimary = SvgEndPoint.prototype.createSvgEndPoint.call(this, index)
         .on("click", (event) => this.elementClick(event, this.actionStates))
         .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
@@ -35,8 +36,11 @@ SvgEndPointPrimary.prototype.elementClick = function(event, actionStates) {
         // actionStates.measurePathActive === false &&
         // actionStates.saveFigureDataActive === false
     ) {
-        console.log('EndPoint path clicked, all EndPoint click functions off.')
+        console.log('endPoint_clicked')
+        console.log('all EndPoint click functions off')
+        console.log(this.pathData)
     } else if(actionStates.removeEndPointActive === true) {
+        console.log('endPoint_clicked')
         console.log('Remove EndPoint = true')
         removeEndPointFunction(event, this)
         actionStates.removeEndPointActive = false
