@@ -3,12 +3,22 @@ import {PathDataCorner} from "../../SvgData/SvgData_Children/SvgData_Corner_Clas
 // import {PathData} from "../../SvgData/SvgData_Class.js"
 
 // FIXME: Eventually move to parallegFigure?
+// FIXME: not currently a class... should it be?
 function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, shape) {
     console.log("createAndAddSvgElementAndUpdateDataArrays")
 
     let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
+
+    //FIXME:
+    //FIXME:
+        // ***!!!!WHERE IM CURRENTLY WORKING!!!!***
+        // Right here, add opd and select with index
+        // this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+        // ***!!!!WHERE IM CURRENTLY WORKING!!!!***
+    //FIXME:
+    //FIXME:
 
     let index
     let indexer
@@ -55,6 +65,9 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     // parallelFigure.createFillerParallelEndPoint(parPathData[1], doubleIndex, 2, parPathData[1])
     // parallelFigure.createFillerParallelEndPoint(parPathData[0], doubleIndex, 1, parPathData[0])
 
+
+    //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
+    //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
     parallelFigure.createParallelEndPointCorner(parPathData[1], doubleIndex, 2, parPathData[1])
     parallelFigure.createParallelEndPointCorner(parPathData[0], doubleIndex, 1, parPathData[0])
 
@@ -155,3 +168,53 @@ function getRefPointAtIndexIfNotFiller(refEndPointsBase, index) {
 
     return refEndPointsBaseNoFiller
 }
+
+
+
+// EXAMPLE 1
+// // To insert a new circle element into the DOM after a specific circle on the same layer, you can use JavaScript's DOM manipulation methods. Assuming you have a reference to the existing circle element after which you want to insert the new one, you can use the insertBefore or after method, depending on your setup.
+
+// // Here's how to do it:
+
+// // Using insertBefore
+
+// // The insertBefore method allows you to insert an element before a specified node. To insert after a specific element, you can use the next sibling of that element as the reference.
+// // Get a reference to the SVG container (e.g., <svg> or a group <g>)
+// const svgLayer = document.getElementById('mySvgLayer');
+
+// // Create your new circle element
+// const newCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+// newCircle.setAttribute('cx', '50');
+// newCircle.setAttribute('cy', '50');
+// newCircle.setAttribute('r', '10');
+// newCircle.setAttribute('fill', 'red');
+
+// // Get the reference to the circle after which you want to insert
+// const targetCircle = document.getElementById('existingCircleId');
+
+// // Insert the new circle after the target circle
+// if (targetCircle.nextSibling) {
+//   svgLayer.insertBefore(newCircle, targetCircle.nextSibling);
+// } else {
+//   // If it's the last child, just append it
+//   svgLayer.appendChild(newCircle);
+// }
+
+
+// EXAMPLE 2
+// // Using after (Modern)
+// // If you are working in a modern browser, you can use the after method to directly insert the element after a specific one.
+
+// // Create your new circle element
+// const newCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+// newCircle.setAttribute('cx', '50');
+// newCircle.setAttribute('cy', '50');
+// newCircle.setAttribute('r', '10');
+// newCircle.setAttribute('fill', 'red');
+
+// // Get the reference to the circle after which you want to insert
+// const targetCircle = document.getElementById('existingCircleId');
+
+// // Insert the new circle after the target circle
+// targetCircle.after(newCircle);
+

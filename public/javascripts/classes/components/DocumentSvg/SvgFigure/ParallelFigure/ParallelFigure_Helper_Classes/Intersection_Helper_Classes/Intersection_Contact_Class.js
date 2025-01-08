@@ -10,18 +10,18 @@ function Intersection_Contact(parallelFigure) {
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
     this.index = null
 
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02.addCircle({palette: 2, circRad: 15, fillClr: 2}, 1)
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // let svgFigure = parallelFigure.svgFigure
+    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_02.addCircle({palette: 2, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
 
-    this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_05.addRadial({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_05.addRadial({palette: 4, circRad: 10, fillClr: 2}, 1)
 }
 
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
