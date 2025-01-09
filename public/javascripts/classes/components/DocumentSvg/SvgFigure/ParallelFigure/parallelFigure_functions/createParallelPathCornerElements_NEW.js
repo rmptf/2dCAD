@@ -11,12 +11,15 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
 
+    
+
     //FIXME:
     //FIXME:
-        // ***!!!!WHERE IM CURRENTLY WORKING!!!!***
-        // Right here, add opd and select with index
-        // this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-        // ***!!!!WHERE IM CURRENTLY WORKING!!!!***
+
+
+    let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+
+
     //FIXME:
     //FIXME:
 
@@ -40,19 +43,32 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     console.log("PASSED_INDEX")
     console.log(index)
     console.log(indexer)
+    console.log(originalFigurePathDatas[index].children.parallel_pathDatas)
 
     // parallelFigurePathDatas
-    let thisParPathData = parallelFigurePathDatas[index][0]
+    //old
+    // let thisParPathData = parallelFigurePathDatas[index][0]
+    //new
+    let thisParPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
+
     let data1 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     let data2 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     // parallelFigure.createParallelPathData([data1, data2], index)
     // let parPathData = PathDataParallel.createParallelPathData(parallelFigure, [data1, data2], index)
     let parPathData = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     
+    // // old
+    // // parallelFigurePathDatas_perpendicularProjections
+    // referenceEndPointsParallelPerpendicular.splice(index, 0, [
+    //     {x: parallelFigurePathDatas[index][0].coords.x, y: parallelFigurePathDatas[index][0].coords.y},
+    //     {x: parallelFigurePathDatas[index][1].coords.x, y: parallelFigurePathDatas[index][1].coords.y}
+    // ])
+
+    //new
     // parallelFigurePathDatas_perpendicularProjections
     referenceEndPointsParallelPerpendicular.splice(index, 0, [
-        {x: parallelFigurePathDatas[index][0].coords.x, y: parallelFigurePathDatas[index][0].coords.y},
-        {x: parallelFigurePathDatas[index][1].coords.x, y: parallelFigurePathDatas[index][1].coords.y}
+        {x: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.x, y: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.y},
+        {x: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.x, y: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.y}
     ])
 
     // originalFigurePathDatas_plusFillers
