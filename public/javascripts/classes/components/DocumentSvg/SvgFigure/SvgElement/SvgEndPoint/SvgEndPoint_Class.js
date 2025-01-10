@@ -13,7 +13,7 @@ function SvgEndPoint(parentFigure, parentElement, pathData, index) {
 }
 
 SvgEndPoint.prototype.createSvgEndPoint = function(index) {
-    console.log("ADDIND_ENDPOINT_MOTHER")
+    console.log("ADDIND_ENDPOINT_PARENT")
     let newEndPoint = this.parentElement.insert(this.ELEMENT, ':nth-child(' + (index + 1) + ')') // D3.JS index's first pos as 1 (not 0) when using 'nth-child' so 1 is added to index
     // let newEndPoint = this.parentElement.append(this.ELEMENT)
         .attr('class', this.CLASSNAME)

@@ -47,15 +47,15 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     // parallelFigurePathDatas
     //old
-    // let thisParPathData = parallelFigurePathDatas[index][0]
+    // let referenceParPathData = parallelFigurePathDatas[index][0]
     //new
-    let thisParPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
+    let referenceParPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
 
-    let data1 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data2 = {coords: {x: thisParPathData.coords.x, y: thisParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data1 = {coords: {x: referenceParPathData.coords.x, y: referenceParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data2 = {coords: {x: referenceParPathData.coords.x, y: referenceParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     // parallelFigure.createParallelPathData([data1, data2], index)
     // let parPathData = PathDataParallel.createParallelPathData(parallelFigure, [data1, data2], index)
-    let parPathData = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
+    let parPathDataCorner = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     
     // // old
     // // parallelFigurePathDatas_perpendicularProjections
@@ -84,8 +84,8 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
     //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
-    parallelFigure.createParallelEndPointCorner(parPathData[1], doubleIndex, 2, parPathData[1])
-    parallelFigure.createParallelEndPointCorner(parPathData[0], doubleIndex, 1, parPathData[0])
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[1], doubleIndex, parPathDataCorner[1], referenceParPathData)
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[0], doubleIndex, parPathDataCorner[0], referenceParPathData)
 
     parallelFigure.createFillerParallelPath(index)
 }

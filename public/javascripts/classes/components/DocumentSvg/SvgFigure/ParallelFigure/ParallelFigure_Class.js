@@ -408,20 +408,18 @@ ParallelFigure.prototype.createFillerParallelPath = function(index) {
 
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index, epIndex, ppdIndex, side) {
-    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[epIndex][ppdIndex])
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[epIndex][ppdIndex], "ooo")
     pathData.children.parallel_pathDatas[side].endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }
 
 // move this to ParEndPoint_Class
-ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, order, parPathData) {
-    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData)
+ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, parPathData, referenceParPathData) {
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData, referenceParPathData)
     console.log("NEW_ENDPOINT")
     console.log(newEndPointParallel)
     pathData.endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
-
-    // svgLayer.insertBefore(newCircle, targetCircle.nextSibling);
 }
 
 export {
