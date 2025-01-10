@@ -20,6 +20,15 @@ SvgEndPoint.prototype.createSvgEndPoint = function(index) {
         // .on("click", (event) => this.elementClick(event, this.actionStates, this.parentFigure, this.pathData))
         // .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
     return newEndPoint
+
+
+
+    // // let existingSelection = d3.select(existingElement);
+    // let newEndPoint = this.parentElement.insert(newElementType, function() {
+    //     return existingSelection.node().nextSibling;
+    // }).attr('class', this.CLASSNAME);
+
+    // return newEndPoint;
 }
 
 // SvgEndPoint.prototype.elementDrag = function(event, parentFigure, pathData, actionStates) {

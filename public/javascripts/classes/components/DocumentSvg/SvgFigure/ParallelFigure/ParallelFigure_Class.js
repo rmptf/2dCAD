@@ -321,7 +321,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
-                        if(i < 4) {
+                        // if(i < 4) {
                             console.log("CHECKING_FOR_ARC_JOINER")
                             console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
                             console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
@@ -331,7 +331,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                                 thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
                             } else {
                                 console.log("NO_JOINER")
-                            }
+                            // }
                         }
                     } else {
                         console.log("CURRENT_INDEX_IS_PATH")
@@ -420,6 +420,8 @@ ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index
     console.log(newEndPointParallel)
     pathData.endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
+
+    // svgLayer.insertBefore(newCircle, targetCircle.nextSibling);
 }
 
 export {
