@@ -321,17 +321,15 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
-                        // if(i < 4) {
-                            console.log("CHECKING_FOR_ARC_JOINER")
-                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                            console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
-                            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1 || thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                                console.log("CURRENT_INDEX_IS_ARC_JOINER")
-                                console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
-                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
-                            } else {
-                                console.log("NO_JOINER")
-                            // }
+                        console.log("CHECKING_FOR_AR``C_JOINER")
+                        console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                        console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                        if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1 || thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                            console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
+                            thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                        } else {
+                            console.log("NO_JOINER")
                         }
                     } else {
                         console.log("CURRENT_INDEX_IS_PATH")
