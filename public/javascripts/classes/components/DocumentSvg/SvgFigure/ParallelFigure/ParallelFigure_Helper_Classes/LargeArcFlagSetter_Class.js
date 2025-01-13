@@ -10,37 +10,37 @@ function LargeArcFlagSetter(parallelFigure) {
     let svgFigure = parallelFigure.svgFigure
 
     // Add ReferenceFigures
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
     this.referenceFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
     this.referenceFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
 
-    this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
     this.referenceFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
     this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
-    // this.referenceFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
+    this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
+    this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 2)
+    this.referenceFigure_04.addLine({palette: 3, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    // this.referenceFigure_05 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
-    // this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
-    // this.referenceFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
-
-    // this.referenceFigure_06 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
-    // this.referenceFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
-    // this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
-    // this.referenceFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+    this.referenceFigure_05 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 1)
+    this.referenceFigure_05.addCircle({palette: 3, circRad: 5, fillClr: 3}, 2)
+    this.referenceFigure_05.addLine({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5})
+    false
+    this.referenceFigure_06 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.referenceFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.referenceFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 }
 
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot) {
@@ -128,11 +128,11 @@ function updateReferenceFigures(index, fillerCounter, prevTargetEndPoint, thisTa
         thisClass.referenceFigure_03.runFunctions([[prevTargetEndPoint, thisTargetEndPoint]])
     }
     // if(index === 2 + fillerCounter) {
-    // if(index === 2) {
-    //     thisClass.referenceFigure_04.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
-    //     thisClass.referenceFigure_05.runFunctions([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
-    //     thisClass.referenceFigure_06.runFunctions([[prevTargetEndPoint, thisTargetEndPoint]])
-    // }
+    if(index === 2) {
+        thisClass.referenceFigure_04.runFunctions([[prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y], [thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y]])
+        thisClass.referenceFigure_05.runFunctions([midPointBetweenInts, [thisTargetEndPoint.arc.center.x, thisTargetEndPoint.arc.center.y]])
+        thisClass.referenceFigure_06.runFunctions([[prevTargetEndPoint, thisTargetEndPoint]])
+    }
 }
 
 export {

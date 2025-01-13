@@ -314,7 +314,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // //     }
                     // // }
 
-                    console.log(i)
+                    // console.log(i)
                     // thisFigure.IntersectionsSorter_WithArc.checkForJoiners()
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_INDEX_IS_ARC")
@@ -323,8 +323,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
                         if(i < thisFigure.originalFigurePathDatas.length - 1) {
                             console.log("CHECKING_FOR_ARC_JOINER")
-                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                            console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                            // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                            // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
                             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
                                 console.log("CURRENT_INDEX_IS_ARC_JOINER")
                                 console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)

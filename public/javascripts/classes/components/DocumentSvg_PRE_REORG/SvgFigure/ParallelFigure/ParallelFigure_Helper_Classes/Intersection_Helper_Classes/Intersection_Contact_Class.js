@@ -52,6 +52,23 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let thisParallelPathData = this.parallelFigurePathDatas[thisIndex] // [1] third 1st
     let nextParallelPathData = this.parallelFigurePathDatas[nextIndex] // [0] third 2nd
     // let nextParallelPathData = this.parallelFigurePathDatas[nextIndex] // [1] last
+
+
+    console.log("kokokokokokokokokokokokokokokokokokokokoookokokokokokokokok")
+    // console.log(this.parallelFigurePathDatas[prevIndex][0]) // 1
+    // console.log(this.parallelFigurePathDatas[prevIndex][1]) // 3
+    // console.log(this.parallelFigurePathDatas[thisIndex][0]) // 2
+    // console.log(this.parallelFigurePathDatas[thisIndex][1]) // 5
+    // console.log(this.parallelFigurePathDatas[nextIndex][0]) // 4
+    // console.log(this.parallelFigurePathDatas[nextIndex][1]) // 6
+    console.log('oskdfposdk')
+    console.log(prevParallelPathData[0])
+    console.log(prevParallelPathData[1])
+    console.log(thisParallelPathData[0])
+    console.log(thisParallelPathData[1])
+    console.log(nextParallelPathData[0])
+    console.log(nextParallelPathData[1])
+
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
     let intersectPoint
@@ -64,14 +81,6 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             break
         case "a2p":
             intersectPoint = getPathToArcIntersections(nextParallelPathData[1], nextParallelPathData[0], thisParallelPathData[1], thisOriginalPathData)
-            // this.referenceFigure_01.runFunctions([[nextParallelPathData[1].coords.x, nextParallelPathData[1].coords.y]]) // last 
-            // this.referenceFigure_02.runFunctions([[nextParallelPathData[0].coords.x, nextParallelPathData[0].coords.y]]) // third 2nd
-            // this.referenceFigure_03.runFunctions([[thisParallelPathData[1].coords.x, thisParallelPathData[1].coords.y]]) // third 1st
-            // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // opd a2p
-
-            // this.referenceFigure_05.runFunctions([[thisParallelPathData[1].arc.center.x, thisParallelPathData[1].arc.center.y], [thisParallelPathData[1].arc.radius]])
-            // this.referenceFigure_05.runFunctions([[nextParallelPathData[0].arc.center.x, nextParallelPathData[0].arc.center.y], [nextParallelPathData[0].arc.radius]])
-            // this.referenceFigure_05.runFunctions([[nextParallelPathData[1].arc.center.x, nextParallelPathData[1].arc.center.y], [nextParallelPathData[1].arc.radius]])
             break
     }
 

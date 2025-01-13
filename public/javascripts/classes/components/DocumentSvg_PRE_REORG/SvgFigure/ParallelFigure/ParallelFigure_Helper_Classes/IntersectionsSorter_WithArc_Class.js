@@ -12,22 +12,22 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.firstPosition = (targetIndex) => (targetIndex) === 0
     this.arcExist = (targetIndex) => {
         console.log("ARCEXIST_?")
-        console.log(this.parallelPathDatas[targetIndex][1].arc.exist)
-        console.log(this.parallelPathDatas[targetIndex][1])
+        // console.log(this.parallelPathDatas[targetIndex][1].arc.exist)
+        // console.log(this.parallelPathDatas[targetIndex][1])
         return this.parallelPathDatas[targetIndex][1].arc.exist === true
     }
     this.lastPosition = (targetIndex) => {
         console.log("LASTPOSITION_?")
-        console.log(targetIndex === this.parallelPathDatas.length - 1)
-        console.log(targetIndex)
-        console.log(this.parallelPathDatas.length - 1)
-        console.log(this.parallelPathDatas[targetIndex])
+        // console.log(targetIndex === this.parallelPathDatas.length - 1)
+        // console.log(targetIndex)
+        // console.log(this.parallelPathDatas.length - 1)
+        // console.log(this.parallelPathDatas[targetIndex])
         return targetIndex === this.parallelPathDatas.length - 1
     }
     this.includes = (list, targetIndex) => {
         console.log("INCLUDES_?")
-        console.log(list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide))
-        console.log(this.parallelPathDatas[targetIndex][1])
+        // console.log(list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide))
+        // console.log(this.parallelPathDatas[targetIndex][1])
         return list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
     }
     
@@ -57,29 +57,29 @@ IntersectionsSorter_WithArc.prototype.sortIntersections = function() {
         switch(true) {
             case this.isJoiner(this.index):
                 console.log("INT_SORTER_ARC: SORTING: YES_JOINER_THIS_INDEX_OTHER_POS")
-                console.log(this.parallelPathDatas[this.index])
+                // console.log(this.parallelPathDatas[this.index])
                 this.handleDisconnectedArcIntersection()
                 break
             case this.isJoiner(this.index - 1):
                 console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
-                console.log(this.parallelPathDatas[this.index])
+                // console.log(this.parallelPathDatas[this.index])
                 this.handleDisconnectedArcIntersection()
                 break
             default:
                 console.log("INT_SORTER_ARC: SORTING: NO_JOINER_OTHER_POS")
-                console.log(this.parallelPathDatas[this.index])
+                // console.log(this.parallelPathDatas[this.index])
                 this.handleDefaultArcIntersection()
         }
     } else if (this.firstPosition(this.index)) {
         switch(true) {
             case this.isJoiner(this.index):
                 console.log("INT_SORTER_ARC: SORTING: YES_JOINER_FIRST_POS")
-                console.log(this.parallelPathDatas[this.index])
+                // console.log(this.parallelPathDatas[this.index])
                 this.handleDisconnectedArcIntersection()
                 break
             default:
                 console.log("INT_SORTER_ARC: SORTING: NO_JOINER_FIRST_POS")
-                console.log(this.parallelPathDatas[this.index])
+                // console.log(this.parallelPathDatas[this.index])
                 this.handleDefaultArcIntersection()
         }
     }
@@ -136,7 +136,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // 7
     console.log("INT_SORTER_ARC: SECOND_ARC_SEG: EVERY_INDEX_FIRST_ACTION")
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
-    console.log("NEW_CHECKER_000")
+    // console.log("NEW_CHECKER_000")
     switch(true) {
         case !this.lastPosition(this.index):
             if(this.arcExist(this.index + 1)) {
