@@ -321,15 +321,21 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
                         thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
                         // thisFigure.IntersectionsSorter_WithArc.sortIntersections()
-                        console.log("CHECKING_FOR_AR``C_JOINER")
-                        console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                        console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
-                        if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1 || thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                            console.log("CURRENT_INDEX_IS_ARC_JOINER")
-                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
-                            thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
-                        } else {
-                            console.log("NO_JOINER")
+                        if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                            console.log("CHECKING_FOR_ARC_JOINER")
+                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                            console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                                console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                            } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
+                                console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                            } else {
+                                console.log("NO_JOINER")
+                            }
                         }
                     } else {
                         console.log("CURRENT_INDEX_IS_PATH")
@@ -398,7 +404,7 @@ ParallelFigure.prototype.createParallelPath = function(index) {
 }
 
 // move this to ParPath_Class
-ParallelFigure.prototype.createFillerParallelPath = function(index) {
+ParallelFigure.prototype.createParallelPathCorner = function(index) {
     let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index, true)
     // this.svgPaths.parallelPaths.push(newParallelPath)
     this.svgPaths.parallelPaths.splice(index, 0, newParallelPath)
@@ -414,8 +420,6 @@ ParallelFigure.prototype.createParallelEndPoint = function(pathData, index, epIn
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, parPathData, referenceParPathData) {
     let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData, referenceParPathData)
-    console.log("NEW_ENDPOINT")
-    console.log(newEndPointParallel)
     pathData.endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }

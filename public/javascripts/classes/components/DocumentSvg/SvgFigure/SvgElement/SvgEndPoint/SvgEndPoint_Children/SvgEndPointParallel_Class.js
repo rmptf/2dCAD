@@ -26,12 +26,13 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
     // if(this.joinerFlag === true) {
     //     newEndPointParallel.node().classList.add(this.ENDPOINT_JOINER_CLASS)
     // }
+
     // new
     let newEndPointParallel
     let d3Element = d3.select(this.referenceParPathElement.endPointElement)
     if(this.joinerFlag === true) {
-        newEndPointParallel = this.parentElement.insert('circle', function() {return d3Element.node().nextSibling})
-            .attr('class', 'endPoint')
+        newEndPointParallel = this.parentElement.insert(this.ELEMENT, function() {return d3Element.node().nextSibling})
+            .attr('class', this.CLASSNAME)
             .on("click", (event) => this.elementClick(event, this.actionStates))
             .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
         newEndPointParallel.node().classList.add(this.ENDPOINT_CLASS)
@@ -43,12 +44,10 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
         newEndPointParallel.node().classList.add(this.ENDPOINT_CLASS)
     }
 
-    // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'west') {
     if(this.parallelPathData.arc.exist === true && this.parallelPathData.arc.side === 'west') {
         newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_WEST_CLASS)
     }
 
-    // if(this.pathData.arc.exist === true && this.pathData.arc.side === 'east') {
     if(this.parallelPathData.arc.exist === true && this.parallelPathData.arc.side === 'east') {
         newEndPointParallel.node().classList.add(this.ENDPOINT_CURVE_EAST_CLASS)
     }

@@ -51,6 +51,12 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     let thisTargetEndPoint = this.parallelFigurePathDatas[modifiedIndex][1]
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
+
+    console.log("POOOOOOOOPER_NEW")
+    console.log(this.index)
+    console.log(this.parallelFigureObj.counterOfArcsAsTheyArrive)
+
+    
     if(runOrNot === true) {
         console.log("FLIPPER__set")
         if(this.parallelFigureObj.iterationCounter === 1) {

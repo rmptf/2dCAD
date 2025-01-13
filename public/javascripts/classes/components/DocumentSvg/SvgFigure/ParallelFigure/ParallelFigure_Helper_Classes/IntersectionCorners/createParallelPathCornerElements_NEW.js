@@ -1,28 +1,19 @@
-import {PathDataParallel} from "../../SvgData/SvgData_Children/SvgData_Parallel_Class.js"
-import {PathDataCorner} from "../../SvgData/SvgData_Children/SvgData_Corner_Class.js"
-// import {PathData} from "../../SvgData/SvgData_Class.js"
+import {PathDataCorner} from "../../../SvgData/SvgData_Children/SvgData_Corner_Class.js"
 
-// FIXME: Eventually move to parallegFigure?
 // FIXME: not currently a class... should it be?
+// FIXME: Create as a class when handling different corner shapes.
+    // This might have to change for each corner shape
 function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, shape) {
     console.log("createAndAddSvgElementAndUpdateDataArrays")
 
-    let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    // old
+    // let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    //new
+    let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
 
-    
-
-    //FIXME:
-    //FIXME:
-
-
-    let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-
-
-    //FIXME:
-    //FIXME:
-
+    // set indecies based on the shape of the intersection
     let index
     let indexer
     let sideCode
@@ -41,20 +32,19 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     }
 
     console.log("PASSED_INDEX")
-    console.log(index)
-    console.log(indexer)
     console.log(originalFigurePathDatas[index].children.parallel_pathDatas)
 
     // parallelFigurePathDatas
     //old
-    // let referenceParPathData = parallelFigurePathDatas[index][0]
+    // let referenceParallelPathData = parallelFigurePathDatas[index][0]
     //new
-    let referenceParPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
+    // find reference parallelPathData for new corner
+    let referenceParallelPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
 
-    let data1 = {coords: {x: referenceParPathData.coords.x, y: referenceParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data2 = {coords: {x: referenceParPathData.coords.x, y: referenceParPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    // parallelFigure.createParallelPathData([data1, data2], index)
-    // let parPathData = PathDataParallel.createParallelPathData(parallelFigure, [data1, data2], index)
+    // fill in the data for the new corner using the data from the reference
+    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    // use the data to create a parellelPathDataCorner
     let parPathDataCorner = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     
     // // old
@@ -66,33 +56,36 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
 
     //new
     // parallelFigurePathDatas_perpendicularProjections
+    // create a new referenceEndPointsParallelPerpendicular and splice it into the array
     referenceEndPointsParallelPerpendicular.splice(index, 0, [
         {x: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.x, y: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.y},
         {x: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.x, y: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.y}
     ])
 
     // originalFigurePathDatas_plusFillers
+    // splice a "filler" placeholder into the referenceEndPointsBaseAndFillers array
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 
+    // create corner EndPoint elements, place them into the dom and update corrosponding pathDatas
     let doubleIndex = index * 2
-    // parallelFigure.createFillerParallelEndPoint(data2, doubleIndex, 2, data2)
-    // parallelFigure.createFillerParallelEndPoint(data1, doubleIndex, 1, data1)
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[1], doubleIndex, parPathDataCorner[1], referenceParallelPathData)
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[0], doubleIndex, parPathDataCorner[0], referenceParallelPathData)
 
-    // parallelFigure.createFillerParallelEndPoint(parPathData[1], doubleIndex, 2, parPathData[1])
-    // parallelFigure.createFillerParallelEndPoint(parPathData[0], doubleIndex, 1, parPathData[0])
-
-
-    //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
-    //FIXME: an example of how to insert these elemnts into the correct spot in the DOM is listed at the bottom of this page:
-    parallelFigure.createParallelEndPointCorner(parPathDataCorner[1], doubleIndex, parPathDataCorner[1], referenceParPathData)
-    parallelFigure.createParallelEndPointCorner(parPathDataCorner[0], doubleIndex, parPathDataCorner[0], referenceParPathData)
-
-    parallelFigure.createFillerParallelPath(index)
+    // create corner Path elements, place them into the dom and update corrosponding pathDatas
+    parallelFigure.createParallelPathCorner(index)
 }
 
 export {
     createAndAddSvgElementAndUpdateDataArrays
 }
+
+
+// set indecies based on the shape of the intersection
+// find reference parallelPathData for new corner
+// create a new referenceEndPointsParallelPerpendicular and splice it into the array
+// splice a "filler" placeholder into the referenceEndPointsBaseAndFillers array
+// create corner EndPoint elements, place them into the dom and update corrosponding pathDatas
+// create corner Path elements, place them into the dom and update corrosponding pathDatas
 
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
@@ -187,50 +180,24 @@ function getRefPointAtIndexIfNotFiller(refEndPointsBase, index) {
 
 
 
-// EXAMPLE 1
-// // To insert a new circle element into the DOM after a specific circle on the same layer, you can use JavaScript's DOM manipulation methods. Assuming you have a reference to the existing circle element after which you want to insert the new one, you can use the insertBefore or after method, depending on your setup.
 
-// // Here's how to do it:
 
-// // Using insertBefore
 
-// // The insertBefore method allows you to insert an element before a specified node. To insert after a specific element, you can use the next sibling of that element as the reference.
-// // Get a reference to the SVG container (e.g., <svg> or a group <g>)
-// const svgLayer = document.getElementById('mySvgLayer');
 
-// // Create your new circle element
-// const newCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-// newCircle.setAttribute('cx', '50');
-// newCircle.setAttribute('cy', '50');
-// newCircle.setAttribute('r', '10');
-// newCircle.setAttribute('fill', 'red');
 
-// // Get the reference to the circle after which you want to insert
-// const targetCircle = document.getElementById('existingCircleId');
+// import {dragEndPoint} from '../SvgElement_functions/dragSvgElements_NEW.js'
 
-// // Insert the new circle after the target circle
-// if (targetCircle.nextSibling) {
-//   svgLayer.insertBefore(newCircle, targetCircle.nextSibling);
-// } else {
-//   // If it's the last child, just append it
-//   svgLayer.appendChild(newCircle);
+// function SvgEndPoint(parentFigure) {
+//     this.ELEMENT = 'circle'
+//     this.parentFigure = parentFigure
 // }
 
+// SvgEndPoint.prototype.createSvgEndPoint = function(index) {
+//     let newEndPoint = this.parentElement.insert(this.ELEMENT, ':nth-child(' + (index + 1) + ')')
+//         .attr('class', this.CLASSNAME)
+//     return newEndPoint
+// }
 
-// EXAMPLE 2
-// // Using after (Modern)
-// // If you are working in a modern browser, you can use the after method to directly insert the element after a specific one.
-
-// // Create your new circle element
-// const newCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-// newCircle.setAttribute('cx', '50');
-// newCircle.setAttribute('cy', '50');
-// newCircle.setAttribute('r', '10');
-// newCircle.setAttribute('fill', 'red');
-
-// // Get the reference to the circle after which you want to insert
-// const targetCircle = document.getElementById('existingCircleId');
-
-// // Insert the new circle after the target circle
-// targetCircle.after(newCircle);
-
+// export {
+//     SvgEndPoint
+// }

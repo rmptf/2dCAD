@@ -1,5 +1,5 @@
 import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.js'
-import {createAndAddSvgElementAndUpdateDataArrays} from '../../parallelFigure_functions/createParallelPathCornerElements_NEW.js'
+import {createAndAddSvgElementAndUpdateDataArrays} from '../IntersectionCorners/createParallelPathCornerElements_NEW.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function Intersection_Contact(parallelFigure) {
@@ -62,17 +62,17 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let filler_01 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0] // third
     // let filler_02 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1] // third
 
-    let filler_01_new
-    let filler_02_new
-    if(this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.childCount < 2) {
-        filler_01_new = thisParallelPathData_end  // second
-        filler_02_new = nextParallelPathData_start // second
-    } else {
-        // filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
-        filler_01_new = thisParallelPathData_end
-        // filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
-        filler_02_new = nextParallelPathData_start
-    }
+    // let filler_01_new
+    // let filler_02_new
+    // if(this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.childCount < 2) {
+    //     filler_01_new = thisParallelPathData_end  // second
+    //     filler_02_new = nextParallelPathData_start // second
+    // } else {
+    //     // filler_01_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+    //     filler_01_new = thisParallelPathData_end
+    //     // filler_02_new = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1]
+    //     filler_02_new = nextParallelPathData_start
+    // }
 
     //old
     // let origPathDataIndex = indexArray[shapeCount]
@@ -110,7 +110,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]]) // original path data
 
             // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData, this.referenceFigure_01, this.referenceFigure_02, this.referenceFigure_03, this.referenceFigure_04)
-            intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData)
+            // intersectPoint = getPathToArcIntersections(nextParallelPathData_end, filler_02_new, filler_01_new, thisOriginalPathData) //TODO: this was the one that worked before i removed the filler_01&02_new's
             // FIXME: HAVE TO ADD PARALLEL PATH DATA CHILDREN TO FIX
             // this.referenceFigure_01.runFunctions([[nextParallelPathData_end.coords.x, nextParallelPathData_end.coords.y]]) // last
             // this.referenceFigure_02.runFunctions([[filler_02_new.coords.x, filler_02_new.coords.y]]) // third 2nd
@@ -118,6 +118,9 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             // this.referenceFigure_04.runFunctions([[thisOriginalPathData.coords.x, thisOriginalPathData.coords.y]])
 
             // this.referenceFigure_05.runFunctions([[this.parallelFigurePathDatas[nextIndex][1].coords.x, this.parallelFigurePathDatas[nextIndex][1].coords.y], [this.parallelFigurePathDatas[thisIndex][1].arc.radius]])
+
+
+            intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
 
 
             break

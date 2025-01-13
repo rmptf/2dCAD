@@ -10,9 +10,6 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
     this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
     this.firstPosition = (targetIndex) => (targetIndex) === 0
-    // FIXME:
-    // FIXME:
-    // FIXME:
     this.arcExist = (targetIndex) => {
         console.log("ARCEXIST_?")
         console.log(this.parallelPathDatas[targetIndex][1].arc.exist)
@@ -33,10 +30,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         console.log(this.parallelPathDatas[targetIndex][1])
         return list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
     }
-    // FIXME:
-    // FIXME:
-    // FIXME:
-
+    
     this.intersectionSorterObject = {
         index: null,
         // arcRadiusParDistAndDir: null // maybe can go into handler? // MOVED

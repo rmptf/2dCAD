@@ -36,6 +36,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
             return false
         }
     }
+
     this.isJoiner = (targetIndex) => {
         return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0;
     }
@@ -192,7 +193,7 @@ IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
             case this.isJoiner(this.index - 1):
                 console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
                 console.log(this.originalFigurePathDatas[this.index + 1])
-                this.handleDisconnectedArcIntersection()
+                this.handleDisconnectedArcIntersection(joiner)
                 break;
             default:
                 console.log("INT_SORTER_ARC: SORTING: NO_JOINER_OTHER_POS")
@@ -283,15 +284,10 @@ IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {
     }
 }
 
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
 IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // 7
     console.log("INT_SORTER_ARC: SECOND_ARC_SEG: EVERY_INDEX_FIRST_ACTION")
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
-    console.log("NEW_CHECKER_000")
     switch(true) {
         case !this.lastPosition(this.index):
             // if(this.arcExist(this.index + 1)) {
@@ -362,30 +358,25 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     console.log("INT_SORTER_ARC: SECOND_ARC_SEG: EVERY_INDEX_LAST_ACTION")
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
 }
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
-//FIXME: WORKING RIGHT HERE
 
-IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function() {
+IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function(joiner) {
     console.log("INT_SORTER_ARC: DISCONNECTED_INTERSECTION")
     switch(true) {
         // 1_Joiner
-        case this.joinerType(this.index, "AAA"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
-        case this.joinerType(this.index - 1, "AAA"): 
-        this.arcExist(this.index + 1) ?
-                // 2_A_Joiner
-                this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() // TODO: (Set_arcRad)
-                :
-                // 2_B_Joiner
-                this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
+        case this.joinerType(this.index - 1, "AAA") && joiner === false: this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsPathToArc(); break
+        // 2_Joiner
+        case this.joinerType(this.index - 1, "AAA") && joiner === true: 
+            this.arcExist(this.index + 1) ?
+                    // 2_A_Joiner
+                    this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsArc() // TODO: (Set_arcRad)
+                    :
+                    // 2_B_Joiner
+                    this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc()
             break
         // 3_Joiner
         case this.joinerType(this.index, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
         // 4_Joiner
-        case this.joinerType(this.index - 1, "CCC"):
-            this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); // TODO: (Set_arcRad)
-            break
+        case this.joinerType(this.index - 1, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); break // TODO: (Set_arcRad)
         // 5_Joiner
         case this.joinerType(this.index, "BBB"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         // 6_Joiner
