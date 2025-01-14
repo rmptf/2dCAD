@@ -90,6 +90,9 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
 
+    console.log(this.parallelFigureObj.arrayOfArcFlagsInitPos)
+    console.log(this.parallelFigureObj.counterOfArcsAsTheyArrive)
+    
     if(this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 !== currentPos_x1GreaterThanX2 && this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_y1GreaterThanY2 !== currentPos_Y1GreaterThanY2) {
         flipFlag = true
         this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2 = !this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPos_x1GreaterThanX2

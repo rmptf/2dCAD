@@ -179,7 +179,13 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     //old
     // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     //new (not 100% tested)
+    // FIXME:
+    // FIXME: This is where the current problem is (it sets the segCounter to -1 and it should be 0)
+    // FIXME:
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
+    // FIXME:
+    // FIXME:
+    // FIXME:
     console.log("SEG_COUNTER")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
@@ -217,22 +223,22 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
 IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
-            // console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
+            console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
             this.ArcFlagSetter.setLargeArcFlag(0, false)
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
         }
         if(this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner === true) {
-            // console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
+            console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
             this.ArcFlagSetter.setLargeArcFlag(-1, false)
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
         if(this.intersectionHandlerObject.isIntersectionConnected === true) {
-            // console.log("CONNECTED")
+            console.log("CONNECTED")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
         } else {
-            // console.log("NOT_CONNECTED")
+            console.log("NOT_CONNECTED")
             this.ArcFlagSetter.setLargeArcFlag(0, false)
             this.intersectionHandlerObject.isIntersectionConnected = true
         }
@@ -240,7 +246,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 
     if(flag === "arcFlag_2AJ") {
         if(this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
-            // console.log("running_skip_arcFlagSet_from_1j_in_2j")
+            console.log("running_skip_arcFlagSet_from_1j_in_2j")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
@@ -249,7 +255,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 
     if(flag === "arcFlag_4J") {
         if(this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
-            // console.log("running_skip_arcFlagSet_from_3j_in_4j")
+            console.log("running_skip_arcFlagSet_from_3j_in_4j")
             this.ArcFlagSetter.setLargeArcFlag(0, true)
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false

@@ -55,6 +55,8 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     let prevTargetEndPoint = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
     let thisTargetEndPoint = this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
+    console.log(midPointBetweenInts)
+    console.log(thisTargetEndPoint)
 
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
 
@@ -67,6 +69,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
         if(this.parallelFigureObj.iterationCounter === 1) {
             let midPointX_isGreaterThan_arcCenterX = isGreaterThan(midPointBetweenInts[0], thisTargetEndPoint.arc.center.x)
             let midPointY_isGreaterThan_arcCenterY = isGreaterThan(midPointBetweenInts[1], thisTargetEndPoint.arc.center.y)
+            console.log(midPointX_isGreaterThan_arcCenterX)
             this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive] = {
                 startPosX1_isGreaterThan_startPosX2: midPointX_isGreaterThan_arcCenterX,
                 startPosY1_isGreaterThan_startPosY2: midPointY_isGreaterThan_arcCenterY
@@ -99,6 +102,9 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
     let currentPos_x1GreaterThanX2 = isGreaterThan(x1, x2)
     let currentPos_Y1GreaterThanY2 = isGreaterThan(y1, y2)
     let flipFlag = false
+
+    console.log(this.parallelFigureObj.arrayOfArcFlagsInitPos)
+    console.log(this.parallelFigureObj.counterOfArcsAsTheyArrive)
 
     //FIXME: // everytime a removeCornerPathsAndEndPoints runs, there is an error here with (counterOfArcsAsTheyArrive)
     if(this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosX1_isGreaterThan_startPosX2 !== currentPos_x1GreaterThanX2 && this.parallelFigureObj.arrayOfArcFlagsInitPos[this.parallelFigureObj.counterOfArcsAsTheyArrive].startPosY1_isGreaterThan_startPosY2 !== currentPos_Y1GreaterThanY2) {
