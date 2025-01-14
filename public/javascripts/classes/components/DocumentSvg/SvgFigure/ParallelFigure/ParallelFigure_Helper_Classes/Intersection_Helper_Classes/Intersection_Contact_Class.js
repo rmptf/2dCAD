@@ -55,10 +55,10 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     let prevParallelPathData_start = this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west // first
     let thisParallelPathData_start = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west // second
     let nextParallelPathData_start = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west // third
-    let prevParallelPathData_end = this.originalFigurePathDatas[prevIndex + 1].children.parallel_pathDatas.pathData_east // second
-    let thisParallelPathData_end = this.originalFigurePathDatas[thisIndex + 1].children.parallel_pathDatas.pathData_east // third
+    let prevParallelPathData_end = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_east // second
+    let thisParallelPathData_end = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_east // third
     let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east // last
-    //new new
+    // //new new
     // let prevParallelPathData_start = this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west
     // let prevParallelPathData_end = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west
     // let thisParallelPathData_start = this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_east
@@ -66,7 +66,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let nextParallelPathData_start = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_east
     // let nextParallelPathData_end = this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east
 
-    console.log("kokokokokokokokokokokokokokokokokokokokoookokokokokokokokok")
+    // console.log("kokokokokokokokokokokokokokokokokokokokoookokokokokokokokok")
     // console.log(this.originalFigurePathDatas[prevIndex].children.parallel_pathDatas.pathData_west)      // 1    // 1     
     // console.log(this.originalFigurePathDatas[thisIndex].children.parallel_pathDatas.pathData_west)      // 3    // 3
     // console.log(this.originalFigurePathDatas[prevIndex + 1].children.parallel_pathDatas.pathData_east)  // 2    // 5
@@ -80,13 +80,13 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // console.log(this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west)      // 5    // 2
     // console.log(this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_east)      // 4    // 4
     // console.log(this.originalFigurePathDatas[nextIndex + 1].children.parallel_pathDatas.pathData_east)  // 6    // 6
-    console.log("oskdfposdk")
-    console.log(prevParallelPathData_start)
-    console.log(prevParallelPathData_end)
-    console.log(thisParallelPathData_start)
-    console.log(thisParallelPathData_end)
-    console.log(nextParallelPathData_start)
-    console.log(nextParallelPathData_end)
+    // console.log("oskdfposdk")
+    // console.log(prevParallelPathData_start)
+    // console.log(prevParallelPathData_end)
+    // console.log(thisParallelPathData_start)
+    // console.log(thisParallelPathData_end)
+    // console.log(nextParallelPathData_start)
+    // console.log(nextParallelPathData_end)
 
     // let filler_01 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0] // third
     // let filler_02 = this.originalFigurePathDatas[nextIndex].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1] // third

@@ -65,7 +65,7 @@ Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function
         fifthParPath.coords.y = circleRadiusPoint[1]
     } else if(pathToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")
-        this.removePointsAndPaths(index + 0, index + 0)
+        this.removePointsAndPaths(index + 0, index + 0, "P2A")
     }
 }
 
@@ -116,7 +116,7 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
     } 
     else if(pathToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")
-        this.removePointsAndPaths(index + 1, index + 2)
+        this.removePointsAndPaths(index + 1, index + 2, "A2P")
     }
 }
 
@@ -163,12 +163,25 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")
-        this.removePointsAndPaths(index + 1, index + 2)
+        this.removePointsAndPaths(index + 1, index + 2, "A2A")
     }
 }
 
-Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded, nextIndexModded) {
+Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded, nextIndexModded, shape) {
+
+    // FIXME: CHECK HERE
+    // FIXME: CHECK HERE
+    // FIXME: CHECK HERE    // In the test figure where we are seeing the current bug, the corner end points and corner path is NOT removed but the previous 
+                            // real endpoints and real path is removed.
+                            // That might indicate something is wrong with THIS function or how its called.
+                            // The bug only hapens sometimes when moving the parallel line fast
+    // FIXME: CHECK HERE
+    // FIXME: CHECK HERE
     console.log("Remove_Points_and_Paths")
+    console.log(shape)
+    console.log(this.index)
+    console.log(thisIndexModded)
+
     let thisIndex = thisIndexModded
     let nextIndex = nextIndexModded
     let doubleIndex = thisIndex * 2
