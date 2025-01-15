@@ -193,6 +193,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // FIXME:
     // FIXME:
     console.log("SEG_COUNTER")
+    console.log("THIS_IS_ARC_2_ARC__DISCONNECTED")
     console.log(" = -1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
@@ -239,7 +240,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
         }
         if(this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
-            this.ArcFlagSetter.setLargeArcFlag(-1, false)
+            // this.ArcFlagSetter.setLargeArcFlag(-1, false)
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }

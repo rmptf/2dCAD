@@ -27,8 +27,18 @@ PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
 }
 
 PathDataParallel.prototype.removeChildPathDataCorner = function() {
+    console.log("ASSSSER")
+    console.log(this.children.corner_pathDatas[0].endPointElement)
+    this.children.corner_pathDatas[0].endPointElement.remove()
     this.children.corner_pathDatas.shift()
     this.children.childCount = this.children.childCount - 1
+    
+}
+
+PathDataParallel.prototype.removeChildPathDataCorners = function() {
+    console.log(this)
+    this.children.corner_pathDatas.splice(0, 2)
+    this.children.childCount = this.children.childCount - 2
 }
 
 // Static Function: dont need to create new instance of Class to use

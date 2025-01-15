@@ -52,6 +52,9 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     let midPointBetweenInts = findLineMidpoint(prevTargetEndPoint.coords.x, prevTargetEndPoint.coords.y, thisTargetEndPoint.coords.x, thisTargetEndPoint.coords.y)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
 
+    console.log(midPointBetweenInts)
+    console.log(thisTargetEndPoint)
+    
     // console.log("POOOOOOOOPER_NEW")
     // console.log(this.index)
     // console.log(this.parallelFigureObj.counterOfArcsAsTheyArrive)

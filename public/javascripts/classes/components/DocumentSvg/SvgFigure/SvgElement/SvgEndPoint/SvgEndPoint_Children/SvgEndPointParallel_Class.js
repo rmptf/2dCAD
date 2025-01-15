@@ -61,8 +61,11 @@ SvgEndPointParallel.prototype.elementDrag = function(event, parentFigure, pathDa
 }
 
 SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {
-    console.log('parallelEndPoint_clicked')
+    console.log('parallelEndPoint_clicked_okokokokok')
+    console.log("Parent")
     console.log(this.pathData)
+    console.log("This")
+    console.log(this.parallelPathData)
 }
 
 export {

@@ -215,6 +215,7 @@ IntersectionsSorter_WithArc.prototype.handleConnectedArcIntersection = function(
     switch(true) {
         // case !this.isWest(this.index):
         case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
+        // case this.parallelFigureObj.parallelPathSegmentCounter_FIRST <= 0:
             console.log("INT_SORTER_ARC: FIRST_OR_SECOND: HANDE_FIRST_SEG")
             this.handleFirctArcSegment()
             break

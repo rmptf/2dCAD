@@ -165,6 +165,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     console.log("SEG_COUNTER")
+    console.log("THIS_IS_ARC_2_ARC__DISCONNECTED")
     console.log(" = 0")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true

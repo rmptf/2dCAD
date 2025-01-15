@@ -326,10 +326,12 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
                             // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
                             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("i: " + i + " ++")
                                 console.log("CURRENT_INDEX_IS_ARC_JOINER")
                                 console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
                                 thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
                             } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("i: " + i + " ++")
                                 console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
                                 console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
                                 thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)

@@ -175,12 +175,17 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
                             // real endpoints and real path is removed.
                             // That might indicate something is wrong with THIS function or how its called.
                             // The bug only hapens sometimes when moving the parallel line fast
+
+                            // THIS IS CORRECT
+                            // The problem is down at: // Remove SVG Elements and Classes
+                            // When a corner element is added in the SAME shape that one is REMOVED the counter for that OLD way of removing elements is off and it removes the previous elements
     // FIXME: CHECK HERE
     // FIXME: CHECK HERE
     console.log("Remove_Points_and_Paths")
     console.log(shape)
     console.log(this.index)
     console.log(thisIndexModded)
+    console.log(this.originalFigurePathDatas[thisIndexModded])
 
     let thisIndex = thisIndexModded
     let nextIndex = nextIndexModded
@@ -191,10 +196,11 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
     this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
 
-    // TODO: RIght here
+    // TODO: Right here
     // Remove Corners from ParallelPathDatas
     this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
     this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
+    // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorners()
 
 
     // Remove SVG Elements and Classes
@@ -205,9 +211,9 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
     let addedSvgPath = svgPathGroup[thisIndex]
     // Remove SVG Elements from Dom
-    firstAddedSvgEndPoint.svgElementObject.remove()
-    secondAddedSvgEndPoint.svgElementObject.remove()
-    addedSvgPath.svgElementObject.remove()
+    // firstAddedSvgEndPoint.svgElementObject.remove()
+    // secondAddedSvgEndPoint.svgElementObject.remove()
+    // addedSvgPath.svgElementObject.remove()
     // Remove SVG Element Classes from Figure
     svgEndPointGroup.splice(doubleIndex + 1, 1)
     svgEndPointGroup.splice(doubleIndex, 1)
