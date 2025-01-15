@@ -45,6 +45,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
     console.log("SEG_COUNTER")
+    console.log(" + 1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
 }
@@ -60,6 +61,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
     console.log("2_seg1_first_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
     console.log("SEG_COUNTER")
+    console.log(" + 1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
@@ -126,6 +128,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     console.log("SEG_COUNTER")
+    console.log(" = -1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
@@ -145,6 +148,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     console.log("SEG_COUNTER")
+    console.log(" = 0")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
     this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = true // (Set_largeArcFag)
@@ -155,6 +159,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     console.log("SEG_COUNTER")
+    console.log(" = 0")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_2AJ")
     this.handleLargeArcFlag("arcFlag_2AJ") // (Set_largeArcFag)
@@ -182,11 +187,13 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // FIXME:
     // FIXME: This is where the current problem is (it sets the segCounter to -1 and it should be 0)
     // FIXME:
+    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     // FIXME:
     // FIXME:
     // FIXME:
     console.log("SEG_COUNTER")
+    console.log(" = -1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
@@ -197,6 +204,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     console.log("4_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     console.log("SEG_COUNTER")
+    console.log(" = 0")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.handleLargeArcFlag("arcFlag_4J") // (Set_largeArcFag)
 }
@@ -214,6 +222,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
     console.log("6_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     console.log("SEG_COUNTER")
+    console.log(" = 0")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
