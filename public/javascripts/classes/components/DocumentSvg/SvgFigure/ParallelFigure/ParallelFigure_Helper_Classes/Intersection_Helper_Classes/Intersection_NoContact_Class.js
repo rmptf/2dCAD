@@ -222,16 +222,20 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     console.log(reference_02)
 
 
-    // //old
+    //old
     svgEndPointGroup.splice(doubleIndex + 1, 1)
-    // // //new
+    svgEndPointGroup.splice(doubleIndex, 1)
+    svgPathGroup.splice(thisIndex, 1)
+
+
+    
+    // //new
     // const foundIndex = svgEndPointGroup.indexOf(reference_01)
-    // // svgEndPointGroup.splice(foundIndex, 1)
+    // svgEndPointGroup.splice(foundIndex, 1)
     // console.log(svgEndPointGroup[foundIndex])
 
 
-    svgEndPointGroup.splice(doubleIndex, 1)
-    svgPathGroup.splice(thisIndex, 1)
+
 }
 
 
