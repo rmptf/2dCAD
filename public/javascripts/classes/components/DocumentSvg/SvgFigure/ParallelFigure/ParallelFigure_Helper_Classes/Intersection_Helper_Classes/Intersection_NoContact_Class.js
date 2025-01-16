@@ -198,8 +198,8 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
 
     // TODO: Right here
     // Remove Corners from ParallelPathDatas
-    this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
-    this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
+    let reference_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
+    let reference_02 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
     // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorners()
 
 
@@ -211,11 +211,25 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
     let addedSvgPath = svgPathGroup[thisIndex]
     // Remove SVG Elements from Dom
-    // firstAddedSvgEndPoint.svgElementObject.remove()
-    // secondAddedSvgEndPoint.svgElementObject.remove()
-    // addedSvgPath.svgElementObject.remove()
+    firstAddedSvgEndPoint.svgElementObject.remove()
+    secondAddedSvgEndPoint.svgElementObject.remove()
+    addedSvgPath.svgElementObject.remove()
     // Remove SVG Element Classes from Figure
+
+
+    console.log("ASSSSSS_ER")
+    console.log(reference_01)
+    console.log(reference_02)
+
+
+    // //old
     svgEndPointGroup.splice(doubleIndex + 1, 1)
+    // // //new
+    // const foundIndex = svgEndPointGroup.indexOf(reference_01)
+    // // svgEndPointGroup.splice(foundIndex, 1)
+    // console.log(svgEndPointGroup[foundIndex])
+
+
     svgEndPointGroup.splice(doubleIndex, 1)
     svgPathGroup.splice(thisIndex, 1)
 }
