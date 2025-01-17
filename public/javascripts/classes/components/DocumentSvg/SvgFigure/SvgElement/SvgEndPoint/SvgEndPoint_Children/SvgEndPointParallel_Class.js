@@ -1,6 +1,6 @@
 import {SvgEndPoint} from '../SvgEndPoint_Class.js'
 
-function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joinerFlag, parallelPathData, referenceParPathElement) {
+function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joinerFlag, parallelPathData, referenceParPathElement, cornerPath) {
     this.ENDPOINT_CLASS = 'parallelEndPoint'
     this.ENDPOINT_CURVE_EAST_CLASS = 'paralellEndPoint_curve_east'
     this.ENDPOINT_CURVE_WEST_CLASS = 'paralellEndPoint_curve_west'
@@ -8,6 +8,7 @@ function SvgEndPointParallel(parentFigure, parentElement, pathData, index, joine
     this.joinerFlag = joinerFlag
     this.parallelPathData = parallelPathData
     this.referenceParPathElement = referenceParPathElement
+    this.referenceParPathElement_cornerPath = cornerPath
 
     SvgEndPoint.call(this, parentFigure, parentElement, pathData, index)
 }
@@ -37,6 +38,7 @@ SvgEndPointParallel.prototype.createSvgEndPoint = function(index) {
             .call(d3.drag().on("drag", (event) => this.elementDrag(event, this.parentFigure, this.pathData, this.actionStates)))
         newEndPointParallel.node().classList.add(this.ENDPOINT_CLASS)
         newEndPointParallel.node().classList.add(this.ENDPOINT_JOINER_CLASS)
+        this.parallelPathData.cornerPath_REF = this.referenceParPathElement_cornerPath
     } else {
         newEndPointParallel = SvgEndPoint.prototype.createSvgEndPoint.call(this, index)
             .on("click", (event) => this.elementClick(event, this.actionStates))
@@ -66,6 +68,7 @@ SvgEndPointParallel.prototype.elementClick = function(event, actionStates) {
     console.log(this.pathData)
     console.log("This")
     console.log(this.parallelPathData)
+    console.log(this)
 }
 
 export {

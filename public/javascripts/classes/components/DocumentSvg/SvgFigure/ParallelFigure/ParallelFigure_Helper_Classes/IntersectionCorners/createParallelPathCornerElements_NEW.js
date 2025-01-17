@@ -66,13 +66,13 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     // splice a "filler" placeholder into the referenceEndPointsBaseAndFillers array
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 
+    // create corner Path elements, place them into the dom and update corrosponding pathDatas
+    let path = parallelFigure.createParallelPathCorner(index)
+
     // create corner EndPoint elements, place them into the dom and update corrosponding pathDatas
     let doubleIndex = index * 2
-    parallelFigure.createParallelEndPointCorner(parPathDataCorner[1], doubleIndex, parPathDataCorner[1], referenceParallelPathData)
-    parallelFigure.createParallelEndPointCorner(parPathDataCorner[0], doubleIndex, parPathDataCorner[0], referenceParallelPathData)
-
-    // create corner Path elements, place them into the dom and update corrosponding pathDatas
-    parallelFigure.createParallelPathCorner(index)
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[1], doubleIndex, parPathDataCorner[1], referenceParallelPathData, path)
+    parallelFigure.createParallelEndPointCorner(parPathDataCorner[0], doubleIndex, parPathDataCorner[0], referenceParallelPathData, null)
 }
 
 export {

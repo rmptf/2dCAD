@@ -410,18 +410,20 @@ ParallelFigure.prototype.createParallelPathCorner = function(index) {
     let newParallelPath = new SvgPathParallel(this, this.svgGroups.secondarySvgGroupElements[0], index, true)
     // this.svgPaths.parallelPaths.push(newParallelPath)
     this.svgPaths.parallelPaths.splice(index, 0, newParallelPath)
+
+    return newParallelPath.svgElementObject._groups[0][0]
 }
 
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index, epIndex, ppdIndex, side) {
-    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[epIndex][ppdIndex], "ooo")
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[epIndex][ppdIndex], "ooo", null)
     pathData.children.parallel_pathDatas[side].endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }
 
 // move this to ParEndPoint_Class
-ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, parPathData, referenceParPathData) {
-    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData, referenceParPathData)
+ParallelFigure.prototype.createParallelEndPointCorner = function(pathData, index, parPathData, referenceParPathData, cornerPath) {
+    let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, true, parPathData, referenceParPathData, cornerPath)
     pathData.endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)
 }

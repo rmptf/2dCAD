@@ -165,7 +165,8 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
             }
-            console.log(this.PARFIGURE.svgEndPoints)
+            // console.log(this.PARFIGURE.svgEndPoints)
+            // console.log(this.PARFIGURE.svgPaths.parallelPaths)
         } else {
             //old
             // switch (shape) {

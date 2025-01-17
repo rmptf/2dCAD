@@ -196,11 +196,10 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
     this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
 
-    // TODO: Right here
+    let path_ref_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.findPATH()
     // Remove Corners from ParallelPathDatas
     let reference_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
     let reference_02 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
-    // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorners()
 
 
     // Remove SVG Elements and Classes
@@ -219,20 +218,25 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     // // old
     // svgEndPointGroup.splice(doubleIndex + 1, 1)
     // svgEndPointGroup.splice(doubleIndex, 1)
-    svgPathGroup.splice(thisIndex, 1)
+    // svgPathGroup.splice(thisIndex, 1)
     
     //new
     console.log("finding_new_way_to_remove_items_from_svgEngPointGroup")
     const result_01 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_01)
     const result_02 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_02)
+    const result_03 = svgPathGroup.find(obj => obj.svgElementObject._groups[0][0] === path_ref_01)
 
     const index_01 = svgEndPointGroup.indexOf(result_01)
     const index_02 = svgEndPointGroup.indexOf(result_02)
+    const index_03 = svgPathGroup.indexOf(result_03)
+
+    console.log(index_01)
+    console.log(index_02)
+    console.log(index_03)
 
     svgEndPointGroup.splice(index_02, 1)
     svgEndPointGroup.splice(index_01, 1)
-
-
+    svgPathGroup.splice(index_03, 1)
 
 }
 
