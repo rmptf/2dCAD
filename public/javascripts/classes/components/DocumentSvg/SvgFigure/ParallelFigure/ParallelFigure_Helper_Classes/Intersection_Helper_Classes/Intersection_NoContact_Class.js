@@ -216,23 +216,22 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     addedSvgPath.svgElementObject.remove()
     // Remove SVG Element Classes from Figure
 
-
-    console.log("ASSSSSS_ER")
-    console.log(reference_01)
-    console.log(reference_02)
-
-
-    //old
-    svgEndPointGroup.splice(doubleIndex + 1, 1)
-    svgEndPointGroup.splice(doubleIndex, 1)
+    // // old
+    // svgEndPointGroup.splice(doubleIndex + 1, 1)
+    // svgEndPointGroup.splice(doubleIndex, 1)
     svgPathGroup.splice(thisIndex, 1)
 
 
-    
-    // //new
-    // const foundIndex = svgEndPointGroup.indexOf(reference_01)
-    // svgEndPointGroup.splice(foundIndex, 1)
-    // console.log(svgEndPointGroup[foundIndex])
+    //new
+    console.log("finding_new_way_to_remove_items_from_svgEngPointGroup")
+    const result_01 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_01)
+    const result_02 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_02)
+
+    const index_01 = svgEndPointGroup.indexOf(result_01)
+    const index_02 = svgEndPointGroup.indexOf(result_02)
+
+    svgEndPointGroup.splice(index_02, 1)
+    svgEndPointGroup.splice(index_01, 1)
 
 
 

@@ -29,12 +29,11 @@ PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
 PathDataParallel.prototype.removeChildPathDataCorner = function() {
     // console.log("ASSSSER")
     // console.log(this.children.corner_pathDatas[0].endPointElement)
-    let objectToRemove = this.children.corner_pathDatas[0]
+    let referenceElement = this.children.corner_pathDatas[0].endPointElement
     this.children.corner_pathDatas[0].endPointElement.remove()
     this.children.corner_pathDatas.shift()
     this.children.childCount = this.children.childCount - 1
-    
-    return objectToRemove
+    return referenceElement
 }
 
 PathDataParallel.prototype.removeChildPathDataCorners = function() {
