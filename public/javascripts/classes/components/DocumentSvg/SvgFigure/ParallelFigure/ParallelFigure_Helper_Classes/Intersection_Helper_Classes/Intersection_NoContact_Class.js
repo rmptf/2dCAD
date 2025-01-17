@@ -214,14 +214,13 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
     firstAddedSvgEndPoint.svgElementObject.remove()
     secondAddedSvgEndPoint.svgElementObject.remove()
     addedSvgPath.svgElementObject.remove()
-    // Remove SVG Element Classes from Figure
 
+    // Remove SVG Element Classes from Figure
     // // old
     // svgEndPointGroup.splice(doubleIndex + 1, 1)
     // svgEndPointGroup.splice(doubleIndex, 1)
     svgPathGroup.splice(thisIndex, 1)
-
-
+    
     //new
     console.log("finding_new_way_to_remove_items_from_svgEngPointGroup")
     const result_01 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_01)
