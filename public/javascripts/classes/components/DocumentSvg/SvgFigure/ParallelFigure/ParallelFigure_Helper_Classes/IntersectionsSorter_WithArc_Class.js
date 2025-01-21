@@ -2,7 +2,7 @@ import { ReferenceFigure } from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
 function IntersectionsSorter_WithArc(parallelFigure) {
-    // this.PARFIGURE = parallelFigure
+    this.PARFIGURE = parallelFigure
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure)
@@ -42,11 +42,8 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     }
     this.firstPosition = (targetIndex) => (targetIndex + 1) === 1
 
-    // FIXME:
-    // FIXME:
-    // FIXME:
     this.arcExist = (targetIndex) => {
-        console.log("ARCEXIST_?")
+        // console.log("ARCEXIST_?")
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1)
@@ -57,7 +54,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
     }
     this.joinerExist = (targetIndex) => {
-        console.log("JOINEREXIST_?")
+        // console.log("JOINEREXIST_?")
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1)
         // console.log(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east)
@@ -66,7 +63,7 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1
     }
     this.lastPosition = (targetIndex) => {
-        console.log("LASTPOSITION_?")
+        // console.log("LASTPOSITION_?")
         // console.log(targetIndex + 1 === this.originalFigurePathDatas.length - 1)
         // console.log(targetIndex)
         // console.log(this.originalFigurePathDatas.length - 1)
@@ -76,12 +73,9 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.includes = (list, targetIndex) => {
         // joiners:
         // this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[1].arc.joinerSide
-        console.log("INCLUDES_?")
+        // console.log("INCLUDES_?")
         return list.includes(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
     }
-    // FIXME:
-    // FIXME:
-    // FIXME:
 
     // this.isWest123 = (targetIndex) => console.log("poopopopopoper", this.parallelPathDatas[targetIndex][1].arc.side)
     // this.isWest = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.side === 'west'
@@ -296,9 +290,6 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
             // // currently works (not 100%)
             // // currently works (not 100%)
 
-            // NEW_001
-            // NEW_001
-            // NEW_001
             if(this.joinerExist(this.index + 0)) {
                 console.log("INT_SORTER_ARC: SECOND_ARC_SEG: NEXT_INDEX_IS_NOT_CONNECTED")
                 this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsNotConnected()
@@ -314,12 +305,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
                 // } else {
                 //     console.log("okokokokokokokok")
                 // }
-
             }
-            // NEW_001
-            // NEW_001
-            // NEW_001
-
             break
         default: {
             // 10

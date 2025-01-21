@@ -168,7 +168,6 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
 }
 
 Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded, nextIndexModded, shape) {
-
     // FIXME: CHECK HERE
     // FIXME: CHECK HERE
     // FIXME: CHECK HERE    // In the test figure where we are seeing the current bug, the corner end points and corner path is NOT removed but the previous 
@@ -181,66 +180,128 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
                             // When a corner element is added in the SAME shape that one is REMOVED the counter for that OLD way of removing elements is off and it removes the previous elements
     // FIXME: CHECK HERE
     // FIXME: CHECK HERE
-    console.log("Remove_Points_and_Paths")
-    console.log(shape)
-    console.log(this.index)
-    console.log(thisIndexModded)
-    console.log(this.originalFigurePathDatas[thisIndexModded])
+    // FIXME: CHECK HERE
 
-    let thisIndex = thisIndexModded
-    let nextIndex = nextIndexModded
-    let doubleIndex = thisIndex * 2
-
-    // Remove pathDatas from various Figure arrays
-    this.parallelFigurePathDatas.splice(thisIndex, 1)
-    this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
-    this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
-
-    let path_ref_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.findPATH()
-    // Remove Corners from ParallelPathDatas
-    let reference_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
-    let reference_02 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildPathDataCorner()
-
-
-    // Remove SVG Elements and Classes
-    // Select Elements
-    let svgEndPointGroup = this.PARFIGURE.svgEndPoints
-    let svgPathGroup = this.PARFIGURE.svgPaths.parallelPaths
-    let firstAddedSvgEndPoint = svgEndPointGroup[doubleIndex + 1]
-    let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
-    let addedSvgPath = svgPathGroup[thisIndex]
-    // Remove SVG Elements from Dom
-    firstAddedSvgEndPoint.svgElementObject.remove()
-    secondAddedSvgEndPoint.svgElementObject.remove()
-    addedSvgPath.svgElementObject.remove()
-
-    // Remove SVG Element Classes from Figure
-    // // old
+    // console.log("Remove_Points_and_Paths")
+    // //old
+    // let thisIndex = thisIndexModded
+    // let nextIndex = nextIndexModded
+    // let doubleIndex = thisIndex * 2
+    // // Remove pathDatas from various Figure arrays
+    // this.parallelFigurePathDatas.splice(thisIndex, 1)
+    // this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
+    // this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
+    // // Remove SVG Elements and Classes
+    // // Select Elements
+    // let svgEndPointGroup = this.PARFIGURE.svgEndPoints
+    // let svgPathGroup = this.PARFIGURE.svgPaths.parallelPaths
+    // let firstAddedSvgEndPoint = svgEndPointGroup[doubleIndex + 1]
+    // let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
+    // let addedSvgPath = svgPathGroup[thisIndex]
+    // // Remove SVG Elements from Dom
+    // firstAddedSvgEndPoint.svgElementObject.remove()
+    // secondAddedSvgEndPoint.svgElementObject.remove()
+    // addedSvgPath.svgElementObject.remove()
+    // // Remove SVG Element Classes from Figure
     // svgEndPointGroup.splice(doubleIndex + 1, 1)
     // svgEndPointGroup.splice(doubleIndex, 1)
     // svgPathGroup.splice(thisIndex, 1)
-    
+
+
     //new
-    console.log("finding_new_way_to_remove_items_from_svgEngPointGroup")
-    const result_01 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_01)
-    const result_02 = svgEndPointGroup.find(obj => obj.svgElementObject._groups[0][0] === reference_02)
-    const result_03 = svgPathGroup.find(obj => obj.svgElementObject._groups[0][0] === path_ref_01)
+    console.log("Remove_Points_and_Paths")
+    let parEndPointClassArray = this.PARFIGURE.svgEndPoints
+    let parPathClassArray = this.PARFIGURE.svgPaths.parallelPaths
 
-    const index_01 = svgEndPointGroup.indexOf(result_01)
-    const index_02 = svgEndPointGroup.indexOf(result_02)
-    const index_03 = svgPathGroup.indexOf(result_03)
+    // Retrieve the SVG Elements that will need to be removed
+    // let path_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerPath()
+    // let endPoint_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+    // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
 
-    console.log(index_01)
-    console.log(index_02)
-    console.log(index_03)
+    let elements = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
 
-    svgEndPointGroup.splice(index_02, 1)
-    svgEndPointGroup.splice(index_01, 1)
-    svgPathGroup.splice(index_03, 1)
+    // Find the classes that hold the Elements
+    const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
+    const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
 
+    // Find the index of te class in its array
+    const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
+    const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
+
+    // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
+    this.parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
+    this.originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
+    this.parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+
+    // Remove the SVG Classes from thier arrays
+    parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
+    parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
+
+    // Remove the SVG Elements from the DOM TODO: Handling in SvgData_Parallle for now
+    // path_element_01.remove()
+    // endPoint_element_01.remove()
+    // endPoint_element_02.remove()
 }
 
 
 export {
     Intersection_NoContact
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // //new
+    // console.log("Remove_Points_and_Paths")
+    // let parEndPointClassArray = this.PARFIGURE.svgEndPoints
+    // let parPathClassArray = this.PARFIGURE.svgPaths.parallelPaths
+
+    // // Retrieve the SVG Elements that will need to be removed
+    // let path_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerPath()
+    // let endPoint_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+    // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+
+    // // Find the classes that hold the Elements
+    // const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === endPoint_element_01)
+    // // const endPoint_class_02 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === endPoint_element_02)
+    // const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === path_element_01)
+    // // const this_PfPathData_01 = this.parallelFigurePathDatas.find(obj => obj[1].cornerPath_REF === path_element_01) // Might not need, using path_class_01 instead
+
+    // // Find the index of te class in its array
+    // const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
+    // // const indexOfEpInEpClassArray_02 = parEndPointClassArray.indexOf(endPoint_class_02)
+    // // const indexOfEpInEpClassArray_02 = indexOfEpInEpClassArray_01 + 1
+    // const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
+    // // const indexOfPdInParPdArray_01 = this.parallelFigurePathDatas.indexOf(this_PfPathData_01) // Might not need, using indexOfPathInPathClassArray_01 instead
+
+    // // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
+    // // this.parallelFigurePathDatas.splice(indexOfPdInParPdArray_01, 1)
+    // // this.originalFigurePathDatas_plusFillers.splice(indexOfPdInParPdArray_01 + 1, 1)
+    // // this.parallelPathDatas_perpendicular.splice(indexOfPdInParPdArray_01, 1)
+    // this.parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
+    // this.originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
+    // this.parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+
+    // // Remove the SVG Classes from thier arrays
+    // // parEndPointClassArray.splice(indexOfEpInEpClassArray_01 + 1, 1)
+    // parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
+    // parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
+
+    // // Remove the SVG Elements from the DOM TODO: Handling in SvgData_Parallle for now
+    // // path_element_01.remove()
+    // // endPoint_element_01.remove()
+    // // endPoint_element_02.remove()

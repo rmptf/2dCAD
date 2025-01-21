@@ -68,6 +68,10 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
     let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
     let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
+    console.log(referenceEndPointsBaseAndFillers)
+    console.log(prevBaseRefNoFiller)
+    console.log(thisBaseRefNoFiller)
+    console.log(nextBaseRefNoFiller)
     let prevBaseRefArc = prevBaseRefNoFiller.arc
     let thisBaseRefArc = thisBaseRefNoFiller.arc
     let nextBaseRefArc = nextBaseRefNoFiller.arc

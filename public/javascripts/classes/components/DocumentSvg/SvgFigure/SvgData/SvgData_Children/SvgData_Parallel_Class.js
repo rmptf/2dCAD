@@ -10,6 +10,7 @@ function PathDataParallel() {
     }
 
     this.cornerPath_REF = null
+    this.cornerShape = "basisCorner"
 
     // Call the constructor of the parent class
     PathData.call(this)
@@ -28,17 +29,62 @@ PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
     this.children.childCount = this.children.childCount + 1
 }
 
-PathDataParallel.prototype.findPATH = function() {
-    let referenceElement = this.children.corner_pathDatas[1].cornerPath_REF
-    return referenceElement
+// PathDataParallel.prototype.removeChildCornerPath = function() {
+//     this.children.corner_pathDatas[1].cornerPath_REF.remove()
+//     // this.children.corner_pathDatas[1].cornerPath_REF.shift()
+//     let referenceElement = this.children.corner_pathDatas[1].cornerPath_REF
+//     return referenceElement
+// }
+
+// PathDataParallel.prototype.removeChildCornerPathData = function() {
+//     this.children.corner_pathDatas[0].endPointElement.remove() //TODO: Maybe do here maybe not, currently at removePointsandPaths
+//     this.children.corner_pathDatas.shift()
+//     this.children.childCount = this.children.childCount - 1
+//     let referenceElement = this.children.corner_pathDatas[0].endPointElement
+//     return referenceElement
+// }
+
+
+
+
+PathDataParallel.prototype.removeChildCornerElements = function() {
+    let referenceElements = null
+    switch(true) {
+        case this.cornerShape === "basisCorner":
+            referenceElements = this.removeBasisCornerElements()
+            break;
+        case this.cornerShape === "FakeCornerShape":
+            console.log("This will never run, no 'FakeCornerShape'")
+            break;
+        default:
+            console.log("NO_SHAPE")
+        }
+        return referenceElements
 }
 
-PathDataParallel.prototype.removeChildPathDataCorner = function() {
-    let referenceElement = this.children.corner_pathDatas[0].endPointElement
+// PathDataParallel.prototype.removeChildCornerPath = function() {
+//     let referenceElement_Path = this.children.corner_pathDatas[1].cornerPath_REF
+//     this.children.corner_pathDatas[1].cornerPath_REF.remove()
+//     // this.children.corner_pathDatas[1].cornerPath_REF = null
+//     return referenceElement_Path
+// }
+
+PathDataParallel.prototype.removeBasisCornerElements = function() {
+    let referenceElement_Path = this.children.corner_pathDatas[1].cornerPath_REF
+    this.children.corner_pathDatas[1].cornerPath_REF.remove()
+    // this.children.corner_pathDatas[1].cornerPath_REF.shift()
+
+    let referenceElement_PathData = this.children.corner_pathDatas[0].endPointElement
+    // let referenceElement_PathData_02 = this.children.corner_pathDatas[1].endPointElement
+    this.children.corner_pathDatas[1].endPointElement.remove()
     this.children.corner_pathDatas[0].endPointElement.remove()
     this.children.corner_pathDatas.shift()
-    this.children.childCount = this.children.childCount - 1
-    return referenceElement
+    this.children.corner_pathDatas.shift()
+    this.children.childCount = this.children.childCount - 2
+    // this.children.childCount = this.children.childCount - 1
+
+    return [referenceElement_Path, referenceElement_PathData]
+    // return referenceElement_PathData_01
 }
 
 

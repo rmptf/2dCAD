@@ -42,8 +42,11 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     let referenceParallelPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
 
     // fill in the data for the new corner using the data from the reference
-    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    //old
+    // let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    // let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     // use the data to create a parellelPathDataCorner
     let parPathDataCorner = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     
@@ -91,9 +94,20 @@ export {
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     console.log("starter___")
     let newSweepFlag
-    let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
-    let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
-    let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
+    //old
+    // let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
+    // let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
+    // let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
+    //new
+    // let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
+    // let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
+    // let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
+    let prevBaseRefNoFiller = referenceEndPointsBaseAndFillers[index - 1]
+    let thisBaseRefNoFiller = referenceEndPointsBaseAndFillers[index]
+    let nextBaseRefNoFiller = referenceEndPointsBaseAndFillers[index + 1]
+    console.log(prevBaseRefNoFiller)
+    console.log(thisBaseRefNoFiller)
+    console.log(nextBaseRefNoFiller)
     let prevBaseRefArc = prevBaseRefNoFiller.arc
     let thisBaseRefArc = thisBaseRefNoFiller.arc
     let nextBaseRefArc = nextBaseRefNoFiller.arc

@@ -142,17 +142,12 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             break
         case "a2p":
             intersectPoint = getPathToArcIntersections(nextParallelPathData_end, nextParallelPathData_start, thisParallelPathData_end, thisOriginalPathData)
-
-
             break
     }
 
     if(intersectPoint) {
-        console.log("intersectPoint_DATA")
-        console.log(intersectPoint)
         if(intersectPoint[0].doesIntersect === false) {
             console.log("CURRENT_DISCONNECTING")
-
             this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
             switch (shape) {
                 case "a2a":
@@ -165,8 +160,6 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
             }
-            // console.log(this.PARFIGURE.svgEndPoints)
-            // console.log(this.PARFIGURE.svgPaths.parallelPaths)
         } else {
             //old
             // switch (shape) {
