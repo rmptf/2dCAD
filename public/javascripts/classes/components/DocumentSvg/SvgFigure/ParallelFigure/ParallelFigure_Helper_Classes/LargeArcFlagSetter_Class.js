@@ -9,6 +9,7 @@ function LargeArcFlagSetter(parallelFigure) {
     this.index = null
     this.setter_01
     this.setter_02
+    this.checker_now = 0
 
     let svgFigure = parallelFigure.svgFigure
 
@@ -28,6 +29,12 @@ function LargeArcFlagSetter(parallelFigure) {
     // this.referenceFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
     // this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     // this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+
+    this.referenceFigure_011 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_011.addCircle({palette: 4, circRad: 15, fillClr: 1}, 1)
+
+    // this.referenceFigure_010 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_010.addCircle({palette: 4, circRad: 3, fillClr: 4}, 1)
 
     this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
@@ -60,6 +67,14 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     let midPointBetweenEndPoints = findLineMidpoint(parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y, parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y)
 
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
+
+    if(this.index === 2) {
+        console.log("checking_000")
+        if(this.checker_now === 0) {
+            console.log("checking_tolerance")
+            checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
+        }
+    }
 
     if(runOrNot === true) {
         // if(this.index === 2) {
@@ -200,11 +215,18 @@ export {
 //     }
 // }
 
-// function checkIfWithinRange(pointStart, pointEnd) {
-//     let distanceBetween = getDistance(pointStart.coords.x, pointStart.coords.y, pointEnd.coords.x, pointEnd.coords.y)
-//     let tolerance = 25
-//     if((distanceBetween - tolerance) < tolerance) {
-//         buildPerpendicularLine(path, centerOfLine)
-//         let positionRelativeToLine = 
-//     }
-// }
+function checkIfWithinRange(thisFigure, pointStart, pointEnd) {
+    let distanceBetween = getDistance(pointStart[0], pointStart[1], pointEnd[0], pointEnd[1])
+    let tolerance = 15
+
+    // thisFigure.referenceFigure_010.runFunctions([[pointStart[0], pointStart[1]]])
+    thisFigure.referenceFigure_011.runFunctions([[pointEnd[0], pointEnd[1]]])
+
+    if(distanceBetween < tolerance) {
+        // buildPerpendicularLine(path, centerOfLine)
+        // let positionRelativeToLine = 
+        console.log("WITHIN_TOLERENCE")
+        console.log(distanceBetween)
+        thisFigure.checker_now = 1
+    }
+}
