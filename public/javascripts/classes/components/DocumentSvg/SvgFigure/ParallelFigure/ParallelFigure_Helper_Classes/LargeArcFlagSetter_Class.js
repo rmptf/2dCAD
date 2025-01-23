@@ -69,11 +69,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
 
     if(this.index === 2) {
-        console.log("checking_000")
-        if(this.checker_now === 0) {
-            console.log("checking_tolerance")
-            checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
-        }
+        checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
     }
 
     if(runOrNot === true) {
@@ -222,11 +218,22 @@ function checkIfWithinRange(thisFigure, pointStart, pointEnd) {
     // thisFigure.referenceFigure_010.runFunctions([[pointStart[0], pointStart[1]]])
     thisFigure.referenceFigure_011.runFunctions([[pointEnd[0], pointEnd[1]]])
 
-    if(distanceBetween < tolerance) {
-        // buildPerpendicularLine(path, centerOfLine)
-        // let positionRelativeToLine = 
-        console.log("WITHIN_TOLERENCE")
-        console.log(distanceBetween)
-        thisFigure.checker_now = 1
+    if(thisFigure.checker_now === 0) {
+        if(distanceBetween < tolerance) {
+            // buildPerpendicularLine(path, centerOfLine)
+            // let positionRelativeToLine = 
+            console.log("WITHIN_TOLERENCE")
+            console.log(distanceBetween)
+            thisFigure.checker_now = 1
+        }
+    } else {
+        if(distanceBetween > tolerance) {
+            // buildPerpendicularLine(path, centerOfLine)
+            // let positionRelativeToLine = 
+            console.log("OUTSIDE_TOLERENCE")
+            console.log(distanceBetween)
+            thisFigure.checker_now = 0
+        }
     }
+
 }
