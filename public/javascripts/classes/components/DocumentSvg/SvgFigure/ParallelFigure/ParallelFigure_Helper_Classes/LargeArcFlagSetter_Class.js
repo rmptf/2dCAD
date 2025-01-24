@@ -9,7 +9,9 @@ function LargeArcFlagSetter(parallelFigure) {
     this.index = null
     this.setter_01
     this.setter_02
-    this.checker_now = 0
+    this.withinTolerance = false
+    this.toleranceCount = 0
+    this.currentlySameSideOfBarrier
 
     let svgFigure = parallelFigure.svgFigure
 
@@ -32,6 +34,9 @@ function LargeArcFlagSetter(parallelFigure) {
 
     this.referenceFigure_011 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_011.addCircle({palette: 4, circRad: 15, fillClr: 1}, 1)
+
+    this.referenceFigure_012 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_012.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
 
     // this.referenceFigure_010 = new ReferenceFigure(svgFigure, true)
     // this.referenceFigure_010.addCircle({palette: 4, circRad: 3, fillClr: 4}, 1)
@@ -69,7 +74,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
 
     if(this.index === 2) {
-        checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
+        checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y], parallelEndPoint_start, parallelEndPoint_end)
     }
 
     if(runOrNot === true) {
@@ -211,20 +216,27 @@ export {
 //     }
 // }
 
-function checkIfWithinRange(thisFigure, pointStart, pointEnd) {
+function checkIfWithinRange(thisFigure, pointStart, pointEnd, endPointStart, endPointFinish) {
     let distanceBetween = getDistance(pointStart[0], pointStart[1], pointEnd[0], pointEnd[1])
     let tolerance = 15
 
     // thisFigure.referenceFigure_010.runFunctions([[pointStart[0], pointStart[1]]])
     thisFigure.referenceFigure_011.runFunctions([[pointEnd[0], pointEnd[1]]])
 
-    if(thisFigure.checker_now === 0) {
+    if(thisFigure.withinTolerance === false) {
         if(distanceBetween < tolerance) {
             // buildPerpendicularLine(path, centerOfLine)
             // let positionRelativeToLine = 
             console.log("WITHIN_TOLERENCE")
             console.log(distanceBetween)
-            thisFigure.checker_now = 1
+
+            if(thisFigure.toleranceCount > 1) {
+                setBarrierLine(pointEnd, endPointStart, endPointFinish, thisFigure)
+            }
+            // setBarrierSide()
+
+            thisFigure.withinTolerance = true
+            thisFigure.toleranceCount = thisFigure.toleranceCount + 1
         }
     } else {
         if(distanceBetween > tolerance) {
@@ -232,8 +244,38 @@ function checkIfWithinRange(thisFigure, pointStart, pointEnd) {
             // let positionRelativeToLine = 
             console.log("OUTSIDE_TOLERENCE")
             console.log(distanceBetween)
-            thisFigure.checker_now = 0
+            thisFigure.withinTolerance = false
         }
     }
+}
+
+function setBarrierLine(arcCenter, endPointStart, endPointFinis, thisFigure) {
+
+    // Create an SVG container
+
+    // Existing line coordinates
+    const x1 = endPointStart.coords.x, y1 = endPointStart.coords.y
+    const x2 = endPointFinish.coords.x, y2 = endPointFinish.coords.y;
+
+    // New point the parallel line should pass through
+    const px = arcCenter[0], py = arcCenter[1];
+
+    // Calculate the shift vector
+    const dx = x2 - x1; // Difference in x
+    const dy = y2 - y1; // Difference in y
+
+    // New line's points by translating the original points
+    const newStart = [px, py]
+    const newEnd = [(px + dx), (py + dy)]
+
+    thisFigure.referenceFigure_012.runFunctions([[newStart, newEnd]])
+
 
 }
+
+function setBarrierSide() {
+
+}
+
+
+
