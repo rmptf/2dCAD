@@ -36,7 +36,7 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_011.addCircle({palette: 4, circRad: 15, fillClr: 1}, 1)
 
     this.referenceFigure_012 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_012.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.referenceFigure_012.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
 
     // this.referenceFigure_010 = new ReferenceFigure(svgFigure, true)
     // this.referenceFigure_010.addCircle({palette: 4, circRad: 3, fillClr: 4}, 1)
@@ -230,7 +230,7 @@ function checkIfWithinRange(thisFigure, pointStart, pointEnd, endPointStart, end
             console.log("WITHIN_TOLERENCE")
             console.log(distanceBetween)
 
-            if(thisFigure.toleranceCount > 1) {
+            if(thisFigure.toleranceCount < 1) {
                 setBarrierLine(pointEnd, endPointStart, endPointFinish, thisFigure)
             }
             // setBarrierSide()
@@ -249,16 +249,18 @@ function checkIfWithinRange(thisFigure, pointStart, pointEnd, endPointStart, end
     }
 }
 
-function setBarrierLine(arcCenter, endPointStart, endPointFinis, thisFigure) {
+function setBarrierLine(arcCenter, endPointStart, endPointFinish, thisFigure) {
 
     // Create an SVG container
 
     // Existing line coordinates
-    const x1 = endPointStart.coords.x, y1 = endPointStart.coords.y
-    const x2 = endPointFinish.coords.x, y2 = endPointFinish.coords.y;
+    const x1 = endPointStart.coords.x
+    const y1 = endPointStart.coords.y
+    const x2 = endPointFinish.coords.x
+    const y2 = endPointFinish.coords.y
 
     // New point the parallel line should pass through
-    const px = arcCenter[0], py = arcCenter[1];
+    const px = arcCenter[0], py = arcCenter[1]
 
     // Calculate the shift vector
     const dx = x2 - x1; // Difference in x
@@ -268,7 +270,15 @@ function setBarrierLine(arcCenter, endPointStart, endPointFinis, thisFigure) {
     const newStart = [px, py]
     const newEnd = [(px + dx), (py + dy)]
 
-    thisFigure.referenceFigure_012.runFunctions([[newStart, newEnd]])
+    console.log("osdkfosdkosdkfoskfosdfkoskf")
+    console.log(newStart)
+    console.log(newEnd)
+    console.log(endPointStart.coords.x)
+
+    thisFigure.referenceFigure_012.runFunctions([newStart, newEnd])
+    // thisFigure.referenceFigure_012.runFunctions([[50,50], [100,100]])
+    // thisFigure.referenceFigure_012.runFunctions()
+    // thisClass.referenceFigure_01.runFunctions([[50, 50], [50, 50]])
 
 
 }
