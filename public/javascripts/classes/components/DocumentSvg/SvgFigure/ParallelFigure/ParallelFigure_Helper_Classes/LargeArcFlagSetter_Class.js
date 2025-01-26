@@ -7,12 +7,6 @@ function LargeArcFlagSetter(parallelFigure) {
     // this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.index = null
-    this.setter_01
-    this.setter_02
-    this.withinTolerance = false
-    this.toleranceCount = 0
-    this.currentlySameSideOfBarrier
-
     let svgFigure = parallelFigure.svgFigure
 
     // Add ReferenceFigures
@@ -26,20 +20,12 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
     this.referenceFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
 
-    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
-    // this.referenceFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
-    // this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
-    // this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+    this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2}, 1)
+    this.referenceFigure_03.addPath({palette: 2, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
+    this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
+    this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 
-    this.referenceFigure_011 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_011.addCircle({palette: 4, circRad: 15, fillClr: 1}, 1)
-
-    this.referenceFigure_012 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_012.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
-
-    // this.referenceFigure_010 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_010.addCircle({palette: 4, circRad: 3, fillClr: 4}, 1)
 
     this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_04.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
@@ -56,6 +42,20 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_06.addPath({palette: 4, strkWdth: 2, strkClr: 2, dshArray: 5}, 2)
     this.referenceFigure_06.addPath({palette: 3, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     this.referenceFigure_06.addPath({palette: 4, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
+
+
+    // NEW FLIP FLAP SHIT
+    this.referenceFigure_011 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_011.addCircle({palette: 4, circRad: 15, fillClr: 1}, 1)
+
+    this.referenceFigure_010 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_010.addCircle({palette: 4, circRad: 3, fillClr: 4}, 1)
+
+    this.referenceFigure_012 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_012.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
+
+    this.referenceFigure_013 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_013.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
 }
 
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot) {
@@ -74,7 +74,7 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot)
     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
 
     if(this.index === 2) {
-        checkIfWithinRange(this, [midPointBetweenEndPoints[0], midPointBetweenEndPoints[1]], [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y], parallelEndPoint_start, parallelEndPoint_end)
+        setArcCenterAxisLine(parallelEndPoint_start, parallelEndPoint_end, midPointBetweenEndPoints, [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y], this)
     }
 
     if(runOrNot === true) {
@@ -173,14 +173,12 @@ LargeArcFlagSetter.prototype.detectCrossover = function(movingPoint, stationaryP
 }
 
 function updateReferenceFigures(index, fillerCounter, parallelEndPoint_start, parallelEndPoint_end, midPointBetweenEndPoints, thisClass) {
-    // if(index === 1 + fillerCounter) {
     if(index === 2) {
         thisClass.referenceFigure_01.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
         thisClass.referenceFigure_02.runFunctions([midPointBetweenEndPoints, [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y]])
-        // thisClass.referenceFigure_03.runFunctions([[parallelEndPoint_start, parallelEndPoint_end]])
+        thisClass.referenceFigure_03.runFunctions([[parallelEndPoint_start, parallelEndPoint_end]])
     }
-    // if(index === 2 + fillerCounter) {
-    if(index === 2) {
+    if(index === 3) {
         thisClass.referenceFigure_04.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
         thisClass.referenceFigure_05.runFunctions([midPointBetweenEndPoints, [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y]])
         thisClass.referenceFigure_06.runFunctions([[parallelEndPoint_start, parallelEndPoint_end]])
@@ -193,99 +191,52 @@ export {
 
 
 
-// Working on new algorythm to check if the midPointBetween2EndPoints passes through the arcSegmentCenter
-    // First: determine if the two points are within tolerance
-    // Second: note the starting position of the midPoint relative to a line drawn perpendicular to the midPoint, centered on the arcSegmentCenter at the time it reached the tolerance distance
-    // Third: track when the midPoint passes from its current side of the perpendicular line to the other
-    // Fourth: Run arcFlag flipper at the moment it crosses the perpendicular line and reset this side to be the new starting position
-    // Fifth: Keep position and slope of the perpindicular line for furture use and just keep track of the starting side relative to the endpoint and test whenever within the tolerance distance
-
-// LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot) {
-//     console.log("ARCFLAG_FLIPPER_RUNNING__________")
-//     let modifiedIndex = this.index + indexModifier
-//     let parallelEndPoint_start = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
-//     let parallelEndPoint_end = this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east
-//     let midPointBetweenEndPoints = findLineMidpoint(parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y, parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y)
-
-//     this.parallelFigureObj.counterOfArcsAsTheyArrive = this.parallelFigureObj.counterOfArcsAsTheyArrive + 1
-
-//     if(runOrNot === true) {
-//         console.log("CHECKING")
-//     } else {
-//         console.log("DONT_CHECK")
-//     }
-// }
-
-function checkIfWithinRange(thisFigure, pointStart, pointEnd, endPointStart, endPointFinish) {
-    let distanceBetween = getDistance(pointStart[0], pointStart[1], pointEnd[0], pointEnd[1])
-    let tolerance = 15
-
-    // thisFigure.referenceFigure_010.runFunctions([[pointStart[0], pointStart[1]]])
-    thisFigure.referenceFigure_011.runFunctions([[pointEnd[0], pointEnd[1]]])
-
-    if(thisFigure.withinTolerance === false) {
-        if(distanceBetween < tolerance) {
-            // buildPerpendicularLine(path, centerOfLine)
-            // let positionRelativeToLine = 
-            console.log("WITHIN_TOLERENCE")
-            console.log(distanceBetween)
-
-            if(thisFigure.toleranceCount < 1) {
-                setBarrierLine(pointEnd, endPointStart, endPointFinish, thisFigure)
-            }
-            // setBarrierSide()
-
-            thisFigure.withinTolerance = true
-            thisFigure.toleranceCount = thisFigure.toleranceCount + 1
-        }
-    } else {
-        if(distanceBetween > tolerance) {
-            // buildPerpendicularLine(path, centerOfLine)
-            // let positionRelativeToLine = 
-            console.log("OUTSIDE_TOLERENCE")
-            console.log(distanceBetween)
-            thisFigure.withinTolerance = false
-        }
-    }
-}
-
-function setBarrierLine(arcCenter, endPointStart, endPointFinish, thisFigure) {
-
-    // Create an SVG container
-
+function setArcCenterAxisLine(arcBaseStart, arcBaseFinish, arcBaseMidPoint, circleCenter, thisFigure) {
     // Existing line coordinates
-    const x1 = endPointStart.coords.x
-    const y1 = endPointStart.coords.y
-    const x2 = endPointFinish.coords.x
-    const y2 = endPointFinish.coords.y
+    const x1 = arcBaseStart.coords.x
+    const y1 = arcBaseStart.coords.y
+    const x2 = arcBaseFinish.coords.x
+    const y2 = arcBaseFinish.coords.y
 
     // New point the parallel line should pass through
-    const px = arcCenter[0], py = arcCenter[1]
+    const px = circleCenter[0], py = circleCenter[1]
 
     // Calculate the shift vector
-    const dx = x2 - x1; // Difference in x
-    const dy = y2 - y1; // Difference in y
+    const dx = x2 - x1 // Difference in x
+    const dy = y2 - y1 // Difference in y
 
     // New line's points by translating the original points
-    const newStart = [px, py]
-    const newEnd = [(px + dx), (py + dy)]
+    // const arcCenterAxisStart = [px, py]
+    // const arcCenterAxisFinish = [(px + dx), (py + dy)]
+    const arcCenterAxisStart = [(px - (dx/2)), (py - (dy/2))]
+    const arcCenterAxisFinish = [(px + (dx/2)), (py + (dy/2))]
 
-    console.log("osdkfosdkosdkfoskfosdfkoskf")
-    console.log(newStart)
-    console.log(newEnd)
-    console.log(endPointStart.coords.x)
+    thisFigure.referenceFigure_010.runFunctions([arcBaseMidPoint])
+    thisFigure.referenceFigure_011.runFunctions([circleCenter])
+    thisFigure.referenceFigure_013.runFunctions([arcBaseMidPoint])
+    thisFigure.referenceFigure_012.runFunctions([arcCenterAxisStart, arcCenterAxisFinish])
 
-    thisFigure.referenceFigure_012.runFunctions([newStart, newEnd])
-    // thisFigure.referenceFigure_012.runFunctions([[50,50], [100,100]])
-    // thisFigure.referenceFigure_012.runFunctions()
-    // thisClass.referenceFigure_01.runFunctions([[50, 50], [50, 50]])
-
-
+    checkWhenPointHasCrossedAxis(arcCenterAxisStart, arcCenterAxisFinish, arcBaseMidPoint, thisFigure.referenceFigure_013)
 }
 
-function setBarrierSide() {
+function checkWhenPointHasCrossedAxis(axisStartCoords, axisFinishCoords, pointCoords, arcBaseMidPointReferenceFigure) {
+        // Vector from start to end of the path
+        const pathVectorX = axisFinishCoords[0] - axisStartCoords[0]
+        const pathVectorY = axisFinishCoords[1] - axisStartCoords[1]
+      
+        // Vector from start of path to the point
+        const pointVectorX = pointCoords[0] - axisStartCoords[0]
+        const pointVectorY = pointCoords[1] - axisStartCoords[1]
 
+         // Compute the cross product
+         const crossProduct = pathVectorX * pointVectorY - pathVectorY * pointVectorX;
+
+         // Return the side based on the cross product
+        if (crossProduct > 0) {
+            arcBaseMidPointReferenceFigure.changeCircleColor(4,1)
+        } else if (crossProduct < 0) {
+            arcBaseMidPointReferenceFigure.changeCircleColor(1,4)
+        } else {
+            // return "ONPATH_______.";
+        }
 }
-
-
-

@@ -12,7 +12,7 @@ function ReferenceFigure(svgFigure, doRun) {
         // addRect(this.testRectGroup, this.testGroup, this.rectElements, this.functionHolder)
         this.functionHolder = []
         this.svgElements = []
-
+        this.d3Element = null
         // console.log(this)
     }
 }
@@ -23,11 +23,30 @@ ReferenceFigure.prototype.runFunctions = function(vars) {
     }
 }
 
+ReferenceFigure.prototype.changeCircleRadius = function(oldRad, newRad) {
+    if(this.doRun) {
+        if (this.d3Element.classed('testElem-radius--'+[oldRad]+'')) {
+            this.d3Element.classed('testElem-radius--'+[oldRad]+'', false)
+            this.d3Element.classed('testElem-radius--'+[newRad]+'', true)
+          }
+    }
+}
+ReferenceFigure.prototype.changeCircleColor = function(oldRad, newRad) {
+    if(this.doRun) {
+        if (this.d3Element.classed('testElem-fill-color--'+[oldRad]+'')) {
+            this.d3Element.classed('testElem-fill-color--'+[oldRad]+'', false)
+            this.d3Element.classed('testElem-fill-color--'+[newRad]+'', true)
+          }
+    }
+}
+
+
 ReferenceFigure.prototype.addCircle = function(visObj, counter) {
     if(this.doRun) {
         let newCircle = this.testGroup.append('circle')
         .attr('class','testElement-endpoint testElement-palette--'+[visObj.palette]+' testElem-radius--'+[visObj.circRad]+' testElem-fill-color--'+[visObj.fillClr]+'')
         this.svgElements.push(newCircle._groups[0][0])
+        this.d3Element = newCircle
 
         // BUILD FUNCTION
         let moveCircleFunction = function(coords1, coords2) {
