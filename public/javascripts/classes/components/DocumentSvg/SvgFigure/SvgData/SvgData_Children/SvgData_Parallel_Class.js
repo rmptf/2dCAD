@@ -12,6 +12,8 @@ function PathDataParallel() {
     this.cornerPath_REF = null
     this.cornerShape = "basisCorner"
 
+    this.largeArcFlagSetter = null
+
     // Call the constructor of the parent class
     PathData.call(this)
 }
