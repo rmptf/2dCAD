@@ -8,20 +8,20 @@ import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
     // this.PARFIGURE = parallelFigure
-    
     this.intersectionHandlerObject = {
         isIntersectionConnected: true,
     }
-
-    this.ArcFlagSetter = new LargeArcFlagSetter(parallelFigure)
+    this.parallelFigure = parallelFigure
+    //old
+    // this.ArcFlagSetter = new LargeArcFlagSetter(parallelFigure)
+    //new
+    this.ArcFlagSetters = [] //TODO: these are currently being stored in order then gettign called from index pos. these two dont alway align, have to place arcflagsetter within ParPathData
     this.Intersection_Contact = new Intersection_Contact(parallelFigure)
     this.Intersection_NoContact = new Intersection_NoContact(parallelFigure)
-
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
-
     this.index = null
     this.arcRadiusParDistAndDir = null
 
@@ -234,22 +234,70 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
-            this.ArcFlagSetter.setLargeArcFlag(0, false)
+
+
+            //old
+            // this.ArcFlagSetter.setLargeArcFlag(0, false)
+            //new
+            console.log("HANDLE_ARCFLAG_01")
+            console.log(this.index)
+            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+                this.ArcFlagSetters.push(arcFlagSetter)
+            }
+            this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
+
+
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
         }
         if(this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_finalAll")
+
+
+            // this was the old, but turned off previously while handling new way of doing OOP (double check if ever needed)
             // this.ArcFlagSetter.setLargeArcFlag(-1, false)
+            //new way if ever needed (not finished)
+            console.log("HANDLE_ARCFLAG_02")
+            console.log(this.index)
+
+
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
         if(this.intersectionHandlerObject.isIntersectionConnected === true) {
             console.log("CONNECTED")
-            this.ArcFlagSetter.setLargeArcFlag(0, true)
+            console.log(this.parallelFigure.parallelFigureObject.iterationCounter)
+
+
+            //old
+            // this.ArcFlagSetter.setLargeArcFlag(0, true)
+            //new
+            console.log("HANDLE_ARCFLAG_03")
+            console.log(this.index)
+            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+                this.ArcFlagSetters.push(arcFlagSetter)
+            }
+
+
+            this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
         } else {
             console.log("NOT_CONNECTED")
-            this.ArcFlagSetter.setLargeArcFlag(0, false)
+
+
+            //old
+            // this.ArcFlagSetter.setLargeArcFlag(0, false)
+            //new
+            console.log("HANDLE_ARCFLAG_04")
+            console.log(this.index)
+            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+                this.ArcFlagSetters.push(arcFlagSetter)
+            }
+
+
+            this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
             this.intersectionHandlerObject.isIntersectionConnected = true
         }
     }
@@ -257,7 +305,20 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_2AJ") {
         if(this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_2j")
-            this.ArcFlagSetter.setLargeArcFlag(0, true)
+
+
+            //old
+            // this.ArcFlagSetter.setLargeArcFlag(0, true)
+            //new
+            console.log("HANDLE_ARCFLAG_05")
+            console.log(this.index)
+            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+                this.ArcFlagSetters.push(arcFlagSetter)
+            }
+            this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
+
+
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
             this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = false
         }
@@ -266,7 +327,20 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_4J") {
         if(this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner === true) {
             console.log("running_skip_arcFlagSet_from_3j_in_4j")
-            this.ArcFlagSetter.setLargeArcFlag(0, true)
+
+
+            //old
+            // this.ArcFlagSetter.setLargeArcFlag(0, true)
+            //new
+            console.log("HANDLE_ARCFLAG_06")
+            console.log(this.index)
+            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+                this.ArcFlagSetters.push(arcFlagSetter)
+            }
+            this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
+
+
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }

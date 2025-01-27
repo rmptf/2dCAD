@@ -95,7 +95,10 @@ function IntersectionsSorter_WithArc(parallelFigure) {
 IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
     this.index = index
     this.IntersectionHandler.index = index
-    this.IntersectionHandler.ArcFlagSetter.index = index
+    //old
+    // this.IntersectionHandler.ArcFlagSetter.index = index // TODO: Turned off while handling setLargeArcFlag in new way (new clas for each arc)
+    //new
+    // nothing, just turned of above
     this.IntersectionHandler.Intersection_Contact.index = index
     this.IntersectionHandler.Intersection_NoContact.index = index
 
