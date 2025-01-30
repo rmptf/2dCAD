@@ -82,7 +82,12 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // J
     console.log("J_ooo")
-    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
+    //TODO: is this never used? (turned on while fixing arc to path (i think))
+    //TODO: (yes used: Why turned off? need for arc to path(disconnect) to path)
+
+    // this.originalFigurePathDatas[this.index + 0]
+
+    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {

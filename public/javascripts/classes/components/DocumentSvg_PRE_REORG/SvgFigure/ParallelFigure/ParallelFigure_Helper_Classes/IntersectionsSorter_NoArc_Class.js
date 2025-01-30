@@ -65,7 +65,7 @@ IntersectionsSorter_NoArc.prototype.sortIntersections = function() {
                 this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments()
             } else {
                 // F (E)
-                console.log("NA_E")
+                console.log("NA_F")
                 this.IntersectionHandler.noArcIntersection_notFirstPos_notLastPos_prevIndexIsArc()
                 // empty
             }
