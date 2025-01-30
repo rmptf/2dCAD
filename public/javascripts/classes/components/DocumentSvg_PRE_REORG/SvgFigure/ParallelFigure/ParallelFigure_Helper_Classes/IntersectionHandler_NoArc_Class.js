@@ -69,6 +69,7 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
     // TODO: Right here is where is need to fix new one
     console.log(this.parallelPathDatas[this.index-1])
     console.log(this.parallelPathDatas_perpendicular[this.index])
+    
     this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
 }
 
