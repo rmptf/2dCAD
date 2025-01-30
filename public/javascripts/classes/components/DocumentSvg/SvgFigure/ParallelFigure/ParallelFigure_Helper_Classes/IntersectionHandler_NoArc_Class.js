@@ -12,9 +12,9 @@ function IntersectionHandler_NoArc(parallelFigure) {
 
 
 
-    // let svgFigure = parallelFigure.svgFigure
-    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
+    let svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
     // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
     // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
     // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
@@ -86,8 +86,19 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
     //TODO: (yes used: Why turned off? need for arc to path(disconnect) to path)
 
     // this.originalFigurePathDatas[this.index + 0]
+    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east)
+    
+    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
+
+    this.referenceFigure_01.runFunctions([[thisOrigPathDataRefPtForParPerpProj.coords.x, thisOrigPathDataRefPtForParPerpProj.coords.y]])
 
     this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
+
+
+    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.x = intersectionPoint.x
+    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.y = intersectionPoint.y
+    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = intersectionPoint.x
+    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = intersectionPoint.y
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {

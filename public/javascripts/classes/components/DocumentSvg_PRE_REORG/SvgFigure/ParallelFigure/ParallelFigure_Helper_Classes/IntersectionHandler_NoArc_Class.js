@@ -7,6 +7,10 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     // this.origPathDataRefPointsForParPerpProj = null
     this.index = null
+
+    let svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -70,6 +74,10 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
     console.log(this.parallelPathDatas[this.index-1])
     console.log(this.parallelPathDatas_perpendicular[this.index])
     
+        
+    this.referenceFigure_01.runFunctions([[this.parallelPathDatas_perpendicular[this.index].x, this.parallelPathDatas_perpendicular[this.index].y]])
+
+
     this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
 }
 
