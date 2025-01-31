@@ -171,7 +171,7 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
 
     // this.origPathDataRefPointsForParPerpProj = [thisOrigPathDataRefPtForParPerpProj, nextOrigPathDataRefPtForParPerpProj]
 
-
+    // TODO: not used i think
     let thisOrigPathDataRefPtForParPerpProj
     let nextOrigPathDataRefPtForParPerpProj
     let fillerAdder = 0
@@ -190,6 +190,7 @@ IntersectionHandler_NoArc.prototype.getRefPointAtIndexIfNotFiller = function() {
         // console.log("do_I_run_333")
         nextFillerAdder = 1
     }
+    // TODO: not used i think
 
     //old
     // thisOrigPathDataRefPtForParPerpProj = this.originalPathDatasPlusFillers[this.index + fillerAdder]
