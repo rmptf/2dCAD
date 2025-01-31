@@ -5,22 +5,22 @@ function IntersectionHandler_NoArc(parallelFigure) {
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalPathDatasPlusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas
-    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
+    // FIXME: DO I NEED TO REMOVE parallelFigurePathDatas_perpendicularProjections??
+    this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections// FIXME: DO I NEED TO REMOVE parallelFigurePathDatas_perpendicularProjections??
+    // FIXME: DO I NEED TO REMOVE parallelFigurePathDatas_perpendicularProjections??
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     // this.origPathDataRefPointsForParPerpProj = null
     this.index = null
 
-
-
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // let svgFigure = parallelFigure.svgFigure
+    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_01.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_02.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03.addCircle({palette: 3, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_04.addCircle({palette: 3, circRad: 15, fillClr: 2}, 1)
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_setPerpRefEndPointsToParallelProjections = function() {
@@ -51,7 +51,14 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_pre
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_isSecondSegment = function() {
     // D
     console.log("D_ooo")
+    let coords_start ={x: this.originalFigurePathDatas[this.index - 1].children.parallel_pathDatas.pathData_west.coords.x, y: this.originalFigurePathDatas[this.index - 1].children.parallel_pathDatas.pathData_west.coords.y}
+    let coords_end ={x: this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.x, y: this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.y}
+
+    //old
     // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false]) //TODO: is this never used?
+    //new
+    // this.calculateAndSetIntersectionPoints([[coords_start, coords_end], false], [this.parallelPathDatas_perpendicular[this.index], false])
+    this.calculateAndSetIntersectionPoints([this.parallelPathDatas_perpendicular[this.index-1], false], [this.parallelPathDatas_perpendicular[this.index], false])
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_notLastPos_prevIndexIsNotArc_bothSegments = function() {
@@ -84,21 +91,18 @@ IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIn
     console.log("J_ooo")
     //TODO: is this never used? (turned on while fixing arc to path (i think))
     //TODO: (yes used: Why turned off? need for arc to path(disconnect) to path)
+    let coords_start ={x: this.originalFigurePathDatas[this.index - 1].children.parallel_pathDatas.pathData_west.coords.x, y: this.originalFigurePathDatas[this.index - 1].children.parallel_pathDatas.pathData_west.coords.y}
+    let coords_end ={x: this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.x, y: this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.y}
+    // this.referenceFigure_01.runFunctions([[coords_start.x, coords_start.y]])
+    // this.referenceFigure_02.runFunctions([[coords_end.x, coords_end.y]])
+    // this.referenceFigure_03.runFunctions([[this.parallelPathDatas_perpendicular[this.index][0].x, this.parallelPathDatas_perpendicular[this.index][0].y]])
+    // this.referenceFigure_04.runFunctions([[this.parallelPathDatas_perpendicular[this.index][1].x, this.parallelPathDatas_perpendicular[this.index][1].y]])
 
-    // this.originalFigurePathDatas[this.index + 0]
-    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east)
-    
-    console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
-
-    this.referenceFigure_01.runFunctions([[thisOrigPathDataRefPtForParPerpProj.coords.x, thisOrigPathDataRefPtForParPerpProj.coords.y]])
-
-    this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
-
-
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.x = intersectionPoint.x
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east.coords.y = intersectionPoint.y
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.x = intersectionPoint.x
-    // this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.coords.y = intersectionPoint.y
+    //old
+    // this.calculateAndSetIntersectionPoints([this.parallelPathDatas[this.index-1], true], [this.parallelPathDatas_perpendicular[this.index], false])
+    //new
+    // this.calculateAndSetIntersectionPoints([[coords_start, coords_end], false], [this.parallelPathDatas_perpendicular[this.index], false])
+    this.calculateAndSetIntersectionPoints([this.parallelPathDatas_perpendicular[this.index-1], false], [this.parallelPathDatas_perpendicular[this.index], false])
 }
 
 IntersectionHandler_NoArc.prototype.noArcIntersection_notFirstPos_lastPos_prevIndexIsNotArc_bothSegments = function() {

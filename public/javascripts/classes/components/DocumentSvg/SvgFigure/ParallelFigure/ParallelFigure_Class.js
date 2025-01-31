@@ -19,7 +19,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // Figure Data
     this.originalFigurePathDatas = svgFigure.svgPathDatas
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
-    this.parallelFigurePathDatas = PathDataParallel.createParallelPathDatas(this.originalFigurePathDatas, this.svgFigure)
+    // this.parallelFigurePathDatas = PathDataParallel.createParallelPathDatas(this.originalFigurePathDatas, this.svgFigure)
     this.parallelFigurePathDatas_perpendicularProjections = this.transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
