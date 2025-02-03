@@ -31,9 +31,6 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
         sideCode = "CCC"
     }
 
-    console.log("PASSED_INDEX")
-    console.log(originalFigurePathDatas[index].children.parallel_pathDatas)
-
     // parallelFigurePathDatas
     //old
     // let referenceParallelPathData = parallelFigurePathDatas[index][0]
@@ -92,7 +89,6 @@ export {
 
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
-    console.log("starter___")
     let newSweepFlag
     //old
     // let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
@@ -105,9 +101,7 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let prevBaseRefNoFiller = referenceEndPointsBaseAndFillers[index - 1]
     let thisBaseRefNoFiller = referenceEndPointsBaseAndFillers[index]
     let nextBaseRefNoFiller = referenceEndPointsBaseAndFillers[index + 1]
-    console.log(prevBaseRefNoFiller)
-    console.log(thisBaseRefNoFiller)
-    console.log(nextBaseRefNoFiller)
+
     let prevBaseRefArc = prevBaseRefNoFiller.arc
     let thisBaseRefArc = thisBaseRefNoFiller.arc
     let nextBaseRefArc = nextBaseRefNoFiller.arc
@@ -117,7 +111,6 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
 
     // both arcs exist
     if(thisBaseRefArc.exist && nextBaseRefArc.exist) {
-        console.log(111)
         // both arcs have different sweep flags
         if(thisBaseRefArc.sweepFlag !== nextBaseRefArc.sweepFlag) {
             let direction
@@ -162,12 +155,10 @@ function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     }
     // only one arc; prev index is arc
     if(thisBaseRefArc.exist && !nextBaseRefArc.exist) {
-        console.log(222)
         thisBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
     // only one arc; next index is arc
     if(!thisBaseRefArc.exist && nextBaseRefArc.exist) {
-        console.log(333)
         nextBaseRefArc.sweepFlag === 0 ? newSweepFlag = 1 : newSweepFlag = 0
     }
 

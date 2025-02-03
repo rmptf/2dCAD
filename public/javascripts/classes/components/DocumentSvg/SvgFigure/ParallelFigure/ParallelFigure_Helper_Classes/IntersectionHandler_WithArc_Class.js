@@ -44,9 +44,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    console.log("SEG_COUNTER")
-    console.log(" + 1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
     this.checkToTurnOffThisShapeSegment()
 }
@@ -61,9 +58,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
     // 2
     console.log("2_seg1_first_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    console.log("SEG_COUNTER")
-    console.log(" + 1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
@@ -128,9 +122,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
-    console.log("SEG_COUNTER")
-    console.log(" = -1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 
@@ -148,9 +139,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     this.parallelFigureObj.pathToArcCounter += 1
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
     this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = true // (Set_largeArcFag)
 }
@@ -159,9 +147,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_2AJ")
     this.handleLargeArcFlag("arcFlag_2AJ") // (Set_largeArcFag)
 }
@@ -193,10 +178,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // FIXME:
     // FIXME:
     // FIXME:
-    console.log("SEG_COUNTER")
-    console.log("THIS_IS_ARC_2_ARC__DISCONNECTED")
-    console.log(" = -1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
 }
@@ -205,9 +186,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     // 4_Joiner
     console.log("4_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.handleLargeArcFlag("arcFlag_4J") // (Set_largeArcFag)
 }
 
@@ -223,9 +201,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
     // 6_Joiner
     console.log("6_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 
@@ -237,8 +212,6 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
-
-
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, false)
             //new
@@ -387,12 +360,6 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let arcRefIndex = this.index + indicators[2]
     let target = indicators[3]
 
-    // this.setPerpendicularPoints([0, 0, 1, 0], false)
-    // this.setPerpendicularPoints([0, 0, 1, 0], true)
-    // this.setPerpendicularPoints([0, 1, 1, 1], false)
-
-
-
     // set target datas
     //old
     // let targetPathData = this.parallelFigurePathDatas[targetIndex][target]
@@ -408,21 +375,6 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let refPathData01 = this.originalFigurePathDatas[targetIndex + indicators[1]] //TODO: can we make this from orginalPathData
     let refArcCenter01 = this.originalFigurePathDatas[targetIndex + indicators[2]]
 
-    // console.log("CURRENT: OKOKOK")
-    // console.log(this.originalFigurePathDatas_plusFillers)
-    // console.log(this.originalFigurePathDatas_plusFillers[refIndex])
-    // console.log(this.originalFigurePathDatas_plusFillers[arcRefIndex])
-    // console.log(refIndex)
-    // console.log(arcRefIndex)
-    // console.log(targetIndex + indicators[1])
-    // console.log(targetIndex + indicators[2])
-    // console.log(refPathData)
-    // console.log(refArcCenter)
-    // console.log(refPathData01)
-    // console.log(refArcCenter01)
-    // console.log("CURRENT: OPD+ fillers length: " + this.originalFigurePathDatas_plusFillers.length)
-
-    
     // calculate positions and set data
     //old
     // let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusData)
@@ -473,46 +425,6 @@ IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = fun
     this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x = parallelProjections.nextPointX
     this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y = parallelProjections.nextPointY
     this.parallelFigureObj.arcToPathCounter += 1 //use orig
-
-
-
-
-
-
-
-
-    // DATA VIS
-    // // reference coords old way
-    // // if(this.index === 1) {
-    //     this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder].coords.x, this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder].coords.y]])
-    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.x, this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.y]])
-    // // }
-
-    // // reference coords new way
-    // // if(this.index === 1) {
-    //     this.referenceFigure_03.runFunctions([[this.originalFigurePathDatas[this.index + 1].coords.x, this.originalFigurePathDatas[this.index + 1].coords.y]])
-    //     this.referenceFigure_04.runFunctions([[this.originalFigurePathDatas[this.index + 2].coords.x, this.originalFigurePathDatas[this.index + 2].coords.y]])
-    // // }
-
-
-
-    // // finished coords: oldway
-    // // if(this.index === 1) {
-    //     this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][0].coords.x, this.parallelFigurePathDatas[this.index + 1][0].coords.y]])
-    //     this.referenceFigure_02.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
-    // // }
-
-    // // finished coords: oldway
-    // // if(this.index === 1) {
-    //     this.referenceFigure_01.runFunctions([[parallelProjections.thisPointX, parallelProjections.thisPointY]])
-    //     this.referenceFigure_02.runFunctions([[parallelProjections.nextPointX, parallelProjections.nextPointY]])
-    // // }
-
-    // // finished coords new way
-    // // if(this.index === 1) {
-    //     this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.x, this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.y]])
-    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x, this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y]])
-    // // }
 }
 
 //FIXME: Can these all be one?

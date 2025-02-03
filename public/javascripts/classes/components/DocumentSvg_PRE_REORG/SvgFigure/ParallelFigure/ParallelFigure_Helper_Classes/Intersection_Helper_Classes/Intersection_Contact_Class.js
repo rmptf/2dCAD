@@ -54,20 +54,20 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let nextParallelPathData = this.parallelFigurePathDatas[nextIndex] // [1] last
 
 
-    console.log("kokokokokokokokokokokokokokokokokokokokoookokokokokokokokok")
+    // console.log("kokokokokokokokokokokokokokokokokokokokoookokokokokokokokok")
     // console.log(this.parallelFigurePathDatas[prevIndex][0]) // 1
     // console.log(this.parallelFigurePathDatas[prevIndex][1]) // 3
     // console.log(this.parallelFigurePathDatas[thisIndex][0]) // 2
     // console.log(this.parallelFigurePathDatas[thisIndex][1]) // 5
     // console.log(this.parallelFigurePathDatas[nextIndex][0]) // 4
     // console.log(this.parallelFigurePathDatas[nextIndex][1]) // 6
-    console.log('oskdfposdk')
-    console.log(prevParallelPathData[0])
-    console.log(prevParallelPathData[1])
-    console.log(thisParallelPathData[0])
-    console.log(thisParallelPathData[1])
-    console.log(nextParallelPathData[0])
-    console.log(nextParallelPathData[1])
+    // console.log('oskdfposdk')
+    // console.log(prevParallelPathData[0])
+    // console.log(prevParallelPathData[1])
+    // console.log(thisParallelPathData[0])
+    // console.log(thisParallelPathData[1])
+    // console.log(nextParallelPathData[0])
+    // console.log(nextParallelPathData[1])
 
     let origPathDataIndex = indexArray[shapeCount]
     let thisOriginalPathData = this.originalFigurePathDatas[origPathDataIndex]
@@ -85,8 +85,6 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     }
 
     if(intersectPoint) {
-        console.log("intersectPoint_DATA")
-        console.log(intersectPoint)
         if(intersectPoint[0].doesIntersect === false) {
             console.log("CURRENT_DISCONNECTING")
             this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated

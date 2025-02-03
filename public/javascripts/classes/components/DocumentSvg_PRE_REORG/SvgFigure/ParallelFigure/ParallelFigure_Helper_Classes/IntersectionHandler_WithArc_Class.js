@@ -38,9 +38,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    console.log("SEG_COUNTER")
-    console.log(" + 1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_1")
 }
 
@@ -54,9 +51,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
     // 2
     console.log("2_seg1_first_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    console.log("SEG_COUNTER")
-    console.log(" + 1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
@@ -121,9 +115,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
-    console.log("SEG_COUNTER")
-    console.log(" = -1")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPathToArc = function() {
@@ -132,9 +123,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     this.parallelFigureObj.pathToArcCounter += 1
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
     this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = true // (Set_largeArcFag)
 }
@@ -143,9 +131,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_2AJ")
     this.handleLargeArcFlag("arcFlag_2AJ") // (Set_largeArcFag)
 }
@@ -164,10 +149,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     this.setArcRadius(1, "arcRad_4J")
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log("THIS_IS_ARC_2_ARC__DISCONNECTED")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
 }
@@ -176,9 +157,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     // 4_Joiner
     console.log("4_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.handleLargeArcFlag("arcFlag_4J") // (Set_largeArcFag)
 }
 
@@ -194,9 +172,6 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex 
     // 6_Joiner
     console.log("6_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    console.log("SEG_COUNTER")
-    console.log(" = 0")
-    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 

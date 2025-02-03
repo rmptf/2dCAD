@@ -108,7 +108,6 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")
-        // console.log("CHECKER_01: RIGHRHEREREREKROEKROEKREOKREOK")
         this.removePointsAndPaths(index + 1, index + 2)
     }
 }

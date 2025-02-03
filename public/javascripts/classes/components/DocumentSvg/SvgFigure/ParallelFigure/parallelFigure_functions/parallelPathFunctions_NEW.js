@@ -253,11 +253,6 @@ function findIntersectingPointTwoFormats(coord1, coord2) {
 // function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData, self) {
 function getPathToArcIntersections(linePt1, linePt2, circ, originalPathData) {
     console.log("p2a_INT")
-    // console.log("PATH_TO_ARC_INT")
-    // console.log(linePt1)
-    // console.log(linePt2)
-    // console.log(circ)
-    // console.log(originalPathData)
     
     let lineStart = {x: linePt1.coords.x, y: linePt1.coords.y}
     let lineEnd = {x: linePt2.coords.x, y: linePt2.coords.y}
@@ -354,9 +349,6 @@ function findPointAlongSlopeAtDistance(startingPoint, endPoint, distanceAwayArcA
 
 function getArcToArcIntersections(firstParallelPathData, secondParallelPathData, originalPathData) {
     console.log("ARC_TO_ARC_INT")
-    console.log(firstParallelPathData)
-    console.log(secondParallelPathData)
-    console.log(originalPathData)
 
     let x1 = firstParallelPathData.arc.center.x
     let y1 = firstParallelPathData.arc.center.y

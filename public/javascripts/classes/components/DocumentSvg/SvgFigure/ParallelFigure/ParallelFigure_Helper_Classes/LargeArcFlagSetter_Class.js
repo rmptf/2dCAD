@@ -47,7 +47,7 @@ function LargeArcFlagSetter(parallelFigure) {
 
 
 LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot, index) {
-    // console.log("ARCFLAG_FLIPPER_RUNNING__________")
+    // console.log("ARCFLAG_FLIPPER_RUNNING")
     let modifiedIndex = index + indexModifier
 
     let parallelEndPoint_start = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
