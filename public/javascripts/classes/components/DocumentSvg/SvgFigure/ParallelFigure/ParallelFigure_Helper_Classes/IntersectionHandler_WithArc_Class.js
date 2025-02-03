@@ -48,6 +48,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     console.log(" + 1")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
+    this.checkToTurnOffThisShapeSegment()
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
@@ -624,4 +625,8 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
 
     return nextArcToCenterMinusPointerToArcFromArc1
+}
+
+IntersectionHandler_WithArc.prototype.checkToTurnOffThisShapeSegment = function(index) {
+    
 }
