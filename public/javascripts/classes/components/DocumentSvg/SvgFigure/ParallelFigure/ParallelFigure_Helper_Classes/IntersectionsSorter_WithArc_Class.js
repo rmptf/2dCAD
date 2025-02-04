@@ -114,6 +114,7 @@ IntersectionsSorter_WithArc.prototype.handleConnectedArcIntersection = function(
     }
     // Final
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+    // console.log()
 }
 
 IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {

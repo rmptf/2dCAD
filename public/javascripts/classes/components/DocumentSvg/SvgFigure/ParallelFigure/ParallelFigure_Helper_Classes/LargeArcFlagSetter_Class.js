@@ -9,10 +9,10 @@ function LargeArcFlagSetter(parallelFigure) {
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     //old
     // this.index = null
-    this.iterationCounter = 0
-    this.startSide = null
-    let svgFigure = parallelFigure.svgFigure
+    this.firstIteration = true
+    this.prevCrossState = null
 
+    let svgFigure = parallelFigure.svgFigure
     // Add ReferenceFigures
     this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
@@ -59,25 +59,22 @@ LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot,
     this.referenceFigure_03.runFunctions([[parallelEndPoint_start, parallelEndPoint_end]])
 
     if(runOrNot === true) {
-        let shiftedVectParLine = translateLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
-        let didPointCross =  pointCrossedAxis(shiftedVectParLine[0], shiftedVectParLine[1], midPointBetweenEndPoints, [this.referenceFigure_04_A])
+        let translatedAxis = translateLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y])
+        let hasTargetCrossedAxis =  pointCrossedAxis(translatedAxis[0], translatedAxis[1], midPointBetweenEndPoints, [this.referenceFigure_04_A])
 
         this.referenceFigure_01_A.runFunctions([midPointBetweenEndPoints])
         this.referenceFigure_02_A.runFunctions([[parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y]])
-        this.referenceFigure_03_A.runFunctions([shiftedVectParLine[0], shiftedVectParLine[1]])
+        this.referenceFigure_03_A.runFunctions([translatedAxis[0], translatedAxis[1]])
         this.referenceFigure_04_A.runFunctions([midPointBetweenEndPoints])
 
-        if(this.iterationCounter === 0) {
-            this.startSide = didPointCross
+        if(this.firstIteration === true) {
+            this.prevCrossState = hasTargetCrossedAxis
+            this.firstIteration = false
         }
-        if(didPointCross !== this.startSide) {
+        if(hasTargetCrossedAxis !== this.prevCrossState) {
             parallelEndPoint_end.arc.arcFlag = +!parallelEndPoint_end.arc.arcFlag
-            this.startSide = didPointCross
+            this.prevCrossState = hasTargetCrossedAxis
         } 
-    }
-
-    if(this.iterationCounter < 10) {
-        this.iterationCounter = this.iterationCounter + 1
     }
 }
 

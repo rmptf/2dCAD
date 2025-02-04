@@ -34,6 +34,21 @@ function IntersectionHandler_WithArc(parallelFigure) {
     // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
     // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
     // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+
+    let svgFigure = parallelFigure.svgFigure
+    // NEW FLIP FLAP SHIT
+    this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
+
+    this.referenceFigure_02_A = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+
+    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5})
+
+    this.referenceFigure_04_A = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_04_A.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
+
 }
 
 export {
@@ -45,13 +60,13 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
     this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
-    this.checkToTurnOffThisShapeSegment()
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
     // Final
     console.log("FINAL_all")
     this.handleLargeArcFlag("arcFlag_finalAll") // (Set_largeArcFag)
+    this.checkIfArcIsClosed()
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex_firstAction = function() {
@@ -539,6 +554,28 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
     return nextArcToCenterMinusPointerToArcFromArc1
 }
 
-IntersectionHandler_WithArc.prototype.checkToTurnOffThisShapeSegment = function(index) {
-    
+IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
+    // // let arcBaseStart = "poop"
+    // // let arcBaseEnd = "poop"
+    // let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
+    // let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
+    // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end)
+    // let hasTargetCrossedAxis =  pointCrossedAxis(translatedAxis[0], translatedAxis[1], parallelEndPoint_end, [this.referenceFigure_04_A])
+
+    // // these are not lind up correctely yet
+    // if(index === 2) {
+    //     this.referenceFigure_01_A.runFunctions([parallelEndPoint_end])
+    //     this.referenceFigure_02_A.runFunctions([[parallelEndPoint_end.arc.center.x, parallelEndPoint_end.arc.center.y]])
+    //     this.referenceFigure_03_A.runFunctions([translatedAxis[0], translatedAxis[1]])
+    //     // this.referenceFigure_04_A.runFunctions([midPointBetweenEndPoints])
+    // }
+
+    // if(this.firstIteration === true) {
+    //     this.prevCrossState = hasTargetCrossedAxis
+    //     this.firstIteration = false
+    // }
+    // if(hasTargetCrossedAxis !== this.prevCrossState) {
+    //     parallelEndPoint_end.arc.arcFlag = +!parallelEndPoint_end.arc.arcFlag
+    //     this.prevCrossState = hasTargetCrossedAxis
+    // } 
 }
