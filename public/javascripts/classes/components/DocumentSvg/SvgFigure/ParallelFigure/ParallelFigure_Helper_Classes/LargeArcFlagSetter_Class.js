@@ -14,12 +14,12 @@ function LargeArcFlagSetter(parallelFigure) {
 
     let svgFigure = parallelFigure.svgFigure
     // Add ReferenceFigures
-    this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
     this.referenceFigure_01.addLine({palette: 4, strkWdth: 1, strkClr: 2, dshArray: 5})
 
-    this.referenceFigure_02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 1)
     this.referenceFigure_02.addCircle({palette: 4, circRad: 5, fillClr: 3}, 2)
     this.referenceFigure_02.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 5})
@@ -32,16 +32,16 @@ function LargeArcFlagSetter(parallelFigure) {
 
 
     // NEW FLIP FLAP SHIT
-    this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
 
-    this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02_A = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
 
-    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5})
 
-    this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_04_A = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_04_A.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
 }
 
