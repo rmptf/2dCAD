@@ -4,6 +4,7 @@ import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
+import { translatePerpendicularLinePreservingDirection } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -43,7 +44,10 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
 
-    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_02_B = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02_B.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+
+    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5})
 
     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, false)
@@ -54,6 +58,45 @@ function IntersectionHandler_WithArc(parallelFigure) {
 export {
     IntersectionHandler_WithArc
 }
+
+
+
+
+
+
+
+IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
+    let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
+    let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
+    
+    let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
+    // let hasTargetCrossedAxis =  pointCrossedAxis(translatedAxis[0], translatedAxis[1], parallelEndPoint_end, [this.referenceFigure_04_A])
+
+
+    // these are not lind up correctely yet
+    if(this.index === 4) {
+        // this.referenceFigure_02_A.runFunctions()
+        this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+        this.referenceFigure_02_B.runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+        this.referenceFigure_03_A.runFunctions([translatedAxis[0], translatedAxis[1]])
+        // this.referenceFigure_04_A.runFunctions([parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
+    }
+
+    // if(this.firstIteration === true) {
+    //     this.prevCrossState = hasTargetCrossedAxis
+    //     this.firstIteration = false
+    // }
+    // if(hasTargetCrossedAxis !== this.prevCrossState) {
+    //     parallelEndPoint_end.arc.arcFlag = +!parallelEndPoint_end.arc.arcFlag
+    //     this.prevCrossState = hasTargetCrossedAxis
+    // } 
+}
+
+
+
+
+
+
 
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_firstAction = function() {
     // 1
@@ -552,35 +595,4 @@ IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
     let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
 
     return nextArcToCenterMinusPointerToArcFromArc1
-}
-
-IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
-    // let arcBaseStart = "poop"
-    // let arcBaseEnd = "poop"
-    let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
-    // let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
-    // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end)
-    // let hasTargetCrossedAxis =  pointCrossedAxis(translatedAxis[0], translatedAxis[1], parallelEndPoint_end, [this.referenceFigure_04_A])
-
-
-    // these are not lind up correctely yet
-    if(this.index === 2) {
-        // this.referenceFigure_02_A.runFunctions()
-        this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
-        // this.referenceFigure_03_A.runFunctions([translatedAxis[0], translatedAxis[1]])
-        // this.referenceFigure_04_A.runFunctions([parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
-
-        console.log("pooperoper")
-        console.log(parallelEndPoint_start.coords.x)
-        console.log(parallelEndPoint_start.coords.y)
-    }
-
-    // if(this.firstIteration === true) {
-    //     this.prevCrossState = hasTargetCrossedAxis
-    //     this.firstIteration = false
-    // }
-    // if(hasTargetCrossedAxis !== this.prevCrossState) {
-    //     parallelEndPoint_end.arc.arcFlag = +!parallelEndPoint_end.arc.arcFlag
-    //     this.prevCrossState = hasTargetCrossedAxis
-    // } 
 }

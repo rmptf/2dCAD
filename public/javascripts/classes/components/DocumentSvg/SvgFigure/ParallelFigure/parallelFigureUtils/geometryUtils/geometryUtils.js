@@ -78,5 +78,6 @@ const pointCrossedAxis = (axisStartCoords, axisFinishCoords, pointCoords, refere
 
 export {
     translateLinePreservingDirection,
+    translatePerpendicularLinePreservingDirection,
     pointCrossedAxis
 }
