@@ -115,57 +115,46 @@ const pointCrossedAxis_02 = (axisStartCoords, axisFinishCoords, pointCoords, ref
 }
 
 
-// new chatgpt
-// const translatePerpendicularLinePreservingDirection = (originLineStart, originLineFinish, prevPoint, newPoint) => {
-//     // Existing line coordinates
-//     const x1 = originLineStart.coords.x, y1 = originLineStart.coords.y;
-//     const x2 = originLineFinish.coords.x, y2 = originLineFinish.coords.y;
-
-//     // New point the perpendicular line should pass through
-//     const px = newPoint[0], py = newPoint[1];
-
-//     // Calculate the shift vector
-//     const dx = x2 - x1; 
-//     const dy = y2 - y1;
-
-//     // Rotate the shift vector 90 degrees counterclockwise (-dy, dx)
-//     const perpDx = -dy, perpDy = dx;
-
-//     // Compute the new start and end points for the perpendicular line
-//     const perpLineStart = [px - perpDx, py - perpDy];
-//     const perpLineFinish = [px + perpDx, py + perpDy];
-
-//     // Check if the second point crossed the first point
-//     const crossed = hasCrossedLine(originLineStart, originLineFinish, prevPoint, newPoint);
-
-//     return {
-//         perpendicularLine: [perpLineStart, perpLineFinish],
-//         hasCrossed: crossed
-//     };
-// };
-
-
-// Function to check if the second point has crossed the first
-const hasCrossedLine = (originLineStart, originLineFinish, prevPoint, newPoint) => {
-    // Extract coordinates
+// FIXME: here
+const translatePerpendicularLinePreservingDirection000 = (originLineStart, originLineFinish, trackedPointStart, newPoint) => {
+    // Existing line coordinates
     const x1 = originLineStart.coords.x, y1 = originLineStart.coords.y;
     const x2 = originLineFinish.coords.x, y2 = originLineFinish.coords.y;
-    const xp1 = prevPoint[0], yp1 = prevPoint[1]; // Previous position
-    const xp2 = newPoint[0], yp2 = newPoint[1]; // New position
 
-    // Compute cross products
-    const cross1 = (x2 - x1) * (yp1 - y1) - (y2 - y1) * (xp1 - x1);
-    const cross2 = (x2 - x1) * (yp2 - y1) - (y2 - y1) * (xp2 - x1);
+    // New point the perpendicular line should pass through
+    const px = newPoint[0], py = newPoint[1];
 
-    console.log("Asdflsdjflksdjlfksjf")
-    console.log(cross1 * cross2)
-    if(cross1 * cross2 < 0) {
-        console.log("NEGATIVE")
-    } else {
-        console.log("PSOTIVE")
-    }
+    // Calculate the shift vector
+    const dx = x2 - x1; 
+    const dy = y2 - y1;
 
-    // If sign changes, the point has crossed the line
+    // Rotate the shift vector 90 degrees counterclockwise (-dy, dx)
+    const perpDx = -dy, perpDy = dx;
+
+    // Compute the new start and end points for the perpendicular line
+    const perpLineStart = [px - perpDx, py - perpDy];
+    const perpLineFinish = [px + perpDx, py + perpDy];
+
+    // Check if the second point crossed the first point
+    const crossed = hasCrossedMovingLine(startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint);
+
+    return {
+        perpendicularLine: [perpLineStart, perpLineFinish],
+        hasCrossed: crossed
+    };
+};
+
+// FIXME: here
+const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint) => {
+    // Compute cross product at previous frame
+    const cross1 = (startingEnd[0] - startingStart[0]) * (trackedPointStart[1] - startingStart[1]) - 
+                   (startingEnd[1] - startingStart[1]) * (trackedPointStart[0] - startingStart[0]);
+
+    // Compute cross product at current frame
+    const cross2 = (currentEnd[0] - currentStart[0]) * (newPoint[1] - currentStart[1]) - 
+                   (currentEnd[1] - currentStart[1]) * (newPoint[0] - currentStart[0]);
+
+    // Detect crossing: If signs flipped, a crossing occurred
     return cross1 * cross2 < 0;
 };
 
@@ -174,6 +163,7 @@ const hasCrossedLine = (originLineStart, originLineFinish, prevPoint, newPoint) 
 export {
     translateLinePreservingDirection,
     translatePerpendicularLinePreservingDirection,
+    translatePerpendicularLinePreservingDirection000,
     pointCrossedAxis,
     pointCrossedAxis_02
 }

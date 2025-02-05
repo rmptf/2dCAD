@@ -4,7 +4,7 @@ import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
-import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
+import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000 } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -50,6 +50,9 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.referenceFigure_02_B = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_02_B.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
 
+    this.referenceFigure_02_C = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_02_C.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+
     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
     this.referenceFigure_03_B = new ReferenceFigure(svgFigure, true)
@@ -76,19 +79,21 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
         let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
 
-        // if(this.FIRSTCHECKER === true) {
-        //     this.ORIGPOS = [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]
-        //     this.FIRSTCHECKER = false
-        // }
+        if(this.FIRSTCHECKER === true) {
+            this.ORIGPOS_START = [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]
+            this.ORIGPOS_END = [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]
+            this.FIRSTCHECKER = false
+        }
 
         let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
-        // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, this.ORIGPOS, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
+        // let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, this.ORIGPOS_START, this.ORIGPOS_END, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]) //FIXME: here
         // let hasTargetCrossedAxis =  pointCrossedAxis_02(translatedAxis[0], translatedAxis[1], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [this.referenceFigure_04_A])
 
 
         // this.referenceFigure_02_A.runFunctions()
         this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
         this.referenceFigure_02_B.runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+        this.referenceFigure_02_C.runFunctions([this.ORIGPOS])
         this.referenceFigure_03_A.runFunctions([translatedAxis[0][0], translatedAxis[0][1]])
         this.referenceFigure_03_B.runFunctions([translatedAxis[1][0], translatedAxis[1][1]])
         this.referenceFigure_04_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
