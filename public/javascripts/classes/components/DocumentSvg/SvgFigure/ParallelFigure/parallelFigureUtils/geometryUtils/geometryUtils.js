@@ -116,7 +116,7 @@ const pointCrossedAxis_02 = (axisStartCoords, axisFinishCoords, pointCoords, ref
 
 
 // FIXME: here
-const translatePerpendicularLinePreservingDirection000 = (originLineStart, originLineFinish, trackedPointStart, newPoint) => {
+const translatePerpendicularLinePreservingDirection000 = (originLineStart, originLineFinish, newPoint, originLineStart_startPos, originLineEnd_startPos, figures) => {
     // Existing line coordinates
     const x1 = originLineStart.coords.x, y1 = originLineStart.coords.y;
     const x2 = originLineFinish.coords.x, y2 = originLineFinish.coords.y;
@@ -136,7 +136,11 @@ const translatePerpendicularLinePreservingDirection000 = (originLineStart, origi
     const perpLineFinish = [px + perpDx, py + perpDy];
 
     // Check if the second point crossed the first point
-    const crossed = hasCrossedMovingLine(startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint);
+    const crossed = hasCrossedMovingLine(originLineStart_startPos, originLineEnd_startPos, [x1, y1], [x2, y2], originLineStart_startPos, newPoint, figures)
+
+    console.log("POOPER")
+    console.log(crossed)
+
 
     return {
         perpendicularLine: [perpLineStart, perpLineFinish],
@@ -145,7 +149,7 @@ const translatePerpendicularLinePreservingDirection000 = (originLineStart, origi
 };
 
 // FIXME: here
-const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint) => {
+const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint, figures) => {
     // Compute cross product at previous frame
     const cross1 = (startingEnd[0] - startingStart[0]) * (trackedPointStart[1] - startingStart[1]) - 
                    (startingEnd[1] - startingStart[1]) * (trackedPointStart[0] - startingStart[0]);
@@ -153,6 +157,9 @@ const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentE
     // Compute cross product at current frame
     const cross2 = (currentEnd[0] - currentStart[0]) * (newPoint[1] - currentStart[1]) - 
                    (currentEnd[1] - currentStart[1]) * (newPoint[0] - currentStart[0]);
+
+    figures[0].runFunctions([startingStart, currentStart, [startingStart, currentStart]])
+    figures[1].runFunctions([startingEnd, currentEnd, [startingEnd, currentEnd]])
 
     // Detect crossing: If signs flipped, a crossing occurred
     return cross1 * cross2 < 0;

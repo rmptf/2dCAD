@@ -28,38 +28,61 @@ function IntersectionHandler_WithArc(parallelFigure) {
 
     this.FIRSTCHECKER = true
     this.ORIGPOS = null
-
-    // let svgFigure = parallelFigure.svgFigure
-    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    this.ORIGPOS_START = null
+    this.ORIGPOS_END = null
 
     let svgFigure = parallelFigure.svgFigure
     // NEW FLIP FLAP SHIT
-    this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
+    // this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
 
-    this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
+    // this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
 
-    this.referenceFigure_02_B = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02_B.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    // this.referenceFigure_02_B = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_02_B.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
 
-    this.referenceFigure_02_C = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_02_C.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    // this.referenceFigure_02_C = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_02_C.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
 
-    this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
-    this.referenceFigure_03_B = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_03_B.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 2})
+    // this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
+    // this.referenceFigure_03_B = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03_B.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 2})
 
-    this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_04_A.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
+    // this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_04_A.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
+
+
+
+
+    // NEW FLIP FLAP SHIT
+    // this.referenceFigure_smallDot_01 = new ReferenceFigure(svgFigure, false)
+    // this.referenceFigure_smallDot_01.addCircle({palette: 1, circRad: 3, fillClr: 1}, 1)
+
+    // this.referenceFigure_medDot_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_medDot_01.addCircle({palette: 1, circRad: 7, fillClr: 1}, 1)
+
+    // this.referenceFigure_largeDot_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_largeDot_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+
+    // this.referenceFigure_dottedLine_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+
+    // this.referenceFigure_solidLine_01 = new ReferenceFigure(svgFigure, true)
+    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 0})
+
+
+    this.referenceFigure_2xMedDots_1xDottedLine_01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_2xMedDots_1xDottedLine_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+    this.referenceFigure_2xMedDots_1xDottedLine_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 2)
+    this.referenceFigure_2xMedDots_1xDottedLine_01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+
+    this.referenceFigure_2xMedDots_1xDottedLine_02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_2xMedDots_1xDottedLine_02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    this.referenceFigure_2xMedDots_1xDottedLine_02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 2)
+    this.referenceFigure_2xMedDots_1xDottedLine_02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
+
 
 }
 
@@ -85,29 +108,18 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
             this.FIRSTCHECKER = false
         }
 
-        let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
-        // let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, this.ORIGPOS_START, this.ORIGPOS_END, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]) //FIXME: here
+        // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
+        let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_START, this.ORIGPOS_END, [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02]) //FIXME: here
         // let hasTargetCrossedAxis =  pointCrossedAxis_02(translatedAxis[0], translatedAxis[1], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [this.referenceFigure_04_A])
 
 
         // this.referenceFigure_02_A.runFunctions()
-        this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
-        this.referenceFigure_02_B.runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
-        this.referenceFigure_02_C.runFunctions([this.ORIGPOS])
-        this.referenceFigure_03_A.runFunctions([translatedAxis[0][0], translatedAxis[0][1]])
-        this.referenceFigure_03_B.runFunctions([translatedAxis[1][0], translatedAxis[1][1]])
-        this.referenceFigure_04_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+        // this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+        // this.referenceFigure_02_B.runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+        // this.referenceFigure_03_A.runFunctions([translatedAxis[0][0], translatedAxis[0][1]])
+        // this.referenceFigure_03_B.runFunctions([translatedAxis[1][0], translatedAxis[1][1]])
+        // this.referenceFigure_04_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
     }
-
-
-    // if(this.firstIteration === true) {
-    //     this.prevCrossState = hasTargetCrossedAxis
-    //     this.firstIteration = false
-    // }
-    // if(hasTargetCrossedAxis !== this.prevCrossState) {
-    //     parallelEndPoint_end.arc.arcFlag = +!parallelEndPoint_end.arc.arcFlag
-    //     this.prevCrossState = hasTargetCrossedAxis
-    // } 
 }
 
 
