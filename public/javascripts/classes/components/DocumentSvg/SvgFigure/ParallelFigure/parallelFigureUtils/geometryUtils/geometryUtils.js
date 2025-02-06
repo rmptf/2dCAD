@@ -167,10 +167,124 @@ const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentE
 
 
 
+
+
+const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, figures) => {
+    figures[0].runFunctions([line1Start])
+    figures[1].runFunctions([line1End])
+    figures[2].runFunctions([line1Start, line1End])
+
+    figures[3].runFunctions([line2Start])
+    figures[4].runFunctions([line2End])
+    figures[5].runFunctions([line2Start, line2End])
+
+    let checkForFigureAndRunAFunction = (pos1, pos2, figure) => figures.length > 0 ? figures[figure].changeCircleColor(pos1, pos2) : null
+    
+    function crossProduct(a, b) {
+        return a[0] * b[1] - a[1] * b[0];
+    }
+
+    function subtractPoints(a, b) {
+        return [a[0] - b[0], a[1] - b[1]];
+    }
+
+    function isPointOnSegment(p, a, b) {
+        return Math.min(a[0], b[0]) <= p[0] && p[0] <= Math.max(a[0], b[0]) &&
+               Math.min(a[1], b[1]) <= p[1] && p[1] <= Math.max(a[1], b[1]);
+    }
+
+    let d1 = crossProduct(subtractPoints(line2Start, line1Start), subtractPoints(line1End, line1Start));
+    let d2 = crossProduct(subtractPoints(line2End, line1Start), subtractPoints(line1End, line1Start));
+    let d3 = crossProduct(subtractPoints(line1Start, line2Start), subtractPoints(line2End, line2Start));
+    let d4 = crossProduct(subtractPoints(line1End, line2Start), subtractPoints(line2End, line2Start));
+
+    if ((d1 * d2 < 0) && (d3 * d4 < 0)) {
+        checkForFigureAndRunAFunction(2, 1, 0)
+        checkForFigureAndRunAFunction(2, 1, 1)
+        checkForFigureAndRunAFunction(4, 3, 3)
+        checkForFigureAndRunAFunction(4, 3, 4)
+        return true;
+    }
+
+    // Check for collinear overlap (special case)
+    if (d1 === 0 && isPointOnSegment(line2Start, line1Start, line1End)) {
+        checkForFigureAndRunAFunction(2, 1, 0)
+        checkForFigureAndRunAFunction(2, 1, 1)
+        checkForFigureAndRunAFunction(4, 3, 3)
+        checkForFigureAndRunAFunction(4, 3, 4)
+        return true;
+    }
+    if (d2 === 0 && isPointOnSegment(line2End, line1Start, line1End)) {
+        checkForFigureAndRunAFunction(2, 1, 0)
+        checkForFigureAndRunAFunction(2, 1, 1)
+        checkForFigureAndRunAFunction(4, 3, 3)
+        checkForFigureAndRunAFunction(4, 3, 4)
+        return true;
+    }
+    if (d3 === 0 && isPointOnSegment(line1Start, line2Start, line2End)) {
+        checkForFigureAndRunAFunction(2, 1, 0)
+        checkForFigureAndRunAFunction(2, 1, 1)
+        checkForFigureAndRunAFunction(4, 3, 3)
+        checkForFigureAndRunAFunction(4, 3, 4)
+        return true;
+    }
+    if (d4 === 0 && isPointOnSegment(line1End, line2Start, line2End)) {
+        checkForFigureAndRunAFunction(2, 1, 0)
+        checkForFigureAndRunAFunction(2, 1, 1)
+        checkForFigureAndRunAFunction(4, 3, 3)
+        checkForFigureAndRunAFunction(4, 3, 4)
+        return true;
+    }
+
+    checkForFigureAndRunAFunction(1, 2, 0)
+    checkForFigureAndRunAFunction(1, 2, 1)
+    checkForFigureAndRunAFunction(3, 4, 3)
+    checkForFigureAndRunAFunction(3, 4, 4)
+    return false;
+}
+
+const pooper = (parallelFigure, thisIndexModded) => {
+    let PARFIGURE = parallelFigure //FIXME: still used
+    let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+    let originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
+    let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
+    let parFigureObject = parallelFigure.parallelFigureObject
+
+
+    
+    //new
+    console.log("Remove_Points_and_Paths")
+    let parEndPointClassArray = PARFIGURE.svgEndPoints
+    let parPathClassArray = PARFIGURE.svgPaths.parallelPaths
+
+    let elements = originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+
+    // Find the classes that hold the Elements
+    const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
+    const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
+
+    // Find the index of te class in its array
+    const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
+    const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
+
+    // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
+    parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
+    originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
+    parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+
+    // Remove the SVG Classes from thier arrays
+    parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
+    parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
+}
+
+
 export {
     translateLinePreservingDirection,
     translatePerpendicularLinePreservingDirection,
     translatePerpendicularLinePreservingDirection000,
     pointCrossedAxis,
-    pointCrossedAxis_02
+    pointCrossedAxis_02,
+    areTwoLinesIntersecting,
+    pooper
 }

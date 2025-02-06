@@ -4,7 +4,7 @@ import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
-import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000 } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
+import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000, areTwoLinesIntersecting, pooper } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -73,17 +73,19 @@ function IntersectionHandler_WithArc(parallelFigure) {
     // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 0})
 
 
-    this.referenceFigure_2xMedDots_1xDottedLine_01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_2xMedDots_1xDottedLine_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-    this.referenceFigure_2xMedDots_1xDottedLine_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 2)
-    this.referenceFigure_2xMedDots_1xDottedLine_01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+    this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+    this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+    this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
 
-    this.referenceFigure_2xMedDots_1xDottedLine_02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_2xMedDots_1xDottedLine_02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-    this.referenceFigure_2xMedDots_1xDottedLine_02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 2)
-    this.referenceFigure_2xMedDots_1xDottedLine_02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
-
-
+    this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
 }
 
 export {
@@ -109,7 +111,7 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         }
 
         // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
-        let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_START, this.ORIGPOS_END, [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02]) //FIXME: here
+        // let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_START, this.ORIGPOS_END, [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02]) //FIXME: here
         // let hasTargetCrossedAxis =  pointCrossedAxis_02(translatedAxis[0], translatedAxis[1], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [this.referenceFigure_04_A])
 
 
@@ -119,8 +121,26 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         // this.referenceFigure_03_A.runFunctions([translatedAxis[0][0], translatedAxis[0][1]])
         // this.referenceFigure_03_B.runFunctions([translatedAxis[1][0], translatedAxis[1][1]])
         // this.referenceFigure_04_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+
+        let hasArcClosed = areTwoLinesIntersecting(
+            this.ORIGPOS_START,
+            [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y],
+            this.ORIGPOS_END,
+            [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y],
+            // [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02],
+            [this.referenceFigure_largeDot_01_fig01, this.referenceFigure_largeDot_02_fig01, this.referenceFigure_dottedLine_01_fig01, this.referenceFigure_largeDot_01_fig02, this.referenceFigure_largeDot_02_fig02, this.referenceFigure_dottedLine_01_fig02],
+        )
+
+
+        if(hasArcClosed === true) {
+            // pooper(this.parallelFigure, this.index - 1)
+        }
+
     }
 }
+
+
+
 
 
 
