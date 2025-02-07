@@ -10,7 +10,7 @@ function PathDataParallel() {
     }
 
     this.cornerPath_REF = null
-    this.cornerShape = "basisCorner"
+    this.cornerShape = "basisCorner" //TODO: will set on build not here
 
     this.largeArcFlagSetter = null
 
@@ -49,6 +49,7 @@ PathDataParallel.prototype.addChildPathDataCorner = function(pathData) {
 
 
 
+// This will be for future use: will sort thrugh which type of corner is drawn on figure
 PathDataParallel.prototype.removeChildCornerElements = function() {
     let referenceElements = null
     switch(true) {
@@ -71,6 +72,7 @@ PathDataParallel.prototype.removeChildCornerElements = function() {
 //     return referenceElement_Path
 // }
 
+// This is for future use too: each type of corner will be removed in its own way
 PathDataParallel.prototype.removeBasisCornerElements = function() {
     let referenceElement_Path = this.children.corner_pathDatas[1].cornerPath_REF
     this.children.corner_pathDatas[1].cornerPath_REF.remove()

@@ -4,7 +4,7 @@ import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
-import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000, areTwoLinesIntersecting, pooper } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
+import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000, areTwoLinesIntersecting, removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure) {
@@ -27,52 +27,11 @@ function IntersectionHandler_WithArc(parallelFigure) {
     this.arcRadiusParDistAndDir = null
 
     this.FIRSTCHECKER = true
-    this.ORIGPOS = null
+    this.FIRSTCHECKER_02 = true
     this.ORIGPOS_START = null
     this.ORIGPOS_END = null
 
     let svgFigure = parallelFigure.svgFigure
-    // NEW FLIP FLAP SHIT
-    // this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
-
-    // this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_02_A.addCircle({palette: 1, circRad: 15, fillClr: 2}, 1)
-
-    // this.referenceFigure_02_B = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_02_B.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-
-    // this.referenceFigure_02_C = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_02_C.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-
-    // this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
-    // this.referenceFigure_03_B = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03_B.addLine({palette: 4, strkWdth: 1, strkClr: 3, dshArray: 2})
-
-    // this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_04_A.addCircle({palette: 1, circRad: 15, fillClr: 4}, 1)
-
-
-
-
-    // NEW FLIP FLAP SHIT
-    // this.referenceFigure_smallDot_01 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_smallDot_01.addCircle({palette: 1, circRad: 3, fillClr: 1}, 1)
-
-    // this.referenceFigure_medDot_01 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_medDot_01.addCircle({palette: 1, circRad: 7, fillClr: 1}, 1)
-
-    // this.referenceFigure_largeDot_01 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_largeDot_01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-
-    // this.referenceFigure_dottedLine_01 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
-
-    // this.referenceFigure_solidLine_01 = new ReferenceFigure(svgFigure, true)
-    // this.referenceFigure_03_A.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 0})
-
-
     this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
     this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
@@ -99,7 +58,6 @@ export {
 
 
 IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
-    // these are not lind up correctely yet
     if(this.index === 1) {
         let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
         let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
@@ -114,26 +72,22 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         // let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_START, this.ORIGPOS_END, [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02]) //FIXME: here
         // let hasTargetCrossedAxis =  pointCrossedAxis_02(translatedAxis[0], translatedAxis[1], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [this.referenceFigure_04_A])
 
-
-        // this.referenceFigure_02_A.runFunctions()
-        // this.referenceFigure_02_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
-        // this.referenceFigure_02_B.runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
-        // this.referenceFigure_03_A.runFunctions([translatedAxis[0][0], translatedAxis[0][1]])
-        // this.referenceFigure_03_B.runFunctions([translatedAxis[1][0], translatedAxis[1][1]])
-        // this.referenceFigure_04_A.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
-
         let hasArcClosed = areTwoLinesIntersecting(
             this.ORIGPOS_START,
             [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y],
             this.ORIGPOS_END,
             [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y],
-            // [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02],
             [this.referenceFigure_largeDot_01_fig01, this.referenceFigure_largeDot_02_fig01, this.referenceFigure_dottedLine_01_fig01, this.referenceFigure_largeDot_01_fig02, this.referenceFigure_largeDot_02_fig02, this.referenceFigure_dottedLine_01_fig02],
         )
 
 
         if(hasArcClosed === true) {
-            // pooper(this.parallelFigure, this.index - 1)
+            console.log("oskfosdk")
+            if(this.FIRSTCHECKER_02 === true) {
+                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.parallelFigure, this.index - 1)
+                console.log("poopopopo")
+                this.FIRSTCHECKER_02 = false
+            }
         }
 
     }

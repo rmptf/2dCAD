@@ -243,7 +243,7 @@ const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, fig
     return false;
 }
 
-const pooper = (parallelFigure, thisIndexModded) => {
+const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, thisIndexModded) => {
     let PARFIGURE = parallelFigure //FIXME: still used
     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     let originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
@@ -251,31 +251,32 @@ const pooper = (parallelFigure, thisIndexModded) => {
     let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let parFigureObject = parallelFigure.parallelFigureObject
 
-
     
-    //new
-    console.log("Remove_Points_and_Paths")
-    let parEndPointClassArray = PARFIGURE.svgEndPoints
-    let parPathClassArray = PARFIGURE.svgPaths.parallelPaths
 
-    let elements = originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+    // //This is how corner elements are removed (could be useful to remove main path and points)
+    // console.log("Remove_Points_and_Paths")
+    // let parEndPointClassArray = PARFIGURE.svgEndPoints
+    // let parPathClassArray = PARFIGURE.svgPaths.parallelPaths
 
-    // Find the classes that hold the Elements
-    const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
-    const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
+    // //FIXME: change to remove parallelPathDats
+    // let elements = originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
 
-    // Find the index of te class in its array
-    const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
-    const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
+    // // Find the classes that hold the Elements
+    // const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
+    // const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
 
-    // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
-    parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
-    originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
-    parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+    // // Find the index of te class in its array
+    // const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
+    // const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
 
-    // Remove the SVG Classes from thier arrays
-    parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
-    parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
+    // // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
+    // parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
+    // originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
+    // parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+
+    // // Remove the SVG Classes from thier arrays
+    // parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
+    // parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
 }
 
 
@@ -286,5 +287,5 @@ export {
     pointCrossedAxis,
     pointCrossedAxis_02,
     areTwoLinesIntersecting,
-    pooper
+    removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER
 }
