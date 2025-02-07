@@ -251,7 +251,7 @@ const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, t
     let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let parFigureObject = parallelFigure.parallelFigureObject
 
-    
+    //Remove 
 
     // //This is how corner elements are removed (could be useful to remove main path and points)
     // console.log("Remove_Points_and_Paths")
