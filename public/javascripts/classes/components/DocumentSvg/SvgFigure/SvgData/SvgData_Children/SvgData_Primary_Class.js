@@ -11,6 +11,7 @@ function PathDataPrimary() {
             pathData_east: null,
         }
     }
+    this.hide = false
 
     // Call the constructor of the parent class
     PathData.call(this)

@@ -55,6 +55,51 @@ export {
 
 
 
+// let object_A {
+//     object_B_00 {
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_01 {
+//         object_C_01
+//         object_C_02     // delete
+//     },
+//     object_B_02 {   // remove
+//         object_C_01     // delete
+//         object_C_02     // move
+//     },
+//     object_B_03 { 
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_04 {
+//         object_C_01
+//         object_C_02
+//     }
+// }
+
+// let object_A {
+//     object_B_00 {
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_01 {
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_02 {
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_03 { 
+//         object_C_01
+//         object_C_02
+//     },
+//     object_B_04 {
+//         object_C_01
+//         object_C_02
+//     }
+// }
 
 
 IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
@@ -84,7 +129,7 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         if(hasArcClosed === true) {
             console.log("oskfosdk")
             if(this.FIRSTCHECKER_02 === true) {
-                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.parallelFigure, this.index - 1)
+                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.parallelFigure, this.index - 1, this.index)
                 console.log("poopopopo")
                 this.FIRSTCHECKER_02 = false
             }

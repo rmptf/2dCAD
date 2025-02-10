@@ -8,7 +8,7 @@ import {PathDataCorner} from '../SvgData/SvgData_Children/SvgData_Corner_Class.j
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
-import {findParallelDistance} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
+import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
 
 function ParallelFigure(svgFigure, sectionIndex) {
     this.svgFigure = svgFigure
@@ -16,10 +16,17 @@ function ParallelFigure(svgFigure, sectionIndex) {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
 
+
     // Figure Data
-    this.originalFigurePathDatas = svgFigure.svgPathDatas
+    this.originalFigurePathDatas = svgFigure.svgPathDatas // can be a deep copy of svgFigure.svgPathDatas then can be manipulated however necisary and wont affect OriginalFigure
+
+
+    //TODO: Remove all of these
+    // dont need
     this.originalFigurePathDatas_plusFillers = copyPathDatas(this.originalFigurePathDatas)
+    // create in each endPoint / or before each endpoint
     this.parallelFigurePathDatas = PathDataParallel.createParallelPathDatas(this.originalFigurePathDatas, this.svgFigure)
+    // create in each no_arc pathData
     this.parallelFigurePathDatas_perpendicularProjections = this.transformData(this.parallelFigurePathDatas) // this starts out the same as parFigurePathDatas but then is transformed THEN is transformed into points that are exactly perpectingular to originalFigPathDatas at parallalDistance (used for handling intersections with no arc)
     // ^^ only used in intersectionHandler_NoArc_Class (updated ultiple other places) rename to (parallelFigurePathDatas_parallelPerpendicularProjectionPointDatas: or shorter)
 
@@ -167,6 +174,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
     console.log("")
     console.log("START_SHAPE")
     console.log("")
+    console.log(thisFigure.originalFigurePathDatas)
 
     thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
     thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -190,39 +198,45 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.parallelFigureObject.parallelDistance = parallelDistance
         // thisFigure.parallelFigureObject.parallelDistance = -100
     }
-    // NEWWAY: ORIGINALPathData Children
+    // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
-        console.log("i: " + i)
-        thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
-        thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
-        if(i < thisFigure.originalFigurePathDatas.length) {
-            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
-                console.log("CURRENT_INDEX_IS_ARC")
-                // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
-                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
-                if(i < thisFigure.originalFigurePathDatas.length - 1) {
-                    console.log("CHECKING_FOR_ARC_JOINER")
-                    if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                        console.log("i: " + i + " ++")
-                        console.log("CURRENT_INDEX_IS_ARC_JOINER")
-                        // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
-                    } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                        console.log("i: " + i + " ++")
-                        console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
-                        // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
-                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+        // if(i !== 2) {
+            console.log("i: " + i)
+            thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
+            thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
+            if(thisFigure.originalFigurePathDatas[i].hide === false) {
+                if(i < thisFigure.originalFigurePathDatas.length) {
+                    if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
+                        console.log("CURRENT_INDEX_IS_ARC")
+                        // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
+                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
+                        // let intersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this, i - 1)
+                        // intersectionsSorter_WithArc.sortIntersections_NEW(false)
+                        if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                            console.log("CHECKING_FOR_ARC_JOINER")
+                            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("i: " + i + " ++")
+                                console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                                // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                            } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                                console.log("i: " + i + " ++")
+                                console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
+                                // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                            } else {
+                                console.log("NO_JOINER")
+                            }
+                        }
                     } else {
-                        console.log("NO_JOINER")
+                        console.log("CURRENT_INDEX_IS_PATH")
+                        thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                     }
                 }
-            } else {
-                console.log("CURRENT_INDEX_IS_PATH")
-                thisFigure.IntersectionsSorter_NoArc.sortIntersections()
             }
+            thisFigure.parallelFigure_updateSvg()
         }
-        thisFigure.parallelFigure_updateSvg()
-    }
+    // }
 }
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
@@ -290,6 +304,7 @@ ParallelFigure.prototype.createParallelPathCorner = function(index) {
 
 // move this to ParEndPoint_Class
 ParallelFigure.prototype.createParallelEndPoint = function(pathData, index, epIndex, ppdIndex, side) {
+    // createParallelPathData() here
     let newEndPointParallel = new SvgEndPointParallel(this, this.svgGroups.secondarySvgGroupElements[1], pathData, index, false, this.parallelFigurePathDatas[epIndex][ppdIndex], "ooo", null)
     pathData.children.parallel_pathDatas[side].endPointElement = newEndPointParallel.svgElementObject._groups[0][0]
     this.svgEndPoints.splice(index, 0, newEndPointParallel)

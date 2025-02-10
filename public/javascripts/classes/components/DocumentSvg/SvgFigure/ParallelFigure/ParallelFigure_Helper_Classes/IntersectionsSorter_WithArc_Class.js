@@ -1,4 +1,3 @@
-import { ReferenceFigure } from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
 function IntersectionsSorter_WithArc(parallelFigure) {
@@ -8,8 +7,18 @@ function IntersectionsSorter_WithArc(parallelFigure) {
     this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure)
     this.parallelPathDatas = parallelFigure.parallelFigurePathDatas // TODO: I think you can pass this child PathData and Prev Chid PathData as one array (they are only used in the following if checks)
     this.index = null
-    this.fakeCounter = 0
 
+    //old
+    // this.isWest123 = (targetIndex) => console.log("poopopopopoper", this.parallelPathDatas[targetIndex][1].arc.side)
+    // this.isWest = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.side === 'west'
+    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
+    // this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
+    // this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
+    // this.firstPosition = (targetIndex) => (targetIndex) === 0
+    // this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
+    // this.includes = (list, targetIndex) => list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
+
+    //new
     this.joinerType = (targetIndex, code) => {
         if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
             return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
@@ -35,29 +44,10 @@ function IntersectionsSorter_WithArc(parallelFigure) {
         return list.includes(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
     }
 
-    // this.isWest123 = (targetIndex) => console.log("poopopopopoper", this.parallelPathDatas[targetIndex][1].arc.side)
-    // this.isWest = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.side === 'west'
-    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
-    // this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
-    // this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
-    // this.firstPosition = (targetIndex) => (targetIndex) === 0
-    // this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
-    // this.includes = (list, targetIndex) => list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
-
-    this.intersectionSorterObject = {
-        index: null
-    }
-
-
-    // let svgFigure = parallelFigure.svgFigure
-    // this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_01.addCircle({palette: 1, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_02 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_02.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_03 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_03.addCircle({palette: 3, circRad: 10, fillClr: 2}, 1)
-    // this.referenceFigure_04 = new ReferenceFigure(svgFigure, false)
-    // this.referenceFigure_04.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
+    // not in use
+    // this.intersectionSorterObject = {
+    //     index: null
+    // }
 }
 
 IntersectionsSorter_WithArc.prototype.setIndices = function (index) {

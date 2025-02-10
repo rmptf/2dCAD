@@ -243,13 +243,44 @@ const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, fig
     return false;
 }
 
-const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, thisIndexModded) => {
+const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, thisIndexModded, index) => {
     let PARFIGURE = parallelFigure //FIXME: still used
     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     let originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let parFigureObject = parallelFigure.parallelFigureObject
+
+
+    console.log("jifjsdifjsdijfisdj")
+    console.log(originalFigurePathDatas[2])
+
+    // originalFigurePathDatas[2].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west 
+    originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
+
+    originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west 
+    originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east
+
+    // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_west = null
+    // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_east = null
+    // originalFigurePathDatas[4].children.childCount = 0
+    // originalFigurePathDatas[4].hide = true
+
+    // originalFigurePathDatas.pop(originalFigurePathDatas[4])
+
+
+
+
+
+
+    // // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west
+    // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
+    // originalFigurePathDatas.splice(2, 1)
+
+
+    
+    console.log(originalFigurePathDatas)
+    
 
     //Remove 
 

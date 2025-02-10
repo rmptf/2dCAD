@@ -30,9 +30,9 @@ function updateSVG_thisSvgFigure(figure) {
 
 function updateSVG_thisSvgParallelFigure(figure) {
     let parallelPathDatas = figure.parallelFigurePathDatas
-    let parallelPaths = figure.svgPaths.parallelPaths
 
     // PARALLEL PATH
+    let parallelPaths = figure.svgPaths.parallelPaths
     for (let i = 0; i < parallelPaths.length; i++) {
         parallelPaths[i].svgElementObject
             .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i][1]]))
