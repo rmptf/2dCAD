@@ -5,9 +5,9 @@ svg{
   border: 1px solid var(--highlight-60);
 }
 
-.path {
+/* .path {
 
-}
+} */
 
 .mainPath {
   stroke-width: 30;
@@ -30,6 +30,10 @@ svg{
   fill: none;
   stroke: var(--dusk-500);
   opacity: 1;
+}
+
+.displayNone {
+  display: none;
 }
 
 .endPoint {

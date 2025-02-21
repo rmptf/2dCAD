@@ -2,13 +2,21 @@ import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.
 import {createAndAddSvgElementAndUpdateDataArrays} from '../IntersectionCorners/createParallelPathCornerElements_NEW.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
-function Intersection_Contact(parallelFigure) {
+//old
+// function Intersection_Contact(parallelFigure) {
+//new
+function Intersection_Contact(parallelFigure, index, intersectionIsConnected) {
     this.PARFIGURE = parallelFigure // FIXME: still used
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parFigureObject = parallelFigure.parallelFigureObject
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
-    this.index = null
+    //old
+    // this.index = null
+    //new
+    this.index = index
+
+    this.intersectionIsConnected = intersectionIsConnected
 
     // let svgFigure = parallelFigure.svgFigure
     // this.referenceFigure_01 = new ReferenceFigure(svgFigure, true)
@@ -148,7 +156,27 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
             console.log("CURRENT_DISCONNECTING")
-            this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
+
+            // FIXME: (right here)
+            // FIXME:
+            // FIXME:
+            // FIXME:
+            // FIXME:
+            //old
+            // this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
+            //new from handler
+            // this.intersectionIsConnected = false
+            this.intersectionIsConnected.isIntersectionConnected = false
+            // this.intersectionIsConnected.isIntersectionConnected = "LEGOS"
+            //new way from parFigure
+            // this.parFigureObject.isIntersectionConnected === false
+
+            // FIXME: (right here)
+            // FIXME:
+            // FIXME:
+            // FIXME:
+            // FIXME:
+
             switch (shape) {
                 case "a2a":
                     createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file

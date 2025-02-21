@@ -20,6 +20,7 @@ function PathData() {
         startAngle: null,
         joiner: null,
         joinerSide: undefined,
+        interSectionSorter: "empty" //FIXME: this breaks all faved figures
     }
     this.dataChangeChecker = "Intitially_Set"
 }
@@ -55,6 +56,7 @@ PathData.prototype.initiateCurvePoint = function(side) {
         startAngle: 0,
         joiner: false,
         joinerSide: undefined,
+        interSectionSorter: "empty"
     }
 }
 
@@ -73,6 +75,7 @@ PathData.prototype.terminateCurvePoint = function() {
         startAngle: null,
         joiner: null,
         joinerSide: undefined,
+        interSectionSorter: "empty"
     }
 }
 

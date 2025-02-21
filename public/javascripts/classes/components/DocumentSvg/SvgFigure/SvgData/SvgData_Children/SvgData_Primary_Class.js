@@ -15,7 +15,7 @@ function PathDataPrimary() {
 
     // Call the constructor of the parent class
     PathData.call(this)
-    // console.log(this)
+    this.dataChangeChecker = "Changed_At_PDPrimary"
 }
 
 // Inherit methods from the parent class

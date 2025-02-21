@@ -7,44 +7,53 @@ import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000, areTwoLinesIntersecting, removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
-function IntersectionHandler_WithArc(parallelFigure) {
-    // this.PARFIGURE = parallelFigure
+function IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperIndexModifiers) {
+    this.PARFIGURE = parallelFigure
+    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+    this.parallelFigureObj = parallelFigure.parallelFigureObject
+    this.index = index
+    this.arcRadiusParDistAndDir = null
+
     this.intersectionHandlerObject = {
         isIntersectionConnected: true,
     }
-    this.parallelFigure = parallelFigure
-    //old
-    // this.ArcFlagSetter = new LargeArcFlagSetter(parallelFigure)
-    //new
-    // this.ArcFlagSetters = [] //TODO: these are currently being stored in order then gettign called from index pos. these two dont alway align, have to place arcflagsetter within ParPathData
-    this.Intersection_Contact = new Intersection_Contact(parallelFigure)
-    this.Intersection_NoContact = new Intersection_NoContact(parallelFigure)
-    this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-    this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
-    this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    this.parallelFigureObj = parallelFigure.parallelFigureObject
-    this.index = null
-    this.arcRadiusParDistAndDir = null
 
+    this.Intersection_Contact = new Intersection_Contact(parallelFigure, index, this.intersectionHandlerObject)
+    this.Intersection_NoContact = new Intersection_NoContact(parallelFigure, index)
+
+    let previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
+    let thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
+    let nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
+
+    this.previousOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[previousIndex + modifierFromFunction]
+    this.thisOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[thisIndex + modifierFromFunction]
+    this.nextOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[nextIndex + modifierFromFunction]
+
+
+
+
+    // REFERENCE FIGURE STUFF
+    let svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+    this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+    this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+
+    this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+    this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, false)
+    this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
+
+
+    // CLOSED ARC STUFF
     this.FIRSTCHECKER = true
     this.FIRSTCHECKER_02 = true
     this.ORIGPOS_START = null
     this.ORIGPOS_END = null
-
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-    this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-    this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
-
-    this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-    this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-    this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
 }
 
 export {
@@ -52,60 +61,10 @@ export {
 }
 
 
-
-
-
-// let object_A {
-//     object_B_00 {
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_01 {
-//         object_C_01
-//         object_C_02     // delete
-//     },
-//     object_B_02 {   // remove
-//         object_C_01     // delete
-//         object_C_02     // move
-//     },
-//     object_B_03 { 
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_04 {
-//         object_C_01
-//         object_C_02
-//     }
-// }
-
-// let object_A {
-//     object_B_00 {
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_01 {
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_02 {
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_03 { 
-//         object_C_01
-//         object_C_02
-//     },
-//     object_B_04 {
-//         object_C_01
-//         object_C_02
-//     }
-// }
-
-
 IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
     if(this.index === 1) {
-        let parallelEndPoint_start = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_west
-        let parallelEndPoint_end = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
+        let parallelEndPoint_start = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+        let parallelEndPoint_end = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
 
         if(this.FIRSTCHECKER === true) {
             this.ORIGPOS_START = [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]
@@ -127,10 +86,8 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
 
 
         if(hasArcClosed === true) {
-            console.log("oskfosdk")
             if(this.FIRSTCHECKER_02 === true) {
-                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.parallelFigure, this.index - 1, this.index)
-                console.log("poopopopo")
+                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.PARFIGURE, this.index - 1, this.index)
                 this.FIRSTCHECKER_02 = false
             }
         }
@@ -151,7 +108,7 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
-    this.setArcRadius(0, "arcRad_1") //TODO: can we just set automatically using parDistance?
+    this.setArcRadius(0)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction = function() {
@@ -170,19 +127,19 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
     // 3
     console.log("3_seg1")
-    this.handleArcIntersectionArcToArc()
+    this.handleIntersectionWithArc('a2a')
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFirstIndex_prevIndexIsNoArc = function() {
     // 4
     console.log("4_seg1")
-    this.handleArcIntersectionPathToArc()
+    this.handleIntersectionWithArc('p2a')
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_fistIndex = function() {
     // 5
     console.log("5_seg1")
-    this.setPerpendicularPoints([0, 0, 1, 0], false)
+    this.setPerpendicularPoints([0, 0], false)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc = function() {
@@ -194,14 +151,14 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_n
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc = function() {
     // 6_B
     console.log("6_B_seg1")
-    this.skipFillersAndSetParallelProjections(1)
-    this.handleIntersectionArcToPath()
+    this.setParallelProjections()
+    this.handleIntersectionWithArc('a2p')
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_firstAction = function() {
     // 7
     console.log("7_seg2_first_all")
-    this.setPerpendicularPoints([0, 0, 1, 0], true)
+    this.setPerpendicularPoints([0, 0], true)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected = function() {
@@ -217,13 +174,13 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIn
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsNoArc = function() {
     // 9
     console.log("9_seg2")
-    this.skipFillersAndSetParallelProjections(1)
-    this.handleIntersectionArcToPath()
+    this.setParallelProjections()
+    this.handleIntersectionWithArc('a2p')
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex = function() {
     console.log("10_seg2")
-    this.setPerpendicularPoints([0, 1, 1, 1], false)
+    this.setPerpendicularPoints([1, 1], false)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
@@ -243,7 +200,6 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPathToArc = function() {
     // 1_Joiner
     console.log("1_Joiner_ooo")
-    this.parallelFigureObj.pathToArcCounter += 1
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
@@ -254,37 +210,23 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    this.setArcRadius(0, "arcRad_2AJ")
+    this.setArcRadius(0)
     this.handleLargeArcFlag("arcFlag_2AJ") // (Set_largeArcFag)
 }
 
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPathToArc_nextIndexIsNoArc = function() {
     // 2_B_Joiner
     console.log("2_B_Joiner_ooo")
-    this.skipFillersAndSetParallelProjections(1)
-    this.handleIntersectionArcToPath()
+    this.setParallelProjections()
+    this.handleIntersectionWithArc('a2p')
 }
 
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function() {
     // 3_Joiner
     console.log("3_Joiner_ooo")
-    this.parallelFigureObj.arcToArcCounter += 1
-    this.setArcRadius(1, "arcRad_4J")
-    //old
-    // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
-    //new
+    this.setArcRadius(1)
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
-    //old
-    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-    //new (not 100% tested)
-    // FIXME:
-    // FIXME: This is where the current problem is (it sets the segCounter to -1 and it should be 0)
-    // FIXME:
-    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
-    // FIXME:
-    // FIXME:
-    // FIXME:
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
 }
@@ -299,22 +241,22 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
 IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArcToPath = function() {
     // 5_Joiner
     console.log("5_Joiner_ooo")
-    this.skipFillersAndSetParallelProjections(0)
+    this.setParallelProjections()
     this.handleNOIntersection()
     this.parallelFigureObj.parallelPathSegmentCounter_SECOND = 1
 }
 
-IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex = function() {
-    // 6_Joiner
-    console.log("6_Joiner_ooo")
-    this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-}
+// IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex = function() {
+//     // 6_Joiner
+//     console.log("6_Joiner_ooo")
+//     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+// }
 
 
 
 
 //FIXME: This new way of handling arcFlagSetter works great but need to handle popping points in original blob.
-    // make sure largeArcFlagSetter is being placed in correct OFPD child PPD
+// make sure largeArcFlagSetter is being placed in correct OFPD child PPD
 IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
@@ -322,17 +264,19 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, false)
             //new
-            console.log("HANDLE_ARCFLAG_01")
-            console.log(this.index)
-            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
-                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+            // console.log("HANDLE_ARCFLAG_01")
+            // console.log(this.index)
+            if(this.parallelFigureObj.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.PARFIGURE)
                 // this.ArcFlagSetters.push(arcFlagSetter)
-                console.log("NEW_ARCFLAG_SETTER")
-                console.log(this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west)
-                this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
+                // console.log("NEW_ARCFLAG_SETTER")
+                // console.log(this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west)
+                this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
-            this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(0, false, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
+
+            // LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot, index) {
 
 
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -352,25 +296,30 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
             this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = false
         }
+        //new - but not ok?
+        // if(this.parallelFigureObj.isIntersectionConnected === true) {
+        // //old - but maybe ok
+        // console.log("foskfosdkfosk")
+        // console.log(this.intersectionHandlerObject.isIntersectionConnected)
         if(this.intersectionHandlerObject.isIntersectionConnected === true) {
             console.log("CONNECTED")
-            console.log(this.parallelFigure.parallelFigureObject.iterationCounter)
+            // console.log(this.parallelFigureObj.iterationCounter)
 
 
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, true)
             //new
-            console.log("HANDLE_ARCFLAG_03")
-            console.log(this.index)
-            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
-                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+            // console.log("HANDLE_ARCFLAG_03")
+            // console.log(this.index)
+            if(this.parallelFigureObj.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.PARFIGURE)
                 // this.ArcFlagSetters.push(arcFlagSetter)
-                console.log("NEW_ARCFLAG_SETTER")
-                console.log(this.originalFigurePathDatas[this.index + 0])
-                this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
+                // console.log("NEW_ARCFLAG_SETTER")
+                // console.log(this.previousOriginalFigurePathData())
+                this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(0, true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
 
 
         } else {
@@ -380,19 +329,23 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, false)
             //new
-            console.log("HANDLE_ARCFLAG_04")
-            console.log(this.index)
-            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
-                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+            // console.log("HANDLE_ARCFLAG_04")
+            // console.log(this.index)
+            if(this.parallelFigureObj.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.PARFIGURE)
                 // this.ArcFlagSetters.push(arcFlagSetter)
-                console.log("NEW_ARCFLAG_SETTER")
-                console.log(this.originalFigurePathDatas[this.index + 0])
-                this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
+                // console.log("NEW_ARCFLAG_SETTER")
+                // console.log(this.previousOriginalFigurePathData())
+                this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
-            this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(0, false, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
 
-
+            //new - but not ok?
+            // this.parallelFigureObj.isIntersectionConnected = true
+            //old - but ok?
+            // console.log("foskfosdkfosk")
+            // console.log(this.intersectionHandlerObject.isIntersectionConnected)
             this.intersectionHandlerObject.isIntersectionConnected = true
         }
     }
@@ -405,17 +358,17 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, true)
             //new
-            console.log("HANDLE_ARCFLAG_05")
-            console.log(this.index)
-            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
-                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+            // console.log("HANDLE_ARCFLAG_05")
+            // console.log(this.index)
+            if(this.parallelFigureObj.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.PARFIGURE)
                 // this.ArcFlagSetters.push(arcFlagSetter)
-                console.log("NEW_ARCFLAG_SETTER")
-                console.log(this.originalFigurePathDatas[this.index + 0])
-                this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
+                // console.log("NEW_ARCFLAG_SETTER")
+                // console.log(this.previousOriginalFigurePathData())
+                this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(0, true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
 
 
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -431,17 +384,17 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
             //old
             // this.ArcFlagSetter.setLargeArcFlag(0, true)
             //new
-            console.log("HANDLE_ARCFLAG_06")
-            console.log(this.index)
-            if(this.parallelFigure.parallelFigureObject.iterationCounter === 1) {
-                let arcFlagSetter = new LargeArcFlagSetter(this.parallelFigure)
+            // console.log("HANDLE_ARCFLAG_06")
+            // console.log(this.index)
+            if(this.parallelFigureObj.iterationCounter === 1) {
+                let arcFlagSetter = new LargeArcFlagSetter(this.PARFIGURE)
                 // this.ArcFlagSetters.push(arcFlagSetter)
-                console.log("NEW_ARCFLAG_SETTER")
-                console.log(this.originalFigurePathDatas[this.index + 0])
-                this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
+                // console.log("NEW_ARCFLAG_SETTER")
+                // console.log(this.previousOriginalFigurePathData())
+                this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(0, true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
 
 
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
@@ -450,159 +403,123 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
     }
 }
 
-IntersectionHandler_WithArc.prototype.setArcRadius = function(indexModifier, logId) {
-    let modifiedIndex = this.index + indexModifier
-    let parallelDistance = this.calcArcParDistance(modifiedIndex)
-    //old
-    // this.parallelFigurePathDatas[modifiedIndex][1].arc.radius = parallelDistance
-    //new
-    this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east.arc.radius = parallelDistance
+IntersectionHandler_WithArc.prototype.setArcRadius = function(indexModifier) {
+    let parallelDistance = this.calcArcParDistance(this.thisOriginalFigurePathData(indexModifier))
+    this.thisOriginalFigurePathData(indexModifier).children.parallel_pathDatas.pathData_east.arc.radius = parallelDistance
 }
 
+
+
+
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
+// IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicators, setPrevious) {
+//     let arcRadiusData = this.arcRadiusParDistAndDir
+//     // set targets with indicators
+//     // let targetIndex = this.index + indicators[0]
+//     // let refIndex = this.index + indicators[1]
+//     // let arcRefIndex = this.index + indicators[2]
+//     let target = indicators[1]
+
+//     // set target datas
+//     // let prevGuy = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west
+//     let prevGuy = this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_west
+
+//     // let thisGuy = this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east
+//     let thisGuy = this.originalFigurePathDatas[this.index + 0 + 1].children.parallel_pathDatas.pathData_east
+//     let targetPathData = (target == 0) ? prevGuy : thisGuy;
+    
+
+
+//     // let refPathData01 = this.originalFigurePathDatas[targetIndex + indicators[1]] //TODO: can we make this from orginalPathData
+//     let refPathData01 = this.originalFigurePathDatas[this.index + 0 + indicators[0]] //TODO: can we make this from orginalPathData
+
+//     // let refArcCenter01 = this.originalFigurePathDatas[targetIndex + indicators[2]]
+//     let refArcCenter01 = this.originalFigurePathDatas[this.index + 0 + 1]
+
+
+
+//     // calculate positions and set data
+//     let newParallelPosition = findPointAlongSlopeAtDistance([refPathData01.coords.x, refPathData01.coords.y], [refArcCenter01.arc.center.x, refArcCenter01.arc.center.y], arcRadiusData)
+//     targetPathData.coords.x = newParallelPosition[0]
+//     targetPathData.coords.y = newParallelPosition[1]
+
+//     if (setPrevious) {
+//         // let prevParallelPathData = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_east
+//         let prevParallelPathData = this.originalFigurePathDatas[this.index + 0].children.parallel_pathDatas.pathData_east
+//         prevParallelPathData.coords.x = newParallelPosition[0]
+//         prevParallelPathData.coords.y = newParallelPosition[1]
+//     }
+// }
+
+
+//old
+// this.setPerpendicularPoints([0, 0, 1, 0], false)
+// this.setPerpendicularPoints([0, 0, 1, 0], true)
+// this.setPerpendicularPoints([0, 1, 1, 1], false)
+//new
+// this.setPerpendicularPoints([0, 0], false)
+// this.setPerpendicularPoints([0, 0], true)
+// this.setPerpendicularPoints([1, 1], false)
 IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicators, setPrevious) {
     let arcRadiusData = this.arcRadiusParDistAndDir
-    // set targets with indicators
-    let targetIndex = this.index + indicators[0]
-    let refIndex = this.index + indicators[1]
-    let arcRefIndex = this.index + indicators[2]
-    let target = indicators[3]
+    let OpdRefFlag = indicators[0]
+    let targetFlag = indicators[1]
 
     // set target datas
-    //old
-    // let targetPathData = this.parallelFigurePathDatas[targetIndex][target]
-    //new
-    let prevGuy = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_west
-    let thisGuy = this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east
-    let targetPathData = (target == 0) ? prevGuy : thisGuy;
+    let previousParallelPathDataTarget = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    let thisParallelPathDataTarget = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+    let targetPathData = (targetFlag == 0) ? previousParallelPathDataTarget : thisParallelPathDataTarget;
     
-    //old
-    // let refPathData = this.originalFigurePathDatas_plusFillers[refIndex] //TODO: can we make this from orginalPathData
-    // let refArcCenter = this.originalFigurePathDatas_plusFillers[arcRefIndex]
-    //new
-    let refPathData01 = this.originalFigurePathDatas[targetIndex + indicators[1]] //TODO: can we make this from orginalPathData
-    let refArcCenter01 = this.originalFigurePathDatas[targetIndex + indicators[2]]
+    let referencePathData = this.previousOriginalFigurePathData(OpdRefFlag)
+    let referenceArcCenter = this.thisOriginalFigurePathData()
 
     // calculate positions and set data
-    //old
-    // let newParallelPosition = findPointAlongSlopeAtDistance([refPathData.coords.x, refPathData.coords.y], [refArcCenter.arc.center.x, refArcCenter.arc.center.y], arcRadiusData)
-    //new
-    let newParallelPosition = findPointAlongSlopeAtDistance([refPathData01.coords.x, refPathData01.coords.y], [refArcCenter01.arc.center.x, refArcCenter01.arc.center.y], arcRadiusData)
+    let newParallelPosition = findPointAlongSlopeAtDistance([referencePathData.coords.x, referencePathData.coords.y], [referenceArcCenter.arc.center.x, referenceArcCenter.arc.center.y], arcRadiusData)
     targetPathData.coords.x = newParallelPosition[0]
     targetPathData.coords.y = newParallelPosition[1]
 
     if (setPrevious) {
-        //old
-        // let prevParallelPathData = this.parallelFigurePathDatas[targetIndex - 1][1]
-        //new
-        let prevParallelPathData = this.originalFigurePathDatas[targetIndex].children.parallel_pathDatas.pathData_east
+        let prevParallelPathData = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_east
         prevParallelPathData.coords.x = newParallelPosition[0]
         prevParallelPathData.coords.y = newParallelPosition[1]
     }
 }
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
+//TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
 
-IntersectionHandler_WithArc.prototype.skipFillersAndSetParallelProjections = function(offset) {
-    // //old
-    // let fillerAdder = 0
-    // let nextFillerAdder = 0
-    // if (this.originalFigurePathDatas_plusFillers[this.index + 2] === "filler") {
-    //     fillerAdder = fillerAdder + 0
-    //     nextFillerAdder = nextFillerAdder + 1
-    // }
-    //new (kinda working)
-    // (not needed)
 
-    // //old
-    // let thisPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + offset + fillerAdder]
-    // let nextPathDataOutside = this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder]
-    // let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, this.parallelFigureObj.parallelDistance)//use orig
-    //new (kinda working)
-    let thisPathDataOutside = this.originalFigurePathDatas[this.index + 1]
-    let nextPathDataOutside = this.originalFigurePathDatas[this.index + 2]
+
+
+
+
+
+IntersectionHandler_WithArc.prototype.setParallelProjections = function() {
+    let thisPathDataOutside = this.thisOriginalFigurePathData()
+    let nextPathDataOutside = this.nextOriginalFigurePathData()
     let parallelProjections = calcParallelProjections(thisPathDataOutside.coords, nextPathDataOutside.coords, this.parallelFigureObj.parallelDistance)//use orig
 
-    // //old
-    // this.parallelFigurePathDatas[this.index + 1][0].coords.x = parallelProjections.thisPointX //use orig
-    // this.parallelFigurePathDatas[this.index + 1][0].coords.y = parallelProjections.thisPointY
-    // this.parallelFigurePathDatas[this.index + 1][1].coords.x = parallelProjections.nextPointX
-    // this.parallelFigurePathDatas[this.index + 1][1].coords.y = parallelProjections.nextPointY
-    // this.parallelFigureObj.arcToPathCounter += 1 //use orig
-    //new (kinda working)
-    this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.x = parallelProjections.thisPointX //use orig
-    this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.coords.y = parallelProjections.thisPointY
-    this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.x = parallelProjections.nextPointX
-    this.originalFigurePathDatas[this.index + 2].children.parallel_pathDatas.pathData_east.coords.y = parallelProjections.nextPointY
-    this.parallelFigureObj.arcToPathCounter += 1 //use orig
+    thisPathDataOutside.children.parallel_pathDatas.pathData_west.coords.x = parallelProjections.thisPointX //use orig
+    thisPathDataOutside.children.parallel_pathDatas.pathData_west.coords.y = parallelProjections.thisPointY
+    nextPathDataOutside.children.parallel_pathDatas.pathData_east.coords.x = parallelProjections.nextPointX
+    nextPathDataOutside.children.parallel_pathDatas.pathData_east.coords.y = parallelProjections.nextPointY
 }
 
-//FIXME: Can these all be one?
-IntersectionHandler_WithArc.prototype.handleIntersectionArcToPath = function() {
-    if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
-        this.parallelFigureObj.arcToPathIndexArray.push(this.index + 1)
-    }
-    // this.Intersection_Contact.handleArcToPathIntersection()
-
-
-    // // if(this.index === 1) {
-        // this.referenceFigure_01.runFunctions([[this.parallelFigurePathDatas[this.index + 1][1].coords.x, this.parallelFigurePathDatas[this.index + 1][1].coords.y]])
-        // this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.x, this.originalFigurePathDatas_plusFillers[this.index + 2 + nextFillerAdder].coords.y]])
-    // // }
-
-    // // if(this.index === 1) {
-    //     // this.referenceFigure_01.runFunctions([[this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.coords.x, this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.coords.y]])
-    //     this.referenceFigure_02.runFunctions([[this.originalFigurePathDatas[this.index + 1].coords.x, this.originalFigurePathDatas[this.index + 1].coords.y]])
-    //     console.log("oisjiowejoirwjeoriejwoirjw")
-    //     console.log(this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west)
-    //     // this.referenceFigure_02.runFunctions([[100, 100]])
-    //     // console.log("osijfodisjfoisdjfosdjfosdijfosdjfoisdjfosdjf")
-    //     // console.log(this.originalFigurePathDatas[this.index + 1].coords.x)
-    // // }
-
-
-    this.Intersection_Contact.handleAllIntersections('a2p')
-    // // old
-    // if (this.parallelFigurePathDatas[this.index + 1][1].arc.joiner) {
-    //new
-    if (this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
-        // console.log("handling_arc_to_path")
-        this.parallelFigureObj.arcToPathCounter -= 1
-    }
-}
-
-IntersectionHandler_WithArc.prototype.handleArcIntersectionPathToArc = function() {
-    this.parallelFigureObj.pathToArcCounter += 1
-    if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
-        this.parallelFigureObj.pathToArchIndexArray.push(this.index);
-    }
-    // this.Intersection_Contact.handlePathToArcIntersection()
-    this.Intersection_Contact.handleAllIntersections('p2a')
-}
-
-IntersectionHandler_WithArc.prototype.handleArcIntersectionArcToArc = function() {
-    this.parallelFigureObj.arcToArcCounter += 1
-    if (this.parallelFigureObj.collectIndicesOfIntersections === true) {
-        this.parallelFigureObj.arcToArcIndexArray.push(this.index);
-    }
-    // this.Intersection_Contact.handleArcToArcIntersection()
-    this.Intersection_Contact.handleAllIntersections('a2a')
+IntersectionHandler_WithArc.prototype.handleIntersectionWithArc = function(shape) {
+    this.Intersection_Contact.handleAllIntersections(shape)
 }
 
 IntersectionHandler_WithArc.prototype.handleNOIntersection = function() {
-    // //old
-    // this.Intersection_NoContact.handleArcToPathIntersectionNoContact(-1)
-    //new
     this.Intersection_NoContact.handleArcToPathIntersectionNoContact(0)
 }
 
 IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData = function() {
-    //old
-    // let prevParallelPathData = this.parallelFigurePathDatas[this.index - 1][1]
-    // let thisParallelPathData = this.parallelFigurePathDatas[this.index][1]
-    //new
-    let prevParallelPathData = this.originalFigurePathDatas[this.index].children.parallel_pathDatas.pathData_east
-    let thisParallelPathData = this.originalFigurePathDatas[this.index + 1].children.parallel_pathDatas.pathData_east
+    let prevParallelPathData = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+    let thisParallelPathData = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
     if(thisParallelPathData.arc.joiner) {
-        thisParallelPathData.coords.x = prevParallelPathData.coords.x
-        thisParallelPathData.coords.y = prevParallelPathData.coords.y
+        Object.assign(thisParallelPathData.coords, prevParallelPathData.coords)
     }
 }
 
@@ -631,17 +548,15 @@ function calcParallelProjections(thisPathDataCoords, nextPathDataCoords, paralle
     }
 }
 
-IntersectionHandler_WithArc.prototype.calcArcParDistance = function(index) {
-    // let modIndex = index + 1
-    //old
-    // let nextRefEndPointBase = this.originalFigurePathDatas_plusFillers[index + 1]
-    //new
-    let nextRefEndPointBase = this.originalFigurePathDatas[index + 1]
-    let distance = this.parallelFigureObj.parallelDistance
-    this.arcRadiusParDistAndDir = (nextRefEndPointBase.arc.sweepFlag === 0) ? distance : distance * -1
-    let arcRadiusParDistAndDir = this.arcRadiusParDistAndDir
-    let nextArcToCenterTotalDistance = getDistance(nextRefEndPointBase.coords.x, nextRefEndPointBase.coords.y, nextRefEndPointBase.arc.center.x, nextRefEndPointBase.arc.center.y)
-    let nextArcToCenterMinusPointerToArcFromArc1 = nextArcToCenterTotalDistance - arcRadiusParDistAndDir
+IntersectionHandler_WithArc.prototype.calcArcParDistance = function(referencePathData) {
+    const distance = this.parallelFigureObj.parallelDistance
+    const sweepFlag = referencePathData.arc.sweepFlag
+    
+    // Determine arc radius parallel distance and direction
+    this.arcRadiusParDistAndDir = sweepFlag === 0 ? distance : -distance
 
-    return nextArcToCenterMinusPointerToArcFromArc1
-}
+    // Calculate distance from reference point to arc center
+    const refToCenterDist = getDistance(referencePathData.coords.x, referencePathData.coords.y, referencePathData.arc.center.x, referencePathData.arc.center.y)
+
+    return refToCenterDist - this.arcRadiusParDistAndDir
+};

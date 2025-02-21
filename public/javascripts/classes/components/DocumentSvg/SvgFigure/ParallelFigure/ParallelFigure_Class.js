@@ -6,7 +6,7 @@ import {PathDataPrimary} from '../SvgData/SvgData_Children/SvgData_Primary_Class
 import {PathDataParallel} from '../SvgData/SvgData_Children/SvgData_Parallel_Class.js'
 import {PathDataCorner} from '../SvgData/SvgData_Children/SvgData_Corner_Class.js'
 import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
-import {IntersectionsSorter_WithArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
+import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_cornerShape_01} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
 
@@ -52,36 +52,20 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     this.parallelFigureObject = {
         sectionClickedIndex: sectionIndex,
-        pathToArcCounter: -1,   // trying to remove
-        arcToPathCounter: -1,   // trying to remove
-        arcToArcCounter: -1,    // trying to remove
-        pathToArchIndexArray: [],   // trying to remove
-        arcToPathIndexArray: [],    // trying to remove
-        arcToArcIndexArray: [],     // trying to remove
-        collectIndicesOfIntersections: true,
         parallelPathSegmentCounter_FIRST: -1,
         parallelPathSegmentCounter_SECOND: 0,
         parallelDistance: null,
         iterationCounter: 0,
-        // arc flag stuff
-        arrayOfArcFlagsInitPos: [],
-        counterOfArcsAsTheyArrive: 0,
         setThisArcFlag_at2Joiner_from1Joiner: null,
         setThisArcFlag_at4Joiner_from3Joiner: null,
         setThisArcFlag_atFinal_from1Joiner: null,
         setPrevArcFlag_atFinal_from3Joiner: null,
-
-        // each counter
-        skipperCheckers: {
-            skipperChecker_Path: false,
-            skipperChecker_Arc: false
-        },
-
-        PARALLELPATHINITIATED: false                // never called never used
+        // isIntersectionConnected: true,
     }
     this.isDownDrawParallelActive = false
 
-    this.IntersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this)
+    //new (removed this)
+    // this.IntersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this)
     this.IntersectionsSorter_NoArc = new IntersectionsSorter_NoArc(this)
 
     this.addPaths()
@@ -176,7 +160,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
     console.log("")
     console.log(thisFigure.originalFigurePathDatas)
 
-    thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
+    // thisFigure.parallelFigureObject.counterOfArcsAsTheyArrive = -1
     thisFigure.parallelFigureObject.setThisArcFlag_at2Joiner_from1Joiner = false
     thisFigure.parallelFigureObject.setThisArcFlag_at4Joiner_from3Joiner = false
     thisFigure.parallelFigureObject.setThisArcFlag_atFinal_from1Joiner = false
@@ -202,28 +186,120 @@ function mouseMoveDrawParallel(event, thisFigure) {
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
         // if(i !== 2) {
             console.log("i: " + i)
-            thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
+            //new (turned off)
+            // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
             thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
-            if(thisFigure.originalFigurePathDatas[i].hide === false) {
+            if(thisFigure.originalFigurePathDatas[i].hide === false) {  //FIXME: RH
                 if(i < thisFigure.originalFigurePathDatas.length) {
+                        // let skipPrevPdPathSubFigure = thisFigure.originalFigurePathDatas[i - 1].hide
+                        let subFigureSkipperIndexModifiers = {
+                        previousIndexModifier: 0,
+                        currentIndexModifier: 0,
+                        nextIndexModifier: 0
+                    }
                     if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
                         console.log("CURRENT_INDEX_IS_ARC")
                         // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
-                        thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
-                        // let intersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this, i - 1)
-                        // intersectionsSorter_WithArc.sortIntersections_NEW(false)
+                        //old
+                        // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
+
+
+                        // PRE TESTING (WRKING)
+                        // new
+                        //FIXME: This breaks all saved figure.... have to  and empty : interSectionSorter: "empty" to SvgData_Class in this.arc = {}
+                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                        let IntersectionSorter
+                        if(thisFigure.parallelFigureObject.iterationCounter < 2) {
+                            // console.log("NEW_CLASS")
+                            // console.log(THISPathData.arc.interSectionSorter)
+                            IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            THISPathData.arc.interSectionSorter = IntersectionSorter
+                            // console.log(THISPathData.arc.interSectionSorter)
+                        }
+                        // IntersectionSorter.handleConnectedArcIntersection(false)
+                        THISPathData.arc.interSectionSorter.handleConnectedArcIntersection(false)
+
+                        // console.log("LOG_IT")
+                        // console.log(THISPathData)
+                        // console.log(THISPathData.arc.interSectionSorter)
+
+
+                        // //TESTING
+                        // // if(skipPrevPdPathSubFigure = true) {
+                        // //     subFigureSkipperIndexModifiers.previousIndexModifier = -1
+                        // // } else {
+                        // //     subFigureSkipperIndexModifiers.previousIndexModifier = 0
+                        // // }
+
+                        // if(i === 3) {
+                        //     subFigureSkipperIndexModifiers.previousIndexModifier = -1
+                        // } else {
+                        //     subFigureSkipperIndexModifiers.previousIndexModifier = 0
+
+                        //     let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                        //     let IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                        //     THISPathData.arc.interSectionSorter = IntersectionSorter
+                        //     IntersectionSorter.handleConnectedArcIntersection(false)
+                        // }
+
+
+
                         if(i < thisFigure.originalFigurePathDatas.length - 1) {
-                            console.log("CHECKING_FOR_ARC_JOINER")
+                            // console.log("CHECKING_FOR_ARC_JOINER")
                             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
                                 console.log("i: " + i + " ++")
                                 console.log("CURRENT_INDEX_IS_ARC_JOINER")
                                 // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                                // old
+                                // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                                // // // new // old
+                                // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                                // thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
+                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+
+                                //new
+                                let THISPathData_02 = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+                                // let IntersectionSorter
+                                console.log("okokokokokok_01")
+                                if(THISPathData_02.arc.interSectionSorter === "empty") {
+                                    // console.log("inside_thisDisc")
+                                    let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                                    THISPathData_02.arc.interSectionSorter = IntersectionSorter
+                                }
+                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
+                                THISPathData_02.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
+
+
+
                             } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
                                 console.log("i: " + i + " ++")
-                                console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
+                                console.log("PREVIOUS_INDEX_IS_ARC_JOINER") // (prev index is arc joiner runs because the arc disconnects right before and you need to catch it)
                                 // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
-                                thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+                                //old
+                                // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                                // // // //new
+                                // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                                // thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
+                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+
+                                //new
+                                let THISPathData_03 = thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+                                console.log("okokokokokok_02")
+                                // let IntersectionSorter
+                                if(THISPathData_03.arc.interSectionSorter === "empty") {
+                                    // console.log("inside_prevDisc")
+                                    let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                                    THISPathData_03.arc.interSectionSorter = IntersectionSorter
+                                }
+                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
+                                THISPathData_03.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
+
+
+
                             } else {
                                 console.log("NO_JOINER")
                             }

@@ -16,6 +16,7 @@ function PathDataParallel() {
 
     // Call the constructor of the parent class
     PathData.call(this)
+    this.dataChangeChecker = "Changed_At_PDParallel"
 }
 
 // Inherit methods from the parent class

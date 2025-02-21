@@ -42,8 +42,8 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
     //old
     // let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
     // let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
+    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode, interSectionSorter: "empty"}}
+    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode, interSectionSorter: "empty"}}
     // use the data to create a parellelPathDataCorner
     let parPathDataCorner = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     

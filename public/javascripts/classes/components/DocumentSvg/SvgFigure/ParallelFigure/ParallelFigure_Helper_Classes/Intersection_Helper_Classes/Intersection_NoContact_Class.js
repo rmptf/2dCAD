@@ -1,14 +1,13 @@
 import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
 
-function Intersection_NoContact(parallelFigure) {
+function Intersection_NoContact(parallelFigure, index) {
     this.PARFIGURE = parallelFigure //FIXME: still used
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     this.parFigureObject = parallelFigure.parallelFigureObject
-
-    this.index = null
+    this.index = index
 
     // might have to update manually like index //FIXME:
     // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
@@ -17,20 +16,6 @@ function Intersection_NoContact(parallelFigure) {
 
 Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function(indexModifier) { // mod: 0
     let index = this.index + indexModifier
-
-    // path_start
-    // let firstParPath = this.parallelFigurePathDatas[index - 1][0]
-    // // separated pd_01
-    // let secondParPath = this.parallelFigurePathDatas[index - 1][1]
-    // // corner_01
-    // let thirdParPath = this.parallelFigurePathDatas[index + 0][0]
-    // // corner_02
-    // let fourthParPath = this.parallelFigurePathDatas[index + 0][1]
-    // // separated pd_02
-    // let fifthParPath = this.parallelFigurePathDatas[index + 1][0]
-    // arc_finish
-    // let sixthParPath = this.parallelFigurePathDatas[index + 1][1]
-
 
     // path_start
     let firstParPath = this.originalFigurePathDatas[index - 1].children.parallel_pathDatas.pathData_west
@@ -72,17 +57,6 @@ Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function
 Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function(indexModifier) { // mod: -1
     let index = this.index + indexModifier
 
-    // //old
-    // // separated pd_01
-    // let firstParPath = this.parallelFigurePathDatas[index + 0][1]
-    // // corner_01
-    // let secondParPath = this.parallelFigurePathDatas[index + 1][0]
-    // // corner_02
-    // let thirdParPath = this.parallelFigurePathDatas[index + 1][1]
-    // // separated pd_02
-    // let fourthParPath = this.parallelFigurePathDatas[index + 2][0]
-    // let fifthParPath = this.parallelFigurePathDatas[index + 2][1]
-
     //new
     // separated pd_01
     let firstParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_east
@@ -123,16 +97,6 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
 Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(indexModifier) {  // mod: -1
     let index = this.index + indexModifier
 
-    // // separated pd_01
-    // let firstParPath = this.parallelFigurePathDatas[index + 0][1]
-    // // corner_01
-    // let secondParPath = this.parallelFigurePathDatas[index + 1][0]
-    // // corner_02
-    // let thirdParPath = this.parallelFigurePathDatas[index + 1][1]
-    // // separated pd_02
-    // let fourthParPath = this.parallelFigurePathDatas[index + 2][0]
-    // let fifthParPath = this.parallelFigurePathDatas[index + 2][1]
-
     // separated pd_01
     let firstParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_east
     // corner_01
@@ -168,46 +132,6 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
 }
 
 Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded, nextIndexModded, shape) {
-    // FIXME: CHECK HERE
-    // FIXME: CHECK HERE
-    // FIXME: CHECK HERE    // In the test figure where we are seeing the current bug, the corner end points and corner path is NOT removed but the previous 
-                            // real endpoints and real path is removed.
-                            // That might indicate something is wrong with THIS function or how its called.
-                            // The bug only hapens sometimes when moving the parallel line fast
-
-                            // THIS IS CORRECT
-                            // The problem is down at: // Remove SVG Elements and Classes
-                            // When a corner element is added in the SAME shape that one is REMOVED the counter for that OLD way of removing elements is off and it removes the previous elements
-    // FIXME: CHECK HERE
-    // FIXME: CHECK HERE
-    // FIXME: CHECK HERE
-
-    // console.log("Remove_Points_and_Paths")
-    // //old
-    // let thisIndex = thisIndexModded
-    // let nextIndex = nextIndexModded
-    // let doubleIndex = thisIndex * 2
-    // // Remove pathDatas from various Figure arrays
-    // this.parallelFigurePathDatas.splice(thisIndex, 1)
-    // this.originalFigurePathDatas_plusFillers.splice(nextIndex, 1)
-    // this.parallelPathDatas_perpendicular.splice(thisIndex, 1)
-    // // Remove SVG Elements and Classes
-    // // Select Elements
-    // let svgEndPointGroup = this.PARFIGURE.svgEndPoints
-    // let svgPathGroup = this.PARFIGURE.svgPaths.parallelPaths
-    // let firstAddedSvgEndPoint = svgEndPointGroup[doubleIndex + 1]
-    // let secondAddedSvgEndPoint = svgEndPointGroup[doubleIndex]
-    // let addedSvgPath = svgPathGroup[thisIndex]
-    // // Remove SVG Elements from Dom
-    // firstAddedSvgEndPoint.svgElementObject.remove()
-    // secondAddedSvgEndPoint.svgElementObject.remove()
-    // addedSvgPath.svgElementObject.remove()
-    // // Remove SVG Element Classes from Figure
-    // svgEndPointGroup.splice(doubleIndex + 1, 1)
-    // svgEndPointGroup.splice(doubleIndex, 1)
-    // svgPathGroup.splice(thisIndex, 1)
-
-
     //new
     console.log("Remove_Points_and_Paths")
     let parEndPointClassArray = this.PARFIGURE.svgEndPoints
@@ -247,61 +171,3 @@ Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded
 export {
     Intersection_NoContact
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // //new
-    // console.log("Remove_Points_and_Paths")
-    // let parEndPointClassArray = this.PARFIGURE.svgEndPoints
-    // let parPathClassArray = this.PARFIGURE.svgPaths.parallelPaths
-
-    // // Retrieve the SVG Elements that will need to be removed
-    // let path_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerPath()
-    // let endPoint_element_01 = this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
-    // this.originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
-
-    // // Find the classes that hold the Elements
-    // const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === endPoint_element_01)
-    // // const endPoint_class_02 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === endPoint_element_02)
-    // const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === path_element_01)
-    // // const this_PfPathData_01 = this.parallelFigurePathDatas.find(obj => obj[1].cornerPath_REF === path_element_01) // Might not need, using path_class_01 instead
-
-    // // Find the index of te class in its array
-    // const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
-    // // const indexOfEpInEpClassArray_02 = parEndPointClassArray.indexOf(endPoint_class_02)
-    // // const indexOfEpInEpClassArray_02 = indexOfEpInEpClassArray_01 + 1
-    // const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
-    // // const indexOfPdInParPdArray_01 = this.parallelFigurePathDatas.indexOf(this_PfPathData_01) // Might not need, using indexOfPathInPathClassArray_01 instead
-
-    // // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
-    // // this.parallelFigurePathDatas.splice(indexOfPdInParPdArray_01, 1)
-    // // this.originalFigurePathDatas_plusFillers.splice(indexOfPdInParPdArray_01 + 1, 1)
-    // // this.parallelPathDatas_perpendicular.splice(indexOfPdInParPdArray_01, 1)
-    // this.parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
-    // this.originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
-    // this.parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
-
-    // // Remove the SVG Classes from thier arrays
-    // // parEndPointClassArray.splice(indexOfEpInEpClassArray_01 + 1, 1)
-    // parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
-    // parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
-
-    // // Remove the SVG Elements from the DOM TODO: Handling in SvgData_Parallle for now
-    // // path_element_01.remove()
-    // // endPoint_element_01.remove()
-    // // endPoint_element_02.remove()

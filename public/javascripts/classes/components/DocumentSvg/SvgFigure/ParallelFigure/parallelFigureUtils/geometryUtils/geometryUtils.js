@@ -20,7 +20,7 @@ const translateLinePreservingDirection = (originLineStart, originLineFinish, new
 }
 
 const translatePerpendicularLinePreservingDirection = (originLineStart, originLineFinish, newVectorCenter) => {
-    console.log("oksfoksdofks")
+    // console.log("oksfoksdofks")
     // Existing line coordinates
     const x1 = originLineStart.coords.x
     const y1 = originLineStart.coords.y
@@ -66,11 +66,11 @@ const pointCrossedAxis = (axisStartCoords, axisFinishCoords, pointCoords, refere
      // Return the side based on the cross product
     if (crossProduct > 0) {
         checkForFigureAndRunAFunction(4, 1)
-        console.log("NO_CROSSED_AXIS")
+        // console.log("NO_CROSSED_AXIS")
         return true
     } else if (crossProduct < 0) {
         checkForFigureAndRunAFunction(1, 4)
-        console.log("CROSSED_AXIS")
+        // console.log("CROSSED_AXIS")
         return false
     } else {
         // return "ON_AXIS"
@@ -78,7 +78,7 @@ const pointCrossedAxis = (axisStartCoords, axisFinishCoords, pointCoords, refere
 }
 
 const pointCrossedAxis_02 = (axisStartCoords, axisFinishCoords, pointCoords, referenceFigures) => {
-    console.log("asfsdfdsfsd")
+    // console.log("asfsdfdsfsd")
     // Vector from start to end of the path
     const pathVectorX = axisFinishCoords[0] - axisStartCoords[0]
     const pathVectorY = axisFinishCoords[1] - axisStartCoords[1]
@@ -243,6 +243,7 @@ const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, fig
     return false;
 }
 
+// removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.PARFIGURE, this.index - 1, this.index)
 const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, thisIndexModded, index) => {
     let PARFIGURE = parallelFigure //FIXME: still used
     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
@@ -250,6 +251,10 @@ const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, t
     let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let parFigureObject = parallelFigure.parallelFigureObject
+
+    let parPaths = parallelFigure.svgPaths.parallelPaths
+
+
 
 
     console.log("jifjsdifjsdijfisdj")

@@ -4,16 +4,14 @@ import {translateLinePreservingDirection, pointCrossedAxis} from "../ParallelFig
 
 function LargeArcFlagSetter(parallelFigure) {
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-    this.originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
-    // this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    this.parallelFigureObj = parallelFigure.parallelFigureObject
-    //old
-    // this.index = null
     this.firstIteration = true
     this.prevCrossState = null
 
+
+
+    // Reference Figure Stuff
     let svgFigure = parallelFigure.svgFigure
-    // Add ReferenceFigures
+    // OLD FIG STUFF
     this.referenceFigure_01 = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 1)
     this.referenceFigure_01.addCircle({palette: 4, circRad: 10, fillClr: 2}, 2)
@@ -30,7 +28,6 @@ function LargeArcFlagSetter(parallelFigure) {
     this.referenceFigure_03.addPath({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 5}, 3)
     this.referenceFigure_03.addPath({palette: 2, strkWdth: 5, strkClr: 2, dshArray: 'none'}, 4)
 
-
     // NEW FLIP FLAP SHIT
     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
     this.referenceFigure_01_A.addCircle({palette: 1, circRad: 3, fillClr: 4}, 1)
@@ -46,12 +43,9 @@ function LargeArcFlagSetter(parallelFigure) {
 }
 
 
-LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot, index) {
-    // console.log("ARCFLAG_FLIPPER_RUNNING")
-    let modifiedIndex = index + indexModifier
-
-    let parallelEndPoint_start = this.originalFigurePathDatas[modifiedIndex].children.parallel_pathDatas.pathData_west
-    let parallelEndPoint_end = this.originalFigurePathDatas[modifiedIndex + 1].children.parallel_pathDatas.pathData_east
+LargeArcFlagSetter.prototype.setLargeArcFlag = function(runOrNot, index) {
+    let parallelEndPoint_start = this.originalFigurePathDatas[index].children.parallel_pathDatas.pathData_west
+    let parallelEndPoint_end = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_east
     let midPointBetweenEndPoints = findLineMidpoint(parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y, parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y)
 
     this.referenceFigure_01.runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
