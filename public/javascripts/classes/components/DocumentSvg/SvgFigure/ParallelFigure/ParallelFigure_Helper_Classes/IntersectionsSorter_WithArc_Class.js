@@ -57,7 +57,17 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
 
     //new
     this.joinerType = (targetIndex, code) => {
+        // console.log('running_joiner_outside')
+        // console.log(targetIndex)
+        // console.log(code)
+        // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west)
+        // console.log(this.index)
         if(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+            // console.log("inside_joinerType")
+            // console.log(this.previousOriginalFigurePathData(targetIndex))
+            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0])
+            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true)
+            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code)
             return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
         } else {
             return false
@@ -81,6 +91,16 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
         return list.includes(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
     }
 }
+
+
+IntersectionsSorter_WithArc.prototype.setIndex = function(index) {
+    this.index = index
+
+    this.previousIndex = this.index + 0// + subFigureSkipperIndexModifiers.previousIndexModifier
+    this.thisIndex = this.index + 1// + subFigureSkipperIndexModifiers.currentIndexModifier 
+    this.nextIndex = this.index + 2// + subFigureSkipperIndexModifiers.nextIndexModifier
+}
+
 
 // IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
 //     this.index = index
@@ -291,8 +311,11 @@ IntersectionsSorter_WithArc_Disconnected_cornerShape_01.prototype.handleDisconne
         // 5_Joiner
         // case this.joinerType(this.index, "BBB"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
         case this.joinerType(this.thisIndex, "BBB"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToPath(); break
+        // 6_Joiner
+        // case this.parallelFigureObj.skipperCheckers.skipperChecker_Arc: this.IntersectionHandler.disconnectedArcIntersection_skipThisIndex(parPathObj) // TODO: check that it works
     }
 }
+
 
 export {
     IntersectionsSorter_WithArc,

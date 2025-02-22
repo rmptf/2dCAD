@@ -95,6 +95,7 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
 }
 
 Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(indexModifier) {  // mod: -1
+    console.log("ARC_TO_ARC")
     let index = this.index + indexModifier
 
     // separated pd_01
@@ -109,6 +110,10 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
     let fifthParPath = this.originalFigurePathDatas[index + 2].children.parallel_pathDatas.pathData_east
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
+
+    console.log(firstParPath)
+    console.log(fifthParPath)
+    console.log(arcToArcIntPoint)
 
     if(arcToArcIntPoint[0].doesIntersect === false) {
         // first point (joiner 1 parent)

@@ -225,7 +225,10 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // 3_Joiner
     console.log("3_Joiner_ooo")
     this.setArcRadius(1)
-    this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
+    //old
+    // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
+    //new
+    this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
@@ -246,11 +249,11 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     this.parallelFigureObj.parallelPathSegmentCounter_SECOND = 1
 }
 
-// IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex = function() {
-//     // 6_Joiner
-//     console.log("6_Joiner_ooo")
-//     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
-// }
+IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_skipThisIndex = function() {
+    // 6_Joiner
+    console.log("6_Joiner_ooo")
+    this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+}
 
 
 

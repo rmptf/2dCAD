@@ -184,135 +184,113 @@ function mouseMoveDrawParallel(event, thisFigure) {
     }
     // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
-        // if(i !== 2) {
-            console.log("i: " + i)
-            //new (turned off)
-            // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
-            thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
-            if(thisFigure.originalFigurePathDatas[i].hide === false) {  //FIXME: RH
-                if(i < thisFigure.originalFigurePathDatas.length) {
-                        // let skipPrevPdPathSubFigure = thisFigure.originalFigurePathDatas[i - 1].hide
-                        let subFigureSkipperIndexModifiers = {
-                        previousIndexModifier: 0,
-                        currentIndexModifier: 0,
-                        nextIndexModifier: 0
-                    }
-                    if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
-                        console.log("CURRENT_INDEX_IS_ARC")
-                        // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
-                        //old
-                        // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
+        console.log("i: " + i)
+        //new (turned off)
+        // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
+        thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
+        // if(thisFigure.originalFigurePathDatas[i].hide === false) {  //FIXME: RH
+            if(i < thisFigure.originalFigurePathDatas.length) {
+                    let subFigureSkipperIndexModifiers = {
+                    previousIndexModifier: 0,
+                    currentIndexModifier: 0,
+                    nextIndexModifier: 0
+                }
+                if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) { //FIXME: Tight herer
+                    console.log("CURRENT_INDEX_IS_ARC")
+                    console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
+                    //old
+                    // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
 
 
-                        // PRE TESTING (WRKING)
-                        // new
-                        //FIXME: This breaks all saved figure.... have to  and empty : interSectionSorter: "empty" to SvgData_Class in this.arc = {}
-                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        let IntersectionSorter
-                        if(thisFigure.parallelFigureObject.iterationCounter < 2) {
-                            // console.log("NEW_CLASS")
-                            // console.log(THISPathData.arc.interSectionSorter)
-                            IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                            THISPathData.arc.interSectionSorter = IntersectionSorter
-                            // console.log(THISPathData.arc.interSectionSorter)
-                        }
-                        // IntersectionSorter.handleConnectedArcIntersection(false)
-                        THISPathData.arc.interSectionSorter.handleConnectedArcIntersection(false)
-
-                        // console.log("LOG_IT")
-                        // console.log(THISPathData)
+                    // PRE TESTING (WRKING)
+                    // new
+                    //FIXME: This breaks all saved figure.... have to  and empty : interSectionSorter: "empty" to SvgData_Class in this.arc = {}
+                    let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                    let IntersectionSorter
+                    if(thisFigure.parallelFigureObject.iterationCounter < 2) {
+                        // console.log("NEW_CLASS")
                         // console.log(THISPathData.arc.interSectionSorter)
-
-
-                        // //TESTING
-                        // // if(skipPrevPdPathSubFigure = true) {
-                        // //     subFigureSkipperIndexModifiers.previousIndexModifier = -1
-                        // // } else {
-                        // //     subFigureSkipperIndexModifiers.previousIndexModifier = 0
-                        // // }
-
-                        // if(i === 3) {
-                        //     subFigureSkipperIndexModifiers.previousIndexModifier = -1
-                        // } else {
-                        //     subFigureSkipperIndexModifiers.previousIndexModifier = 0
-
-                        //     let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        //     let IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                        //     THISPathData.arc.interSectionSorter = IntersectionSorter
-                        //     IntersectionSorter.handleConnectedArcIntersection(false)
-                        // }
-
-
-
-                        if(i < thisFigure.originalFigurePathDatas.length - 1) {
-                            // console.log("CHECKING_FOR_ARC_JOINER")
-                            if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                                console.log("i: " + i + " ++")
-                                console.log("CURRENT_INDEX_IS_ARC_JOINER")
-                                // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
-                                // old
-                                // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
-
-                                // // // new // old
-                                // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                                // thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
-                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
-
-
-                                //new
-                                let THISPathData_02 = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
-                                // let IntersectionSorter
-                                console.log("okokokokokok_01")
-                                if(THISPathData_02.arc.interSectionSorter === "empty") {
-                                    // console.log("inside_thisDisc")
-                                    let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                                    THISPathData_02.arc.interSectionSorter = IntersectionSorter
-                                }
-                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
-                                THISPathData_02.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
-
-
-
-                            } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
-                                console.log("i: " + i + " ++")
-                                console.log("PREVIOUS_INDEX_IS_ARC_JOINER") // (prev index is arc joiner runs because the arc disconnects right before and you need to catch it)
-                                // console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
-                                //old
-                                // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
-
-                                // // // //new
-                                // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                                // thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
-                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
-
-
-                                //new
-                                let THISPathData_03 = thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
-                                console.log("okokokokokok_02")
-                                // let IntersectionSorter
-                                if(THISPathData_03.arc.interSectionSorter === "empty") {
-                                    // console.log("inside_prevDisc")
-                                    let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
-                                    THISPathData_03.arc.interSectionSorter = IntersectionSorter
-                                }
-                                // IntersectionSorter.handleDisconnectedArcIntersection(false)
-                                THISPathData_03.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
-
-
-
-                            } else {
-                                console.log("NO_JOINER")
-                            }
-                        }
-                    } else {
-                        console.log("CURRENT_INDEX_IS_PATH")
-                        thisFigure.IntersectionsSorter_NoArc.sortIntersections()
+                        IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                        THISPathData.arc.interSectionSorter = IntersectionSorter
+                        // console.log(THISPathData.arc.interSectionSorter)
                     }
+                    // IntersectionSorter.handleConnectedArcIntersection(false)
+                    THISPathData.arc.interSectionSorter.setIndex(i - 1)
+                    THISPathData.arc.interSectionSorter.handleConnectedArcIntersection(false)
+
+                    if(i < thisFigure.originalFigurePathDatas.length - 1) {
+                        // console.log("CHECKING_FOR_ARC_JOINER")
+                        if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                            console.log("i: " + i + " ++")
+                            console.log("CURRENT_INDEX_IS_ARC_JOINER")
+                            console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
+                            //old
+                            // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                            // //new //old
+                            // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            // thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+
+                            //new
+                            let THISPathData_02 = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+                            // let IntersectionSorter
+                            // console.log("okokokokokok_01")
+                            // console.log(THISPathData_02)
+                            // if(THISPathData_02.arc.interSectionSorter === "empty") {
+                            //     console.log("inside_thisDisc")
+                            //     let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            //     THISPathData_02.arc.interSectionSorter = IntersectionSorter
+                            // }
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+                            THISPathData_02.arc.interSectionSorter.setIndex(i - 1)
+                            THISPathData_02.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
+
+
+
+                        } else if(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
+                            console.log("i: " + i + " ++")
+                            console.log("PREVIOUS_INDEX_IS_ARC_JOINER") // (prev index is arc joiner runs because the arc disconnects right before and you need to catch it)
+                            console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
+                            //old
+                            // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                            // //new //old
+                            // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            // thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.interSectionSorter = IntersectionSorter
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+
+                            //new
+                            let THISPathData_03 = thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
+                            // console.log("okokokokokok_02")
+                            // let IntersectionSorter
+                            if(THISPathData_03.arc.interSectionSorter === "empty") {
+                                console.log("inside_prevDisc")
+                                let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                                THISPathData_03.arc.interSectionSorter = IntersectionSorter
+                                THISPathData_03.arc.crapper = "crapper"
+
+                            }
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+                            THISPathData_03.arc.interSectionSorter.setIndex(i - 1)
+                            THISPathData_03.arc.interSectionSorter.handleDisconnectedArcIntersection(false)
+
+
+
+                        } else {
+                            console.log("NO_JOINER")
+                        }
+                    }
+                } else {
+                    console.log("CURRENT_INDEX_IS_PATH")
+                    thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                 }
             }
-            thisFigure.parallelFigure_updateSvg()
-        }
-    // }
+        // }
+        thisFigure.parallelFigure_updateSvg()
+    }
 }
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
