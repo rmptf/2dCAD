@@ -113,39 +113,51 @@ IntersectionsSorter_WithArc.prototype.setIndex = function(index) {
 //     this.IntersectionHandler.Intersection_NoContact.index = index
 // }
 
-// IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
-//     if (!this.firstPosition(this.index)) {
-//         switch(true) {
-//             case !this.lastPosition(this.index) && this.isJoiner(this.index) && joiner === true:
-//                 // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_THIS_INDEX_OTHER_POS")
-//                 console.log("DISCONNECTED_1111111111")
-//                 this.handleDisconnectedArcIntersection()
-//                 // console.log("INT_SORTER_ARC: SORTING: RUNNING_CONNECTED_AFTER_DISCONNECTED")
-//                 break
-//             case this.isJoiner(this.index - 1):
-//                 // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
-//                 console.log("DISCONNECTED_1111111111")
-//                 this.handleDisconnectedArcIntersection(joiner)
-//                 break
-//             default:
-//                 // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_OTHER_POS")
-//                 console.log("CONNECTED_0000000000")
-//                 this.handleConnectedArcIntersection()
-//             }
-//     } else if (this.firstPosition(this.index)) {
-//         switch (true) {
-//             case this.isJoiner(this.index):
-//                 // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_FIRST_POS")
-//                 console.log("DISCONNECTED_1111111111")
-//                 this.handleDisconnectedArcIntersection()
-//                 break
-//             default:
-//                 // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_FIRST_POS")
-//                 console.log("CONNECTED_0000000000")
-//                 this.handleConnectedArcIntersection()
-//         }
-//     }
-// }
+//FIXME: right here
+IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
+    if (!this.firstPosition(this.index)) {
+        switch(true) {
+            //old
+            // case !this.lastPosition(this.index) && this.isJoiner(this.index) && joiner === true:
+            //new
+            case !this.lastPosition(this.thisIndex) && this.isJoiner(this.thisIndex) && joiner === true:
+                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_THIS_INDEX_OTHER_POS")
+                console.log("DISCONNECTED_1111111111")
+                this.handleDisconnectedArcIntersection()
+                // console.log("INT_SORTER_ARC: SORTING: RUNNING_CONNECTED_AFTER_DISCONNECTED")
+                break
+            //old
+            // case this.isJoiner(this.index - 1):
+            case this.isJoiner(this.previousIndex): 
+                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
+                console.log("DISCONNECTED_1111111111")
+                this.handleDisconnectedArcIntersection(joiner)
+                break
+            default:
+                // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_OTHER_POS")
+                console.log("CONNECTED_0000000000")
+                this.handleConnectedArcIntersection()
+            }
+    //old
+    // } else if (this.firstPosition(this.index)) {
+    //new
+    } else if (this.firstPosition(this.thisIndex)) {
+        switch (true) {
+            //old
+            // case this.isJoiner(this.index):
+            //old
+            case this.isJoiner(this.thisIndex):
+                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_FIRST_POS")
+                console.log("DISCONNECTED_1111111111")
+                this.handleDisconnectedArcIntersection()
+                break
+            default:
+                // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_FIRST_POS")
+                console.log("CONNECTED_0000000000")
+                this.handleConnectedArcIntersection()
+        }
+    }
+}
 
 IntersectionsSorter_WithArc.prototype.handleConnectedArcIntersection = function() { //TODO: Is there a way to just know which segments we r on rather than setting a flag?
     // 1
@@ -236,7 +248,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
 }
 
-//old
+// old
 // IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = function(joiner) {
 //     // console.log("INT_SORTER_ARC: DISCONNECTED_INTERSECTION")
 //     switch(true) {

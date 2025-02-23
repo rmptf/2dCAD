@@ -217,6 +217,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // IntersectionSorter.handleConnectedArcIntersection(false)
                     THISPathData.arc.interSectionSorter.setIndex(i - 1)
                     THISPathData.arc.interSectionSorter.handleConnectedArcIntersection(false)
+                    // THISPathData.arc.interSectionSorter.sortIntersections_NEW(false)
 
                     if(i < thisFigure.originalFigurePathDatas.length - 1) {
                         // console.log("CHECKING_FOR_ARC_JOINER")
