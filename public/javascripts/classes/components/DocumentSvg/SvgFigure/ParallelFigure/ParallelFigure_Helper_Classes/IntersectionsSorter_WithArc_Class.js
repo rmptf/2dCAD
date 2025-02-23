@@ -65,26 +65,26 @@ IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
     if (!this.firstPosition(this.index)) {
         switch(true) {
             case !this.lastPosition(this.index) && this.isJoiner(this.index) && joiner === true:
-                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_THIS_INDEX_OTHER_POS")
+                console.log("INT_SORTER_ARC: SORTING: HANDLE_DISCONNECTED: YES_JOINER_THIS_INDEX_OTHER_POS")
                 this.handleDisconnectedArcIntersection()
                 // console.log("INT_SORTER_ARC: SORTING: RUNNING_CONNECTED_AFTER_DISCONNECTED")
                 break
             case this.isJoiner(this.index - 1):
-                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_PREV_INDEX_OTHER_POS")
+                console.log("INT_SORTER_ARC: SORTING:  HANDLE_DISCONNECTED: YES_JOINER_PREV_INDEX_OTHER_POS")
                 this.handleDisconnectedArcIntersection(joiner)
                 break
             default:
-                // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_OTHER_POS")
+                console.log("INT_SORTER_ARC: SORTING: HANDLE_CONNECTED: NO_JOINER_OTHER_POS")
                 this.handleConnectedArcIntersection()
             }
     } else if (this.firstPosition(this.index)) {
         switch (true) {
             case this.isJoiner(this.index):
-                // console.log("INT_SORTER_ARC: SORTING: YES_JOINER_FIRST_POS")
+                console.log("INT_SORTER_ARC: SORTING: HANDLE_DISCONNECTED: YES_JOINER_FIRST_POS")
                 this.handleDisconnectedArcIntersection()
                 break
             default:
-                // console.log("INT_SORTER_ARC: SORTING: NO_JOINER_FIRST_POS")
+                console.log("INT_SORTER_ARC: SORTING: HANDLE_CONNECTED: NO_JOINER_FIRST_POS")
                 this.handleConnectedArcIntersection()
         }
     }
