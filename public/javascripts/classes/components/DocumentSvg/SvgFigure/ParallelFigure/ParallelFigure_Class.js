@@ -272,8 +272,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
                                 console.log("inside_prevDisc")
                                 let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
                                 THISPathData_03.arc.interSectionSorter = IntersectionSorter
-                                THISPathData_03.arc.crapper = "crapper"
-
                             }
                             // IntersectionSorter.handleDisconnectedArcIntersection(false)
                             THISPathData_03.arc.interSectionSorter.setIndex(i - 1)

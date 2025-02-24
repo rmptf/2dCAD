@@ -297,7 +297,7 @@ IntersectionsSorter_WithArc.prototype.handleDisconnectedArcIntersection = functi
             break
         // 3_Joiner
         // case this.joinerType(this.index, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
-        case this.joinerType(this.thisIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(0); break  //3_ooo
+        case this.joinerType(this.thisIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break  //3_ooo
         // 4_Joiner
         // case this.joinerType(this.index - 1, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); break // TODO: (Set_arcRad)
         case this.joinerType(this.previousIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); break // TODO: (Set_arcRad)    //4_ooo
@@ -351,7 +351,7 @@ IntersectionsSorter_WithArc_Disconnected_cornerShape_01.prototype.handleDisconne
             break
         // 3_Joiner
         // case this.joinerType(this.index, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break
-        case this.joinerType(this.thisIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(-1); break  //3_ooo
+        case this.joinerType(this.thisIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_thisIndexIsArcToArc(); break  //3_ooo
         // 4_Joiner
         // case this.joinerType(this.index - 1, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); break // TODO: (Set_arcRad)
         case this.joinerType(this.previousIndex, "CCC"): this.IntersectionHandler.disconnectedArcIntersection_prevIndexIsArcToArc(); break // TODO: (Set_arcRad)    //4_ooo
