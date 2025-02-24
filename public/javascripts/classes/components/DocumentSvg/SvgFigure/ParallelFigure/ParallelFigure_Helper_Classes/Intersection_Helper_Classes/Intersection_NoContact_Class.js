@@ -146,6 +146,15 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
+    console.log("check_int_no_cont")
+    console.log(firstParPath)
+    console.log(secondParPath)
+    console.log(thirdParPath)
+    console.log(fourthParPath)
+    console.log(fifthParPath)
+    console.log("INTPOINT")
+    console.log(arcToArcIntPoint)
+
     if(arcToArcIntPoint[0].doesIntersect === false) {
         // first point (joiner 1 parent)
         firstParPath.coords.x = arcToArcIntPoint[0].x
