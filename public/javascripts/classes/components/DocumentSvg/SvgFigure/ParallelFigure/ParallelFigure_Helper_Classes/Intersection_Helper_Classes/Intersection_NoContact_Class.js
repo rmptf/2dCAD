@@ -69,7 +69,6 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
     // path_end
     let fifthParPath = this.originalFigurePathDatas[index + 2].children.parallel_pathDatas.pathData_east
 
-
     let pathToArcIntPoint = getPathToArcIntersections(fourthParPath, fifthParPath, firstParPath, {coords: {x: 0, y: 0}})
     let circleRadiusPoint = findPointAlongSlopeAtDistance([firstParPath.arc.center.x,firstParPath.arc.center.y], [pathToArcIntPoint[0].x,pathToArcIntPoint[0].y], firstParPath.arc.radius)
 
@@ -110,6 +109,17 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
 
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 
+    console.log("POOOOOOPER")
+    console.log(firstParPath)
+    console.log(secondParPath)
+    console.log(thirdParPath)
+    console.log(fourthParPath)
+    console.log(fifthParPath)
+    console.log("INTPOINT")
+    console.log(arcToArcIntPoint)
+
+
+
     if(arcToArcIntPoint[0].doesIntersect === false) {
         // first point (joiner 1 parent)
         firstParPath.coords.x = arcToArcIntPoint[0].x
@@ -124,6 +134,21 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         // last point  (joiner 2 parent)
         fourthParPath.coords.x = arcToArcIntPoint[1].x
         fourthParPath.coords.y = arcToArcIntPoint[1].y
+
+
+        // // first point (joiner 1 parent)
+        // firstParPath.coords.x = 100
+        // firstParPath.coords.y = 100
+        // // joiner 1
+        // secondParPath.coords.x = 100
+        // secondParPath.coords.y = 100
+        // // joiner 2
+        // thirdParPath.coords.x = 200
+        // thirdParPath.coords.y = 100
+        // thirdParPath.arc.radius = 500
+        // // last point  (joiner 2 parent)
+        // fourthParPath.coords.x = 200
+        // fourthParPath.coords.y = 100
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")

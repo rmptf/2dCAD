@@ -221,14 +221,17 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     this.handleIntersectionWithArc('a2p')
 }
 
-IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function() {
+IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArcToArc = function(checker) {
     // 3_Joiner
     console.log("3_Joiner_ooo")
     this.setArcRadius(1)
     //old
     // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
-    // new
+    // new //old
     this.Intersection_NoContact.handleArcToArcIntersectionNoContact(-1)
+    //newnew
+    // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(checker)
+
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
