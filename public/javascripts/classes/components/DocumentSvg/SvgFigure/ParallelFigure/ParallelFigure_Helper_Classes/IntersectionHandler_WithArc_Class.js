@@ -18,16 +18,17 @@ function IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperInde
         isIntersectionConnected: true,
     }
 
-    this.Intersection_Contact = new Intersection_Contact(parallelFigure, index, this.intersectionHandlerObject)
-    this.Intersection_NoContact = new Intersection_NoContact(parallelFigure, index)
-
-    let previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
-    let thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
-    let nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
+    this.skipperIndexMods = subFigureSkipperIndexModifiers
+    let previousIndex = this.index + 0 + this.skipperIndexMods.previousIndexModifier
+    let thisIndex = this.index + 1 + this.skipperIndexMods.currentIndexModifier 
+    let nextIndex = this.index + 2 + this.skipperIndexMods.nextIndexModifier
 
     this.previousOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[previousIndex + modifierFromFunction]
     this.thisOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[thisIndex + modifierFromFunction]
     this.nextOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[nextIndex + modifierFromFunction]
+
+    this.Intersection_Contact = new Intersection_Contact(parallelFigure, index, this.intersectionHandlerObject, this.skipperIndexMods)
+    this.Intersection_NoContact = new Intersection_NoContact(parallelFigure, index)
 
 
 

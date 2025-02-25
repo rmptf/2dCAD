@@ -4,70 +4,18 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
     // this.PARFIGURE = parallelFigure
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
-
     this.index = index
- 
     this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
     this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
     this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
-
     this.previousOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
     this.thisOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
     this.nextOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
 
-
     this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperIndexModifiers)
 
-    //old
-    // this.isWest123 = (targetIndex) => console.log(this.parallelPathDatas[targetIndex][1].arc.side)
-    // this.isWest = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.side === 'west'
-    // this.isJoiner = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.joiner === true
-    // this.joinerType = (targetIndex, code) => this.parallelPathDatas[targetIndex][1].arc.joiner === true && this.parallelPathDatas[targetIndex][1].arc.joinerSide === code
-    // this.arcExist = (targetIndex) => this.parallelPathDatas[targetIndex][1].arc.exist === true
-    // this.firstPosition = (targetIndex) => (targetIndex) === 0
-    // this.lastPosition = (targetIndex) => targetIndex === this.parallelPathDatas.length - 1
-    // this.includes = (list, targetIndex) => list.includes(this.parallelPathDatas[targetIndex][1].arc.joinerSide)
-
-    // //new //old
-    // this.joinerType = (targetIndex, code) => {
-    //     if(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0) {
-    //         return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
-    //     } else {
-    //         return false
-    //     }
-    // }
-    // this.isJoiner = (targetIndex) => {
-    //     return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 0;
-    // }
-    // this.firstPosition = (targetIndex) => (targetIndex + 1) === 1
-
-    // this.arcExist = (targetIndex) => {
-    //     return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_east.arc.exist === true
-    // }
-    // this.joinerExist = (targetIndex) => {
-    //     return this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.children.childCount > 1
-    // }
-    // this.lastPosition = (targetIndex) => {
-    //     return targetIndex + 1 >= this.originalFigurePathDatas.length - 1
-    // }
-    // this.includes = (list, targetIndex) => {
-    //     return list.includes(this.originalFigurePathDatas[targetIndex + 1].children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
-    // }
-
-
-    //new
     this.joinerType = (targetIndex, code) => {
-        // console.log('running_joiner_outside')
-        // console.log(targetIndex)
-        // console.log(code)
-        // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west)
-        // console.log(this.index)
         if(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0) {
-            // console.log("inside_joinerType")
-            // console.log(this.previousOriginalFigurePathData(targetIndex))
-            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0])
-            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true)
-            // console.log(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code)
             return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
         } else {
             return false
