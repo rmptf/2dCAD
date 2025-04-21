@@ -63,10 +63,9 @@ function ParallelFigure(svgFigure, sectionIndex) {
     }
     this.isDownDrawParallelActive = false
 
+    this.skipped_index = 'THIS_GETS_CHANGED'
     this.skipped_indecies = []
-    this.skipped_indecies_NOT_ORDERED = []
-    this.currentSkippedIndex = null
-    this.groupOfConsecutiveIndeciesCounter = 0
+    this.firstArcClosedBeforeIntersection = null
 
     //new (removed this)
     // this.IntersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this)
@@ -193,7 +192,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
         // findParallelDistance(thisFigure.originalFigurePathDatas, 0, event)
         let parallelDistance = findParallelDistance(thisFigure.originalFigurePathDatas, thisFigure.parallelFigureObject.sectionClickedIndex, event)
         thisFigure.parallelFigureObject.parallelDistance = parallelDistance
-        // thisFigure.parallelFigureObject.parallelDistance = -150
+        // thisFigure.parallelFigureObject.parallelDistance = -100
     }
     // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
@@ -201,56 +200,68 @@ function mouseMoveDrawParallel(event, thisFigure) {
         // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
         thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
 
-        // // thisFigure.groupOfConsecutiveIndeciesCounter = 0
-        // let diffCounter = 0 //FIXME: i think this might work but cant check until more indecies
-        // let breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies = groupConsecutive(thisFigure.skipped_indecies)
-        // console.log("butthurt")
-        // console.log(breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies)
-        // // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[thisFigure.groupOfConsecutiveIndeciesCounter]
-        // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[diffCounter]
-        // // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[0]
-        // console.log(diffCounter)
-        // console.log(thisFigure.groupOfConsecutiveIndeciesCounter)
-        // console.log(currentGroupOfConsecutiveSkippedIndecies)
-
-        // function groupConsecutive(arr) {
-        //     arr.sort((a, b) => a - b); // Sort numbers
-        //     const result = []
-        //     let group = []
-          
-        //     for (let i = 0; i < arr.length; i++) {
-        //       if (group.length === 0 || arr[i] === arr[i - 1] + 1) {
-        //         group.push(arr[i])
-        //       } else {
-        //         result.push(group)
-        //         group = [arr[i]]
-        //       }
-        //     }
-          
-        //     if (group.length) result.push(group); // Add last group
-        //     return result;
-        //   }
-
 
 
         let subFigureSkipperIndexModifiers = {
             previousIndexModifier: 0,
             currentIndexModifier: 0,
             nextIndexModifier: 0,
-            subFigureIndex: thisFigure.skipped_indecies,
-            currentSkippedIndex: thisFigure.currentSkippedIndex,
-            currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
+            subFigureIndex: thisFigure.skipped_indecies
+        }
+        let singleAndDoubleClosedArcVars = {
+            prev_skippedIndex_ifStatement: -1,
+            prev_skippedIndex_nextIndexModifier: 1,
+            skipped_skippedIndex_ifStatement: 0,
+            following_skippedIndex_ifStatement: 1,
+            following_skippedIndex_previousIndexModifier: -1
+        }
+        if(thisFigure.skipped_indecies.length > 1) {
+            console.log("EVERYTHING_EQUALS_DOUBLE_wehavestartednewway")
+            singleAndDoubleClosedArcVars = {
+                prev_skippedIndex_ifStatement: -2,
+                prev_skippedIndex_nextIndexModifier: 2,
+                skipped_skippedIndex_ifStatement: -1,
+                following_skippedIndex_ifStatement: 1,
+                following_skippedIndex_previousIndexModifier: -2
+            }
         }
 
-        if(i === thisFigure.skipped_indecies[0] - 1 && thisFigure.skipped_indecies[0] !== 0) {  //FIXME: TODO: was an if else added that stopped this from running an ran regular for some reason
+        // // only for 2 closed arcs, starts after int.
+        // if(thisFigure.skipped_indecies.length > 1) {
+        //     console.log("EVERYTHING_EQUALS_DOUBLE_wehavestartednewway")
+        //     singleAndDoubleClosedArcVars = {
+        //         prev_skippedIndex_ifStatement: -1,
+        //         prev_skippedIndex_nextIndexModifier: 2,
+        //         skipped_skippedIndex_ifStatement: -0,
+        //         following_skippedIndex_ifStatement: 2,
+        //         following_skippedIndex_previousIndexModifier: -2
+        //     }
+        // }
+
+        // -2, -1
+        // -1, 0
+        // 1, 2
+
+
+        //FIXME: RIGHT HERE
+        // let arrayOfConnectedSkippedIndexes = [] //TODO: add later
+        if(i === thisFigure.skipped_indecies[0] - 1) {
             console.log("NEXT_SKIPPED_THIS_IS_PREVIOUS_INDEX: NEW_SKIPPER")
 
-            subFigureSkipperIndexModifiers.nextIndexModifier = thisFigure.skipped_indecies.length // causes issues with random shapes... do i need?
+            // console.log("i")
+            // console.log(i)
+            // console.log("skipped_index")
+            // console.log(thisFigure.skipped_index)
+            // console.log("prev_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.prev_skippedIndex_ifStatement)
+            // console.log("thisFigure.skipped_index + prev_skippedIndex_ifStatement")
+            // console.log(thisFigure.skipped_index + singleAndDoubleClosedArcVars.prev_skippedIndex_ifStatement)
+
+            subFigureSkipperIndexModifiers.nextIndexModifier = singleAndDoubleClosedArcVars.prev_skippedIndex_nextIndexModifier
             subFigureSkipperIndexModifiers.subFigureIndex = thisFigure.skipped_indecies
 
             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) {
                 console.log("CURRENT_INDEX_IS_ARC")
-                console.log(thisFigure.originalFigurePathDatas[i])
 
                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                 if(thisFigure.parallelFigureObject.iterationCounter < 2) {
@@ -259,61 +270,62 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
                 THISPathData.interSectionSorter.setIndex(i - 1, subFigureSkipperIndexModifiers)
 
-                // THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
-                if(thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] === thisFigure.originalFigurePathDatas.length - 1) { // if(skippedInd[last] = origFigLenth)
-                    if(i === 1) { //FIXME: HARDCODED
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
-                    } else if(i === 2) { //FIXME: HARDCODED
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
-                    }
-                } else {
-                    THISPathData.interSectionSorter.sortIntersections_NEW(false)
-                }
+
+
+                // if(thisFigure.arcClosedBeforeIntersection()) {
+                //     THISPathData.interSectionSorter.customIntersection_A2A_previousArcClosedPREVIOUS(false)
+                // } else {
+                //     THISPathData.interSectionSorter.customIntersection_A2A_afterArcClosedPREVIOUS(false)
+                // }
+
+                THISPathData.interSectionSorter.sortIntersections_NEW(false)
+
+                // if(thisFigure.skipped_index === 3) {
+                //     // THISPathData.interSectionSorter.sortIntersections_NEW(false)
+                //     console.log("HERE_YES_01")
+                //     THISPathData.interSectionSorter.customIntersection_A2A_twoArcsClosedPREVIOUS(false)
+                // } else {
+                //     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+                // }
+
+
+
+
             }
         }
 
         else if(thisFigure.skipped_indecies.includes(i)) {
+        // else if(i === thisFigure.skipped_index || i === thisFigure.skipped_index + singleAndDoubleClosedArcVars.skipped_skippedIndex_ifStatement) {
             console.log("SKIPPED_INDEX_DONT_RUN: NEW_SKIPPER")
-            console.log(thisFigure.originalFigurePathDatas[i])
+            
+            // console.log("i")
+            // console.log(i)
+            // console.log("skipped_index")
+            // console.log(thisFigure.skipped_index)
+            // console.log("skipped_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.skipped_skippedIndex_ifStatement)
+            // console.log("thisFigure.skipped_index + skipped_skippedIndex_ifStatement")
+            // console.log(thisFigure.skipped_index + singleAndDoubleClosedArcVars.skipped_skippedIndex_ifStatement)
 
-
-            if(i === 1) {
-                let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopo()
-            }
-
-            // NEW STUFF WORKING
-            let skippedIndecies = thisFigure.skipped_indecies
-            let lastArcIndex = thisFigure.originalFigurePathDatas.length - 1
-            let skippedArcWithHighestIndex = skippedIndecies[skippedIndecies.length - 1];
-
-            if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
-                if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
-                    if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc
-                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE   
-                    } else { // Current skipped arc index IS NOT final arc
-                        if(i === thisFigure.currentSkippedIndex + 0) {
-                            let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                            THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
-                        }
-                    }
-                } else { // More than the first index not skipped
-                    if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped
-                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
-                    }
-                }
-            }
-            // NEW STUFF WORKING
+            // console.log(i)
+            // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
         } 
 
         else if(i === thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] + 1) {
+        // else if(i === thisFigure.skipped_index + singleAndDoubleClosedArcVars.following_skippedIndex_ifStatement) {  // have to remove this to work but need it on the final #4 after the first second arc closed
             console.log("PREVIOUS_SKIPPED_THIS_IS_FOLLOWING_INDEX: NEW_SKIPPER")
-            console.log(thisFigure.originalFigurePathDatas[i])
 
-            subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+            // console.log("i")
+            // console.log(i)
+            // console.log("skipped_index")
+            // console.log(thisFigure.skipped_index)
+            // console.log("following_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.following_skippedIndex_ifStatement)
+            // console.log("thisFigure.skipped_index + following_skippedIndex_ifStatement")
+            // console.log(thisFigure.skipped_index + singleAndDoubleClosedArcVars.following_skippedIndex_ifStatement)
+
+            subFigureSkipperIndexModifiers.previousIndexModifier = singleAndDoubleClosedArcVars.following_skippedIndex_previousIndexModifier
             subFigureSkipperIndexModifiers.subFigureIndex = thisFigure.skipped_indecies
 
             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) {
@@ -326,42 +338,60 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
                 THISPathData.interSectionSorter.setIndex(i - 1, subFigureSkipperIndexModifiers)
 
-                // THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
-                if(thisFigure.skipped_indecies[0] === 1) {
-                    if(i === 4) { //FIXME: hardcoded
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
-                    } else if(i === 3) { //FIXME: hardcoded
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
-                    }
-                } else {
-                    THISPathData.interSectionSorter.sortIntersections_NEW(false)
-                }
 
-                // thisFigure.groupOfConsecutiveIndeciesCounter = thisFigure.groupOfConsecutiveIndeciesCounter + 1
-                // diffCounter = diffCounter + 1
+            
+                // if(thisFigure.arcClosedBeforeIntersection()) {
+                //     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+                // } else {
+                //     THISPathData.interSectionSorter.customIntersection_A2A_afterArcClosedNEXT(false)
+                // }
+
+                THISPathData.interSectionSorter.sortIntersections_NEW(false)
+                
+                // if(thisFigure.skipped_index === 3) {
+                //     console.log("HERE_YES_02")
+                //     THISPathData.interSectionSorter.customIntersection_A2A_twoArcsClosedNEXT(false)
+                // } else {
+                //     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+                // }
+
+
+
+
             }
         }
 
         else {
             console.log("NOTHING_SKIPPED_RUN_NORMAL: NEW_SKIPPER")
+            // console.log("i")
+            // console.log(i)
+            // console.log("skipped_index")
+            // console.log(thisFigure.skipped_index)
+            // console.log("prev_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.prev_skippedIndex_ifStatement)
+            // console.log("skipped_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.skipped_skippedIndex_ifStatement)
+            // console.log("following_skippedIndex_ifStatement")
+            // console.log(singleAndDoubleClosedArcVars.following_skippedIndex_ifStatement)
 
             subFigureSkipperIndexModifiers = {
                 previousIndexModifier: 0,
                 currentIndexModifier: 0,
                 nextIndexModifier: 0,
-                //old
-                subFigureIndex: thisFigure.skipped_indecies,
-                //new
-                // subFigureIndex: null
-                currentSkippedIndex: thisFigure.currentSkippedIndex,
-                currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
+                subFigureIndex: thisFigure.skipped_indecies
             }
             if(i < thisFigure.originalFigurePathDatas.length) {
                 if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) {
                     console.log("CURRENT_INDEX_IS_ARC")
-                    console.log(thisFigure.originalFigurePathDatas[i])
+                    // console.log(thisFigure.originalFigurePathDatas[i])
+                    // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east)
+                    // console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
 
+                    //old
+                    // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(false)
+
+                    // new
                     let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                     if(thisFigure.parallelFigureObject.iterationCounter < 2) {
                         let IntersectionSorter = new IntersectionsSorter_WithArc(thisFigure, i - 1, subFigureSkipperIndexModifiers)
@@ -379,6 +409,15 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             // console.log("CURRENT_INDEX_IS_ARC_JOINER")
                             console.log(thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west)
 
+                            //old
+                            // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                            // //new //old
+                            // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            // thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].interSectionSorter = IntersectionSorter
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+                            //new
                             let THISPathData_02 = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
                             if(THISPathData_02.interSectionSorter === "empty") {
                                 let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
@@ -392,6 +431,15 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             // console.log("PREVIOUS_INDEX_IS_ARC_JOINER")
                             console.log(thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west)
 
+                            //old
+                            // thisFigure.IntersectionsSorter_WithArc.sortIntersections_NEW(true)
+
+                            // //new //old
+                            // let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
+                            // thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].interSectionSorter = IntersectionSorter
+                            // IntersectionSorter.handleDisconnectedArcIntersection(false)
+
+                            //new
                             let THISPathData_03 = thisFigure.originalFigurePathDatas[i-1].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
                             if(THISPathData_03.interSectionSorter === "empty") {
                                 let IntersectionSorter = new IntersectionsSorter_WithArc_Disconnected_cornerShape_01(thisFigure, i - 1, subFigureSkipperIndexModifiers)
@@ -413,8 +461,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
             }
         }
-        console.log("RUN ANIMATOR")
-        thisFigure.parallelFigure_updateSvg(i, subFigureSkipperIndexModifiers)
+        thisFigure.parallelFigure_updateSvg(subFigureSkipperIndexModifiers)
     }
 }
 
@@ -454,8 +501,8 @@ ParallelFigure.prototype.transformData = function(pathDatas) {
 }
 
 
-ParallelFigure.prototype.parallelFigure_updateSvg = function(i, skippers) {
-    updateSVG_thisSvgParallelFigure(this, i, skippers)
+ParallelFigure.prototype.parallelFigure_updateSvg = function(skippers) {
+    updateSVG_thisSvgParallelFigure(this, skippers)
 }
 
 ParallelFigure.prototype.initiateFigure = function() {

@@ -60,16 +60,11 @@ const pointCrossedAxis = (axisStartCoords, axisFinishCoords, pointCoords, refere
     // Compute the cross product
     const crossProduct = pathVectorX * pointVectorY - pathVectorY * pointVectorX
 
-    // Check if there is a referenceFigure and run it's function
-    let checkForFigureAndRunAFunction = (pos1, pos2) => referenceFigures.length > 0 ? referenceFigures[0].changeCircleColor(pos1, pos2) : null
-
      // Return the side based on the cross product
     if (crossProduct > 0) {
-        checkForFigureAndRunAFunction(4, 1)
         // console.log("NO_CROSSED_AXIS")
         return true
     } else if (crossProduct < 0) {
-        checkForFigureAndRunAFunction(1, 4)
         // console.log("CROSSED_AXIS")
         return false
     } else {
@@ -77,76 +72,76 @@ const pointCrossedAxis = (axisStartCoords, axisFinishCoords, pointCoords, refere
     }
 }
 
-const pointCrossedAxis_02 = (axisStartCoords, axisFinishCoords, pointCoords, referenceFigures) => {
-    // console.log("asfsdfdsfsd")
-    // Vector from start to end of the path
-    const pathVectorX = axisFinishCoords[0] - axisStartCoords[0]
-    const pathVectorY = axisFinishCoords[1] - axisStartCoords[1]
+// const pointCrossedAxis_02 = (axisStartCoords, axisFinishCoords, pointCoords, referenceFigures) => {
+//     // console.log("asfsdfdsfsd")
+//     // Vector from start to end of the path
+//     const pathVectorX = axisFinishCoords[0] - axisStartCoords[0]
+//     const pathVectorY = axisFinishCoords[1] - axisStartCoords[1]
   
-    // Vector from start of path to the point
-    const pointVectorX = pointCoords[0] - axisStartCoords[0]
-    const pointVectorY = pointCoords[1] - axisStartCoords[1]
+//     // Vector from start of path to the point
+//     const pointVectorX = pointCoords[0] - axisStartCoords[0]
+//     const pointVectorY = pointCoords[1] - axisStartCoords[1]
 
-    // Compute the cross product
-    const crossProduct = pathVectorX * pointVectorY - pathVectorY * pointVectorX
-
-
-    console.log(pathVectorX)
-    console.log(pointVectorY)
-    console.log(pathVectorY)
-    console.log(pointVectorX)
-    console.log(crossProduct)
-
-    // Check if there is a referenceFigure and run it's function
-    let checkForFigureAndRunAFunction = (pos1, pos2) => referenceFigures.length > 0 ? referenceFigures[0].changeCircleColor(pos1, pos2) : null
-
-     // Return the side based on the cross product
-    if (crossProduct > 0) {
-        checkForFigureAndRunAFunction(4, 1)
-        console.log("NO_CROSSED_AXISASS")
-        return true
-    } else if (crossProduct < 0) {
-        checkForFigureAndRunAFunction(1, 4)
-        console.log("CROSSED_AXISASS")
-        return false
-    } else {
-        // return "ON_AXIS"
-    }
-}
+//     // Compute the cross product
+//     const crossProduct = pathVectorX * pointVectorY - pathVectorY * pointVectorX
 
 
-// FIXME: here
-const translatePerpendicularLinePreservingDirection000 = (originLineStart, originLineFinish, newPoint, originLineStart_startPos, originLineEnd_startPos, figures) => {
-    // Existing line coordinates
-    const x1 = originLineStart.coords.x, y1 = originLineStart.coords.y;
-    const x2 = originLineFinish.coords.x, y2 = originLineFinish.coords.y;
+//     console.log(pathVectorX)
+//     console.log(pointVectorY)
+//     console.log(pathVectorY)
+//     console.log(pointVectorX)
+//     console.log(crossProduct)
 
-    // New point the perpendicular line should pass through
-    const px = newPoint[0], py = newPoint[1];
+//     // Check if there is a referenceFigure and run it's function
+//     let checkForFigureAndRunAFunction = (pos1, pos2) => referenceFigures.length > 0 ? referenceFigures[0].changeCircleColor(pos1, pos2) : null
 
-    // Calculate the shift vector
-    const dx = x2 - x1; 
-    const dy = y2 - y1;
-
-    // Rotate the shift vector 90 degrees counterclockwise (-dy, dx)
-    const perpDx = -dy, perpDy = dx;
-
-    // Compute the new start and end points for the perpendicular line
-    const perpLineStart = [px - perpDx, py - perpDy];
-    const perpLineFinish = [px + perpDx, py + perpDy];
-
-    // Check if the second point crossed the first point
-    const crossed = hasCrossedMovingLine(originLineStart_startPos, originLineEnd_startPos, [x1, y1], [x2, y2], originLineStart_startPos, newPoint, figures)
-
-    console.log("POOPER")
-    console.log(crossed)
+//      // Return the side based on the cross product
+//     if (crossProduct > 0) {
+//         checkForFigureAndRunAFunction(4, 1)
+//         console.log("NO_CROSSED_AXISASS")
+//         return true
+//     } else if (crossProduct < 0) {
+//         checkForFigureAndRunAFunction(1, 4)
+//         console.log("CROSSED_AXISASS")
+//         return false
+//     } else {
+//         // return "ON_AXIS"
+//     }
+// }
 
 
-    return {
-        perpendicularLine: [perpLineStart, perpLineFinish],
-        hasCrossed: crossed
-    };
-};
+// // FIXME: here
+// const translatePerpendicularLinePreservingDirection000 = (originLineStart, originLineFinish, newPoint, originLineStart_startPos, originLineEnd_startPos, figures) => {
+//     // Existing line coordinates
+//     const x1 = originLineStart.coords.x, y1 = originLineStart.coords.y;
+//     const x2 = originLineFinish.coords.x, y2 = originLineFinish.coords.y;
+
+//     // New point the perpendicular line should pass through
+//     const px = newPoint[0], py = newPoint[1];
+
+//     // Calculate the shift vector
+//     const dx = x2 - x1; 
+//     const dy = y2 - y1;
+
+//     // Rotate the shift vector 90 degrees counterclockwise (-dy, dx)
+//     const perpDx = -dy, perpDy = dx;
+
+//     // Compute the new start and end points for the perpendicular line
+//     const perpLineStart = [px - perpDx, py - perpDy];
+//     const perpLineFinish = [px + perpDx, py + perpDy];
+
+//     // Check if the second point crossed the first point
+//     const crossed = hasCrossedMovingLine(originLineStart_startPos, originLineEnd_startPos, [x1, y1], [x2, y2], originLineStart_startPos, newPoint, figures)
+
+//     console.log("POOPER")
+//     console.log(crossed)
+
+
+//     return {
+//         perpendicularLine: [perpLineStart, perpLineFinish],
+//         hasCrossed: crossed
+//     };
+// };
 
 // FIXME: here
 const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentEnd, trackedPointStart, newPoint, figures) => {
@@ -165,21 +160,7 @@ const hasCrossedMovingLine = (startingStart, startingEnd, currentStart, currentE
     return cross1 * cross2 < 0;
 };
 
-
-
-
-
-const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, figures) => {
-    figures[0].runFunctions([line1Start])
-    figures[1].runFunctions([line1End])
-    figures[2].runFunctions([line1Start, line1End])
-
-    figures[3].runFunctions([line2Start])
-    figures[4].runFunctions([line2End])
-    figures[5].runFunctions([line2Start, line2End])
-
-    let checkForFigureAndRunAFunction = (pos1, pos2, figure) => figures.length > 0 ? figures[figure].changeCircleColor(pos1, pos2) : null
-    
+const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End) => {
     function crossProduct(a, b) {
         return a[0] * b[1] - a[1] * b[0];
     }
@@ -193,135 +174,112 @@ const areTwoLinesIntersecting = (line1Start, line1End, line2Start, line2End, fig
                Math.min(a[1], b[1]) <= p[1] && p[1] <= Math.max(a[1], b[1]);
     }
 
-    let d1 = crossProduct(subtractPoints(line2Start, line1Start), subtractPoints(line1End, line1Start));
-    let d2 = crossProduct(subtractPoints(line2End, line1Start), subtractPoints(line1End, line1Start));
-    let d3 = crossProduct(subtractPoints(line1Start, line2Start), subtractPoints(line2End, line2Start));
-    let d4 = crossProduct(subtractPoints(line1End, line2Start), subtractPoints(line2End, line2Start));
+    let d1 = crossProduct(subtractPoints(line2Start, line1Start), subtractPoints(line1End, line1Start))
+    let d2 = crossProduct(subtractPoints(line2End, line1Start), subtractPoints(line1End, line1Start))
+    let d3 = crossProduct(subtractPoints(line1Start, line2Start), subtractPoints(line2End, line2Start))
+    let d4 = crossProduct(subtractPoints(line1End, line2Start), subtractPoints(line2End, line2Start))
 
     if ((d1 * d2 < 0) && (d3 * d4 < 0)) {
-        checkForFigureAndRunAFunction(2, 1, 0)
-        checkForFigureAndRunAFunction(2, 1, 1)
-        checkForFigureAndRunAFunction(4, 3, 3)
-        checkForFigureAndRunAFunction(4, 3, 4)
         return true;
     }
 
     // Check for collinear overlap (special case)
     if (d1 === 0 && isPointOnSegment(line2Start, line1Start, line1End)) {
-        checkForFigureAndRunAFunction(2, 1, 0)
-        checkForFigureAndRunAFunction(2, 1, 1)
-        checkForFigureAndRunAFunction(4, 3, 3)
-        checkForFigureAndRunAFunction(4, 3, 4)
         return true;
     }
     if (d2 === 0 && isPointOnSegment(line2End, line1Start, line1End)) {
-        checkForFigureAndRunAFunction(2, 1, 0)
-        checkForFigureAndRunAFunction(2, 1, 1)
-        checkForFigureAndRunAFunction(4, 3, 3)
-        checkForFigureAndRunAFunction(4, 3, 4)
         return true;
     }
     if (d3 === 0 && isPointOnSegment(line1Start, line2Start, line2End)) {
-        checkForFigureAndRunAFunction(2, 1, 0)
-        checkForFigureAndRunAFunction(2, 1, 1)
-        checkForFigureAndRunAFunction(4, 3, 3)
-        checkForFigureAndRunAFunction(4, 3, 4)
         return true;
     }
     if (d4 === 0 && isPointOnSegment(line1End, line2Start, line2End)) {
-        checkForFigureAndRunAFunction(2, 1, 0)
-        checkForFigureAndRunAFunction(2, 1, 1)
-        checkForFigureAndRunAFunction(4, 3, 3)
-        checkForFigureAndRunAFunction(4, 3, 4)
         return true;
     }
-
-    checkForFigureAndRunAFunction(1, 2, 0)
-    checkForFigureAndRunAFunction(1, 2, 1)
-    checkForFigureAndRunAFunction(3, 4, 3)
-    checkForFigureAndRunAFunction(3, 4, 4)
     return false;
 }
 
+
+
 // removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.PARFIGURE, this.index - 1, this.index)
 const removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER = (parallelFigure, thisIndexModded, index) => {
-    let PARFIGURE = parallelFigure //FIXME: still used
-    let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
-    let originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
-    let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
-    let parFigureObject = parallelFigure.parallelFigureObject
+    // let PARFIGURE = parallelFigure //FIXME: still used
+    // let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
+    // let originalFigurePathDatas_plusFillers = parallelFigure.originalFigurePathDatas_plusFillers
+    // let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
+    // let parallelPathDatas_perpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
+    // let parFigureObject = parallelFigure.parallelFigureObject
 
-    let parPaths = parallelFigure.svgPaths.parallelPaths
-
-
-
-
-    console.log("jifjsdifjsdijfisdj")
-    console.log(originalFigurePathDatas[2])
-
-    // originalFigurePathDatas[2].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west 
-    originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
-
-    originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west 
-    originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east
-
-    // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_west = null
-    // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_east = null
-    // originalFigurePathDatas[4].children.childCount = 0
-    // originalFigurePathDatas[4].hide = true
-
-    // originalFigurePathDatas.pop(originalFigurePathDatas[4])
+    // let parPaths = parallelFigure.svgPaths.parallelPaths
 
 
 
 
+    // // console.log("jifjsdifjsdijfisdj")
+    // // console.log(originalFigurePathDatas[2])
+
+    // // originalFigurePathDatas[2].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west 
+    // originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
+
+    // originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_west 
+    // originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[3].children.parallel_pathDatas.pathData_east
+
+    // // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_west = null
+    // // originalFigurePathDatas[4].children.parallel_pathDatas.pathData_east = null
+    // // originalFigurePathDatas[4].children.childCount = 0
+    // // originalFigurePathDatas[4].hide = true
+
+    // // originalFigurePathDatas.pop(originalFigurePathDatas[4])
 
 
-    // // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west
-    // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
-    // originalFigurePathDatas.splice(2, 1)
+
+
+
+
+    // // // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west = originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west
+    // // originalFigurePathDatas[1].children.parallel_pathDatas.pathData_east = originalFigurePathDatas[2].children.parallel_pathDatas.pathData_east
+    // // originalFigurePathDatas.splice(2, 1)
 
 
     
-    console.log(originalFigurePathDatas)
+    // console.log(originalFigurePathDatas)
     
 
-    //Remove 
+    // //Remove 
 
-    // //This is how corner elements are removed (could be useful to remove main path and points)
-    // console.log("Remove_Points_and_Paths")
-    // let parEndPointClassArray = PARFIGURE.svgEndPoints
-    // let parPathClassArray = PARFIGURE.svgPaths.parallelPaths
+    // // //This is how corner elements are removed (could be useful to remove main path and points)
+    // // console.log("Remove_Points_and_Paths")
+    // // let parEndPointClassArray = PARFIGURE.svgEndPoints
+    // // let parPathClassArray = PARFIGURE.svgPaths.parallelPaths
 
-    // //FIXME: change to remove parallelPathDats
-    // let elements = originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
+    // // //FIXME: change to remove parallelPathDats
+    // // let elements = originalFigurePathDatas[thisIndexModded].children.parallel_pathDatas.pathData_west.removeChildCornerElements()
 
-    // // Find the classes that hold the Elements
-    // const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
-    // const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
+    // // // Find the classes that hold the Elements
+    // // const path_class_01 = parPathClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[0])
+    // // const endPoint_class_01 = parEndPointClassArray.find(obj => obj.svgElementObject._groups[0][0] === elements[1])
 
-    // // Find the index of te class in its array
-    // const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
-    // const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
+    // // // Find the index of te class in its array
+    // // const indexOfEpInEpClassArray_01 = parEndPointClassArray.indexOf(endPoint_class_01)
+    // // const indexOfPathInPathClassArray_01 = parPathClassArray.indexOf(path_class_01)
 
-    // // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
-    // parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
-    // originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
-    // parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
+    // // // Update the OLD arrays for svg animation TODO: WILL REMOVE LATER
+    // // parallelFigurePathDatas.splice(indexOfPathInPathClassArray_01, 1)
+    // // originalFigurePathDatas_plusFillers.splice(indexOfPathInPathClassArray_01 + 1, 1)
+    // // parallelPathDatas_perpendicular.splice(indexOfPathInPathClassArray_01, 1)
 
-    // // Remove the SVG Classes from thier arrays
-    // parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
-    // parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
+    // // // Remove the SVG Classes from thier arrays
+    // // parEndPointClassArray.splice(indexOfEpInEpClassArray_01, 2)
+    // // parPathClassArray.splice(indexOfPathInPathClassArray_01, 1)
 }
 
 
 export {
     translateLinePreservingDirection,
     translatePerpendicularLinePreservingDirection,
-    translatePerpendicularLinePreservingDirection000,
+    // translatePerpendicularLinePreservingDirection000,
     pointCrossedAxis,
-    pointCrossedAxis_02,
+    // pointCrossedAxis_02,
     areTwoLinesIntersecting,
     removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER
 }

@@ -1,6 +1,6 @@
-import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.js'
 import {createAndAddSvgElementAndUpdateDataArrays} from '../IntersectionCorners/createParallelPathCornerElements_NEW.js'
 import {getPathToArcIntersections, getArcToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
+import { ReferenceFigure } from '../../../ReferenceFigure/ReferenceFigure_Class.js'
 
 function Intersection_Contact(parallelFigure, index, intersectionIsConnected, skipperIndexMods) {
     this.PARFIGURE = parallelFigure // FIXME: still used
@@ -8,48 +8,44 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
     this.parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
     this.parFigureObject = parallelFigure.parallelFigureObject
     // this.intersectionHandlerObject = parallelFigure.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject
-    //old
-    // this.index = null
-    //new
     this.index = index
     this.intersectionIsConnected = intersectionIsConnected
     this.skipperIndexMods = skipperIndexMods
 
-
-    // let previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
-    // let thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
-    // let nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
-    // this.previousOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[previousIndex + modifierFromFunction]
-    // this.thisOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[thisIndex + modifierFromFunction]
-    // this.nextOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[nextIndex + modifierFromFunction]
-
-    // this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
-    // this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
-    // this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
-    // this.previousOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    // this.thisOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    // this.nextOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    
     this.previousIndex = this.index + -1 + this.skipperIndexMods.previousIndexModifier
-    this.thisIndex = this.index + 0 + this.skipperIndexMods.currentIndexModifier 
+    this.thisIndex = this.index + 0 + this.skipperIndexMods.previousIndexModifier 
     this.nextIndex = this.index + 1 + this.skipperIndexMods.nextIndexModifier
-    this.previousOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    this.thisOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    this.nextOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
+    this.originalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
 
-    console.log("okokoko")
-    console.log(this.skipperIndexMods.previousIndexModifier)
+    console.log(this.index)
 
-    // this.previousOriginalFigurePathData(this.previousIndex)
-    // this.previousOriginalFigurePathData(this.thisIndex)
-    // this.previousOriginalFigurePathData(this.nextIndex)
-
-
+    // // REFERENCE FIGURE STUFF
+    if(this.index === 2) {
+        console.log("ADDING_REFERENCEFIGURE")
+        let svgFigure = parallelFigure.svgFigure
+        this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_01_A.addCircle({palette: 1, circRad: 10, fillClr: 4}, 1)
+        this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 4}, 1)
+        this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_03_A.addCircle({palette: 3, circRad: 5, fillClr: 4}, 1)
+        this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_04_A.addCircle({palette: 4, circRad: 10, fillClr: 4}, 1)
+    }
+    // // REFERENCE FIGURE STUFF
 
 }
 
+//FIXME: Get rid of this method, set dynamically
+// Intersection_Contact.prototype.setIndex = function(subFigureSkipperIndexModifiers) {
+Intersection_Contact.prototype.setIndex = function(index, subFigureSkipperIndexModifiers) {
+    this.index = index // this wasnt here, added for last final arc shapes (f5 specifically)
+    this.previousIndex = this.index + -1 + subFigureSkipperIndexModifiers.previousIndexModifier
+    this.thisIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
+    this.nextIndex = this.index + 1 + subFigureSkipperIndexModifiers.nextIndexModifier //FIXME: TURNED OFF FOR NEW LONGER SHAPE
+}
+
 Intersection_Contact.prototype.handleAllIntersections = function(shape) {
-    console.log("oksdofk")
     // a2a, p2a, a2p
     let indexArray
     let shapeCount
@@ -81,21 +77,65 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
     // let thisOriginalPathData = this.originalFigurePathDatas[thisIndex + 0] //FIXME: changed (added + 1) while working on p2a, check if affects a2a
 
     //new
-    let prevParallelPathData_start = this.previousOriginalFigurePathData(this.previousIndex).children.parallel_pathDatas.pathData_west // first
-    let prevParallelPathData_end = this.previousOriginalFigurePathData(this.thisIndex).children.parallel_pathDatas.pathData_east // second
-    let thisParallelPathData_start = this.previousOriginalFigurePathData(this.thisIndex).children.parallel_pathDatas.pathData_west // second
-    let thisParallelPathData_end = this.previousOriginalFigurePathData(this.nextIndex).children.parallel_pathDatas.pathData_east // third
-    let nextParallelPathData_start = this.previousOriginalFigurePathData(this.nextIndex).children.parallel_pathDatas.pathData_west // third
-    let nextParallelPathData_end = this.previousOriginalFigurePathData(this.nextIndex + 1).children.parallel_pathDatas.pathData_east // last
-    let thisOriginalPathData = this.previousOriginalFigurePathData(this.thisIndex)
+    console.log("oksokfosdkfosdkofskfskfosdkfoskdf")
+    console.log(this.previousIndex)
+    console.log(this.thisIndex)
+    console.log(this.nextIndex)
 
-    console.log("okokokok")
-    console.log(prevParallelPathData_start)
-    console.log(prevParallelPathData_end)
-    console.log(thisParallelPathData_start)
-    console.log(thisParallelPathData_end)
-    console.log(nextParallelPathData_start)
-    console.log(nextParallelPathData_end)
+    let prevParallelPathData_start
+    let prevParallelPathData_end
+    if(this.previousIndex === -1) { //FIXME: VERY VERY VERY Temporary. needs to be fixed, used for first arc segment closing.
+        console.log("TEMPORARY_INTERSECTION_CONTACT_DATAS: FIX_LATER")
+        prevParallelPathData_start = this.originalFigurePathData(2).children.parallel_pathDatas.pathData_west // first
+        console.log(this.originalFigurePathData(2))
+        // console.log(prevParallelPathData_start)
+        prevParallelPathData_end = this.originalFigurePathData(1).children.parallel_pathDatas.pathData_east // second
+        console.log(this.originalFigurePathData(1))
+        // console.log(prevParallelPathData_end)
+    } else {
+        prevParallelPathData_start = this.originalFigurePathData(this.previousIndex).children.parallel_pathDatas.pathData_west // first
+        console.log(this.originalFigurePathData(this.previousIndex))
+        // console.log(prevParallelPathData_start)
+        prevParallelPathData_end = this.originalFigurePathData(this.thisIndex).children.parallel_pathDatas.pathData_east // second
+        console.log(this.originalFigurePathData(this.thisIndex))
+        // console.log(prevParallelPathData_end)
+    }
+    // let prevParallelPathData_start = this.originalFigurePathData(this.previousIndex).children.parallel_pathDatas.pathData_west // first
+    // // console.log(this.originalFigurePathData(this.previousIndex))
+    // console.log(prevParallelPathData_start)
+    // let prevParallelPathData_end = this.originalFigurePathData(this.thisIndex).children.parallel_pathDatas.pathData_east // second
+    // // console.log(this.originalFigurePathData(this.thisIndex))
+    // console.log(prevParallelPathData_end)
+    let thisParallelPathData_start = this.originalFigurePathData(this.thisIndex).children.parallel_pathDatas.pathData_west // second
+    console.log(this.originalFigurePathData(this.thisIndex))
+    // console.log(thisParallelPathData_start)
+    let thisParallelPathData_end = this.originalFigurePathData(this.nextIndex).children.parallel_pathDatas.pathData_east // third //FIXME: discrepancy RIGHT HERE (maybe where problem is?)
+    console.log(this.originalFigurePathData(this.nextIndex))
+    // console.log(thisParallelPathData_end)
+    // console.log(this.nextIndex) //FIXME: this was the discrepancy
+
+    // let nextParallelPathData_start = this.originalFigurePathData(this.nextIndex).children.parallel_pathDatas.pathData_west // third
+    // console.log(nextParallelPathData_start)
+    //FIXME: Turned off for A2A arcClosed AFTER intersection (fix later)
+    // let nextParallelPathData_end = this.originalFigurePathData(this.nextIndex + 1).children.parallel_pathDatas.pathData_east // last
+    // console.log(nextParallelPathData_end)
+    let thisOriginalPathData = this.originalFigurePathData(this.thisIndex)
+
+
+    // REFERENCE FIGURE STUFF
+    if(this.index === 2) {
+        // let referenceFigures = [this.referenceFigure_04_A]
+        this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+        this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+        this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+        this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    }
+    // REFERENCE FIGURE STUFF
+
+    // // REFERENCE FIGURE STUFF
+    // referenceFigures[0].changeCircleColor(pos1, pos2)
+    // // REFERENCE FIGURE STUFF
+
 
     let intersectPoint
     switch (shape) {
@@ -117,13 +157,13 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
             this.intersectionIsConnected.isIntersectionConnected = false
             switch (shape) {
                 case "a2a":
-                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
+                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, this.nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "p2a":
-                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, thisIndex, shape) //FIXME: Fix later, fix in different file
+                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, this.thisIndex, shape) //FIXME: Fix later, fix in different file
                     break
                 case "a2p":
-                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, nextIndex, shape) //FIXME: Fix later, fix in different file
+                    createAndAddSvgElementAndUpdateDataArrays(this.PARFIGURE, this.nextIndex, shape) //FIXME: Fix later, fix in different file
                     break
             }
         } else {

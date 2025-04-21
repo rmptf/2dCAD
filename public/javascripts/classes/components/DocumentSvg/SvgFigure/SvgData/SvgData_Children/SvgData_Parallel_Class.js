@@ -3,20 +3,19 @@ import {PathData} from '../SvgData_Class.js'
 
 function PathDataParallel() {
     this.endPointElement = null
-
     this.children = {
         childCount: 0,
         corner_pathDatas: []
     }
-
     this.cornerPath_REF = null
     this.cornerShape = "basisCorner" //TODO: will set on build not here
-
     this.largeArcFlagSetter = null
 
     // Call the constructor of the parent class
     PathData.call(this)
+    this.arc.hidden = false
     this.dataChangeChecker = "Changed_At_PDParallel"
+    this.interSectionSorter = "empty"
 }
 
 // Inherit methods from the parent class
@@ -128,9 +127,6 @@ PathDataParallel.createParallelPathDatas = function(originalFigurePathDatas) {
 
             originalFigurePathDatas[i].addChildPathDataBase('pathData_west', newPathData01)
             originalFigurePathDatas[i + 1].addChildPathDataBase('pathData_east', newPathData02)
-
-            // originalFigurePathDatas[i + 1].consoleLogTest()
-            // console.log([newPathData01, newPathData02])
         }
 
         return parallelFigurePathDatas

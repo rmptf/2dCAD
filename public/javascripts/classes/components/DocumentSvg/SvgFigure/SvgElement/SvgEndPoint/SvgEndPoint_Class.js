@@ -6,7 +6,7 @@ function SvgEndPoint(parentFigure, parentElement, pathData, index) {
     this.ELEMENT = 'circle'
     this.CLASSNAME = 'endPoint'
 
-    // this.parentFigure = parentFigure
+    this.parentFigure = parentFigure
     this.parentElement = parentElement
     this.pathData = pathData
     this.svgElementObject = this.createSvgEndPoint(index)

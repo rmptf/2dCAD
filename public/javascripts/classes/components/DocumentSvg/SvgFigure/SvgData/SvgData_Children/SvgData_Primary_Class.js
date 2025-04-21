@@ -3,7 +3,6 @@ import {PathData} from '../SvgData_Class.js'
 
 function PathDataPrimary() {
     this.endPointElement = null
-
     this.children = {
         childCount: 0,
         parallel_pathDatas: {
@@ -12,7 +11,6 @@ function PathDataPrimary() {
         }
     }
     this.hide = false
-
     // Call the constructor of the parent class
     PathData.call(this)
     this.dataChangeChecker = "Changed_At_PDPrimary"

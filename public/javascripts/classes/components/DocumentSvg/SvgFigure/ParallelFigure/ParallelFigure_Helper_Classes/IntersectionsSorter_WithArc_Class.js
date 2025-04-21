@@ -5,51 +5,88 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
     this.originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     this.parallelFigureObj = parallelFigure.parallelFigureObject
     this.index = index
+
     this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
     this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
     this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
-    this.previousOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    this.thisOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
-    this.nextOriginalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
+    this.originalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
+
+    this.previousIndexHARDCOUNT = this.index + 0
+    this.thisIndexHARDCOUNT = this.index + 1
+    this.nextIndexHARDCOUNT = this.index + 2
+
 
     this.IntersectionHandler = new IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperIndexModifiers)
 
     this.joinerType = (targetIndex, code) => {
-        if(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0) {
-            return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
+        if(this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0) {
+            return this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joiner === true && this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0].arc.joinerSide === code
         } else {
             return false
         }
     }
     this.isJoiner = (targetIndex) => {
-        return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0;
+        return this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 0;
     }
     this.firstPosition = (targetIndex) => (targetIndex) === 1
 
     this.arcExist = (targetIndex) => {
-        return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_east.arc.exist === true
+        console.log(targetIndex)
+        console.log(this.originalFigurePathData(targetIndex))
+        return this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_east.arc.exist === true
     }
     this.joinerExist = (targetIndex) => {
-        return this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 1
+        return this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.children.childCount > 1
     }
     this.lastPosition = (targetIndex) => {
         return targetIndex >= this.originalFigurePathDatas.length - 1
     }
     this.includes = (list, targetIndex) => {
-        return list.includes(this.previousOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
+        return list.includes(this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west.arc.joinerSide) //FIXME: Prob need to handle differently // here
     }
+    //FIXME: // new used for handling closed arcs
+    this.isHidden = (targetIndex) => {
+        // console.log("INSIDE_IS_HIDDEN________")
+        // console.log(targetIndex)
+        // console.log(this.originalFigurePathData(targetIndex))
+        // console.log(this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west)
+        return this.originalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west?.arc.hidden === true || false
+    }
+    this.isOdd = (targetIndex) => {
+        return targetIndex % 2 !== 0
+    }
+    //FIXME:
+
+    // new but not used currently
+    // this.ifFirstArcSegement = (targetIndex) => {
+    //     console.log("ARC_SIDE_CHECK")
+    //     if(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west === null) {
+    //         return false
+    //     } else {
+    //         console.log("hurrr")
+    //     }
+    // }
+    // this.logThisParPathData = (targetIndex) => {
+    //     console.log(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas)
+    //     console.log(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_west)
+    //     console.log(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_east)
+    // }
+    // new but not used currently
 }
 
-
-IntersectionsSorter_WithArc.prototype.setIndex = function(index) {
+//FIXME: Is there a way to set this dynamically?
+IntersectionsSorter_WithArc.prototype.setIndex = function(index, subFigureSkipperIndexModifiers) {
     this.index = index
 
-    this.previousIndex = this.index + 0// + subFigureSkipperIndexModifiers.previousIndexModifier
-    this.thisIndex = this.index + 1// + subFigureSkipperIndexModifiers.currentIndexModifier 
-    this.nextIndex = this.index + 2// + subFigureSkipperIndexModifiers.nextIndexModifier
+    this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier
+    this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
+    this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
+
+    //FIXME: Get rid of this way, set dynamically
+    this.IntersectionHandler.setIndex(index, subFigureSkipperIndexModifiers)
 }
 
-
+//old
 // IntersectionsSorter_WithArc.prototype.setIndices = function (index) {
 //     this.index = index
 //     this.IntersectionHandler.index = index
@@ -61,7 +98,271 @@ IntersectionsSorter_WithArc.prototype.setIndex = function(index) {
 //     this.IntersectionHandler.Intersection_NoContact.index = index
 // }
 
-//FIXME: right here
+
+// SHAPE 01
+// SHAPE 01
+// SHAPE 01
+//NOTES:
+//NOTES:
+// not working when there is a arc before this
+//NOTES:
+//NOTES:
+// (CLOSED ARC BEFORE INTERSECTON (PART 1 of 1): runs on index BEFORE clsoed arc)
+//FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_previousArcClosedPREVIOUS = function() {
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //NEW TODO: might just need to add a porject perpendicular before or around this.
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// SHAPE 01
+// SHAPE 01
+// SHAPE 01
+
+
+
+// SHAPE 02
+// SHAPE 02
+// SHAPE 02
+// (CLOSED ARC AFTER INTERSECTON (PART 1 of 2): runs on index BEFORE clsoed arc)
+//FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_afterArcClosedPREVIOUS = function() {
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    // this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() //NEW
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction() //NEW
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 8_seg2_connected         // nothing                                                                                              // nothing                                                                              // arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// 1_all (NEW) (SKIP?)      // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all (NEW)   // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+// (CLOSED ARC AFTER INTERSECTON (PART 2 of 2): runs on index AFTER clsoed arc)
+//FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_afterArcClosedNEXT = function() {
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+    this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //NEW
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() // TRY TO STOP FROM RUNNING BUT HARDER TO DO WHEN BREAKOUT (WORKS WITH IT, JUST ADDS UNNECISSARY ANIMATION)
+    this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1 (NEW)             // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 6_A_seg1: (NEW)          // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+// SHAPE 02
+// SHAPE 02
+// SHAPE 02
+
+
+// SHAPE 03
+// SHAPE 03
+// SHAPE 03
+// (2 ARCS CLSOED (PART 1 of 2): runs on index BEFORE clsoed arc)
+//FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_twoArcsClosedPREVIOUS = function() {
+    console.log("RUNNING_TWOARCS_CLOSED_PREVIOUS")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //NEW
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// OLD #1
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+//old
+// (2 ARCS CLSOED (PART 2 of 2): runs on index AFTER clsoed arc)
+// //FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+// IntersectionsSorter_WithArc.prototype.customIntersection_A2A_twoArcsClosedNEXT = function() {
+//     console.log("RUNNING_TWOARCS_CLOSED_FOLLOWING")
+
+//     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+//     this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+//     // this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //NEW
+//     // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() // TRY TO STOP FROM RUNNING BUT HARDER TO DO WHEN BREAKOUT (WORKS WITH IT, JUST ADDS UNNECISSARY ANIMATION)
+//     // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction_NEW() // TRY TO STOP FROM RUNNING BUT HARDER TO DO WHEN BREAKOUT (WORKS WITH IT, JUST ADDS UNNECISSARY ANIMATION)
+//     this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+//     // this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex_NEW()
+//     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+//     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+//     // this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction_NEW()
+// }
+//NEW #4
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1 (NEW)             // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 6_A_seg1: (NEW)          // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+//new
+// (2 ARCS CLSOED (PART 2 of 2): runs on index AFTER clsoed arc)
+//FIXME: RIGHT HERE (this is a temporary method that HARDCODES these actions) Will have to build dynamic alt. that works for all cases
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_twoArcsClosedNEXT = function() {
+    console.log("RUNNING_TWOARCS_CLOSED_FOLLOWING")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() // REMOVED (but on the surface it looks like it works fine if turned on)
+    this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// SHAPE 03
+// SHAPE 03
+// SHAPE 03
+
+
+
+
+
+
+
+
+
+// SHAPE 04_A_firstArcClosed
+// SHAPE 04_A_firstArcClosed
+// SHAPE 04_A_firstArcClosed
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_popoppopopo = function() {
+    console.log("NEWNEW_01_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed = function() {
+    console.log("NEWNEW_02_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc()
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() //in originalbut does nothing here (does control some prev points)
+    this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+// SHAPE 04_A_firstArcClosed
+// SHAPE 04_A_firstArcClosed
+// SHAPE 04_A_firstArcClosed
+
+// SHAPE 04_B_firstArcClosed
+// SHAPE 04_B_firstArcClosed
+// SHAPE 04_B_firstArcClosed
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_SECOND = function() {
+    console.log("NEWNEW_03_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //new?
+    // this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+}
+
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 6_A_seg1                 // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+// SHAPE 04_B_firstArcClosed
+// SHAPE 04_B_firstArcClosed
+// SHAPE 04_B_firstArcClosed
+
+
+// SHAPE 05_A_lastArcClosed
+// SHAPE 05_A_lastArcClosed
+// SHAPE 05_A_lastArcClosed
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_THRIDS = function() {
+    console.log("NEWNEW_04_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD = function() { //FIXME: For shape F4
+    console.log("NEWNEW_05_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //new?
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1 (NEW?)            // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+// SHAPE 05_A_lastArcClosed
+// SHAPE 05_A_lastArcClosed
+// SHAPE 05_A_lastArcClosed
+
+// SHAPE 05_B_lastArcClosed
+// SHAPE 05_B_lastArcClosed
+// SHAPE 05_B_lastArcClosed
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp = function() {
+    console.log("NEWNEW_06_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+}
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 8_seg2_connected         // nothing                                                                                              // nothing                                                                              // arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+// SHAPE 05_B_lastArcClosed
+// SHAPE 05_B_lastArcClosed
+// SHAPE 05_B_lastArcClosed
+
+
+
+IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS = function() { //FIXME: For shape F5
+    console.log("NEWNEW_05_B_________________________________")
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
+    // this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //new?
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+}
+
+
 IntersectionsSorter_WithArc.prototype.sortIntersections_NEW = function(joiner) {
     //old
     // if (!this.firstPosition(this.index)) {
@@ -116,24 +417,24 @@ IntersectionsSorter_WithArc.prototype.handleConnectedArcIntersection = function(
     // this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() // TODO: (Set_arcRad)
     //new
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
-
+    console.log("CHECKING_ARCSIDE")
+    // this.logThisParPathData(this.thisIndex)
     switch(true) {
         case this.parallelFigureObj.parallelPathSegmentCounter_FIRST === 0:
-            // console.log("INT_SORTER_ARC: FIRST_OR_SECOND: HANDE_FIRST_SEG")
-            this.handleFirctArcSegment()
+            console.log("INT_SORTER_ARC: FIRST_OR_SECOND: HANDLE_FIRST_SEG")
+            this.handleFirstArcSegment()
             break
         default:
-            // console.log("INT_SORTER_ARC: FIRST_OR_SECOND: HANDE_SECOND_SEG")
+            console.log("INT_SORTER_ARC: FIRST_OR_SECOND: HANDLE_SECOND_SEG")
             this.handleSecondArcSegment()
     }
     // Final
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
-    // console.log()
 }
 
-IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {
+IntersectionsSorter_WithArc.prototype.handleFirstArcSegment = function() {
     // 2
-    // console.log("INT_SORTER_ARC: FIRST_ARC_SEG: EVERY_INDEX")
+    console.log("INT_SORTER_ARC: FIRST_ARC_SEG: EVERY_INDEX")
     this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
     switch(true) {
         // case !this.firstPosition(this.index):
@@ -156,17 +457,69 @@ IntersectionsSorter_WithArc.prototype.handleFirctArcSegment = function() {
         switch(true) {
             // 6_A
             // case this.arcExist(this.index + 1): (console.log("INT_SORTER_ARC: FIRST_ARC_SEG: NEXT_INDEX_IS_ARC"), this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()); break
-            // case this.arcExist(this.index + 1): this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
-            // case this.arcExist(this.index + 1): this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
             case this.arcExist(this.nextIndex): this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc(); break
             // 6_B
             // default: (console.log("INT_SORTER_ARC: FIRST_ARC_SEG: NEXT_INDEX_IS_NOT_ARC"), this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc())
             default: this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc()
         }
     }
+
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    // This should run when first arc closes but NOT at all when both arcs close
+        // currently runs when both arcs close (FIXED?: yes)
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    //FIXME:
+    // PREVIOUS TO INTERSECTION CLOSED ARC
+    // this runs at i: 1 (previous to closed arc)
+        if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1" // switching to hardcounts: seems to working. adding second arc check
+        console.log('__________________________________INDEX____________________________________')
+        console.log("CLOSSED_ARC_INJECTION: 01")
+        this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //NEW
+    }
+    //FIXME:
 }
 
+// this.previousIndexHARDCOUNT
+// this.thisIndexHARDCOUNT
+// this.nextIndexHARDCOUNT
+// console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT - 0))
+
 IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
+
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    // This should NOT run at any time (when first arc closes or when second arc closes)
+        // currently runs when second arc closes (FIXED?: yes)
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    //FIXME:
+    // AFTER INTERSECTION CLOSED ARC
+    // this runs at i: 4 (after closed arc)
+    // if(this.isHidden(this.previousIndex + 1)) { //TODO: not quite right but quick fix "+ 1"
+    if(this.isHidden(this.previousIndexHARDCOUNT - 0) && !this.isHidden(this.previousIndexHARDCOUNT - 1)) { //TODO: not quite right but quick fix "+ 1"
+        console.log('__________________________________INDEX____________________________________')
+        // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT - 0))
+        // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT - 0))
+        console.log("CLOSSED_ARC_INJECTION: 02_AAA")
+        this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+        this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //NEW
+    }
+    //FIXME:
+
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    // This should run once after the second arc has closed
+        // currently never runs (FIXED?: yes)
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    //FIXME:
+    // AFTER INTERSECTION CLOSED ARC
+    // this runs at i: 4 (after second closed arc)
+    if(this.isHidden(this.previousIndexHARDCOUNT - 0) && this.isHidden(this.previousIndexHARDCOUNT - 1)) { //TODO: not quite right but quick fix "+ 1"
+        console.log('__________________________________INDEX____________________________________')
+        console.log("CLOSSED_ARC_INJECTION: 02_BBB")
+        this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+    }
+    //FIXME:
+
+
+
     // 7
     // console.log("INT_SORTER_ARC: SECOND_ARC_SEG: EVERY_INDEX_FIRST_ACTION")
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
@@ -197,6 +550,50 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // 11
     // console.log("INT_SORTER_ARC: SECOND_ARC_SEG: EVERY_INDEX_LAST_ACTION")
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
+
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    // this should NOT run at any point
+    // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
+    //FIXME:
+    // AFTER INTERSECTION CLOSED ARC
+    // this runs at i: 2 (previous to closed arc)
+    if(!this.lastPosition(this.thisIndex)) {
+        console.log("")
+        console.log("BIG_CHECK")
+        console.log("BIG_CHECK")
+        console.log("")
+        if(this.isHidden(this.nextIndex - 1) && this.isOdd(this.nextIndex - 1)) {
+            console.log('__________________________________INDEX____________________________________')
+            console.log("CLOSSED_ARC_INJECTION: 03")
+            // console.log(this.nextIndexHARDCOUNT + 0)
+            // console.log(this.nextIndexHARDCOUNT + 1)
+            // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT + 0))
+            // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT + 1))
+            // console.log(this.originalFigurePathData(this.nextIndex - 1))
+            // console.log(this.originalFigurePathData(this.nextIndex - 1))
+            this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction() //NEW
+        }
+
+        // // if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1"
+        // if(this.isHidden(this.nextIndex - 1) && !this.isHidden(this.nextIndex - 0)) {  //TODO: not quite right but quick fix "- 1" //FIXME: these should actually stay nextIndex (not hardcount) should probably fix above too but maybe use thisIndex because it doesnt change???
+        // // if(this.isHidden(this.nextIndex - 1)) {  //TODO: not quite right but quick fix "- 1"
+        //     if(!this.isHidden(this.nextIndex - 2)) {
+        //         console.log('__________________________________INDEX____________________________________')
+        //         console.log("CLOSSED_ARC_INJECTION: 03")
+        //         // console.log(this.nextIndexHARDCOUNT + 0)
+        //         // console.log(this.nextIndexHARDCOUNT + 1)
+        //         // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT + 0))
+        //         // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT + 1))
+        //         // console.log(this.originalFigurePathData(this.nextIndex - 1))
+        //         // console.log(this.originalFigurePathData(this.nextIndex - 1))
+
+        //         this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction() //NEW
+        //     } else {
+        //         console.log('poop')
+        //     }
+        // }
+    }
+    //FIXME:
 }
 
 // old

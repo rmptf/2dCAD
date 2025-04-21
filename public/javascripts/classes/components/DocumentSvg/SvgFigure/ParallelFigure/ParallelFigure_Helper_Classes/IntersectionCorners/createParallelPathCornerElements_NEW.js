@@ -2,13 +2,10 @@ import {PathDataCorner} from "../../../SvgData/SvgData_Children/SvgData_Corner_C
 
 // FIXME: not currently a class... should it be?
 // FIXME: Create as a class when handling different corner shapes.
-    // This might have to change for each corner shape
+// This might have to change for each corner shape
 function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, shape) {
     console.log("createAndAddSvgElementAndUpdateDataArrays")
 
-    // old
-    // let parallelFigurePathDatas = parallelFigure.parallelFigurePathDatas
-    //new
     let originalFigurePathDatas = parallelFigure.originalFigurePathDatas
     let referenceEndPointsParallelPerpendicular = parallelFigure.parallelFigurePathDatas_perpendicularProjections
     let referenceEndPointsBaseAndFillers = parallelFigure.originalFigurePathDatas_plusFillers
@@ -31,38 +28,52 @@ function createAndAddSvgElementAndUpdateDataArrays(parallelFigure, passedIndex, 
         sideCode = "CCC"
     }
 
-    // parallelFigurePathDatas
-    //old
-    // let referenceParallelPathData = parallelFigurePathDatas[index][0]
-    //new
     // find reference parallelPathData for new corner
     let referenceParallelPathData = originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east
 
     // fill in the data for the new corner using the data from the reference
-    //old
-    // let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    // let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(referenceEndPointsBaseAndFillers, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode}}
-    let data1 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'west', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode, interSectionSorter: "empty"}}
-    let data2 = {coords: {x: referenceParallelPathData.coords.x, y: referenceParallelPathData.coords.y}, arc: {exist: true, radius: 0, rotation: 0, arcFlag: 0, sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self), side: 'east', center: {x: 0, y: 0}, joiner: true, joinerSide: sideCode, interSectionSorter: "empty"}}
-    // use the data to create a parellelPathDataCorner
+    let data1 = {
+        coords: {
+            x: referenceParallelPathData.coords.x,
+            y: referenceParallelPathData.coords.y
+        },
+        arc: {
+            exist: true,
+            radius: 0,
+            rotation: 0,
+            arcFlag: 0,
+            sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self),
+            side: 'west',
+            center: {x: 0, y: 0},
+            joiner: true,
+            joinerSide: sideCode,
+        }
+    }
+    let data2 = {
+        coords: {
+            x: referenceParallelPathData.coords.x,
+            y: referenceParallelPathData.coords.y
+        },
+        arc: {
+            exist: true,
+            radius: 0,
+            rotation: 0,
+            arcFlag: 0,
+            sweepFlag: determineSweepFlag(originalFigurePathDatas, index, self),
+            side: 'east',
+            center: {x: 0, y: 0},
+            joiner: true,
+            joinerSide: sideCode,
+        }
+    }
     let parPathDataCorner = PathDataCorner.createParallelPathDataCorner(parallelFigure, [data1, data2], index)
     
-    // // old
-    // // parallelFigurePathDatas_perpendicularProjections
-    // referenceEndPointsParallelPerpendicular.splice(index, 0, [
-    //     {x: parallelFigurePathDatas[index][0].coords.x, y: parallelFigurePathDatas[index][0].coords.y},
-    //     {x: parallelFigurePathDatas[index][1].coords.x, y: parallelFigurePathDatas[index][1].coords.y}
-    // ])
-
-    //new
-    // parallelFigurePathDatas_perpendicularProjections
     // create a new referenceEndPointsParallelPerpendicular and splice it into the array
     referenceEndPointsParallelPerpendicular.splice(index, 0, [
         {x: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.x, y: originalFigurePathDatas[index-1].children.parallel_pathDatas.pathData_west.coords.y},
         {x: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.x, y: originalFigurePathDatas[index].children.parallel_pathDatas.pathData_east.coords.y}
     ])
 
-    // originalFigurePathDatas_plusFillers
     // splice a "filler" placeholder into the referenceEndPointsBaseAndFillers array
     referenceEndPointsBaseAndFillers.splice(indexer, 0, "filler")
 
@@ -90,14 +101,7 @@ export {
 
 function determineSweepFlag(referenceEndPointsBaseAndFillers, index, self) {
     let newSweepFlag
-    //old
-    // let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
-    // let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
-    // let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
-    //new
-    // let prevBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index - 1)
-    // let thisBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index)
-    // let nextBaseRefNoFiller = getRefPointAtIndexIfNotFiller(referenceEndPointsBaseAndFillers, index + 1)
+
     let prevBaseRefNoFiller = referenceEndPointsBaseAndFillers[index - 1]
     let thisBaseRefNoFiller = referenceEndPointsBaseAndFillers[index]
     let nextBaseRefNoFiller = referenceEndPointsBaseAndFillers[index + 1]
@@ -182,27 +186,3 @@ function getRefPointAtIndexIfNotFiller(refEndPointsBase, index) {
 
     return refEndPointsBaseNoFiller
 }
-
-
-
-
-
-
-
-
-// import {dragEndPoint} from '../SvgElement_functions/dragSvgElements_NEW.js'
-
-// function SvgEndPoint(parentFigure) {
-//     this.ELEMENT = 'circle'
-//     this.parentFigure = parentFigure
-// }
-
-// SvgEndPoint.prototype.createSvgEndPoint = function(index) {
-//     let newEndPoint = this.parentElement.insert(this.ELEMENT, ':nth-child(' + (index + 1) + ')')
-//         .attr('class', this.CLASSNAME)
-//     return newEndPoint
-// }
-
-// export {
-//     SvgEndPoint
-// }

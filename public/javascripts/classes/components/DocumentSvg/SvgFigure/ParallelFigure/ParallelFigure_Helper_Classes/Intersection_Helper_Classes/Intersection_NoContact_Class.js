@@ -9,6 +9,13 @@ function Intersection_NoContact(parallelFigure, index) {
     this.parFigureObject = parallelFigure.parallelFigureObject
     this.index = index
 
+    //FIXME: Right here
+    // this.previousIndex = this.index + -1 + this.skipperIndexMods.previousIndexModifier
+    // this.thisIndex = this.index + 0 + this.skipperIndexMods.previousIndexModifier 
+    // this.nextIndex = this.index + 1 + this.skipperIndexMods.nextIndexModifier
+    // this.nextNextIndex = this.index + 2 + this.skipperIndexMods.nextIndexModifier
+    // this.originalFigurePathData = (modifierFromFunction) => this.originalFigurePathDatas[modifierFromFunction]
+
     // might have to update manually like index //FIXME:
     // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
     // this.parFigureSvgPaths = parallelFigure.svgPaths
@@ -20,7 +27,7 @@ Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function
     // path_start
     let firstParPath = this.originalFigurePathDatas[index - 1].children.parallel_pathDatas.pathData_west
     // separated pd_01
-    let secondParPath = this.originalFigurePathDatas[index - 0].children.parallel_pathDatas.pathData_east
+    let secondParPath = this.originalFigurePathDatas[index + 0].children.parallel_pathDatas.pathData_east
     // corner_01
     let thirdParPath = this.originalFigurePathDatas[index + 0].children.parallel_pathDatas.pathData_west.children.corner_pathDatas[0]
     // corner_02
@@ -106,6 +113,12 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
     let fourthParPath = this.originalFigurePathDatas[index + 1].children.parallel_pathDatas.pathData_west
     // arc_finish
     let fifthParPath = this.originalFigurePathDatas[index + 2].children.parallel_pathDatas.pathData_east
+
+    console.log("arse")
+    console.log(firstParPath)
+    console.log(fifthParPath)
+
+
     // find where the arcs intersect, or the tangent points of both if they dont
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
 

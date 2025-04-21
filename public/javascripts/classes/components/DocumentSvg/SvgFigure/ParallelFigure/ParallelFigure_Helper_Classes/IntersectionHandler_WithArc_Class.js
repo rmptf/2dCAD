@@ -4,7 +4,7 @@ import {Intersection_NoContact} from './Intersection_Helper_Classes/Intersection
 import {getDistance} from '../../../../../../functions/math/mathFunctions.js' // OLD LOC
 import {findPointAlongSlopeAtDistance} from '../../../../../../functions/drafting/parallelPath/drawParallelPath_functions/parallelPathFunctions.js' // OLD LOC
 import {ReferenceFigure} from '../../ReferenceFigure/ReferenceFigure_Class.js'
-import { pointCrossedAxis, pointCrossedAxis_02, translateLinePreservingDirection, translatePerpendicularLinePreservingDirection, translatePerpendicularLinePreservingDirection000, areTwoLinesIntersecting, removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
+import { areTwoLinesIntersecting } from '../ParallelFigureUtils/GeometryUtils/geometryUtils.js'
 // import {handleArcToArcIntersectionNoContact, handleArcToPathIntersectionNoContact, handlePathToArcIntersectionNoContact} from './Intersection_Helper_Classes/Intersection_NoContact_Class.js'
 
 function IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperIndexModifiers) {
@@ -19,40 +19,21 @@ function IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperInde
     }
 
     this.skipperIndexMods = subFigureSkipperIndexModifiers
-    let previousIndex = this.index + 0 + this.skipperIndexMods.previousIndexModifier
-    let thisIndex = this.index + 1 + this.skipperIndexMods.currentIndexModifier 
-    let nextIndex = this.index + 2 + this.skipperIndexMods.nextIndexModifier
+    this.previousIndex = this.index + 0 + this.skipperIndexMods.previousIndexModifier
+    this.thisIndex = this.index + 1 + this.skipperIndexMods.currentIndexModifier 
+    this.nextIndex = this.index + 2 + this.skipperIndexMods.nextIndexModifier
 
-    this.previousOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[previousIndex + modifierFromFunction]
-    this.thisOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[thisIndex + modifierFromFunction]
-    this.nextOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[nextIndex + modifierFromFunction]
+    this.previousOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[this.previousIndex + modifierFromFunction]
+    this.thisOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[this.thisIndex + modifierFromFunction]
+    this.nextOriginalFigurePathData = (modifierFromFunction = 0) => this.originalFigurePathDatas[this.nextIndex + modifierFromFunction]
 
     this.Intersection_Contact = new Intersection_Contact(parallelFigure, index, this.intersectionHandlerObject, this.skipperIndexMods)
     this.Intersection_NoContact = new Intersection_NoContact(parallelFigure, index)
 
-
-
-
-    // REFERENCE FIGURE STUFF
-    let svgFigure = parallelFigure.svgFigure
-    this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-    this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-    this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
-
-    this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-    this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-    this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, false)
-    this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
-
-
     // CLOSED ARC STUFF
     this.FIRSTCHECKER = true
     this.FIRSTCHECKER_02 = true
+    this.FIRSTCHECKER_03 = false
     this.ORIGPOS_START = null
     this.ORIGPOS_END = null
 }
@@ -62,39 +43,377 @@ export {
 }
 
 
+//FIXME: Get rid of this way, set dynamically
+IntersectionHandler_WithArc.prototype.setIndex = function(index, subFigureSkipperIndexModifiers) {
+    // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
+    // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
+    this.index = index
+    this.skipperIndexMods = subFigureSkipperIndexModifiers
+    this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier //FIXME: specifically this one
+    this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
+    this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
+    // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
+    // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
+
+    // this.Intersection_Contact.setIndex(subFigureSkipperIndexModifiers)
+    this.Intersection_Contact.setIndex(index, subFigureSkipperIndexModifiers)
+}
+
+
+
+
+// function checkIfArcIsClosed_referenceFigure() {
+//     let referencFigureIndex = 1
+
+//     function buildFigure() {
+//         let svgFigure = this.PARFIGURE.svgFigure
+//         let referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+//         let referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+//         let referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+
+//         let referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+//         let referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+//         let referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, true)
+//         referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
+//     }
+
+//     function runFunctions() {
+//         let figures = [
+//             referenceFigure_largeDot_01_fig01,
+//             referenceFigure_largeDot_02_fig01,
+//             referenceFigure_dottedLine_01_fig01,
+//             referenceFigure_largeDot_01_fig02,
+//             referenceFigure_largeDot_02_fig02,
+//             referenceFigure_dottedLine_01_fig02
+//         ]
+//         let checkForFigureAndRunAFunction = (pos1, pos2, figure) => figures.length > 0 ? figures[figure].changeCircleColor(pos1, pos2) : null
+//         if(this.index === referencFigureIndex) {
+//             figures[0].runFunctions([this.ORIGPOS_START])
+//             figures[1].runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+//             figures[2].runFunctions([this.ORIGPOS_START, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+//             figures[3].runFunctions([this.ORIGPOS_END])
+//             figures[4].runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+//             figures[5].runFunctions([this.ORIGPOS_END, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+//         }
+//     }
+
+//     function runOtherFunction_A() {
+//         checkForFigureAndRunAFunction(1, 2, 0)
+//         checkForFigureAndRunAFunction(1, 2, 1)
+//         checkForFigureAndRunAFunction(3, 4, 3)
+//         checkForFigureAndRunAFunction(3, 4, 4)
+//     }
+//     function runOtherFunction_B() {
+//         checkForFigureAndRunAFunction(2, 1, 0)
+//         checkForFigureAndRunAFunction(2, 1, 1)
+//         checkForFigureAndRunAFunction(4, 3, 3)
+//         checkForFigureAndRunAFunction(4, 3, 4)
+//     }
+// }
+
+
+
+
+// TODO:
+// Actual Todo List For Closed Arcs: (unorganzed, random reminders)
+    // - Arc To Arc
+        // - fix disconnected corner after an arc has closed
+        // - fix closed arc after a corner has disconnected
+        // - handle multiple closed arcs
+
+    // - Path To Arc
+        // - start
+
+    // - Arc To Path
+        // - start
+
+
 IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
-    if(this.index === 1) {
-        let parallelEndPoint_start = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
-        let parallelEndPoint_end = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+    let parallelEndPoint_start = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    let parallelEndPoint_end = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+    let parallelEndPoint_end_next = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    // let parallelEndPoint_next = this.nextOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+    let referencFigureIndex = 1 // REFERENCE FIGURE STUFF
 
-        if(this.FIRSTCHECKER === true) {
-            this.ORIGPOS_START = [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]
-            this.ORIGPOS_END = [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]
-            this.FIRSTCHECKER = false
+    if(this.FIRSTCHECKER === true) {
+        this.ORIGPOS_START = [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]
+        this.ORIGPOS_END = [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]
+        // REFERENCE FIGURE STUFF
+        if(this.index === referencFigureIndex) {
+
+            let svgFigure = this.PARFIGURE.svgFigure
+            this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+            this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
+            this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
+
+            this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+            this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
+            this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
         }
+        // REFERENCE FIGURE STUFF
+        this.FIRSTCHECKER = false
+    }
 
-        // let translatedAxis = translatePerpendicularLinePreservingDirection(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y])
-        // let translatedAxis = translatePerpendicularLinePreservingDirection000(parallelEndPoint_start, parallelEndPoint_end, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_START, this.ORIGPOS_END, [this.referenceFigure_2xMedDots_1xDottedLine_01, this.referenceFigure_2xMedDots_1xDottedLine_02]) //FIXME: here
-        // let hasTargetCrossedAxis =  pointCrossedAxis_02(translatedAxis[0], translatedAxis[1], [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], [this.referenceFigure_04_A])
+    // REFERENCE FIGURE STUFF
+    let figures = [
+        this.referenceFigure_largeDot_01_fig01,
+        this.referenceFigure_largeDot_02_fig01,
+        this.referenceFigure_dottedLine_01_fig01,
+        this.referenceFigure_largeDot_01_fig02,
+        this.referenceFigure_largeDot_02_fig02,
+        this.referenceFigure_dottedLine_01_fig02
+    ]
+    let checkForFigureAndRunAFunction = (pos1, pos2, figure) => figures.length > 0 ? figures[figure].changeCircleColor(pos1, pos2) : null
+    if(this.index === referencFigureIndex) {
+        figures[0].runFunctions([this.ORIGPOS_START])
+        figures[1].runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+        figures[2].runFunctions([this.ORIGPOS_START, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
+        figures[3].runFunctions([this.ORIGPOS_END])
+        figures[4].runFunctions([[parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+        figures[5].runFunctions([this.ORIGPOS_END, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]])
+    }
+    // REFERENCE FIGURE STUFF
 
-        let hasArcClosed = areTwoLinesIntersecting(
-            this.ORIGPOS_START,
-            [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y],
-            this.ORIGPOS_END,
-            [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y],
-            [this.referenceFigure_largeDot_01_fig01, this.referenceFigure_largeDot_02_fig01, this.referenceFigure_dottedLine_01_fig01, this.referenceFigure_largeDot_01_fig02, this.referenceFigure_largeDot_02_fig02, this.referenceFigure_dottedLine_01_fig02],
-        )
+    let hasArcClosed = areTwoLinesIntersecting(this.ORIGPOS_START, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_END, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
 
-
-        if(hasArcClosed === true) {
-            if(this.FIRSTCHECKER_02 === true) {
-                removePathAndPoints_TEST_WILLHANDLERDIFFERENTLY_LATER(this.PARFIGURE, this.index - 1, this.index)
-                this.FIRSTCHECKER_02 = false
+    if(hasArcClosed === true) {
+        if(this.FIRSTCHECKER_02 === true) {
+            // REFERENCE FIGURE STUFF
+            if(this.index === referencFigureIndex) {
+                checkForFigureAndRunAFunction(1, 2, 0)
+                checkForFigureAndRunAFunction(1, 2, 1)
+                checkForFigureAndRunAFunction(3, 4, 3)
+                checkForFigureAndRunAFunction(3, 4, 4)
             }
-        }
+            // REFERENCE FIGURE STUFF
+            this.FIRSTCHECKER_02 = false
+            this.FIRSTCHECKER_03 = true
+            this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
+            this.PARFIGURE.skipped_indecies.push(this.index + 1)
+            this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
+            this.PARFIGURE.currentSkippedIndex = this.index + 1
 
+            console.log(parallelEndPoint_end)
+            console.log(parallelEndPoint_end_next)
+
+            parallelEndPoint_end.arc.hidden = true
+            if(parallelEndPoint_end_next !== null) {
+                parallelEndPoint_end_next.arc.hidden = true //FIXME: issue here
+            }
+
+            console.log("CLOSED_ARC")
+            //FIXME:
+        }
+    }
+    if(hasArcClosed === false) {
+        if(this.FIRSTCHECKER_03 === true) {
+            // REFERENCE FIGURE STUFF
+            if(this.index === referencFigureIndex) {
+                checkForFigureAndRunAFunction(2, 1, 0)
+                checkForFigureAndRunAFunction(2, 1, 1)
+                checkForFigureAndRunAFunction(4, 3, 3)
+                checkForFigureAndRunAFunction(4, 3, 4)
+            }
+            // REFERENCE FIGURE STUFF
+            this.FIRSTCHECKER_03 = false
+            this.FIRSTCHECKER_02 = true
+        }
     }
 }
+
+// OLD #1
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+// OLD #1
+// FIRST ARC (not first pd in shape)
+// 1_all
+// 2_seg1_first_all
+// 3_seg1
+// 6_A_seg1: joineronly
+// FINAL_all
+
+
+// 1_all
+// 2_seg1_first_all
+// 3_seg1
+// 6_A_seg1: joineronly
+// 11_seg2_last_all
+// FINAL_all
+
+// OLD #2
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)
+// 8_seg2_connected         // nothing                                                                                              // nothing
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)
+
+// OLD #3
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD
+// 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)
+// 6_A_seg1: joineronly     // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)
+
+//OLD #4
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)
+
+
+//SHAPE ONE
+//SHAPE ONE
+// ARC TO ARC - PREVIOUS ARC CLOSED
+//NEW #1
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)
+// 11_seg2_last_all (NEW)   // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)
+//SHAPE ONE
+//SHAPE ONE
+
+
+//SHAPE TWO
+//SHAPE TWO
+// ARC TO ARC - NEXT ARC CLOSED
+// NEW #2
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 8_seg2_connected         // nothing                                                                                              // nothing                                                                              // arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// 1_all (NEW) (SKIP?)      // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all (NEW)   // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+
+//SKIP #3
+
+//NEW #4
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1 (NEW)             // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 6_A_seg1: (NEW)          // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+//SHAPE TWO
+//SHAPE TWO
+
+
+
+//1
+// 1_all
+// 2_seg1_first_all
+// 5_seg1
+// FINAL_all
+//1
+
+//4
+// 1_all
+// 3_seg1
+// 6_A_seg1: joineronly
+// 7_seg2_first_all
+// 10_seg2
+// 11_seg2_last_all
+// FINAL_all
+//4
+
+
+// OLD #1
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
+// 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
+
+// OLD #2
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD
+
+// OLD #3
+// FIRST ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)
+// 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD
+// 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)
+// 6_A_seg1: joineronly     // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)
+
+//OLD #4
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no 
+
+
+
+
+
+
+
+
+//SHAPE THREE
+//SHAPE THREE
+//NEW #4
+// SECOND ARC
+// 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
+// 3_seg1 (NEW)             // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
+// 6_A_seg1: (NEW)          // this.setThisPathDataAsPreviousPathData()                                                             // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc
+// 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
+// 10_seg2                  // this.setPerpendicularPoints([1, 1], false)                                                                                                                                                   // arcIntersection_secondArcSegment_lastIndex
+// 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
+// FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
+//SHAPE THREE
+//SHAPE THREE
+
+
+
+// i: 1
+// SKIP_PREVIOUS__NEWSHIT
+// 1_all
+// 2_seg1_first_all
+// 5_seg1
+// 11_seg2_last_all
+// FINAL_all
+
+// i: 2
+// DONT_RUN_NETHING__NEWSHIT
+
+// i: 3
+// DONT_RUN_NETHING__NEWSHIT
+
+
+// i: 4
+// SKIP_FOLLOWING__NEWSHIT
+// 1_all
+// 3_seg1
+// 6_A_seg1: joineronly
+// 7_seg2_first_all
+// 10_seg2
+// 11_seg2_last_all
+// FINAL_all
 
 
 
@@ -109,6 +428,8 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     // 1
     console.log("1_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
     this.setArcRadius(0)
 }
 
@@ -119,10 +440,20 @@ IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_
     this.checkIfArcIsClosed()
 }
 
+// //new FIXME:
+// IntersectionHandler_WithArc.prototype.arcIntersection_allArcSegments_everyIndex_lastAction_NEW = function() {
+//     // Final
+//     console.log("FINAL_all_NEW")
+//     this.handleLargeArcFlag("arcFlag_finalAll") // (Set_largeArcFag)
+//     this.checkIfArcIsClosed()
+// }
+
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_everyIndex_firstAction = function() {
     // 2
     console.log("2_seg1_first_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc = function() {
@@ -143,6 +474,13 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_fistIndex 
     this.setPerpendicularPoints([0, 0], false)
 }
 
+// //NEW FIXME:
+// IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_fistIndex_NEW = function() {
+//     // 5
+//     console.log("5_seg1")
+//     this.setPerpendicularPoints([1, 0], false)
+// }
+
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc = function() {
     // 6_A
     console.log("6_A_seg1: joineronly")
@@ -161,6 +499,15 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyInde
     console.log("7_seg2_first_all")
     this.setPerpendicularPoints([0, 0], true)
 }
+
+// //NEW FIXME:
+// IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_firstAction_NEW = function() {
+//     // 7
+//     console.log("7_seg2_first_all_NEW")
+//     console.log("Passed_orig_ref")
+//     console.log(3)
+//     this.setPerpendicularPoints([3, 0], false)
+// }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected = function() {
     // 8_A
@@ -183,12 +530,19 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex
     console.log("10_seg2")
     this.setPerpendicularPoints([1, 1], false)
 }
+// //NEW FIXME:
+// IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex_NEW = function() {
+//     console.log("10_seg2_NEW")
+//     // this.setPerpendicularPoints([3, 1], false) // this used to be necesary but not any more
+//     this.setPerpendicularPoints([1, 1], false)
+// }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 }
-
 
 
 
@@ -208,6 +562,9 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsPat
     this.Intersection_NoContact.handlePathToArcIntersectionNoContact(0)
 
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
+
     this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = true // (Set_largeArcFag)
     this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner = true // (Set_largeArcFag)
 }
@@ -216,6 +573,8 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsPat
     // 2_A_Joiner
     console.log("2_A_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
 
     //old
     // this.setArcRadius(0)
@@ -247,6 +606,9 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(checker)
 
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
+
     this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = true
     this.parallelFigureObj.setPrevArcFlag_atFinal_from3Joiner = true
 }
@@ -255,6 +617,9 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
     // 4_Joiner
     console.log("4_Joiner_ooo")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = 0
+    console.log("parPath_SEG_COUNTER")
+    console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
+
     this.handleLargeArcFlag("arcFlag_4J") // (Set_largeArcFag)
 }
 
@@ -278,6 +643,7 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_prevIndexIsArc
 //FIXME: This new way of handling arcFlagSetter works great but need to handle popping points in original blob.
 // make sure largeArcFlagSetter is being placed in correct OFPD child PPD
 IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
+    console.log("HANDLE_LARGE_ARCFLAG")
     if(flag === "arcFlag_finalAll") {
         if(this.parallelFigureObj.setThisArcFlag_atFinal_from1Joiner === true) {
             console.log("running_skip_arcFlagSet_from_1j_in_finalAll")
@@ -294,7 +660,8 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
                 this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
-            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
+            // this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.previousIndex)
 
             // LargeArcFlagSetter.prototype.setLargeArcFlag = function(indexModifier, runOrNot, index) {
 
@@ -339,7 +706,8 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
                 this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            // this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.previousIndex)
 
 
         } else {
@@ -359,7 +727,8 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
                 this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, false, this.index)
-            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
+            // this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(false, this.previousIndex)
 
             //new - but not ok?
             // this.parallelFigureObj.isIntersectionConnected = true
@@ -388,7 +757,8 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
                 this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            // this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.previousIndex)
 
 
             this.parallelFigureObj.setThisArcFlag_at2Joiner_from1Joiner = false
@@ -414,7 +784,8 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
                 this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter = arcFlagSetter
             }
             // this.ArcFlagSetters[this.index].setLargeArcFlag(0, true, this.index)
-            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            // this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.index)
+            this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west.largeArcFlagSetter.setLargeArcFlag(true, this.previousIndex)
 
 
             this.parallelFigureObj.setThisArcFlag_at4Joiner_from3Joiner = false
@@ -488,12 +859,31 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     let targetFlag = indicators[1]
 
     // set target datas
-    let previousParallelPathDataTarget = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    // let previousParallelPathDataTarget = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    let previousParallelPathDataTarget = this.thisOriginalFigurePathData(-1).children.parallel_pathDatas.pathData_west // changed from prevOFPD to thisOFPD(-1) to account for the change that happens when a skipper is set
     let thisParallelPathDataTarget = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
     let targetPathData = (targetFlag == 0) ? previousParallelPathDataTarget : thisParallelPathDataTarget;
     
-    let referencePathData = this.previousOriginalFigurePathData(OpdRefFlag)
+    // let referencePathData = this.previousOriginalFigurePathData(OpdRefFlag)
+    let referencePathData = this.thisOriginalFigurePathData(OpdRefFlag - 1) // changed from prevOFPD to thisOFPD(-1) to account for the change that happens when a skipper is set
     let referenceArcCenter = this.thisOriginalFigurePathData()
+
+    // console.log(this.index)
+    // console.log("SET_PERP: 01")
+    // console.log("target")
+    // console.log(targetPathData)
+    // console.log("options")
+    // console.log("prev")
+    // console.log(previousParallelPathDataTarget)
+    // console.log("this")
+    // console.log(thisParallelPathDataTarget)
+
+    // console.log("REFERENCES")
+    // console.log("refPthDta")
+    // console.log(referencePathData)
+    // console.log(OpdRefFlag)
+    // console.log("refArcCent")
+    // console.log(referenceArcCenter)
 
     // calculate positions and set data
     let newParallelPosition = findPointAlongSlopeAtDistance([referencePathData.coords.x, referencePathData.coords.y], [referenceArcCenter.arc.center.x, referenceArcCenter.arc.center.y], arcRadiusData)
@@ -501,9 +891,14 @@ IntersectionHandler_WithArc.prototype.setPerpendicularPoints = function(indicato
     targetPathData.coords.y = newParallelPosition[1]
 
     if (setPrevious) {
-        let prevParallelPathData = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+        // let prevParallelPathData = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_east
+        let prevParallelPathData = this.thisOriginalFigurePathData(-1).children.parallel_pathDatas.pathData_east // changed from prevOFPD to thisOFPD(-1) to account for the change that happens when a skipper is set
         prevParallelPathData.coords.x = newParallelPosition[0]
         prevParallelPathData.coords.y = newParallelPosition[1]
+
+        // console.log("SET_PERP: 02")
+        // console.log("new_target")
+        // console.log(prevParallelPathData)
     }
 }
 //TODO: havnet set to new wa of finding pathdata yet (too hard with all the indicators)
@@ -541,6 +936,11 @@ IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData = functi
     if(thisParallelPathData.arc.joiner) {
         Object.assign(thisParallelPathData.coords, prevParallelPathData.coords)
     }
+
+    //FIXME: RIGHT HERE (fixed but keep for other shapes)
+    // console.log("poopoppopop")
+    // console.log(prevParallelPathData)
+    // console.log(thisParallelPathData)
 }
 
 // TODO: (in two places at once rn, find a place for it)
