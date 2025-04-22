@@ -263,6 +263,22 @@ svg{
         --color-04: #895737ff;
         --color-05: #dab49dff;
       }
+
+      .testElement-palette--7{
+        --color-01: rgb(255, 0, 0);
+        --color-02: rgb(7, 153, 31);
+        --color-03: rgb(0, 20, 199);
+        --color-04: rgb(228, 245, 0);
+        --color-05: rgb(255, 98, 0);
+      }
+
+      .testElement-palette--8{
+        --color-01: #FFD700;
+        --color-02: #FF8C00;
+        --color-03: #DC143C;
+        --color-04: #1E90FF;
+        --color-05: #1E90FF;
+      }
     /* colorPalettes */
 
     /* fill */
