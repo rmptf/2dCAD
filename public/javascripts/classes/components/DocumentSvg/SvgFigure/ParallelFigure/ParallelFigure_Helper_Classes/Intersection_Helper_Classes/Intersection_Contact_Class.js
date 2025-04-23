@@ -24,7 +24,8 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
         console.log("ADDING_REFERENCEFIGURE")
         let svgFigure = parallelFigure.svgFigure
         this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+        // this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+        this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
         this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
         this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
         this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
@@ -33,11 +34,12 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
         this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
     }
 
-    if(this.index === 30) {
+    if(this.index === 2) {
         console.log("ADDING_REFERENCEFIGURE")
         let svgFigure = parallelFigure.svgFigure
         this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
+        // this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
+        this.referenceFigure_01_A.addEmptyCircle({palette: 2, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
         this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
         this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
         this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
@@ -152,7 +154,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
         this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
     }
 
-    if(this.index === 30) {
+    if(this.index === 2) {
         console.log("ANIMATING")
         // let referenceFigures = [this.referenceFigure_04_A]
         if(this.previousIndex === -1) {

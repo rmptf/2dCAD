@@ -61,6 +61,26 @@ ReferenceFigure.prototype.addCircle = function(visObj, counter) {
     }
 }
 
+ReferenceFigure.prototype.addEmptyCircle = function(visObj, counter) {
+    if(this.doRun) {
+        let newCircle = this.testGroup.append('circle')
+        .attr('class','testElement-endpoint testElement-palette--'+[visObj.palette]+' testElem-radius--'+[visObj.circRad]+' testElem-fill-color--'+[visObj.fillClr]+' testElem-stroke-color--'+[visObj.strokeClr]+' testElem-strokeWidth--'+[visObj.strokeWidth]+'')
+        this.svgElements.push(newCircle._groups[0][0])
+        this.d3Element = newCircle
+
+        // BUILD FUNCTION
+        let moveCircleFunction = function(coords1, coords2) {
+            if(counter === 1){
+                newCircle.attr('cx', coords1[0]).attr('cy', coords1[1])
+            } else {
+                newCircle.attr('cx', coords2[0]).attr('cy', coords2[1])
+            }
+        }
+        this.functionHolder.push(moveCircleFunction)
+        // BUILD FUNCTIONthis.svgElements.push(newCircle)
+    }
+}
+
 ReferenceFigure.prototype.addRadial = function(visObj, counter) {
     if(this.doRun) {
         let newCircle = this.testGroup.append('circle')
