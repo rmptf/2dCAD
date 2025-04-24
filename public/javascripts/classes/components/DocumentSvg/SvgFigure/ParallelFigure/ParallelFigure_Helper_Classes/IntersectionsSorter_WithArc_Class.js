@@ -1,3 +1,4 @@
+import { ReferenceFigure } from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
 function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperIndexModifiers) {
@@ -194,6 +195,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_afterArcClosedNEXT 
     this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 3_seg1 (NEW)             // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
@@ -409,6 +411,9 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
 
 
 
+
+
+    // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
 
 
     // // REFERENCE FIGURE STUFF

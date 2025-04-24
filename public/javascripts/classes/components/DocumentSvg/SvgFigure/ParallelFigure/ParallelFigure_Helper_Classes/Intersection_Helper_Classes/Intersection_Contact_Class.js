@@ -24,8 +24,8 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
         console.log("ADDING_REFERENCEFIGURE")
         let svgFigure = parallelFigure.svgFigure
         this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
-        this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+        this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+        // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
         this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
         this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
         this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
@@ -38,8 +38,8 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
         console.log("ADDING_REFERENCEFIGURE")
         let svgFigure = parallelFigure.svgFigure
         this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
-        this.referenceFigure_01_A.addEmptyCircle({palette: 2, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+        this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
+        // this.referenceFigure_01_A.addEmptyCircle({palette: 2, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
         this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
         this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
         this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
