@@ -79,33 +79,11 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
 
 
     // // REFERENCE FIGURE STUFF
-    if(this.index === 3) {
-        console.log("ADDING_REFERENCEFIGURE")
+    if(this.index === 0) {
         let svgFigure = parallelFigure.svgFigure
         this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
         this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
-        // this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
-        // this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
-        // this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
-        // this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-        // this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
     }
-
-    // if(this.index === 30) {
-    //     console.log("ADDING_REFERENCEFIGURE")
-    //     let svgFigure = parallelFigure.svgFigure
-    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-    //     this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
-    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-    //     this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-    //     this.referenceFigure_03_A.addCircle({palette: 2, circRad: 5, fillClr: 3}, 1)
-    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-    //     this.referenceFigure_04_A.addCircle({palette: 2, circRad: 10, fillClr: 4}, 1)
-    // }
     // // REFERENCE FIGURE STUFF
 
 
@@ -572,10 +550,14 @@ IntersectionsSorter_WithArc.prototype.handleFirstArcSegment = function() {
     //FIXME:
     // PREVIOUS TO INTERSECTION CLOSED ARC
     // this runs at i: 1 (previous to closed arc)
-        if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1" // switching to hardcounts: seems to working. adding second arc check
+    if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1" // switching to hardcounts: seems to working. adding second arc check
         console.log('__________________________________INDEX____________________________________')
         console.log("CLOSSED_ARC_INJECTION: 01")
         this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //NEW
+
+        if(this.index === 0) {
+            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+        }
     }
     //FIXME:
 }
