@@ -73,24 +73,6 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
     //     console.log(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_east)
     // }
     // new but not used currently
-
-
-
-
-
-    // // REFERENCE FIGURE STUFF
-    if(this.index === 0) {
-        let svgFigure = parallelFigure.svgFigure
-        this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
-    }
-    // // REFERENCE FIGURE STUFF
-
-
-
-
-
-
 }
 
 //FIXME: Is there a way to set this dynamically?
@@ -391,50 +373,6 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
 
 
 
-    // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-
-
-    // // REFERENCE FIGURE STUFF
-    // if(this.index === 3) {
-    //     console.log("ANIMATING")
-    //     // let referenceFigures = [this.referenceFigure_04_A]
-    //     if(this.previousIndex === -1) {
-    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
-    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
-    //     } else {
-    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
-    //     }
-    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
-    // }
-
-    // if(this.index === 30) {
-    //     console.log("ANIMATING")
-    //     // let referenceFigures = [this.referenceFigure_04_A]
-    //     if(this.previousIndex === -1) {
-    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
-    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
-    //     } else {
-    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
-    //     }
-    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
-    // }
-    // // REFERENCE FIGURE STUFF
-
-    // // // REFERENCE FIGURE STUFF
-    // // referenceFigures[0].changeCircleColor(pos1, pos2)
-    // // // REFERENCE FIGURE STUFF
-
-
-
-
 
 
 
@@ -554,10 +492,9 @@ IntersectionsSorter_WithArc.prototype.handleFirstArcSegment = function() {
         console.log('__________________________________INDEX____________________________________')
         console.log("CLOSSED_ARC_INJECTION: 01")
         this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //NEW
-
-        if(this.index === 0) {
-            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-        }
+        // REFERENCE FIGURE STUFF
+        // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction(true) //With passed variable for REFERENCE FIGURE
+        // REFERENCE FIGURE STUFF
     }
     //FIXME:
 }

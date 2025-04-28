@@ -36,6 +36,36 @@ function IntersectionHandler_WithArc(parallelFigure, index, subFigureSkipperInde
     this.FIRSTCHECKER_03 = false
     this.ORIGPOS_START = null
     this.ORIGPOS_END = null
+
+
+    // // REFERENCE FIGURE STUFF
+    // if(this.index === 0) {
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
+    //     this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    // }
+    // if(this.index === 1) {
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
+    //     this.referenceFigure_02_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 2, strokeWidth: 3}, 1)
+    // }
+    // if(this.index === 2) {
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
+    //     this.referenceFigure_03_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 3, strokeWidth: 3}, 1)
+    // }
+    // if(this.index === 3) {
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
+    //     this.referenceFigure_04_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 4, strokeWidth: 3}, 1)
+    // }
+    // if(this.index === 4) {
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_05_A = new ReferenceFigure(svgFigure, true)
+    //     this.referenceFigure_05_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 5, strokeWidth: 3}, 1)
+    // }
+    // // REFERENCE FIGURE STUFF
+
 }
 
 export {
@@ -538,10 +568,40 @@ IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_lastIndex
 // }
 
 IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function() {
+// IntersectionHandler_WithArc.prototype.arcIntersection_secondArcSegment_everyIndex_lastAction = function(closedArcAction) { // With passed var for REFERENCE FIGURE
     console.log("11_seg2_last_all")
     this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1
     console.log("parPath_SEG_COUNTER")
     console.log(this.parallelFigureObj.parallelPathSegmentCounter_FIRST)
+
+
+
+    // // REFERENCE FIGURE STUFF
+    // // if(closedArcAction) {
+    // //     this.referenceFigure_01_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    // // } else {
+    // //     this.referenceFigure_01_A.runFunctions([[100, 10]])
+    // // }
+
+    // if(closedArcAction) {
+    //     if(this.index === 0) {
+    //         this.referenceFigure_01_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    //     }
+    //     if(this.index === 1) {
+    //         this.referenceFigure_02_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    //     }
+    //     if(this.index === 2) {
+    //         this.referenceFigure_03_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    //     }
+    //     if(this.index === 3) {
+    //         this.referenceFigure_04_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    //     }
+    //     if(this.index === 4) {
+    //         this.referenceFigure_05_A.runFunctions([[this.thisOriginalFigurePathData().coords.x, this.thisOriginalFigurePathData().coords.y]])
+    //     }
+    // }
+    // // REFERENCE FIGURE STUFF
+
 }
 
 
