@@ -177,18 +177,18 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
         if(this.index === referencFigureIndex) {
 
             let svgFigure = this.PARFIGURE.svgFigure
-            this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-            this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-            this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
 
-            this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-            this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-            this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
         }
         // REFERENCE FIGURE STUFF
@@ -229,6 +229,9 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
             // REFERENCE FIGURE STUFF
             this.FIRSTCHECKER_02 = false
             this.FIRSTCHECKER_03 = true
+
+
+
             this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
             this.PARFIGURE.skipped_indecies.push(this.index + 1)
             this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
