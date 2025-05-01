@@ -1,9 +1,9 @@
 function ClosedArcChecker() {
 
     // CLOSED ARC STUFF
-    this.firstCycle = true
-    this.arcHasClosed = true
-    this.arcHasOpened = false
+    this.functionRunning_firstCycle = true
+    this.arcHasClosed_firstCycle = true
+    this.arcHasOpened_firstCycle = false
     this.endPoints_origPosStart = null
     this.endPoints_origPosEnd = null
     
@@ -19,7 +19,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
     let parallelEndPoint_end_next = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_west
     // let referencFigureIndex = 1 // REFERENCE FIGURE STUFF
 
-    if(this.firstCycle === true) {
+    if(this.functionRunning_firstCycle === true) {
         this.endPoints_origPosStart = [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]
         this.endPoints_origPosEnd = [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y]
         // // REFERENCE FIGURE STUFF
@@ -41,7 +41,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
         //     this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
         // }
         // // REFERENCE FIGURE STUFF
-        this.firstCycle = false
+        this.functionRunning_firstCycle = false
     }
 
     // // REFERENCE FIGURE STUFF
@@ -67,7 +67,8 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
     let hasArcClosed = areTwoLinesIntersecting(this.endPoints_origPosStart, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.endPoints_origPosEnd, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
 
     if(hasArcClosed === true) {
-        if(this.arcHasClosed === true) {
+        console.log("POOPER_1111111")
+        if(this.arcHasClosed_firstCycle === true) {
             // // REFERENCE FIGURE STUFF
             // if(this.index === referencFigureIndex) {
             //     checkForFigureAndRunAFunction(1, 2, 0)
@@ -76,8 +77,8 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
             //     checkForFigureAndRunAFunction(3, 4, 4)
             // }
             // // REFERENCE FIGURE STUFF
-            this.arcHasClosed = false
-            this.arcHasOpened = true
+            this.arcHasClosed_firstCycle = false
+            this.arcHasOpened_firstCycle = true
             this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
             this.PARFIGURE.skipped_indecies.push(this.index + 1)
             this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
@@ -96,7 +97,8 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
         }
     }
     if(hasArcClosed === false) {
-        if(this.arcHasOpened === true) {
+        console.log("POOPER_22222")
+        if(this.arcHasOpened_firstCycle === true) {
             // // REFERENCE FIGURE STUFF
             // if(this.index === referencFigureIndex) {
             //     checkForFigureAndRunAFunction(2, 1, 0)
@@ -105,8 +107,8 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
             //     checkForFigureAndRunAFunction(4, 3, 4)
             // }
             // // REFERENCE FIGURE STUFF
-            this.arcHasOpened = false
-            this.arcHasClosed = true
+            this.arcHasOpened_firstCycle = false
+            this.arcHasClosed_firstCycle = true
         }
     }
 }

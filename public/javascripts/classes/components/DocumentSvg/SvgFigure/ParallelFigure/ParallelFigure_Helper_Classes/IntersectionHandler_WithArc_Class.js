@@ -218,7 +218,9 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
     let hasArcClosed = areTwoLinesIntersecting(this.ORIGPOS_START, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y], this.ORIGPOS_END, [parallelEndPoint_end.coords.x, parallelEndPoint_end.coords.y])
 
     if(hasArcClosed === true) {
+        console.log("POOPER_1111111")
         if(this.FIRSTCHECKER_02 === true) {
+            console.log("titter_11111")
             // REFERENCE FIGURE STUFF
             if(this.index === referencFigureIndex) {
                 checkForFigureAndRunAFunction(1, 2, 0)
@@ -232,25 +234,27 @@ IntersectionHandler_WithArc.prototype.checkIfArcIsClosed = function() {
 
 
 
-            this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
-            this.PARFIGURE.skipped_indecies.push(this.index + 1)
-            this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
-            this.PARFIGURE.currentSkippedIndex = this.index + 1
+            // this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
+            // this.PARFIGURE.skipped_indecies.push(this.index + 1)
+            // this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
+            // this.PARFIGURE.currentSkippedIndex = this.index + 1
 
-            console.log(parallelEndPoint_end)
-            console.log(parallelEndPoint_end_next)
+            // console.log(parallelEndPoint_end)
+            // console.log(parallelEndPoint_end_next)
 
-            parallelEndPoint_end.arc.hidden = true
-            if(parallelEndPoint_end_next !== null) {
-                parallelEndPoint_end_next.arc.hidden = true //FIXME: issue here
-            }
+            // parallelEndPoint_end.arc.hidden = true
+            // if(parallelEndPoint_end_next !== null) {
+            //     parallelEndPoint_end_next.arc.hidden = true //FIXME: issue here
+            // }
 
-            console.log("CLOSED_ARC")
-            //FIXME:
+            // console.log("CLOSED_ARC")
+            // //FIXME:
         }
     }
     if(hasArcClosed === false) {
+        console.log("POOPER_22222")
         if(this.FIRSTCHECKER_03 === true) {
+            console.log("titter_2222222")
             // REFERENCE FIGURE STUFF
             if(this.index === referencFigureIndex) {
                 checkForFigureAndRunAFunction(2, 1, 0)
