@@ -34,9 +34,10 @@ function updateSVG_thisSvgParallelFigure(figure) {
 
     // PARALLEL PATH
     for (let i = 0; i < parallelPaths.length; i++) {
-        // console.log(" ")
-        // console.log("RUNNING")
-        // console.log(" ")
+        console.log(" ")
+        console.log("RUNNING")
+        console.log(i)
+        console.log(" ")
         parallelPaths[i].svgElementObject
             .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i][1]]))
     }

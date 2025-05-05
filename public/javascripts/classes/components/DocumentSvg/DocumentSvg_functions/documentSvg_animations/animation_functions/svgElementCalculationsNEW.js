@@ -64,7 +64,7 @@ function calculateArcAndDescribePath(pathDataPass) {
 }
 
 //FIXME: RIGHT HERE (no changes have been made to this yet)
-function describeComplexPath(pathDataPass) {
+function describeComplexPath(pathDataPass) { //FIXME: mogjt need to update using the new originalFigurePathDatas()
     let M = ['M', pathDataPass[0].coords.x, pathDataPass[0].coords.y].join(' ')
     let arcsAndLines = []
     for (let i = 1; i < pathDataPass.length; i++) {
