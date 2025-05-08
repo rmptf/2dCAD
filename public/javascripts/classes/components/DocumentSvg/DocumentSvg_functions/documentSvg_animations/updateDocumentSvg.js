@@ -447,48 +447,39 @@ function updateSVG_thisSvgParallelFigure(figure, i) {
     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
     let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
 
-    // let newIII = i + 1
-    // let originalFigurePathDatas = figure.originalFigurePathDatas //FIXME: new way
-    // // this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_west
-    // // this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
 
-    // //NOTOWKRING
-    // // let prevPD = originalFigurePathDatas[newIII - 1].children.parallel_pathDatas.pathData_west
-    // // let thisPD =  originalFigurePathDatas[newIII].children.parallel_pathDatas.pathData_east
+    //WORKING
+    let passed_III_forOld = i - 1
+    let passed_III_forNew = i
+    let originalFigurePathDatas = figure.originalFigurePathDatas
+    let prevPD = originalFigurePathDatas[passed_III_forNew - 1] !== undefined ? originalFigurePathDatas[passed_III_forNew - 1].children.parallel_pathDatas.pathData_west : null;
+    let thisPD = originalFigurePathDatas[passed_III_forNew] !== undefined ? originalFigurePathDatas[passed_III_forNew].children.parallel_pathDatas.pathData_east : null;
 
-    // // let prevPD = someValue !== undefined ? someValue : null;
-    // // let thisPD = someValue !== undefined ? someValue : null;
-    // // let myVar = typeof someValue !== 'undefined' ? someValue : null;
-
-
-    // // let prevPD = originalFigurePathDatas[newIII - 1].children.parallel_pathDatas.pathData_west
-    // // let thisPD =  originalFigurePathDatas[newIII].children.parallel_pathDatas.pathData_east
-
-    // let prevPD = originalFigurePathDatas[newIII - 1] !== undefined ? originalFigurePathDatas[newIII - 1].children.parallel_pathDatas.pathData_west : null;
-    // let thisPD = originalFigurePathDatas[newIII] !== undefined ? originalFigurePathDatas[newIII].children.parallel_pathDatas.pathData_east : null;
-
-    // console.log("okokokokokokokok")
-    // console.log("NEWWAY")
-    // // console.log(originalFigurePathDatas[newIII - 1])
-    // // console.log(originalFigurePathDatas[newIII])
-    // console.log(prevPD)
-    // console.log(thisPD)
-    // console.log("OLDWAY")
-    // console.log(parallelPathDatas[i][0])
-    // console.log(parallelPathDatas[i][1])
-    // //NOTOWKRING
-
+    console.log("TEST_TEST_TEST_TEST_TEST")
+    console.log("NEWWAY")
+    console.log(prevPD)
+    console.log(thisPD)
+    console.log("OLDWAY")
+    console.log(parallelPathDatas[passed_III_forOld][0])
+    console.log(parallelPathDatas[passed_III_forOld][1])
+    console.log("SVG_Elements")
+    console.log("NEWWAY")
+    console.log(null)
+    console.log("OLDWAY")
+    console.log(parallelPaths[passed_III_forOld])
+    //WORKING
 
     // PARALLEL PATH
     // for (let i = 0; i < parallelPaths.length; i++) {
         console.log(" ")
         console.log("RUNNING")
-        console.log(i)
-        // console.log(originalFigurePathDatas[i])
+        console.log(passed_III_forOld)
+        console.log(passed_III_forNew)
         console.log(" ")
-        parallelPaths[i].svgElementObject //FIXME: old way, might need to update
-            .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i][1]])) //FIXME: old way, need to update AND might need to update describeComplexPath()
-            // .attr('d', describeComplexPath([prevPD, thisPD])) //FIXME: old way, need to update AND might need to update describeComplexPath()
+        parallelPaths[passed_III_forOld].svgElementObject //FIXME: old way, might need to update
+        // parallelPaths[passed_III_forOld].svgElementObject //FIXME: To Do it the new way: Will hve to add parPath Ref to OFPD Parallel Figure Children
+            // .attr('d', describeComplexPath([parallelPathDatas[passed_III_forOld][0], parallelPathDatas[passed_III_forOld][1]])) //FIXME: old way, need to update AND might need to update describeComplexPath()
+            .attr('d', describeComplexPath([prevPD, thisPD])) //FIXME: old way, need to update AND might need to update describeComplexPath()
     // }
     // PARALLEL PATH
 
