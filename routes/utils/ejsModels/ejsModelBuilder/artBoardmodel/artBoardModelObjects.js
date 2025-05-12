@@ -195,6 +195,7 @@ const MODEL_OBJECTS = {
                         {CONTENT_ID_ACANVAS_ZOOM: 'aCanvasZoomLayer'},
                         {CONTENT_ID_ACANVAS_PAN: 'aCanvasPanLayer'},
                         {CONTENT_ID_ACANVAS_DOCTEMPLATE: 'aCanvasTemplate'},
+                        {CONTENT_ID_ACANVAS_DOCTEMPLATE_02: 'aCanvasTemplate_02'},
                     ]
                 },
             },
@@ -428,6 +429,78 @@ const MODEL_OBJECTS = {
             CHILDREN_MOD_LOC: []
         }
     },
+
+
+
+
+
+    B_DOCUMENT: {
+        MODULE_NAME: 'B_DOCUMENT',
+        MODULE_LOCATION: MODULE_LOCATIONS.B_DOCUMENT,
+        MODULE_THEMES: {
+            THEME_containerFill: COLORVARS.FILLS.mainFill,
+            THEME_containerColor: COLORVARS.COLORS.main,
+            THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
+            THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
+        },
+        MODULE_DATA: {
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_ELEMENT_IDS: [
+                        {CONTENT_ID_BDOCUMENT_CONTAINER_ID: 'bDocumentContainerOOO'}, //FIXME: impliment this (currently hardcoded into ejs module)
+                        {CONTENT_ID_BDOCUMENT_HEADER: 'bDocumentHeaderOOO'},
+                        {CONTENT_ID_BDOCUMENT_SVG: 'bDocumentSvgOOO'},
+                    ],
+                    CONTENT_TEXT: {
+                        HEADER_TEXT: "Reference Layer",
+                    }
+                },
+            },
+        },
+        MODULE_ACTIONS: {
+            BUTTONS: [
+                {
+                    BUTTON: {
+                        BTN_DATA: null,
+                    },
+                },
+            ],
+            BUTTON_CONTAINERS: [
+                {
+                    CONTAINER: {
+                        CONTAINER_DATA: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--center",
+                            },
+                        BUTTONS: []
+                    },
+                },
+                {
+                    CONTAINER: {
+                        CONTAINER_DATA: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--center",
+                        },
+                        BUTTONS: []
+                    },
+                },
+            ],
+        },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: null,
+        },
+        MODULE_CHILDREN_DATA: {
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
+            CHILDREN_MOD_LOC: []
+        }
+    },
+
+
+
+
+
 
     B_FOOTER: {
         MODULE_NAME: 'B_FOOTER',

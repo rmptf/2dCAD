@@ -6,7 +6,7 @@ import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyMa
 
 function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[2].element.content
-    this.canvasDocumentClasses = canvasClass.canvasDocuments
+    this.canvasDocumentClasses = canvasClass.canvasADocuments
     this.canvasScaleClass = canvasClass.canvScaleClass
     this.scaleObject = scaleClass.scaleObject
     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
@@ -38,6 +38,8 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.footerActionBar03_btn01_htmlElement.addEventListener('click', () => {this.increaseCanvasScale()})
     this.footerActionBar03_btn02_htmlElement.addEventListener('click', () => {this.resetCanvasScale()})
     this.footerActionBar03_btn03_htmlElement.addEventListener('click', () => {this.decreaseCanvasScale()})
+
+    // canvasClass.newReferenceLayer() //FIXME: Trying to get this to work first.
 }
 
 // HOTKEY ACTIONS

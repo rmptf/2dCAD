@@ -11,7 +11,9 @@ function ArtBoard() {
         let aCanvasData = this.dataHandler.findModuleDataFromProcessedData('A_CANVAS', this.dataHandler.processedData)
         let aFooterData = this.dataHandler.findModuleDataFromProcessedData('B_FOOTER', this.dataHandler.processedData)
         let aDocumentData = this.dataHandler.findModuleDataFromProcessedData('A_DOCUMENT', this.dataHandler.processedData)
-        let canvas = new Canvas(aCanvasData)
+        let bDocumentData = this.dataHandler.findModuleDataFromProcessedData('B_DOCUMENT', this.dataHandler.processedData)
+        let canvas = new Canvas(aCanvasData, bDocumentData)
+        // let canvas = new Canvas(aCanvasData)
         new Footer(canvas, canvas.canvScaleClass, aCanvasData, aFooterData, aDocumentData)
     })
 }

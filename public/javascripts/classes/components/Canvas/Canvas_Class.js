@@ -1,7 +1,8 @@
 import {CanvasScale} from '../CanvasScale/CanvasScale_Class.js'
 import {CanvasPan} from '../CanvasPan/CanvasPan_Class.js'
+import { ReferenceLayer } from '../ReferenceLayer/ReferenceLayer_Class.js'
 
-function Canvas(canvasData) {
+function Canvas(canvasData, bDocumentData) {
     this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
     this.vars = {
         stringIncrement: -1,
@@ -13,7 +14,18 @@ function Canvas(canvasData) {
     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
     this.canvScaleClass = new CanvasScale(this.scaleElement)
     this.canvasPanClass = new CanvasPan(this.panElement, this.canvScaleClass.scaleObject)
-    this.canvasDocuments = []
+    this.canvasADocuments = []
+
+
+    this.canvasData
+    this.bDocumentData = bDocumentData
+    this.referenceLayers = []
+}
+
+Canvas.prototype.newReferenceLayer = function() {
+    console.log("new_REF_LAYER_NEW")
+    let newReferenceLayer = new ReferenceLayer(this)
+    this.canvasADocuments.push(newReferenceLayer)
 }
 
 export {

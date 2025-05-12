@@ -74,26 +74,26 @@ function updateSVG_thisSvgParallelFigure(figure, iii, subFigureSkipperIndexModif
                 console.log("RUNNING")
                 console.log(i)
                 console.log(" ")
-                parallelPaths[i].svgElementObject // ((SHAPE AAAA)) and others
-                    .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i+2][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection  // ((SHAPE AAAA)) and others
-                parallelPaths[i].svgElementObject.style("stroke", "pink")  // ((SHAPE AAAA)) and others
+                // parallelPaths[i].svgElementObject // ((SHAPE AAAA)) and others
+                //     .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i+2][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection  // ((SHAPE AAAA)) and others
+                // parallelPaths[i].svgElementObject.style("stroke", "pink")  // ((SHAPE AAAA)) and others
                 
-                // parallelPaths[i-1].svgElementObject //FIXME: only for last arc closed ((SHAPE BBBB)) only
-                //     .attr('d', describeComplexPath([parallelPathDatas[i-1][0], parallelPathDatas[i-1][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection //FIXME: only for last arc closed ((SHAPE BBBB)) only
-                // parallelPaths[i-1].svgElementObject.style("stroke", "pink") //FIXME: only for last arc closed ((SHAPE BBBB)) only
+                parallelPaths[i-1].svgElementObject //FIXME: only for last arc closed ((SHAPE BBBB)) only
+                    .attr('d', describeComplexPath([parallelPathDatas[i-1][0], parallelPathDatas[i-1][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection //FIXME: only for last arc closed ((SHAPE BBBB)) only
+                parallelPaths[i-1].svgElementObject.style("stroke", "pink") //FIXME: only for last arc closed ((SHAPE BBBB)) only
 
             } else if(skippedIndicies.length === 3) {
                 console.log(" ")
                 console.log("RUNNING")
                 console.log(i)
                 console.log(" ")
-                parallelPaths[i].svgElementObject
-                    .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i+3][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection
-                parallelPaths[i].svgElementObject.style("stroke", "yellow")
+                // parallelPaths[i].svgElementObject
+                //     .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i+3][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection
+                // parallelPaths[i].svgElementObject.style("stroke", "yellow")
 
-                // parallelPaths[i-1].svgElementObject //FIXME: only for last arc closed  // ((SHAPE AAAA))
-                //     .attr('d', describeComplexPath([parallelPathDatas[i-1][0], parallelPathDatas[i-1][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection //FIXME: only for last arc closed  // ((SHAPE AAAA))
-                // parallelPaths[i-1].svgElementObject.style("stroke", "yellow") //FIXME: only for last arc closed  // ((SHAPE AAAA))
+                parallelPaths[i-1].svgElementObject //FIXME: only for last arc closed  // ((SHAPE AAAA))
+                    .attr('d', describeComplexPath([parallelPathDatas[i-1][0], parallelPathDatas[i-1][1]])) // this grabs correct data for double arc closed first arc BEFORE intersection //FIXME: only for last arc closed  // ((SHAPE AAAA))
+                parallelPaths[i-1].svgElementObject.style("stroke", "yellow") //FIXME: only for last arc closed  // ((SHAPE AAAA))
 
             } else if(skippedIndicies.length === 4) {
                 console.log(" ")
@@ -573,81 +573,87 @@ function updateSVG_thisSvgParallelFigure(figure, iii, subFigureSkipperIndexModif
 
 
 
-function updateSVG_thisSvgParallelFigure(figure, i) {
-    let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
-    let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
+// function updateSVG_thisSvgParallelFigure(figure, i) {
+//     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
+//     let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
 
-    let passed_III_forOld = i - 1
-    let passed_III_forNew = i
-    let originalFigurePathDatas = figure.originalFigurePathDatas
+//     let passed_III_forOld = i - 1
+//     let passed_III_forNew = i
+//     let originalFigurePathDatas = figure.originalFigurePathDatas
 
-    let prevPD = originalFigurePathDatas[passed_III_forNew - 1] !== undefined ? originalFigurePathDatas[passed_III_forNew - 1].children.parallel_pathDatas.pathData_west : null;
-    let thisPD = originalFigurePathDatas[passed_III_forNew] !== undefined ? originalFigurePathDatas[passed_III_forNew].children.parallel_pathDatas.pathData_east : null;
+//     let prevPD = originalFigurePathDatas[passed_III_forNew - 1] !== undefined ? originalFigurePathDatas[passed_III_forNew - 1].children.parallel_pathDatas.pathData_west : null;
+//     let thisPD = originalFigurePathDatas[passed_III_forNew] !== undefined ? originalFigurePathDatas[passed_III_forNew].children.parallel_pathDatas.pathData_east : null;
 
-    // PARALLEL PATH
-        parallelPaths[passed_III_forOld].svgElementObject //FIXME: old way, might need to update
-            .attr('d', describeComplexPath([prevPD, thisPD])) //FIXME: old way, need to update AND might need to update describeComplexPath()
-    // PARALLEL PATH
+//     // PARALLEL PATH
+//         parallelPaths[passed_III_forOld].svgElementObject //FIXME: old way, might need to update
+//             .attr('d', describeComplexPath([prevPD, thisPD])) //FIXME: old way, need to update AND might need to update describeComplexPath()
+//     // PARALLEL PATH
 
 
-    // before skipped
-    // skipped
-    // after skipped
-    // other
+//     // before skipped
+//     // skipped
+//     // after skipped
+//     // other
     
-    if(i === skippedIndicies[0] - 1 || skippedIndicies[0] === 0) { // before skipped 
-    // (if i is the index before the first Skipped Index or if the first Skipped Index is 0)
-        let length = skippedIndicies.length
-        let color
-        if(length === 1) {
-            color = 'red'
-        }
-        if(length === 2) {
-            color = 'pink'
-        }
-        if(length === 3) {
-            color = 'yellow'
-        }
-        if(length === 4) {
-            color = 'green'
-        }
+//     if(i === skippedIndicies[0] - 1 || skippedIndicies[0] === 0) { // before skipped 
+//     // (if i is the index before the first Skipped Index or if the first Skipped Index is 0)
+//         let length = skippedIndicies.length
+//         let color
+//         if(length === 1) {
+//             color = 'red'
+//         }
+//         if(length === 2) {
+//             color = 'pink'
+//         }
+//         if(length === 3) {
+//             color = 'yellow'
+//         }
+//         if(length === 4) {
+//             color = 'green'
+//         }
 
-        // parallelPaths[i].svgElementObject
-        //     .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i + length][1]]))
-        parallelPaths[passed_III_forOld].svgElementObject
-            .attr('d', describeComplexPath([prevPD, thisPD]))
-        parallelPaths[i].svgElementObject.style("stroke", color)
-    }
-    else if(skippedIndicie.includes(i)) { // skipped
-    // (if i is a Skipped Index)
+//         // parallelPaths[i].svgElementObject
+//         //     .attr('d', describeComplexPath([parallelPathDatas[i][0], parallelPathDatas[i + length][1]]))
+//         parallelPaths[passed_III_forOld].svgElementObject
+//             .attr('d', describeComplexPath([prevPD, thisPD]))
+//         parallelPaths[i].svgElementObject.style("stroke", color)
+//     }
+//     else if(skippedIndicie.includes(i)) { // skipped
+//     // (if i is a Skipped Index)
 
-    }
-    else if(i === skippedIndicies[skippedIndicies.length]) { // after skipped
-    // (if i is the index after the last Skipped Index)
+//     }
+//     else if(i === skippedIndicies[skippedIndicies.length]) { // after skipped
+//     // (if i is the index after the last Skipped Index)
 
-    }
-    else { // other
-    // (anything else (i doesnt interect with any skipped indecies))
+//     }
+//     else { // other
+//     // (anything else (i doesnt interect with any skipped indecies))
 
-    }
-
-
+//     }
 
 
 
 
-    // PARALLEL END POINTS
-    let endPoints = figure.svgEndPoints
-    let k = -1
-    for (let i = 0; i < parallelPaths.length; i++) {
-        for (let j = 0; j < parallelPathDatas[i].length; j++) {
-            k = k + 1
-            endPoints[k].svgElementObject
-                .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
-        }
-    }
-    // PARALLEL END POINTS
-}
+//     // PARALLEL END POINTS
+//     let endPoints = figure.svgEndPoints
+//     let k = -1
+//     for (let i = 0; i < parallelPaths.length; i++) {
+//         for (let j = 0; j < parallelPathDatas[i].length; j++) {
+//             k = k + 1
+//             endPoints[k].svgElementObject
+//                 .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
+//         }
+//     }
+//     // PARALLEL END POINTS
+// }
+
+
+
+
+
+
+
+
 
 
 export {

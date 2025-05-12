@@ -20,34 +20,102 @@ function Intersection_Contact(parallelFigure, index, intersectionIsConnected, sk
     console.log(this.index)
 
     // // REFERENCE FIGURE STUFF
-    if(this.index === 3) {
-        console.log("ADDING_REFERENCEFIGURE")
-        let svgFigure = parallelFigure.svgFigure
-        this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
-        // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
-        this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
-        this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
-        this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
-    }
+        // if(this.index === 0) {
+    //     // let swtitch = true
+    //     let swtitch = false
+    //     console.log("ADDING_REFERENCEFIGURE")
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+    //     // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
+    // }
 
-    if(this.index === 2) {
-        console.log("ADDING_REFERENCEFIGURE")
-        let svgFigure = parallelFigure.svgFigure
-        this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
-        // this.referenceFigure_01_A.addEmptyCircle({palette: 2, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
-        this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
-        this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_03_A.addCircle({palette: 2, circRad: 5, fillClr: 3}, 1)
-        this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
-        this.referenceFigure_04_A.addCircle({palette: 2, circRad: 10, fillClr: 4}, 1)
-    }
-    // // REFERENCE FIGURE STUFF
+    // if(this.index === 1) {
+    //     // let swtitch = true
+    //     let swtitch = false
+    //     console.log("ADDING_REFERENCEFIGURE")
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+    //     // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
+    // }
+
+    // if(this.index === 2) {
+    //     // let swtitch = true
+    //     let swtitch = false
+    //     console.log("ADDING_REFERENCEFIGURE")
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+    //     // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
+    // }
+
+    // if(this.index === 3) {
+    //     let swtitch = true
+    //     // let swtitch = false
+    //     console.log("ADDING_REFERENCEFIGURE")
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+    //     // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
+    // }
+
+    //FIXME: 4 doesnt run
+    // if(this.index === 4) {
+    //     // let swtitch = true
+    //     let swtitch = false
+    //     console.log("ADDING_REFERENCEFIGURE")
+    //     let svgFigure = parallelFigure.svgFigure
+    //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_01_A.addCircle({palette: 8, circRad: 10, fillClr: 1}, 1)
+    //     // this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_02_A.addCircle({palette: 8, circRad: 10, fillClr: 2}, 1)
+    //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_03_A.addCircle({palette: 8, circRad: 5, fillClr: 3}, 1)
+    //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, swtitch)
+    //     this.referenceFigure_04_A.addCircle({palette: 8, circRad: 10, fillClr: 4}, 1)
+    // }
+
+    //FIXME: old
+    // // if(this.index === 2) {
+    // //     console.log("ADDING_REFERENCEFIGURE")
+    // //     let svgFigure = parallelFigure.svgFigure
+    // //     this.referenceFigure_01_A = new ReferenceFigure(svgFigure, false)
+    // //     this.referenceFigure_01_A.addCircle({palette: 2, circRad: 10, fillClr: 1}, 1)
+    // //     // this.referenceFigure_01_A.addEmptyCircle({palette: 2, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+    // //     this.referenceFigure_02_A = new ReferenceFigure(svgFigure, false)
+    // //     this.referenceFigure_02_A.addCircle({palette: 2, circRad: 10, fillClr: 2}, 1)
+    // //     this.referenceFigure_03_A = new ReferenceFigure(svgFigure, false)
+    // //     this.referenceFigure_03_A.addCircle({palette: 2, circRad: 5, fillClr: 3}, 1)
+    // //     this.referenceFigure_04_A = new ReferenceFigure(svgFigure, false)
+    // //     this.referenceFigure_04_A.addCircle({palette: 2, circRad: 10, fillClr: 4}, 1)
+    // // }
+    // // // REFERENCE FIGURE STUFF
 
 }
 
@@ -138,37 +206,86 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
 
 
     // REFERENCE FIGURE STUFF
-    if(this.index === 3) {
-        console.log("ANIMATING")
-        // let referenceFigures = [this.referenceFigure_04_A]
-        if(this.previousIndex === -1) {
-            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
-            this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
-        } else {
-            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-            this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
-        }
-        // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-        // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-        this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-        this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
-    }
+        // if(this.index === 0) {
+    //     console.log("ANIMATING_REFERENCE_FIGURE")
+    //     // let referenceFigures = [this.referenceFigure_04_A]
+    //     if(this.previousIndex === -1) {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
+    //     } else {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
+    //     }
+    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    // }
 
-    if(this.index === 2) {
-        console.log("ANIMATING")
-        // let referenceFigures = [this.referenceFigure_04_A]
-        if(this.previousIndex === -1) {
-            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
-            this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
-        } else {
-            this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-            this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
-        }
-        // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
-        // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-        this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
-        this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
-    }
+    // if(this.index === 1) {
+    //     console.log("ANIMATING_REFERENCE_FIGURE")
+    //     // let referenceFigures = [this.referenceFigure_04_A]
+    //     if(this.previousIndex === -1) {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
+    //     } else {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
+    //     }
+    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    // }
+
+    // if(this.index === 2) {
+    //     console.log("ANIMATING_REFERENCE_FIGURE")
+    //     // let referenceFigures = [this.referenceFigure_04_A]
+    //     if(this.previousIndex === -1) {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
+    //     } else {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
+    //     }
+    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    // }
+
+    // if(this.index === 3) {
+    //     console.log("ANIMATING_REFERENCE_FIGURE")
+    //     // let referenceFigures = [this.referenceFigure_04_A]
+    //     if(this.previousIndex === -1) {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
+    //     } else {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
+    //     }
+    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    // }
+
+    // FIXME: 4 doesnt get called
+    // if(this.index === 4) {
+    //     console.log("ANIMATING_REFERENCE_FIGURE")
+    //     // let referenceFigures = [this.referenceFigure_04_A]
+    //     if(this.previousIndex === -1) {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(2).coords.x, this.originalFigurePathData(2).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(1).coords.x, this.originalFigurePathData(1).coords.y]])    
+    //     } else {
+    //         this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //         this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])    
+    //     }
+    //     // this.referenceFigure_01_A.runFunctions([[this.originalFigurePathData(this.previousIndex).coords.x, this.originalFigurePathData(this.previousIndex).coords.y]])
+    //     // this.referenceFigure_02_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_03_A.runFunctions([[this.originalFigurePathData(this.thisIndex).coords.x, this.originalFigurePathData(this.thisIndex).coords.y]])
+    //     this.referenceFigure_04_A.runFunctions([[this.originalFigurePathData(this.nextIndex).coords.x, this.originalFigurePathData(this.nextIndex).coords.y]])
+    // }
     // REFERENCE FIGURE STUFF
 
     // // REFERENCE FIGURE STUFF

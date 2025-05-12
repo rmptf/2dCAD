@@ -13,6 +13,7 @@ const MODULE_LOCATIONS = {
     A_CANVAS: '../../../../../../../../views/partials/modules/html/third_level_modules/canvases/a-canvas/a-canvas_files/a-canvas.ejs',
 
     A_DOCUMENT: '../../../../../../../../views/partials/modules/html/third_level_modules/documents/a-document/a-document_files/a-document.ejs',
+    B_DOCUMENT: '../../../../../../../../views/partials/modules/html/third_level_modules/documents/b-document/b-document_files/b-document.ejs',
 
     A_HEADER: '',
     B_HEADER: '../../../../../../../../views/partials/modules/html/third_level_modules/headers/b-header/b-header_files/b-header.ejs',

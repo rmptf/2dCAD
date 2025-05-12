@@ -8,6 +8,7 @@ let objects = {
   "B_HEADER": MODEL_OBJECTS.B_HEADER,
   "A_CANVAS": MODEL_OBJECTS.A_CANVAS,
   "A_DOCUMENT": MODEL_OBJECTS.A_DOCUMENT,
+  "B_DOCUMENT": MODEL_OBJECTS.B_DOCUMENT,
   "B_FOOTER": MODEL_OBJECTS.B_FOOTER
 }
 
@@ -17,6 +18,7 @@ let modelStructure = [
   { parent: "A_ARTBOARD", child: "B_HEADER" },
   { parent: "A_ARTBOARD", child: "A_CANVAS" },
   { parent: "A_CANVAS", child: "A_DOCUMENT" },
+  { parent: "A_CANVAS", child: "B_DOCUMENT" },
   { parent: "A_ARTBOARD", child: "B_FOOTER" },
 ]
 

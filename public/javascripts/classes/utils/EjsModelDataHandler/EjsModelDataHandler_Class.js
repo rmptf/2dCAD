@@ -20,6 +20,7 @@ EjsModelDataHandler.prototype.grabModelDataFromAPI = async function() {
 EjsModelDataHandler.prototype.findModuleDataFromProcessedData = function(key, data) {
     const firstKey = key // First key you want to match
     const result = data.find(obj => Object.keys(obj)[0] === firstKey)
+    console.log(result)
     return result
 }
 

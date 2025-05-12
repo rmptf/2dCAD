@@ -1,9 +1,19 @@
+
 <div class="a-canvas <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>" id="<%= A_CANVAS.MODULE_DATA.MODULE_ID %>">
+
+    <!-- <div class="a-canvas__slot">
+        <%# if (A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[1]) { %>
+            <%#- include(A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_LOCATION, {}) %>
+        <%# } %>
+    </div> -->
+    
     <div class="a-canvas__container <%= A_CANVAS.MODULE_THEMES.THEME_ContainerFill %>">
         <div class="a-canvas__zoomLayer" id=<%= A_CANVAS.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[0].CONTENT_ID_ACANVAS_ZOOM %>>
-            <div class="a-canvas__panLayer <%= A_CANVAS.MODULE_THEMES.THEME_PanLayerFill %>" id=<%=A_CANVAS.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_ACANVAS_PAN%>></div>
+            <div class="a-canvas__panLayer <%= A_CANVAS.MODULE_THEMES.THEME_PanLayerFill %>" id=<%=A_CANVAS.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_ACANVAS_PAN%>>
+            </div>
         </div>
     </div>
+
 </div>
 <template id="aCanvasTemplate">
     <div class="a-canvas__slot">
@@ -12,11 +22,18 @@
         <% } %>
     </div>
 </template>
+<template id="aCanvasTemplate_02">
+    <div class="a-canvas__slot">
+        <% if (A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[1]) { %>
+            <%- include(A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_LOCATION, {}) %>
+        <% } %>
+    </div>
+</template>
 
 
 <!-- only using this for "oldway" -->
-<script>
+<!-- <script>
     // const a_canvas_functions = {}
     const a_canvas_globalVars = {}
 </script>
-<script id='aCanvas_scriptId' type='module' data-json='[""]' src='./javascripts/html_modules/a_canvas.js'></script>
+<script id='aCanvas_scriptId' type='module' data-json='[""]' src='./javascripts/html_modules/a_canvas.js'></script> -->

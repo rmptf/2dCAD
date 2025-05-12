@@ -9,6 +9,7 @@ import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/docum
 import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_cornerShape_01} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
+import { ReferenceFigure } from '../ReferenceFigure/ReferenceFigure_Class.js'
 
 function ParallelFigure(svgFigure, sectionIndex) {
     this.svgFigure = svgFigure
@@ -84,7 +85,80 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
 
 
+
+
+    // REFERENCE FIGURE STUFF
+    // let svgFigure = this.svgFigure
+    this.referenceFigure_01_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_01_A.runFunctions([[20, 50]])
+
+
+    this.referenceFigure_02_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_02_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_02_A.runFunctions([[20, 100]])
+
+
+    this.referenceFigure_03_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_03_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_03_A.runFunctions([[20, 150]])
+
+
+    this.referenceFigure_04_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_04_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_04_A.runFunctions([[20, 200]])
+
+
+    this.referenceFigure_05_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_05_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_05_A.runFunctions([[20, 250]])
+
+    this.referenceFigure_06_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_06_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_06_A.runFunctions([[20, 300]])
+
+    this.referenceFigure_07_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_07_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_07_A.runFunctions([[20, 350]])
+
+    this.referenceFigure_08_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_08_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_08_A.runFunctions([[20, 400]])
+
+    this.referenceFigure_09_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_09_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_09_A.runFunctions([[20, 450]])
+
+    this.referenceFigure_10_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_10_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
+
+    this.referenceFigure_10_A.runFunctions([[20, 500]])
+
+
+
+
+    this.referenceFigure_01_B = new ReferenceFigure(svgFigure, true)
+    this.referenceFigure_01_B.addCircle({palette: 8, circRad: 8, fillClr: 1}, 1)
+
+    this.referenceFigure_01_B.runFunctions([[-100, -100]])
+    // REFERENCE FIGURE STUFF
+
+
 }
+
+
+
+
+
 
 // OLD NAMES
 // this.originalFigurePathDatas
@@ -264,11 +338,29 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 if(thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] === thisFigure.originalFigurePathDatas.length - 1) { // if(skippedInd[last] = origFigLenth)
                     if(i === 1) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 50]])
+                        // // REFERENCE FIGURE STUFF  
+
                     } else if(i === 2) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 100]])
+                        // // REFERENCE FIGURE STUFF  
+
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+
+                    // // REFERENCE FIGURE STUFF
+                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                    thisFigure.referenceFigure_01_B.runFunctions([[20, 150]])
+                    // // REFERENCE FIGURE STUFF  
+
                 }
             }
         }
@@ -292,17 +384,34 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
                     if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc
                         let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE   
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 200]])
+                        // // REFERENCE FIGURE STUFF  
+
                     } else { // Current skipped arc index IS NOT final arc
                         if(i === thisFigure.currentSkippedIndex + 0) {
                             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
+
+                            // // REFERENCE FIGURE STUFF
+                            // thisFigure.referenceFigure_01_A.runFunctions([[100, 300]])
+                            thisFigure.referenceFigure_01_B.runFunctions([[20, 250]])
+                            // // REFERENCE FIGURE STUFF  
+
                         }
                     }
                 } else { // More than the first index not skipped
                     if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped
                         let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 600]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 300]])
+                        // // REFERENCE FIGURE STUFF  
                     }
                 }
             }
@@ -331,11 +440,29 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 if(thisFigure.skipped_indecies[0] === 1) {
                     if(i === 4) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 350]])
+                        // // REFERENCE FIGURE STUFF  
+
                     } else if(i === 3) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
+
+                        // // REFERENCE FIGURE STUFF
+                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                        thisFigure.referenceFigure_01_B.runFunctions([[20, 400]])
+                        // // REFERENCE FIGURE STUFF  
+
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+
+                    // // REFERENCE FIGURE STUFF
+                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                    thisFigure.referenceFigure_01_B.runFunctions([[20, 450]])
+                    // // REFERENCE FIGURE STUFF  
+
                 }
 
                 // thisFigure.groupOfConsecutiveIndeciesCounter = thisFigure.groupOfConsecutiveIndeciesCounter + 1
@@ -369,6 +496,11 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     }
                     THISPathData.interSectionSorter.setIndex(i - 1, subFigureSkipperIndexModifiers)
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
+
+                    // // REFERENCE FIGURE STUFF
+                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
+                    thisFigure.referenceFigure_01_B.runFunctions([[20, 500]])
+                    // // REFERENCE FIGURE STUFF  
 
 
 
