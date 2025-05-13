@@ -155,10 +155,7 @@ function ParallelFigure(svgFigure, sectionIndex, Canvas) {
 
 
 
-    
 
-    console.log("ParFigure")
-    console.log(Canvas)
     Canvas.newReferenceLayer() //FIXME: Trying to get this to work first.
 }
 
