@@ -6,7 +6,7 @@ function Canvas(canvasData, bDocumentData) {
     this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
     this.vars = {
         stringIncrement: -1,
-        previousDrawPathObj: undefined
+        previousDrawPathObj: undefined,
     }
     this.scaleObject = {}
     this.panObject = {}
@@ -17,14 +17,14 @@ function Canvas(canvasData, bDocumentData) {
     this.canvasADocuments = []
 
 
-    this.canvasData
+    this.canvasData = canvasData
     this.bDocumentData = bDocumentData
     this.referenceLayers = []
 }
 
 Canvas.prototype.newReferenceLayer = function() {
     console.log("new_REF_LAYER_NEW")
-    let newReferenceLayer = new ReferenceLayer(this)
+    let newReferenceLayer = new ReferenceLayer(this.canvasData)
     this.canvasADocuments.push(newReferenceLayer)
 }
 

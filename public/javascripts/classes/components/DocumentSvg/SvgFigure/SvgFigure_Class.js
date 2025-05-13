@@ -12,6 +12,7 @@ function SvgFigure(DocSvg) {
         //TODO: put in order and in an object (will affect other files)
         SECONDARYGROUPNAMES: [{className: "mainPathGROUP_001", id: "mainPath_groupId"}, {className: "secondaryPathGROUP_001", id: "secondaryPath_groupId"}, {className: "endPointGROUP_001", id: "endPoint_groupId"}, {className: "testElementsGROUP_001", id: "testElement_groupId"}, {className:  "parallelFigureGROUP_001", id: "parallelFigure_groupId"}],
     }
+    this.Canvas = DocSvg.Canvas
     this.DocumentSvg = DocSvg
     this.documentSvgD3 = DocSvg.D3Element
     this.documentSvgHTML = DocSvg.HtmlElement
@@ -37,6 +38,15 @@ function SvgFigure(DocSvg) {
     // Svg Elements
 
     this.parallelFigure = null
+
+
+
+
+
+
+    
+    console.log("SvgFigure")
+    console.log(this.Canvas)
 }
 
 
@@ -105,14 +115,14 @@ SvgFigure.prototype.createPath_primary = function(figure, parentElement, index) 
 
 
 SvgFigure.prototype.createPath_secondary = function(figure, parentElement, index) {
-    let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates, index)
+    let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates, index, this.Canvas)
     this.svgPaths.secondaryPaths.push(newPath_secondary)
 
     return newPath_secondary
 }
 
 SvgFigure.prototype.createPath_secondary_splice = function(figure, parentElement, index) {
-    let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates, index)
+    let newPath_secondary = new SvgPathSecondary(figure, parentElement, this.actionStates, index, this.Canvas)
     this.svgPaths.secondaryPaths.splice(index, 0, newPath_secondary)
 
     return newPath_secondary

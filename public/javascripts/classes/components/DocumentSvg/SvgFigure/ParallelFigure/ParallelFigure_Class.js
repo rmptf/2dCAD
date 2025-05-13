@@ -11,7 +11,7 @@ import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/Interse
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
 import { ReferenceFigure } from '../ReferenceFigure/ReferenceFigure_Class.js'
 
-function ParallelFigure(svgFigure, sectionIndex) {
+function ParallelFigure(svgFigure, sectionIndex, Canvas) {
     this.svgFigure = svgFigure
     this.SVGGROUPSDATA = {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
@@ -153,6 +153,13 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // REFERENCE FIGURE STUFF
 
 
+
+
+    
+
+    console.log("ParFigure")
+    console.log(Canvas)
+    Canvas.newReferenceLayer() //FIXME: Trying to get this to work first.
 }
 
 

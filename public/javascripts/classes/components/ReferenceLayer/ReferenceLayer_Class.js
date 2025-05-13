@@ -4,10 +4,15 @@
 // import {dragElement} from '../../utils/htmlElementFunctions.js'
 // import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 
-function ReferenceLayer(Canvas) {
-    this.canvasElement = Canvas.canvasElement
-    this.documentTemplateContent = Canvas.canvasData.A_CANVAS.elements.contentElementsData[3].element.content
+function ReferenceLayer(canvasData) {
+    this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
+    this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[3].element.content
     this.cloneAndAppendTemplate(this.documentTemplateContent, this.canvasElement)
+
+
+
+
+
 
     // this.canvasDocument_htmlElement = document.getElementById(documentData.A_DOCUMENT.elements.contentElementsData[0].id)
     // this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + documentData.A_DOCUMENT.elements.contentElementsData[1].id)

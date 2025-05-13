@@ -4,7 +4,7 @@ import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyMa
 import {dragElement} from '../../utils/htmlElementFunctions.js'
 import {saveFigureData, saveSvgData} from '../DocumentSvg/DocumentSvg_functions/saveFigureData_NEW.js'
 
-function CanvasDocument(documentData, footer) {
+function CanvasDocument(Canvas, documentData, footer) {
     this.DOCUMENT_ELEMENT_NEWNAMES = {
         CANV_DOC: 'aDocument_',
         HEADING: 'Pattern_Pc_',
@@ -29,7 +29,7 @@ function CanvasDocument(documentData, footer) {
         saveFigureDataActive: false,
     }
 
-    this.documentSvg = new DocumentSvg(this)
+    this.documentSvg = new DocumentSvg(this, Canvas)
 
     this.hotkeyManager = new HotkeyManager(this)
     this.hotkeyManager.registerHotkey('F1', () => this.f1(this))

@@ -4,11 +4,11 @@ import {CanvasDocument_PRE_OOP} from '../CanvasDocument/CanvasDocument_Class_PRE
 import {EjsModelDataHandler} from '../../utils/EjsModelDataHandler/EjsModelDataHandler_Class.js'
 import {HotkeyManager} from '../../utils/actionsAndEvents/HotKeyManager/HotkeyManager_Class.js'
 
-function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
+function Footer(Canvas, Scale, canvasData, footerData, documentData) {
     this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[2].element.content
-    this.canvasDocumentClasses = canvasClass.canvasADocuments
-    this.canvasScaleClass = canvasClass.canvScaleClass
-    this.scaleObject = scaleClass.scaleObject
+    this.canvasDocumentClasses = Canvas.canvasADocuments
+    this.canvasScaleClass = Canvas.canvScaleClass
+    this.scaleObject = Scale.scaleObject
     this.panElement = canvasData.A_CANVAS.elements.contentElementsData[1].element
     this.footerElement = footerData.B_FOOTER.elements.elementData.element
     this.footerActionElements = EjsModelDataHandler.grabModuleActionElements(footerData, "B_FOOTER")
@@ -19,9 +19,9 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     }
 
     this.hotkeyManager = new HotkeyManager(this)
-    this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW(this))
-    this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_PRE_REORG(this))
-    this.hotkeyManager.registerHotkey("Ctrl+Enter", () => this.newCanvDoc_OLD(this))
+    this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW(Canvas))
+    this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_PRE_REORG())
+    this.hotkeyManager.registerHotkey("Ctrl+Enter", () => this.newCanvDoc_OLD())
 
     this.footerActionBar01_btn01_htmlElement = this.footerActionElements[0][0]
     this.footerActionBar02_btn01_htmlElement = this.footerActionElements[1][0]
@@ -32,20 +32,18 @@ function Footer(canvasClass, scaleClass, canvasData, footerData, documentData) {
     this.footerActionBar03_btn03_htmlElement = this.footerActionElements[2][2]
 
     this.footerActionBar01_btn01_htmlElement.addEventListener('click', () => {this.test()})
-    this.footerActionBar02_btn01_htmlElement.addEventListener('click', () => {this.createCanvasDocument()})
+    this.footerActionBar02_btn01_htmlElement.addEventListener('click', () => {this.createCanvasDocument(Canvas)})
     this.footerActionBar02_btn02_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_REORG()})
     this.footerActionBar02_btn03_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_OOP()})
     this.footerActionBar03_btn01_htmlElement.addEventListener('click', () => {this.increaseCanvasScale()})
     this.footerActionBar03_btn02_htmlElement.addEventListener('click', () => {this.resetCanvasScale()})
     this.footerActionBar03_btn03_htmlElement.addEventListener('click', () => {this.decreaseCanvasScale()})
-
-    // canvasClass.newReferenceLayer() //FIXME: Trying to get this to work first.
 }
 
 // HOTKEY ACTIONS
-Footer.prototype.newCanvDoc_NEW = function() {
+Footer.prototype.newCanvDoc_NEW = function(Canvas) {
     console.log("new_CANV_DOC_NEW")
-    this.createCanvasDocument()
+    this.createCanvasDocument(Canvas)
 }
 Footer.prototype.newCanvDoc_PRE_REORG = function() {
     console.log("new_CANV_DOC_PRE_REORG")
@@ -58,11 +56,11 @@ Footer.prototype.newCanvDoc_OLD = function() {
 // HOTKEY ACTIONS
 
 // BTN ACTIONS
-Footer.prototype.createCanvasDocument = function() {
+Footer.prototype.createCanvasDocument = function(Canvas) {
     // console.log("3")
     console.log("NEW_WAY")
     this.iterateCounters()
-    let newCanvasDoc = new CanvasDocument(this.documentData, this)
+    let newCanvasDoc = new CanvasDocument(Canvas, this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)
 }
 Footer.prototype.createCanvasDocument_PRE_REORG = function() {
