@@ -19,9 +19,18 @@ export {
 
 ReferenceLayer.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement, true))
+
+        const clonedElement = document.importNode(templateElement, true);
+    targetElement.appendChild(clonedElement);
+    return clonedElement; // Return the newly appended element
+
 }
 
 ReferenceLayer.newReferenceLayer = function() {
     let NewReferenceLayer =  new ReferenceLayer()
     // this.referenceLayers.push(newReferenceLayer) //TODO: Do I need this?
-  }
+}
+
+ReferenceLayer.prototype.moveDivToCoords = function() {
+
+}

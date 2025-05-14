@@ -194,7 +194,7 @@ const MODEL_OBJECTS = {
                     CONTENT_ELEMENT_IDS: [
                         {CONTENT_ID_ACANVAS_ZOOM: 'aCanvasZoomLayer'},
                         {CONTENT_ID_ACANVAS_PAN: 'aCanvasPanLayer'},
-                        {CONTENT_ID_ACANVAS_DOCTEMPLATE: 'aCanvasTemplate'},
+                        {CONTENT_ID_ACANVAS_DOCTEMPLATE_01: 'aCanvasTemplate_01'},
                         {CONTENT_ID_ACANVAS_DOCTEMPLATE_02: 'aCanvasTemplate_02'},
                     ]
                 },
