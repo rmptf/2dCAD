@@ -6,22 +6,12 @@ import {saveFigureData} from '../../../../DocumentSvg_functions/saveFigureData_N
 // import {drawParallelPathFunction_NEW} from '../../../../DocumentSvg_functions/drawParallelPath_NEW/drawParallelPath_NEW.js'
 
 // Child class using "Inheritance"
-function SvgPathSecondary(thisFigure, parentElement, actionStates, index, Canvas) {
+function SvgPathSecondary(thisFigure, parentElement, actionStates, index) {
     // Call the constructor of the parent class
     // SvgPath.call(this, thisFigure, parentElement, actionStates, index)
-    this.Canvas = Canvas
     this.PATH_CLASS = 'secondaryPath'
     SvgPath.call(this, thisFigure, parentElement, index)
     this.actionStates = actionStates
-
-
-
-
-
-
-    
-    console.log("SvgPathSecondary")
-    console.log(Canvas)
 }
 
 // Inherit methods from the parent class
@@ -58,7 +48,7 @@ SvgPathSecondary.prototype.elementClick = function(event, actionStates) {
         actionStates.addEndPointActive_curve = false
     } else if(actionStates.drawParallelPathAcive === true) {
         console.log('Add Parallel = true')
-        let newParallelFigure = new ParallelFigure(this.thisFigure, clickedIndex, this.Canvas)
+        let newParallelFigure = new ParallelFigure(this.thisFigure, clickedIndex)
         newParallelFigure.parallelFigure_updateSvg()
         newParallelFigure.initiateFigure()
         this.thisFigure.parallelFigure = this

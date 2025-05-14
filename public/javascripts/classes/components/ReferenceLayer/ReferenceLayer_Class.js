@@ -1,9 +1,8 @@
-function ReferenceLayer(canvasData) {
+function ReferenceLayer() {
     // this.canvasElement = canvasData.A_CANVAS.elements.elementData.element
     // this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[3].element.content
-
-    this.canvasElement = document.getElementById('aCanvas_01')
-    this.documentTemplateContent = document.getElementById('aCanvasTemplate_02').content
+    this.canvasElement = document.getElementById('aCanvas_01') //TODO: try to make not hardcoded
+    this.documentTemplateContent = document.getElementById('aCanvasTemplate_02').content //TODO: try to make not hardcoded
 
     this.cloneAndAppendTemplate(this.documentTemplateContent, this.canvasElement)
 
@@ -21,3 +20,8 @@ export {
 ReferenceLayer.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement, true))
 }
+
+ReferenceLayer.newReferenceLayer = function() {
+    let NewReferenceLayer =  new ReferenceLayer()
+    // this.referenceLayers.push(newReferenceLayer) //TODO: Do I need this?
+  }

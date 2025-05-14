@@ -2,8 +2,7 @@ import {drawDocumentSvgAllFiguresFromData, drawFigureFromData, drawNewFigure} fr
 import {SvgGroup} from './SvgFigure/SvgElement/SvgGroup/SvgGroup_Class.js'
 import {SvgFigure} from './SvgFigure/SvgFigure_Class.js'
 
-function DocumentSvg(CanvDoc, Canvas) {
-    this.Canvas = Canvas
+function DocumentSvg(CanvDoc) {
     this.CanvasDocument = CanvDoc
     this.scaleValue = CanvDoc.scaleValue
     this.panElement = CanvDoc.panElement
@@ -24,15 +23,6 @@ function DocumentSvg(CanvDoc, Canvas) {
     }
 
     this.HtmlElement.addEventListener('click', (event) => {this.svgClick(event, CanvDoc)})
-
-
-
-
-
-
-    
-    console.log("DocSvg")
-    console.log(this.Canvas)
 }
 
 DocumentSvg.prototype.svgClick = function(event, CanvDoc) {

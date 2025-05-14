@@ -19,7 +19,7 @@ function Footer(Canvas, Scale, canvasData, footerData, documentData) {
     }
 
     this.hotkeyManager = new HotkeyManager(this)
-    this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW(Canvas))
+    this.hotkeyManager.registerHotkey('Ctrl+;', () => this.newCanvDoc_NEW())
     this.hotkeyManager.registerHotkey("Ctrl+'", () => this.newCanvDoc_PRE_REORG())
     this.hotkeyManager.registerHotkey("Ctrl+Enter", () => this.newCanvDoc_OLD())
 
@@ -32,7 +32,7 @@ function Footer(Canvas, Scale, canvasData, footerData, documentData) {
     this.footerActionBar03_btn03_htmlElement = this.footerActionElements[2][2]
 
     this.footerActionBar01_btn01_htmlElement.addEventListener('click', () => {this.test()})
-    this.footerActionBar02_btn01_htmlElement.addEventListener('click', () => {this.createCanvasDocument(Canvas)})
+    this.footerActionBar02_btn01_htmlElement.addEventListener('click', () => {this.createCanvasDocument()})
     this.footerActionBar02_btn02_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_REORG()})
     this.footerActionBar02_btn03_htmlElement.addEventListener('click', () => {this.createCanvasDocument_PRE_OOP()})
     this.footerActionBar03_btn01_htmlElement.addEventListener('click', () => {this.increaseCanvasScale()})
@@ -41,9 +41,9 @@ function Footer(Canvas, Scale, canvasData, footerData, documentData) {
 }
 
 // HOTKEY ACTIONS
-Footer.prototype.newCanvDoc_NEW = function(Canvas) {
+Footer.prototype.newCanvDoc_NEW = function() {
     console.log("new_CANV_DOC_NEW")
-    this.createCanvasDocument(Canvas)
+    this.createCanvasDocument()
 }
 Footer.prototype.newCanvDoc_PRE_REORG = function() {
     console.log("new_CANV_DOC_PRE_REORG")
@@ -56,11 +56,11 @@ Footer.prototype.newCanvDoc_OLD = function() {
 // HOTKEY ACTIONS
 
 // BTN ACTIONS
-Footer.prototype.createCanvasDocument = function(Canvas) {
+Footer.prototype.createCanvasDocument = function() {
     // console.log("3")
     console.log("NEW_WAY")
     this.iterateCounters()
-    let newCanvasDoc = new CanvasDocument(Canvas, this.documentData, this)
+    let newCanvasDoc = new CanvasDocument(this.documentData, this)
     this.canvasDocumentClasses.push(newCanvasDoc)
 }
 Footer.prototype.createCanvasDocument_PRE_REORG = function() {

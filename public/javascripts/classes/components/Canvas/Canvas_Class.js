@@ -17,15 +17,10 @@ function Canvas(canvasData, bDocumentData) {
     this.canvasADocuments = []
 
 
-    this.canvasData = canvasData
-    this.bDocumentData = bDocumentData
-    this.referenceLayers = []
-}
-
-Canvas.prototype.newReferenceLayer = function() {
-    console.log("new_REF_LAYER_NEW")
-    let newReferenceLayer = new ReferenceLayer(this.canvasData)
-    this.canvasADocuments.push(newReferenceLayer)
+    //TODO: do i need any of these?
+    // this.canvasData = canvasData
+    // this.bDocumentData = bDocumentData
+    // this.referenceLayers = []
 }
 
 export {

@@ -10,8 +10,9 @@ import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_co
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
 import { ReferenceFigure } from '../ReferenceFigure/ReferenceFigure_Class.js'
+import { ReferenceLayer } from '../../../ReferenceLayer/ReferenceLayer_Class.js'
 
-function ParallelFigure(svgFigure, sectionIndex, Canvas) {
+function ParallelFigure(svgFigure, sectionIndex) {
     this.svgFigure = svgFigure
     this.SVGGROUPSDATA = {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
@@ -145,7 +146,6 @@ function ParallelFigure(svgFigure, sectionIndex, Canvas) {
 
 
 
-
     this.referenceFigure_01_B = new ReferenceFigure(svgFigure, true)
     this.referenceFigure_01_B.addCircle({palette: 8, circRad: 8, fillClr: 1}, 1)
 
@@ -155,10 +155,10 @@ function ParallelFigure(svgFigure, sectionIndex, Canvas) {
 
 
 
-
-    Canvas.newReferenceLayer() //FIXME: Trying to get this to work first.
+    // REFERENCE LAYER STUFF
+    ReferenceLayer.newReferenceLayer()
+    // REFERENCE LAYER STUFF
 }
-
 
 
 
