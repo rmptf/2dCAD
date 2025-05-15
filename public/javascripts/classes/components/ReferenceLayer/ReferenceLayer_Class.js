@@ -3,9 +3,7 @@ function ReferenceLayer() {
     // this.documentTemplateContent = canvasData.A_CANVAS.elements.contentElementsData[3].element.content
     this.canvasElement = document.getElementById('aCanvas_01') //TODO: try to make not hardcoded
     this.documentTemplateContent = document.getElementById('aCanvasTemplate_02').content //TODO: try to make not hardcoded
-
-    this.cloneAndAppendTemplate(this.documentTemplateContent, this.canvasElement)
-
+    this.referenceLayerElement = this.cloneAndAppendTemplate(this.documentTemplateContent, this.canvasElement)
 
     // this.canvasDocument_htmlElement = document.getElementById(documentData.A_DOCUMENT.elements.contentElementsData[0].id)
     // this.canvasDocumentHeader_htmlElement = this.canvasDocument_htmlElement.querySelector('#' + documentData.A_DOCUMENT.elements.contentElementsData[1].id)
@@ -19,18 +17,28 @@ export {
 
 ReferenceLayer.prototype.cloneAndAppendTemplate = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement, true))
+    let newElement = targetElement.children[1].children[0].children[0]
 
-        const clonedElement = document.importNode(templateElement, true);
-    targetElement.appendChild(clonedElement);
-    return clonedElement; // Return the newly appended element
-
+    return newElement
 }
 
-ReferenceLayer.newReferenceLayer = function() {
-    let NewReferenceLayer =  new ReferenceLayer()
-    // this.referenceLayers.push(newReferenceLayer) //TODO: Do I need this?
+ReferenceLayer.prototype.repositionReferenceLayer = function(repos) {
+    //TODO: this resets the elements css positioning to 0 then starts from scratch. Find way to do it relative to where it currently is.
+    this.referenceLayerElement.style.left = repos[0]+"px"
+    this.referenceLayerElement.style.top = repos[1]+"px"
 }
 
-ReferenceLayer.prototype.moveDivToCoords = function() {
-
+ReferenceLayer.prototype.getSvgElement = function() {
+    let svgElement = this.referenceLayerElement.children[1]
+    return svgElement
 }
+
+// ReferenceLayer.prototype.repositionReferenceLayer = function(element, repos) {
+//     element.style.left = repos[0]+"px"
+//     element.style.top = repos[1]+"px"
+// }
+
+// ReferenceLayer.newReferenceLayer = function() {
+//     let NewReferenceLayer =  new ReferenceLayer()
+//     // this.referenceLayers.push(newReferenceLayer) //TODO: Do I need this?
+// }
