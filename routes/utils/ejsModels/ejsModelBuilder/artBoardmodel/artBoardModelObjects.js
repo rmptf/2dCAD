@@ -116,7 +116,7 @@ const MODEL_OBJECTS = {
                     CONTENT_ELEMENT_IDS: [],
                     CONTENT_LOGO_CONTAINER: {
                         ICON: '@',
-                        TEXT: 'NOTCHER'
+                        TEXT: '...'
                     }
                 },
             },

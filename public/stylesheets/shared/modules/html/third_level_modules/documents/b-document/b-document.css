@@ -45,3 +45,18 @@
     /* margin-top: 2rem; */
     /* border: 2px solid #00000020; */
 }
+
+.space_holder_01 {
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+}
+
+.space_holder_02 {
+    /* display: flex;
+    flex-direction: column; */
+    margin: 0.5rem;
+    background-color: blue;
+    width: 5rem;
+    height: 5rem;
+}

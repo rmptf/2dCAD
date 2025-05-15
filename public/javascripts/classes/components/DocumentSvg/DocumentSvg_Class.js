@@ -4,15 +4,15 @@ import {SvgFigure} from './SvgFigure/SvgFigure_Class.js'
 
 function DocumentSvg(CanvDoc) {
     this.CanvasDocument = CanvDoc
-    this.scaleValue = CanvDoc.scaleValue
-    this.panElement = CanvDoc.panElement
     this.canvDocHtmlElement = CanvDoc.canvasDocument_htmlElement
     this.D3Element = CanvDoc.documentSvg_D3Element
     this.HtmlElement = CanvDoc.documentSvg_htmlElement
-    this.actionStates = CanvDoc.actionStates
     this.documentSvgGroup = new SvgGroup(this.D3Element, 'documentGROUP_001', 'fakeId_document')
     this.documentSvgFigures = []
 
+    this.scaleValue = CanvDoc.scaleValue
+    this.panElement = CanvDoc.panElement
+    this.actionStates = CanvDoc.actionStates
     this.pathDrawingData = {
         currentFigure: null,
         m1: null,
@@ -21,7 +21,6 @@ function DocumentSvg(CanvDoc) {
         secondaryPathCount: 0,
         previouslPathDrawingData: null
     }
-
     this.HtmlElement.addEventListener('click', (event) => {this.svgClick(event, CanvDoc)})
 }
 
@@ -46,7 +45,6 @@ DocumentSvg.prototype.drawSavedSvg = function(CanvDoc, svgClass) {
 DocumentSvg.prototype.createFigure = function() {
     let newFigure = new SvgFigure(this)
     this.documentSvgFigures.push(newFigure)
-
     return newFigure
 }
 
