@@ -450,10 +450,12 @@ const MODEL_OBJECTS = {
                     CONTENT_ELEMENT_IDS: [
                         {CONTENT_ID_BDOCUMENT_CONTAINER_ID: 'bDocumentContainerOOO'}, //FIXME: impliment this (currently hardcoded into ejs module)
                         {CONTENT_ID_BDOCUMENT_HEADER: 'bDocumentHeaderOOO'},
+                        {CONTENT_ID_BDOCUMENT_BODY_CONTAINER: 'bDocumentBodyContOOO'},
                         {CONTENT_ID_BDOCUMENT_SVG: 'bDocumentSvgOOO'},
+                        {CONTENT_ID_B_DOCUMENT_DOCTEMPLATE_01: 'bDocumentTemplate000_01'}
                     ],
                     CONTENT_TEXT: {
-                        HEADER_TEXT: "Reference Layer",
+                        HEADER_TEXT: "Reference_Layer",
                     }
                 },
             },
@@ -476,15 +478,6 @@ const MODEL_OBJECTS = {
                         BUTTONS: []
                     },
                 },
-                {
-                    CONTAINER: {
-                        CONTAINER_DATA: {
-                            btnDirection: "btn-container--row",
-                            btnAlign: "btn-align--center",
-                        },
-                        BUTTONS: []
-                    },
-                },
             ],
         },
         MODULE_PARENT_DATA: {
@@ -497,7 +490,60 @@ const MODEL_OBJECTS = {
         }
     },
 
+    // A_OPTIONSELECT: {
+    //     MODULE_NAME: 'A_OPTIONSELECT',
+    //     MODULE_LOCATION: MODULE_LOCATIONS.A_OPTIONSELECT,
+    //     MODULE_THEMES: {
+    //         THEME_containerFill: COLORVARS.FILLS.mainFill,
+    //         THEME_containerColor: COLORVARS.COLORS.main,
+    //         THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
+    //         THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
+    //     },
+    //     MODULE_DATA: {
+    //         MODULE_ID: null,
+    //         MODULE_CONTENT: {
+    //             CONTENT_DATA: {
+    //                 CONTENT_ELEMENT_IDS: [],
+    //                 CONTENT_TEXT: {}
+    //             },
+    //         },
+    //     },
+    //     MODULE_ACTIONS: {
+    //         BUTTONS: [
+    //             {
+    //                 BUTTON: {
+    //                     BTN_DATA: null,
+    //                 },
+    //             },
+    //         ],
+    //         BUTTON_CONTAINERS: [
+    //             {
+    //                 CONTAINER: {
+    //                     CONTAINER_DATA: {
+    //                         btnDirection: "btn-container--row",
+    //                         btnAlign: "btn-align--center",
+    //                         },
+    //                     BUTTONS: []
+    //                 },
+    //             },
+    //         ],
+    //     },
+    //     MODULE_PARENT_DATA: {
+    //         PARENT_NAME: null,
+    //     },
+    //     MODULE_CHILDREN_DATA: {
+    //         CHILDREN_NAMES: [],
+    //         CHILDREN: [],
+    //         CHILDREN_MOD_LOC: []
+    //     }
+    // },
 
+
+
+
+
+
+    
 
 
 

@@ -26,6 +26,7 @@ const MODULE_LOCATIONS = {
 
     // FOURTH LEVEL
     A_BUTTONCONTAINER: '../../../../../../../../views/partials/modules/html/fourth_level_modules/buttonContainer/a-buttonContainer/a-buttonContainer.ejs',
+    A_OPTIONSELECT: '../../../../../../../../views/partials/modules/html/fourth_level_modules/optionSelectModules/a-optionSelect/a-optionSelect.ejs',
 
 }
 

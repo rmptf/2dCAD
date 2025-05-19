@@ -1,39 +1,14 @@
 <div class="b-document <%= MODEL_GLOBAL_VARIABLES.MODULE_THEME %>">
     <div class="b-document__container <%= B_DOCUMENT.MODULE_THEMES.THEME_containerFill %> <%= B_DOCUMENT.MODULE_THEMES.THEME_containerColor %> <%= B_DOCUMENT.MODULE_THEMES.THEME_containerBorderColor %>" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[0].CONTENT_ID_BDOCUMENT_CONTAINER_ID %>>
-        <div class="b-document__header body_1" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_BDOCUMENT_HEADER %>>REFERENCE_LAYER: 01</div>
-        <div class="space_holder_01">
-            <div class="space_holder_02">
-                <div class="space_holder_03">
-                    <div class="space_holder_05 body_3">FORMULA_NAME_GOES_HERE</div>
-                </div>
-                <div class="space_holder_04">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="space_holder_02">
-                <div class="space_holder_03">
-                    <div class="space_holder_05 body_3">FORMULA_NAME_GOES_HERE</div>
-                </div>
-                <div class="space_holder_04">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="space_holder_02">
-                <div class="space_holder_03">
-                    <div class="space_holder_05 body_3">FORMULA_NAME_GOES_HERE</div>
-                </div>
-                <div class="space_holder_04">
-                    <div class="circle circleFilled"></div>
-                </div>
-            </div>
+        <div class="b-document__header body_3" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[1].CONTENT_ID_BDOCUMENT_HEADER %>><%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_TEXT.HEADER_TEXT %></div>
+        <div class="b-document__slot">
+            <div class="b-document__body-container" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[2].CONTENT_ID_BDOCUMENT_BODY_CONTAINER %>></div>
         </div>
-        <svg class="b-document__svg <%= B_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[2].CONTENT_ID_BDOCUMENT_HEADER %>></svg>
+        <svg class="b-document__svg <%= B_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[3].CONTENT_ID_BDOCUMENT_SVG %>></svg>
     </div>
 </div>
 
-<!-- <div class="b-document">
-    <div class="b-document__container">
-        <div class="b-document__header body_1"></div>
-        <svg class="b-document__svg"></svg>
-    </div>
-</div> -->
+
+<template id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[4].CONTENT_ID_B_DOCUMENT_DOCTEMPLATE_01 %>>
+    <%- include(MODEL_GLOBAL_VARIABLES.A_OPTIONSELECT_MODULE_LOC, {thisContainer: B_DOCUMENT.MODULE_ACTIONS}) %>
+</template>

@@ -23,18 +23,27 @@ function Canvas(canvasData, bDocumentData) {
     // this.referenceLayers = []
 
 
-
-
     // REFERENCE LAYER STUFF
-    // ReferenceLayer.newReferenceLayer(500, 500)
     let referenceLayer = new ReferenceLayer()
-    referenceLayer.repositionReferenceLayer([])
-    let referenceLayerSvgElement = referenceLayer.getSvgElement()
 
+    referenceLayer.changeReferenceLayerHeader("Development_UI_01")
+    // referenceLayer.repositionReferenceLayer([200,200])
+    this.optSel01 = referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    this.optSel02 = referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
+    this.optSel03 = referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
+    this.optSel04 = referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
+    this.optSel05 = referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_05")
+    referenceLayer.toggleCheckBox(this.optSel01)
+    referenceLayer.toggleCheckBox(this.optSel02)
+    referenceLayer.toggleCheckBox(this.optSel03)
+    referenceLayer.toggleCheckBox(this.optSel01)
+    referenceLayer.toggleCheckBox(this.optSel02)
+    referenceLayer.toggleCheckBox(this.optSel05)
+
+    // let referenceLayerSvgElement = referenceLayer.getSvgElement()
     // this.referenceFigure_01_AAAA = new ReferenceFigure(referenceLayerSvgElement, true) //TODO: this isnt working, have to pass class not element (pass class or change to element for all?)
     // this.referenceFigure_01_AAAA.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
     // this.referenceFigure_01_AAAA.runFunctions([[20, 50]])
-
     // REFERENCE LAYER STUFF
 }
 
