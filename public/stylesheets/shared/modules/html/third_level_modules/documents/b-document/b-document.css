@@ -33,8 +33,9 @@
 .b-document__body-container {
     display: flex;
     flex-direction: column;
-    background-color: red;
-    border: 1px solid black;
+    /* background-color: red; */
+    /* border: 1px solid black; */
+    width: 40rem;
 }
 
 .b-document__subHeader {

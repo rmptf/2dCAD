@@ -490,53 +490,53 @@ const MODEL_OBJECTS = {
         }
     },
 
-    // A_OPTIONSELECT: {
-    //     MODULE_NAME: 'A_OPTIONSELECT',
-    //     MODULE_LOCATION: MODULE_LOCATIONS.A_OPTIONSELECT,
-    //     MODULE_THEMES: {
-    //         THEME_containerFill: COLORVARS.FILLS.mainFill,
-    //         THEME_containerColor: COLORVARS.COLORS.main,
-    //         THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
-    //         THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
-    //     },
-    //     MODULE_DATA: {
-    //         MODULE_ID: null,
-    //         MODULE_CONTENT: {
-    //             CONTENT_DATA: {
-    //                 CONTENT_ELEMENT_IDS: [],
-    //                 CONTENT_TEXT: {}
-    //             },
-    //         },
-    //     },
-    //     MODULE_ACTIONS: {
-    //         BUTTONS: [
-    //             {
-    //                 BUTTON: {
-    //                     BTN_DATA: null,
-    //                 },
-    //             },
-    //         ],
-    //         BUTTON_CONTAINERS: [
-    //             {
-    //                 CONTAINER: {
-    //                     CONTAINER_DATA: {
-    //                         btnDirection: "btn-container--row",
-    //                         btnAlign: "btn-align--center",
-    //                         },
-    //                     BUTTONS: []
-    //                 },
-    //             },
-    //         ],
-    //     },
-    //     MODULE_PARENT_DATA: {
-    //         PARENT_NAME: null,
-    //     },
-    //     MODULE_CHILDREN_DATA: {
-    //         CHILDREN_NAMES: [],
-    //         CHILDREN: [],
-    //         CHILDREN_MOD_LOC: []
-    //     }
-    // },
+    A_OPTIONSELECT: {
+        MODULE_NAME: 'A_OPTIONSELECT',
+        MODULE_LOCATION: MODULE_LOCATIONS.A_OPTIONSELECT,
+        MODULE_THEMES: {
+            THEME_containerFill: COLORVARS.FILLS.mainFill,
+            THEME_containerColor: COLORVARS.COLORS.main,
+            THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
+            THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
+        },
+        MODULE_DATA: {
+            MODULE_ID: null,
+            MODULE_CONTENT: {
+                CONTENT_DATA: {
+                    CONTENT_ELEMENT_IDS: [],
+                    CONTENT_TEXT: {}
+                },
+            },
+        },
+        MODULE_ACTIONS: {
+            BUTTONS: [
+                {
+                    BUTTON: {
+                        BTN_DATA: null,
+                    },
+                },
+            ],
+            BUTTON_CONTAINERS: [
+                {
+                    CONTAINER: {
+                        CONTAINER_DATA: {
+                            btnDirection: "btn-container--row",
+                            btnAlign: "btn-align--center",
+                            },
+                        BUTTONS: []
+                    },
+                },
+            ],
+        },
+        MODULE_PARENT_DATA: {
+            PARENT_NAME: null,
+        },
+        MODULE_CHILDREN_DATA: {
+            CHILDREN_NAMES: [],
+            CHILDREN: [],
+            CHILDREN_MOD_LOC: []
+        }
+    },
 
 
 

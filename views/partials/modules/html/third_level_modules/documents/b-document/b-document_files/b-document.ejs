@@ -6,9 +6,25 @@
         </div>
         <svg class="b-document__svg <%= B_DOCUMENT.MODULE_THEMES.THEME_svgFill %>" id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[3].CONTENT_ID_BDOCUMENT_SVG %>></svg>
     </div>
+    <%# console.log(B_PANE.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_CHILDREN_DATA.CHILDREN[1].MODULE_CHILDREN_DATA.CHILDREN[1]) %>
 </div>
 
 
 <template id=<%= B_DOCUMENT.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[4].CONTENT_ID_B_DOCUMENT_DOCTEMPLATE_01 %>>
     <%- include(MODEL_GLOBAL_VARIABLES.A_OPTIONSELECT_MODULE_LOC, {thisContainer: B_DOCUMENT.MODULE_ACTIONS}) %>
+    <%#- include(B_DOCUMENT.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION, {}) %> <!-- EXAMPLE -->
 </template>
+
+<!-- EXAMPLE -->
+<!-- <template id=<%#= A_CANVAS.MODULE_DATA.MODULE_CONTENT.CONTENT_DATA.CONTENT_ELEMENT_IDS[2].CONTENT_ID_ACANVAS_DOCTEMPLATE_01 %>>
+    <div class="a-canvas__slot">
+        <%# if (A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[0]) { %>
+            <%#- include(A_CANVAS.MODULE_CHILDREN_DATA.CHILDREN[0].MODULE_LOCATION, {}) %>
+        <%# } %>
+    </div>
+</template> -->
+<!-- EXAMPLE -->
+
+<!-- <script>
+    console.log("IN VS CODE TERM")
+</script> -->
