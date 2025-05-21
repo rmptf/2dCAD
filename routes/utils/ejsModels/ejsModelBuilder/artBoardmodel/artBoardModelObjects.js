@@ -494,10 +494,10 @@ const MODEL_OBJECTS = {
         MODULE_NAME: 'A_OPTIONSELECT',
         MODULE_LOCATION: MODULE_LOCATIONS.A_OPTIONSELECT,
         MODULE_THEMES: {
-            THEME_containerFill: COLORVARS.FILLS.mainFill,
+            THEME_containerFill: COLORVARS.FILLS.accentPrimaryFill,
             THEME_containerColor: COLORVARS.COLORS.main,
-            THEME_containerBorderColor: COLORVARS.BORDERS.mainMutedBorderColor,
-            THEME_svgFill: COLORVARS.FILLS.mainMutedFill,
+            THEME_optionSelect_containerFill: COLORVARS.FILLS.mainMutedFill,
+            THEME_optionSelect_containerColor: COLORVARS.COLORS.bw90,
         },
         MODULE_DATA: {
             MODULE_ID: null,
