@@ -1,8 +1,16 @@
 function ReferenceLayer() {
+    // ReferenceLayer Class:
     this.canvasElement = document.getElementById('aCanvas_01') //TODO: try to make not hardcoded
     this.documentTemplateContent = document.getElementById('aCanvasTemplate_02') //TODO: try to make not hardcoded
-    this.referenceLayerElement = this.cloneAndAppendTemplate01(this.documentTemplateContent, this.canvasElement)
+    this.referenceLayerElement = this.cloneAndAppendTemplate_ReferenceLayer(this.documentTemplateContent, this.canvasElement)
     this.referenceLayerUIElements = {optionSelects: []}
+
+    // ReferenceLayer Children Classes:
+    // OprionSelect:
+    this.referenceLayerSlot = this.referenceLayerElement.querySelector("#bDocumentBodyContOOO")
+    this.documentTemplateContent = this.referenceLayerElement.parentElement.parentElement.querySelector("#bDocumentTemplate000_01")
+
+
 
 
 
@@ -16,20 +24,11 @@ export {
     ReferenceLayer
 }
 
-ReferenceLayer.prototype.cloneAndAppendTemplate01 = function(templateElement, targetElement) {
+//ReferenceLayer Class
+ReferenceLayer.prototype.cloneAndAppendTemplate_ReferenceLayer = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement.content, true))
-    // let newElement = targetElement.children[1].children[0].children[0]
     let newElement = targetElement.lastElementChild.children[0].children[0]
-    
     return newElement
-}
-
-ReferenceLayer.prototype.cloneAndAppendTemplate02 = function(templateElement, targetElement) {
-    let fragment = document.importNode(templateElement.content, true)
-    let firstElement = fragment.firstElementChild
-    targetElement.appendChild(fragment)
-
-    return firstElement
 }
 
 ReferenceLayer.prototype.repositionReferenceLayer = function(repos) {
@@ -38,23 +37,36 @@ ReferenceLayer.prototype.repositionReferenceLayer = function(repos) {
     this.referenceLayerElement.style.top = repos[1]+"px"
 }
 
+ReferenceLayer.prototype.changeReferenceLayerHeader = function(newTitle) {
+    let referenceLayerHeader = this.referenceLayerElement.children[0]
+    referenceLayerHeader.textContent = newTitle
+}
+
 ReferenceLayer.prototype.getSvgElement = function() {
     let svgElement = this.referenceLayerElement.children[1]
     return svgElement
 }
 
 
-ReferenceLayer.prototype.addOptionSelect = function(label) { //FIXME: this works but probably not clean, fix this and fix all references to class elemtns
-    let referenceLayerSlot = this.referenceLayerElement.querySelector("#bDocumentBodyContOOO")
-    // let documentTemplateContent = this.referenceLayerElement.querySelector("#bDocumentTemplate000_01")
 
-    // let referenceLayerSlot = document.getElementById('bDocumentBodyContOOO')
-    let documentTemplateContent = document.getElementById('bDocumentTemplate000_01')
-    let referenceElemensOptionSelects = this.cloneAndAppendTemplate02(documentTemplateContent, referenceLayerSlot)
+
+
+
+
+
+//OptionSelect Class
+ReferenceLayer.prototype.cloneAndAppendTemplate_OptionSelect = function(templateElement, targetElement) {
+    let fragment = document.importNode(templateElement.content, true)
+    let firstElement = fragment.firstElementChild
+    targetElement.appendChild(fragment)
+
+    return firstElement
+}
+
+ReferenceLayer.prototype.addOptionSelect = function(label) {
+    let referenceElemensOptionSelects = this.cloneAndAppendTemplate_OptionSelect(this.documentTemplateContent, this.referenceLayerSlot)
     let textElement = referenceElemensOptionSelects.children[0].children[0].children[0]
-
     textElement.textContent = label
-
     this.referenceLayerUIElements.optionSelects.push(referenceElemensOptionSelects)
 
     return referenceElemensOptionSelects
@@ -62,25 +74,17 @@ ReferenceLayer.prototype.addOptionSelect = function(label) { //FIXME: this works
 
 ReferenceLayer.prototype.toggleCheckBox = function(activeElement) {
     let elementArray = this.referenceLayerUIElements.optionSelects
-    let checkBoxElement = activeElement.children[0].children[1].children[0]
+    // let checkBoxElement = activeElement.children[0].children[1].children[0]
     // checkBoxElement.classList.toggle("a-optionSelect__icon--active")
-    checkBoxElement.style.backgroundColor = 'yellow'
+    // checkBoxElement.style.backgroundColor = 'yellow'
 
 
     // TODO: change that to this
     elementArray.forEach(element => {
         if (element === activeElement) {
-            // element.style.backgroundColor = 'yellow'; // active element color
             element.children[0].children[1].children[0].style.backgroundColor = 'black'
         } else {
-            // element.style.backgroundColor = 'white'; // other elements color
             element.children[0].children[1].children[0].style.backgroundColor = 'transparent'
         }
     })
 }
-
-ReferenceLayer.prototype.changeReferenceLayerHeader = function(newTitle) {
-    let referenceLayerHeader = this.referenceLayerElement.children[0]
-    referenceLayerHeader.textContent = newTitle
-}
-
