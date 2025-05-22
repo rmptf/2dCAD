@@ -18,8 +18,9 @@ export {
 
 ReferenceLayer.prototype.cloneAndAppendTemplate01 = function(templateElement, targetElement) {
     targetElement.appendChild(document.importNode(templateElement.content, true))
-    let newElement = targetElement.children[1].children[0].children[0]
-
+    // let newElement = targetElement.children[1].children[0].children[0]
+    let newElement = targetElement.lastElementChild.children[0].children[0]
+    
     return newElement
 }
 
@@ -43,8 +44,11 @@ ReferenceLayer.prototype.getSvgElement = function() {
 }
 
 
-ReferenceLayer.prototype.addOptionSelect = function(label) {
-    let referenceLayerSlot = document.getElementById('bDocumentBodyContOOO')
+ReferenceLayer.prototype.addOptionSelect = function(label) { //FIXME: this works but probably not clean, fix this and fix all references to class elemtns
+    let referenceLayerSlot = this.referenceLayerElement.querySelector("#bDocumentBodyContOOO")
+    // let documentTemplateContent = this.referenceLayerElement.querySelector("#bDocumentTemplate000_01")
+
+    // let referenceLayerSlot = document.getElementById('bDocumentBodyContOOO')
     let documentTemplateContent = document.getElementById('bDocumentTemplate000_01')
     let referenceElemensOptionSelects = this.cloneAndAppendTemplate02(documentTemplateContent, referenceLayerSlot)
     let textElement = referenceElemensOptionSelects.children[0].children[0].children[0]

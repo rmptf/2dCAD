@@ -1,3 +1,4 @@
+import { ReferenceLayer } from '../../../../ReferenceLayer/ReferenceLayer_Class.js'
 import { ReferenceFigure } from '../../ReferenceFigure/ReferenceFigure_Class.js'
 import {IntersectionHandler_WithArc} from './IntersectionHandler_WithArc_Class.js'
 
@@ -73,6 +74,25 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
     //     console.log(this.thisOriginalFigurePathData(targetIndex).children.parallel_pathDatas.pathData_east)
     // }
     // new but not used currently
+
+    // REFERENCE LAYER STUFF
+    this.referenceLayer = new ReferenceLayer()
+    this.referenceLayer.changeReferenceLayerHeader("Development_UI_01")
+    this.referenceLayer.repositionReferenceLayer([150,200])
+    this.optSel01 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    this.optSel02 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
+    this.optSel03 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
+    this.optSel04 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
+    this.optSel05 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_05")
+    this.optSel06 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_06")
+    this.optSel07 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_07")
+    // this.referenceLayer.toggleCheckBox(this.optSel01)
+    // this.referenceLayer.toggleCheckBox(this.optSel02)
+    // this.referenceLayer.toggleCheckBox(this.optSel03)
+    // this.referenceLayer.toggleCheckBox(this.optSel01)
+    // this.referenceLayer.toggleCheckBox(this.optSel02)
+    // this.referenceLayer.toggleCheckBox(this.optSel05)
+    // REFERENCE LAYER STUFF
 }
 
 //FIXME: Is there a way to set this dynamically?
@@ -249,6 +269,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
     this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
+    this.referenceLayer.toggleCheckBox(this.optSel01)
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
@@ -264,6 +286,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
+    this.referenceLayer.toggleCheckBox(this.optSel02)
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
@@ -285,6 +309,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //new?
     // this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
+    this.referenceLayer.toggleCheckBox(this.optSel03)
 }
 
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
@@ -307,6 +333,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 
+    this.referenceLayer.toggleCheckBox(this.optSel04)
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
@@ -321,6 +348,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+
+    this.referenceLayer.toggleCheckBox(this.optSel05)
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 3_seg1 (NEW?)            // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
@@ -342,6 +371,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+
+    this.referenceLayer.toggleCheckBox(this.optSel06)
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
@@ -362,6 +393,8 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_lastIndex()
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
+
+    this.referenceLayer.toggleCheckBox(this.optSel07)
 }
 
 
