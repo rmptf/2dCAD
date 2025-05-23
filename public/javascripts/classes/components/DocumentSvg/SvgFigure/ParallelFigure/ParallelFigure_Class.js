@@ -152,20 +152,14 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.referenceFigure_01_B.runFunctions([[-100, -100]])
     // REFERENCE FIGURE STUFF
 
-
-    // // REFERENCE LAYER STUFF
-    // this.referenceLayer = new ReferenceLayer()
-    // this.referenceLayer.changeReferenceLayerHeader("Development_UI_01")
-    // // this.referenceLayer.repositionReferenceLayer([200,200])
-    // this.optSel01 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    // this.optSel02 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
-    // this.optSel03 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
-    // this.optSel04 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
-    // this.optSel05 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_05")
-    // // this.referenceLayer.toggleCheckBox(this.optSel01)
-    // // this.referenceLayer.toggleCheckBox(this.optSel02)    
-    // // this.referenceLayer.toggleCheckBox(this.optSel03)
-    // // REFERENCE LAYER STUFF
+    // REFERENCE LAYER STUFF
+    this.referenceLaye_01 = new ReferenceLayer()
+    this.referenceLaye_01.changeReferenceLayerHeader("Development_UI_02")
+    this.referenceLaye_01.repositionReferenceLayer([450,100])
+    this.optSel01_01 = this.referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    // this.referenceLaye_01.toggleCheckBox(this.optSel01_01)
+    // this.referenceLaye_01.changeLabel("New_Name_Changed_@_Instantiation")
+    // REFERENCE LAYER STUFF
 }
 
 
@@ -283,6 +277,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
     }
     // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
+
+    
+
         console.log("i: " + i)
         // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
         thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
@@ -327,6 +324,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
             currentSkippedIndex: thisFigure.currentSkippedIndex,
             currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         }
+
+        thisFigure.referenceLaye_01.changeLabel(subFigureSkipperIndexModifiers.currentSkippedIndex)
 
         if(i === thisFigure.skipped_indecies[0] - 1 && thisFigure.skipped_indecies[0] !== 0) {  //FIXME: TODO: was an if else added that stopped this from running an ran regular for some reason
             console.log("NEXT_SKIPPED_THIS_IS_PREVIOUS_INDEX: NEW_SKIPPER")

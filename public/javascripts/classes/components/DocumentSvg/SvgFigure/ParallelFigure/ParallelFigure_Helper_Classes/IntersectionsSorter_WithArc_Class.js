@@ -86,12 +86,12 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
     this.optSel05 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_05")
     this.optSel06 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_06")
     this.optSel07 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_07")
+
+    this.optSel08 = this.referenceLayer.addOptionSelect("FIRST_ONE") // PREVIOUS TO INTERSECTION CLOSED ARC
+    this.optSel09 = this.referenceLayer.addOptionSelect("SECOND_ONE_A") // AFTER INTERSECTION CLOSED ARC - first or second arc hasnt closed
+    this.optSel10 = this.referenceLayer.addOptionSelect("SECOND_ONE_B") // AFTER INTERSECTION CLOSED ARC - second arc has closed
+    this.optSel11 = this.referenceLayer.addOptionSelect("LAST_ONE") // AFTER INTERSECTION CLOSED ARC
     // this.referenceLayer.toggleCheckBox(this.optSel01)
-    // this.referenceLayer.toggleCheckBox(this.optSel02)
-    // this.referenceLayer.toggleCheckBox(this.optSel03)
-    // this.referenceLayer.toggleCheckBox(this.optSel01)
-    // this.referenceLayer.toggleCheckBox(this.optSel02)
-    // this.referenceLayer.toggleCheckBox(this.optSel05)
     // REFERENCE LAYER STUFF
 }
 
@@ -528,6 +528,10 @@ IntersectionsSorter_WithArc.prototype.handleFirstArcSegment = function() {
         // REFERENCE FIGURE STUFF
         // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction(true) //With passed variable for REFERENCE FIGURE
         // REFERENCE FIGURE STUFF
+
+        // REFERENCE LAYER STUFF
+        this.referenceLayer.toggleCheckBox(this.optSel08)
+        // REFERENCE LAYER STUFF
     }
     //FIXME:
 }
@@ -544,7 +548,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         // currently runs when second arc closes (FIXED?: yes)
     // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
     //FIXME:
-    // AFTER INTERSECTION CLOSED ARC
+    // AFTER INTERSECTION CLOSED ARC - first or second arc hasnt closed
     // this runs at i: 4 (after closed arc)
     // if(this.isHidden(this.previousIndex + 1)) { //TODO: not quite right but quick fix "+ 1"
     if(this.isHidden(this.previousIndexHARDCOUNT - 0) && !this.isHidden(this.previousIndexHARDCOUNT - 1)) { //TODO: not quite right but quick fix "+ 1"
@@ -553,7 +557,11 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         // console.log(this.originalFigurePathData(this.nextIndexHARDCOUNT - 0))
         console.log("CLOSSED_ARC_INJECTION: 02_AAA")
         this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
-        this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //NEW
+        this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //
+        
+        // REFERENCE LAYER STUFF
+        this.referenceLayer.toggleCheckBox(this.optSel09)
+        // REFERENCE LAYER STUFF
     }
     //FIXME:
 
@@ -562,12 +570,16 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         // currently never runs (FIXED?: yes)
     // ***NOTES FOR DOUBLE CLOSED ARC: Previous arc to intersection closed first***
     //FIXME:
-    // AFTER INTERSECTION CLOSED ARC
+    // AFTER INTERSECTION CLOSED ARC - second arc has closed
     // this runs at i: 4 (after second closed arc)
     if(this.isHidden(this.previousIndexHARDCOUNT - 0) && this.isHidden(this.previousIndexHARDCOUNT - 1)) { //TODO: not quite right but quick fix "+ 1"
         console.log('__________________________________INDEX____________________________________')
         console.log("CLOSSED_ARC_INJECTION: 02_BBB")
         this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
+
+        // REFERENCE LAYER STUFF
+        this.referenceLayer.toggleCheckBox(this.optSel10)
+        // REFERENCE LAYER STUFF
     }
     //FIXME:
 
@@ -626,6 +638,10 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
             // console.log(this.originalFigurePathData(this.nextIndex - 1))
             this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction() //NEW
         }
+
+        // REFERENCE LAYER STUFF
+        this.referenceLayer.toggleCheckBox(this.optSel11)
+        // REFERENCE LAYER STUFF
 
         // // if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1"
         // if(this.isHidden(this.nextIndex - 1) && !this.isHidden(this.nextIndex - 0)) {  //TODO: not quite right but quick fix "- 1" //FIXME: these should actually stay nextIndex (not hardcount) should probably fix above too but maybe use thisIndex because it doesnt change???

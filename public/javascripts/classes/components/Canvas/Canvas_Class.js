@@ -40,24 +40,25 @@ function Canvas(canvasData, bDocumentData) {
     // referenceLayer.toggleCheckBox(this.optSel05)
     // // REFERENCE LAYER STUFF
 
-    // REFERENCE LAYER STUFF
-    let referenceLaye_01 = new ReferenceLayer()
-    referenceLaye_01.changeReferenceLayerHeader("Development_UI_02")
-    referenceLaye_01.repositionReferenceLayer([450,100])
-    this.optSel01_01 = referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    referenceLaye_01.toggleCheckBox(this.optSel01_01)
-    // REFERENCE LAYER STUFF
+    // // REFERENCE LAYER STUFF
+    // let referenceLaye_01 = new ReferenceLayer()
+    // referenceLaye_01.changeReferenceLayerHeader("Development_UI_02")
+    // referenceLaye_01.repositionReferenceLayer([450,100])
+    // this.optSel01_01 = referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    // referenceLaye_01.toggleCheckBox(this.optSel01_01)
+    // referenceLaye_01.changeLabel("New_Name_Changed_@_Instantiation")
+    // // REFERENCE LAYER STUFF
 
-    // REFERENCE LAYER STUFF
-    let referenceLaye_02 = new ReferenceLayer()
-    referenceLaye_02.changeReferenceLayerHeader("Development_UI_03")
-    referenceLaye_02.repositionReferenceLayer([450,400])
-    this.optSel01_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    this.optSel02_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
-    this.optSel03_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
-    this.optSel04_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
-    referenceLaye_02.toggleCheckBox(this.optSel03_02)
-    // REFERENCE LAYER STUFF
+    // // REFERENCE LAYER STUFF
+    // let referenceLaye_02 = new ReferenceLayer()
+    // referenceLaye_02.changeReferenceLayerHeader("Development_UI_03")
+    // referenceLaye_02.repositionReferenceLayer([450,400])
+    // this.optSel01_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    // this.optSel02_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
+    // this.optSel03_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
+    // this.optSel04_02 = referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
+    // referenceLaye_02.toggleCheckBox(this.optSel03_02)
+    // // REFERENCE LAYER STUFF
 }
 
 export {

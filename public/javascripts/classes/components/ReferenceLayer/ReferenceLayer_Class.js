@@ -7,6 +7,7 @@ function ReferenceLayer() {
 
     // ReferenceLayer Children Classes:
     // OprionSelect:
+    this.optionSelectElement
     this.referenceLayerSlot = this.referenceLayerElement.querySelector("#bDocumentBodyContOOO")
     this.documentTemplateContent = this.referenceLayerElement.parentElement.parentElement.querySelector("#bDocumentTemplate000_01")
 
@@ -64,12 +65,17 @@ ReferenceLayer.prototype.cloneAndAppendTemplate_OptionSelect = function(template
 }
 
 ReferenceLayer.prototype.addOptionSelect = function(label) {
-    let referenceElemensOptionSelects = this.cloneAndAppendTemplate_OptionSelect(this.documentTemplateContent, this.referenceLayerSlot)
-    let textElement = referenceElemensOptionSelects.children[0].children[0].children[0]
+    this.referenceElemensOptionSelects = this.cloneAndAppendTemplate_OptionSelect(this.documentTemplateContent, this.referenceLayerSlot)
+    let textElement = this.referenceElemensOptionSelects.children[0].children[0].children[0]
     textElement.textContent = label
-    this.referenceLayerUIElements.optionSelects.push(referenceElemensOptionSelects)
+    this.referenceLayerUIElements.optionSelects.push(this.referenceElemensOptionSelects)
 
-    return referenceElemensOptionSelects
+    return this.referenceElemensOptionSelects
+}
+
+ReferenceLayer.prototype.changeLabel = function(label) {
+    let textElement = this.referenceElemensOptionSelects.children[0].children[0].children[0]
+    textElement.textContent = label
 }
 
 ReferenceLayer.prototype.toggleCheckBox = function(activeElement) {
