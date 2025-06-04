@@ -40,3 +40,8 @@
 .a-optionSelect__icon--active {
     background-color: black;
 }
+
+.removeBorder {
+    border: none;
+}
+

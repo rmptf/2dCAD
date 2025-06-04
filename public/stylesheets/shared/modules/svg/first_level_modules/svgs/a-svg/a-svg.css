@@ -201,21 +201,27 @@ svg{
     /* fill */
     .testElem-fill-color--transparent{
       fill-opacity: 0;
+      background-color: transparent;
     }
     .testElem-fill-color--1{
       fill: var(--color-01);
+      background-color: var(--color-01);
     }
     .testElem-fill-color--2{
       fill: var(--color-02);
+      background-color: var(--color-02);
     }
     .testElem-fill-color--3{
       fill: var(--color-03);
+      background-color: var(--color-03);
     }
     .testElem-fill-color--4{
       fill: var(--color-04);
+      background-color: var(--color-04);
     }
     .testElem-fill-color--5{
       fill: var(--color-05);
+      background-color: var(--color-05);
     }
   /* fill */
 
@@ -312,7 +318,7 @@ svg{
       .testElement-palette--7{
         --color-01: rgb(255, 0, 0);
         --color-02: rgb(7, 153, 31);
-        --color-03: rgb(0, 20, 199);
+        --color-03: #0014c7;
         --color-04: rgb(228, 245, 0);
         --color-05: rgb(255, 98, 0);
       }
@@ -322,7 +328,7 @@ svg{
         --color-02: #FF8C00;
         --color-03: #DC143C;
         --color-04: #1E90FF;
-        --color-05: #1E90FF;
+        --color-05: #0014c7;
       }
     /* colorPalettes */
 /* TESTER ELEMENTS */

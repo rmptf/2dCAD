@@ -84,81 +84,51 @@ function ParallelFigure(svgFigure, sectionIndex) {
         return this.parallelFigureObject.parallelPathSegmentCounter_FIRST < 0
     }
 
-
-
-
-
     // REFERENCE FIGURE STUFF
-    // let svgFigure = this.svgFigure
-    this.referenceFigure_01_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_01_A.runFunctions([[20, 50]])
-
-
-    this.referenceFigure_02_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_02_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_02_A.runFunctions([[20, 100]])
-
-
-    this.referenceFigure_03_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_03_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_03_A.runFunctions([[20, 150]])
-
-
-    this.referenceFigure_04_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_04_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_04_A.runFunctions([[20, 200]])
-
-
-    this.referenceFigure_05_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_05_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_05_A.runFunctions([[20, 250]])
-
-    this.referenceFigure_06_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_06_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_06_A.runFunctions([[20, 300]])
-
-    this.referenceFigure_07_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_07_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_07_A.runFunctions([[20, 350]])
-
-    this.referenceFigure_08_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_08_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_08_A.runFunctions([[20, 400]])
-
-    this.referenceFigure_09_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_09_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_09_A.runFunctions([[20, 450]])
-
-    this.referenceFigure_10_A = new ReferenceFigure(this.svgFigure, true)
-    this.referenceFigure_10_A.addEmptyCircle({palette: 8, circRad: 7, fillClr: 'transparent', strokeClr: 1, strokeWidth: 2}, 1)
-
-    this.referenceFigure_10_A.runFunctions([[20, 500]])
-
-
-
-    this.referenceFigure_01_B = new ReferenceFigure(svgFigure, true)
-    this.referenceFigure_01_B.addCircle({palette: 8, circRad: 8, fillClr: 1}, 1)
-
-    this.referenceFigure_01_B.runFunctions([[-100, -100]])
+        this.referenceFigure_01_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 3}, 1)
+        this.referenceFigure_02_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_02_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 2, strokeWidth: 3}, 1)
+        this.referenceFigure_03_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_03_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 3, strokeWidth: 3}, 1)
+        this.referenceFigure_04_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_04_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 4, strokeWidth: 3}, 1)
+        this.referenceFigure_05_A = new ReferenceFigure(svgFigure, true)
+        this.referenceFigure_05_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 5, strokeWidth: 3}, 1)
+    this.refFigs = [
+        this.referenceFigure_01_A,
+        this.referenceFigure_02_A,
+        this.referenceFigure_03_A,
+        this.referenceFigure_04_A,
+        this.referenceFigure_05_A,
+    ]
     // REFERENCE FIGURE STUFF
 
     // REFERENCE LAYER STUFF
     this.referenceLaye_01 = new ReferenceLayer()
-    this.referenceLaye_01.changeReferenceLayerHeader("Development_UI_02")
-    this.referenceLaye_01.repositionReferenceLayer([450,100])
+    this.referenceLaye_01.changeReferenceLayerHeader("Current_Skipped_Index")
+    this.referenceLaye_01.repositionReferenceLayer([500,100])
     this.optSel01_01 = this.referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    // this.referenceLaye_01.toggleCheckBox(this.optSel01_01)
+    
+    // this.referenceLaye_01.toggleCheckBox(this.optSel01_01, {palette: 8, fillClr: 1, strokeClr: 1})
     // this.referenceLaye_01.changeLabel("New_Name_Changed_@_Instantiation")
+    // REFERENCE LAYER STUFF
+
+    // REFERENCE LAYER STUFF
+    let referenceLayer = new ReferenceLayer()
+    referenceLayer.changeReferenceLayerHeader("Positional_Color_Code")
+    referenceLayer.repositionReferenceLayer([950,200])
+    this.optSel01 = referenceLayer.addOptionSelect("1st_Pos")
+    this.optSel02 = referenceLayer.addOptionSelect("2nd_Pos")
+    this.optSel03 = referenceLayer.addOptionSelect("3rd_Pos")
+    this.optSel04 = referenceLayer.addOptionSelect("4th_Pos")
+    this.optSel05 = referenceLayer.addOptionSelect("5th_Pos")
+
+    referenceLayer.fillCheckBox(this.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
+    referenceLayer.fillCheckBox(this.optSel02, {palette: 8, fillClr: 2, strokeClr: 1})
+    referenceLayer.fillCheckBox(this.optSel03, {palette: 8, fillClr: 3, strokeClr: 1})
+    referenceLayer.fillCheckBox(this.optSel04, {palette: 8, fillClr: 4, strokeClr: 1})
+    referenceLayer.fillCheckBox(this.optSel05, {palette: 8, fillClr: 5, strokeClr: 1})
     // REFERENCE LAYER STUFF
 }
 
@@ -351,16 +321,14 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 50]])
+
                         // // REFERENCE FIGURE STUFF  
 
                     } else if(i === 2) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 100]])
+
                         // // REFERENCE FIGURE STUFF  
 
                     }
@@ -368,8 +336,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // // REFERENCE FIGURE STUFF
-                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                    thisFigure.referenceFigure_01_B.runFunctions([[20, 150]])
+
                     // // REFERENCE FIGURE STUFF  
 
                 }
@@ -398,8 +365,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 200]])
+
                         // // REFERENCE FIGURE STUFF  
 
                     } else { // Current skipped arc index IS NOT final arc
@@ -408,8 +374,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
                             // // REFERENCE FIGURE STUFF
-                            // thisFigure.referenceFigure_01_A.runFunctions([[100, 300]])
-                            thisFigure.referenceFigure_01_B.runFunctions([[20, 250]])
+
                             // // REFERENCE FIGURE STUFF  
 
                         }
@@ -420,8 +385,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 600]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 300]])
+
                         // // REFERENCE FIGURE STUFF  
                     }
                 }
@@ -453,16 +417,14 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 350]])
+
                         // // REFERENCE FIGURE STUFF  
 
                     } else if(i === 3) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
 
                         // // REFERENCE FIGURE STUFF
-                        // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                        thisFigure.referenceFigure_01_B.runFunctions([[20, 400]])
+
                         // // REFERENCE FIGURE STUFF  
 
                     }
@@ -470,8 +432,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // // REFERENCE FIGURE STUFF
-                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                    thisFigure.referenceFigure_01_B.runFunctions([[20, 450]])
+
                     // // REFERENCE FIGURE STUFF  
 
                 }
@@ -509,8 +470,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // // REFERENCE FIGURE STUFF
-                    // thisFigure.referenceFigure_01_A.runFunctions([[100, 10]])
-                    thisFigure.referenceFigure_01_B.runFunctions([[20, 500]])
+
                     // // REFERENCE FIGURE STUFF  
 
 
@@ -557,7 +517,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
             }
         }
         console.log("RUN ANIMATOR")
-        thisFigure.parallelFigure_updateSvg(i, subFigureSkipperIndexModifiers)
+        thisFigure.parallelFigure_updateSvg(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
     }
 }
 
@@ -597,8 +557,8 @@ ParallelFigure.prototype.transformData = function(pathDatas) {
 }
 
 
-ParallelFigure.prototype.parallelFigure_updateSvg = function(i, skippers) {
-    updateSVG_thisSvgParallelFigure(this, i, skippers)
+ParallelFigure.prototype.parallelFigure_updateSvg = function(i, skippers, refFig) {
+    updateSVG_thisSvgParallelFigure(this, i, skippers, refFig)
 }
 
 ParallelFigure.prototype.initiateFigure = function() {

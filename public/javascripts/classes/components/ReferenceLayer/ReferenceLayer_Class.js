@@ -78,19 +78,22 @@ ReferenceLayer.prototype.changeLabel = function(label) {
     textElement.textContent = label
 }
 
-ReferenceLayer.prototype.toggleCheckBox = function(activeElement) {
+ReferenceLayer.prototype.toggleCheckBox = function(activeElement, visObj) {
     let elementArray = this.referenceLayerUIElements.optionSelects
-    // let checkBoxElement = activeElement.children[0].children[1].children[0]
-    // checkBoxElement.classList.toggle("a-optionSelect__icon--active")
-    // checkBoxElement.style.backgroundColor = 'yellow'
 
-
-    // TODO: change that to this
     elementArray.forEach(element => {
         if (element === activeElement) {
-            element.children[0].children[1].children[0].style.backgroundColor = 'black'
+            // element.children[0].children[1].children[0].classList.add('testElement-palette--'+[visObj.palette]+'', 'testElem-fill-color--'+[visObj.fillClr]+'')
+            // element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+' removeBorder'
+            element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+''
         } else {
-            element.children[0].children[1].children[0].style.backgroundColor = 'transparent'
+            // element.children[0].children[1].children[0].classList.remove('testElement-palette--'+[visObj.palette]+'', 'testElem-fill-color--'+[visObj.fillClr]+'')
+            element.children[0].children[1].children[0].className = 'a-optionSelect__icon'
         }
     })
+}
+
+ReferenceLayer.prototype.fillCheckBox = function(element, visObj) {
+    // element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+' removeBorder'
+    element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+''
 }

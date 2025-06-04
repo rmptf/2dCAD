@@ -77,21 +77,21 @@ function IntersectionsSorter_WithArc(parallelFigure, index, subFigureSkipperInde
 
     // REFERENCE LAYER STUFF
     this.referenceLayer = new ReferenceLayer()
-    this.referenceLayer.changeReferenceLayerHeader("Development_UI_01")
+    this.referenceLayer.changeReferenceLayerHeader("Skipper_Function_Running")
     this.referenceLayer.repositionReferenceLayer([150,200])
-    this.optSel01 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    this.optSel02 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_02")
-    this.optSel03 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_03")
-    this.optSel04 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_04")
-    this.optSel05 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_05")
-    this.optSel06 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_06")
-    this.optSel07 = this.referenceLayer.addOptionSelect("NEW_NAME_OF_FUNCTION_07")
+    this.optSel01 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_01")
+    this.optSel02 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_02")
+    this.optSel03 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_03")
+    this.optSel04 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_04")
+    this.optSel05 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_05")
+    this.optSel06 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_06")
+    this.optSel07 = this.referenceLayer.addOptionSelect("HARD_CODED_FUNCTION_07")
 
     this.optSel08 = this.referenceLayer.addOptionSelect("FIRST_ONE") // PREVIOUS TO INTERSECTION CLOSED ARC
     this.optSel09 = this.referenceLayer.addOptionSelect("SECOND_ONE_A") // AFTER INTERSECTION CLOSED ARC - first or second arc hasnt closed
     this.optSel10 = this.referenceLayer.addOptionSelect("SECOND_ONE_B") // AFTER INTERSECTION CLOSED ARC - second arc has closed
     this.optSel11 = this.referenceLayer.addOptionSelect("LAST_ONE") // AFTER INTERSECTION CLOSED ARC
-    // this.referenceLayer.toggleCheckBox(this.optSel01)
+    this.referenceLayer.toggleCheckBox(this.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
     // REFERENCE LAYER STUFF
 }
 
@@ -259,7 +259,6 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_twoArcsClosedNEXT =
 
 
 
-
 // SHAPE 04_A_firstArcClosed
 // SHAPE 04_A_firstArcClosed
 // SHAPE 04_A_firstArcClosed
@@ -270,7 +269,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 
-    this.referenceLayer.toggleCheckBox(this.optSel01)
+    this.referenceLayer.toggleCheckBox(this.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
@@ -287,7 +286,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 
-    this.referenceLayer.toggleCheckBox(this.optSel02)
+    this.referenceLayer.toggleCheckBox(this.optSel02, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
@@ -310,7 +309,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     // this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 
-    this.referenceLayer.toggleCheckBox(this.optSel03)
+    this.referenceLayer.toggleCheckBox(this.optSel03, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
@@ -333,7 +332,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
 
-    this.referenceLayer.toggleCheckBox(this.optSel04)
+    this.referenceLayer.toggleCheckBox(this.optSel04, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
@@ -349,7 +348,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
 
-    this.referenceLayer.toggleCheckBox(this.optSel05)
+    this.referenceLayer.toggleCheckBox(this.optSel05, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 3_seg1 (NEW?)            // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc
@@ -372,7 +371,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
 
-    this.referenceLayer.toggleCheckBox(this.optSel06)
+    this.referenceLayer.toggleCheckBox(this.optSel06, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
@@ -394,7 +393,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //FIXME: need this but turned off for now, for conveneince //FIXME: maybe done need? FIXME: DONT NEED, already closed
 
-    this.referenceLayer.toggleCheckBox(this.optSel07)
+    this.referenceLayer.toggleCheckBox(this.optSel07, {palette: 8, fillClr: 1, strokeClr: 1})
 }
 
 
@@ -530,7 +529,7 @@ IntersectionsSorter_WithArc.prototype.handleFirstArcSegment = function() {
         // REFERENCE FIGURE STUFF
 
         // REFERENCE LAYER STUFF
-        this.referenceLayer.toggleCheckBox(this.optSel08)
+        this.referenceLayer.toggleCheckBox(this.optSel08, {palette: 8, fillClr: 1, strokeClr: 1})
         // REFERENCE LAYER STUFF
     }
     //FIXME:
@@ -560,7 +559,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc() //
         
         // REFERENCE LAYER STUFF
-        this.referenceLayer.toggleCheckBox(this.optSel09)
+        this.referenceLayer.toggleCheckBox(this.optSel09, {palette: 8, fillClr: 1, strokeClr: 1})
         // REFERENCE LAYER STUFF
     }
     //FIXME:
@@ -578,7 +577,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         this.IntersectionHandler.arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc() //NEW
 
         // REFERENCE LAYER STUFF
-        this.referenceLayer.toggleCheckBox(this.optSel10)
+        this.referenceLayer.toggleCheckBox(this.optSel10, {palette: 8, fillClr: 1, strokeClr: 1})
         // REFERENCE LAYER STUFF
     }
     //FIXME:
@@ -640,7 +639,7 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
         }
 
         // REFERENCE LAYER STUFF
-        this.referenceLayer.toggleCheckBox(this.optSel11)
+        this.referenceLayer.toggleCheckBox(this.optSel11, {palette: 8, fillClr: 1, strokeClr: 1})
         // REFERENCE LAYER STUFF
 
         // // if(this.isHidden(this.nextIndexHARDCOUNT + 0) && !this.isHidden(this.nextIndexHARDCOUNT + 1)) {  //TODO: not quite right but quick fix "- 1"
