@@ -5,7 +5,7 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathDataPrimary} from '../SvgData/SvgData_Children/SvgData_Primary_Class.js'
 import {PathDataParallel} from '../SvgData/SvgData_Children/SvgData_Parallel_Class.js'
 import {PathDataCorner} from '../SvgData/SvgData_Children/SvgData_Corner_Class.js'
-import {updateSVG_thisSvgParallelFigure} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
+import {updateSVG_thisSvgParallelFigure_oneByOne, updateSVG_thisSvgParallelFigure_allAtOnce} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_cornerShape_01} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
@@ -245,6 +245,18 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.parallelFigureObject.parallelDistance = parallelDistance
         // thisFigure.parallelFigureObject.parallelDistance = -150
     }
+
+
+    let subFigureSkipperIndexModifiers = {
+        previousIndexModifier: 0,
+        currentIndexModifier: 0,
+        nextIndexModifier: 0,
+        subFigureIndex: thisFigure.skipped_indecies,
+        currentSkippedIndex: thisFigure.currentSkippedIndex,
+        currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
+    }
+
+
     // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
 
@@ -286,7 +298,16 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
 
-        let subFigureSkipperIndexModifiers = {
+        // let subFigureSkipperIndexModifiers = {
+        //     previousIndexModifier: 0,
+        //     currentIndexModifier: 0,
+        //     nextIndexModifier: 0,
+        //     subFigureIndex: thisFigure.skipped_indecies,
+        //     currentSkippedIndex: thisFigure.currentSkippedIndex,
+        //     currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
+        // }
+
+        subFigureSkipperIndexModifiers = {
             previousIndexModifier: 0,
             currentIndexModifier: 0,
             nextIndexModifier: 0,
@@ -516,9 +537,14 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
             }
         }
-        console.log("RUN ANIMATOR")
-        thisFigure.parallelFigure_updateSvg(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+        // // This runs UpdateSvg after each iteration
+        // console.log("RUN ANIMATOR")
+        thisFigure.parallelFigure_updateSvg_oneByOne_OLDWAY(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+        // thisFigure.parallelFigure_updateSvg_oneByOne(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
     }
+    // This runs UpdateSvg after all iterations
+    console.log("RUN_ANIMATOR")
+    thisFigure.parallelFigure_updateSvg_allAtOnce(subFigureSkipperIndexModifiers, thisFigure.refFigs)
 }
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
@@ -557,8 +583,11 @@ ParallelFigure.prototype.transformData = function(pathDatas) {
 }
 
 
-ParallelFigure.prototype.parallelFigure_updateSvg = function(i, skippers, refFig) {
-    updateSVG_thisSvgParallelFigure(this, i, skippers, refFig)
+ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne = function(i, skippers, refFig) {
+    updateSVG_thisSvgParallelFigure_oneByOne(this, i, skippers, refFig)
+}
+ParallelFigure.prototype.parallelFigure_updateSvg_allAtOnce = function(skippers, refFig) {
+    updateSVG_thisSvgParallelFigure_allAtOnce(this, skippers, refFig)
 }
 
 ParallelFigure.prototype.initiateFigure = function() {
