@@ -78,22 +78,28 @@ ReferenceLayer.prototype.changeLabel = function(label) {
     textElement.textContent = label
 }
 
+ReferenceLayer.prototype.changeTextBox = function(element, text) {
+    let textElement = element.children[0].children[2]
+    textElement.textContent = text
+}
+
+ReferenceLayer.prototype.fillCheckBox = function(element, visObj) {
+    element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+''
+}
+
+ReferenceLayer.prototype.emptyCheckBox = function(element) {
+    element.children[0].children[1].children[0].className = 'a-optionSelect__icon'
+}
+
 ReferenceLayer.prototype.toggleCheckBox = function(activeElement, visObj) {
     let elementArray = this.referenceLayerUIElements.optionSelects
 
     elementArray.forEach(element => {
         if (element === activeElement) {
-            // element.children[0].children[1].children[0].classList.add('testElement-palette--'+[visObj.palette]+'', 'testElem-fill-color--'+[visObj.fillClr]+'')
-            // element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+' removeBorder'
             element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+''
         } else {
-            // element.children[0].children[1].children[0].classList.remove('testElement-palette--'+[visObj.palette]+'', 'testElem-fill-color--'+[visObj.fillClr]+'')
             element.children[0].children[1].children[0].className = 'a-optionSelect__icon'
         }
     })
 }
 
-ReferenceLayer.prototype.fillCheckBox = function(element, visObj) {
-    // element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+' removeBorder'
-    element.children[0].children[1].children[0].className = 'a-optionSelect__icon testElement-palette--'+[visObj.palette]+' testElem-fill-color--'+[visObj.fillClr]+''
-}

@@ -5,7 +5,7 @@ import {SvgPathParallel} from '../SvgElement/SvgPath/SvgPath_Children/SvgPath_Pa
 import {PathDataPrimary} from '../SvgData/SvgData_Children/SvgData_Primary_Class.js'
 import {PathDataParallel} from '../SvgData/SvgData_Children/SvgData_Parallel_Class.js'
 import {PathDataCorner} from '../SvgData/SvgData_Children/SvgData_Corner_Class.js'
-import {updateSVG_thisSvgParallelFigure_oneByOne, updateSVG_thisSvgParallelFigure_allAtOnce} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
+import {updateSVG_thisSvgParallelFigure_OLDWAY, updateSVG_thisSvgParallelFigure_oneByOne, updateSVG_thisSvgParallelFigure_allAtOnce, updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS, updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1, updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSinceItsEndPointsOnly} from '../../DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js'
 import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_cornerShape_01} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
@@ -107,28 +107,60 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // REFERENCE LAYER STUFF
     this.referenceLaye_01 = new ReferenceLayer()
     this.referenceLaye_01.changeReferenceLayerHeader("Current_Skipped_Index")
-    this.referenceLaye_01.repositionReferenceLayer([500,100])
+    this.referenceLaye_01.repositionReferenceLayer([600,100])
     this.optSel01_01 = this.referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
-    
-    // this.referenceLaye_01.toggleCheckBox(this.optSel01_01, {palette: 8, fillClr: 1, strokeClr: 1})
-    // this.referenceLaye_01.changeLabel("New_Name_Changed_@_Instantiation")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
-    let referenceLayer = new ReferenceLayer()
-    referenceLayer.changeReferenceLayerHeader("Positional_Color_Code")
-    referenceLayer.repositionReferenceLayer([950,200])
-    this.optSel01 = referenceLayer.addOptionSelect("1st_Pos")
-    this.optSel02 = referenceLayer.addOptionSelect("2nd_Pos")
-    this.optSel03 = referenceLayer.addOptionSelect("3rd_Pos")
-    this.optSel04 = referenceLayer.addOptionSelect("4th_Pos")
-    this.optSel05 = referenceLayer.addOptionSelect("5th_Pos")
+    let referenceLayer_02 = new ReferenceLayer()
+    referenceLayer_02.changeReferenceLayerHeader("Positional_Color_Code")
+    referenceLayer_02.repositionReferenceLayer([1000,200])
+    this.optSel01 = referenceLayer_02.addOptionSelect("1st_Pos")
+    this.optSel02 = referenceLayer_02.addOptionSelect("2nd_Pos")
+    this.optSel03 = referenceLayer_02.addOptionSelect("3rd_Pos")
+    this.optSel04 = referenceLayer_02.addOptionSelect("4th_Pos")
+    this.optSel05 = referenceLayer_02.addOptionSelect("5th_Pos")
 
-    referenceLayer.fillCheckBox(this.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
-    referenceLayer.fillCheckBox(this.optSel02, {palette: 8, fillClr: 2, strokeClr: 1})
-    referenceLayer.fillCheckBox(this.optSel03, {palette: 8, fillClr: 3, strokeClr: 1})
-    referenceLayer.fillCheckBox(this.optSel04, {palette: 8, fillClr: 4, strokeClr: 1})
-    referenceLayer.fillCheckBox(this.optSel05, {palette: 8, fillClr: 5, strokeClr: 1})
+    referenceLayer_02.fillCheckBox(this.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
+    referenceLayer_02.fillCheckBox(this.optSel02, {palette: 8, fillClr: 2, strokeClr: 1})
+    referenceLayer_02.fillCheckBox(this.optSel03, {palette: 8, fillClr: 3, strokeClr: 1})
+    referenceLayer_02.fillCheckBox(this.optSel04, {palette: 8, fillClr: 4, strokeClr: 1})
+    referenceLayer_02.fillCheckBox(this.optSel05, {palette: 8, fillClr: 5, strokeClr: 1})
+    // REFERENCE LAYER STUFF
+
+    // REFERENCE LAYER STUFF
+    this.referenceLayer_03 = new ReferenceLayer()
+    this.referenceLayer_03.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_03.repositionReferenceLayer([150,200])
+    this.optSel01 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__01")
+    this.optSel02 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__02")
+    this.optSel03 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__03")
+    // REFERENCE LAYER STUFF
+
+    // REFERENCE LAYER STUFF
+    this.referenceLayer_04 = new ReferenceLayer()
+    this.referenceLayer_04.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_04.repositionReferenceLayer([150,400])
+    this.optSel04 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__01")
+    this.optSel05 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__02")
+    this.optSel06 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__03")
+    // REFERENCE LAYER STUFF
+
+    // REFERENCE LAYER STUFF
+    this.referenceLayer_05 = new ReferenceLayer()
+    this.referenceLayer_05.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_05.repositionReferenceLayer([150,600])
+    this.optSel07 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
+    this.optSel08 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__02")
+    this.optSel09 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__03")
+    // REFERENCE LAYER STUFF
+
+    // REFERENCE LAYER STUFF
+    this.referenceLayer_06 = new ReferenceLayer()
+    this.referenceLayer_06.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_06.repositionReferenceLayer([150,800])
+
+    this.optSel10 = this.referenceLayer_06.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
     // REFERENCE LAYER STUFF
 }
 
@@ -216,6 +248,30 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 }
 
 function mouseMoveDrawParallel(event, thisFigure) {
+    // REFERENCE FIGURE STUFF
+    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel01)
+    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel02)
+    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel03)
+    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel04)
+    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel05)
+    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel06)
+    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel07)
+    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel08)
+    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel09)
+    thisFigure.referenceLayer_06.emptyCheckBox(thisFigure.optSel10)
+
+    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel01, "_")
+    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel02, "_")
+    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel03, "_")
+    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel04, "_")
+    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel05, "_")
+    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel06, "_")
+    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel07, "_")
+    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel08, "_")
+    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel09, "_")
+    thisFigure.referenceLayer_06.changeTextBox(thisFigure.optSel10, "_")
+    // REFERENCE FIGURE STUFF
+
     console.log("")
     console.log("")
     console.log("")
@@ -247,6 +303,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
     }
 
 
+    //NEWWAY
     let subFigureSkipperIndexModifiers = {
         previousIndexModifier: 0,
         currentIndexModifier: 0,
@@ -298,6 +355,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
 
+        // //OLDWAY
         // let subFigureSkipperIndexModifiers = {
         //     previousIndexModifier: 0,
         //     currentIndexModifier: 0,
@@ -307,6 +365,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
         //     currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         // }
 
+        //NEWWAY
         subFigureSkipperIndexModifiers = {
             previousIndexModifier: 0,
             currentIndexModifier: 0,
@@ -316,7 +375,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
             currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         }
 
-        thisFigure.referenceLaye_01.changeLabel(subFigureSkipperIndexModifiers.currentSkippedIndex)
+        thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
+        thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
 
         if(i === thisFigure.skipped_indecies[0] - 1 && thisFigure.skipped_indecies[0] !== 0) {  //FIXME: TODO: was an if else added that stopped this from running an ran regular for some reason
             console.log("NEXT_SKIPPED_THIS_IS_PREVIOUS_INDEX: NEW_SKIPPER")
@@ -341,25 +401,31 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     if(i === 1) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
-
+                        // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel01, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel01, i)
+                        // REFERENCE FIGURE STUFF
                     } else if(i === 2) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel02, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
-
+                        // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel02, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel02, i)
+                        // REFERENCE FIGURE STUFF
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
-                    // // REFERENCE FIGURE STUFF
+                    // REFERENCE FIGURE STUFF
+                    thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel03, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                    // // REFERENCE FIGURE STUFF  
-
+                    // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel03, {palette: 8, fillClr: 1, strokeClr: 1})
+                    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel03, i)
+                    // REFERENCE FIGURE STUFF
                 }
             }
         }
@@ -381,33 +447,41 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
             if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
                 if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
-                    if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc
+                    if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc (shape 3: [i-1][0], [i-1][0])
                         let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel04, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
+                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel04, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel04, i)
+                        // REFERENCE FIGURE STUFF
 
                     } else { // Current skipped arc index IS NOT final arc
-                        if(i === thisFigure.currentSkippedIndex + 0) {
+                        if(i === thisFigure.currentSkippedIndex + 0) { //(shape 4: [i-1][0], [i-1][0])
                             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
-                            // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel05, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                            // // REFERENCE FIGURE STUFF  
-
+                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel05, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel05, i)
+                        // REFERENCE FIGURE STUFF
                         }
                     }
                 } else { // More than the first index not skipped
-                    if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped
+                    if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped (shape 5: [i-1][0], [i-1][0])
                         let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel06, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
+                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel06, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel06, i)
+                        // REFERENCE FIGURE STUFF
                     }
                 }
             }
@@ -415,6 +489,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
         } 
 
         else if(i === thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] + 1) {
+
+
+
+
             console.log("PREVIOUS_SKIPPED_THIS_IS_FOLLOWING_INDEX: NEW_SKIPPER")
             console.log(thisFigure.originalFigurePathDatas[i])
 
@@ -437,25 +515,31 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     if(i === 4) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel07, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
-
+                        // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel07, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel07, i)
+                        // REFERENCE FIGURE STUFF  
                     } else if(i === 3) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
 
-                        // // REFERENCE FIGURE STUFF
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel08, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                        // // REFERENCE FIGURE STUFF  
-
+                        // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel08, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel08, i)
+                        // REFERENCE FIGURE STUFF  
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
-                    // // REFERENCE FIGURE STUFF
+                    // REFERENCE FIGURE STUFF
+                    thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel09, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                    // // REFERENCE FIGURE STUFF  
-
+                    // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel09, {palette: 8, fillClr: 3, strokeClr: 1})
+                    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel09, i)
+                    // REFERENCE FIGURE STUFF  
                 }
 
                 // thisFigure.groupOfConsecutiveIndeciesCounter = thisFigure.groupOfConsecutiveIndeciesCounter + 1
@@ -477,6 +561,15 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 currentSkippedIndex: thisFigure.currentSkippedIndex,
                 currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
             }
+
+            // REFERENCE FIGURE STUFF
+            thisFigure.referenceLayer_06.fillCheckBox(thisFigure.optSel10, {palette: 8, fillClr: 2, strokeClr: 1})
+
+            // thisFigure.referenceLayer_06.toggleCheckBox(thisFigure.optSel10, {palette: 8, fillClr: 2, strokeClr: 1})
+            thisFigure.referenceLayer_06.changeTextBox(thisFigure.optSel10, i)
+            // REFERENCE FIGURE STUFF
+
+
             if(i < thisFigure.originalFigurePathDatas.length) {
                 if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) {
                     console.log("CURRENT_INDEX_IS_ARC")
@@ -489,13 +582,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     }
                     THISPathData.interSectionSorter.setIndex(i - 1, subFigureSkipperIndexModifiers)
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
-
-                    // // REFERENCE FIGURE STUFF
-
-                    // // REFERENCE FIGURE STUFF  
-
-
-
+                    
 
                     if(i < thisFigure.originalFigurePathDatas.length - 1) {
                         if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_west.children.childCount > 1) {
@@ -535,16 +622,36 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     console.log("CURRENT_INDEX_IS_PATH")
                     thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                 }
+
+                // //TODO: Add this to all functions
+                // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+                // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'blue')
             }
         }
-        // // This runs UpdateSvg after each iteration
+        // // This runs UpdateSvg after each iteration (runs every iteration for each iteration (oldeay))
         // console.log("RUN ANIMATOR")
-        thisFigure.parallelFigure_updateSvg_oneByOne_OLDWAY(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+        // thisFigure.parallelFigure_updateSvg_OLDWAY(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+
+        // // This runs UpdateSvg after each iteration (runs it one time each iteration)
+        // console.log("RUN ANIMATOR")
         // thisFigure.parallelFigure_updateSvg_oneByOne(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+
+        // This runs UpdateSvg after each iteration (but doesnt handle end points, end points are all handled at once at the end)
+        console.log("RUN ANIMATOR")
+        thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+
+        // // FIXME: (THIS DOESNT GO HERE)
+        // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+        // // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(parallelPath, parPathData_start, parPathData_end, color) //EXAMPLE
+        // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1 +1][1], 'red')
     }
-    // This runs UpdateSvg after all iterations
-    console.log("RUN_ANIMATOR")
-    thisFigure.parallelFigure_updateSvg_allAtOnce(subFigureSkipperIndexModifiers, thisFigure.refFigs)
+    // // This runs UpdateSvg after all iterations
+    // console.log("RUN_ANIMATOR")
+    // thisFigure.parallelFigure_updateSvg_allAtOnce(subFigureSkipperIndexModifiers, thisFigure.refFigs)
+
+    // This runs UpdateSvg after all iterations (only handles END POINTS paths are handled one by one)
+    console.log("RUN ANIMATOR")
+    thisFigure.parallelFigure_updateSvg_oneByOne_ENDPOINTS_ONLY(thisFigure.refFigs)
 }
 
 function mouseDownDrawParallel(docSvgD3, flag, thisFigure) {
@@ -583,11 +690,28 @@ ParallelFigure.prototype.transformData = function(pathDatas) {
 }
 
 
+ParallelFigure.prototype.parallelFigure_updateSvg_OLDWAY = function(i, skippers, refFig) {
+    updateSVG_thisSvgParallelFigure_OLDWAY(this, i, skippers, refFig)
+}
 ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne = function(i, skippers, refFig) {
     updateSVG_thisSvgParallelFigure_oneByOne(this, i, skippers, refFig)
 }
 ParallelFigure.prototype.parallelFigure_updateSvg_allAtOnce = function(skippers, refFig) {
     updateSVG_thisSvgParallelFigure_allAtOnce(this, skippers, refFig)
+}
+
+
+ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS = function(i, skippers, refFig) {
+    updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS(this, i, skippers, refFig)
+}
+
+
+ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1 = function(parallelPath, parPathData_start, parPathData_end, color) {
+    updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color)
+}
+
+ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_ENDPOINTS_ONLY = function(refFig) {
+    updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSinceItsEndPointsOnly(this, refFig)
 }
 
 ParallelFigure.prototype.initiateFigure = function() {
