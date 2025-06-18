@@ -493,7 +493,7 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS(figure, i, subFig
     }
 }
 
-function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color) {
+function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color, describePath) {
 // function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(figure, i) {
 //     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
 //     let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
@@ -504,9 +504,14 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1
 //         .attr('d', describeComplexPath([parallelPathDatas[passed_III_forOld][0], parallelPathDatas[passed_III_forOld][1]]))
 //     parallelPaths[passed_III_forOld].svgElementObject.style("stroke", "green")
 
-    parallelPath.svgElementObject
-        .attr('d', describeComplexPath([parPathData_start, parPathData_end]))
-    parallelPath.svgElementObject.style("stroke", color)
+    if(describePath === true) {
+        parallelPath.svgElementObject
+                .attr('d', describeComplexPath([parPathData_start, parPathData_end]))
+        parallelPath.svgElementObject.style("stroke", color)
+    } else {
+        parallelPath.svgElementObject
+        parallelPath.svgElementObject.style("stroke", color)
+    }
 }
 
 

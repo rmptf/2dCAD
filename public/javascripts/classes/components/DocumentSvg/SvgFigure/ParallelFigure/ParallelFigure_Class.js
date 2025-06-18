@@ -428,6 +428,11 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     // REFERENCE FIGURE STUFF
                 }
             }
+
+            // //TODO: Add this to all functions
+            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            // let pooper = thisFigure.skipped_indecies.length
+            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[(i-1) + pooper][1], 'red', true)
         }
 
         else if(thisFigure.skipped_indecies.includes(i)) {
@@ -486,6 +491,11 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
             }
             // NEW STUFF WORKING
+
+            // //TODO: Add this to all functions
+            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'white', false)
+
         } 
 
         else if(i === thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] + 1) {
@@ -545,6 +555,11 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // thisFigure.groupOfConsecutiveIndeciesCounter = thisFigure.groupOfConsecutiveIndeciesCounter + 1
                 // diffCounter = diffCounter + 1
             }
+
+            // //TODO: Add this to all functions
+            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'white', false)
+
         }
 
         else {
@@ -625,7 +640,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
                 // //TODO: Add this to all functions
                 // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-                // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'blue')
+                // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'blue', true)
             }
         }
         // // This runs UpdateSvg after each iteration (runs every iteration for each iteration (oldeay))
@@ -642,8 +657,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
         // // FIXME: (THIS DOESNT GO HERE)
         // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-        // // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(parallelPath, parPathData_start, parPathData_end, color) //EXAMPLE
-        // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1 +1][1], 'red')
+        // // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(parallelPath, parPathData_start, parPathData_end, color, describePath) //EXAMPLE
+        // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1 +1][1], 'red', true)
     }
     // // This runs UpdateSvg after all iterations
     // console.log("RUN_ANIMATOR")
@@ -706,8 +721,8 @@ ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS = functi
 }
 
 
-ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1 = function(parallelPath, parPathData_start, parPathData_end, color) {
-    updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color)
+ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1 = function(parallelPath, parPathData_start, parPathData_end, color, describePath) {
+    updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color, describePath)
 }
 
 ParallelFigure.prototype.parallelFigure_updateSvg_oneByOne_ENDPOINTS_ONLY = function(refFig) {
