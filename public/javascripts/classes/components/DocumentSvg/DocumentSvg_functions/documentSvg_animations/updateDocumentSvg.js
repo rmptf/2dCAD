@@ -511,6 +511,7 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1
     } else {
         parallelPath.svgElementObject
         parallelPath.svgElementObject.style("stroke", color)
+        console.log("ASSSSSSER________")
     }
 }
 

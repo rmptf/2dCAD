@@ -429,10 +429,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 }
             }
 
-            // //TODO: Add this to all functions
-            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            // let pooper = thisFigure.skipped_indecies.length
-            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[(i-1) + pooper][1], 'red', true)
+            //TODO: Add this to all functions
+            // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            let pooper = thisFigure.skipped_indecies.length
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-0], thisFigure.parallelFigurePathDatas[i-0][0], thisFigure.parallelFigurePathDatas[(i-0) + pooper][1], 'red', true)
         }
 
         else if(thisFigure.skipped_indecies.includes(i)) {
@@ -492,9 +492,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
             }
             // NEW STUFF WORKING
 
-            // //TODO: Add this to all functions
-            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'white', false)
+            //TODO: Add this to all functions
+            // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            console.log("OTHER_ASSSSSSSSSSER__________")
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-0], thisFigure.parallelFigurePathDatas[i-0][0], thisFigure.parallelFigurePathDatas[i-0][1], 'white', false)
 
         } 
 
@@ -556,9 +557,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // diffCounter = diffCounter + 1
             }
 
-            // //TODO: Add this to all functions
-            // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'white', false)
+            //TODO: Add this to all functions
+            // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-0], thisFigure.parallelFigurePathDatas[i-0][0], thisFigure.parallelFigurePathDatas[i-0][1], 'white', true)
 
         }
 
@@ -638,9 +639,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     thisFigure.IntersectionsSorter_NoArc.sortIntersections()
                 }
 
-                // //TODO: Add this to all functions
-                // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-                // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'blue', true)
+                //TODO: Add this to all functions
+                // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
+                thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'blue', true)
             }
         }
         // // This runs UpdateSvg after each iteration (runs every iteration for each iteration (oldeay))
@@ -651,9 +652,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
         // console.log("RUN ANIMATOR")
         // thisFigure.parallelFigure_updateSvg_oneByOne(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
 
-        // This runs UpdateSvg after each iteration (but doesnt handle end points, end points are all handled at once at the end)
-        console.log("RUN ANIMATOR")
-        thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
+        // // This runs UpdateSvg after each iteration (but doesnt handle end points, end points are all handled at once at the end)
+        // console.log("RUN ANIMATOR")
+        // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS(i, subFigureSkipperIndexModifiers, thisFigure.refFigs)
 
         // // FIXME: (THIS DOESNT GO HERE)
         // // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
