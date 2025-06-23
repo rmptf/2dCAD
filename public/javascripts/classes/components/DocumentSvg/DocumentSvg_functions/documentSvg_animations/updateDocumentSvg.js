@@ -29,22 +29,22 @@ function updateSVG_thisSvgFigure(figure) {
 }
 
 // 123-4 X
-// 132-4 X
+// 132-4 X newF1
 
-// 213-4 *
-// 231-4 *
+// 213-4 * F2
+// 231-4 * F1
 
-// 312-4 X
-// 321-4 *
+// 312-4 X newF2
+// 321-4 X newF3
 
-// 324-1 *
-// 342-1 *
+// 324-1 * F3
+// 342-1 * F4
 
-// 234-1 ?
-// 243-1 ?
+// 234-1 * newF4
+// 243-1 X newF5
 
-// 432-1
-// 423-1
+// 432-1 X
+// 423-1 X
 
 function updateSVG_thisSvgParallelFigure_OLDWAY(figure, iii, subFigureSkipperIndexModifiers, refFig) {
     let parallelPathDatas = figure.parallelFigurePathDatas
@@ -423,6 +423,7 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS(figure, i, subFig
     // if(passed_III_forOld === skippedIndicies[0] - 1 || skippedIndicies[0] === 0) { // before skipped 
     // if(passed_III_forOld === skippedIndicies[0] - 1) { // before skipped 
     if(passed_III_forOld === skippedIndicies[0] - 1 && skippedIndicies.length !== 3) { // before skipped 
+        console.log("RIGHTHERERRERERERERERE")
     // (if i is the index before the first Skipped Index or if the first Skipped Index is 0)
         let length = skippedIndicies.length
         let color
@@ -509,9 +510,8 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1
                 .attr('d', describeComplexPath([parPathData_start, parPathData_end]))
         parallelPath.svgElementObject.style("stroke", color)
     } else {
-        parallelPath.svgElementObject
+        // parallelPath.svgElementObject
         parallelPath.svgElementObject.style("stroke", color)
-        console.log("ASSSSSSER________")
     }
 }
 
