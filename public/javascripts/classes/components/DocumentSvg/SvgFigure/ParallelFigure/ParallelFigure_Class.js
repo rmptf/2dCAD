@@ -130,7 +130,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     // REFERENCE LAYER STUFF
     this.referenceLayer_03 = new ReferenceLayer()
-    this.referenceLayer_03.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_03.changeReferenceLayerHeader("NEXT_Skipper_Functions")
     this.referenceLayer_03.repositionReferenceLayer([150,200])
     this.optSel_03_01 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__01")
     this.optSel_03_02 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__02")
@@ -139,7 +139,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     // REFERENCE LAYER STUFF
     this.referenceLayer_04 = new ReferenceLayer()
-    this.referenceLayer_04.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_04.changeReferenceLayerHeader("CURRENT_Skipper_Functions")
     this.referenceLayer_04.repositionReferenceLayer([150,400])
     this.optSel_04_01 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__01")
     this.optSel_04_02 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__02")
@@ -149,8 +149,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     // REFERENCE LAYER STUFF
     this.referenceLayer_05 = new ReferenceLayer()
-    this.referenceLayer_05.changeReferenceLayerHeader("Skipper_Function_Running")
-    this.referenceLayer_05.repositionReferenceLayer([150,600])
+    this.referenceLayer_05.changeReferenceLayerHeader("PREVIOUS_Skipper_Functions")
+    this.referenceLayer_05.repositionReferenceLayer([150,640])
     this.optSel_05_01 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
     this.optSel_05_02 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__02")
     this.optSel_05_03 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__03")
@@ -159,7 +159,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // REFERENCE LAYER STUFF
     this.referenceLayer_06 = new ReferenceLayer()
     this.referenceLayer_06.changeReferenceLayerHeader("Skipper_Function_Running")
-    this.referenceLayer_06.repositionReferenceLayer([150,800])
+    this.referenceLayer_06.repositionReferenceLayer([150,840])
 
     this.optSel_06_01 = this.referenceLayer_06.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
     // REFERENCE LAYER STUFF
