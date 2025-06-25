@@ -129,31 +129,32 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
-    this.referenceLayer_03 = new ReferenceLayer()
-    this.referenceLayer_03.changeReferenceLayerHeader("NEXT_Skipper_Functions")
-    this.referenceLayer_03.repositionReferenceLayer([150,200])
-    this.optSel_03_01 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__01")
-    this.optSel_03_02 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__02")
-    this.optSel_03_03 = this.referenceLayer_03.addOptionSelect("NEXT_INDEX_SKIPPED__03")
+    this.nextIndexSkippedFunctions_ReferenceLayer = new ReferenceLayer()
+    this.nextIndexSkippedFunctions_ReferenceLayer.changeReferenceLayerHeader("NEXT_Skipper_Functions")
+    this.nextIndexSkippedFunctions_ReferenceLayer.repositionReferenceLayer([150,200])
+    this.optSel_03_01 = this.nextIndexSkippedFunctions_ReferenceLayer.addOptionSelect("NEXT_INDEX_SKIPPED__01")
+    this.optSel_03_02 = this.nextIndexSkippedFunctions_ReferenceLayer.addOptionSelect("NEXT_INDEX_SKIPPED__02")
+    this.optSel_03_03 = this.nextIndexSkippedFunctions_ReferenceLayer.addOptionSelect("NEXT_INDEX_SKIPPED__03")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
-    this.referenceLayer_04 = new ReferenceLayer()
-    this.referenceLayer_04.changeReferenceLayerHeader("CURRENT_Skipper_Functions")
-    this.referenceLayer_04.repositionReferenceLayer([150,400])
-    this.optSel_04_01 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__01")
-    this.optSel_04_02 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__02")
-    this.optSel_04_03 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__03")
-    this.optSel_04_04 = this.referenceLayer_04.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__04")
+    this.thisIndexSkippedFunctions_ReferenceLayer = new ReferenceLayer()
+    this.thisIndexSkippedFunctions_ReferenceLayer.changeReferenceLayerHeader("CURRENT_Skipper_Functions")
+    this.thisIndexSkippedFunctions_ReferenceLayer.repositionReferenceLayer([150,400])
+    this.optSel_04_01 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__01")
+    this.optSel_04_02 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__02")
+    this.optSel_04_03 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__03")
+    this.optSel_04_04 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__04")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
-    this.referenceLayer_05 = new ReferenceLayer()
-    this.referenceLayer_05.changeReferenceLayerHeader("PREVIOUS_Skipper_Functions")
-    this.referenceLayer_05.repositionReferenceLayer([150,640])
-    this.optSel_05_01 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
-    this.optSel_05_02 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__02")
-    this.optSel_05_03 = this.referenceLayer_05.addOptionSelect("PREVIOUS_INDEX_SKIPPED__03")
+    this.prevIndexSkippedFunctions_ReferenceLayer = new ReferenceLayer()
+    this.prevIndexSkippedFunctions_ReferenceLayer.changeReferenceLayerHeader("PREVIOUS_Skipper_Functions")
+    this.prevIndexSkippedFunctions_ReferenceLayer.repositionReferenceLayer([150,640])
+    this.optSel_05_01 = this.prevIndexSkippedFunctions_ReferenceLayer.addOptionSelect("PREVIOUS_INDEX_SKIPPED_this_index_hardcoded_to_04")
+    this.optSel_05_02 = this.prevIndexSkippedFunctions_ReferenceLayer.addOptionSelect("PREVIOUS_INDEX_SKIPPED_this_index_hardcoded_to_03")
+    this.optSel_05_03 = this.prevIndexSkippedFunctions_ReferenceLayer.addOptionSelect("PREVIOUS_INDEX_SKIPPED_this_index_hardcoded_to_02")
+    this.optSel_05_04 = this.prevIndexSkippedFunctions_ReferenceLayer.addOptionSelect("PREVIOUS_INDEX_SKIPPED_this_index_set_to_'else'")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
@@ -249,29 +250,38 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
 }
 
 function mouseMoveDrawParallel(event, thisFigure) {
+
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
     // REFERENCE FIGURE STUFF
-    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel_03_01)
-    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel_03_02)
-    thisFigure.referenceLayer_03.emptyCheckBox(thisFigure.optSel_03_03)
-    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel_04_01)
-    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel_04_02)
-    thisFigure.referenceLayer_04.emptyCheckBox(thisFigure.optSel_04_03)
-    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel_05_01)
-    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel_05_02)
-    thisFigure.referenceLayer_05.emptyCheckBox(thisFigure.optSel_05_03)
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_01)
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_02)
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_03)
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_01)
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_02)
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_03)
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_05_01)
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_05_02)
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_05_03)
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_05_04)
     thisFigure.referenceLayer_06.emptyCheckBox(thisFigure.optSel_06_01)
 
-    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_01, "_")
-    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_02, "_")
-    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_03, "_")
-    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_01, "_")
-    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_02, "_")
-    thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_03, "_")
-    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_01, "_")
-    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_02, "_")
-    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_03, "_")
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_01, "_")
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_02, "_")
+    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_03, "_")
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01, "_")
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, "_")
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, "_")
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_01, "_")
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_02, "_")
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_03, "_")
+    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_04, "_")
     thisFigure.referenceLayer_06.changeTextBox(thisFigure.optSel_06_01, "_")
     // REFERENCE FIGURE STUFF
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
+    //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
 
     console.log("")
     console.log("")
@@ -403,29 +413,29 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
-                        thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_01, i)
+                        // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_01, i)
                         // REFERENCE FIGURE STUFF
                     } else if(i === 2) { //FIXME: HARDCODED
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
-                        thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_02, i)
+                        // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_02, i)
                         // REFERENCE FIGURE STUFF
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // REFERENCE FIGURE STUFF
-                    thisFigure.referenceLayer_03.fillCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
+                    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                    // thisFigure.referenceLayer_03.toggleCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
-                    thisFigure.referenceLayer_03.changeTextBox(thisFigure.optSel_03_03, i)
+                    // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
+                    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_03, i)
                     // REFERENCE FIGURE STUFF
                 }
             }
@@ -447,10 +457,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 THISPathData.interSectionSorter.allPreviousPathsSkipped_setFirstEndPointAtCurrentFirstPathStart()
 
                 // REFERENCE FIGURE STUFF
-                thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
+                thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
-                thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_01, i)
+                // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
+                thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01, i)
                 // REFERENCE FIGURE STUFF
             }
 
@@ -466,10 +476,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_02, i)
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
                         // REFERENCE FIGURE STUFF
 
                     } else { // Current skipped arc index IS NOT final arc
@@ -478,10 +488,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_03, i)
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
                         // REFERENCE FIGURE STUFF
                         }
                     }
@@ -491,10 +501,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_04.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_04.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.referenceLayer_04.changeTextBox(thisFigure.optSel_04_04, i)
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
                         // REFERENCE FIGURE STUFF
                     }
                 }
@@ -508,10 +518,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
         } 
 
         else if(i === thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] + 1) {
-
-
-
-
             console.log("PREVIOUS_SKIPPED_THIS_IS_FOLLOWING_INDEX: NEW_SKIPPER")
             console.log(thisFigure.originalFigurePathDatas[i])
 
@@ -535,29 +541,38 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel_05_01, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_01, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel_05_01, {palette: 8, fillClr: 3, strokeClr: 1})
-                        thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_01, i)
+                        // thisFigure.prevIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_05_01, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_01, i)
                         // REFERENCE FIGURE STUFF  
                     } else if(i === 3) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel_05_02, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_02, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                        // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel_05_02, {palette: 8, fillClr: 3, strokeClr: 1})
-                        thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_02, i)
+                        // thisFigure.prevIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_05_02, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_02, i)
+                        // REFERENCE FIGURE STUFF  
+                    } else if(i === 2) { //FIXME: hardcoded
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed__THIRD_secondPos()
+
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_03, {palette: 8, fillClr: 3, strokeClr: 1})
+
+                        // thisFigure.prevIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_05_03, {palette: 8, fillClr: 3, strokeClr: 1})
+                        thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_03, i)
                         // REFERENCE FIGURE STUFF  
                     }
                 } else {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // REFERENCE FIGURE STUFF
-                    thisFigure.referenceLayer_05.fillCheckBox(thisFigure.optSel_05_03, {palette: 8, fillClr: 3, strokeClr: 1})
+                    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_04, {palette: 8, fillClr: 3, strokeClr: 1})
 
-                    // thisFigure.referenceLayer_05.toggleCheckBox(thisFigure.optSel_05_03, {palette: 8, fillClr: 3, strokeClr: 1})
-                    thisFigure.referenceLayer_05.changeTextBox(thisFigure.optSel_05_03, i)
+                    // thisFigure.prevIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_05_04, {palette: 8, fillClr: 3, strokeClr: 1})
+                    thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_04, i)
                     // REFERENCE FIGURE STUFF  
                 }
 
