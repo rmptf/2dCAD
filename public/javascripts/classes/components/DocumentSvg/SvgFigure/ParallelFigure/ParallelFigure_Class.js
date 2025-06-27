@@ -413,7 +413,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS() //FIXME: for first and second arc closed ((SHAPE AAAA))
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 2, strokeClr: 1})
 
                         // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_01, {palette: 8, fillClr: 1, strokeClr: 1})
                         thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_01, i)
@@ -422,7 +422,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_THRIDS_plplplplplplplp() //FIXME: for first arc closed, ((SHAPE BBBB))
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
+                        thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 2, strokeClr: 1})
 
                         // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_02, {palette: 8, fillClr: 1, strokeClr: 1})
                         thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_02, i)
@@ -432,7 +432,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                     // REFERENCE FIGURE STUFF
-                    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
+                    thisFigure.nextIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 2, strokeClr: 1})
 
                     // thisFigure.nextIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_03_03, {palette: 8, fillClr: 1, strokeClr: 1})
                     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_03, i)
@@ -442,7 +442,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
             //TODO: Add this to all functions
             // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'green', true)
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1][0], thisFigure.parallelFigurePathDatas[i-1][1], 'orange', true)
         }
 
         else if(thisFigure.skipped_indecies.includes(i)) {
@@ -453,11 +453,16 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // This i is skipped / This i equals 1 (is this first or second? first usually = 0)
                 // All previous paths have been eliminated this is most current path, moves first end point to current path start
             if(i === 1) {
+                console.log("POOPER_01")
+                console.log("POOPER_01")
+                console.log("POOPER_01")
+                console.log("POOPER_01")
+                
                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                 THISPathData.interSectionSorter.allPreviousPathsSkipped_setFirstEndPointAtCurrentFirstPathStart()
 
                 // REFERENCE FIGURE STUFF
-                thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
+                thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 1, strokeClr: 1})
 
                 // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
                 thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01, i)
@@ -476,7 +481,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 1, strokeClr: 1})
 
                         // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
                         thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
@@ -488,7 +493,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 1, strokeClr: 1})
 
                         // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
                         thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
@@ -501,7 +506,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
                         // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 1, strokeClr: 1})
 
                         // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
                         thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
@@ -513,9 +518,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
             //TODO: Add this to all functions
             // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], null,  null, 'white', false)
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], null,  null, 'yellow', false)
 
-        } 
+        }
 
         else if(i === thisFigure.skipped_indecies[thisFigure.skipped_indecies.length - 1] + 1) {
             console.log("PREVIOUS_SKIPPED_THIS_IS_FOLLOWING_INDEX: NEW_SKIPPER")
@@ -538,7 +543,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
                 if(thisFigure.skipped_indecies[0] === 1) {
                     if(i === 4) { //FIXME: hardcoded
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed()
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheFourthPos()
 
                         // REFERENCE FIGURE STUFF
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_01, {palette: 8, fillClr: 3, strokeClr: 1})
@@ -547,7 +552,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_01, i)
                         // REFERENCE FIGURE STUFF  
                     } else if(i === 3) { //FIXME: hardcoded
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_SECOND()
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheThirdPos()
 
                         // REFERENCE FIGURE STUFF
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_02, {palette: 8, fillClr: 3, strokeClr: 1})
@@ -556,7 +561,12 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_02, i)
                         // REFERENCE FIGURE STUFF  
                     } else if(i === 2) { //FIXME: hardcoded
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed__THIRD_secondPos()
+                        console.log("POOPER_02")
+                        console.log("POOPER_02")
+                        console.log("POOPER_02")
+                        console.log("POOPER_02")
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheSecondPos()
+                        // customIntersection_A2A_firstArcSegmentClosed__THIRD_secondPos
 
                         // REFERENCE FIGURE STUFF
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_05_03, {palette: 8, fillClr: 3, strokeClr: 1})
@@ -599,7 +609,12 @@ function mouseMoveDrawParallel(event, thisFigure) {
             console.log("parPathDatas[i-1+skippedIndeciesLength]")
             console.log(thisFigure.parallelFigurePathDatas[i-1+skippedIndeciesLength])
 
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-skippedIndeciesLength][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
+
+            //TODO: build a skiper adder to calculater where the skipped index is in relation to i
+            let skipperAdder
+            
+            //FIXME: hardcoded to work for shape f5 only
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-0-skippedIndeciesLength][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
 
         }
 
@@ -619,7 +634,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
             }
 
             // REFERENCE FIGURE STUFF
-            thisFigure.referenceLayer_06.fillCheckBox(thisFigure.optSel_06_01, {palette: 8, fillClr: 2, strokeClr: 1})
+            thisFigure.referenceLayer_06.fillCheckBox(thisFigure.optSel_06_01, {palette: 8, fillClr: 5, strokeClr: 1})
 
             // thisFigure.referenceLayer_06.toggleCheckBox(thisFigure.optSel_06_01, {palette: 8, fillClr: 2, strokeClr: 1})
             thisFigure.referenceLayer_06.changeTextBox(thisFigure.optSel_06_01, i)
