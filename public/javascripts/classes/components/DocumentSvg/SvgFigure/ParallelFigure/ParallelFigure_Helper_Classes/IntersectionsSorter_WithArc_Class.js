@@ -240,10 +240,19 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_twoArcsClosedNEXT =
 // SHAPE 04_A_firstArcClosed
 IntersectionsSorter_WithArc.prototype.allPreviousPathsSkipped_setFirstEndPointAtCurrentFirstPathStart = function() {
     console.log("NEWNEW_01_PART_01_________________________________")
+
+    //worki g for index 0 start
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
     this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
     this.IntersectionHandler.arcIntersection_firstArcSegment_fistIndex()
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
+
+
+    // this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() //2
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() //2
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() //2
+    // this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //2
+    // this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //2
 }
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
@@ -302,15 +311,17 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     //TODO: Add new stuff here!!
     //FIXME: i dont remember how to make these things work, have to remember and should be easy to get going
 
+
+    // woring for index 0 end and index 1 start
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() //2
+
+    this.IntersectionHandler.arcIntersection_firstArcSegment_everyIndex_firstAction()
+
     
-    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction()
-    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction()
-    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected()
-    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction()
-    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction()
-
-
-
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() //2
+    this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() //2
+    this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_lastAction() //2
+    this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_lastAction() //2
 
 }
 // SHAPE 04_C_firstArcClosed
@@ -326,20 +337,20 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
 
 //...
 
-// 1
+// i: 1
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
 // 5_seg1                   // this.setPerpendicularPoints([0, 0], false)                                                           // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_firstArcSegment_fistIndex
 // FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll")      // this.checkIfArcIsClosed()                        // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)   
 
-// 2
+// i: 2
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 7_seg2_first_all         // this.setPerpendicularPoints([0, 0], true)                                                            // (prevPD.child_east & thisPD.child_west)                                              // arcIntersection_secondArcSegment_everyIndex_firstAction
 // 8_seg2_connected         // nothing                                                                                              // nothing                                                                              // arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected
 // 11_seg2_last_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST = -1                                         // no PD                                                                                // arcIntersection_secondArcSegment_everyIndex_lastAction
 // FINAL_all                // this.handleLargeArcFlag("arcFlag_finalAll") // this.checkIfArcIsClosed()                             // (prevPD.child_east) // (prevPD.child_east & thisPD.child_west)                       // arcIntersection_allArcSegments_everyIndex_lastAction
 
-// 3
+// i: 3
 // 1_all                    // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1 // this.setArcRadius(0)                  // no PD // (thisPD.child_east)                                                         // arcIntersection_allArcSegments_everyIndex_firstAction
 // 2_seg1_first_all         // this.parallelFigureObj.parallelPathSegmentCounter_FIRST + 1                                          // no PD                                                                                // arcIntersection_firstArcSegment_everyIndex_firstAction
 // 3_seg1                   // this.handleIntersectionWithArc('a2a')                                                                // (prevPD.child_east #2 & thisPD.child_west #3)                                        // arcIntersection_firstArcSegment_notFistIndex_prevIndexIsArc

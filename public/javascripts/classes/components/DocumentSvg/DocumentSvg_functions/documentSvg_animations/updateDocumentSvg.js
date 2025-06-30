@@ -29,7 +29,7 @@ function updateSVG_thisSvgFigure(figure) {
 }
 
 // 123-4 X
-// 132-4 X newF1
+// 132-4 X newF1 (1 and 3 not connected so actually have to create 2 skippedIndecie arrays and make that work)
 
 // 213-4 * F2
 // 231-4 * F1
@@ -548,6 +548,8 @@ function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSin
     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
     let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
 
+    // console.log("POOOOPER_____________________________")
+    // console.log(parallelPathDatas)
     // PARALLEL END POINTS
     let endPoints = figure.svgEndPoints
     let k = -1
@@ -557,7 +559,10 @@ function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSin
             endPoints[k].svgElementObject
                 .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
 
-            refFig[i].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
+            // refFig[i].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
+            // console.log("Pooooporpeorpeorpeorpe_______+_+_+_+_+_+_+_+_+_")
+            // console.log(i)
+            // console.log(j)
         }
     }
     // PARALLEL END POINTS

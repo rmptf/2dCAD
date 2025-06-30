@@ -308,7 +308,7 @@ Intersection_Contact.prototype.handleAllIntersections = function(shape) {
 
     if(intersectPoint) {
         if(intersectPoint[0].doesIntersect === false) {
-            console.log("CURRENT_DISCONNECTING")
+            console.log("CURRENT_DISCONNECTING_____________________________________________________________")
             // this.PARFIGURE.IntersectionsSorter_WithArc.IntersectionHandler.intersectionHandlerObject.isIntersectionConnected = false // FIXME: might need to update same way index is updated
             this.intersectionIsConnected.isIntersectionConnected = false
             switch (shape) {

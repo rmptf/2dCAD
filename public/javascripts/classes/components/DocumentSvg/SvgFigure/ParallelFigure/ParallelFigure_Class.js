@@ -453,10 +453,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // This i is skipped / This i equals 1 (is this first or second? first usually = 0)
                 // All previous paths have been eliminated this is most current path, moves first end point to current path start
             if(i === 1) {
-                console.log("POOPER_01")
-                console.log("POOPER_01")
-                console.log("POOPER_01")
-                console.log("POOPER_01")
                 
                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                 THISPathData.interSectionSorter.allPreviousPathsSkipped_setFirstEndPointAtCurrentFirstPathStart()
@@ -518,7 +514,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
             //TODO: Add this to all functions
             // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], null,  null, 'yellow', false)
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], null,  null, 'none', false)
 
         }
 
@@ -542,6 +538,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // THISPathData.interSectionSorter.sortIntersections_NEW(false)
 
                 if(thisFigure.skipped_indecies[0] === 1) {
+
                     if(i === 4) { //FIXME: hardcoded
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheFourthPos()
 
@@ -561,10 +558,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         thisFigure.prevIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_05_02, i)
                         // REFERENCE FIGURE STUFF  
                     } else if(i === 2) { //FIXME: hardcoded
-                        console.log("POOPER_02")
-                        console.log("POOPER_02")
-                        console.log("POOPER_02")
-                        console.log("POOPER_02")
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheSecondPos()
                         // customIntersection_A2A_firstArcSegmentClosed__THIRD_secondPos
 
@@ -594,28 +587,61 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
 
             let skippedIndeciesLength = thisFigure.skipped_indecies.length
-            console.log('i')
-            console.log(i)
-            console.log('i-1')
-            console.log(i-1)
+            // console.log('i')
+            // console.log(i)
+            // console.log('i-1')
+            // console.log(i-1)
 
-            console.log('skippedIndecieLengh')
-            console.log(skippedIndeciesLength)
-            console.log('i-1+skippedIndeciesLength')
-            console.log(i-1+skippedIndeciesLength)
+            // console.log('skippedIndecieLengh')
+            // console.log(skippedIndeciesLength)
+            // console.log('i-1+skippedIndeciesLength')
+            // console.log(i-1+skippedIndeciesLength)
 
-            console.log("parPathDatas")
-            console.log(thisFigure.parallelFigurePathDatas)
-            console.log("parPathDatas[i-1+skippedIndeciesLength]")
-            console.log(thisFigure.parallelFigurePathDatas[i-1+skippedIndeciesLength])
+            // console.log("parPathDatas")
+            // console.log(thisFigure.parallelFigurePathDatas)
+            // console.log("parPathDatas[i-1+skippedIndeciesLength]")
+            // console.log(thisFigure.parallelFigurePathDatas[i-1+skippedIndeciesLength])
 
 
-            //TODO: build a skiper adder to calculater where the skipped index is in relation to i
-            let skipperAdder
+
+            let skipperAdder = 0
+            thisFigure.skipped_indecies.forEach(index => {
+                // console.log("CHECKKIINGNGNGNGNGNGNGN")
+                // console.log('thisFigure.skipped_indecies')
+                // console.log(thisFigure.skipped_indecies)
+                // console.log('i')
+                // console.log(i)
+                // console.log('index')
+                // console.log(index)
+                // console.log('skippedIndeciesLength')
+                // console.log(skippedIndeciesLength)
+                // if(index > i-1){
+                // if(index > 1) {
+                if(skippedIndeciesLength === 1 && index === 1) {
+                    // console.log("FIRST_ONE_SKIPPED_NOT_ADDED")
+                    // skipperAdder = skipperAdder + 1
+                    skipperAdder = 0
+                    // skipperAdder = 1
+                    // skipperAdder = 2
+                    // skipperAdder = 3
+                // } else if(thisFigure.skipped_indecies.length > 0) {
+                //     console.log("REGULAR_ADDED")
+                //     skipperAdder = skipperAdder + 1
+                // } else {
+                //     console.log('NOTADDED')
+                // }
+                } else {
+                    skipperAdder = 2
+                }
+            })
+            // console.log('skipperAdder')
+            // console.log(skipperAdder)
+
             
             //FIXME: hardcoded to work for shape f5 only
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-0-skippedIndeciesLength][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
-
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-skippedIndeciesLength][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
+            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-skipperAdder][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
+            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-0][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
         }
 
         else {

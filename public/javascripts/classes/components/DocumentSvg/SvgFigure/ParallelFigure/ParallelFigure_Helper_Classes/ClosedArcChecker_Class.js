@@ -34,6 +34,7 @@ ClosedArcChecker.prototype.setIndex = function(index, subFigureSkipperIndexModif
     this.index = index
     this.skipperIndexMods = subFigureSkipperIndexModifiers
     this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier //FIXME: specifically this one
+    // this.previousIndex = this.index + 0 + 0 //FIXME: specifically this one
     this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
     this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
     // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
@@ -57,6 +58,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
     let parallelEndPoint_start = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
     let parallelEndPoint_end = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_east
     let parallelEndPoint_end_next = this.thisOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    // let referencFigureIndex = "Run_All" // REFERENCE FIGURE STUFF
     let referencFigureIndex = 1 // REFERENCE FIGURE STUFF
 
     if(this.functionRunning_firstCycle === true) {
@@ -65,21 +67,21 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
 
 
         // REFERENCE FIGURE STUFF
-        if(this.index === referencFigureIndex) {
+        if(this.index === referencFigureIndex || referencFigureIndex === "Run_All") {
 
             let svgFigure = this.PARFIGURE.svgFigure
-            this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, false)
-            this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-            this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, false)
-            this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 15, fillClr: 1}, 1)
-            this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig01 = new ReferenceFigure(svgFigure, true)
+            this.referenceFigure_largeDot_01_fig01.addCircle({palette: 1, circRad: 10, fillClr: 1}, 1)
+            this.referenceFigure_largeDot_02_fig01 = new ReferenceFigure(svgFigure, true)
+            this.referenceFigure_largeDot_02_fig01.addCircle({palette: 1, circRad: 10, fillClr: 1}, 1)
+            this.referenceFigure_dottedLine_01_fig01 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_dottedLine_01_fig01.addLine({palette: 1, strkWdth: 1, strkClr: 1, dshArray: 2})
 
-            this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, false)
-            this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-            this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, false)
-            this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 15, fillClr: 3}, 1)
-            this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, false)
+            this.referenceFigure_largeDot_01_fig02 = new ReferenceFigure(svgFigure, true)
+            this.referenceFigure_largeDot_01_fig02.addCircle({palette: 1, circRad: 10, fillClr: 3}, 1)
+            this.referenceFigure_largeDot_02_fig02 = new ReferenceFigure(svgFigure, true)
+            this.referenceFigure_largeDot_02_fig02.addCircle({palette: 1, circRad: 10, fillClr: 3}, 1)
+            this.referenceFigure_dottedLine_01_fig02 = new ReferenceFigure(svgFigure, true)
             this.referenceFigure_dottedLine_01_fig02.addLine({palette: 1, strkWdth: 1, strkClr: 3, dshArray: 2})
         }
         // REFERENCE FIGURE STUFF
@@ -99,7 +101,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
         this.referenceFigure_dottedLine_01_fig02
     ]
     let checkForFigureAndRunAFunction = (pos1, pos2, figure) => figures.length > 0 ? figures[figure].changeCircleColor(pos1, pos2) : null
-    if(this.index === referencFigureIndex) {
+    if(this.index === referencFigureIndex || referencFigureIndex === "Run_All") {
         figures[0].runFunctions([this.endPoints_origPosStart])
         figures[1].runFunctions([[parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
         figures[2].runFunctions([this.endPoints_origPosStart, [parallelEndPoint_start.coords.x, parallelEndPoint_start.coords.y]])
@@ -117,7 +119,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
 
 
             // REFERENCE FIGURE STUFF
-            if(this.index === referencFigureIndex) {
+            if(this.index === referencFigureIndex || referencFigureIndex === "Run_All") {
                 checkForFigureAndRunAFunction(1, 2, 0)
                 checkForFigureAndRunAFunction(1, 2, 1)
                 checkForFigureAndRunAFunction(3, 4, 3)
@@ -150,7 +152,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
 
 
             // REFERENCE FIGURE STUFF
-            if(this.index === referencFigureIndex) {
+            if(this.index === referencFigureIndex || referencFigureIndex === "Run_All") {
                 checkForFigureAndRunAFunction(2, 1, 0)
                 checkForFigureAndRunAFunction(2, 1, 1)
                 checkForFigureAndRunAFunction(4, 3, 3)
