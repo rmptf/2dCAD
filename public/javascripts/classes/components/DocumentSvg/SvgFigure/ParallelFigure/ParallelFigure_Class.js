@@ -470,46 +470,46 @@ function mouseMoveDrawParallel(event, thisFigure) {
             let lastArcIndex = thisFigure.originalFigurePathDatas.length - 1
             let skippedArcWithHighestIndex = skippedIndecies[skippedIndecies.length - 1];
 
-            if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
-                if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
-                    if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc (shape 3: [i-1][0], [i-1][0])
-                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
+            // if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
+            //     if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
+            //         if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc (shape 3: [i-1][0], [i-1][0])
+            //             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+            //             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
-                        // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 1, strokeClr: 1})
+            //             // REFERENCE FIGURE STUFF
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
-                        // REFERENCE FIGURE STUFF
+            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
+            //             // REFERENCE FIGURE STUFF
 
-                    } else { // Current skipped arc index IS NOT final arc
-                        if(i === thisFigure.currentSkippedIndex + 0) { //(shape 4: [i-1][0], [i-1][0])
-                            let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                            THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
+            //         } else { // Current skipped arc index IS NOT final arc
+            //             if(i === thisFigure.currentSkippedIndex + 0) { //(shape 4: [i-1][0], [i-1][0])
+            //                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+            //                 THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
-                        // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 1, strokeClr: 1})
+            //             // REFERENCE FIGURE STUFF
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
-                        // REFERENCE FIGURE STUFF
-                        }
-                    }
-                } else { // More than the first index not skipped
-                    if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped (shape 5: [i-1][0], [i-1][0])
-                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
+            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
+            //             // REFERENCE FIGURE STUFF
+            //             }
+            //         }
+            //     } else { // More than the first index not skipped
+            //         if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped (shape 5: [i-1][0], [i-1][0])
+            //             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+            //             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
-                        // REFERENCE FIGURE STUFF
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 1, strokeClr: 1})
+            //             // REFERENCE FIGURE STUFF
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 1, strokeClr: 1})
 
-                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
-                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
-                        // REFERENCE FIGURE STUFF
-                    }
-                }
-            }
+            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
+            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
+            //             // REFERENCE FIGURE STUFF
+            //         }
+            //     }
+            // }
             // NEW STUFF WORKING
 
             //TODO: Add this to all functions
