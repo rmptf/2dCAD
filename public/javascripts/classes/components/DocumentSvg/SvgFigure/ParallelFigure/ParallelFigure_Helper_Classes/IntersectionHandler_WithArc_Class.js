@@ -263,6 +263,12 @@ IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_n
     this.setThisPathDataAsPreviousPathData()
 }
 
+IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc_OPPOSITE = function() {
+    // 6_A
+    console.log("6_A_seg1: joineronly_OPPOSITE")
+    this.setThisPathDataAsPreviousPathData_OPPOSITE()
+}
+
 IntersectionHandler_WithArc.prototype.arcIntersection_firstArcSegment_anyIndex_nextIndexIsNoArc = function() {
     // 6_B
     console.log("6_B_seg1")
@@ -748,6 +754,56 @@ IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData = functi
     // console.log(prevParallelPathData)
     // console.log(thisParallelPathData)
 }
+
+
+//FIXME: NEWNEW
+IntersectionHandler_WithArc.prototype.setThisPathDataAsPreviousPathData_OPPOSITE = function() {
+    let prevParallelPathData = this.previousOriginalFigurePathData().children.parallel_pathDatas.pathData_west
+    let prevOrigPathData = this.previousOriginalFigurePathData()
+    let thisParallelPathData = this.thisOriginalFigurePathData()
+    let thisOrigPathData = this.thisOriginalFigurePathData()
+
+    let pooperPREV = this.originalFigurePathDatas[0].children.parallel_pathDatas.pathData_west
+    let pooperTHIS = this.originalFigurePathDatas[1].children.parallel_pathDatas.pathData_west
+
+        Object.assign(pooperPREV.coords, pooperTHIS.coords)
+
+
+
+
+    // if(thisParallelPathData.arc.joiner) {
+    //     // Object.assign(thisParallelPathData.coords, prevParallelPathData.coords)
+    //     Object.assign(prevParallelPathData.coords, thisParallelPathData.coords)
+    // }
+
+    //FIXME: RIGHT HERE (fixed but keep for other shapes)
+    console.log("FIGUREITOUT__________________")
+
+    console.log("prev_ppd")
+    console.log(prevParallelPathData)
+    console.log("this_ppd")
+    console.log(thisParallelPathData)
+
+    console.log("prev_opd")
+    console.log(prevOrigPathData)
+    console.log("this_opd")
+    console.log(thisOrigPathData)
+
+
+    console.log("SKIPPER_INDEX")
+    console.log(this.skipperIndexMods)
+    console.log("ORIGINALPATHDATAS")
+    console.log(this.originalFigurePathDatas)
+    console.log(this.originalFigurePathDatas)
+
+    console.log("prev_ppd")
+    console.log(pooperPREV)
+    console.log("this_ppd")
+    console.log(pooperTHIS)
+}
+
+
+
 
 // TODO: (in two places at once rn, find a place for it)
 // Write a good comment to describe this function
