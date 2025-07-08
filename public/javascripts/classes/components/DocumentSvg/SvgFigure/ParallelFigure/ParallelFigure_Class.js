@@ -470,46 +470,46 @@ function mouseMoveDrawParallel(event, thisFigure) {
             let lastArcIndex = thisFigure.originalFigurePathDatas.length - 1
             let skippedArcWithHighestIndex = skippedIndecies[skippedIndecies.length - 1];
 
-            // if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
-            //     if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
-            //         if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc (shape 3: [i-1][0], [i-1][0])
-            //             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-            //             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
+            if (!skippedIndecies.includes(1)) { //check that this shape isnt f1 or f2
+                if(skippedIndecies.length === thisFigure.originalFigurePathDatas.length - 2) { // All indecies except first are skipped
+                    if(thisFigure.currentSkippedIndex === lastArcIndex) { // Current skipped arc index IS final arc (shape 3: [i-1][0], [i-1][0])
+                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD() //RUN DIFFERENT ON SHAPE 
 
-            //             // REFERENCE FIGURE STUFF
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 1, strokeClr: 1})
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 1, strokeClr: 1})
 
-            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
-            //             // REFERENCE FIGURE STUFF
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_02, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, i)
+                        // REFERENCE FIGURE STUFF
 
-            //         } else { // Current skipped arc index IS NOT final arc
-            //             if(i === thisFigure.currentSkippedIndex + 0) { //(shape 4: [i-1][0], [i-1][0])
-            //                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-            //                 THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
+                    } else { // Current skipped arc index IS NOT final arc
+                        if(i === thisFigure.currentSkippedIndex + 0) { //(shape 4: [i-1][0], [i-1][0])
+                            let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                            THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD_PSDFPSDFSDFSDFSDFS() //RUN DIFFERENT ON SHAPE 5     
 
-            //             // REFERENCE FIGURE STUFF
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 1, strokeClr: 1})
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 1, strokeClr: 1})
 
-            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
-            //             // REFERENCE FIGURE STUFF
-            //             }
-            //         }
-            //     } else { // More than the first index not skipped
-            //         if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped (shape 5: [i-1][0], [i-1][0])
-            //             let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
-            //             THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_03, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, i)
+                        // REFERENCE FIGURE STUFF
+                        }
+                    }
+                } else { // More than the first index not skipped
+                    if(lastArcIndex === skippedArcWithHighestIndex) { // Last index is skipped (shape 5: [i-1][0], [i-1][0])
+                        let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
+                        THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_popoppopopoDODODODOD()
 
-            //             // REFERENCE FIGURE STUFF
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 1, strokeClr: 1})
+                        // REFERENCE FIGURE STUFF
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 1, strokeClr: 1})
 
-            //             // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
-            //             thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
-            //             // REFERENCE FIGURE STUFF
-            //         }
-            //     }
-            // }
+                        // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_04, {palette: 8, fillClr: 2, strokeClr: 1})
+                        thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_04, i)
+                        // REFERENCE FIGURE STUFF
+                    }
+                }
+            }
             // NEW STUFF WORKING
 
             //TODO: Add this to all functions
@@ -522,7 +522,27 @@ function mouseMoveDrawParallel(event, thisFigure) {
             console.log("PREVIOUS_SKIPPED_THIS_IS_FOLLOWING_INDEX: NEW_SKIPPER")
             console.log(thisFigure.originalFigurePathDatas[i])
 
+
+
+
+
+            //old
             subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+
+            //new
+            //FIXME: this works for the new shape when 1 is skipped, messes up all old shapes so need to fix their way of working next
+            //FIXME:
+            //FIXME:
+            //FIXME:
+            // This checks if skipped indecies starts at the first position in which case you do not need to skip anything so a new variable is created based on that
+                // check and is either set to 0 if skipped indecies starts at the first position, or set at the lenth of skippped Indecies if it doesnt
+                    //Only handled here, dont need to change anything in closedArcChecker
+                    // Have to fix previous shapes to work with this way of working
+            // subFigureSkipperIndexModifiers.previousIndexModifier = thisFigure.skipped_indecies[0] === 1 ? 0 : -thisFigure.skipped_indecies.length
+            //FIXME:
+            //FIXME:
+            //FIXME:
+
             subFigureSkipperIndexModifiers.subFigureIndex = thisFigure.skipped_indecies
 
             if (thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east.arc.exist === true) {
@@ -583,65 +603,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // diffCounter = diffCounter + 1
             }
 
-            //TODO: Add this to all functions
-            // This runs UpdateSvg after each iteration INSIDE each sorter (This is what you plug into each sorter and you plug in each pd)
-
-            let skippedIndeciesLength = thisFigure.skipped_indecies.length
-            // console.log('i')
-            // console.log(i)
-            // console.log('i-1')
-            // console.log(i-1)
-
-            // console.log('skippedIndecieLengh')
-            // console.log(skippedIndeciesLength)
-            // console.log('i-1+skippedIndeciesLength')
-            // console.log(i-1+skippedIndeciesLength)
-
-            // console.log("parPathDatas")
-            // console.log(thisFigure.parallelFigurePathDatas)
-            // console.log("parPathDatas[i-1+skippedIndeciesLength]")
-            // console.log(thisFigure.parallelFigurePathDatas[i-1+skippedIndeciesLength])
-
-
-
-            let skipperAdder = 0
-            thisFigure.skipped_indecies.forEach(index => {
-                // console.log("CHECKKIINGNGNGNGNGNGNGN")
-                // console.log('thisFigure.skipped_indecies')
-                // console.log(thisFigure.skipped_indecies)
-                // console.log('i')
-                // console.log(i)
-                // console.log('index')
-                // console.log(index)
-                // console.log('skippedIndeciesLength')
-                // console.log(skippedIndeciesLength)
-                // if(index > i-1){
-                // if(index > 1) {
-                if(skippedIndeciesLength === 1 && index === 1) {
-                    // console.log("FIRST_ONE_SKIPPED_NOT_ADDED")
-                    // skipperAdder = skipperAdder + 1
-                    skipperAdder = 0
-                    // skipperAdder = 1
-                    // skipperAdder = 2
-                    // skipperAdder = 3
-                // } else if(thisFigure.skipped_indecies.length > 0) {
-                //     console.log("REGULAR_ADDED")
-                //     skipperAdder = skipperAdder + 1
-                // } else {
-                //     console.log('NOTADDED')
-                // }
-                } else {
-                    skipperAdder = 2
-                }
-            })
-            // console.log('skipperAdder')
-            // console.log(skipperAdder)
-
-            
-            //FIXME: hardcoded to work for shape f5 only
-            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-skippedIndeciesLength][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
-            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-skipperAdder][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
-            // thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1-0][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
+            thisFigure.parallelFigure_updateSvg_oneByOne_NO_ENDPOINTS_PASS_PD_1B1(thisFigure.svgPaths.parallelPaths[i-1], thisFigure.parallelFigurePathDatas[i-1+subFigureSkipperIndexModifiers.previousIndexModifier][0], thisFigure.parallelFigurePathDatas[i-1][1], 'red', true)
         }
 
         else {

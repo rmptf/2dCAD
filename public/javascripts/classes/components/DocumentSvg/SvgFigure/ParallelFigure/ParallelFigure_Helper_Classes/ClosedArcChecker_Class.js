@@ -34,7 +34,6 @@ ClosedArcChecker.prototype.setIndex = function(index, subFigureSkipperIndexModif
     this.index = index
     this.skipperIndexMods = subFigureSkipperIndexModifiers
     this.previousIndex = this.index + 0 + subFigureSkipperIndexModifiers.previousIndexModifier //FIXME: specifically this one
-    // this.previousIndex = this.index + 0 + 0 //FIXME: specifically this one
     this.thisIndex = this.index + 1 + subFigureSkipperIndexModifiers.currentIndexModifier 
     this.nextIndex = this.index + 2 + subFigureSkipperIndexModifiers.nextIndexModifier
     // FIXME: THIS is what causes ONE closed arc second (after) arc closed not to work
@@ -130,10 +129,16 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
 
             this.arcHasClosed_firstCycle = false
             this.arcHasOpened_firstCycle = true
-            this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
-            this.PARFIGURE.skipped_indecies.push(this.index + 1)
-            this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
-            this.PARFIGURE.currentSkippedIndex = this.index + 1
+            // if(this.index !== 0) {
+                this.PARFIGURE.skipped_indecies_NOT_ORDERED.push(this.index + 1)
+                this.PARFIGURE.skipped_indecies.push(this.index + 1)
+                this.PARFIGURE.skipped_indecies.sort((a, b) => a - b)  // Sorts in ascending order // FIXME: try to eliminate this
+                this.PARFIGURE.currentSkippedIndex = this.index + 1
+            // }
+
+            console.log("CLOSED_ASSSSSSS_____________________")
+            console.log(this.index)
+
 
             console.log(parallelEndPoint_end)
             console.log(parallelEndPoint_end_next)

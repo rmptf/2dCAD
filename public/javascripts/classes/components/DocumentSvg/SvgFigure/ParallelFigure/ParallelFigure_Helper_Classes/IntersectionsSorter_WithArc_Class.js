@@ -306,7 +306,7 @@ IntersectionsSorter_WithArc.prototype.customIntersection_A2A_firstArcSegmentClos
     this.IntersectionHandler.arcIntersection_allArcSegments_everyIndex_firstAction() //2    
     this.IntersectionHandler.arcIntersection_secondArcSegment_everyIndex_firstAction() //2
 
-    this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc_OPPOSITE() //NEW
+    // this.IntersectionHandler.arcIntersection_firstArcSegment_anyIndex_nextIndexIsArc_OPPOSITE() //NEW
 
 
     this.IntersectionHandler.arcIntersection_secondArcSegment_notLastIndex_nextIndexIsArc_nextIndexIntersectionIsConnected() //2
