@@ -9,14 +9,15 @@ import {updateSVG_thisSvgParallelFigure_OLDWAY, updateSVG_thisSvgParallelFigure_
 import {IntersectionsSorter_WithArc, IntersectionsSorter_WithArc_Disconnected_cornerShape_01} from './ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js'
 import {IntersectionsSorter_NoArc} from './ParallelFigure_Helper_Classes/IntersectionsSorter_NoArc_Class.js'
 import {findParallelDistance, makeDeepCopy} from './parallelFigure_functions/parallelPathFunctions_NEW.js'
-import { ReferenceFigure } from '../ReferenceFigure/ReferenceFigure_Class.js'
-import { ReferenceLayer } from '../../../ReferenceLayer/ReferenceLayer_Class.js'
+import {ReferenceFigure} from '../ReferenceFigure/ReferenceFigure_Class.js'
+import {ReferenceLayer} from '../../../ReferenceLayer/ReferenceLayer_Class.js'
 
 function ParallelFigure(svgFigure, sectionIndex) {
     this.svgFigure = svgFigure
     this.SVGGROUPSDATA = {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
     }
+
 
     // Figure Data
     this.originalFigurePathDatas = svgFigure.svgPathDatas // can be a deep copy of svgFigure.svgPathDatas then can be manipulated however necisary and wont affect OriginalFigure
@@ -108,7 +109,12 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.referenceLaye_01 = new ReferenceLayer()
     this.referenceLaye_01.changeReferenceLayerHeader("Current_Skipped_Index")
     this.referenceLaye_01.repositionReferenceLayer([600,100])
-    this.optSel01_01 = this.referenceLaye_01.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+    this.optSel01_01 = this.referenceLaye_01.addOptionSelect("")
+
+    this.referenceLaye_02 = new ReferenceLayer()
+    this.referenceLaye_02.changeReferenceLayerHeader("Previous_Skipped_Index")
+    this.referenceLaye_02.repositionReferenceLayer([600,175])
+    this.optSel01_02 = this.referenceLaye_02.addOptionSelect("")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
@@ -323,13 +329,26 @@ function mouseMoveDrawParallel(event, thisFigure) {
         currentSkippedIndex: thisFigure.currentSkippedIndex,
         currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
     }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // NEWWAY: ORIGINALPathData Children)
     for (let i = 1; i < thisFigure.originalFigurePathDatas.length; i++) {
-
-    
-
         console.log("i: " + i)
         // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
         thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
@@ -527,7 +546,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
             //old
-            subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+            // subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
 
             //new
             //FIXME: this works for the new shape when 1 is skipped, messes up all old shapes so need to fix their way of working next
@@ -539,6 +558,35 @@ function mouseMoveDrawParallel(event, thisFigure) {
                     //Only handled here, dont need to change anything in closedArcChecker
                     // Have to fix previous shapes to work with this way of working
             // subFigureSkipperIndexModifiers.previousIndexModifier = thisFigure.skipped_indecies[0] === 1 ? 0 : -thisFigure.skipped_indecies.length
+
+            // // assign x based on two conditions checked in one ternary expression
+            // subFigureSkipperIndexModifiers.previousIndexModifier = 
+            // // condition: first element must equal 1 AND each element must equal its index+1
+            // (arr[0] === 1 && arr.every((n, i) => n === i + 1))
+            //     // if condition true → set x to 0
+            //     ? 0
+            //     // else → set x to the negative length of skipped_indecies
+            //     : -thisFigure.skipped_indecies.length
+
+
+
+            // this.referenceLaye_02 = new ReferenceLayer()
+            // this.referenceLaye_02.changeReferenceLayerHeader("Previous_Skipped_Index")
+            // this.referenceLaye_02.repositionReferenceLayer([600,200])
+            // this.optSel01_02 = this.referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
+
+            // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
+            subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : (-thisFigure.skipped_indecies.length + 1)
+
+            // thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
+            // thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
+
+            thisFigure.referenceLaye_02.changeLabel(subFigureSkipperIndexModifiers.skipped_indecies)
+            thisFigure.referenceLaye_02.changeTextBox(thisFigure.optSel01_02, subFigureSkipperIndexModifiers.previousIndexModifier)
+
+
+
+
             //FIXME:
             //FIXME:
             //FIXME:

@@ -136,7 +136,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
                 this.PARFIGURE.currentSkippedIndex = this.index + 1
             // }
 
-            console.log("CLOSED_ASSSSSSS_____________________")
+            console.log("CLOSED_ARC________________________")
             console.log(this.index)
 
 
