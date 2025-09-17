@@ -553,13 +553,21 @@ function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSin
     // PARALLEL END POINTS
     let endPoints = figure.svgEndPoints
     let k = -1
+
+    // REFERENCE FIGURE STUFF
+    refFig[0].runFunctions([[parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y]])
+    // REFERENCE FIGURE STUFF
+
     for (let i = 0; i < parallelPaths.length; i++) {
         for (let j = 0; j < parallelPathDatas[i].length; j++) {
             k = k + 1
             endPoints[k].svgElementObject
                 .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
 
-            // refFig[i].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
+            // REFERENCE FIGURE STUFF
+            refFig[i+1].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
+            // REFERENCE FIGURE STUFF
+
             // console.log("Pooooporpeorpeorpeorpe_______+_+_+_+_+_+_+_+_+_")
             // console.log(i)
             // console.log(j)
