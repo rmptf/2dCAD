@@ -136,8 +136,8 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
                 this.PARFIGURE.currentSkippedIndex = this.index + 1
             // }
 
-            console.log("CLOSED_ARC________________________")
-            console.log(this.index)
+            // console.log("CLOSED_ARC")
+            // console.log(this.index)
 
 
             console.log(parallelEndPoint_end)
@@ -148,7 +148,7 @@ ClosedArcChecker.prototype.checkIfArcIsClosed = function() {
                 parallelEndPoint_end_next.arc.hidden = true //FIXME: issue here
             }
 
-            console.log("CLOSED_ARC")
+            // console.log("CLOSED_ARC")
             //FIXME:
         }
     }

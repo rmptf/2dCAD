@@ -167,8 +167,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.referenceLayer_06 = new ReferenceLayer()
     this.referenceLayer_06.changeReferenceLayerHeader("Skipper_Function_Running")
     this.referenceLayer_06.repositionReferenceLayer([150,840])
-
-    this.optSel_06_01 = this.referenceLayer_06.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01")
+    this.optSel_06_01 = this.referenceLayer_06.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01") // NOT SURE WHAT THIS MEANS ANY MORE
     // REFERENCE LAYER STUFF
 }
 
@@ -472,7 +471,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 // This i is skipped / This i equals 1 (is this first or second? first usually = 0)
                 // All previous paths have been eliminated this is most current path, moves first end point to current path start
             if(i === 1) {
-                
+                // OKOKOKOKOK
                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
                 THISPathData.interSectionSorter.allPreviousPathsSkipped_setFirstEndPointAtCurrentFirstPathStart()
 
@@ -546,7 +545,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
             //old
-            // subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+            subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
 
             //new
             //FIXME: this works for the new shape when 1 is skipped, messes up all old shapes so need to fix their way of working next
@@ -576,7 +575,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // this.optSel01_02 = this.referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
 
             // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
-            subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : (-thisFigure.skipped_indecies.length + 1)
+            // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : (-thisFigure.skipped_indecies.length + 1)
 
             // thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
             // thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
@@ -608,6 +607,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                 if(thisFigure.skipped_indecies[0] === 1) {
 
                     if(i === 4) { //FIXME: hardcoded
+                        //OKOKOKOKOK
                         THISPathData.interSectionSorter.customIntersection_A2A_firstArcSegmentClosed_i_IsInTheFourthPos()
 
                         // REFERENCE FIGURE STUFF
