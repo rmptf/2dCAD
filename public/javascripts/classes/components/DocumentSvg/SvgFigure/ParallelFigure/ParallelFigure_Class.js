@@ -147,7 +147,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.thisIndexSkippedFunctions_ReferenceLayer = new ReferenceLayer()
     this.thisIndexSkippedFunctions_ReferenceLayer.changeReferenceLayerHeader("CURRENT_Skipper_Functions")
     this.thisIndexSkippedFunctions_ReferenceLayer.repositionReferenceLayer([150,400])
-    this.optSel_04_01 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__01")
+    this.optSel_04_01a = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED")
+    this.optSel_04_01 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_AND_EVERY_PREVIOUS_INDEX_SKIPPED")
     this.optSel_04_02 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__02")
     this.optSel_04_03 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__03")
     this.optSel_04_04 = this.thisIndexSkippedFunctions_ReferenceLayer.addOptionSelect("THIS_INDEX_SKIPPED_BUT_RUNNING__04")
@@ -165,9 +166,9 @@ function ParallelFigure(svgFigure, sectionIndex) {
 
     // REFERENCE LAYER STUFF
     this.referenceLayer_06 = new ReferenceLayer()
-    this.referenceLayer_06.changeReferenceLayerHeader("Skipper_Function_Running")
+    this.referenceLayer_06.changeReferenceLayerHeader("REGULAR_Function_Running")
     this.referenceLayer_06.repositionReferenceLayer([150,840])
-    this.optSel_06_01 = this.referenceLayer_06.addOptionSelect("PREVIOUS_INDEX_SKIPPED__01") // NOT SURE WHAT THIS MEANS ANY MORE
+    this.optSel_06_01 = this.referenceLayer_06.addOptionSelect("THIS_INDEX_NO_SKIPPERS") // NOT SURE WHAT THIS MEANS ANY MORE
     // REFERENCE LAYER STUFF
 }
 
@@ -263,6 +264,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_01)
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_02)
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_03_03)
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_01a)
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_01)
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_02)
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.emptyCheckBox(thisFigure.optSel_04_03)
@@ -275,6 +277,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_01, "_")
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_02, "_")
     thisFigure.nextIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_03_03, "_")
+    thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01a, "_")
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01, "_")
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_02, "_")
     thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_03, "_")
@@ -467,9 +470,14 @@ function mouseMoveDrawParallel(event, thisFigure) {
             console.log("SKIPPED_INDEX_DONT_RUN: NEW_SKIPPER")
             console.log(thisFigure.originalFigurePathDatas[i])
 
-            // What does this do?
-                // This i is skipped / This i equals 1 (is this first or second? first usually = 0)
-                // All previous paths have been eliminated this is most current path, moves first end point to current path start
+            // REFERENCE FIGURE STUFF
+            thisFigure.thisIndexSkippedFunctions_ReferenceLayer.fillCheckBox(thisFigure.optSel_04_01a, {palette: 8, fillClr: 1, strokeClr: 1})
+
+            // thisFigure.thisIndexSkippedFunctions_ReferenceLayer.toggleCheckBox(thisFigure.optSel_04_01, {palette: 8, fillClr: 2, strokeClr: 1})
+            thisFigure.thisIndexSkippedFunctions_ReferenceLayer.changeTextBox(thisFigure.optSel_04_01a, i)
+            // REFERENCE FIGURE STUFF
+
+            // All previous paths have been eliminated this is most current path, moves first end point to current path start
             if(i === 1) {
                 // OKOKOKOKOK
                 let THISPathData = thisFigure.originalFigurePathDatas[i].children.parallel_pathDatas.pathData_east
@@ -545,7 +553,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
             //old
-            subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+            // subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
 
             //new
             //FIXME: this works for the new shape when 1 is skipped, messes up all old shapes so need to fix their way of working next
@@ -574,14 +582,17 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // this.referenceLaye_02.repositionReferenceLayer([600,200])
             // this.optSel01_02 = this.referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
 
-            // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
+            subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
             // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : (-thisFigure.skipped_indecies.length + 1)
 
             // thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
             // thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
 
+
             thisFigure.referenceLaye_02.changeLabel(subFigureSkipperIndexModifiers.skipped_indecies)
+            // thisFigure.referenceLaye_02.changeLabel("pooooper")
             thisFigure.referenceLaye_02.changeTextBox(thisFigure.optSel01_02, subFigureSkipperIndexModifiers.previousIndexModifier)
+            // thisFigure.referenceLaye_02.changeTextBox(thisFigure.optSel01_02, "titter")
 
 
 
