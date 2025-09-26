@@ -407,6 +407,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
             currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         }
 
+        
         thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
         thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
 
