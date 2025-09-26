@@ -12,6 +12,7 @@ import {findParallelDistance} from './parallelFigure_functions/parallelPathFunct
 
 
 function ParallelFigure(svgFigure, sectionIndex) {
+    //newtest
     this.svgFigure = svgFigure
     this.SVGGROUPSDATA = {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],
