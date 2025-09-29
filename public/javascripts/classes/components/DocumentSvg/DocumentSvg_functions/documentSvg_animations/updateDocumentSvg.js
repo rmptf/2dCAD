@@ -28,23 +28,23 @@ function updateSVG_thisSvgFigure(figure) {
     // END POINTS
 }
 
-// 123-4 X
-// 132-4 X newF1 (1 and 3 not connected so actually have to create 2 skippedIndecie arrays and make that work)
+// 123-4 X newF6
+// 132-4 X newF1 ** skippedIndex NOT CONNECTED** (1 and 3 not connected so actually have to create 2 skippedIndecie arrays and make that work)
 
 // 213-4 * F2
 // 231-4 * F1
 
-// 312-4 X newF2
+// 312-4 X newF2  ** skippedIndex NOT CONNECTED*
 // 321-4 X newF3
 
-// 324-1 * F3
-// 342-1 * F4
+// 324-1 * F3  ** skippedIndex NOT CONNECTED*
+// 342-1 * F4  ** skippedIndex NOT CONNECTED*
 
 // 234-1 * newF4
-// 243-1 X newF5
+// 243-1 X newF5  ** skippedIndex NOT CONNECTED*
 
 // 432-1 X
-// 423-1 X
+// 423-1 X  ** skippedIndex NOT CONNECTED*
 
 // 1234
 // 1243
