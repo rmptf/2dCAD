@@ -69,7 +69,7 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.skipped_indecies = []
     this.skipped_indecies_NOT_ORDERED = []
     this.currentSkippedIndex = null
-    this.groupOfConsecutiveIndeciesCounter = 0
+    this.consecutiveIndexCounter = null
 
     //new (removed this)
     // this.IntersectionsSorter_WithArc = new IntersectionsSorter_WithArc(this)
@@ -108,13 +108,27 @@ function ParallelFigure(svgFigure, sectionIndex) {
     // REFERENCE LAYER STUFF
     this.referenceLaye_01 = new ReferenceLayer()
     this.referenceLaye_01.changeReferenceLayerHeader("Current_Skipped_Index")
-    this.referenceLaye_01.repositionReferenceLayer([600,100])
+    this.referenceLaye_01.repositionReferenceLayer([150,50])
     this.optSel01_01 = this.referenceLaye_01.addOptionSelect("")
 
     this.referenceLaye_02 = new ReferenceLayer()
     this.referenceLaye_02.changeReferenceLayerHeader("Previous_Skipped_Index")
-    this.referenceLaye_02.repositionReferenceLayer([600,175])
+    this.referenceLaye_02.repositionReferenceLayer([325,50])
     this.optSel01_02 = this.referenceLaye_02.addOptionSelect("")
+
+    this.referenceLaye_03 = new ReferenceLayer()
+    this.referenceLaye_03.changeReferenceLayerHeader("Skipped_Index_Consecutive_Groups")
+    this.referenceLaye_03.repositionReferenceLayer([540,50])
+    this.optSel01_03 = this.referenceLaye_03.addOptionSelect("")
+    this.referenceLaye_03.changeLabel("left_Label")
+    this.referenceLaye_03.changeTextBox(this.optSel01_03, "right_Content")
+
+    this.referenceLaye_04 = new ReferenceLayer()
+    this.referenceLaye_04.changeReferenceLayerHeader("Skipped_Index_Consecutive_Groups")
+    this.referenceLaye_04.repositionReferenceLayer([790,50])
+    this.optSel01_04 = this.referenceLaye_04.addOptionSelect("")
+    // this.referenceLaye_04.changeLabel("left_Label")
+    // this.referenceLaye_04.changeTextBox(this.optSel01_04, "right_Content")
     // REFERENCE LAYER STUFF
 
     // REFERENCE LAYER STUFF
@@ -255,6 +269,22 @@ ParallelFigure.prototype.setParallelFigureClickEvents = function(docSvgD3) {
     docSvgD3.on("click", mouseDownDrawParallel(docSvgD3, this.isDownDrawParallelActive, this))
 }
 
+ParallelFigure.prototype.countConsecutive = function(arr, startNum) {
+let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === startNum + count + 1) {
+            count++;
+        } else {
+            break;
+        }
+    }
+return count;
+}
+
+function countConsecutiveFromValue(arr, startNum) {
+
+}
+
 function mouseMoveDrawParallel(event, thisFigure) {
 
     //FIXME: build a clear all function inside Reference Layer Class because i will forget to turn off each checkbox every time i add a new one.
@@ -355,38 +385,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
         // thisFigure.IntersectionsSorter_WithArc.setIndices(i - 1)
         thisFigure.IntersectionsSorter_NoArc.setIndices(i - 1)
 
-        // // thisFigure.groupOfConsecutiveIndeciesCounter = 0
-        // let diffCounter = 0 //FIXME: i think this might work but cant check until more indecies
-        // let breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies = groupConsecutive(thisFigure.skipped_indecies)
-        // console.log("butthurt")
-        // console.log(breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies)
-        // // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[thisFigure.groupOfConsecutiveIndeciesCounter]
-        // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[diffCounter]
-        // // let currentGroupOfConsecutiveSkippedIndecies = breakSkippedIndeciesIntoGroupsOfConsecutiveIndecies[0]
-        // console.log(diffCounter)
-        // console.log(thisFigure.groupOfConsecutiveIndeciesCounter)
-        // console.log(currentGroupOfConsecutiveSkippedIndecies)
-
-        // function groupConsecutive(arr) {
-        //     arr.sort((a, b) => a - b); // Sort numbers
-        //     const result = []
-        //     let group = []
-          
-        //     for (let i = 0; i < arr.length; i++) {
-        //       if (group.length === 0 || arr[i] === arr[i - 1] + 1) {
-        //         group.push(arr[i])
-        //       } else {
-        //         result.push(group)
-        //         group = [arr[i]]
-        //       }
-        //     }
-          
-        //     if (group.length) result.push(group); // Add last group
-        //     return result;
-        //   }
-
-
-
         // //OLDWAY
         // let subFigureSkipperIndexModifiers = {
         //     previousIndexModifier: 0,
@@ -396,7 +394,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
         //     currentSkippedIndex: thisFigure.currentSkippedIndex,
         //     currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         // }
-
         //NEWWAY
         subFigureSkipperIndexModifiers = {
             previousIndexModifier: 0,
@@ -407,12 +404,28 @@ function mouseMoveDrawParallel(event, thisFigure) {
             currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
         }
 
-        
         thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
         thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
 
+        //if i = the index BEFORE the first index of skippedIndecies && if the first index of skippedIndecies DOESNT equal 0
         if(i === thisFigure.skipped_indecies[0] - 1 && thisFigure.skipped_indecies[0] !== 0) {  //FIXME: TODO: was an if else added that stopped this from running an ran regular for some reason
             console.log("NEXT_SKIPPED_THIS_IS_PREVIOUS_INDEX: NEW_SKIPPER")
+
+            // BUIDLING CONSECUTIVE_INDEX COUNTER
+            // BUIDLING CONSECUTIVE_INDEX COUNTER
+            let indexBEFOREfirstIndexOfSkippedIndecies = i
+            let consecutiveSkippedIndecies = thisFigure.countConsecutive(thisFigure.skipped_indecies, indexBEFOREfirstIndexOfSkippedIndecies)
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log(thisFigure.skipped_indecies)
+            console.log(indexBEFOREfirstIndexOfSkippedIndecies)
+            console.log(consecutiveSkippedIndecies)
+            // BUIDLING CONSECUTIVE_INDEX COUNTER
+            // BUIDLING CONSECUTIVE_INDEX COUNTER
 
             subFigureSkipperIndexModifiers.nextIndexModifier = thisFigure.skipped_indecies.length // causes issues with random shapes... do i need?
             subFigureSkipperIndexModifiers.subFigureIndex = thisFigure.skipped_indecies
@@ -554,7 +567,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
 
             //old
-            // subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
+            subFigureSkipperIndexModifiers.previousIndexModifier = -thisFigure.skipped_indecies.length
 
             //new
             //FIXME: this works for the new shape when 1 is skipped, messes up all old shapes so need to fix their way of working next
@@ -583,7 +596,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // this.referenceLaye_02.repositionReferenceLayer([600,200])
             // this.optSel01_02 = this.referenceLaye_02.addOptionSelect("NEW_NAME_OF_FUNCTION_01")
 
-            subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
+            // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : -thisFigure.skipped_indecies.length
             // subFigureSkipperIndexModifiers.previousIndexModifier = (thisFigure.skipped_indecies[0] === 1 && thisFigure.skipped_indecies.every((n, i) => n === i + 1)) ? 0 : (-thisFigure.skipped_indecies.length + 1)
 
             // thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
