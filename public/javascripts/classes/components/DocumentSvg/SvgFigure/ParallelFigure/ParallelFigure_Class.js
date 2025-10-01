@@ -69,6 +69,8 @@ function ParallelFigure(svgFigure, sectionIndex) {
     this.skipped_indecies = []
     this.skipped_indecies_NOT_ORDERED = []
     this.currentSkippedIndex = null
+    this.consecutiveSkippedIndeciesGrouped = []
+    this.currentConsecutiveSkippedIndecies = null
     this.consecutiveIndexCounter = null
 
     //new (removed this)
@@ -361,6 +363,83 @@ function mouseMoveDrawParallel(event, thisFigure) {
         currentSkippedIndex: thisFigure.currentSkippedIndex,
         currentSkippedIndex_NOT_ORDERED: thisFigure.skipped_indecies_NOT_ORDERED
     }
+
+
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+
+        let testArray = [1,2,3,4,5,9,11,12,14,15,16,25,40,52,53,54]
+        let secondTestArray = [1,2,3,4,6,7,8,10,15,20,30,31,32,33,34]
+        thisFigure.consecutiveSkippedIndeciesGrouped = groupConsecutive(secondTestArray) //thisFigure.skipped_indecies
+
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log("SORTER")
+        console.log(thisFigure.consecutiveSkippedIndeciesGrouped)
+
+        function groupConsecutive(arr) {
+            if (arr.length === 0) return []
+
+            const result = []
+            let currentGroup = [arr[0]]
+
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] === arr[i - 1] + 1) {
+                    currentGroup.push(arr[i])
+                } else {
+                    result.push(currentGroup)
+                    currentGroup = [arr[i]]
+                }
+            }
+
+            result.push(currentGroup)
+            return result
+        }
+
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // loop through the line segments
+        // for (let i = 1; i < 35; i++) {
+            // loop through the skipped index consecutive groups
+            for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
+                let f = thisFigure.consecutiveSkippedIndeciesGrouped[j].length -1
+
+                console.log(thisFigure.consecutiveSkippedIndeciesGrouped[j])
+                console.log(f)
+                console.log(thisFigure.consecutiveSkippedIndeciesGrouped[j][f])
+                console.log("")
+                for (let i = 1; i < 35; i++) {
+                    if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
+                        console.log(i)
+                        console.log("")
+                        console.log("")
+                    }
+                }
+                // if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
+                //     // thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
+
+                //     console.log(i)
+                //     console.log(thisFigure.currentConsecutiveSkippedIndecies)
+                // }
+            }
+        // }
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+
+
+        
+        // [[1,2,3], [4], [6,7,8], [10], [15], [20], [30,31,32,33,34]]
+
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // BUIDLING CONSECUTIVE_INDEX COUNTER
+
     
 
 
@@ -407,6 +486,25 @@ function mouseMoveDrawParallel(event, thisFigure) {
         thisFigure.referenceLaye_01.changeLabel(thisFigure.skipped_indecies)
         thisFigure.referenceLaye_01.changeTextBox(thisFigure.optSel01_01, subFigureSkipperIndexModifiers.currentSkippedIndex)
 
+
+
+        // // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
+        //     let f = thisFigure.consecutiveSkippedIndeciesGrouped[j].length -1
+        //     if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
+        //         thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
+        //     }
+        // }
+        // // BUIDLING CONSECUTIVE_INDEX COUNTER
+        // // BUIDLING CONSECUTIVE_INDEX COUNTER
+
+
+        
+        // [[1,2,3], [4], [6,7,8,9], [10], [15], [20], [30,31,32,33,34]]
+
+
+
         //if i = the index BEFORE the first index of skippedIndecies && if the first index of skippedIndecies DOESNT equal 0
         if(i === thisFigure.skipped_indecies[0] - 1 && thisFigure.skipped_indecies[0] !== 0) {  //FIXME: TODO: was an if else added that stopped this from running an ran regular for some reason
             console.log("NEXT_SKIPPED_THIS_IS_PREVIOUS_INDEX: NEW_SKIPPER")
@@ -415,15 +513,24 @@ function mouseMoveDrawParallel(event, thisFigure) {
             // BUIDLING CONSECUTIVE_INDEX COUNTER
             let indexBEFOREfirstIndexOfSkippedIndecies = i
             let consecutiveSkippedIndecies = thisFigure.countConsecutive(thisFigure.skipped_indecies, indexBEFOREfirstIndexOfSkippedIndecies)
+
             console.log("SKIPPER_COUNTER")
             console.log("SKIPPER_COUNTER")
             console.log("SKIPPER_COUNTER")
             console.log("SKIPPER_COUNTER")
             console.log("SKIPPER_COUNTER")
             console.log("SKIPPER_COUNTER")
+
             console.log(thisFigure.skipped_indecies)
             console.log(indexBEFOREfirstIndexOfSkippedIndecies)
             console.log(consecutiveSkippedIndecies)
+
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
+            console.log("SKIPPER_COUNTER")
             // BUIDLING CONSECUTIVE_INDEX COUNTER
             // BUIDLING CONSECUTIVE_INDEX COUNTER
 
