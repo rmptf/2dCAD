@@ -368,9 +368,10 @@ function mouseMoveDrawParallel(event, thisFigure) {
         // BUIDLING CONSECUTIVE_INDEX COUNTER
         // BUIDLING CONSECUTIVE_INDEX COUNTER
 
-        let testArray = [1,2,3,4,5,9,11,12,14,15,16,25,40,52,53,54]
+        // let testArray = [1,2,3,4,5,9,11,12,14,15,16,25,40,52,53,54]
         let secondTestArray = [1,2,3,4,6,7,8,10,15,20,30,31,32,33,34]
         thisFigure.consecutiveSkippedIndeciesGrouped = groupConsecutive(secondTestArray) //thisFigure.skipped_indecies
+        let newSkipperArray = getSkipperArray()
 
         console.log("SORTER")
         console.log("SORTER")
@@ -405,34 +406,75 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
         // BUIDLING CONSECUTIVE_INDEX COUNTER
         // BUIDLING CONSECUTIVE_INDEX COUNTER
-        // loop through the line segments
-        // for (let i = 1; i < 35; i++) {
-            // loop through the skipped index consecutive groups
-            for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
-                let f = thisFigure.consecutiveSkippedIndeciesGrouped[j].length -1
 
-                console.log(thisFigure.consecutiveSkippedIndeciesGrouped[j])
-                console.log(f)
-                console.log(thisFigure.consecutiveSkippedIndeciesGrouped[j][f])
-                console.log("")
-                for (let i = 1; i < 35; i++) {
-                    if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
-                        console.log(i)
+        function getSkipperArray(arr_01, arr_02) {
+            for (let i = 1; i < secondTestArray.length; i++) { // maybe remove this
+                for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
+                    let f = thisFigure.consecutiveSkippedIndeciesGrouped[j].length -1
+
+                    console.log("SKIPPER")
+                    console.log("SKIPPER")
+                    console.log("SKIPPER")
+                    console.log("SKIPPER")
+                    console.log("SKIPPER")
+                    console.log(i)
+                    console.log(j)
+                    console.log(f)
+                    console.log(thisFigure.consecutiveSkippedIndeciesGrouped[j])
+                    
+                    let skipperArray
+                    if(i >= thisFigure.consecutiveSkippedIndeciesGrouped[j][0] && i <= thisFigure.consecutiveSkippedIndeciesGrouped[j][f]) {
+                        skipperArray = thisFigure.consecutiveSkippedIndeciesGrouped[j]
+                        console.log("YES FOUND SKIPPER ARRAY")
+                        console.log(skipperArray)
                         console.log("")
                         console.log("")
+                        console.log("")
+                        return skipperArray
+                    } else {
+                        skipperArray = null
+                        console.log("NO SKIPPER ARRAY")
+                        console.log(skipperArray)
+                        console.log("")
+                        console.log("")
+                        console.log("")
+                        return skipperArray
                     }
+
+
+                    // for (let i = 1; i < 35; i++) {
+                    //     if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
+                    //         console.log(i)
+                    //         console.log("")
+                    //         console.log("")
+                    //     }
+                    // }
+                    // if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
+                    //     // thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
+
+                    //     console.log(i)
+                    //     console.log(thisFigure.currentConsecutiveSkippedIndecies)
+                    // }
                 }
-                // if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
-                //     // thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
-
-                //     console.log(i)
-                //     console.log(thisFigure.currentConsecutiveSkippedIndecies)
-                // }
             }
-        // }
+        }
         // BUIDLING CONSECUTIVE_INDEX COUNTER
         // BUIDLING CONSECUTIVE_INDEX COUNTER
 
+        // arr_01
+        // 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+        // arr_02
+        // [1,2,3],[7],[10],[14,15,16]
+
+        // 1,7,10,14
+        // 0,6,9,13
+
+        // let f = arr_02[j].length - 1
+        // if([arr_01[i] >= arr_02[j][0]] && arr_01[i] <= arr_02[j][f]) {
+        //     arr_03 = arr_02[j]
+        // } else {
+        //     arr_03 = 0
+        // }
 
         
         // [[1,2,3], [4], [6,7,8], [10], [15], [20], [30,31,32,33,34]]
