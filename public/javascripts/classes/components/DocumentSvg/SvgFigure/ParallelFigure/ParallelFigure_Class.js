@@ -430,7 +430,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log("")
                         console.log("")
                         console.log("")
-                        return skipperArray
+                        // return skipperArray
                     } else {
                         skipperArray = null
                         console.log("NO SKIPPER ARRAY")
@@ -438,7 +438,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log("")
                         console.log("")
                         console.log("")
-                        return skipperArray
+                        // return skipperArray
                     }
 
 
