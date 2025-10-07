@@ -440,21 +440,6 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         console.log("")
                         // return skipperArray
                     }
-
-
-                    // for (let i = 1; i < 35; i++) {
-                    //     if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
-                    //         console.log(i)
-                    //         console.log("")
-                    //         console.log("")
-                    //     }
-                    // }
-                    // if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
-                    //     // thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
-
-                    //     console.log(i)
-                    //     console.log(thisFigure.currentConsecutiveSkippedIndecies)
-                    // }
                 }
             }
         }
@@ -532,12 +517,9 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
         // // BUIDLING CONSECUTIVE_INDEX COUNTER
         // // BUIDLING CONSECUTIVE_INDEX COUNTER
-        // for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
-        //     let f = thisFigure.consecutiveSkippedIndeciesGrouped[j].length -1
-        //     if(i > thisFigure.consecutiveSkippedIndeciesGrouped[j][f]){
-        //         thisFigure.currentConsecutiveSkippedIndecies = thisFigure.consecutiveSkippedIndeciesGrouped[j+1]
-        //     }
-        // }
+
+
+
         // // BUIDLING CONSECUTIVE_INDEX COUNTER
         // // BUIDLING CONSECUTIVE_INDEX COUNTER
 
