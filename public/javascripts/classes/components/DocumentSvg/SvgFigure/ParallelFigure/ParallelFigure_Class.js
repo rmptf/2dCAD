@@ -540,7 +540,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
         let indexBEFOREfirstIndexOfSkippedIndecies = i
         let consecutiveSkippedIndecies = countConsecutive(thisFigure.skipped_indecies, indexBEFOREfirstIndexOfSkippedIndecies-1)
         thisFigure.consecutiveSkippedIndeciesGrouped = groupConsecutive(thisFigure.skipped_indecies) //thisFigure.skipped_indecies
-        let newSkipperArray = getSkipperArray(thisFigure.skipped_indecies, thisFigure.consecutiveSkippedIndeciesGrouped)
+        let newSkipperArray = getSkipperArray(indexBEFOREfirstIndexOfSkippedIndecies, thisFigure.skipped_indecies, thisFigure.consecutiveSkippedIndeciesGrouped)
 
         console.log("SKIPPER_COUNTER")
         console.log("SKIPPER_COUNTER")
@@ -549,9 +549,13 @@ function mouseMoveDrawParallel(event, thisFigure) {
         console.log("SKIPPER_COUNTER")
         console.log("SKIPPER_COUNTER")
 
+        console.log("i")
         console.log(indexBEFOREfirstIndexOfSkippedIndecies)
+        console.log("all skipped indecies")
         console.log(thisFigure.skipped_indecies)
+        console.log("current consecutive indecies")
         console.log(consecutiveSkippedIndecies)
+        console.log("current skipped indecies grouped")
         console.log(thisFigure.consecutiveSkippedIndeciesGrouped)
 
         console.log("SKIPPER_COUNTER")
@@ -562,11 +566,8 @@ function mouseMoveDrawParallel(event, thisFigure) {
         console.log("SKIPPER_COUNTER")
 
 
-        // [[1,2,3], [4], [6,7,8,9], [10], [15], [20], [30,31,32,33,34]]
 
 
-
-        // ParallelFigure.prototype.countConsecutive = function(arr, startNum) {
         function countConsecutive(arr, startNum) {
             let count = 0
                 for (let i = 0; i < arr.length; i++) {
@@ -598,29 +599,28 @@ function mouseMoveDrawParallel(event, thisFigure) {
             return result
         }
 
-        function getSkipperArray(arr_01, arr_02) {
-            console.log("OOKOFKSDOKFSDOKFOSDFKSDOFKSDOFKSDFKSDOFKSDOKFOSDKFOSDFKSDOFKOSDKFOSDKF")
-            for (let i = 0; i < arr_01.length; i++) { // maybe remove this
-                console.log("2312321312312312312312312312312312312313123123123")
-                console.log(arr_01.length)
-                console.log(arr_02[0])
-                console.log(arr_02.length)
-                // for (let j = 1; j < thisFigure.consecutiveSkippedIndeciesGrouped.length; j++) {
+        // (indexBEFOREfirstIndexOfSkippedIndecies, skippedIndecies, consecutiveSkippedIndeciesGrouped)
+        function getSkipperArray(iii, arr_01, arr_02) {
+            console.log("GETTING_SKIPPER_ARRAY")
+            // for (let i = 0; i < arr_01.length; i++) {
+            //     console.log("LOOPING_THROUGH_SKIPPED_INDECIES")
+            //     console.log(i)
+            //     console.log(arr_01[i])
                 for (let j = 0; j < arr_02.length; j++) {
                     let f = arr_02[j].length -1
+                    console.log("LOOPING_THROUGH_CONSECUTIVE_SKIPPED_INDECIES_GROUPED")
+                    console.log(j)
+                    console.log(arr_02[j])
+                    console.log(f)
 
                     console.log("SKIPPER")
                     console.log("SKIPPER")
                     console.log("SKIPPER")
                     console.log("SKIPPER")
                     console.log("SKIPPER")
-                    console.log(i)
-                    console.log(j)
-                    console.log(f)
-                    console.log(arr_02[j])
                     
                     let skipperArray
-                    if(i >= arr_02[j][0] && i <= arr_02[j][f]) {
+                    if(iii >= arr_02[j][0] && iii <= arr_02[j][f]) {
                         skipperArray = arr_02[j]
                         console.log("YES FOUND SKIPPER ARRAY")
                         console.log(skipperArray)
@@ -638,7 +638,7 @@ function mouseMoveDrawParallel(event, thisFigure) {
                         // return skipperArray
                     }
                 }
-            }
+            // }
         }
 
 
