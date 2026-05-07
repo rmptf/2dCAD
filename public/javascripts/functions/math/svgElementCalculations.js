@@ -411,6 +411,93 @@ function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
     return solveTriangleData
 }
 
+
+
+// function solvTriangleALL(triangleA_sides, apStart, apEnd, cp, cpAnchor) {
+//     // Extract coordinates for better readability
+//     const ap1x = apStart.x, ap1y = apStart.y
+//     const ap2x = apEnd.x, ap2y = apEnd.y
+//     const cpX = cp.x, cpY = cp.y
+//     const cpAnchorX = cpAnchor[0], cpAnchorY = cpAnchor[1]
+//  // Calculate triangle geometry
+//     const sinOfAngle_A = triangleA_sides.side_A / triangleA_sides.side_C
+//     const base_angle_A = Math.asin(sinOfAngle_A) * (180 / Math.PI)
+//     const angle_A = base_angle_A * (Math.PI / 180)
+//     const side_C_length = triangleA_sides.side_C / 2
+//     const side_A_length = side_C_length * Math.sin(angle_A)
+//     const side_B_length = side_C_length * Math.cos(angle_A)
+//     const coord_A = findLineMidpoint(ap1x, ap1y, cpX, cpY)
+
+//     // Calculate points and flags based on geometric relationships
+//     const { arcFlag, sweepFlagWest, sweepFlagEast, coord_B, coord_C } = calculateFlagsAndCoordinates(ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY, coord_A, side_A_length, side_B_length)
+
+//     return {
+//         coords: { coord_A, coord_B, coord_C },
+//         arcFlag,
+//         sweepFlagWest,
+//         sweepFlagEast
+//     }
+
+//     function calculateFlagsAndCoordinates(ap1x, ap1y, ap2x, ap2y, cpX, cpY, cpAnchorX, cpAnchorY, coord_A, side_A_len, side_B_len) {
+//         // Simplified logic using boolean flags to track point relationships
+//         const ap1_below_ap2 = ap1y < ap2y
+//         const ap1_left_of_ap2 = ap1x < ap2x
+//         const cp_above_cpAnchor = cpY < cpAnchorY
+//         const ap1_left_of_cpAnchor = ap1x < cpAnchorX
+//         const ap1_left_of_cpX = ap1x < cpX
+        
+//         // Determine sweep flags using a lookup table based on quadrant
+//         const sweepLookup = [
+//             // cp_above_cpAnchor: true
+//             [
+//                 [0, 1], // ap1_below_ap2: true, ap1_left_of_ap2: true
+//                 [1, 0], // ap1_below_ap2: true, ap1_left_of_ap2: false
+//                 [0, 1], // ap1_below_ap2: false, ap1_left_of_ap2: true
+//                 [1, 0]  // ap1_below_ap2: false, ap1_left_of_ap2: false
+//             ],
+//             // cp_above_cpAnchor: false
+//             [
+//                 [1, 0], // ap1_below_ap2: true, ap1_left_of_ap2: true
+//                 [0, 1], // ap1_below_ap2: true, ap1_left_of_ap2: false
+//                 [1, 0], // ap1_below_ap2: false, ap1_left_of_ap2: true
+//                 [0, 1]  // ap1_below_ap2: false, ap1_left_of_ap2: false
+//             ]
+//         ]
+        
+//         const sweepIdx = (ap1_below_ap2 ? 0 : 2) + (ap1_left_of_ap2 ? 0 : 1)
+//         const [sweepFlagWest, sweepFlagEast] = sweepLookup[cp_above_cpAnchor ? 0 : 1][sweepIdx]
+        
+//         // Determine arc flag based on quadrant and anchor positions
+//         let arcFlag = 0
+//         if ((ap1_below_ap2 && ap1_left_of_ap2 && cp_above_cpAnchor && ap1_left_of_cpAnchor) ||
+//             (ap1_below_ap2 && !ap1_left_of_ap2 && cp_above_cpAnchor && !ap1_left_of_cpAnchor) ||
+//             (!ap1_below_ap2 && ap1_left_of_ap2 && !cp_above_cpAnchor && !ap1_left_of_cpAnchor) ||
+//             (!ap1_below_ap2 && !ap1_left_of_ap2 && !cp_above_cpAnchor && ap1_left_of_cpAnchor)) {
+//             arcFlag = 1
+//         }
+        
+//         // Calculate coordinate offsets based on point relationships
+//         const coord_C_x_offset = (ap1_left_of_ap2 && arcFlag) || (!ap1_left_of_ap2 && !arcFlag) 
+//             ? side_A_len : -side_A_len
+//         const coord_C_x = coord_A[0] + coord_C_x_offset
+        
+//         const coord_B_y_offset = (arcFlag && ap1_left_of_cpX) || (!arcFlag && !ap1_left_of_cpX)
+//             ? side_B_len : -side_B_len
+//         const coord_B_y = coord_A[1] + coord_B_y_offset
+        
+//         return {
+//             arcFlag,
+//             sweepFlagWest,
+//             sweepFlagEast,
+//             coord_C: [coord_C_x, coord_A[1]],
+//             coord_B: [coord_C_x, coord_B_y]
+//         }
+//     }
+// }
+
+
+
+
 export {
     calculateArcAndDescribePath,
     describeComplexPath,
