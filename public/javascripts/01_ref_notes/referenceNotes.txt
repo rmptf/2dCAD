@@ -3,9 +3,25 @@ Investigating why Arc to Arc separation doesnt work:
 Going back to when it last worked
 - The last commit that had a functioning arc to arc separation was - 79c5f6a
 - Use "git checkout 79c5f6a" to get there
+- The next commit when disconnected arcs started breaking is called: 15b5545
 - Then "git checkout project-organization" to get back
 
 
 Current Theories on why it doesnt work:
-- some changes made in updateDocumentSvg file
-- strong feeling the issue is in updateDocumentSvg OR how it is called in ParallelFigure_Class
+1: some changes made in updateDocumentSvg file
+2: strong feeling the issue is in updateDocumentSvg OR how it is called in ParallelFigure_Class
+
+1:
+No clues to it yet
+
+2:
+I'm back to thinking the problem sits inside updateDocumentSvg      (DEADEND)
+-  when I check the working disconnected_arcs it has the same exact logs as the nonworking ones.
+-  the error i get on the non working ones points to a function inside updateDocumentSvg that has a comment above asking myself if i need to add functionality for disconnected arcs:
+    // PARALLEL END POINTS //FIXME: Do i need to apply skipper to these??
+-  this is the error message i get when running the function (whitch points to an undefined var rather than a bigger issue):
+    Uncaught TypeError: Cannot read properties of undefined (reading 'runFunctions')
+-  this lead to a dead end, the undefined var was in a REFERENCEFIGURE and once the reference figure was commented out, the error still persisted with no change in behavior but without an actual error message
+-  DEAD END
+
+-  I still have a feelin the problem is in updateDocumentSvg because i just compared working and non working disconnected_arcs and they both are almost exactly correct

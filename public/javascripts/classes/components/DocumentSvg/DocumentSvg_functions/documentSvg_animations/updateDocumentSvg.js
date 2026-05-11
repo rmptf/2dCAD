@@ -522,6 +522,7 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS(figure, i, subFig
     }
 }
 
+//ooo
 function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(parallelPath, parPathData_start, parPathData_end, color, describePath) {
 // function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1(figure, i) {
 //     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
@@ -543,7 +544,7 @@ function updateSVG_thisSvgParallelFigure_oneByOne_NO_ENDPOINTS_PASS_PATHDATA_1B1
     }
 }
 
-
+//oo
 function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSinceItsEndPointsOnly(figure, refFig) {
     let parallelPathDatas = figure.parallelFigurePathDatas //FIXME: old way need to update
     let parallelPaths = figure.svgPaths.parallelPaths //FIXME: old way, might need to update
@@ -554,9 +555,9 @@ function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSin
     let endPoints = figure.svgEndPoints
     let k = -1
 
-    // REFERENCE FIGURE STUFF
-    refFig[0].runFunctions([[parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y]])
-    // REFERENCE FIGURE STUFF
+    // // REFERENCE FIGURE STUFF
+    // refFig[0].runFunctions([[parallelPathDatas[0][0].coords.x, parallelPathDatas[0][0].coords.y]])
+    // // REFERENCE FIGURE STUFF
 
     for (let i = 0; i < parallelPaths.length; i++) {
         for (let j = 0; j < parallelPathDatas[i].length; j++) {
@@ -564,9 +565,9 @@ function updateSVG_thisSvgParallelFigure_oneByOne_END_POINTS_ONLY_notOneByOneSin
             endPoints[k].svgElementObject
                 .attr('cx', parallelPathDatas[i][j].coords.x).attr('cy', parallelPathDatas[i][j].coords.y)
 
-            // REFERENCE FIGURE STUFF
-            refFig[i+1].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
-            // REFERENCE FIGURE STUFF
+            // // REFERENCE FIGURE STUFF
+            // refFig[i+1].runFunctions([[parallelPathDatas[i][j].coords.x, parallelPathDatas[i][j].coords.y]])
+            // // REFERENCE FIGURE STUFF
 
             // console.log("Pooooporpeorpeorpeorpe_______+_+_+_+_+_+_+_+_+_")
             // console.log(i)
