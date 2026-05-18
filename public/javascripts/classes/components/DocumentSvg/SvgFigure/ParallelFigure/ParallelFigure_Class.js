@@ -13,6 +13,9 @@ import {ReferenceFigure} from '../ReferenceFigure/ReferenceFigure_Class.js'
 import {ReferenceLayer} from '../../../ReferenceLayer/ReferenceLayer_Class.js'
 
 function ParallelFigure(svgFigure, sectionIndex) {
+    console.log("sofkosdkfdksfoskdofksdofksdofksdokfosdkfosdkfosdkfosdkfosdkfoksdf")
+    console.log(svgFigure)
+
     this.svgFigure = svgFigure
     this.SVGGROUPSDATA = {
         PARFIGUREGROUPNAMES: ["parallelPathGROUP_001","parallelendPointGROUP_001"],

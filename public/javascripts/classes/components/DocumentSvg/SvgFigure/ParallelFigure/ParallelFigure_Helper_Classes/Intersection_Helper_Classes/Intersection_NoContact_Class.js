@@ -1,4 +1,6 @@
 import {findPointAlongSlopeAtDistance, getArcToArcIntersections, getPathToArcIntersections} from '../../parallelFigure_functions/parallelPathFunctions_NEW.js'
+// import {ReferenceFigure} from '../../../../ReferenceFigure/ReferenceFigure_Class.js'
+import {ReferenceFigure} from '../../../ReferenceFigure/ReferenceFigure_Class.js'
 
 function Intersection_NoContact(parallelFigure, index) {
     this.PARFIGURE = parallelFigure //FIXME: still used
@@ -19,6 +21,13 @@ function Intersection_NoContact(parallelFigure, index) {
     // might have to update manually like index //FIXME:
     // this.parFigureSvgEndPoints = parallelFigure.svgEndPoints
     // this.parFigureSvgPaths = parallelFigure.svgPaths
+
+
+    this.svgFigure = parallelFigure.svgFigure
+    this.referenceFigure_01_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_01_A.addEmptyCircle({palette: 8, circRad: 15, fillClr: 'transparent', strokeClr: 1, strokeWidth: 10}, 1)
+    this.referenceFigure_02_A = new ReferenceFigure(this.svgFigure, true)
+    this.referenceFigure_02_A.addRadial({palette: 1, fillClr: 1}, 2)
 }
 
 Intersection_NoContact.prototype.handlePathToArcIntersectionNoContact = function(indexModifier) { // mod: 0
@@ -101,6 +110,7 @@ Intersection_NoContact.prototype.handleArcToPathIntersectionNoContact = function
 }
 
 Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(indexModifier) {  // mod: -1
+    
     let index = this.index + indexModifier
 
     // separated pd_01
@@ -116,8 +126,18 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
 
     console.log("arse")
     console.log(firstParPath)
+    console.log(secondParPath)
+    console.log(thirdParPath)
+    console.log(fourthParPath)
     console.log(fifthParPath)
 
+    // EITHER THE WRONG PARPATH IS SENT TO THE GETARCINTERSECTION FUNCTION OR THE PARALLEL LINE FUNCTION THAT DECREASES THE SIZE OF THE ARC AFTER FILLER IS ADDED DOEST DECREASE THE SIZE OF ARC AFTER FILLER
+    this.referenceFigure_01_A.runFunctions([[firstParPath.coords.x, firstParPath.coords.y]])
+    // this.referenceFigure_02_A.runFunctions([[firstParPath.arc.center.x, firstParPath.arc.center.y], firstParPath.arc.radius])
+    // this.referenceFigure_02_A.runFunctions([[secondParPath.arc.center.x, secondParPath.arc.center.y], secondParPath.arc.radius])     //xxx no arc
+    // this.referenceFigure_02_A.runFunctions([[thirdParPath.arc.center.x, thirdParPath.arc.center.y], thirdParPath.arc.radius])        //xxx no arc
+    this.referenceFigure_02_A.runFunctions([[fourthParPath.arc.center.x, fourthParPath.arc.center.y], fourthParPath.arc.radius])     //yes arc but radius doesnt move
+    // this.referenceFigure_02_A.runFunctions([[fifthParPath.arc.center.x, fifthParPath.arc.center.y], fifthParPath.arc.radius])           //yes arc but radius doesnt move
 
     // find where the arcs intersect, or the tangent points of both if they dont
     let arcToArcIntPoint = getArcToArcIntersections(firstParPath, fifthParPath, {coords: {x: 0, y: 0}})
@@ -132,15 +152,26 @@ Intersection_NoContact.prototype.handleArcToArcIntersectionNoContact = function(
         // joiner 2
         thirdParPath.coords.x = arcToArcIntPoint[1].x
         thirdParPath.coords.y = arcToArcIntPoint[1].y
+        // thirdParPath.coords.x = 400
+        // thirdParPath.coords.y = 100
         thirdParPath.arc.radius = 1
         // last point  (joiner 2 parent)
         fourthParPath.coords.x = arcToArcIntPoint[1].x
         fourthParPath.coords.y = arcToArcIntPoint[1].y
+        // fourthParPath.coords.x = 400
+        // fourthParPath.coords.y = 100
+        console.log("dumpersfdsfs")
     }
     else if(arcToArcIntPoint[0].doesIntersect === true) {
         console.log("CURRENT_CONNECTING")
         this.removePointsAndPaths(index + 1, index + 2, "A2A")
     }
+
+    console.log("123123")
+    console.log(arcToArcIntPoint[0].x)
+    console.log(arcToArcIntPoint[0].y)
+    console.log(arcToArcIntPoint[1].x)
+    console.log(arcToArcIntPoint[1].y)
 }
 
 Intersection_NoContact.prototype.removePointsAndPaths = function(thisIndexModded, nextIndexModded, shape) {

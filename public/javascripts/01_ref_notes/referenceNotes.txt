@@ -25,3 +25,7 @@ I'm back to thinking the problem sits inside updateDocumentSvg      (DEADEND)
 -  DEAD END
 
 -  I still have a feelin the problem is in updateDocumentSvg because i just compared working and non working disconnected_arcs and they both are almost exactly correct
+
+3:
+I think the logic inside intersectionSorter_WithArc.js for Disconnected Arcs is UNFINISHED.
+I refactored how that page worked and I think I got everything working up until handleDisconnectedArcIntersection(). From there I tried to get it working with the "new format" (where I reorganzied which points where grouped together) and found out it was harder than i thought it would be so i gave up on it to move on to handling "Closed Arcs" and never got it working properly.

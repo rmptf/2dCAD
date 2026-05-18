@@ -47,7 +47,7 @@ Purpose:
 
 
 
-# UI COMPONENTS
+# UI COMPONENT ASSEMBLIES
 
 
 ## Creating EJS Components
@@ -86,21 +86,48 @@ Main files involved in creating and rendering EJS UI components.
 
 # FUNCTIONALITY ASSEMBLIES
 
+## Arc to Arc Disconnected Functionality
+Purpose:
+When arc to arc connection disconnects, behavior isn't working properly anymore since trying to fix parallel path closed arcs.
+
+### Entry Point / Linked Files
+- [parallelFigure_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Class.js) `entry point`
+- [intersectionHandler_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionHandler_WithArc_Class.js)
+- [intersectionsSorter_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js)
+- [intersection_Contact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_Contact_Class.js)
+- [intersection_NoContact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_NoContact_Class.js)
+- [updateDocumentSvg.js](../classes/components/DocumentSvg/DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js)
+- [parallelPathFunctions_NEW.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/parallelFigure_functions/parallelPathFunctions_NEW.js)
+
+### Working Data Files
+- [savedFigureData.js](../../reference_files/data/savedFigureData.js)
+
+### Reference Files
+
+### Related Files
+
+### Notes
+- Either arcToArcIntersections() is not working inside parallelPathFunctions_NEW
+- Or the arc after arc filler isnt being told to move outwardly parallel to original arc.
+    - But it probably is because the second point on arc is behaving correctly, just the top point at disconnect is not moving  
+
+
 
 ## Parallel Line Functionality
 Purpose:
 Controls creation, rendering, and intersection behavior of parallel figures.
 
 ### Entry Point / Linked Files
-- [parallelFigure_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Class.js) `entry point`
+- [ParallelFigure_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Class.js) `entry point`
 - [updateDocumentSvg.js](../classes/components/DocumentSvg/DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js)
-- [intersectionHandler_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionHandler_WithArc_Class.js)
-- [intersectionsSorter_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js)
-- [intersection_Contact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_Contact_Class.js)
-- [intersection_NoContact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_NoContact_Class.js)
+- [IntersectionHandler_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionHandler_WithArc_Class.js)
+- [IntersectionsSorter_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js)
+- [Intersection_Contact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_Contact_Class.js)
+- [Intersection_NoContact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_NoContact_Class.js)
 
 ### Working Data Files
 - [savedFigureData.js](../../reference_files/data/savedFigureData.js)
+- [parallelPathFunctionsNEW.js]()
 
 ### Reference Files
 
