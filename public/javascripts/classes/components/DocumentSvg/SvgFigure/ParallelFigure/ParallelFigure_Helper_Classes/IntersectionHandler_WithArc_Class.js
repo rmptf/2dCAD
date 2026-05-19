@@ -607,6 +607,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 }
 
 IntersectionHandler_WithArc.prototype.setArcRadius = function(indexModifier) {
+    console.log("SET_ARC_RADIUS")
     let parallelDistance = this.calcArcParDistance(this.thisOriginalFigurePathData(indexModifier))
     this.thisOriginalFigurePathData(indexModifier).children.parallel_pathDatas.pathData_east.arc.radius = parallelDistance
 }

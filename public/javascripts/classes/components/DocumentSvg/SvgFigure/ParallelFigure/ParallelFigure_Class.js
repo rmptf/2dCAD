@@ -546,24 +546,24 @@ function mouseMoveDrawParallel(event, thisFigure) {
         let newSkipperArray = getSkipperArray(indexBEFOREfirstIndexOfSkippedIndecies, thisFigure.consecutiveSkippedIndeciesGrouped)
         thisFigure.currentConsecutiveSkippedIndecieGroup = newSkipperArray
 
-        console.log("")
-        console.log("")
-        console.log("SKIPPER_COUNTER")
+        // console.log("")
+        // console.log("")
+        // console.log("SKIPPER_COUNTER")
 
-        console.log("i")
-        console.log(indexBEFOREfirstIndexOfSkippedIndecies)
-        console.log("all skipped indecies")
-        console.log(thisFigure.skipped_indecies)
-        console.log("current consecutive indecies")
-        console.log(consecutiveSkippedIndecies)
-        console.log("skipped indecies grouped")
-        console.log(thisFigure.consecutiveSkippedIndeciesGrouped)
-        console.log("current skipped indecies group")
-        console.log(thisFigure.currentConsecutiveSkippedIndecieGroup)
+        // console.log("i")
+        // console.log(indexBEFOREfirstIndexOfSkippedIndecies)
+        // console.log("all skipped indecies")
+        // console.log(thisFigure.skipped_indecies)
+        // console.log("current consecutive indecies")
+        // console.log(consecutiveSkippedIndecies)
+        // console.log("skipped indecies grouped")
+        // console.log(thisFigure.consecutiveSkippedIndeciesGrouped)
+        // console.log("current skipped indecies group")
+        // console.log(thisFigure.currentConsecutiveSkippedIndecieGroup)
 
-        console.log("SKIPPER_COUNTER")
-        console.log("")
-        console.log("")
+        // console.log("SKIPPER_COUNTER")
+        // console.log("")
+        // console.log("")
 
 
 
@@ -601,30 +601,30 @@ function mouseMoveDrawParallel(event, thisFigure) {
 
         // (indexBEFOREfirstIndexOfSkippedIndecies, consecutiveSkippedIndeciesGrouped)
         function getSkipperArray(iii, arr_02) {
-            console.log("")
-            console.log("")
-            console.log("GETTING_SKIPPER_ARRAY")
+            // console.log("")
+            // console.log("")
+            // console.log("GETTING_SKIPPER_ARRAY")
             for (let j = 0; j < arr_02.length; j++) {
                 let f = arr_02[j].length -1
-                console.log("LOOPING_THROUGH_CONSECUTIVE_SKIPPED_INDECIES_GROUPED")
-                console.log(j)
-                console.log(arr_02[j])
-                console.log(f)
+                // console.log("LOOPING_THROUGH_CONSECUTIVE_SKIPPED_INDECIES_GROUPED")
+                // console.log(j)
+                // console.log(arr_02[j])
+                // console.log(f)
                 
                 let skipperArray
                 if(iii >= arr_02[j][0] && iii <= arr_02[j][f]) {
                     skipperArray = arr_02[j]
-                    console.log("YES FOUND SKIPPER ARRAY")
-                    console.log(skipperArray)
-                    console.log("")
-                    console.log("")
+                    // console.log("YES FOUND SKIPPER ARRAY")
+                    // console.log(skipperArray)
+                    // console.log("")
+                    // console.log("")
                     return skipperArray
                 } else {
                     skipperArray = null
-                    console.log("NO SKIPPER ARRAY")
-                    console.log(skipperArray)
-                    console.log("")
-                    console.log("")
+                    // console.log("NO SKIPPER ARRAY")
+                    // console.log(skipperArray)
+                    // console.log("")
+                    // console.log("")
                     return skipperArray
                 }
             }

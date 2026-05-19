@@ -663,10 +663,6 @@ IntersectionsSorter_WithArc.prototype.handleSecondArcSegment = function() {
     // AFTER INTERSECTION CLOSED ARC
     // this runs at i: 2 (previous to closed arc)
     if(!this.lastPosition(this.thisIndex)) {
-        console.log("")
-        console.log("BIG_CHECK")
-        console.log("BIG_CHECK")
-        console.log("")
         if(this.isHidden(this.nextIndex - 1) && this.isOdd(this.nextIndex - 1)) {
             console.log('__________________________________INDEX____________________________________')
             console.log("CLOSSED_ARC_INJECTION: 03")
