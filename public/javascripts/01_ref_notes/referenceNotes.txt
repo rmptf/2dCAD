@@ -39,4 +39,6 @@ Confirmed this is the reason: changed "setArcRadius()" to "old way" as which cha
 5/21/26
 Finishing Past Refactoring inside IntersectionSorter_WithArc.js
 
-
+Creating a new branch for fixing this bug.
+    - new branch will be called ArcIntersection-Refactoring
+    - new branch will have old comments, old console logs not needed to fix this bug, and old code removed.

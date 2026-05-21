@@ -92,8 +92,8 @@ When arc to arc connection disconnects, behavior isn't working properly anymore 
 
 ### Entry Point / Linked Files
 - [parallelFigure_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Class.js) `entry point`
-- [intersectionHandler_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionHandler_WithArc_Class.js)
 - [intersectionsSorter_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionsSorter_WithArc_Class.js)
+- [intersectionHandler_WithArc_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/IntersectionHandler_WithArc_Class.js)
 - [intersection_Contact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_Contact_Class.js)
 - [intersection_NoContact_Class.js](../classes/components/DocumentSvg/SvgFigure/ParallelFigure/ParallelFigure_Helper_Classes/Intersection_Helper_Classes/Intersection_NoContact_Class.js)
 - [updateDocumentSvg.js](../classes/components/DocumentSvg/DocumentSvg_functions/documentSvg_animations/updateDocumentSvg.js)

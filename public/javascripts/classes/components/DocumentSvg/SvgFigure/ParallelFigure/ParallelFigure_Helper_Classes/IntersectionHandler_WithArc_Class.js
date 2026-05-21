@@ -407,9 +407,9 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // 3_Joiner
     console.log("3_Joiner_ooo")
     //old
-    this.setArcRadius(1)
+    // this.setArcRadius(1)
     //new
-    // this.setArcRadius(0)
+    this.setArcRadius(0)
     //old
     // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
     // new //old
