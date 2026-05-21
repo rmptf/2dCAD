@@ -1,4 +1,5 @@
-Investigating why Arc to Arc separation doesnt work:
+5/11/26
+Investigating why Arc to Arc separation doesnt work:                                                   *SOLVED*
 
 Going back to when it last worked
 - The last commit that had a functioning arc to arc separation was - 79c5f6a
@@ -6,15 +7,15 @@ Going back to when it last worked
 - The next commit when disconnected arcs started breaking is called: 15b5545
 - Then "git checkout project-organization" to get back
 
-
 Current Theories on why it doesnt work:
-1: some changes made in updateDocumentSvg file
-2: strong feeling the issue is in updateDocumentSvg OR how it is called in ParallelFigure_Class
+1: some changes made in updateDocumentSvg file                                                          *INCORRECT*
+2: strong feeling the issue is in updateDocumentSvg OR how it is called in ParallelFigure_Class         *INCORRECT*
+3: Unfinished refactoring in IntersectionSorter_WithArc.js                                              *CORRECT*
 
-1:
+1:  *INCORRECT*
 No clues to it yet
 
-2:
+2:  *INCORRECT*
 I'm back to thinking the problem sits inside updateDocumentSvg      (DEADEND)
 -  when I check the working disconnected_arcs it has the same exact logs as the nonworking ones.
 -  the error i get on the non working ones points to a function inside updateDocumentSvg that has a comment above asking myself if i need to add functionality for disconnected arcs:
@@ -23,9 +24,19 @@ I'm back to thinking the problem sits inside updateDocumentSvg      (DEADEND)
     Uncaught TypeError: Cannot read properties of undefined (reading 'runFunctions')
 -  this lead to a dead end, the undefined var was in a REFERENCEFIGURE and once the reference figure was commented out, the error still persisted with no change in behavior but without an actual error message
 -  DEAD END
-
 -  I still have a feelin the problem is in updateDocumentSvg because i just compared working and non working disconnected_arcs and they both are almost exactly correct
 
-3:
-I think the logic inside intersectionSorter_WithArc.js for Disconnected Arcs is UNFINISHED.
+3:  *CORRECT*
+5/18/26
+I think the logic inside IntersectionSorter_WithArc.js for Disconnected Arcs is UNFINISHED.
 I refactored how that page worked and I think I got everything working up until handleDisconnectedArcIntersection(). From there I tried to get it working with the "new format" (where I reorganzied which points where grouped together) and found out it was harder than i thought it would be so i gave up on it to move on to handling "Closed Arcs" and never got it working properly.
+5/21/26
+Confirmed this is the reason: changed "setArcRadius()" to "old way" as which changed the index passed to function and fixed the bug.
+    - now im sure this broke something somewhere else, but it does confirm this is the issue i am dealing with.
+    - problem is in intersectionSorter_WithArc.js (unfinished refactoring from the past - have to finish)
+
+
+5/21/26
+Finishing Past Refactoring inside IntersectionSorter_WithArc.js
+
+

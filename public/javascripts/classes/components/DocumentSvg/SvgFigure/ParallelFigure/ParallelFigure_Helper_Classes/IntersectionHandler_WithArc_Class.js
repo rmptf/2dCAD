@@ -407,9 +407,9 @@ IntersectionHandler_WithArc.prototype.disconnectedArcIntersection_thisIndexIsArc
     // 3_Joiner
     console.log("3_Joiner_ooo")
     //old
-    // this.setArcRadius(1)
+    this.setArcRadius(1)
     //new
-    this.setArcRadius(0)
+    // this.setArcRadius(0)
     //old
     // this.Intersection_NoContact.handleArcToArcIntersectionNoContact(0)
     // new //old
@@ -607,7 +607,7 @@ IntersectionHandler_WithArc.prototype.handleLargeArcFlag = function(flag) {
 }
 
 IntersectionHandler_WithArc.prototype.setArcRadius = function(indexModifier) {
-    console.log("SET_ARC_RADIUS")
+    console.log("SET_ARC_RADIUS_______________")
     let parallelDistance = this.calcArcParDistance(this.thisOriginalFigurePathData(indexModifier))
     this.thisOriginalFigurePathData(indexModifier).children.parallel_pathDatas.pathData_east.arc.radius = parallelDistance
 }
